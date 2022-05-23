@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MEFLNet6
+namespace MEFL
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

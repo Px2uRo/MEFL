@@ -4,14 +4,14 @@
     "I:\\Xiong's\\MEFLCollection\\MEFLNet6\\MEFLNet6.csproj": {}
   },
   "projects": {
-    "D:\\Xiong's\\WPF\\CoreLaunching\\CoreLaunchingNet6\\CoreLaunchingNet6.csproj": {
+    "I:\\Xiong's\\CoreLaunching\\CoreLaunchingNet6\\CoreLaunchingNet6.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Xiong's\\WPF\\CoreLaunching\\CoreLaunchingNet6\\CoreLaunchingNet6.csproj",
+        "projectUniqueName": "I:\\Xiong's\\CoreLaunching\\CoreLaunchingNet6\\CoreLaunchingNet6.csproj",
         "projectName": "CoreLaunchingNet6",
-        "projectPath": "D:\\Xiong's\\WPF\\CoreLaunching\\CoreLaunchingNet6\\CoreLaunchingNet6.csproj",
+        "projectPath": "I:\\Xiong's\\CoreLaunching\\CoreLaunchingNet6\\CoreLaunchingNet6.csproj",
         "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "D:\\Xiong's\\WPF\\CoreLaunching\\CoreLaunchingNet6\\obj\\",
+        "outputPath": "I:\\Xiong's\\CoreLaunching\\CoreLaunchingNet6\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -79,7 +79,7 @@
       "version": "1.0.0",
       "restore": {
         "projectUniqueName": "I:\\Xiong's\\MEFLCollection\\MEFLNet6\\MEFLNet6.csproj",
-        "projectName": "MEFLNet6",
+        "projectName": "MEFL",
         "projectPath": "I:\\Xiong's\\MEFLCollection\\MEFLNet6\\MEFLNet6.csproj",
         "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
         "outputPath": "I:\\Xiong's\\MEFLCollection\\MEFLNet6\\obj\\",
@@ -106,8 +106,8 @@
           "net6.0-windows7.0": {
             "targetAlias": "net6.0-windows",
             "projectReferences": {
-              "D:\\Xiong's\\WPF\\CoreLaunching\\CoreLaunchingNet6\\CoreLaunchingNet6.csproj": {
-                "projectPath": "D:\\Xiong's\\WPF\\CoreLaunching\\CoreLaunchingNet6\\CoreLaunchingNet6.csproj"
+              "I:\\Xiong's\\CoreLaunching\\CoreLaunchingNet6\\CoreLaunchingNet6.csproj": {
+                "projectPath": "I:\\Xiong's\\CoreLaunching\\CoreLaunchingNet6\\CoreLaunchingNet6.csproj"
               }
             }
           }
@@ -121,6 +121,12 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "Microsoft.VisualBasic": {
+              "target": "Package",
+              "version": "[10.3.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

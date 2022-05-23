@@ -1,12 +1,17 @@
-﻿<Window x:Class="MEFLNet6.MainWindow"
+﻿<Window x:Class="MEFL.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MEFLNet6"
-        mc:Ignorable="d"
+        xmlns:local="clr-namespace:MEFL"
+        mc:Ignorable="d" xmlns:c="clr-namespace:MEFL.Controls"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
 
+        <c:MyCard Title="233">
+            <StackPanel>
+                <TextBlock Text="TEXTtext文本wenben" Name="x2333"/>
+            </StackPanel>
+        </c:MyCard>
     </Grid>
 </Window>
