@@ -9,21 +9,30 @@
             <Setter.Value>
                 <ControlTemplate TargetType="local:MyCard">
                     <Border
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
                         x:Name="PART_Border">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="40"/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <ContentPresenter x:Name="PART_Title" Grid.Row="0"/>
-                            <ContentPresenter x:Name="PART_Content" Grid.Row="1"/>
+                            <ContentPresenter x:Name="PART_Title" Grid.Row="0" Style="{DynamicResource STYLE_Normal_Title}" Content="{TemplateBinding Title}"/>
+                            <ContentPresenter x:Name="PART_Content" Margin="25,0,23,15" Grid.Row="1" Style="{DynamicResource STYLE_Normal_Content}"/>
                         </Grid>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
         <Style.Resources>
-
+            <Style x:Key="STYLE_Normal_Title" TargetType="ContentPresenter">
+                <Setter Property="Margin" Value="15,5,0,0"/>
+                <Setter Property="TextBlock.FontWeight" Value="Bold"/>
+            </Style>
+            <Style x:Key="STYLE_Normal_Content" TargetType="ContentPresenter">
+                <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
+            </Style>
         </Style.Resources>
     </Style>
 </ResourceDictionary>

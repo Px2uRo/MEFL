@@ -26,20 +26,6 @@ namespace MEFL.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            if (TitleProperty == null)
-            {
-
-            }
-            else if (Title is string)
-            {
-                TextBlock t = new TextBlock();
-                t.Text = Title as string;
-                (Template.FindName("PART_Title", this) as ContentPresenter).Content = t;
-            }
-            else
-            {
-                (Template.FindName("PART_Title", this) as ContentPresenter).Content = Title;
-            }
         }
 
         public object Title
@@ -55,6 +41,33 @@ namespace MEFL.Controls
 
         // Using a DependencyProperty as the backing store for Title.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty TitleProperty =
-            DependencyProperty.Register("Title", typeof(object), typeof(MyCard), new PropertyMetadata("Title"));
+            DependencyProperty.Register("Title", typeof(object), typeof(MyCard), new PropertyMetadata(string.Empty));
+
+
+        public CornerRadius CornerRadius
+        {
+            get { return (CornerRadius)GetValue(CornerRadiusProperty); }
+            set { SetValue(CornerRadiusProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CornerRadius.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CornerRadiusProperty =
+            DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(MyCard), new PropertyMetadata(new CornerRadius(10)));
+
+
+
+        public Thickness BorderThickness
+        {
+            get { return (Thickness)GetValue(BorderThicknessProperty); }
+            set { SetValue(BorderThicknessProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for BorderThickness.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty BorderThicknessProperty =
+            DependencyProperty.Register("BorderThickness", typeof(Thickness), typeof(MyCard), new PropertyMetadata(new Thickness(5)));
+
+
+
+
     }
 }

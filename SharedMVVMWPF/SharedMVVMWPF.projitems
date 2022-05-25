@@ -9,6 +9,7 @@
     <Import_RootNamespace>MEFL</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ControlModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\MyCard.cs" />
   </ItemGroup>
   <ItemGroup>
