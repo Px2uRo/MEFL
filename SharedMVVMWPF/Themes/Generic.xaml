@@ -8,19 +8,16 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:MyCard">
-                    <Border
+                    <Border Background="Transparent"
+                        Style="{DynamicResource STYLE_PART_Border}"
                         CornerRadius="{TemplateBinding CornerRadius}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         x:Name="PART_Border">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="40"/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <ContentPresenter x:Name="PART_Title" Grid.Row="0" Style="{DynamicResource STYLE_Normal_Title}" Content="{TemplateBinding Title}"/>
-                            <ContentPresenter x:Name="PART_Content" Margin="25,0,23,15" Grid.Row="1" Style="{DynamicResource STYLE_Normal_Content}"/>
-                        </Grid>
+                        <StackPanel>
+                            <ContentPresenter x:Name="PART_Title" Height="40" Style="{DynamicResource STYLE_Normal_Title}" Content="{TemplateBinding Title}"/>
+                            <ContentPresenter x:Name="PART_Content" Margin="25,0,23,15" Style="{DynamicResource STYLE_Normal_Content}"/>
+                        </StackPanel>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -33,6 +30,32 @@
             <Style x:Key="STYLE_Normal_Content" TargetType="ContentPresenter">
                 <Setter Property="TextBlock.TextWrapping" Value="Wrap"/>
             </Style>
+            <Style x:Key="STYLE_PART_Border" TargetType="Border">
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty="Background.Color" 
+                                                    BeginTime="0:0:0:0" Duration="0:0:0:0.5" From="White" To="Red" />
+                                    <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color" 
+                                                    BeginTime="0:0:0:0" Duration="0:0:0:0.5" From="Aqua" To="Red" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+                        <Trigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Storyboard.TargetProperty="Background.Color" 
+                                                    BeginTime="0:0:0:0" Duration="0:0:0:0.5" From="Red" To="White" />
+                                    <ColorAnimation Storyboard.TargetProperty="BorderBrush.Color" 
+                                                    BeginTime="0:0:0:0" Duration="0:0:0:0.5" From="Red" To="Aqua" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.ExitActions>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
         </Style.Resources>
-    </Style>
+        </Style>
 </ResourceDictionary>
