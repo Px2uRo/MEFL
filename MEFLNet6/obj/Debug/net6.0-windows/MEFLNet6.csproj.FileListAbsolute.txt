@@ -25,3 +25,4 @@ I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\CoreLaunchingNet6.dl
 I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\CoreLaunchingNet6.pdb
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\Generic.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\MEFLNet6.csproj.CopyComplete
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\AquaStyle.baml

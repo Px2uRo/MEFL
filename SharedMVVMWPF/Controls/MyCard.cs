@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -18,6 +19,9 @@ namespace MEFL.Controls
 {
     public class MyCard : UserControl
     {
+        #region Methods
+        ColorAnimation ani;
+        #endregion
         static MyCard()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MyCard), new FrameworkPropertyMetadata(typeof(MyCard)));
@@ -26,6 +30,35 @@ namespace MEFL.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
+            if(Background == null)
+            {
+                Background = (this.Template.FindName("PART_Border", this) as Border).Style.Resources["SYTLE_Standard_Background"] as SolidColorBrush;
+            }
+            
+            this.MouseEnter += MyCard_MouseEnter;
+            this.MouseLeave += MyCard_MouseLeave;
+        }
+
+        private void MyCard_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ani = new ColorAnimation();
+            ani.To = Color.FromArgb(10, 102, 153, 253);
+            ani.From = Color.FromArgb(50, 102, 153, 253);
+            ani.Duration = new Duration(TimeSpan.FromSeconds(0.5));
+            SolidColorBrush brush = new SolidColorBrush();
+            brush.BeginAnimation(SolidColorBrush.ColorProperty, ani);
+            this.Background = brush;
+        }
+
+        private void MyCard_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ani = new ColorAnimation();
+            ani.From = Color.FromArgb(10,102,153,253);
+            ani.To = Color.FromArgb(50, 102, 153, 253);
+            ani.Duration = new Duration(TimeSpan.FromSeconds(0.5));
+            SolidColorBrush brush = new SolidColorBrush();
+            brush.BeginAnimation(SolidColorBrush.ColorProperty, ani);
+            this.Background = brush;
         }
 
         public object Title
@@ -65,6 +98,18 @@ namespace MEFL.Controls
         // Using a DependencyProperty as the backing store for BorderThickness.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty BorderThicknessProperty =
             DependencyProperty.Register("BorderThickness", typeof(Thickness), typeof(MyCard), new PropertyMetadata(new Thickness(5)));
+
+
+
+        public SolidColorBrush Background
+        {
+            get { return (SolidColorBrush)GetValue(BackgroundProperty); }
+            set { SetValue(BackgroundProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Background.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty BackgroundProperty =
+            DependencyProperty.Register("Background", typeof(SolidColorBrush), typeof(MyCard), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(00,00,00,00))));
 
 
 

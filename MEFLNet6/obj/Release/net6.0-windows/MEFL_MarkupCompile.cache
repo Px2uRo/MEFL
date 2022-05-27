@@ -1,20 +1,20 @@
 ﻿MEFL
-1.0.0.0
+
 
 winexe
 C#
 .cs
-I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\
 MEFL
 none
 false
-TRACE;DEBUG;NET;NET6_0;NETCOREAPP
+TRACE;RELEASE;NET;NET6_0;NETCOREAPP
 I:\Xiong's\MEFLCollection\MEFLNet6\App.xaml
 2687386496
 
-72112295999
-196490655386
+5-1930736709
+196-924708070
 MainWindow.xaml;I:\Xiong's\MEFLCollection\SharedMVVMWPF\Themes\Generic.xaml;
 
-True
+False
 

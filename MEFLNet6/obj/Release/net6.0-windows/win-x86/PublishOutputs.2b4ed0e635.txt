@@ -1,0 +1,3 @@
+I:\Xiong's\MEFLCollection\MEFLNet6\bin\Release\net6.0-windows\publish\win-x86\MEFL.pdb
+I:\Xiong's\MEFLCollection\MEFLNet6\bin\Release\net6.0-windows\publish\win-x86\CoreLaunchingNet6.pdb
+I:\Xiong's\MEFLCollection\MEFLNet6\bin\Release\net6.0-windows\publish\win-x86\MEFL.exe
