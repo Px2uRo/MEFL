@@ -19,10 +19,11 @@
                         <StackPanel>
                             <Grid Height="40">
                                 <ContentPresenter x:Name="PART_Title" Style="{DynamicResource STYLE_Normal_Title}" Content="{TemplateBinding Title}" HorizontalAlignment="Left"/>
-                                <Rectangle Fill="Transparent" Width="30" x:Name="PART_CheckBox" HorizontalAlignment="Right"/>
+                                <Rectangle Fill="Transparent" Width="40" x:Name="PART_CheckBox" HorizontalAlignment="Right"/>
                                 <Path Fill="Transparent" 
+                                        Height="40" Width="40"
                                       RenderTransformOrigin="0.5,0.5" 
-                                      Data="m0,2.61687l6.40244,6.40244l6.40244,-6.58028" 
+                                      Data="m0,20.61687l6.40244,6.40244l6.40244,-6.58028" 
                                       Stroke="Black" 
                                       StrokeThickness="2" 
                                       Margin="0,5,10,0" 

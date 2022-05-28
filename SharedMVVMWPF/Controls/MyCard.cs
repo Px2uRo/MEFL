@@ -40,7 +40,6 @@ namespace MEFL.Controls
             this.MouseEnter += MyCard_MouseEnter;
             this.MouseLeave += MyCard_MouseLeave;
             (this.Template.FindName("PART_CheckBox", this) as System.Windows.Shapes.Rectangle).MouseDown += CheckBox_Checked;
-            Time = this.Height / 1000;
             Ease = new PowerEase();
         }
 
@@ -53,23 +52,28 @@ namespace MEFL.Controls
             dbani.EasingFunction = Ease;
             dbaniIcon = new DoubleAnimation();
             dbaniIcon.Duration = new Duration(TimeSpan.FromSeconds(Time));
-            dbani.From = 180;
-            dbani.To = 0;
+            dbaniIcon.From = 0;
+            dbaniIcon.To = 180;
             this.BeginAnimation(HeightProperty, dbani);
-            //GetTemplateChild 
-            //(Template.FindName("PART_CheckBox_Icon_Rotate",this) as RotateTransform).BeginAnimation(RotateTransform.AngleProperty,dbaniIcon);
+            (Template.FindName("PART_CheckBox_Icon_Rotate",this) as RotateTransform).BeginAnimation(RotateTransform.AngleProperty,dbaniIcon);
             (sender as System.Windows.Shapes.Rectangle).MouseDown += CheckBox_Checked;
             (sender as System.Windows.Shapes.Rectangle).MouseDown -= CheckBox_Unchecked;  
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
+            Time = this.ActualHeight / 1000;
             dbani = new DoubleAnimation();
             dbani.Duration = new Duration(TimeSpan.FromSeconds(Time));
             OriginalHeight = Height;
             dbani.From = Height;
             dbani.To = 40;
             dbani.EasingFunction = Ease;
+            dbaniIcon = new DoubleAnimation();
+            dbaniIcon.Duration = new Duration(TimeSpan.FromSeconds(Time));
+            dbaniIcon.To = 0;
+            dbaniIcon.From = 180;
+            (Template.FindName("PART_CheckBox_Icon_Rotate", this) as RotateTransform).BeginAnimation(RotateTransform.AngleProperty, dbaniIcon);
             this.BeginAnimation(HeightProperty, dbani);
             (sender as System.Windows.Shapes.Rectangle).MouseDown += CheckBox_Unchecked;
             (sender as System.Windows.Shapes.Rectangle).MouseDown -= CheckBox_Checked;
