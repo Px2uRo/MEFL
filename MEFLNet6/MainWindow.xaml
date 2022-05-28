@@ -5,9 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MEFL"
         mc:Ignorable="d" xmlns:c="clr-namespace:MEFL.Controls"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="450" Width="800" >
     <Grid>
-        <c:MyCard Background="Black" BorderBrush="Aqua" Title="Hello Card!" Width="300" Height="200">
+        <c:MyCard BorderBrush="Aqua" Title="Hello Card!" Width="300" Height="200" RenderTransformOrigin="0.5,0.5">
+            <c:MyCard.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </c:MyCard.RenderTransform>
             <StackPanel>
                 <TextBlock TextWrapping="Wrap" Text="你好卡片！你可以设置它的 Content 以及 Title, Title 是一个 Object 哦！"/>
             </StackPanel>

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -21,6 +22,11 @@ namespace MEFL.Controls
     {
         #region Methods
         ColorAnimation ani;
+        DoubleAnimation dbani;
+        private double OriginalHeight;
+        private double Time;
+        private IEasingFunction Ease;
+        private DoubleAnimation dbaniIcon;
         #endregion
         static MyCard()
         {
@@ -30,13 +36,43 @@ namespace MEFL.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            if(Background == null)
-            {
-                Background = (this.Template.FindName("PART_Border", this) as Border).Style.Resources["SYTLE_Standard_Background"] as SolidColorBrush;
-            }
             
             this.MouseEnter += MyCard_MouseEnter;
             this.MouseLeave += MyCard_MouseLeave;
+            (this.Template.FindName("PART_CheckBox", this) as System.Windows.Shapes.Rectangle).MouseDown += CheckBox_Checked;
+            Time = this.Height / 1000;
+            Ease = new PowerEase();
+        }
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            dbani = new DoubleAnimation();
+            dbani.Duration = new Duration(TimeSpan.FromSeconds(Time));
+            dbani.From = 40;
+            dbani.To = OriginalHeight;
+            dbani.EasingFunction = Ease;
+            dbaniIcon = new DoubleAnimation();
+            dbaniIcon.Duration = new Duration(TimeSpan.FromSeconds(Time));
+            dbani.From = 180;
+            dbani.To = 0;
+            this.BeginAnimation(HeightProperty, dbani);
+            //GetTemplateChild 
+            //(Template.FindName("PART_CheckBox_Icon_Rotate",this) as RotateTransform).BeginAnimation(RotateTransform.AngleProperty,dbaniIcon);
+            (sender as System.Windows.Shapes.Rectangle).MouseDown += CheckBox_Checked;
+            (sender as System.Windows.Shapes.Rectangle).MouseDown -= CheckBox_Unchecked;  
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            dbani = new DoubleAnimation();
+            dbani.Duration = new Duration(TimeSpan.FromSeconds(Time));
+            OriginalHeight = Height;
+            dbani.From = Height;
+            dbani.To = 40;
+            dbani.EasingFunction = Ease;
+            this.BeginAnimation(HeightProperty, dbani);
+            (sender as System.Windows.Shapes.Rectangle).MouseDown += CheckBox_Unchecked;
+            (sender as System.Windows.Shapes.Rectangle).MouseDown -= CheckBox_Checked;
         }
 
         private void MyCard_MouseLeave(object sender, MouseEventArgs e)
