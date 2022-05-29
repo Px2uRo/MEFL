@@ -10,11 +10,11 @@ none
 false
 TRACE;RELEASE;NET;NET6_0;NETCOREAPP
 I:\Xiong's\MEFLCollection\MEFLNet6\App.xaml
-2687386496
+3-939324479
 
 7-1610036369
 196-924708070
-MainWindow.xaml;I:\Xiong's\MEFLCollection\SharedMVVMWPF\Themes\Generic.xaml;
+MainWindow.xaml;I:\Xiong's\MEFLCollection\SharedMVVMWPF\AquaStyle.xaml;I:\Xiong's\MEFLCollection\SharedMVVMWPF\Themes\Generic.xaml;
 
 True
 

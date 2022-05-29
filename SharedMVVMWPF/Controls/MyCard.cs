@@ -26,6 +26,7 @@ namespace MEFL.Controls
         private double Time;
         private IEasingFunction Ease;
         private DoubleAnimation dbaniIcon;
+        private double OriginalOpacity;
         #endregion
         static MyCard()
         {
@@ -52,16 +53,20 @@ namespace MEFL.Controls
                 else
                 {
                     (this.Template.FindName("PART_CheckBox", this) as System.Windows.Shapes.Rectangle).MouseDown += SwapBox_UnSwap;
-                    this.Loaded += MyCard_Initialized;
                 }
             }
+            this.Loaded += MyCard_Initialized;
             Ease = new PowerEase();
         }
 
         private void MyCard_Initialized(object? sender, EventArgs e)
         {
             OriginalHeight = this.ActualHeight;
-            this.Height = 40;
+            OriginalOpacity = this.VisualOpacity;
+            if (IsSwaped == true)
+            {
+                this.Height = 40;
+            }
         }
 
         private void SwapBox_UnSwap(object sender, RoutedEventArgs e)
@@ -107,8 +112,9 @@ namespace MEFL.Controls
         private void MyCard_MouseLeave(object sender, MouseEventArgs e)
         {
             OpacityAni = new DoubleAnimation();
-            OpacityAni.To = this.Opacity - 0.1;
-            OpacityAni.From = this.Opacity;
+            OpacityAni.To = this.OriginalOpacity - 0.1;
+            OpacityAni.From = this.OriginalOpacity;
+            OpacityAni.EasingFunction = Ease;
             OpacityAni.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             this.BeginAnimation(OpacityProperty, OpacityAni);
         }
@@ -117,8 +123,9 @@ namespace MEFL.Controls
         private void MyCard_MouseEnter(object sender, MouseEventArgs e)
         {
             OpacityAni = new DoubleAnimation();
-            OpacityAni.From = this.Opacity;
-            OpacityAni.To = this.Opacity + 0.1;
+            OpacityAni.From = this.OriginalOpacity;
+            OpacityAni.To = this.OriginalOpacity + 0.1;
+            OpacityAni.EasingFunction = Ease;
             OpacityAni.Duration = new Duration(TimeSpan.FromSeconds(0.5));
             this.BeginAnimation(OpacityProperty, OpacityAni);
         }

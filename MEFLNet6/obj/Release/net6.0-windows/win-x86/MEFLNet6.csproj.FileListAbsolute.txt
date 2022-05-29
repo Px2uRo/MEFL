@@ -25,3 +25,4 @@ I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\win-x86\refint\MEF
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\win-x86\MEFL.pdb
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\win-x86\MEFLNet6.genruntimeconfig.cache
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\win-x86\ref\MEFL.dll
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\win-x86\AquaStyle.baml
