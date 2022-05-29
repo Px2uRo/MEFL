@@ -9,19 +9,27 @@
                     <ControlTemplate.Resources>
                         <ResourceDictionary Source="..\..\aquastyle.xaml"/>
                     </ControlTemplate.Resources>
-                    <Border
-                        Opacity="{TemplateBinding Opacity}"
-                        Background="{DynamicResource ResourceKey=SYTLE_Standard_Background}"
+                    <Grid>
+                        <Border
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                Opacity="0.9"
+                                Background="{DynamicResource ResourceKey=SYTLE_Standard_Background}" 
+                                x:Name="PART_Background_Rect"/>
+                        <Border
+                        Background="Transparent"
                         Style="{DynamicResource STYLE_PART_Border}"
                         CornerRadius="{TemplateBinding CornerRadius}"
                         BorderThickness="{TemplateBinding BorderThickness}"
                         BorderBrush="{DynamicResource ResourceKey=SYTLE_Standard_BorderBrush}"
                         x:Name="PART_Border">
-                        <StackPanel>
-                            <Grid Height="40">
-                                <ContentPresenter x:Name="PART_Title" Style="{DynamicResource STYLE_Normal_Title}" Content="{TemplateBinding Title}" HorizontalAlignment="Left"/>
-                                <Rectangle Fill="Transparent" x:Name="PART_CheckBox"/>
-                                <Path
+                            <Grid>
+                                <StackPanel>
+                                    <Grid Height="40">
+                                        <ContentPresenter
+                                        x:Name="PART_Title" 
+                                        Style="{DynamicResource STYLE_Normal_Title}" Content="{TemplateBinding Title}" HorizontalAlignment="Left"/>
+                                        <Rectangle Fill="Transparent" x:Name="PART_CheckBox"/>
+                                        <Path
                                       RenderTransformOrigin="0.5,0.5" 
                                       VerticalAlignment="Top"
                                       Margin="0,7,5,5"
@@ -30,19 +38,21 @@
                                       StrokeThickness="2" 
                                       HorizontalAlignment="Right"
                                       x:Name="PART_CheckBox_Icon">
-                                    <Path.LayoutTransform>
-                                        <TransformGroup>
-                                            <ScaleTransform/>
-                                            <SkewTransform/>
-                                            <RotateTransform x:Name="PART_CheckBox_Icon_Rotate"/>
-                                            <TranslateTransform/>
-                                        </TransformGroup>
-                                    </Path.LayoutTransform>
-                                </Path>
+                                            <Path.LayoutTransform>
+                                                <TransformGroup>
+                                                    <ScaleTransform/>
+                                                    <SkewTransform/>
+                                                    <RotateTransform x:Name="PART_CheckBox_Icon_Rotate"/>
+                                                    <TranslateTransform/>
+                                                </TransformGroup>
+                                            </Path.LayoutTransform>
+                                        </Path>
+                                    </Grid>
+                                    <ContentPresenter x:Name="PART_Content" Margin="25,0,23,15" Style="{DynamicResource STYLE_Normal_Content}"/>
+                                </StackPanel>
                             </Grid>
-                            <ContentPresenter x:Name="PART_Content" Margin="25,0,23,15" Style="{DynamicResource STYLE_Normal_Content}"/>
-                        </StackPanel>
-                    </Border>
+                        </Border>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

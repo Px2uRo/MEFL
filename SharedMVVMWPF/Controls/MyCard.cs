@@ -56,13 +56,13 @@ namespace MEFL.Controls
                 }
             }
             this.Loaded += MyCard_Initialized;
-            Ease = new PowerEase();
+            Ease = new CircleEase();
         }
 
         private void MyCard_Initialized(object? sender, EventArgs e)
         {
             OriginalHeight = this.ActualHeight;
-            OriginalOpacity = this.VisualOpacity;
+            OriginalOpacity = (this.Template.FindName("PART_Background_Rect", this) as Border).Opacity;
             if (IsSwaped == true)
             {
                 this.Height = 40;
@@ -115,8 +115,8 @@ namespace MEFL.Controls
             OpacityAni.To = this.OriginalOpacity - 0.1;
             OpacityAni.From = this.OriginalOpacity;
             OpacityAni.EasingFunction = Ease;
-            OpacityAni.Duration = new Duration(TimeSpan.FromSeconds(0.5));
-            this.BeginAnimation(OpacityProperty, OpacityAni);
+            OpacityAni.Duration = new Duration(TimeSpan.FromSeconds(1));
+            (this.Template.FindName ("PART_Background_Rect",this) as Border).BeginAnimation(OpacityProperty, OpacityAni);
         }
 
         //进入事件。
@@ -126,8 +126,8 @@ namespace MEFL.Controls
             OpacityAni.From = this.OriginalOpacity;
             OpacityAni.To = this.OriginalOpacity + 0.1;
             OpacityAni.EasingFunction = Ease;
-            OpacityAni.Duration = new Duration(TimeSpan.FromSeconds(0.5));
-            this.BeginAnimation(OpacityProperty, OpacityAni);
+            OpacityAni.Duration = new Duration(TimeSpan.FromSeconds(1));
+            (this.Template.FindName("PART_Background_Rect", this) as Border).BeginAnimation(OpacityProperty, OpacityAni);
         }
 
         #region Propdp
