@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualBasic.CompilerServices;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,10 +19,10 @@ namespace MEFL.Controls
 {
     public class MyCard : UserControl
     {
-        #region Methods
-        ColorAnimation ani;
+        #region 你是个屁的 Methods
+        DoubleAnimation OpacityAni;
         DoubleAnimation dbani;
-        private double OriginalHeight;
+        private double OriginalHeight { get; set; }
         private double Time;
         private IEasingFunction Ease;
         private DoubleAnimation dbaniIcon;
@@ -39,12 +38,35 @@ namespace MEFL.Controls
             
             this.MouseEnter += MyCard_MouseEnter;
             this.MouseLeave += MyCard_MouseLeave;
-            (this.Template.FindName("PART_CheckBox", this) as System.Windows.Shapes.Rectangle).MouseDown += CheckBox_Checked;
+            if (IsAbleToSwap == false)
+            {
+                (this.Template.FindName("PART_CheckBox_Icon", this) as Path).Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                if(IsSwaped == false)
+                {
+                    (Template.FindName("PART_CheckBox_Icon_Rotate", this) as RotateTransform).Angle = 180;
+                    (this.Template.FindName("PART_CheckBox", this) as System.Windows.Shapes.Rectangle).MouseDown += SwapBox_Swap;
+                }
+                else
+                {
+                    (this.Template.FindName("PART_CheckBox", this) as System.Windows.Shapes.Rectangle).MouseDown += SwapBox_UnSwap;
+                    this.Loaded += MyCard_Initialized;
+                }
+            }
             Ease = new PowerEase();
         }
 
-        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        private void MyCard_Initialized(object? sender, EventArgs e)
         {
+            OriginalHeight = this.ActualHeight;
+            this.Height = 40;
+        }
+
+        private void SwapBox_UnSwap(object sender, RoutedEventArgs e)
+        {
+            Time = OriginalHeight / 1000;
             dbani = new DoubleAnimation();
             dbani.Duration = new Duration(TimeSpan.FromSeconds(Time));
             dbani.From = 40;
@@ -52,62 +74,65 @@ namespace MEFL.Controls
             dbani.EasingFunction = Ease;
             dbaniIcon = new DoubleAnimation();
             dbaniIcon.Duration = new Duration(TimeSpan.FromSeconds(Time));
-            dbaniIcon.From = 0;
+            dbaniIcon.From = 360;
             dbaniIcon.To = 180;
             this.BeginAnimation(HeightProperty, dbani);
             (Template.FindName("PART_CheckBox_Icon_Rotate",this) as RotateTransform).BeginAnimation(RotateTransform.AngleProperty,dbaniIcon);
-            (sender as System.Windows.Shapes.Rectangle).MouseDown += CheckBox_Checked;
-            (sender as System.Windows.Shapes.Rectangle).MouseDown -= CheckBox_Unchecked;  
+            (sender as System.Windows.Shapes.Rectangle).MouseDown += SwapBox_Swap;
+            (sender as System.Windows.Shapes.Rectangle).MouseDown -= SwapBox_UnSwap;  
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        private void SwapBox_Swap(object sender, RoutedEventArgs e)
         {
+            if(OriginalHeight == 0)
+            {
+                OriginalHeight = this.ActualHeight;
+            }
             Time = this.ActualHeight / 1000;
             dbani = new DoubleAnimation();
             dbani.Duration = new Duration(TimeSpan.FromSeconds(Time));
-            OriginalHeight = Height;
             dbani.From = Height;
             dbani.To = 40;
             dbani.EasingFunction = Ease;
             dbaniIcon = new DoubleAnimation();
             dbaniIcon.Duration = new Duration(TimeSpan.FromSeconds(Time));
-            dbaniIcon.To = 0;
+            dbaniIcon.To = 360;
             dbaniIcon.From = 180;
             (Template.FindName("PART_CheckBox_Icon_Rotate", this) as RotateTransform).BeginAnimation(RotateTransform.AngleProperty, dbaniIcon);
             this.BeginAnimation(HeightProperty, dbani);
-            (sender as System.Windows.Shapes.Rectangle).MouseDown += CheckBox_Unchecked;
-            (sender as System.Windows.Shapes.Rectangle).MouseDown -= CheckBox_Checked;
+            (sender as System.Windows.Shapes.Rectangle).MouseDown += SwapBox_UnSwap;
+            (sender as System.Windows.Shapes.Rectangle).MouseDown -= SwapBox_Swap;
         }
 
         private void MyCard_MouseLeave(object sender, MouseEventArgs e)
         {
-            ani = new ColorAnimation();
-            ani.To = Color.FromArgb(10, 102, 153, 253);
-            ani.From = Color.FromArgb(50, 102, 153, 253);
-            ani.Duration = new Duration(TimeSpan.FromSeconds(0.5));
-            SolidColorBrush brush = new SolidColorBrush();
-            brush.BeginAnimation(SolidColorBrush.ColorProperty, ani);
-            this.Background = brush;
+            OpacityAni = new DoubleAnimation();
+            OpacityAni.To = this.Opacity - 0.1;
+            OpacityAni.From = this.Opacity;
+            OpacityAni.Duration = new Duration(TimeSpan.FromSeconds(0.5));
+            this.BeginAnimation(OpacityProperty, OpacityAni);
         }
 
+        //进入事件。
         private void MyCard_MouseEnter(object sender, MouseEventArgs e)
         {
-            ani = new ColorAnimation();
-            ani.From = Color.FromArgb(10,102,153,253);
-            ani.To = Color.FromArgb(50, 102, 153, 253);
-            ani.Duration = new Duration(TimeSpan.FromSeconds(0.5));
-            SolidColorBrush brush = new SolidColorBrush();
-            brush.BeginAnimation(SolidColorBrush.ColorProperty, ani);
-            this.Background = brush;
+            OpacityAni = new DoubleAnimation();
+            OpacityAni.From = this.Opacity;
+            OpacityAni.To = this.Opacity + 0.1;
+            OpacityAni.Duration = new Duration(TimeSpan.FromSeconds(0.5));
+            this.BeginAnimation(OpacityProperty, OpacityAni);
         }
 
+        #region Propdp
         public object Title
         {
-            get { 
+            get
+            {
 
-                return (object)GetValue(TitleProperty); 
+                return (object)GetValue(TitleProperty);
             }
-            set {
+            set
+            {
                 SetValue(TitleProperty, value);
             }
         }
@@ -127,9 +152,7 @@ namespace MEFL.Controls
         public static readonly DependencyProperty CornerRadiusProperty =
             DependencyProperty.Register("CornerRadius", typeof(CornerRadius), typeof(MyCard), new PropertyMetadata(new CornerRadius(10)));
 
-
-
-        public Thickness BorderThickness
+        public new Thickness BorderThickness
         {
             get { return (Thickness)GetValue(BorderThicknessProperty); }
             set { SetValue(BorderThicknessProperty, value); }
@@ -141,18 +164,30 @@ namespace MEFL.Controls
 
 
 
-        public SolidColorBrush Background
+        public bool IsAbleToSwap
         {
-            get { return (SolidColorBrush)GetValue(BackgroundProperty); }
-            set { SetValue(BackgroundProperty, value); }
+            get { return (bool)GetValue(IsAbleToSwapProperty); }
+            set { SetValue(IsAbleToSwapProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Background.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty BackgroundProperty =
-            DependencyProperty.Register("Background", typeof(SolidColorBrush), typeof(MyCard), new PropertyMetadata(new SolidColorBrush(Color.FromArgb(00,00,00,00))));
+        // Using a DependencyProperty as the backing store for IsAbleToSwap.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsAbleToSwapProperty =
+            DependencyProperty.Register("IsAbleToSwap", typeof(bool), typeof(MyCard), new PropertyMetadata(false));
 
 
 
+        public bool IsSwaped
+        {
+            get { return (bool)GetValue(IsSwapedProperty); }
+            set { SetValue(IsSwapedProperty, value); }
+        }
 
+        // Using a DependencyProperty as the backing store for IsSwaped.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty IsSwapedProperty =
+            DependencyProperty.Register("IsSwaped", typeof(bool), typeof(MyCard), new PropertyMetadata(false));
+
+
+
+        #endregion
     }
 }
