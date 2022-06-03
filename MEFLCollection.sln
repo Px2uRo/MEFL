@@ -31,6 +31,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedWPF", "SharedMVVMWPF\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MEFLNet6", "MEFLNet6\MEFLNet6.csproj", "{46691A0F-6F40-4CB2-B17D-E14DABD459D6}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedSources", "SharedSources\SharedSources.shproj", "{A6BAB5A9-265B-4417-8C32-6D9A7E19F081}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		SharedMEFLClass\SharedMEFLClass.projitems*{00442d5b-d000-4d7e-9d37-6ce764806d77}*SharedItemsImports = 13
@@ -39,7 +41,9 @@ Global
 		SharedMEFLUWP\SharedMEFLUWP.projitems*{1d7867e0-3a4e-4673-b13c-8bec1b24e5d9}*SharedItemsImports = 4
 		SharedMEFLClass\SharedMEFLClass.projitems*{2ae91223-506e-4234-ad2f-f30bd53779e6}*SharedItemsImports = 5
 		SharedMVVMWPF\SharedMVVMWPF.projitems*{46691a0f-6f40-4cb2-b17d-e14dabd459d6}*SharedItemsImports = 5
+		SharedSources\SharedSources.projitems*{46691a0f-6f40-4cb2-b17d-e14dabd459d6}*SharedItemsImports = 5
 		SharedMEFLClass\SharedMEFLClass.projitems*{640b998c-7539-490a-9c5b-4a6b34c636d6}*SharedItemsImports = 5
+		SharedSources\SharedSources.projitems*{a6bab5a9-265b-4417-8c32-6d9a7e19f081}*SharedItemsImports = 13
 		SharedMVVMWPF\SharedMVVMWPF.projitems*{a76e17ed-57bf-45e9-b5e8-9a16c228fb70}*SharedItemsImports = 13
 		..\CoreLaunching\SharedCore\SharedCore.projitems*{a98f00b4-191b-4401-b986-b3e8a5f10605}*SharedItemsImports = 4
 		SharedMEFLClass\SharedMEFLClass.projitems*{c3acf42f-3a3a-43f1-b1e8-d025d48ffda3}*SharedItemsImports = 4

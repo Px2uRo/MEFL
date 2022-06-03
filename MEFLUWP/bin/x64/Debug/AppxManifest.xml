@@ -32,7 +32,7 @@
     <Capability Name="internetClient" />
   </Capabilities>
   <build:Metadata>
-    <build:Item Name="SharedGUID" Value="f9d617ca-0cc1-4b2e-8605-2a97d42d73a7" />
+    <build:Item Name="SharedGUID" Value="00442d5b-d000-4d7e-9d37-6ce764806d77" />
     <build:Item Name="CodeSharingProject" Value="248F659F-DAC5-46E8-AC09-60EC9FC95053" />
     <build:Item Name="TargetFrameworkMoniker" Value=".NETCore,Version=v5.0" />
     <build:Item Name="VisualStudio" Version="17.0" />

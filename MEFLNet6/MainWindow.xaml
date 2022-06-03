@@ -5,13 +5,115 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MEFL"
         mc:Ignorable="d" xmlns:c="clr-namespace:MEFL.Controls"
-        Title="MainWindow" Height="450" Width="800" >
-    <Grid Background="Black">
-        <c:MyCard IsAbleToSwap="True" IsSwaped="True" Opacity="0.9"
-            BorderBrush="Aqua" Title="Hello Card!" Width="300" Height="200" RenderTransformOrigin="0.5,0.5">
-            <StackPanel>
-                <TextBlock TextWrapping="Wrap" Text="你好卡片！你可以设置它的 Content 以及 Title, Title 是一个 Object 哦！"/>
+        Title="MainWindow" Height="450" Width="800"
+        WindowStyle="None" StateChanged="Window_StateChanged">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="40"/>
+    </WindowChrome.WindowChrome>
+    <Window.Resources>
+        <!--<ResourceDictionary Source="..\AquaStyle.xaml"/>-->
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Background="Aqua">
+            <ContentPresenter Content="Title" 
+                              VerticalAlignment="Center"
+                              Margin="10,0,0,0"/>
+            <StackPanel Orientation="Horizontal" 
+                        HorizontalAlignment="Right">
+                <Border Width="45" 
+                        Margin="0,5,0,0">
+                    <Grid>
+                        <!--#region Icon -->
+                        <Rectangle VerticalAlignment="Center"
+                                   Width="10" Height="1" 
+                                   Fill="Black" />
+                        <!--#endregion-->
+                        <Border Background="Transparent" 
+                                MouseDown="Border_MouseDown" 
+                                Name="MinWindowButton"
+                                MouseEnter="MinWindowButton_MouseEnter"
+                                MouseLeave="MinWindowButton_MouseLeave"/>
+                    </Grid>
+                </Border>
+                <Border Width="45" Margin="0,5,0,0">
+                    <Grid>
+                        <!--#region Icon -->
+                        <Border Name="MaxWindowIcon"
+                                Width="15" Height="12" 
+                                CornerRadius="2" 
+                                BorderBrush="Black" 
+                                BorderThickness="1"/>
+                        <Border Name="WinWindowIcon"
+                                Visibility="Hidden">
+                            <Grid>
+                                <Border Width="12" 
+                                        Height="10"
+                                        CornerRadius="2" 
+                                        BorderBrush="Black" 
+                                        BorderThickness="1"/>
+                                <Border Width="12"
+                                        Height="10" 
+                                        CornerRadius="2" 
+                                        BorderBrush="Black" 
+                                        BorderThickness="1" 
+                                        Margin="5,0,0,5"/>
+                            </Grid>
+                        </Border>
+                        <!--#endregion-->
+                        <Border 
+                            Background="Transparent" 
+                            MouseDown="Border_MouseDown" 
+                            Name="ChangeSizeButton"
+                            MouseEnter="MinWindowButton_MouseEnter"
+                                MouseLeave="MinWindowButton_MouseLeave"
+                            />
+                    </Grid>
+                </Border>
+                <Border Width="45" Margin="0,5,0,0">
+                    <Grid>
+                        <!--#region Icon -->
+                        <Grid>
+                            <Rectangle VerticalAlignment="Center" Width="15" Height="1" Fill="Black" RenderTransformOrigin="0.5,0.5" >
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="-45"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                            <Rectangle VerticalAlignment="Center" Width="15" Height="1" Fill="Black" RenderTransformOrigin="0.5,0.5" >
+                                <Rectangle.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="45"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Rectangle.RenderTransform>
+                            </Rectangle>
+                        </Grid>
+                        <!--#endregion-->
+                        <Border Background="Transparent"
+                                MouseDown="Border_MouseDown" 
+                                Name="CloseWindowsButton"
+                                MouseEnter="MinWindowButton_MouseEnter"
+                                MouseLeave="MinWindowButton_MouseLeave"/>
+                    </Grid>
+                </Border>
             </StackPanel>
-        </c:MyCard>
+        </Grid>
+        <TextBlock Grid.Row="2" 
+                   FontSize="24"
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"
+                   />
     </Grid>
 </Window>

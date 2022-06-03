@@ -10,22 +10,22 @@
     <PackageArchitecture>x64</PackageArchitecture>
     <PackageIdentityName>59506eea-5c16-40d4-9ea1-d69e3985d8d1</PackageIdentityName>
     <PackageIdentityPublisher>CN=Lenovo</PackageIdentityPublisher>
-    <IntermediateOutputPath>I:\Xiong%27s\MEFLCollection\MEFLCollection\MEFLUWP\obj\x64\Debug\</IntermediateOutputPath>
+    <IntermediateOutputPath>I:\Xiong%27s\MEFLCollection\MEFLUWP\obj\x64\Debug\</IntermediateOutputPath>
     <RemoteDeploymentType></RemoteDeploymentType>
     <PackageRegistrationPath></PackageRegistrationPath>
     <RemoveNonLayoutFiles>true</RemoveNonLayoutFiles>
     <DeployOptionalPackages>false</DeployOptionalPackages>
     <WindowsSdkPath>C:\Program Files %28x86%29\Windows Kits\10\</WindowsSdkPath>
-    <LayoutDir>I:\Xiong%27s\MEFLCollection\MEFLCollection\MEFLUWP\bin\x64\Debug\AppX</LayoutDir>
+    <LayoutDir>I:\Xiong%27s\MEFLCollection\MEFLUWP\bin\x64\Debug\AppX</LayoutDir>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="I:\Xiong%27s\MEFLCollection\MEFLCollection\MEFLUWP\bin\x64\Debug\Core\AppxManifest.xml">
+    <AppXManifest Include="I:\Xiong%27s\MEFLCollection\MEFLUWP\bin\x64\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLCollection\MEFLUWP\bin\x64\Debug\MEFL.exe">
+    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLUWP\bin\x64\Debug\MEFL.exe">
       <PackagePath>entrypoint\MEFL.exe</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\microsoft.csharp\4.0.1\lib\netcore50\Microsoft.CSharp.dll">
@@ -370,52 +370,52 @@
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\system.xml.xmlserializer\4.0.11\lib\netcore50\System.Xml.XmlSerializer.dll">
       <PackagePath>System.Xml.XmlSerializer.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLCollection\MEFLUWP\Properties\Default.rd.xml">
+    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLUWP\Properties\Default.rd.xml">
       <PackagePath>Properties\Default.rd.xml</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLCollection\MEFLUWP\Assets\LockScreenLogo.scale-200.png">
+    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLUWP\Assets\LockScreenLogo.scale-200.png">
       <PackagePath>Assets\LockScreenLogo.scale-200.png</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLCollection\MEFLUWP\Assets\SplashScreen.scale-200.png">
+    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLUWP\Assets\SplashScreen.scale-200.png">
       <PackagePath>Assets\SplashScreen.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLCollection\MEFLUWP\Assets\Square150x150Logo.scale-200.png">
+    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLUWP\Assets\Square150x150Logo.scale-200.png">
       <PackagePath>Assets\Square150x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLCollection\MEFLUWP\Assets\Square44x44Logo.scale-200.png">
+    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLUWP\Assets\Square44x44Logo.scale-200.png">
       <PackagePath>Assets\Square44x44Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLCollection\MEFLUWP\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
+    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLUWP\Assets\Square44x44Logo.targetsize-24_altform-unplated.png">
       <PackagePath>Assets\Square44x44Logo.targetsize-24_altform-unplated.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLCollection\MEFLUWP\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLUWP\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLCollection\MEFLUWP\Assets\Wide310x150Logo.scale-200.png">
+    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLUWP\Assets\Wide310x150Logo.scale-200.png">
       <PackagePath>Assets\Wide310x150Logo.scale-200.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLCollection\MEFLUWP\bin\x64\Debug\MEFL.xr.xml">
+    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLUWP\bin\x64\Debug\MEFL.xr.xml">
       <PackagePath>MEFL.xr.xml</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLCollection\MEFLUWP\bin\x64\Debug\App.xbf">
+    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLUWP\bin\x64\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLCollection\MEFLUWP\bin\x64\Debug\MainPage.xbf">
+    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLUWP\bin\x64\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.22000.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLCollection\MEFLUWP\bin\x64\Debug\resources.pri">
+    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLUWP\bin\x64\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLCollection\MEFLUWP\bin\x64\Debug\Core\MEFL.exe">
+    <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLUWP\bin\x64\Debug\Core\MEFL.exe">
       <PackagePath>MEFL.exe</PackagePath>
     </AppxPackagedFile>
   </ItemGroup>

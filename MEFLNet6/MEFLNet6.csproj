@@ -15,4 +15,6 @@
 
   <Import Project="..\SharedMVVMWPF\SharedMVVMWPF.projitems" Label="Shared" />
 
+  <Import Project="..\SharedSources\SharedSources.projitems" Label="Shared" />
+
 </Project>

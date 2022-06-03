@@ -12,7 +12,8 @@
                     <Grid>
                         <Border
                                 CornerRadius="{TemplateBinding CornerRadius}"
-                                Opacity="0.9"
+                                Opacity="0.95"
+                                BorderBrush="{DynamicResource ResourceKey=SYTLE_Standard_Background}"
                                 Background="{DynamicResource ResourceKey=SYTLE_Standard_Background}" 
                                 x:Name="PART_Background_Rect"/>
                         <Border
@@ -25,10 +26,6 @@
                             <Grid>
                                 <StackPanel>
                                     <Grid Height="40">
-                                        <ContentPresenter
-                                        x:Name="PART_Title" 
-                                        Style="{DynamicResource STYLE_Normal_Title}" Content="{TemplateBinding Title}" HorizontalAlignment="Left"/>
-                                        <Rectangle Fill="Transparent" x:Name="PART_CheckBox"/>
                                         <Path
                                       RenderTransformOrigin="0.5,0.5" 
                                       VerticalAlignment="Top"
@@ -47,8 +44,15 @@
                                                 </TransformGroup>
                                             </Path.LayoutTransform>
                                         </Path>
+                                        <ContentPresenter
+                                        x:Name="PART_Title" 
+                                        Style="{DynamicResource STYLE_Normal_Title}" Content="{TemplateBinding Title}" HorizontalAlignment="Left"/>
+                                        <Rectangle Fill="Transparent" x:Name="PART_CheckBox"/>
                                     </Grid>
-                                    <ContentPresenter x:Name="PART_Content" Margin="25,0,23,15" Style="{DynamicResource STYLE_Normal_Content}"/>
+                                    <ContentPresenter 
+                                        x:Name="PART_Content" 
+                                        Margin="25,0,23,15" 
+                                        Style="{DynamicResource STYLE_Normal_Content}"/>
                                 </StackPanel>
                             </Grid>
                         </Border>

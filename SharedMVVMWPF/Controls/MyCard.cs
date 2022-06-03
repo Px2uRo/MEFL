@@ -74,12 +74,12 @@ namespace MEFL.Controls
             Time = OriginalHeight / 1000;
             dbani = new DoubleAnimation();
             dbani.Duration = new Duration(TimeSpan.FromSeconds(Time));
-            dbani.From = 40;
+            dbani.From = this.ActualHeight;
             dbani.To = OriginalHeight;
             dbani.EasingFunction = Ease;
             dbaniIcon = new DoubleAnimation();
             dbaniIcon.Duration = new Duration(TimeSpan.FromSeconds(Time));
-            dbaniIcon.From = 360;
+            dbaniIcon.From = (Template.FindName("PART_CheckBox_Icon_Rotate", this) as RotateTransform).Angle;
             dbaniIcon.To = 180;
             this.BeginAnimation(HeightProperty, dbani);
             (Template.FindName("PART_CheckBox_Icon_Rotate",this) as RotateTransform).BeginAnimation(RotateTransform.AngleProperty,dbaniIcon);
@@ -89,20 +89,16 @@ namespace MEFL.Controls
 
         private void SwapBox_Swap(object sender, RoutedEventArgs e)
         {
-            if(OriginalHeight == 0)
-            {
-                OriginalHeight = this.ActualHeight;
-            }
-            Time = this.ActualHeight / 1000;
+            Time = ActualHeight / 1000;
             dbani = new DoubleAnimation();
             dbani.Duration = new Duration(TimeSpan.FromSeconds(Time));
-            dbani.From = Height;
+            dbani.From = ActualHeight;
             dbani.To = 40;
             dbani.EasingFunction = Ease;
             dbaniIcon = new DoubleAnimation();
             dbaniIcon.Duration = new Duration(TimeSpan.FromSeconds(Time));
             dbaniIcon.To = 360;
-            dbaniIcon.From = 180;
+            dbaniIcon.From = (Template.FindName("PART_CheckBox_Icon_Rotate", this) as RotateTransform).Angle;
             (Template.FindName("PART_CheckBox_Icon_Rotate", this) as RotateTransform).BeginAnimation(RotateTransform.AngleProperty, dbaniIcon);
             this.BeginAnimation(HeightProperty, dbani);
             (sender as System.Windows.Shapes.Rectangle).MouseDown += SwapBox_UnSwap;
@@ -112,8 +108,8 @@ namespace MEFL.Controls
         private void MyCard_MouseLeave(object sender, MouseEventArgs e)
         {
             OpacityAni = new DoubleAnimation();
-            OpacityAni.To = this.OriginalOpacity - 0.1;
-            OpacityAni.From = this.OriginalOpacity;
+            OpacityAni.To = this.OriginalOpacity - 0.05;
+            OpacityAni.From = this.OriginalOpacity; 
             OpacityAni.EasingFunction = Ease;
             OpacityAni.Duration = new Duration(TimeSpan.FromSeconds(1));
             (this.Template.FindName ("PART_Background_Rect",this) as Border).BeginAnimation(OpacityProperty, OpacityAni);
@@ -124,7 +120,7 @@ namespace MEFL.Controls
         {
             OpacityAni = new DoubleAnimation();
             OpacityAni.From = this.OriginalOpacity;
-            OpacityAni.To = this.OriginalOpacity + 0.1;
+            OpacityAni.To = this.OriginalOpacity + 0.05;
             OpacityAni.EasingFunction = Ease;
             OpacityAni.Duration = new Duration(TimeSpan.FromSeconds(1));
             (this.Template.FindName("PART_Background_Rect", this) as Border).BeginAnimation(OpacityProperty, OpacityAni);
