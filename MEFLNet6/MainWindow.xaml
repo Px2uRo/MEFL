@@ -6,9 +6,10 @@
         xmlns:local="clr-namespace:MEFL"
         mc:Ignorable="d" xmlns:c="clr-namespace:MEFL.Controls"
         Title="MainWindow" Height="450" Width="800"
+        
         WindowStyle="None" StateChanged="Window_StateChanged">
     <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="40"/>
+        <WindowChrome CaptionHeight="0"/>
     </WindowChrome.WindowChrome>
     <Window.Resources>
         <!--<ResourceDictionary Source="..\AquaStyle.xaml"/>-->
@@ -19,29 +20,28 @@
             <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid Background="Aqua">
+        <Grid Background="Aqua" MouseMove="Grid_MouseMove">
             <ContentPresenter Content="Title" 
                               VerticalAlignment="Center"
                               Margin="10,0,0,0"/>
             <StackPanel Orientation="Horizontal" 
                         HorizontalAlignment="Right">
-                <Border Width="45" 
+                    <Grid Width="45" 
                         Margin="0,5,0,0">
-                    <Grid>
                         <!--#region Icon -->
                         <Rectangle VerticalAlignment="Center"
                                    Width="10" Height="1" 
                                    Fill="Black" />
                         <!--#endregion-->
-                        <Border Background="Transparent" 
+                        <Border Background="Gray" 
                                 MouseDown="Border_MouseDown" 
                                 Name="MinWindowButton"
                                 MouseEnter="MinWindowButton_MouseEnter"
-                                MouseLeave="MinWindowButton_MouseLeave"/>
+                                MouseLeave="MinWindowButton_MouseLeave"
+                                Opacity="0"/>
                     </Grid>
-                </Border>
-                <Border Width="45" Margin="0,5,0,0">
-                    <Grid>
+                    <Grid Width="45" 
+                        Margin="0,5,0,0">
                         <!--#region Icon -->
                         <Border Name="MaxWindowIcon"
                                 Width="15" Height="12" 
@@ -66,17 +66,21 @@
                         </Border>
                         <!--#endregion-->
                         <Border 
-                            Background="Transparent" 
+                            Background="Gray" 
                             MouseDown="Border_MouseDown" 
                             Name="ChangeSizeButton"
                             MouseEnter="MinWindowButton_MouseEnter"
                                 MouseLeave="MinWindowButton_MouseLeave"
-                            />
+                            Opacity="0"/>
                     </Grid>
-                </Border>
-                <Border Width="45" Margin="0,5,0,0">
-                    <Grid>
-                        <!--#region Icon -->
+                    <Grid Width="45" Margin="0,5,0,0">
+                    <Border Background="Red"
+                                MouseDown="Border_MouseDown" 
+                                Name="CloseWindowsButton"
+                                MouseEnter="MinWindowButton_MouseEnter"
+                                MouseLeave="MinWindowButton_MouseLeave"
+                                Opacity="0"/>
+                    <!--#region Icon -->
                         <Grid>
                             <Rectangle VerticalAlignment="Center" Width="15" Height="1" Fill="Black" RenderTransformOrigin="0.5,0.5" >
                                 <Rectangle.RenderTransform>
@@ -100,13 +104,7 @@
                             </Rectangle>
                         </Grid>
                         <!--#endregion-->
-                        <Border Background="Transparent"
-                                MouseDown="Border_MouseDown" 
-                                Name="CloseWindowsButton"
-                                MouseEnter="MinWindowButton_MouseEnter"
-                                MouseLeave="MinWindowButton_MouseLeave"/>
                     </Grid>
-                </Border>
             </StackPanel>
         </Grid>
         <TextBlock Grid.Row="2" 
@@ -114,6 +112,6 @@
                    FontWeight="Bold" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center"
-                   />
+                   Name="TextTB"/>
     </Grid>
 </Window>
