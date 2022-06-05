@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "cjD6jZga5JtZwiotukqMHL7I5jeztY1l4P2WTrTpeFeWl3Zz95WGtCkFcmZXfFWRRv2RJvH2VO3U9KIxXPWnlw==",
+  "dgSpecHash": "oOIg0G4QIMyziEArFQP+BTaRRb/oEOaJdIAkD5HzspIxYML2879nwjHQtdhdmOyabRltYTVqLSxsLEW8JmhO1Q==",
   "success": true,
   "projectFilePath": "I:\\Xiong's\\MEFLCollection\\MEFLNet6\\MEFLNet6.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "C:\\Users\\Lenovo\\.nuget\\packages\\runtime.native.system.io.compression\\4.3.0\\runtime.native.system.io.compression.4.3.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.buffers\\4.3.0\\system.buffers.4.3.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.collections\\4.3.0\\system.collections.4.3.0.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\system.componentmodel.composition\\6.0.0\\system.componentmodel.composition.6.0.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.diagnostics.debug\\4.3.0\\system.diagnostics.debug.4.3.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.diagnostics.tracing\\4.3.0\\system.diagnostics.tracing.4.3.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.globalization\\4.3.0\\system.globalization.4.3.0.nupkg.sha512",

@@ -14,6 +14,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MEFL.ControlModelViews;
 
 namespace MEFL.Controls
 {
@@ -22,8 +23,8 @@ namespace MEFL.Controls
         #region 你是个屁的 Methods
         DoubleAnimation OpacityAni;
         DoubleAnimation dbani;
-        private double OriginalHeight { get; set; }
-        private double Time;
+        private double OriginalHeight;
+        private double Time { get; set; }
         private IEasingFunction Ease;
         private DoubleAnimation dbaniIcon;
         private double OriginalOpacity;
@@ -36,7 +37,8 @@ namespace MEFL.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            
+            this.DataContext = MainModelViews.MyCardModelView;
+
             this.MouseEnter += MyCard_MouseEnter;
             this.MouseLeave += MyCard_MouseLeave;
             if (IsAbleToSwap == false)
@@ -71,7 +73,7 @@ namespace MEFL.Controls
 
         private void SwapBox_UnSwap(object sender, RoutedEventArgs e)
         {
-            Time = OriginalHeight / 1000;
+            Time = OriginalHeight / 1000 * ControlModel.TimeMultiple;
             dbani = new DoubleAnimation();
             dbani.Duration = new Duration(TimeSpan.FromSeconds(Time));
             dbani.From = this.ActualHeight;
@@ -89,7 +91,7 @@ namespace MEFL.Controls
 
         private void SwapBox_Swap(object sender, RoutedEventArgs e)
         {
-            Time = ActualHeight / 1000;
+            Time = OriginalHeight / 1000 * ControlModel.TimeMultiple;
             dbani = new DoubleAnimation();
             dbani.Duration = new Duration(TimeSpan.FromSeconds(Time));
             dbani.From = ActualHeight;

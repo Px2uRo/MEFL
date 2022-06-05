@@ -8,13 +8,13 @@ I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\
 MEFL
 none
 false
-TRACE;DEBUG;NET;NET6_0;NETCOREAPP
+WPF;DEBUG;NET;NET6_0;NETCOREAPP
 I:\Xiong's\MEFLCollection\MEFLNet6\App.xaml
 3-939324479
 
-72112295999
-196490655386
+14-733896995
+197-263912351
 MainWindow.xaml;I:\Xiong's\MEFLCollection\SharedMVVMWPF\AquaStyle.xaml;I:\Xiong's\MEFLCollection\SharedMVVMWPF\Themes\Generic.xaml;
 
-True
+False
 

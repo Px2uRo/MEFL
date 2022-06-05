@@ -27,6 +27,7 @@ namespace MEFL
         private DoubleAnimation _dbani;
         public MainWindow()
         {
+            (new MEFL.Hosting()).LoadAll();
             InitializeComponent();
             _dbani = new DoubleAnimation();
             _dbani.Duration = new Duration(TimeSpan.FromSeconds(0.2));
@@ -134,14 +135,13 @@ namespace MEFL
         {
             if (e.LeftButton == MouseButtonState.Pressed)
             {
-                if (WindowState == WindowState.Maximized)
-                {
-                    WindowState=WindowState.Normal;
-                    Top = 0;
-                    Left = GetMousePosition().X - ActualWidth/2;
-                }
                 DragMove();
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ControlModel.TimeMultiple = 5;
         }
     }
 }

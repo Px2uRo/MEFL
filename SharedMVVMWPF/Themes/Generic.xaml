@@ -6,9 +6,6 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="local:MyCard">
-                    <ControlTemplate.Resources>
-                        <ResourceDictionary Source="..\..\aquastyle.xaml"/>
-                    </ControlTemplate.Resources>
                     <Grid>
                         <Border
                                 CornerRadius="{TemplateBinding CornerRadius}"

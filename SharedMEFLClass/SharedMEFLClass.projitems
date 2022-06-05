@@ -9,5 +9,10 @@
     <Import_RootNamespace>MEFL</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)BaseInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Hosting.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)IBaseAddIn.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ISettingPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Permissions.cs" />
   </ItemGroup>
 </Project>

@@ -20,7 +20,7 @@
             <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid Background="Aqua" MouseMove="Grid_MouseMove">
+        <Grid Background="{DynamicResource ResourceKey=SYTLE_Standard_ColorBrush}" MouseMove="Grid_MouseMove">
             <ContentPresenter Content="Title" 
                               VerticalAlignment="Center"
                               Margin="10,0,0,0"/>
@@ -107,11 +107,14 @@
                     </Grid>
             </StackPanel>
         </Grid>
-        <TextBlock Grid.Row="2" 
+        <c:MyCard Grid.Row="2" IsAbleToSwap="True" IsSwaped="False" VerticalAlignment="Top" Height="300">
+            <Button Click="Button_Click" Height="30" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        </c:MyCard>
+        <!--<TextBlock Grid.Row="2" 
                    FontSize="24"
                    FontWeight="Bold" 
                    HorizontalAlignment="Center" 
                    VerticalAlignment="Center"
-                   Name="TextTB"/>
+                   Name="TextTB"/>-->
     </Grid>
 </Window>

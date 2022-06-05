@@ -9,6 +9,18 @@
     <RootNamespace>MEFL</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>WPF</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>WPF</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />
+  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\..\CoreLaunching\CoreLaunchingNet6\CoreLaunchingNet6.csproj" />
   </ItemGroup>
@@ -16,5 +28,7 @@
   <Import Project="..\SharedMVVMWPF\SharedMVVMWPF.projitems" Label="Shared" />
 
   <Import Project="..\SharedSources\SharedSources.projitems" Label="Shared" />
+
+  <Import Project="..\SharedMEFLClass\SharedMEFLClass.projitems" Label="Shared" />
 
 </Project>
