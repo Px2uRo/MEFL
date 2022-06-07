@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -16,6 +17,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MEFL.Controls;
 
 namespace MEFL
 {
@@ -27,7 +29,17 @@ namespace MEFL
         private DoubleAnimation _dbani;
         public MainWindow()
         {
-            (new MEFL.Hosting()).LoadAll();
+#if DEBUG
+            try
+            {
+                (new FileInfo(@"D:\Xiong's\WPF\TestAddIn\TestAddIn\bin\Debug\net6.0-windows\TestAddIn.dll"))
+            .CopyTo(@"I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\AddIns\TestAddIn.dll", true);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.Message);
+            }
+#endif
             InitializeComponent();
             _dbani = new DoubleAnimation();
             _dbani.Duration = new Duration(TimeSpan.FromSeconds(0.2));

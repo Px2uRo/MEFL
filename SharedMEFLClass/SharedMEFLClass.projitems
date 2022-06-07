@@ -9,10 +9,13 @@
     <Import_RootNamespace>MEFL</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)BaseInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)..\..\..\Xiong%27s\MEFLCollection\SharedMEFLClass\Contract\BaseInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Hosting.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IBaseAddIn.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ISettingPage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Permissions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)..\..\..\Xiong%27s\MEFLCollection\SharedMEFLClass\Contract\IBaseAddIn.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)..\..\..\Xiong%27s\MEFLCollection\SharedMEFLClass\Contract\ISettingPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)..\..\..\Xiong%27s\MEFLCollection\SharedMEFLClass\Contract\Permissions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Contract\" />
   </ItemGroup>
 </Project>

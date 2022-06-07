@@ -1,0 +1,50 @@
+﻿<local:MyCard x:Class="MEFL.Controls.MyExtensionCard"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MEFL.Controls"
+             mc:Ignorable="d" 
+             Height="150" Width="450">
+    <local:MyCard.Title>
+        <ContentPresenter TextBlock.FontWeight="Bold" Content="{Binding Name}"/>
+    </local:MyCard.Title>
+    <Grid x:Name="PART_THE_Content">
+        <StackPanel>
+            <Grid Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <ContentPresenter Width="50" Height="50" Content="{Binding Icon}" HorizontalAlignment="Left" />
+                <Grid Grid.Column="1" Margin="5,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal">
+                        <TextBlock Text="作者: "/>
+                        <TextBlock>
+                            <Hyperlink NavigateUri="{Binding PulisherUri}" Click="Hyperlink_Click" Cursor="Hand">
+                                <TextBlock Text="{Binding Publisher}"/>
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Horizontal">
+                        <TextBlock Text="插件 URL: "/>
+                        <TextBlock>
+                            <Hyperlink NavigateUri="{Binding ExtensionUri}" Click="Hyperlink_Click" Cursor="Hand">
+                                <TextBlock Text="{Binding ExtensionUri}"/>
+                            </Hyperlink>
+                        </TextBlock>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal">
+                        <TextBlock Text="Guid: "/>
+                        <TextBlock Text="{Binding Guid}"/>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</local:MyCard>

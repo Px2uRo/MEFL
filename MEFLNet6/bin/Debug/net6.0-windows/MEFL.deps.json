@@ -9,7 +9,8 @@
       "MEFL/1.0.0": {
         "dependencies": {
           "CoreLaunchingNet6": "1.0.0",
-          "System.ComponentModel.Composition": "6.0.0"
+          "System.ComponentModel.Composition": "6.0.0",
+          "Contract": "1.0.0.0"
         },
         "runtime": {
           "MEFL.dll": {}
@@ -223,6 +224,14 @@
         "runtime": {
           "CoreLaunchingNet6.dll": {}
         }
+      },
+      "Contract/1.0.0.0": {
+        "runtime": {
+          "Contract.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
       }
     }
   },
@@ -416,6 +425,11 @@
     },
     "CoreLaunchingNet6/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Contract/1.0.0.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }

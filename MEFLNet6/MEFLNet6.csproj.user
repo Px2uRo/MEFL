@@ -3,5 +3,20 @@
   <PropertyGroup>
     <_LastSelectedProfileId>I:\Xiong%27s\MEFLCollection\MEFLNet6\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Compile Update="Controls\MyExtensionCard.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\ExtensionPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Controls\MyExtensionCard.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\ExtensionPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
 </Project>

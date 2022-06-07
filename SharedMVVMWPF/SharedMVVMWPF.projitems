@@ -10,8 +10,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)ControlModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlModelViews\ExtensionPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ControlModelViews\MainModelViews.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ControlModelViews\MyCardModelView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlModelViews\PageModelViews.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\MyCard.cs" />
   </ItemGroup>
   <ItemGroup>

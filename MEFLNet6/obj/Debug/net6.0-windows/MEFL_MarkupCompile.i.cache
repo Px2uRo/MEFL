@@ -8,13 +8,13 @@ I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\
 MEFL
 none
 false
-WPF;DEBUG;NET;NET6_0;NETCOREAPP
+WPF;HOSTING;DEBUG;NET;NET6_0;NETCOREAPP
 I:\Xiong's\MEFLCollection\MEFLNet6\App.xaml
-3-939324479
+5-118715459
 
-14-733896995
-197-263912351
-MainWindow.xaml;I:\Xiong's\MEFLCollection\SharedMVVMWPF\AquaStyle.xaml;I:\Xiong's\MEFLCollection\SharedMVVMWPF\Themes\Generic.xaml;
+18-829074484
+1981763104145
+Controls\MyExtensionCard.xaml;MainWindow.xaml;Pages\ExtensionPage.xaml;I:\Xiong's\MEFLCollection\SharedMVVMWPF\AquaStyle.xaml;I:\Xiong's\MEFLCollection\SharedMVVMWPF\Themes\Generic.xaml;
 
 False
 

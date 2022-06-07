@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MEFL"
         mc:Ignorable="d" xmlns:c="clr-namespace:MEFL.Controls"
         Title="MainWindow" Height="450" Width="800"
-        
+        xmlns:p ="clr-namespace:MEFL.Pages"
         WindowStyle="None" StateChanged="Window_StateChanged">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"/>
@@ -107,14 +107,8 @@
                     </Grid>
             </StackPanel>
         </Grid>
-        <c:MyCard Grid.Row="2" IsAbleToSwap="True" IsSwaped="False" VerticalAlignment="Top" Height="300">
-            <Button Click="Button_Click" Height="30" Width="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </c:MyCard>
-        <!--<TextBlock Grid.Row="2" 
-                   FontSize="24"
-                   FontWeight="Bold" 
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center"
-                   Name="TextTB"/>-->
+        <Grid Grid.Row="2" Name="PART_Window_Content">
+            <p:ExtensionPage/>
+        </Grid>
     </Grid>
 </Window>

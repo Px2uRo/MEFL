@@ -25,17 +25,29 @@
       "Microsoft.WindowsAppSDK.Foundation/1.0.0-experimental1": {
         "type": "package",
         "compile": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.ApplicationModel.Resources.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.AppLifecycle.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.PushNotifications.winmd": {}
         },
         "runtime": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.ApplicationModel.Resources.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.AppLifecycle.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.PushNotifications.winmd": {}
         },
         "build": {
           "build/Microsoft.WindowsAppSDK.Foundation.props": {},
           "build/Microsoft.WindowsAppSDK.Foundation.targets": {}
         },
         "runtimeTargets": {
-          "runtimes/lib/native/x64/_._": {
+          "runtimes/lib/native/arm64/Microsoft.WindowsAppSDK.Bootstrap.dll": {
+            "assetType": "native",
+            "rid": "lib"
+          },
+          "runtimes/lib/native/x64/Microsoft.WindowsAppSDK.Bootstrap.dll": {
+            "assetType": "native",
+            "rid": "lib"
+          },
+          "runtimes/lib/native/x86/Microsoft.WindowsAppSDK.Bootstrap.dll": {
             "assetType": "native",
             "rid": "lib"
           }
@@ -44,10 +56,24 @@
       "Microsoft.WindowsAppSDK.InteractiveExperiences/1.0.0-experimental1": {
         "type": "package",
         "compile": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.Foundation.winmd": {},
+          "lib/uap10.0/Microsoft.Graphics.DirectX.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Composition.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Dispatching.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Hosting.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Input.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Windowing.winmd": {},
+          "lib/uap10.0/Microsoft.UI.winmd": {}
         },
         "runtime": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.Foundation.winmd": {},
+          "lib/uap10.0/Microsoft.Graphics.DirectX.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Composition.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Dispatching.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Hosting.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Input.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Windowing.winmd": {},
+          "lib/uap10.0/Microsoft.UI.winmd": {}
         },
         "build": {
           "build/Microsoft.WindowsAppSDK.InteractiveExperiences.props": {},
@@ -70,6 +96,12 @@
       "MEFL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Microsoft.WindowsAppSDK": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.Foundation": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.InteractiveExperiences": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.WinUI": "1.0.0-experimental1"
+        },
         "compile": {
           "bin/placeholder/MEFL.dll": {}
         },
@@ -102,10 +134,14 @@
       "Microsoft.WindowsAppSDK.Foundation/1.0.0-experimental1": {
         "type": "package",
         "compile": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.ApplicationModel.Resources.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.AppLifecycle.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.PushNotifications.winmd": {}
         },
         "runtime": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.ApplicationModel.Resources.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.AppLifecycle.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.PushNotifications.winmd": {}
         },
         "build": {
           "build/Microsoft.WindowsAppSDK.Foundation.props": {},
@@ -115,10 +151,24 @@
       "Microsoft.WindowsAppSDK.InteractiveExperiences/1.0.0-experimental1": {
         "type": "package",
         "compile": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.Foundation.winmd": {},
+          "lib/uap10.0/Microsoft.Graphics.DirectX.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Composition.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Dispatching.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Hosting.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Input.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Windowing.winmd": {},
+          "lib/uap10.0/Microsoft.UI.winmd": {}
         },
         "runtime": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.Foundation.winmd": {},
+          "lib/uap10.0/Microsoft.Graphics.DirectX.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Composition.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Dispatching.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Hosting.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Input.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Windowing.winmd": {},
+          "lib/uap10.0/Microsoft.UI.winmd": {}
         },
         "build": {
           "build/Microsoft.WindowsAppSDK.InteractiveExperiences.props": {},
@@ -141,6 +191,12 @@
       "MEFL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Microsoft.WindowsAppSDK": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.Foundation": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.InteractiveExperiences": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.WinUI": "1.0.0-experimental1"
+        },
         "compile": {
           "bin/placeholder/MEFL.dll": {}
         },
@@ -173,10 +229,14 @@
       "Microsoft.WindowsAppSDK.Foundation/1.0.0-experimental1": {
         "type": "package",
         "compile": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.ApplicationModel.Resources.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.AppLifecycle.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.PushNotifications.winmd": {}
         },
         "runtime": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.ApplicationModel.Resources.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.AppLifecycle.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.PushNotifications.winmd": {}
         },
         "build": {
           "build/Microsoft.WindowsAppSDK.Foundation.props": {},
@@ -186,10 +246,24 @@
       "Microsoft.WindowsAppSDK.InteractiveExperiences/1.0.0-experimental1": {
         "type": "package",
         "compile": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.Foundation.winmd": {},
+          "lib/uap10.0/Microsoft.Graphics.DirectX.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Composition.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Dispatching.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Hosting.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Input.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Windowing.winmd": {},
+          "lib/uap10.0/Microsoft.UI.winmd": {}
         },
         "runtime": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.Foundation.winmd": {},
+          "lib/uap10.0/Microsoft.Graphics.DirectX.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Composition.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Dispatching.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Hosting.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Input.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Windowing.winmd": {},
+          "lib/uap10.0/Microsoft.UI.winmd": {}
         },
         "build": {
           "build/Microsoft.WindowsAppSDK.InteractiveExperiences.props": {},
@@ -212,6 +286,12 @@
       "MEFL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Microsoft.WindowsAppSDK": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.Foundation": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.InteractiveExperiences": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.WinUI": "1.0.0-experimental1"
+        },
         "compile": {
           "bin/placeholder/MEFL.dll": {}
         },
@@ -244,10 +324,14 @@
       "Microsoft.WindowsAppSDK.Foundation/1.0.0-experimental1": {
         "type": "package",
         "compile": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.ApplicationModel.Resources.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.AppLifecycle.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.PushNotifications.winmd": {}
         },
         "runtime": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.ApplicationModel.Resources.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.AppLifecycle.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.PushNotifications.winmd": {}
         },
         "build": {
           "build/Microsoft.WindowsAppSDK.Foundation.props": {},
@@ -257,10 +341,24 @@
       "Microsoft.WindowsAppSDK.InteractiveExperiences/1.0.0-experimental1": {
         "type": "package",
         "compile": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.Foundation.winmd": {},
+          "lib/uap10.0/Microsoft.Graphics.DirectX.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Composition.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Dispatching.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Hosting.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Input.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Windowing.winmd": {},
+          "lib/uap10.0/Microsoft.UI.winmd": {}
         },
         "runtime": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.Foundation.winmd": {},
+          "lib/uap10.0/Microsoft.Graphics.DirectX.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Composition.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Dispatching.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Hosting.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Input.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Windowing.winmd": {},
+          "lib/uap10.0/Microsoft.UI.winmd": {}
         },
         "build": {
           "build/Microsoft.WindowsAppSDK.InteractiveExperiences.props": {},
@@ -283,6 +381,12 @@
       "MEFL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Microsoft.WindowsAppSDK": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.Foundation": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.InteractiveExperiences": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.WinUI": "1.0.0-experimental1"
+        },
         "compile": {
           "bin/placeholder/MEFL.dll": {}
         },
@@ -315,10 +419,14 @@
       "Microsoft.WindowsAppSDK.Foundation/1.0.0-experimental1": {
         "type": "package",
         "compile": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.ApplicationModel.Resources.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.AppLifecycle.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.PushNotifications.winmd": {}
         },
         "runtime": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.ApplicationModel.Resources.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.AppLifecycle.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.PushNotifications.winmd": {}
         },
         "build": {
           "build/Microsoft.WindowsAppSDK.Foundation.props": {},
@@ -328,10 +436,24 @@
       "Microsoft.WindowsAppSDK.InteractiveExperiences/1.0.0-experimental1": {
         "type": "package",
         "compile": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.Foundation.winmd": {},
+          "lib/uap10.0/Microsoft.Graphics.DirectX.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Composition.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Dispatching.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Hosting.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Input.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Windowing.winmd": {},
+          "lib/uap10.0/Microsoft.UI.winmd": {}
         },
         "runtime": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.Foundation.winmd": {},
+          "lib/uap10.0/Microsoft.Graphics.DirectX.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Composition.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Dispatching.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Hosting.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Input.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Windowing.winmd": {},
+          "lib/uap10.0/Microsoft.UI.winmd": {}
         },
         "build": {
           "build/Microsoft.WindowsAppSDK.InteractiveExperiences.props": {},
@@ -354,6 +476,12 @@
       "MEFL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Microsoft.WindowsAppSDK": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.Foundation": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.InteractiveExperiences": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.WinUI": "1.0.0-experimental1"
+        },
         "compile": {
           "bin/placeholder/MEFL.dll": {}
         },
@@ -386,10 +514,14 @@
       "Microsoft.WindowsAppSDK.Foundation/1.0.0-experimental1": {
         "type": "package",
         "compile": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.ApplicationModel.Resources.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.AppLifecycle.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.PushNotifications.winmd": {}
         },
         "runtime": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.ApplicationModel.Resources.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.AppLifecycle.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.PushNotifications.winmd": {}
         },
         "build": {
           "build/Microsoft.WindowsAppSDK.Foundation.props": {},
@@ -399,10 +531,24 @@
       "Microsoft.WindowsAppSDK.InteractiveExperiences/1.0.0-experimental1": {
         "type": "package",
         "compile": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.Foundation.winmd": {},
+          "lib/uap10.0/Microsoft.Graphics.DirectX.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Composition.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Dispatching.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Hosting.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Input.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Windowing.winmd": {},
+          "lib/uap10.0/Microsoft.UI.winmd": {}
         },
         "runtime": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.Foundation.winmd": {},
+          "lib/uap10.0/Microsoft.Graphics.DirectX.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Composition.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Dispatching.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Hosting.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Input.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Windowing.winmd": {},
+          "lib/uap10.0/Microsoft.UI.winmd": {}
         },
         "build": {
           "build/Microsoft.WindowsAppSDK.InteractiveExperiences.props": {},
@@ -425,6 +571,12 @@
       "MEFL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Microsoft.WindowsAppSDK": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.Foundation": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.InteractiveExperiences": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.WinUI": "1.0.0-experimental1"
+        },
         "compile": {
           "bin/placeholder/MEFL.dll": {}
         },
@@ -457,10 +609,14 @@
       "Microsoft.WindowsAppSDK.Foundation/1.0.0-experimental1": {
         "type": "package",
         "compile": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.ApplicationModel.Resources.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.AppLifecycle.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.PushNotifications.winmd": {}
         },
         "runtime": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.ApplicationModel.Resources.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.AppLifecycle.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.PushNotifications.winmd": {}
         },
         "build": {
           "build/Microsoft.WindowsAppSDK.Foundation.props": {},
@@ -470,10 +626,24 @@
       "Microsoft.WindowsAppSDK.InteractiveExperiences/1.0.0-experimental1": {
         "type": "package",
         "compile": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.Foundation.winmd": {},
+          "lib/uap10.0/Microsoft.Graphics.DirectX.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Composition.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Dispatching.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Hosting.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Input.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Windowing.winmd": {},
+          "lib/uap10.0/Microsoft.UI.winmd": {}
         },
         "runtime": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.Foundation.winmd": {},
+          "lib/uap10.0/Microsoft.Graphics.DirectX.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Composition.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Dispatching.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Hosting.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Input.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Windowing.winmd": {},
+          "lib/uap10.0/Microsoft.UI.winmd": {}
         },
         "build": {
           "build/Microsoft.WindowsAppSDK.InteractiveExperiences.props": {},
@@ -496,6 +666,12 @@
       "MEFL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Microsoft.WindowsAppSDK": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.Foundation": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.InteractiveExperiences": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.WinUI": "1.0.0-experimental1"
+        },
         "compile": {
           "bin/placeholder/MEFL.dll": {}
         },
@@ -528,10 +704,14 @@
       "Microsoft.WindowsAppSDK.Foundation/1.0.0-experimental1": {
         "type": "package",
         "compile": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.ApplicationModel.Resources.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.AppLifecycle.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.PushNotifications.winmd": {}
         },
         "runtime": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.ApplicationModel.Resources.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.AppLifecycle.winmd": {},
+          "lib/uap10.0/Microsoft.Windows.PushNotifications.winmd": {}
         },
         "build": {
           "build/Microsoft.WindowsAppSDK.Foundation.props": {},
@@ -541,10 +721,24 @@
       "Microsoft.WindowsAppSDK.InteractiveExperiences/1.0.0-experimental1": {
         "type": "package",
         "compile": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.Foundation.winmd": {},
+          "lib/uap10.0/Microsoft.Graphics.DirectX.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Composition.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Dispatching.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Hosting.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Input.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Windowing.winmd": {},
+          "lib/uap10.0/Microsoft.UI.winmd": {}
         },
         "runtime": {
-          "lib/uap10.0/_._": {}
+          "lib/uap10.0/Microsoft.Foundation.winmd": {},
+          "lib/uap10.0/Microsoft.Graphics.DirectX.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Composition.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Dispatching.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Hosting.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Input.winmd": {},
+          "lib/uap10.0/Microsoft.UI.Windowing.winmd": {},
+          "lib/uap10.0/Microsoft.UI.winmd": {}
         },
         "build": {
           "build/Microsoft.WindowsAppSDK.InteractiveExperiences.props": {},
@@ -567,6 +761,12 @@
       "MEFL/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
+        "dependencies": {
+          "Microsoft.WindowsAppSDK": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.Foundation": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.InteractiveExperiences": "1.0.0-experimental1",
+          "Microsoft.WindowsAppSDK.WinUI": "1.0.0-experimental1"
+        },
         "compile": {
           "bin/placeholder/MEFL.dll": {}
         },
@@ -1030,12 +1230,12 @@
           "net471",
           "net472",
           "net48",
-          "net6.0-windows10.0.22000",
+          "net7.0-windows10.0.22000",
           "net461"
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {

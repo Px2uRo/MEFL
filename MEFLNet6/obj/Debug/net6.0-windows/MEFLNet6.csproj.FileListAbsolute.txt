@@ -28,3 +28,9 @@ I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\MEFLNet6.csproj.Copy
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\AquaStyle.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\App.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\System.ComponentModel.Composition.dll
+I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\Contract.dll
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\Controls\MyExtensionCard.g.cs
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\Pages\ExtensionPage.g.cs
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\Controls\MyExtensionCard.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\Pages\ExtensionPage.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\Contract.pdb
