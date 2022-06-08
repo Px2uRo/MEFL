@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,26 @@ using System.Windows.Shapes;
 
 namespace MEFL.Controls
 {
+    public class VersionToStringConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is Version)
+            {
+                return (value as Version).ToString();
+            }
+            else
+            {
+                throw new Exception("代码错误我谔谔，，，");
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     /// <summary>
     /// MyExtensionCard.xaml 的交互逻辑
     /// </summary>
@@ -35,11 +56,10 @@ namespace MEFL.Controls
             }
             if(Hosting.ExceptionInfo != null)
             {
+                base.Title = $"加载文件 {Hosting.FileName} 错误";
                 PART_THE_Content.Children.Clear();
-                PART_THE_Content.Children.Add(
-                    new TextBlock() { 
-                    Text=Hosting.ExceptionInfo.Message
-                            });
+                PART_THE_Content.Children.Add
+                    (new TextBlock() { Text = Hosting.ExceptionInfo.Message });
             }
             else
             {

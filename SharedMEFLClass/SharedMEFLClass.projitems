@@ -10,6 +10,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)..\..\..\Xiong%27s\MEFLCollection\SharedMEFLClass\Contract\BaseInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)APIData\APIModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)APIData\SettingConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Debugger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Hosting.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)..\..\..\Xiong%27s\MEFLCollection\SharedMEFLClass\Contract\IBaseAddIn.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)..\..\..\Xiong%27s\MEFLCollection\SharedMEFLClass\Contract\ISettingPage.cs" />

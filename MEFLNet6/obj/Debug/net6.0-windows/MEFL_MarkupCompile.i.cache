@@ -9,10 +9,10 @@ MEFL
 none
 false
 WPF;HOSTING;DEBUG;NET;NET6_0;NETCOREAPP
-I:\Xiong's\MEFLCollection\MEFLNet6\App.xaml
+I:\Xiong's\MEFLCollection\SharedMVVMWPF\App.xaml
 5-118715459
 
-18-829074484
+212081302587
 1981763104145
 Controls\MyExtensionCard.xaml;MainWindow.xaml;Pages\ExtensionPage.xaml;I:\Xiong's\MEFLCollection\SharedMVVMWPF\AquaStyle.xaml;I:\Xiong's\MEFLCollection\SharedMVVMWPF\Themes\Generic.xaml;
 

@@ -9,6 +9,9 @@
     <Import_RootNamespace>MEFL</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)ControlModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ControlModelViews\ExtensionPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ControlModelViews\MainModelViews.cs" />
@@ -25,5 +28,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
   </ItemGroup>
 </Project>

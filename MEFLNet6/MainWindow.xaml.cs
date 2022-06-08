@@ -29,6 +29,7 @@ namespace MEFL
         private DoubleAnimation _dbani;
         public MainWindow()
         {
+            Debugger.Logger("程序启动了");
 #if DEBUG
             try
             {

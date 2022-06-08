@@ -5,7 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MEFL.Controls"
              mc:Ignorable="d" 
-             Height="150" Width="450">
+             Height="150" >
+    <local:MyCard.Resources>
+        <local:VersionToStringConverter x:Key="VTSC"/>
+        <Style TargetType="TextBlock">
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+    </local:MyCard.Resources>
     <local:MyCard.Title>
         <ContentPresenter TextBlock.FontWeight="Bold" Content="{Binding Name}"/>
     </local:MyCard.Title>
@@ -32,16 +38,12 @@
                         </TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Orientation="Horizontal">
-                        <TextBlock Text="插件 URL: "/>
-                        <TextBlock>
-                            <Hyperlink NavigateUri="{Binding ExtensionUri}" Click="Hyperlink_Click" Cursor="Hand">
-                                <TextBlock Text="{Binding ExtensionUri}"/>
-                            </Hyperlink>
-                        </TextBlock>
+                        <TextBlock Text="描述: "/>
+                        <TextBlock Text="{Binding Description}"/>
                     </StackPanel>
                     <StackPanel Grid.Row="2" Orientation="Horizontal">
-                        <TextBlock Text="Guid: "/>
-                        <TextBlock Text="{Binding Guid}"/>
+                        <TextBlock Text="版本号: "/>
+                        <TextBlock Text="{Binding Version,Converter={StaticResource VTSC}}"/>
                     </StackPanel>
                 </Grid>
             </Grid>

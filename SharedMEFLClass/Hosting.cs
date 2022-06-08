@@ -22,6 +22,7 @@ namespace MEFL
         public ISettingPage SettingPage;
 
         public Exception ExceptionInfo;
+        public string FileName;
 
         public static ObservableCollection<Hosting> LoadAll()
         {
@@ -52,12 +53,20 @@ namespace MEFL
         public static Hosting LoadOne(string Path)
         {
             Hosting h = new Hosting();
-            
+            h.FileName = System.IO.Path.GetFileName(Path);
             try
             {
                 var ac = new AssemblyCatalog(Path);
                 var cc = new CompositionContainer(ac);
                 h.BaseAddIn = cc.GetExport<IBaseAddIn>().Value;
+                try
+                {
+                    Guid.Parse(h.BaseAddIn.BaseInfo().Guid);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"非法 Uuid，详细信息：{ex.Message}");
+                }
                 if (h.BaseAddIn.Permissions().UseSeetingPageAPI == true)
                 {
                     h.SettingPage = cc.GetExport<ISettingPage>().Value;
