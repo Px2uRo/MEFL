@@ -82,10 +82,10 @@
     <AppxPackagedFile Include="C:\Users\Lenovo\.nuget\packages\microsoft.windowsappsdk.foundation\1.0.0-experimental1\runtimes\lib\native\x86\Microsoft.WindowsAppSDK.Bootstrap.dll">
       <PackagePath>MEFLWinUI3Desktop\runtimes\lib\native\x86\Microsoft.WindowsAppSDK.Bootstrap.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Lenovo\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.22\lib\Microsoft.Windows.SDK.NET.dll">
+    <AppxPackagedFile Include="C:\Users\Lenovo\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.25\lib\Microsoft.Windows.SDK.NET.dll">
       <PackagePath>MEFLWinUI3Desktop\Microsoft.Windows.SDK.NET.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Lenovo\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.22\lib\WinRT.Runtime.dll">
+    <AppxPackagedFile Include="C:\Users\Lenovo\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.25\lib\WinRT.Runtime.dll">
       <PackagePath>MEFLWinUI3Desktop\WinRT.Runtime.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="I:\Xiong%27s\MEFLCollection\MEFLWinUI3Desktop\MEFLWinUI3Desktop\bin\x64\Debug\net5.0-windows10.0.19041.0\MEFL.deps.json">

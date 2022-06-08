@@ -15,8 +15,8 @@ C:\Users\Lenovo\.nuget\packages\microsoft.windowsappsdk.winui\1.0.0-experimental
 C:\Users\Lenovo\.nuget\packages\microsoft.windowsappsdk.foundation\1.0.0-experimental1\runtimes\lib\native\arm64\Microsoft.WindowsAppSDK.Bootstrap.dll
 C:\Users\Lenovo\.nuget\packages\microsoft.windowsappsdk.foundation\1.0.0-experimental1\runtimes\lib\native\x64\Microsoft.WindowsAppSDK.Bootstrap.dll
 C:\Users\Lenovo\.nuget\packages\microsoft.windowsappsdk.foundation\1.0.0-experimental1\runtimes\lib\native\x86\Microsoft.WindowsAppSDK.Bootstrap.dll
-C:\Users\Lenovo\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.22\lib\Microsoft.Windows.SDK.NET.dll
-C:\Users\Lenovo\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.22\lib\WinRT.Runtime.dll
+C:\Users\Lenovo\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.25\lib\Microsoft.Windows.SDK.NET.dll
+C:\Users\Lenovo\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.25\lib\WinRT.Runtime.dll
 I:\Xiong's\MEFLCollection\MEFLWinUI3Desktop\MEFLWinUI3Desktop\bin\x64\Debug\net5.0-windows10.0.19041.0\MEFL.deps.json
 I:\Xiong's\MEFLCollection\MEFLWinUI3Desktop\MEFLWinUI3Desktop\bin\x64\Debug\net5.0-windows10.0.19041.0\MEFL.runtimeconfig.dev.json
 I:\Xiong's\MEFLCollection\MEFLWinUI3Desktop\MEFLWinUI3Desktop\obj\x64\Debug\net5.0-windows10.0.19041.0\apphost.exe
