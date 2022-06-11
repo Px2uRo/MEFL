@@ -51,7 +51,7 @@ namespace MEFL.APIData
             }
             catch (Exception ex)
             {
-                Debug.Write($"无法加载配置： {ex.Message}");
+                Debug.WriteLine($"无法加载配置： {ex.Message}");
                 sc = new SettingConfig();
             }
             if (sc == null)
@@ -68,6 +68,56 @@ namespace MEFL.APIData
             if (Directory.Exists(MEFLConfigForder)!=true)
             {
                 Directory.CreateDirectory(MEFLConfigForder);
+            }
+        }
+    }
+
+    public class AddInConfig
+    {
+        public string Guid { get; set; }
+        public bool IsOpen { get; set; }
+
+        public static List<AddInConfig> GetAll()
+        {
+            List<AddInConfig> ret;
+            var Path = System.IO.Path.Combine(Environment.CurrentDirectory,"AddIns\\Config.json");
+            try
+            {
+                if (File.Exists(Path) != true)
+                {
+                    File.Create(Path).Close();
+                }
+                using(StreamReader sr = new StreamReader(Path))
+                {
+                    ret = JsonConvert.DeserializeObject<List<AddInConfig>>(sr.ReadToEnd());
+                }
+                if (ret == null)
+                {
+                    ret=new List<AddInConfig>();
+                }
+            }
+            catch (Exception ex)
+            {
+                Debugger.Logger(ex.Message);
+                ret = new List<AddInConfig>();
+            }
+            return ret;
+        }
+
+        public static void Update(List<AddInConfig> addInConfigs)
+        {
+            var Path = System.IO.Path.Combine(Environment.CurrentDirectory, "AddIns\\Config.json");
+            try
+            {
+                if (Directory.Exists(Path) != true)
+                {
+                    File.Create(Path).Close();
+                }
+                File.WriteAllText(Path, JsonConvert.SerializeObject(addInConfigs));
+            }
+            catch (Exception ex)
+            {
+                Debugger.Logger(ex.Message);
             }
         }
     }

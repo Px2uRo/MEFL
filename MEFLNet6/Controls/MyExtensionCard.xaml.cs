@@ -41,7 +41,7 @@ namespace MEFL.Controls
                 PART_THE_Content.Children.Add
                     (new TextBlock() { Text = Hosting.ExceptionInfo.Message });
             }
-            else
+            else if(Hosting.IsOpen==true)
             {
                 if (Hosting.BaseInfo.Title != null)
                 {
@@ -51,6 +51,10 @@ namespace MEFL.Controls
                 {
                     this.Title = Hosting.FileName;
                 }
+            }
+            else
+            {
+                Hosting.Icon = "已关闭";
             }
             PART_THE_Content.DataContext = Hosting;
         }
@@ -69,13 +73,20 @@ namespace MEFL.Controls
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
-            try
+            if (Hosting.IsOpen==false)
             {
-                Process.Start("explorer.exe", (sender as Hyperlink).NavigateUri.AbsoluteUri.ToString());
+                MessageBox.Show("请启用插件后重试");
             }
-            catch (Exception ex)
+            else 
             {
-                Debug.WriteLine(ex.Message);
+                try
+                {
+                    Process.Start("explorer.exe", (sender as Hyperlink).NavigateUri.AbsoluteUri.ToString());
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
             }
         }
     }

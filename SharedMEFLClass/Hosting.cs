@@ -36,6 +36,7 @@ namespace MEFL
         public Uri PulisherUri { get; set; }
         public Uri ExtensionUri { get; set; }
         public string Guid { get; set; }
+        public bool IsOpen { get; set; }
 
         public static Hosting LoadOne(string Path)
         {
@@ -54,7 +55,7 @@ namespace MEFL
                     string guid = assembly.ManifestModule.ModuleVersionId.ToString(); 
                     System.Guid.Parse(guid);
                     h.Guid = guid;
-                    guid = null;
+                    assembly = null;
                     guid = null;
                 }
                 catch (Exception ex)
@@ -62,24 +63,43 @@ namespace MEFL
                     throw new Exception("Guid 不合法或者无法获取其 Guid");
                 }
 
-
-                var ac = new AssemblyCatalog(Path);
-                var cc = new CompositionContainer(ac);
-                h.BaseInfo = cc.GetExport<IBaseInfo>().Value;
-                h.Permissions = cc.GetExport<IPermissions>().Value;
-                h.Icon = h.BaseInfo.Icon;
-                h.PulisherUri = h.BaseInfo.PulisherUri;
-                h.ExtensionUri = h.BaseInfo.ExtensionUri;
-                
-                if (h.Permissions.UseSeetingPageAPI == true)
+                foreach (var item in APIData.APIModel.AddInConfigs)
                 {
-                    h.SettingPage = cc.GetExport<ISettingPage>().Value;
+                    if (item.Guid == h.Guid)
+                    {
+                        h.IsOpen = item.IsOpen;
+                    }
+                    else
+                    {
+                        h.IsOpen = false;
+                    }
+                }
+                if (h.IsOpen == null)
+                {
+                    h.IsOpen = false;
+                }
+
+                if (h.IsOpen == true)
+                {
+                    var ac = new AssemblyCatalog(Path);
+                    var cc = new CompositionContainer(ac);
+                    h.BaseInfo = cc.GetExport<IBaseInfo>().Value;
+                    h.Permissions = cc.GetExport<IPermissions>().Value;
+                    h.Icon = h.BaseInfo.Icon;
+                    h.PulisherUri = h.BaseInfo.PulisherUri;
+                    h.ExtensionUri = h.BaseInfo.ExtensionUri;
+
+                    if (h.Permissions.UseSeetingPageAPI == true)
+                    {
+                        h.SettingPage = cc.GetExport<ISettingPage>().Value;
+                    }
+                    Debugger.Logger($"加载了一个插件，名称 {h.FileName}，版本：{h.Version} Guid {h.Guid}");
+                    ac = null;
+                    cc = null;
                 }
                 fvif = null;
-                ac = null;
-                cc = null;
-                Debugger.Logger($"加载了一个插件，名称 {h.FileName}，版本：{h.Version} Guid {h.Guid}");
                 return h;
+                h = null;
             }
             catch (Exception ex)
             {
@@ -100,15 +120,41 @@ namespace MEFL
             {
                 System.IO.Directory.CreateDirectory(path);
             }
-            var fls = new DirectoryInfo(path).GetFiles();
-            hc = new Hosting[fls.Length];
-            for (int i = 0; i < fls.Length; i++)
+            var di = new DirectoryInfo(path).GetFiles();
+            foreach (var item in di)
             {
-                hc.SetValue(LoadOne(fls[i].FullName),i);
+                if (item.Name.EndsWith(".dll"))
+                {
+                    l.Add(item);
+                }
             }
-            fls = null;
+            hc = new Hosting[l.Count];
+            for (int i = 0; i < l.Count; i++)
+            {
+                var h = LoadOne(l[i].FullName);
+                for (int j = 0; j < APIData.APIModel.AddInConfigs.Count|| APIData.APIModel.AddInConfigs.Count==0; j++)
+                {
+                    if(APIData.APIModel.AddInConfigs.Count == 0)
+                    {
+                        APIData.AddInConfig item = new APIData.AddInConfig() { Guid = h.Guid, IsOpen = h.IsOpen };
+                        APIData.APIModel.AddInConfigs.Add(item);
+                        item = null;
+                    }
+                    else if (APIData.APIModel.AddInConfigs[j].Guid != h.Guid)
+                    {
+                        APIData.AddInConfig item = new APIData.AddInConfig() { Guid = h.Guid, IsOpen = h.IsOpen };
+                        APIData.APIModel.AddInConfigs.Add(item);
+                        item = null;
+                    }
+                }
+                hc.SetValue(h,i);
+                h=null;
+            }
+            APIData.AddInConfig.Update(APIData.APIModel.AddInConfigs);
+            l = null;
             l = null;
             path = null;
+            di=null;
             return hc;
         }
 
