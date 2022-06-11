@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MEFL.ControlModelViews
 {
-    public class PageModelViews : INotifyPropertyChanged
+    public class PageModelView : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;
     }

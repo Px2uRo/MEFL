@@ -10,12 +10,18 @@
     <Compile Update="Pages\ExtensionPage.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Pages\SettingPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="Controls\MyExtensionCard.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Pages\ExtensionPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Pages\SettingPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

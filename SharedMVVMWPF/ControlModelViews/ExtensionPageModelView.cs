@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MEFL.ControlModelViews
 {
-    public class ExtensionPageModelView:PageModelViews
+    public class ExtensionPageModelView:PageModelView
     {
         public Hosting[] Hostings { get; set; }
 

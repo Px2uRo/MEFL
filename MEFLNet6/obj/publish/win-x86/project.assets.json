@@ -2,6 +2,18 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
+      "ContractNet6/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0-windows7.0/ContractNet6.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/ContractNet6.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
       "Microsoft.NETCore.Platforms/1.1.0": {
         "type": "package",
         "compile": {
@@ -355,6 +367,18 @@
       }
     },
     "net6.0-windows7.0/win-x86": {
+      "ContractNet6/1.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0-windows7.0/ContractNet6.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/ContractNet6.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
       "Microsoft.NETCore.Platforms/1.1.0": {
         "type": "package",
         "compile": {
@@ -925,6 +949,17 @@
     }
   },
   "libraries": {
+    "ContractNet6/1.0.0": {
+      "sha512": "sibAAYfEc41bxMj/Rf4FYhamiizLlD9ipBfGY8yUrq/GwWevteqoKLZ3NbRofBe5LBNAB+h4Udxew404juDXoQ==",
+      "type": "package",
+      "path": "contractnet6/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        "contractnet6.1.0.0.nupkg.sha512",
+        "contractnet6.nuspec",
+        "lib/net6.0-windows7.0/ContractNet6.dll"
+      ]
+    },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "sha512": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
       "type": "package",
@@ -2841,6 +2876,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
+      "ContractNet6 >= 1.0.0",
       "CoreLaunchingNet6 >= 1.0.0",
       "System.ComponentModel.Composition >= 6.0.0"
     ]
@@ -2896,6 +2932,10 @@
       "net6.0-windows7.0": {
         "targetAlias": "net6.0-windows",
         "dependencies": {
+          "ContractNet6": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          },
           "System.ComponentModel.Composition": {
             "target": "Package",
             "version": "[6.0.0, )"

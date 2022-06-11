@@ -1,0 +1,18 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Color x:Key="SYTLE_Standard_Color">Aqua</Color>
+    <SolidColorBrush x:Key="SYTLE_Standard_ColorBrush">Aqua</SolidColorBrush>
+    <SolidColorBrush x:Key="SYTLE_Standard_Background">White</SolidColorBrush>
+    <SolidColorBrush x:Key="SYTLE_Standard_BorderBrush">Aqua</SolidColorBrush>
+    <SolidColorBrush x:Key="SYTLE_Standard_Foreground">Black</SolidColorBrush>
+    <SolidColorBrush x:Key="SYTLE_Changing_Foreground">White</SolidColorBrush>
+    <ExtraAddInPageModelView xmlns="clr-namespace:MEFL.PageModelViews" x:Key="EAIPMV"/>
+    <String x:Key="ExtensionPageSymbol" xmlns="clr-namespace:System;assembly=mscorlib">ExtensionPage</String>
+    <String x:Key="MainPageSymbol" xmlns="clr-namespace:System;assembly=mscorlib">ExtensionPage</String>
+    <String x:Key="SettingPageSymbol" xmlns="clr-namespace:System;assembly=mscorlib">SettingPage</String>
+    <String x:Key="ShowingSymbol" xmlns="clr-namespace:System;assembly=mscorlib">MainPage</String>
+    <Convertest xmlns="clr-namespace:MEFL" x:Key="Covertest"/>
+    <ExtensionPageModelView xmlns="clr-namespace:MEFL.ControlModelViews" x:Key="EPMV"/>
+    <SettingPageModelView xmlns="clr-namespace:MEFL.PageModelViews" x:Key="SPMV"/>
+</ResourceDictionary>

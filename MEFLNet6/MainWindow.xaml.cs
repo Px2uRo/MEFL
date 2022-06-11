@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -18,9 +19,31 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MEFL.Controls;
+using MEFL.PageModelViews;
 
 namespace MEFL
 {
+    public class Convertest : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            Debug.WriteLine(value);
+            if (value as String == parameter as String)
+            {
+                return Visibility.Visible;
+            }
+            else
+            {
+                return Visibility.Hidden;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -42,6 +65,7 @@ namespace MEFL
 #endif
             this.DataContext = this;
             InitializeComponent();
+            //PART_Window_Content.DataContext = this;
             _dbani = new DoubleAnimation();
             _dbani.Duration = new Duration(TimeSpan.FromSeconds(0.2));
         }
@@ -70,6 +94,11 @@ namespace MEFL
                 else if (a.Name == "CloseWindowsButton")
                 {
                     Close();
+                }
+                else if (a.Tag != null&&a.Tag is String)
+                {
+                    App.Current.Resources["howingSymbol"] = a.Tag as String;
+                    Debug.WriteLine(App.Current.Resources["howingSymbol"]);
                 }
             }
             else
@@ -155,6 +184,11 @@ namespace MEFL
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ControlModel.TimeMultiple = 5;
+        }
+
+        private void Ini(object sender, EventArgs e)
+        {
+            ((sender as StackPanel).DataContext as ExtraAddInPageModelView).Ini(sender, e);
         }
     }
 }

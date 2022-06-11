@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:MEFL"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <ResourceDictionary Source="..\..\aquastyle.xaml"/>
+        <ResourceDictionary Source="..\..\Generl.xaml"/>
     </Application.Resources>
 </Application>

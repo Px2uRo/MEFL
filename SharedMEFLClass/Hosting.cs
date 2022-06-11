@@ -121,13 +121,36 @@ namespace MEFL
                 System.IO.Directory.CreateDirectory(path);
             }
             var di = new DirectoryInfo(path).GetFiles();
+            var lg = new List<String>();
             foreach (var item in di)
             {
                 if (item.Name.EndsWith(".dll"))
                 {
-                    l.Add(item);
+                    try
+                    {
+                        Assembly assembly = Assembly.LoadFile(item.FullName);
+                        string guid = assembly.ManifestModule.ModuleVersionId.ToString();
+                        System.Guid.Parse(guid);
+                        assembly = null;
+                        if (lg.Contains(guid)!=true)
+                        {
+                            l.Add(item);
+                            lg.Add(guid);
+                        }
+                        else
+                        {
+
+                        }
+                        guid = null;
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                    }
+
                 }
             }
+            lg = null;
             hc = new Hosting[l.Count];
             for (int i = 0; i < l.Count; i++)
             {
@@ -151,7 +174,6 @@ namespace MEFL
                 h=null;
             }
             APIData.AddInConfig.Update(APIData.APIModel.AddInConfigs);
-            l = null;
             l = null;
             path = null;
             di=null;

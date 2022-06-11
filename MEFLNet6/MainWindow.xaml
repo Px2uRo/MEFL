@@ -12,7 +12,7 @@
         <WindowChrome CaptionHeight="0"/>
     </WindowChrome.WindowChrome>
     <Window.Resources>
-        <!--<ResourceDictionary Source="..\AquaStyle.xaml"/>-->
+
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -20,12 +20,41 @@
             <RowDefinition Height="50"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <Grid Background="{DynamicResource ResourceKey=SYTLE_Standard_ColorBrush}" MouseMove="Grid_MouseMove">
+        <Grid Background="{DynamicResource SYTLE_Standard_ColorBrush}" MouseMove="Grid_MouseMove">
             <ContentPresenter Content="{Binding Title}" 
                               VerticalAlignment="Center"
                               Margin="10,0,0,0"/>
             <StackPanel Orientation="Horizontal" 
                         HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal"
+                            DataContext="{StaticResource EAIPMV}" 
+                            Initialized="Ini"/>
+                <StackPanel Orientation="Horizontal">
+                    <Grid Width="45" 
+                        Margin="0,5,0,0">
+                        <!--#region Icon -->
+                        <Path Data="M0.500053 0.500053 8.15191 0.500053 8.13135 0.700159C8.13135 2.63976 9.73378 4.21211 11.7105 4.21211 13.6872 4.21211 15.2896 2.63976 15.2896 0.700159L15.2691 0.500053 22.9209 0.500053 22.9209 8.10635 22.9209 8.10635C24.8976 8.10635 26.5001 9.6787 26.5001 11.6183 26.5001 13.5579 24.8976 15.1302 22.9209 15.1302L22.9209 15.1302 22.9209 22.5001 4.23694 22.5001C2.17312 22.5001 0.500053 20.8584 0.500053 18.8333Z"
+                              Stroke="Black" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <!--#endregion-->
+                        <Border Background="Gray" 
+                                MouseDown="Border_MouseDown" 
+                                MouseEnter="MinWindowButton_MouseEnter"
+                                MouseLeave="MinWindowButton_MouseLeave"
+                                Opacity="0" Tag="{StaticResource ExtensionPageSymbol}"/>
+                    </Grid>
+                    <Grid Width="45" 
+                        Margin="0,5,0,0">
+                        <!--#region Icon -->
+                        <Path/>
+                        <!--#endregion-->
+                        <Border Background="Gray" 
+                                MouseDown="Border_MouseDown" 
+                                MouseEnter="MinWindowButton_MouseEnter"
+                                MouseLeave="MinWindowButton_MouseLeave"
+                                Opacity="0" Tag="{StaticResource SettingPageSymbol}"/>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
                     <Grid Width="45" 
                         Margin="0,5,0,0">
                         <!--#region Icon -->
@@ -74,13 +103,13 @@
                             Opacity="0"/>
                     </Grid>
                     <Grid Width="45" Margin="0,5,0,0">
-                    <Border Background="Red"
+                        <Border Background="Red"
                                 MouseDown="Border_MouseDown" 
                                 Name="CloseWindowsButton"
                                 MouseEnter="MinWindowButton_MouseEnter"
                                 MouseLeave="MinWindowButton_MouseLeave"
                                 Opacity="0"/>
-                    <!--#region Icon -->
+                        <!--#region Icon -->
                         <Grid>
                             <Rectangle VerticalAlignment="Center" Width="15" Height="1" Fill="Black" RenderTransformOrigin="0.5,0.5" >
                                 <Rectangle.RenderTransform>
@@ -105,10 +134,12 @@
                         </Grid>
                         <!--#endregion-->
                     </Grid>
+                </StackPanel>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="2" Name="PART_Window_Content">
-            <p:ExtensionPage/>
+            <p:ExtensionPage Visibility="{Binding Converter={StaticResource Covertest},ConverterParameter={StaticResource ExtensionPageSymbol}}" DataContext="{DynamicResource ShowingSymbol}"/>
+            <!--<p:SettingPage/>-->
         </Grid>
     </Grid>
 </Window>
