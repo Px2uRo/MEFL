@@ -36,12 +36,8 @@ namespace MEFL.Pages
             }
             else
             {
-                this.IsVisibleChanged -= VisibleChange;
-                this.Visibility = Visibility.Visible;
                 ani = new DoubleAnimation { From = 1, To = 0, EasingFunction = new PowerEase(), Duration = TimeSpan.FromSeconds(1) };
                 this.BeginAnimation(OpacityProperty, ani);
-                this.Visibility = Visibility.Hidden;
-                this.IsVisibleChanged += VisibleChange;
             }
             ani = null;
         }

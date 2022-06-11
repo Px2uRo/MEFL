@@ -139,7 +139,7 @@
         </Grid>
         <Grid Grid.Row="2" Name="PART_Window_Content">
             <p:ExtensionPage Visibility="{Binding Converter={StaticResource Covertest},ConverterParameter={StaticResource ExtensionPageSymbol}}" DataContext="{DynamicResource ShowingSymbol}"/>
-            <!--<p:SettingPage/>-->
+            <p:SettingPage Visibility="{Binding Converter={StaticResource Covertest},ConverterParameter={StaticResource SettingPageSymbol}}" DataContext="{DynamicResource ShowingSymbol}"/>
         </Grid>
     </Grid>
 </Window>

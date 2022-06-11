@@ -97,8 +97,7 @@ namespace MEFL
                 }
                 else if (a.Tag != null&&a.Tag is String)
                 {
-                    App.Current.Resources["howingSymbol"] = a.Tag as String;
-                    Debug.WriteLine(App.Current.Resources["howingSymbol"]);
+                    App.Current.Resources["ShowingSymbol"] = a.Tag as String;
                 }
             }
             else
