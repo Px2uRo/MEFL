@@ -7,15 +7,14 @@
              mc:Ignorable="d" 
              Height="150" >
     <local:MyCard.Resources>
-        <local:VersionToStringConverter x:Key="VTSC"/>
         <Style TargetType="TextBlock">
             <Setter Property="TextWrapping" Value="Wrap"/>
         </Style>
     </local:MyCard.Resources>
     <local:MyCard.Title>
-        <ContentPresenter TextBlock.FontWeight="Bold" Content="{Binding Name}"/>
+        <ContentPresenter TextBlock.FontWeight="Bold"/>
     </local:MyCard.Title>
-    <Grid x:Name="PART_THE_Content">
+    <Grid x:Name="PART_THE_Content" DataContext="">
         <StackPanel>
             <Grid Height="50">
                 <Grid.ColumnDefinitions>
@@ -43,7 +42,7 @@
                     </StackPanel>
                     <StackPanel Grid.Row="2" Orientation="Horizontal">
                         <TextBlock Text="版本号: "/>
-                        <TextBlock Text="{Binding Version,Converter={StaticResource VTSC}}"/>
+                        <TextBlock Text="{Binding Version}"/>
                     </StackPanel>
                 </Grid>
             </Grid>

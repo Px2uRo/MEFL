@@ -51,11 +51,3 @@ I:\Xiong's\MEFLCollection\MEFLCollection\MEFLWinUI3Desktop\MEFLWinUI3Desktop\obj
 I:\Xiong's\MEFLCollection\MEFLCollection\MEFLWinUI3Desktop\MEFLWinUI3Desktop\obj\x64\Debug\net5.0-windows10.0.19041.0\qualifiers.txt
 I:\Xiong's\MEFLCollection\MEFLCollection\MEFLWinUI3Desktop\MEFLWinUI3Desktop\obj\x64\Debug\net5.0-windows10.0.19041.0\qualifiers.txt.intermediate
 I:\Xiong's\MEFLCollection\MEFLCollection\MEFLWinUI3Desktop\MEFLWinUI3Desktop\obj\x64\Debug\net5.0-windows10.0.19041.0\MultipleQualifiersPerDimensionFound.txt
-I:\Xiong's\MEFLCollection\MEFLWinUI3Desktop\MEFLWinUI3Desktop\obj\x64\Debug\net5.0-windows10.0.19041.0\MEFLWinUI3Desktop.csproj.AssemblyReference.cache
-I:\Xiong's\MEFLCollection\MEFLWinUI3Desktop\MEFLWinUI3Desktop\obj\x64\Debug\net5.0-windows10.0.19041.0\MEFLWinUI3Desktop.GeneratedMSBuildEditorConfig.editorconfig
-I:\Xiong's\MEFLCollection\MEFLWinUI3Desktop\MEFLWinUI3Desktop\obj\x64\Debug\net5.0-windows10.0.19041.0\MEFLWinUI3Desktop.AssemblyInfoInputs.cache
-I:\Xiong's\MEFLCollection\MEFLWinUI3Desktop\MEFLWinUI3Desktop\obj\x64\Debug\net5.0-windows10.0.19041.0\MEFLWinUI3Desktop.AssemblyInfo.cs
-I:\Xiong's\MEFLCollection\MEFLWinUI3Desktop\MEFLWinUI3Desktop\obj\x64\Debug\net5.0-windows10.0.19041.0\MEFLWinUI3Desktop.csproj.CoreCompileInputs.cache
-I:\Xiong's\MEFLCollection\MEFLWinUI3Desktop\MEFLWinUI3Desktop\obj\x64\Debug\net5.0-windows10.0.19041.0\MEFL.dll
-I:\Xiong's\MEFLCollection\MEFLWinUI3Desktop\MEFLWinUI3Desktop\obj\x64\Debug\net5.0-windows10.0.19041.0\refint\MEFL.dll
-I:\Xiong's\MEFLCollection\MEFLWinUI3Desktop\MEFLWinUI3Desktop\obj\x64\Debug\net5.0-windows10.0.19041.0\MEFL.pdb

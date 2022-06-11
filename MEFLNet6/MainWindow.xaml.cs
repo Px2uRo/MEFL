@@ -29,7 +29,6 @@ namespace MEFL
         private DoubleAnimation _dbani;
         public MainWindow()
         {
-            Debugger.Logger("程序启动了");
 #if DEBUG
             try
             {
@@ -41,6 +40,7 @@ namespace MEFL
                 Debug.WriteLine(ex.Message);
             }
 #endif
+            this.DataContext = this;
             InitializeComponent();
             _dbani = new DoubleAnimation();
             _dbani.Duration = new Duration(TimeSpan.FromSeconds(0.2));

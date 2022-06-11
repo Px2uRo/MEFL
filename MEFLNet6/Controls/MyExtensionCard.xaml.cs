@@ -17,26 +17,6 @@ using System.Windows.Shapes;
 
 namespace MEFL.Controls
 {
-    public class VersionToStringConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value is Version)
-            {
-                return (value as Version).ToString();
-            }
-            else
-            {
-                throw new Exception("代码错误我谔谔，，，");
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     /// <summary>
     /// MyExtensionCard.xaml 的交互逻辑
     /// </summary>
@@ -63,8 +43,16 @@ namespace MEFL.Controls
             }
             else
             {
-                this.DataContext = Hosting.BaseAddIn.BaseInfo();
+                if (Hosting.BaseInfo.Title != null)
+                {
+                    this.Title = Hosting.BaseInfo.Title;
+                }
+                else
+                {
+                    this.Title = Hosting.FileName;
+                }
             }
+            PART_THE_Content.DataContext = Hosting;
         }
 
 

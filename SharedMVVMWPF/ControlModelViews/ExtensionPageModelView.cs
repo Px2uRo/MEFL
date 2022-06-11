@@ -7,7 +7,7 @@ namespace MEFL.ControlModelViews
 {
     public class ExtensionPageModelView:PageModelViews
     {
-        public ObservableCollection<Hosting> Hostings { get; set; }
+        public Hosting[] Hostings { get; set; }
 
         public ExtensionPageModelView()
         {
