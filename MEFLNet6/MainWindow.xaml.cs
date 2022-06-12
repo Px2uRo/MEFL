@@ -68,6 +68,8 @@ namespace MEFL
             //PART_Window_Content.DataContext = this;
             _dbani = new DoubleAnimation();
             _dbani.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            (App.Current.Resources["MainPage"] as Grid).Children.Add(new Pages.SettingPage() { Tag= "SettingPage" });
+            (App.Current.Resources["MainPage"] as Grid).Children.Add(new Pages.ExtensionPage() { Tag = "ExtensionPage" });
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -97,7 +99,7 @@ namespace MEFL
                 }
                 else if (a.Tag != null&&a.Tag is String)
                 {
-                    App.Current.Resources["ShowingSymbol"] = a.Tag as String;
+                    
                 }
             }
             else

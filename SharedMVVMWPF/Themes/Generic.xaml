@@ -70,4 +70,16 @@
             </Style>
         </Style.Resources>
     </Style>
+    <Style TargetType="{x:Type local:ChangePageButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:ChangePageButton}">
+                    <Grid>
+                        <Rectangle Name="Icon" Fill="Gray" Opacity="0"/>
+                        <ContentPresenter/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

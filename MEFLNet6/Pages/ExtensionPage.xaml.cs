@@ -2,6 +2,7 @@
 using MEFL.Controls;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,5 +48,19 @@ namespace MEFL.Pages
             }
             ani = null;
         }
+
+        public static List<FrameworkElement> FindTag(object Tag)
+        {
+            List<FrameworkElement> result = new List<FrameworkElement>();
+            foreach (FrameworkElement item in (App.Current.Resources["MainPage"] as Grid).Children)
+            {
+                if (item.Tag as String == Tag as String)
+                {
+                    result.Add(item);
+                }
+            }
+            return result;
+        }
+
     }
 }

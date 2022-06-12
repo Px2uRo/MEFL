@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ControlModelViews\MainModelViews.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ControlModelViews\MyCardModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ControlModelViews\PageModelViews.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ChangePageButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\MyCard.cs" />
   </ItemGroup>
   <ItemGroup>

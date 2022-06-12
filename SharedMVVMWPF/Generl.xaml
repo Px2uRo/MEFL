@@ -8,11 +8,9 @@
     <SolidColorBrush x:Key="SYTLE_Standard_Foreground">Black</SolidColorBrush>
     <SolidColorBrush x:Key="SYTLE_Changing_Foreground">White</SolidColorBrush>
     <ExtraAddInPageModelView xmlns="clr-namespace:MEFL.PageModelViews" x:Key="EAIPMV"/>
-    <String x:Key="ExtensionPageSymbol" xmlns="clr-namespace:System;assembly=mscorlib">ExtensionPage</String>
-    <String x:Key="MainPageSymbol" xmlns="clr-namespace:System;assembly=mscorlib">ExtensionPage</String>
-    <String x:Key="SettingPageSymbol" xmlns="clr-namespace:System;assembly=mscorlib">SettingPage</String>
     <String x:Key="ShowingSymbol" xmlns="clr-namespace:System;assembly=mscorlib">MainPage</String>
     <Convertest xmlns="clr-namespace:MEFL" x:Key="Covertest"/>
     <ExtensionPageModelView xmlns="clr-namespace:MEFL.ControlModelViews" x:Key="EPMV"/>
     <SettingPageModelView xmlns="clr-namespace:MEFL.PageModelViews" x:Key="SPMV"/>
+    <Grid x:Key="MainPage"/>
 </ResourceDictionary>

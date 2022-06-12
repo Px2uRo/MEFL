@@ -30,18 +30,13 @@
                             DataContext="{StaticResource EAIPMV}" 
                             Initialized="Ini"/>
                 <StackPanel Orientation="Horizontal">
-                    <Grid Width="45" 
+                    <c:ChangePageButton Width="45" Tag="ExtensionPage"
                         Margin="0,5,0,0">
                         <!--#region Icon -->
                         <Path Data="M0.500053 0.500053 8.15191 0.500053 8.13135 0.700159C8.13135 2.63976 9.73378 4.21211 11.7105 4.21211 13.6872 4.21211 15.2896 2.63976 15.2896 0.700159L15.2691 0.500053 22.9209 0.500053 22.9209 8.10635 22.9209 8.10635C24.8976 8.10635 26.5001 9.6787 26.5001 11.6183 26.5001 13.5579 24.8976 15.1302 22.9209 15.1302L22.9209 15.1302 22.9209 22.5001 4.23694 22.5001C2.17312 22.5001 0.500053 20.8584 0.500053 18.8333Z"
                               Stroke="Black" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <!--#endregion-->
-                        <Border Background="Gray" 
-                                MouseDown="Border_MouseDown" 
-                                MouseEnter="MinWindowButton_MouseEnter"
-                                MouseLeave="MinWindowButton_MouseLeave"
-                                Opacity="0" Tag="{StaticResource ExtensionPageSymbol}"/>
-                    </Grid>
+                    </c:ChangePageButton>
                     <Grid Width="45" 
                         Margin="0,5,0,0">
                         <!--#region Icon -->
@@ -51,7 +46,7 @@
                                 MouseDown="Border_MouseDown" 
                                 MouseEnter="MinWindowButton_MouseEnter"
                                 MouseLeave="MinWindowButton_MouseLeave"
-                                Opacity="0" Tag="{StaticResource SettingPageSymbol}"/>
+                                Opacity="0" Tag="SettingPage"/>
                     </Grid>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
@@ -137,9 +132,8 @@
                 </StackPanel>
             </StackPanel>
         </Grid>
-        <Grid Grid.Row="2" Name="PART_Window_Content">
-            <p:ExtensionPage Visibility="{Binding Converter={StaticResource Covertest},ConverterParameter={StaticResource ExtensionPageSymbol}}" DataContext="{DynamicResource ShowingSymbol}"/>
-            <p:SettingPage Visibility="{Binding Converter={StaticResource Covertest},ConverterParameter={StaticResource SettingPageSymbol}}" DataContext="{DynamicResource ShowingSymbol}"/>
-        </Grid>
+        <ContentPresenter Grid.Row="2" Content="{DynamicResource MainPage}"/>
+
+
     </Grid>
 </Window>
