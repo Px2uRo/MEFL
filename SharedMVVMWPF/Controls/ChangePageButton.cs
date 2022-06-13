@@ -66,14 +66,32 @@ namespace MEFL.Controls
 
         private void ChangePageButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            foreach (FrameworkElement item in (App.Current.Resources["MainPage"] as Grid).Children)
+            MyPageBase From = new MyPageBase();
+            bool Foo = false;
+            foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
             {
-                item.Visibility = Visibility.Hidden;
+                if (item.Visibility==Visibility.Visible)
+                {
+                    From = item;
+                    Foo = true;
+                    if (item.Tag as String != From.Tag as String)
+                    {
+                        item.Hide();
+                    }
+                }
             }
-            foreach (var item in Pages.ExtensionPage.FindTag(Tag))
+            foreach (MyPageBase item in FindControl.FromTag(Tag, (App.Current.Resources["MainPage"] as Grid)))
             {
-                item.Visibility = Visibility.Visible;
+                if(Foo)
+                {
+                    item.Show(From);
+                }
+                else
+                {
+                    item.Show();
+                }
             }
+            From = null;
         }
 
         private void ChangePageButton_MouseLeave(object sender, MouseEventArgs e)

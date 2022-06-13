@@ -37,17 +37,9 @@
                               Stroke="Black" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <!--#endregion-->
                     </c:ChangePageButton>
-                    <Grid Width="45" 
-                        Margin="0,5,0,0">
-                        <!--#region Icon -->
-                        <Path/>
-                        <!--#endregion-->
-                        <Border Background="Gray" 
-                                MouseDown="Border_MouseDown" 
-                                MouseEnter="MinWindowButton_MouseEnter"
-                                MouseLeave="MinWindowButton_MouseLeave"
-                                Opacity="0" Tag="SettingPage"/>
-                    </Grid>
+                    <c:ChangePageButton Width="45" Tag="SettingPage">
+                        
+                    </c:ChangePageButton>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Grid Width="45" 

@@ -10,11 +10,11 @@ none
 false
 WPF;HOSTING;DEBUG;NET;NET6_0;NETCOREAPP
 I:\Xiong's\MEFLCollection\SharedMVVMWPF\App.xaml
-6508925452
+6954037137
 
-21641750920
+23598961702
 198-801960335
-Controls\MyExtensionCard.xaml;MainWindow.xaml;Pages\ExtensionPage.xaml;Pages\SettingPage.xaml;I:\Xiong's\MEFLCollection\SharedMVVMWPF\Generl.xaml;I:\Xiong's\MEFLCollection\SharedMVVMWPF\Themes\Generic.xaml;
+MainWindow.xaml;I:\Xiong's\MEFLCollection\SharedMVVMWPF\Controls\MyExtensionCard.xaml;I:\Xiong's\MEFLCollection\SharedMVVMWPF\Generl.xaml;I:\Xiong's\MEFLCollection\SharedMVVMWPF\Pages\ExtensionPage.xaml;I:\Xiong's\MEFLCollection\SharedMVVMWPF\Pages\SettingPage.xaml;I:\Xiong's\MEFLCollection\SharedMVVMWPF\Themes\Generic.xaml;
 
 False
 

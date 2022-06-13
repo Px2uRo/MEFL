@@ -18,10 +18,41 @@
     <Compile Include="$(MSBuildThisFileDirectory)ControlModelViews\MyCardModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ControlModelViews\PageModelViews.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ChangePageButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\FindControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\MyCard.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\MyExtensionCard.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>MyExtensionCard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\MyPageBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ExtraAddInPageModelView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\SettingPageModelView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\ExtensionPage.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>ExtensionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\SettingPage.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>SettingPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Controls\MyExtensionCard.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Generl.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\ExtensionPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\SettingPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
