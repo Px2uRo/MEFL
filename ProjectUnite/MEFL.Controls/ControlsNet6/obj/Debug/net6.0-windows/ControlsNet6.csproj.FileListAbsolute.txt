@@ -1,0 +1,17 @@
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6.0-windows\ControlsNet6.csproj.AssemblyReference.cache
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6.0-windows\MEFL.Controls_MarkupCompile.cache
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6.0-windows\MEFL.Controls_MarkupCompile.lref
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\bin\Debug\net6.0-windows\MEFL.Controls.deps.json
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\bin\Debug\net6.0-windows\MEFL.Controls.dll
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\bin\Debug\net6.0-windows\MEFL.Controls.pdb
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6.0-windows\Generic.baml
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6.0-windows\MEFL.Controls.g.resources
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6.0-windows\ControlsNet6.GeneratedMSBuildEditorConfig.editorconfig
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6.0-windows\ControlsNet6.AssemblyInfoInputs.cache
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6.0-windows\ControlsNet6.AssemblyInfo.cs
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6.0-windows\ControlsNet6.csproj.CoreCompileInputs.cache
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6.0-windows\MEFL.Controls.dll
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6.0-windows\refint\MEFL.Controls.dll
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6.0-windows\MEFL.Controls.pdb
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6.0-windows\ref\MEFL.Controls.dll

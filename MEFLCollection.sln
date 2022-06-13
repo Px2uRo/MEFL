@@ -33,26 +33,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MEFLNet6", "MEFLNet6\MEFLNe
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedSources", "SharedSources\SharedSources.shproj", "{A6BAB5A9-265B-4417-8C32-6D9A7E19F081}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MEFLFw4", "MEFLFw4\MEFLFw4.csproj", "{D9630046-2352-43C0-8286-213ACD4EDF90}"
+EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		SharedMEFLClass\SharedMEFLClass.projitems*{00442d5b-d000-4d7e-9d37-6ce764806d77}*SharedItemsImports = 13
-		..\CoreLaunching\SharedCore\SharedCore.projitems*{0b5ff277-f018-41ba-b45e-49cd97bcda02}*SharedItemsImports = 4
-		SharedMEFLClass\SharedMEFLClass.projitems*{1d7867e0-3a4e-4673-b13c-8bec1b24e5d9}*SharedItemsImports = 4
-		SharedMEFLUWP\SharedMEFLUWP.projitems*{1d7867e0-3a4e-4673-b13c-8bec1b24e5d9}*SharedItemsImports = 4
-		SharedMEFLClass\SharedMEFLClass.projitems*{2ae91223-506e-4234-ad2f-f30bd53779e6}*SharedItemsImports = 5
-		SharedMEFLClass\SharedMEFLClass.projitems*{46691a0f-6f40-4cb2-b17d-e14dabd459d6}*SharedItemsImports = 5
-		SharedMVVMWPF\SharedMVVMWPF.projitems*{46691a0f-6f40-4cb2-b17d-e14dabd459d6}*SharedItemsImports = 5
-		SharedSources\SharedSources.projitems*{46691a0f-6f40-4cb2-b17d-e14dabd459d6}*SharedItemsImports = 5
-		SharedMEFLClass\SharedMEFLClass.projitems*{640b998c-7539-490a-9c5b-4a6b34c636d6}*SharedItemsImports = 5
-		SharedSources\SharedSources.projitems*{a6bab5a9-265b-4417-8c32-6d9a7e19f081}*SharedItemsImports = 13
-		SharedMVVMWPF\SharedMVVMWPF.projitems*{a76e17ed-57bf-45e9-b5e8-9a16c228fb70}*SharedItemsImports = 13
-		..\CoreLaunching\SharedCore\SharedCore.projitems*{a98f00b4-191b-4401-b986-b3e8a5f10605}*SharedItemsImports = 4
-		SharedMEFLClass\SharedMEFLClass.projitems*{c3acf42f-3a3a-43f1-b1e8-d025d48ffda3}*SharedItemsImports = 4
-		SharedMEFLUWP\SharedMEFLUWP.projitems*{c3acf42f-3a3a-43f1-b1e8-d025d48ffda3}*SharedItemsImports = 4
-		..\CoreLaunching\SharedCore\SharedCore.projitems*{e2a9f52b-6053-4004-9d43-aa972d0da2cf}*SharedItemsImports = 13
-		..\CoreLaunching\SharedCore\SharedCore.projitems*{f45f7573-6b83-4a0d-a3ec-11feb91b1140}*SharedItemsImports = 5
-		SharedMEFLUWP\SharedMEFLUWP.projitems*{f9d617ca-0cc1-4b2e-8605-2a97d42d73a7}*SharedItemsImports = 13
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
@@ -296,11 +279,52 @@ Global
 		{46691A0F-6F40-4CB2-B17D-E14DABD459D6}.Release|x64.Build.0 = Release|Any CPU
 		{46691A0F-6F40-4CB2-B17D-E14DABD459D6}.Release|x86.ActiveCfg = Release|Any CPU
 		{46691A0F-6F40-4CB2-B17D-E14DABD459D6}.Release|x86.Build.0 = Release|Any CPU
+		{D9630046-2352-43C0-8286-213ACD4EDF90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9630046-2352-43C0-8286-213ACD4EDF90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9630046-2352-43C0-8286-213ACD4EDF90}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{D9630046-2352-43C0-8286-213ACD4EDF90}.Debug|ARM.Build.0 = Debug|Any CPU
+		{D9630046-2352-43C0-8286-213ACD4EDF90}.Debug|arm64.ActiveCfg = Debug|Any CPU
+		{D9630046-2352-43C0-8286-213ACD4EDF90}.Debug|arm64.Build.0 = Debug|Any CPU
+		{D9630046-2352-43C0-8286-213ACD4EDF90}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{D9630046-2352-43C0-8286-213ACD4EDF90}.Debug|x64.Build.0 = Debug|Any CPU
+		{D9630046-2352-43C0-8286-213ACD4EDF90}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{D9630046-2352-43C0-8286-213ACD4EDF90}.Debug|x86.Build.0 = Debug|Any CPU
+		{D9630046-2352-43C0-8286-213ACD4EDF90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9630046-2352-43C0-8286-213ACD4EDF90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9630046-2352-43C0-8286-213ACD4EDF90}.Release|ARM.ActiveCfg = Release|Any CPU
+		{D9630046-2352-43C0-8286-213ACD4EDF90}.Release|ARM.Build.0 = Release|Any CPU
+		{D9630046-2352-43C0-8286-213ACD4EDF90}.Release|arm64.ActiveCfg = Release|Any CPU
+		{D9630046-2352-43C0-8286-213ACD4EDF90}.Release|arm64.Build.0 = Release|Any CPU
+		{D9630046-2352-43C0-8286-213ACD4EDF90}.Release|x64.ActiveCfg = Release|Any CPU
+		{D9630046-2352-43C0-8286-213ACD4EDF90}.Release|x64.Build.0 = Release|Any CPU
+		{D9630046-2352-43C0-8286-213ACD4EDF90}.Release|x86.ActiveCfg = Release|Any CPU
+		{D9630046-2352-43C0-8286-213ACD4EDF90}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F30917EE-B349-4D24-B9FF-54532CCE1231}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SharedMEFLClass\SharedMEFLClass.projitems*{00442d5b-d000-4d7e-9d37-6ce764806d77}*SharedItemsImports = 13
+		..\CoreLaunching\SharedCore\SharedCore.projitems*{0b5ff277-f018-41ba-b45e-49cd97bcda02}*SharedItemsImports = 4
+		SharedMEFLClass\SharedMEFLClass.projitems*{1d7867e0-3a4e-4673-b13c-8bec1b24e5d9}*SharedItemsImports = 4
+		SharedMEFLUWP\SharedMEFLUWP.projitems*{1d7867e0-3a4e-4673-b13c-8bec1b24e5d9}*SharedItemsImports = 4
+		SharedMEFLClass\SharedMEFLClass.projitems*{2ae91223-506e-4234-ad2f-f30bd53779e6}*SharedItemsImports = 5
+		SharedMEFLClass\SharedMEFLClass.projitems*{46691a0f-6f40-4cb2-b17d-e14dabd459d6}*SharedItemsImports = 5
+		SharedMVVMWPF\SharedMVVMWPF.projitems*{46691a0f-6f40-4cb2-b17d-e14dabd459d6}*SharedItemsImports = 5
+		SharedSources\SharedSources.projitems*{46691a0f-6f40-4cb2-b17d-e14dabd459d6}*SharedItemsImports = 5
+		SharedMEFLClass\SharedMEFLClass.projitems*{640b998c-7539-490a-9c5b-4a6b34c636d6}*SharedItemsImports = 5
+		SharedSources\SharedSources.projitems*{a6bab5a9-265b-4417-8c32-6d9a7e19f081}*SharedItemsImports = 13
+		SharedMVVMWPF\SharedMVVMWPF.projitems*{a76e17ed-57bf-45e9-b5e8-9a16c228fb70}*SharedItemsImports = 13
+		..\CoreLaunching\SharedCore\SharedCore.projitems*{a98f00b4-191b-4401-b986-b3e8a5f10605}*SharedItemsImports = 4
+		SharedMEFLClass\SharedMEFLClass.projitems*{c3acf42f-3a3a-43f1-b1e8-d025d48ffda3}*SharedItemsImports = 4
+		SharedMEFLUWP\SharedMEFLUWP.projitems*{c3acf42f-3a3a-43f1-b1e8-d025d48ffda3}*SharedItemsImports = 4
+		SharedMEFLClass\SharedMEFLClass.projitems*{d9630046-2352-43c0-8286-213acd4edf90}*SharedItemsImports = 4
+		SharedMVVMWPF\SharedMVVMWPF.projitems*{d9630046-2352-43c0-8286-213acd4edf90}*SharedItemsImports = 4
+		..\CoreLaunching\SharedCore\SharedCore.projitems*{e2a9f52b-6053-4004-9d43-aa972d0da2cf}*SharedItemsImports = 13
+		..\CoreLaunching\SharedCore\SharedCore.projitems*{f45f7573-6b83-4a0d-a3ec-11feb91b1140}*SharedItemsImports = 5
+		SharedMEFLUWP\SharedMEFLUWP.projitems*{f9d617ca-0cc1-4b2e-8605-2a97d42d73a7}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

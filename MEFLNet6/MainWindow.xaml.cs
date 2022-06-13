@@ -23,27 +23,6 @@ using MEFL.PageModelViews;
 
 namespace MEFL
 {
-    public class Convertest : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            Debug.WriteLine(value);
-            if (value as String == parameter as String)
-            {
-                return Visibility.Visible;
-            }
-            else
-            {
-                return Visibility.Hidden;
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -182,14 +161,9 @@ namespace MEFL
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            ControlModel.TimeMultiple = 5;
-        }
-
         private void Ini(object sender, EventArgs e)
         {
-            ((sender as StackPanel).DataContext as ExtraAddInPageModelView).Ini(sender, e);
+            PageModelViews.ExtraAddInPageModelView.Reload();
         }
     }
 }

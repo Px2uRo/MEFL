@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "WPFTest/1.0.0": {
+        "dependencies": {
+          "MEFL.Controls": "1.0.0"
+        },
+        "runtime": {
+          "WPFTest.dll": {}
+        }
+      },
+      "MEFL.Controls/1.0.0": {
+        "runtime": {
+          "MEFL.Controls.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "WPFTest/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MEFL.Controls/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

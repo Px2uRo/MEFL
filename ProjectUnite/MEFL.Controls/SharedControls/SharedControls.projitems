@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>bee8441a-56da-48d5-aabf-e76594b47403</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>SharedControls</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)ControlModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlModelViews\MainModelViews.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlModelViews\MyCardModelView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ControlModelViews\PageModelViews.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\FindControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\MyCard.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\MyPageBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+</Project>

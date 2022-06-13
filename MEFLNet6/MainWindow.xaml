@@ -15,117 +15,116 @@
 
     </Window.Resources>
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="50"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid Background="{DynamicResource SYTLE_Standard_ColorBrush}" MouseMove="Grid_MouseMove">
-            <ContentPresenter Content="{Binding Title}" 
+        <ContentPresenter Content="{DynamicResource Background}"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Background="{DynamicResource SYTLE_Standard_ColorBrush}" MouseMove="Grid_MouseMove">
+                <ContentPresenter Content="{Binding Title}" 
                               VerticalAlignment="Center"
                               Margin="10,0,0,0"/>
-            <StackPanel Orientation="Horizontal" 
+                <StackPanel Orientation="Horizontal" 
                         HorizontalAlignment="Right">
-                <StackPanel Orientation="Horizontal"
-                            DataContext="{StaticResource EAIPMV}" 
-                            Initialized="Ini"/>
-                <StackPanel Orientation="Horizontal">
-                    <c:ChangePageButton Width="45" Tag="ExtensionPage"
+                    <ContentPresenter Content="{DynamicResource AddInChangePageButtons}" Initialized="Ini"/>
+                    <StackPanel Orientation="Horizontal">
+                        <c:ChangePageButton Width="45" Tag="ExtensionPage"
                         Margin="0,5,0,0">
-                        <!--#region Icon -->
-                        <Path Data="M0.500053 0.500053 8.15191 0.500053 8.13135 0.700159C8.13135 2.63976 9.73378 4.21211 11.7105 4.21211 13.6872 4.21211 15.2896 2.63976 15.2896 0.700159L15.2691 0.500053 22.9209 0.500053 22.9209 8.10635 22.9209 8.10635C24.8976 8.10635 26.5001 9.6787 26.5001 11.6183 26.5001 13.5579 24.8976 15.1302 22.9209 15.1302L22.9209 15.1302 22.9209 22.5001 4.23694 22.5001C2.17312 22.5001 0.500053 20.8584 0.500053 18.8333Z"
+                            <!--#region Icon -->
+                            <Path Data="M0.500053 0.500053 8.15191 0.500053 8.13135 0.700159C8.13135 2.63976 9.73378 4.21211 11.7105 4.21211 13.6872 4.21211 15.2896 2.63976 15.2896 0.700159L15.2691 0.500053 22.9209 0.500053 22.9209 8.10635 22.9209 8.10635C24.8976 8.10635 26.5001 9.6787 26.5001 11.6183 26.5001 13.5579 24.8976 15.1302 22.9209 15.1302L22.9209 15.1302 22.9209 22.5001 4.23694 22.5001C2.17312 22.5001 0.500053 20.8584 0.500053 18.8333Z"
                               Stroke="Black" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <!--#endregion-->
-                    </c:ChangePageButton>
-                    <c:ChangePageButton Width="45" Tag="SettingPage">
-                        
-                    </c:ChangePageButton>
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Grid Width="45" 
+                            <!--#endregion-->
+                        </c:ChangePageButton>
+                        <c:ChangePageButton Width="45" Tag="SettingPage">
+
+                        </c:ChangePageButton>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Grid Width="45" 
                         Margin="0,5,0,0">
-                        <!--#region Icon -->
-                        <Rectangle VerticalAlignment="Center"
+                            <!--#region Icon -->
+                            <Rectangle VerticalAlignment="Center"
                                    Width="10" Height="1" 
                                    Fill="Black" />
-                        <!--#endregion-->
-                        <Border Background="Gray" 
+                            <!--#endregion-->
+                            <Border Background="Gray" 
                                 MouseDown="Border_MouseDown" 
                                 Name="MinWindowButton"
                                 MouseEnter="MinWindowButton_MouseEnter"
                                 MouseLeave="MinWindowButton_MouseLeave"
                                 Opacity="0"/>
-                    </Grid>
-                    <Grid Width="45" 
+                        </Grid>
+                        <Grid Width="45" 
                         Margin="0,5,0,0">
-                        <!--#region Icon -->
-                        <Border Name="MaxWindowIcon"
+                            <!--#region Icon -->
+                            <Border Name="MaxWindowIcon"
                                 Width="15" Height="12" 
                                 CornerRadius="2" 
                                 BorderBrush="Black" 
                                 BorderThickness="1"/>
-                        <Border Name="WinWindowIcon"
+                            <Border Name="WinWindowIcon"
                                 Visibility="Hidden">
-                            <Grid>
-                                <Border Width="12" 
+                                <Grid>
+                                    <Border Width="12" 
                                         Height="10"
                                         CornerRadius="2" 
                                         BorderBrush="Black" 
                                         BorderThickness="1"/>
-                                <Border Width="12"
+                                    <Border Width="12"
                                         Height="10" 
                                         CornerRadius="2" 
                                         BorderBrush="Black" 
                                         BorderThickness="1" 
                                         Margin="5,0,0,5"/>
-                            </Grid>
-                        </Border>
-                        <!--#endregion-->
-                        <Border 
+                                </Grid>
+                            </Border>
+                            <!--#endregion-->
+                            <Border 
                             Background="Gray" 
                             MouseDown="Border_MouseDown" 
                             Name="ChangeSizeButton"
                             MouseEnter="MinWindowButton_MouseEnter"
                                 MouseLeave="MinWindowButton_MouseLeave"
                             Opacity="0"/>
-                    </Grid>
-                    <Grid Width="45" Margin="0,5,0,0">
-                        <Border Background="Red"
+                        </Grid>
+                        <Grid Width="45" Margin="0,5,0,0">
+                            <Border Background="Red"
                                 MouseDown="Border_MouseDown" 
                                 Name="CloseWindowsButton"
                                 MouseEnter="MinWindowButton_MouseEnter"
                                 MouseLeave="MinWindowButton_MouseLeave"
                                 Opacity="0"/>
-                        <!--#region Icon -->
-                        <Grid>
-                            <Rectangle VerticalAlignment="Center" Width="15" Height="1" Fill="Black" RenderTransformOrigin="0.5,0.5" >
-                                <Rectangle.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform Angle="-45"/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </Rectangle.RenderTransform>
-                            </Rectangle>
-                            <Rectangle VerticalAlignment="Center" Width="15" Height="1" Fill="Black" RenderTransformOrigin="0.5,0.5" >
-                                <Rectangle.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform Angle="45"/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </Rectangle.RenderTransform>
-                            </Rectangle>
+                            <!--#region Icon -->
+                            <Grid>
+                                <Rectangle VerticalAlignment="Center" Width="15" Height="1" Fill="Black" RenderTransformOrigin="0.5,0.5" >
+                                    <Rectangle.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="-45"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Rectangle.RenderTransform>
+                                </Rectangle>
+                                <Rectangle VerticalAlignment="Center" Width="15" Height="1" Fill="Black" RenderTransformOrigin="0.5,0.5" >
+                                    <Rectangle.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform Angle="45"/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Rectangle.RenderTransform>
+                                </Rectangle>
+                            </Grid>
+                            <!--#endregion-->
                         </Grid>
-                        <!--#endregion-->
-                    </Grid>
+                    </StackPanel>
                 </StackPanel>
-            </StackPanel>
+            </Grid>
+            <ContentPresenter Grid.Row="2" Content="{DynamicResource MainPage}"/>
         </Grid>
-        <ContentPresenter Grid.Row="2" Content="{DynamicResource MainPage}"/>
-
-
     </Grid>
 </Window>

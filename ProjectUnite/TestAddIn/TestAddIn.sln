@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestAddIn", "TestAddIn\TestAddIn.csproj", "{F7FC8CD6-059E-48A6-A637-A113897AD846}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContractNet6", "Contract\ContractNet6.csproj", "{9E49EB92-7CF7-4DB0-A204-F2C1CD87200E}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedContract", "SharedContract\SharedContract.shproj", "{23BB0CC4-2D6A-456B-A157-AD89E84C401D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContractNetFw4", "ContractNetFw4\ContractNetFw4.csproj", "{5BA0C586-7150-4269-80F7-7DF159131CDC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F7FC8CD6-059E-48A6-A637-A113897AD846}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7FC8CD6-059E-48A6-A637-A113897AD846}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7FC8CD6-059E-48A6-A637-A113897AD846}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7FC8CD6-059E-48A6-A637-A113897AD846}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9E49EB92-7CF7-4DB0-A204-F2C1CD87200E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9E49EB92-7CF7-4DB0-A204-F2C1CD87200E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9E49EB92-7CF7-4DB0-A204-F2C1CD87200E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9E49EB92-7CF7-4DB0-A204-F2C1CD87200E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BA0C586-7150-4269-80F7-7DF159131CDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BA0C586-7150-4269-80F7-7DF159131CDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BA0C586-7150-4269-80F7-7DF159131CDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BA0C586-7150-4269-80F7-7DF159131CDC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D57DFECC-029B-4F5A-8BCF-AC7B3D8EDC04}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		SharedContract\SharedContract.projitems*{23bb0cc4-2d6a-456b-a157-ad89e84c401d}*SharedItemsImports = 13
+		SharedContract\SharedContract.projitems*{5ba0c586-7150-4269-80f7-7df159131cdc}*SharedItemsImports = 4
+		SharedContract\SharedContract.projitems*{9e49eb92-7cf7-4db0-a204-f2c1cd87200e}*SharedItemsImports = 5
+		SharedContract\SharedContract.projitems*{f7fc8cd6-059e-48a6-a637-a113897ad846}*SharedItemsImports = 5
+	EndGlobalSection
+EndGlobal

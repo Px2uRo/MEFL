@@ -9,8 +9,9 @@
     <SolidColorBrush x:Key="SYTLE_Changing_Foreground">White</SolidColorBrush>
     <ExtraAddInPageModelView xmlns="clr-namespace:MEFL.PageModelViews" x:Key="EAIPMV"/>
     <String x:Key="ShowingSymbol" xmlns="clr-namespace:System;assembly=mscorlib">MainPage</String>
-    <Convertest xmlns="clr-namespace:MEFL" x:Key="Covertest"/>
     <ExtensionPageModelView xmlns="clr-namespace:MEFL.ControlModelViews" x:Key="EPMV"/>
     <SettingPageModelView xmlns="clr-namespace:MEFL.PageModelViews" x:Key="SPMV"/>
+    <StackPanel Orientation="Horizontal" x:Key="AddInChangePageButtons" DataContext="{DynamicResource EAIPMV}"/>
     <Grid x:Key="MainPage"/>
+    <Grid x:Key="Background"/>
 </ResourceDictionary>

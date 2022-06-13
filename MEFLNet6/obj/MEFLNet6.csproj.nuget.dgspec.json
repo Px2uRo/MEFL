@@ -126,6 +126,10 @@
               "target": "Package",
               "version": "[1.0.0, )"
             },
+            "MEFL.Controls": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "System.ComponentModel.Composition": {
               "target": "Package",
               "version": "[6.0.0, )"

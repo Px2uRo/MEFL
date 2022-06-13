@@ -1,4 +1,5 @@
 ﻿using MEFL.ControlModelViews;
+using MEFL.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,14 +17,15 @@ namespace MEFL.PageModelViews
 
         }
 
-        public void Ini(object? sender, EventArgs e)
+        public static void Reload()
         {
             foreach (var item in (App.Current.Resources["EPMV"] as ExtensionPageModelView).Hostings)
             {
-                Border bd = new Border();
-                bd.Width = 45;
-                bd.Background = new SolidColorBrush(Color.FromRgb(255, 0, 0));
-                (sender as StackPanel).Children.Add(bd);
+                if (item.IsOpen == true)
+                {
+                    ChangePageButton button = new ChangePageButton() { Width = 45 };
+                    (App.Current.Resources["AddInChangePageButtons"] as StackPanel).Children.Add(button);
+                }
             }
         }
     }

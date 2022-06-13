@@ -1,0 +1,12 @@
+D:\Xiong's\WPF\TestAddIn\Contract\bin\Release\net6.0-windows\Contract.deps.json
+D:\Xiong's\WPF\TestAddIn\Contract\bin\Release\net6.0-windows\Contract.dll
+D:\Xiong's\WPF\TestAddIn\Contract\bin\Release\net6.0-windows\Contract.pdb
+D:\Xiong's\WPF\TestAddIn\Contract\obj\Release\net6.0-windows\Contract.csproj.AssemblyReference.cache
+D:\Xiong's\WPF\TestAddIn\Contract\obj\Release\net6.0-windows\Contract.GeneratedMSBuildEditorConfig.editorconfig
+D:\Xiong's\WPF\TestAddIn\Contract\obj\Release\net6.0-windows\Contract.AssemblyInfoInputs.cache
+D:\Xiong's\WPF\TestAddIn\Contract\obj\Release\net6.0-windows\Contract.AssemblyInfo.cs
+D:\Xiong's\WPF\TestAddIn\Contract\obj\Release\net6.0-windows\Contract.csproj.CoreCompileInputs.cache
+D:\Xiong's\WPF\TestAddIn\Contract\obj\Release\net6.0-windows\Contract.dll
+D:\Xiong's\WPF\TestAddIn\Contract\obj\Release\net6.0-windows\refint\Contract.dll
+D:\Xiong's\WPF\TestAddIn\Contract\obj\Release\net6.0-windows\Contract.pdb
+D:\Xiong's\WPF\TestAddIn\Contract\obj\Release\net6.0-windows\ref\Contract.dll

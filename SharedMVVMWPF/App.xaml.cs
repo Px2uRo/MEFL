@@ -36,7 +36,7 @@ namespace MEFL
             MessageBox.Show(e.ExceptionObject.ToString());
         }
 
-        private void TaskScheduler_UnobservedTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
+        private void TaskScheduler_UnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs e)
         {
             MessageBox.Show($"{e.Exception.Message}");
         }
