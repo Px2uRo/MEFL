@@ -14,18 +14,6 @@
           "Microsoft.WindowsDesktop.App.WPF"
         ]
       },
-      "MEFL.Controls/1.0.0": {
-        "type": "package",
-        "compile": {
-          "lib/net6.0-windows7.0/MEFL.Controls.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0-windows7.0/MEFL.Controls.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.WindowsDesktop.App.WPF"
-        ]
-      },
       "Microsoft.NETCore.Platforms/1.1.0": {
         "type": "package",
         "compile": {
@@ -389,17 +377,6 @@
         "contractnet6.1.0.0.nupkg.sha512",
         "contractnet6.nuspec",
         "lib/net6.0-windows7.0/ContractNet6.dll"
-      ]
-    },
-    "MEFL.Controls/1.0.0": {
-      "sha512": "+Bb1QwVcWWVTR0ZK+fpdbNlp1hZefGD/ojnHm3hXVeQ4agtXcgY2AkLfXXOoL6rbyqlJnoDC+8lp2SbZJbDnKw==",
-      "type": "package",
-      "path": "mefl.controls/1.0.0",
-      "files": [
-        ".nupkg.metadata",
-        "lib/net6.0-windows7.0/MEFL.Controls.dll",
-        "mefl.controls.1.0.0.nupkg.sha512",
-        "mefl.controls.nuspec"
       ]
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
@@ -1804,7 +1781,6 @@
     "net6.0-windows7.0": [
       "ContractNet6 >= 1.0.0",
       "CoreLaunchingNet6 >= 1.0.0",
-      "MEFL.Controls >= 1.0.0",
       "System.ComponentModel.Composition >= 6.0.0"
     ]
   },
@@ -1860,10 +1836,6 @@
         "targetAlias": "net6.0-windows",
         "dependencies": {
           "ContractNet6": {
-            "target": "Package",
-            "version": "[1.0.0, )"
-          },
-          "MEFL.Controls": {
             "target": "Package",
             "version": "[1.0.0, )"
           },

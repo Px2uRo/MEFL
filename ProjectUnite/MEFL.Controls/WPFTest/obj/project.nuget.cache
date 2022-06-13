@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "gL1w/qT/xB0UxAE0X1PjguGmvGkQge2LFi/bpqrcsoqn8B2biDGEvJkXWbsCYc84TtSo0wpFfD+8sTZ/F2UEqw==",
+  "dgSpecHash": "A0Cb/4s11rTtopIByTAcB66n2OTyNuX+QkbbDOZL5k/UOk75t6vS/XIWF7esInp63o467p86I8ywY3fJ96Ee/g==",
   "success": true,
   "projectFilePath": "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\MEFL.Controls\\WPFTest\\WPFTest.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Lenovo\\.nuget\\packages\\handycontrol\\3.3.0\\handycontrol.3.3.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\mefl.controls\\1.0.0\\mefl.controls.1.0.0.nupkg.sha512"
   ],
   "logs": []

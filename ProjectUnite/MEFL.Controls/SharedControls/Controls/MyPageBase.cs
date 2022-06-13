@@ -69,5 +69,19 @@ namespace MEFL.Controls
         // Using a DependencyProperty as the backing store for SideBar.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SideBarProperty =
             DependencyProperty.Register("SideBar", typeof(StackPanel), typeof(MyPageBase), new PropertyMetadata(null));
+
+
+
+        public Brush LineBrush
+        {
+            get { return (Brush)GetValue(LineBrushProperty); }
+            set { SetValue(LineBrushProperty, value); } 
+        }
+
+        // Using a DependencyProperty as the backing store for LineBrush.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty LineBrushProperty =
+            DependencyProperty.Register("LineBrush", typeof(Brush), typeof(MyPageBase), new PropertyMetadata(new SolidColorBrush(Color.FromRgb(0,0,0))));
+
+
     }
 }

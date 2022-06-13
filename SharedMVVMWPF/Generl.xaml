@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:c="clr-namespace:MEFL.Controls;assembly=MEFL.Controls">
     <Color x:Key="SYTLE_Standard_Color">Aqua</Color>
     <SolidColorBrush x:Key="SYTLE_Standard_ColorBrush">Aqua</SolidColorBrush>
     <SolidColorBrush x:Key="SYTLE_Standard_Background">White</SolidColorBrush>
@@ -14,4 +15,8 @@
     <StackPanel Orientation="Horizontal" x:Key="AddInChangePageButtons" DataContext="{DynamicResource EAIPMV}"/>
     <Grid x:Key="MainPage"/>
     <Grid x:Key="Background"/>
+    <Style TargetType="c:MyCard" x:Key="MyCardStyle">
+        <Setter Property="Background" Value="{DynamicResource SYTLE_Standard_Background}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource SYTLE_Standard_BorderBrush}"/>
+    </Style>
 </ResourceDictionary>

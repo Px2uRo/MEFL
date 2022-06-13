@@ -6,6 +6,8 @@
     <UseWPF>true</UseWPF>
     <RootNamespace>MEFL.Controls</RootNamespace>
     <AssemblyName>MEFL.Controls</AssemblyName>
+    <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
+    <BaseOutputPath>D:\MyNupkgs\MEFL.Controls</BaseOutputPath>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -18,6 +18,7 @@ using MEFL.ControlModelViews;
 
 namespace MEFL.Controls
 {
+    
     public class MyCard : UserControl
     {
         #region 你是个屁的 Methods
@@ -29,7 +30,7 @@ namespace MEFL.Controls
         private DoubleAnimation dbaniIcon;
         private double OriginalOpacity;
         #endregion
-        public MyCard()
+        static MyCard()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MyCard), new FrameworkPropertyMetadata(typeof(MyCard)));
         }

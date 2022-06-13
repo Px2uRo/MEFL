@@ -13,4 +13,7 @@
     <SourceRoot Include="C:\Users\Lenovo\.nuget\packages\" />
     <SourceRoot Include="C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages\" />
   </ItemGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgHandyControl Condition=" '$(PkgHandyControl)' == '' ">C:\Users\Lenovo\.nuget\packages\handycontrol\3.3.0</PkgHandyControl>
+  </PropertyGroup>
 </Project>

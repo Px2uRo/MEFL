@@ -5,9 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPFTest"
         mc:Ignorable="d"
+        xmlns:h="https://handyorg.github.io/handycontrol"
         Title="MainWindow" Height="450" Width="800"
         xmlns:c="clr-namespace:MEFL.Controls;assembly=MEFL.Controls">
     <Grid>
-        <c:MyCard Width="300" Height="200" Background="White" BorderBrush="Aqua" IsAbleToSwap="True" IsSwaped="True"/>
+        <c:MyPageBase LineBrush="Aqua">
+            <c:MyPageBase.SideBar>
+                <StackPanel>
+                    <c:ChangePageContentButton SideBarBrush="Aqua" Content="OK1!" />
+                    <c:ChangePageContentButton SideBarBrush="Aqua" Content="OK12" />
+                </StackPanel>
+            </c:MyPageBase.SideBar>
+        </c:MyPageBase>
     </Grid>
 </Window>

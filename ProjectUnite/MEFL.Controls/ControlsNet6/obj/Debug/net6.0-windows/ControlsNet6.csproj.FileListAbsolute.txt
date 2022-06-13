@@ -15,3 +15,6 @@ I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6
 I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6.0-windows\refint\MEFL.Controls.dll
 I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6.0-windows\MEFL.Controls.pdb
 I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6.0-windows\ref\MEFL.Controls.dll
+D:\MyNupkgs\MEFL.Controls\Debug\net6.0-windows\MEFL.Controls.deps.json
+D:\MyNupkgs\MEFL.Controls\Debug\net6.0-windows\MEFL.Controls.dll
+D:\MyNupkgs\MEFL.Controls\Debug\net6.0-windows\MEFL.Controls.pdb
