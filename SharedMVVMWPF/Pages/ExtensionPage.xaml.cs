@@ -29,8 +29,21 @@ namespace MEFL.Pages
             InitializeComponent();
             foreach (var item in (this.DataContext as ExtensionPageModelView).Hostings)
             {
-                Content.Children.Add(new MyExtensionCard() { Hosting = item,Margin=new Thickness(0,0,0,15)});
+                ContentPage.Children.Add(new MyExtensionCard() { Hosting = item,Margin=new Thickness(0,0,0,15)});
             }
+        }
+
+        private void ChangePageContentButton_Checked(object sender, RoutedEventArgs e)
+        {
+            foreach (Panel item in (this.Content as Panel).Children)
+            {
+                item.Visibility = Visibility.Hidden;
+            }
+            foreach (Panel item in FindControl.FromTag((sender as ChangePageContentButton).Tag, this.Content as Panel))
+            {
+                item.Visibility = Visibility.Visible;
+            }
+            
         }
     }
 }

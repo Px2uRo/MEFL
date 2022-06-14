@@ -19,10 +19,10 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
-                <RowDefinition Height="50"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Grid Background="{DynamicResource SYTLE_Standard_ColorBrush}" MouseMove="Grid_MouseMove">
+            <Grid Background="{DynamicResource SYTLE_Standard_ColorBrush}" 
+                  MouseMove="Grid_MouseMove">
                 <ContentPresenter Content="{Binding Title}" 
                               VerticalAlignment="Center"
                               Margin="10,0,0,0"/>
@@ -124,7 +124,7 @@
                     </StackPanel>
                 </StackPanel>
             </Grid>
-            <ContentPresenter Grid.Row="2" Content="{DynamicResource MainPage}"/>
+            <ContentPresenter Grid.Row="1" Content="{DynamicResource MainPage}"/>
         </Grid>
     </Grid>
 </Window>

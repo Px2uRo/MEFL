@@ -15,6 +15,6 @@
     </frameworkReferences>
   </metadata>
   <files>
-    <file src="I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\bin\Release\net6.0-windows\MEFL.Controls.dll" target="lib\net6.0-windows7.0\MEFL.Controls.dll" />
+    <file src="D:\MyNupkgs\MEFL.Controls\Release\net6.0-windows\MEFL.Controls.dll" target="lib\net6.0-windows7.0\MEFL.Controls.dll" />
   </files>
 </package>
