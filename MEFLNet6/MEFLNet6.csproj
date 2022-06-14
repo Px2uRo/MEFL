@@ -27,8 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Reference Include="Contract">
-      <HintPath>D:\Xiong's\WPF\TestAddIn\TestAddIn\bin\Debug\net6.0-windows\Contract.dll</HintPath>
+    <Reference Include="ContractNet6">
+      <HintPath>..\ProjectUnite\TestAddIn\Contract\bin\Debug\net6.0-windows\ContractNet6.dll</HintPath>
     </Reference>
     <Reference Include="MEFL.Controls">
       <HintPath>D:\MyNupkgs\MEFL.Controls\Debug\net6.0-windows\MEFL.Controls.dll</HintPath>
@@ -39,6 +39,6 @@
 
   <Import Project="..\SharedSources\SharedSources.projitems" Label="Shared" />
 
-  <Import Project="..\SharedMEFLClass\SharedMEFLClass.projitems" Label="Shared" />
+  <Import Project="..\SharedMEFL\SharedMEFL.projitems" Label="Shared" />
 
 </Project>

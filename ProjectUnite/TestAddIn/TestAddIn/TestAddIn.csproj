@@ -26,6 +26,4 @@
     <ProjectReference Include="..\Contract\ContractNet6.csproj" />
   </ItemGroup>
 
-  <Import Project="..\SharedContract\SharedContract.projitems" Label="Shared" />
-
 </Project>

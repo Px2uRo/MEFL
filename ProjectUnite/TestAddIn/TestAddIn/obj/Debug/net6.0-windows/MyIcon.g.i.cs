@@ -53,7 +53,7 @@ namespace TestAddIn {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/TestAddIn;V1.0.0.0;component/myicon.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/TestAddIn;component/myicon.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\MyIcon.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

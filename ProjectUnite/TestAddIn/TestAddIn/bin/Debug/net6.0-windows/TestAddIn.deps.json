@@ -24,8 +24,16 @@
         }
       },
       "ContractNet6/1.0.0": {
+        "dependencies": {
+          "MEFL.Controls": "1.0.0"
+        },
         "runtime": {
           "ContractNet6.dll": {}
+        }
+      },
+      "MEFL.Controls/1.0.0": {
+        "runtime": {
+          "MEFL.Controls.dll": {}
         }
       }
     }
@@ -44,6 +52,11 @@
       "hashPath": "system.componentmodel.composition.6.0.0.nupkg.sha512"
     },
     "ContractNet6/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "MEFL.Controls/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

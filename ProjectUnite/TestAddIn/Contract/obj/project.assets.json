@@ -1,11 +1,33 @@
 {
   "version": 3,
   "targets": {
-    "net6.0-windows7.0": {}
+    "net6.0-windows7.0": {
+      "MEFL.Controls/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/MEFL.Controls.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MEFL.Controls.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "MEFL.Controls/1.0.0": {
+      "type": "project",
+      "path": "../../MEFL.Controls/ControlsNet6/ControlsNet6.csproj",
+      "msbuildProject": "../../MEFL.Controls/ControlsNet6/ControlsNet6.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0-windows7.0": []
+    "net6.0-windows7.0": [
+      "MEFL.Controls >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Lenovo\\.nuget\\packages\\": {},
@@ -41,7 +63,11 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
-          "projectReferences": {}
+          "projectReferences": {
+            "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\MEFL.Controls\\ControlsNet6\\ControlsNet6.csproj": {
+              "projectPath": "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\MEFL.Controls\\ControlsNet6\\ControlsNet6.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

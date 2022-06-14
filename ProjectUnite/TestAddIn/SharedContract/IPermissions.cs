@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MEFL.Contract
+﻿namespace MEFL.Contract
 {
 #if CONTRACT
     public interface IPermissions

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-
-namespace MEFL
+﻿namespace MEFL
 {
     public static class ControlModel
     {

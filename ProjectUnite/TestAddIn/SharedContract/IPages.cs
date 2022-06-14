@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MEFL.Contract
+﻿namespace MEFL.Contract
 {
+#if WPF
     public interface IPages
     {
-        
-    }
-#if WPF
-    public class PageButtonPair
-    {
-        public object Icon { get; set; }
-        public object SideBar { get; set; }
-        public object Page { get; set; }
+        public MEFL.Controls.MyPageBase[] Page { get; }
     }
 #endif
 }

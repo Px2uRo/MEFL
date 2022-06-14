@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "IkXqgAIgfkoWk5LilmkUft4yNivtPhNDRor5v4a/qhsGBU/2LV+YY96PGc4oJI+x1r2WOLWgOzmtPFZi1qp1lA==",
+  "dgSpecHash": "c3CDIgEPHq47i7+BD2Pes5QPACNAEBrrxaAwKKylYBP0OhKdgYTStLqsKdbdDCPY8GJh436RftHA1hZktVcYMg==",
   "success": true,
   "projectFilePath": "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\TestAddIn\\Contract\\ContractNet6.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Lenovo\\.nuget\\packages\\mefl.controls\\1.0.0\\mefl.controls.1.0.0.nupkg.sha512"
+  ],
   "logs": []
 }

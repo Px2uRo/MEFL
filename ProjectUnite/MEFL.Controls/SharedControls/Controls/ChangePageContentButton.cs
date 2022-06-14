@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
@@ -24,7 +21,7 @@ namespace MEFL.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            if (this.IsChecked!=true)
+            if (this.IsChecked != true)
             {
                 (Template.FindName("SideRect", this) as Rectangle)
                     .Opacity = 0;
@@ -40,10 +37,10 @@ namespace MEFL.Controls
                 .BeginAnimation(OpacityProperty,
                 new DoubleAnimation()
                 {
-                    From=0.2,
-                    To=0,
-                    EasingFunction=new PowerEase(),
-                    Duration=TimeSpan.FromSeconds(0.2)
+                    From = 0.2,
+                    To = 0,
+                    EasingFunction = new PowerEase(),
+                    Duration = TimeSpan.FromSeconds(0.2)
                 });
         }
 
@@ -72,7 +69,7 @@ namespace MEFL.Controls
                     FromIndex = i;
                 }
             }
-            if(FromIndex != -1)
+            if (FromIndex != -1)
             {
                 //(Template.FindName("SideRect", (Panel[FromIndex] as ChangePageContentButton)) as Rectangle);
 
@@ -179,7 +176,7 @@ namespace MEFL.Controls
 
         // Using a DependencyProperty as the backing store for SideBarBrush.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SideBarBrushProperty =
-            DependencyProperty.Register("SideBarBrush", typeof(Brush), typeof(ChangePageContentButton), new PropertyMetadata(new SolidColorBrush(Color.FromRgb(0,0,0))));
+            DependencyProperty.Register("SideBarBrush", typeof(Brush), typeof(ChangePageContentButton), new PropertyMetadata(new SolidColorBrush(Color.FromRgb(0, 0, 0))));
 
 
     }

@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows;
 
 namespace MEFL.Contract
 {
@@ -21,4 +20,4 @@ namespace MEFL.Contract
         public object Page;
     }
 #endif
-    }
+}

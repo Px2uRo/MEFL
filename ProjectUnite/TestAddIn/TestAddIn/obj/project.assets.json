@@ -17,11 +17,27 @@
       "ContractNet6/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "MEFL.Controls": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/ContractNet6.dll": {}
         },
         "runtime": {
           "bin/placeholder/ContractNet6.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
+      },
+      "MEFL.Controls/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/MEFL.Controls.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MEFL.Controls.dll": {}
         },
         "frameworkReferences": [
           "Microsoft.WindowsDesktop.App.WPF"
@@ -58,6 +74,11 @@
       "type": "project",
       "path": "../Contract/ContractNet6.csproj",
       "msbuildProject": "../Contract/ContractNet6.csproj"
+    },
+    "MEFL.Controls/1.0.0": {
+      "type": "project",
+      "path": "../../MEFL.Controls/ControlsNet6/ControlsNet6.csproj",
+      "msbuildProject": "../../MEFL.Controls/ControlsNet6/ControlsNet6.csproj"
     }
   },
   "projectFileDependencyGroups": {

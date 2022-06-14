@@ -1,24 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using MEFL.ControlModelViews;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MEFL.ControlModelViews;
 
 namespace MEFL.Controls
 {
-    
+
     public class MyCard : UserControl
     {
         #region 你是个屁的 Methods
@@ -48,7 +39,7 @@ namespace MEFL.Controls
             }
             else
             {
-                if(IsSwaped == false)
+                if (IsSwaped == false)
                 {
                     (Template.FindName("PART_CheckBox_Icon_Rotate", this) as RotateTransform).Angle = 180;
                     (this.Template.FindName("PART_CheckBox", this) as System.Windows.Shapes.Rectangle).MouseDown += SwapBox_Swap;
@@ -85,9 +76,9 @@ namespace MEFL.Controls
             dbaniIcon.From = (Template.FindName("PART_CheckBox_Icon_Rotate", this) as RotateTransform).Angle;
             dbaniIcon.To = 180;
             this.BeginAnimation(HeightProperty, dbani);
-            (Template.FindName("PART_CheckBox_Icon_Rotate",this) as RotateTransform).BeginAnimation(RotateTransform.AngleProperty,dbaniIcon);
+            (Template.FindName("PART_CheckBox_Icon_Rotate", this) as RotateTransform).BeginAnimation(RotateTransform.AngleProperty, dbaniIcon);
             (sender as System.Windows.Shapes.Rectangle).MouseDown += SwapBox_Swap;
-            (sender as System.Windows.Shapes.Rectangle).MouseDown -= SwapBox_UnSwap;  
+            (sender as System.Windows.Shapes.Rectangle).MouseDown -= SwapBox_UnSwap;
         }
 
         private void SwapBox_Swap(object sender, RoutedEventArgs e)
@@ -112,10 +103,10 @@ namespace MEFL.Controls
         {
             OpacityAni = new DoubleAnimation();
             OpacityAni.To = this.OriginalOpacity - 0.05;
-            OpacityAni.From = this.OriginalOpacity; 
+            OpacityAni.From = this.OriginalOpacity;
             OpacityAni.EasingFunction = Ease;
             OpacityAni.Duration = new Duration(TimeSpan.FromSeconds(1));
-            (this.Template.FindName ("PART_Background_Rect",this) as Border).BeginAnimation(OpacityProperty, OpacityAni);
+            (this.Template.FindName("PART_Background_Rect", this) as Border).BeginAnimation(OpacityProperty, OpacityAni);
         }
 
         //进入事件。

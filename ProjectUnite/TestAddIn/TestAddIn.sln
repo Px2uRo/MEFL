@@ -11,6 +11,10 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedContract", "SharedCon
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContractNetFw4", "ContractNetFw4\ContractNetFw4.csproj", "{5BA0C586-7150-4269-80F7-7DF159131CDC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ControlsNet6", "..\MEFL.Controls\ControlsNet6\ControlsNet6.csproj", "{CE71E4D5-C008-4380-AFAA-8B001DA5BC7F}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedControls", "..\MEFL.Controls\SharedControls\SharedControls.shproj", "{BEE8441A-56DA-48D5-AABF-E76594B47403}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +33,10 @@ Global
 		{5BA0C586-7150-4269-80F7-7DF159131CDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BA0C586-7150-4269-80F7-7DF159131CDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BA0C586-7150-4269-80F7-7DF159131CDC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE71E4D5-C008-4380-AFAA-8B001DA5BC7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE71E4D5-C008-4380-AFAA-8B001DA5BC7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE71E4D5-C008-4380-AFAA-8B001DA5BC7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE71E4D5-C008-4380-AFAA-8B001DA5BC7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,6 +48,7 @@ Global
 		SharedContract\SharedContract.projitems*{23bb0cc4-2d6a-456b-a157-ad89e84c401d}*SharedItemsImports = 13
 		SharedContract\SharedContract.projitems*{5ba0c586-7150-4269-80f7-7df159131cdc}*SharedItemsImports = 4
 		SharedContract\SharedContract.projitems*{9e49eb92-7cf7-4db0-a204-f2c1cd87200e}*SharedItemsImports = 5
-		SharedContract\SharedContract.projitems*{f7fc8cd6-059e-48a6-a637-a113897ad846}*SharedItemsImports = 5
+		..\MEFL.Controls\SharedControls\SharedControls.projitems*{bee8441a-56da-48d5-aabf-e76594b47403}*SharedItemsImports = 13
+		..\MEFL.Controls\SharedControls\SharedControls.projitems*{ce71e4d5-c008-4380-afaa-8b001da5bc7f}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

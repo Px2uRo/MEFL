@@ -1,2 +1,2 @@
-﻿[12:03:05][MEFL]程序启动了,参数
-[12:03:05][MEFL]加载了一个插件，名称 TestAddIn.dll，版本：1.0.0.0 Guid fae2bd01-0b79-4aef-b718-4380ff260cb0
+﻿[13:57:28][MEFL]程序启动了,参数
+[13:57:28][MEFL]加载了一个插件，名称 TestAddIn.dll，版本：1.0.0.0 Guid fae2bd01-0b79-4aef-b718-4380ff260cb0

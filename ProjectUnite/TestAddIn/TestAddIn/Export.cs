@@ -1,8 +1,8 @@
 using MEFL.Contract;
+using MEFL.Controls;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
-using System.Composition;
 using System.Windows;
 
 namespace TestAddIn
@@ -39,5 +39,11 @@ namespace TestAddIn
             result.Add(item);
             return result;
         }
+    }
+
+    [Export(typeof(IPages))]
+    public class Pages : IPages
+    {
+        public MyPageBase[] Page => throw new NotImplementedException();
     }
 }
