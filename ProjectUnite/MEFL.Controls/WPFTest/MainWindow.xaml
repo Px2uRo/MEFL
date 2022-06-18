@@ -7,16 +7,10 @@
         mc:Ignorable="d"
         xmlns:h="https://handyorg.github.io/handycontrol"
         Title="MainWindow" Height="450" Width="800"
-        xmlns:c="clr-namespace:MEFL.Controls;assembly=MEFL.Controls">
+        xmlns:c="clr-namespace:MEFL.Controls;assembly=MEFL.Controls" Topmost="True">
     <Grid>
         <c:MyPageBase LineBrush="Aqua">
-            <c:MyPageBase.SideBar>
-                <StackPanel>
-                    <c:ChangePageContentButton SideBarBrush="Aqua" Tag="游戏设置" Content="游戏设置" />
-                    <c:ChangePageContentButton SideBarBrush="Aqua" Tag="个性化&#13;设置" Content="个性化&#13;设置" />
-                    <c:ChangePageContentButton SideBarBrush="Aqua" Tag="启动器设置" Content="启动器设置" />
-                </StackPanel>
-            </c:MyPageBase.SideBar>
+            
         </c:MyPageBase>
     </Grid>
 </Window>

@@ -7,9 +7,15 @@
     <Compile Update="MyIcon.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="MyPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MyIcon.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MyPage.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

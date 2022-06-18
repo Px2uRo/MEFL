@@ -80,20 +80,21 @@ namespace MEFL.APIData
         public static List<AddInConfig> GetAll()
         {
             List<AddInConfig> ret;
-            var Path = System.IO.Path.Combine(Environment.CurrentDirectory,"AddIns\\Config.json");
+            var Path = System.IO.Path.Combine(Environment.CurrentDirectory, "AddIns\\Config.json");
             try
             {
                 if (File.Exists(Path) != true)
                 {
+                    Directory.CreateDirectory(System.IO.Path.GetDirectoryName(Path));
                     File.Create(Path).Close();
                 }
-                using(StreamReader sr = new StreamReader(Path))
+                using (StreamReader sr = new StreamReader(Path))
                 {
                     ret = JsonConvert.DeserializeObject<List<AddInConfig>>(sr.ReadToEnd());
                 }
                 if (ret == null)
                 {
-                    ret=new List<AddInConfig>();
+                    ret = new List<AddInConfig>();
                 }
             }
             catch (Exception ex)

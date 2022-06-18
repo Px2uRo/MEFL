@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MEFL.Controls;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,13 @@ namespace MEFL.Pages
         public SettingPage()
         {
             InitializeComponent();
+            this.DefalutChangeButton.IsChecked = true;
+        }
+
+        private void ChangePageContentButton_Checked(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as ChangePageContentButton;
+            btn.Show(btn.Tag.ToString(), this.Content as Panel);
         }
     }
 }

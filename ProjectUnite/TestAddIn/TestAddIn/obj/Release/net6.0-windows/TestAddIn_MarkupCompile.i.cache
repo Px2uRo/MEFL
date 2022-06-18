@@ -4,17 +4,17 @@
 library
 C#
 .cs
-D:\Xiong's\WPF\TestAddIn\TestAddIn\obj\Release\net6.0-windows\
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\TestAddIn\obj\Release\net6.0-windows\
 TestAddIn
 none
 false
 TRACETRACE;WPF;ADDIN;RELEASE;NET;NET6_0;NETCOREAPP
 
-1-452101277
+2-921989853
 
-71033597849
-196-1502463269
-MyIcon.xaml;
+5-1792683443
+1972136599543
+MyIcon.xaml;MyPage.xaml;
 
 True
 

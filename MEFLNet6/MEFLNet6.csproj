@@ -18,7 +18,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ContractNet6" Version="1.0.0" />
+    <PackageReference Include="ContractNet6" Version="0.0.0" />
+    <PackageReference Include="MEFL.Controls" Version="0.0.2.2" />
     <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />
   </ItemGroup>
 
@@ -29,9 +30,6 @@
   <ItemGroup>
     <Reference Include="ContractNet6">
       <HintPath>..\ProjectUnite\TestAddIn\Contract\bin\Debug\net6.0-windows\ContractNet6.dll</HintPath>
-    </Reference>
-    <Reference Include="MEFL.Controls">
-      <HintPath>D:\MyNupkgs\MEFL.Controls\Debug\net6.0-windows\MEFL.Controls.dll</HintPath>
     </Reference>
   </ItemGroup>
 

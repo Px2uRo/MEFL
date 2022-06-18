@@ -1,6 +1,7 @@
 using MEFL.Contract;
 using MEFL.Controls;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using System.Windows;
@@ -44,6 +45,15 @@ namespace TestAddIn
     [Export(typeof(IPages))]
     public class Pages : IPages
     {
-        public MyPageBase[] Page => throw new NotImplementedException();
+        public Dictionary<object, MyPageBase> IconAndPage
+        {
+            get
+            {
+                var res = new Dictionary<object, MyPageBase>();
+                res.Add(new MyIcon(), new MyPage());
+                return res;
+                res = null;
+            }
+        }
     }
 }

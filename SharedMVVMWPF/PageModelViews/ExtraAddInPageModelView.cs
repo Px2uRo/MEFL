@@ -16,17 +16,5 @@ namespace MEFL.PageModelViews
         {
 
         }
-
-        public static void Reload()
-        {
-            foreach (var item in (App.Current.Resources["EPMV"] as ExtensionPageModelView).Hostings)
-            {
-                if (item.IsOpen == true)
-                {
-                    ChangePageButton button = new ChangePageButton() { Width = 45 };
-                    (App.Current.Resources["AddInChangePageButtons"] as StackPanel).Children.Add(button);
-                }
-            }
-        }
     }
 }

@@ -34,7 +34,7 @@ namespace MEFL
 #if DEBUG
             try
             {
-                (new FileInfo(@"D:\Xiong's\WPF\TestAddIn\TestAddIn\bin\Debug\net6.0-windows\TestAddIn.dll"))
+                (new FileInfo(@"I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\TestAddIn\bin\Debug\net6.0-windows\TestAddIn.dll"))
             .CopyTo(@"I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\AddIns\TestAddIn.dll", true);
             }
             catch (Exception ex)
@@ -163,7 +163,7 @@ namespace MEFL
 
         private void Ini(object sender, EventArgs e)
         {
-            PageModelViews.ExtraAddInPageModelView.Reload();
+            //PageModelViews.ExtraAddInPageModelView.Reload();
         }
     }
 }

@@ -124,7 +124,11 @@
           "dependencies": {
             "ContractNet6": {
               "target": "Package",
-              "version": "[1.0.0, )"
+              "version": "[0.0.0, )"
+            },
+            "MEFL.Controls": {
+              "target": "Package",
+              "version": "[0.0.2.2, )"
             },
             "System.ComponentModel.Composition": {
               "target": "Package",

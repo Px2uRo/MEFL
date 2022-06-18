@@ -12,7 +12,9 @@
         </Style>
     </local:MyCard.Resources>
     <local:MyCard.Title>
-        <ContentPresenter TextBlock.FontWeight="Bold"/>
+        <Grid Width="auto">
+            <ContentPresenter TextBlock.FontWeight="Bold"/>
+        </Grid>
     </local:MyCard.Title>
     <Grid x:Name="PART_THE_Content">
         <StackPanel>
@@ -47,5 +49,11 @@
                 </Grid>
             </Grid>
         </StackPanel>
+        <local:MyCheckBox IsChecked="{Binding IsOpen}"
+                          Background="{DynamicResource SYTLE_Standard_ColorBrush}"
+                          Checked="MyCheckBox_Checked"
+                          Unchecked="MyCheckBox_UnChecked"
+                          HorizontalAlignment="Right"
+                          VerticalAlignment="Top"/>
     </Grid>
 </local:MyCard>

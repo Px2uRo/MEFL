@@ -1,9 +1,11 @@
-﻿namespace MEFL.Contract
+﻿using System.Collections.Generic;
+
+namespace MEFL.Contract
 {
 #if WPF
     public interface IPages
     {
-        public MEFL.Controls.MyPageBase[] Page { get; }
+        public Dictionary<object,MEFL.Controls.MyPageBase> IconAndPage{ get; }
     }
 #endif
 }

@@ -27,8 +27,11 @@ namespace MEFL
         [Import(AllowRecomposition=true)]
         public IBaseInfo BaseInfo;
 
+        [Import(AllowRecomposition = true)]
+        public IPages Pages;
         public Exception ExceptionInfo { get; set; }
         public string FileName { get; set; }
+        public string FullPath { get; set; }
         public string Version { get; set; }
         public string Publisher { get; set; }
         public string Description { get; set; }
@@ -41,6 +44,7 @@ namespace MEFL
         public static Hosting LoadOne(string Path)
         {
             Hosting h = new Hosting();
+            h.FullPath = Path;
             h.FileName = System.IO.Path.GetFileName(Path);
             try
             {
@@ -89,9 +93,13 @@ namespace MEFL
                     h.PulisherUri = h.BaseInfo.PulisherUri;
                     h.ExtensionUri = h.BaseInfo.ExtensionUri;
 
-                    if (h.Permissions.UseSeetingPageAPI == true)
+                    if (h.Permissions.UseSeetingPageAPI)
                     {
                         h.SettingPage = cc.GetExport<ISettingPage>().Value;
+                    }
+                    if (h.Permissions.UsePagesAPI)
+                    {
+                        h.Pages = cc.GetExport<IPages>().Value;
                     }
                     Debugger.Logger($"加载了一个插件，名称 {h.FileName}，版本：{h.Version} Guid {h.Guid}");
                     ac = null;

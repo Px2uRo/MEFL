@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "a1GwJW7H0xLgtzFMtQWdEAt1bJPd6LHrWT/gKImv4NJngzBQIHvQGyEX5fTcJWmoq2MNyXMMNtBhspZ22KRlGQ==",
+  "dgSpecHash": "q+4VEYHaCiz+U65Y79oeCM3b68H0Ve5QNnPHfebsYPf00AFTG0+GQtpI3TjoCPMGV9sj/T1jRJubwhRWqtRwDg==",
   "success": true,
   "projectFilePath": "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\TestAddIn\\TestAddIn\\TestAddIn.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Lenovo\\.nuget\\packages\\system.componentmodel.composition\\6.0.0\\system.componentmodel.composition.6.0.0.nupkg.sha512",
-    "C:\\Users\\Lenovo\\.nuget\\packages\\contractnet6\\1.0.0\\contractnet6.1.0.0.nupkg.sha512",
-    "C:\\Users\\Lenovo\\.nuget\\packages\\mefl.controls\\1.0.0\\mefl.controls.1.0.0.nupkg.sha512"
+    "C:\\Users\\Lenovo\\.nuget\\packages\\contractnet6\\0.0.0\\contractnet6.0.0.0.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\mefl.controls\\0.0.1\\mefl.controls.0.0.1.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\system.componentmodel.composition\\6.0.0\\system.componentmodel.composition.6.0.0.nupkg.sha512"
   ],
   "logs": []
 }

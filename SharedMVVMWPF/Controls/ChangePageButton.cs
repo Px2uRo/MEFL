@@ -67,13 +67,13 @@ namespace MEFL.Controls
         private void ChangePageButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
             MyPageBase From = new MyPageBase();
-            bool Foo = false;
+            bool TRUE = false;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
             {
                 if (item.Visibility==Visibility.Visible)
                 {
                     From = item;
-                    Foo = true;
+                    TRUE = true;
                     if (item.Tag as String != From.Tag as String)
                     {
                         item.Hide();
@@ -82,7 +82,7 @@ namespace MEFL.Controls
             }
             foreach (MyPageBase item in FindControl.FromTag(Tag, (App.Current.Resources["MainPage"] as Grid)))
             {
-                if(Foo)
+                if(TRUE)
                 {
                     item.Show(From);
                 }

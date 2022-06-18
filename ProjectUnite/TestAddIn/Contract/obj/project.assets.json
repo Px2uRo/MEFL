@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
-      "MEFL.Controls/1.0.0": {
+      "MEFL.Controls/0.0.2.2": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "compile": {
@@ -18,7 +18,7 @@
     }
   },
   "libraries": {
-    "MEFL.Controls/1.0.0": {
+    "MEFL.Controls/0.0.2.2": {
       "type": "project",
       "path": "../../MEFL.Controls/ControlsNet6/ControlsNet6.csproj",
       "msbuildProject": "../../MEFL.Controls/ControlsNet6/ControlsNet6.csproj"
@@ -26,7 +26,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
-      "MEFL.Controls >= 1.0.0"
+      "MEFL.Controls >= 0.0.2.2"
     ]
   },
   "packageFolders": {
@@ -34,7 +34,7 @@
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
-    "version": "1.0.0",
+    "version": "0.0.0",
     "restore": {
       "projectUniqueName": "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\TestAddIn\\Contract\\ContractNet6.csproj",
       "projectName": "ContractNet6",

@@ -28,15 +28,12 @@ I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\TestAddIn\obj\Debug\net6.0-wind
 I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\TestAddIn\bin\Debug\net6.0-windows\TestAddIn.deps.json
 I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\TestAddIn\bin\Debug\net6.0-windows\TestAddIn.dll
 I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\TestAddIn\bin\Debug\net6.0-windows\TestAddIn.pdb
-I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\TestAddIn\bin\Debug\net6.0-windows\ContractNet6.dll
-I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\TestAddIn\bin\Debug\net6.0-windows\MEFL.Controls.dll
-I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\TestAddIn\bin\Debug\net6.0-windows\ContractNet6.pdb
-I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\TestAddIn\bin\Debug\net6.0-windows\MEFL.Controls.pdb
 I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\TestAddIn\obj\Debug\net6.0-windows\MyIcon.baml
 I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\TestAddIn\obj\Debug\net6.0-windows\TestAddIn.g.resources
 I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\TestAddIn\obj\Debug\net6.0-windows\TestAddIn.GeneratedMSBuildEditorConfig.editorconfig
 I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\TestAddIn\obj\Debug\net6.0-windows\TestAddIn.AssemblyInfoInputs.cache
 I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\TestAddIn\obj\Debug\net6.0-windows\TestAddIn.AssemblyInfo.cs
 I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\TestAddIn\obj\Debug\net6.0-windows\TestAddIn.csproj.CoreCompileInputs.cache
-I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\TestAddIn\obj\Debug\net6.0-windows\TestAddIn.csproj.CopyComplete
 I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\TestAddIn\obj\Debug\net6.0-windows\ref\TestAddIn.dll
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\TestAddIn\obj\Debug\net6.0-windows\MyPage.g.cs
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\TestAddIn\obj\Debug\net6.0-windows\MyPage.baml

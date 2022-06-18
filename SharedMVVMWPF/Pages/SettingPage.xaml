@@ -6,8 +6,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MEFL.Pages"
              mc:Ignorable="d" DataContext="{DynamicResource SPMV}"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             Style="{DynamicResource MyPageStyle}">
+    <c:MyPageBase.SideBar>
+        <StackPanel>
+            <c:ChangePageContentButton x:Name="DefalutChangeButton" Content="{DynamicResource I18N_String_Setting_Launcher}" Tag="{DynamicResource I18N_String_Setting_Launcher}" Checked="ChangePageContentButton_Checked"/>
+            <c:ChangePageContentButton Content="{DynamicResource I18N_String_Setting_Custom}" Tag="{DynamicResource I18N_String_Setting_Custom}" Checked="ChangePageContentButton_Checked"/>
+            <c:ChangePageContentButton Content="{DynamicResource I18N_String_Setting_Game}" Tag="{DynamicResource I18N_String_Setting_Game}" Checked="ChangePageContentButton_Checked"/>
+            <StackPanel.Resources>
+                <Style TargetType="c:ChangePageContentButton">
+                    <Setter Property="SideBarBrush" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>
+                </Style>
+            </StackPanel.Resources>
+        </StackPanel>
+    </c:MyPageBase.SideBar>
     <Grid>
-        <TextBlock Text="UNDERDEVLOPMENT" FontSize="36" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <StackPanel Tag="{DynamicResource I18N_String_Setting_Launcher}"/>
+            <StackPanel Tag="{DynamicResource I18N_String_Setting_Custom}"/>
+            <StackPanel Tag="{DynamicResource I18N_String_Setting_Game}"/>
     </Grid>
 </c:MyPageBase>

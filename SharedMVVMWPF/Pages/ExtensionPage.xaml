@@ -16,12 +16,14 @@
                     <Setter Property="SideBarBrush" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>
                 </Style>
             </StackPanel.Resources>
-            <c:ChangePageContentButton Content="AddIns" Tag="Content" Checked="ChangePageContentButton_Checked"/>
+            <c:ChangePageContentButton x:Name="DefalutChangeButton" Content="AddIns" Tag="Content" Checked="ChangePageContentButton_Checked"/>
             <c:ChangePageContentButton Content="Get More..." Tag="GetMore" Checked="ChangePageContentButton_Checked"/>
         </StackPanel>
     </c:MyPageBase.SideBar>
     <Grid>
         <StackPanel Tag="Content" Name="ContentPage" Visibility="Hidden"/>
-        <StackPanel Tag="GetMore" Visibility="Hidden"/>
+        <StackPanel Tag="GetMore" Visibility="Hidden">
+            <TextBlock Text="Please Wait" HorizontalAlignment="Center"/>
+        </StackPanel>
     </Grid>
 </c:MyPageBase>

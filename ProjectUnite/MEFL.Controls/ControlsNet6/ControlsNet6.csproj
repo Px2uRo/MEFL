@@ -8,6 +8,8 @@
     <AssemblyName>MEFL.Controls</AssemblyName>
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     <BaseOutputPath>D:\MyNupkgs\MEFL.Controls</BaseOutputPath>
+    <FileVersion></FileVersion>
+    <Version>0.0.2.2</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

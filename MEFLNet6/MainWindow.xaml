@@ -15,6 +15,7 @@
 
     </Window.Resources>
     <Grid>
+        <TextBlock Text="{DynamicResource I18N_String_Insider}" FontSize="100" Foreground="Gray" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,40,40" FontFamily="Microsoft Yahei" FontWeight="Bold" />
         <ContentPresenter Content="{DynamicResource Background}"/>
         <Grid>
             <Grid.RowDefinitions>
@@ -37,8 +38,9 @@
                               Stroke="Black" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                             <!--#endregion-->
                         </c:ChangePageButton>
-                        <c:ChangePageButton Width="45" Tag="SettingPage">
-
+                        <c:ChangePageButton Width="45" Tag="SettingPage" Margin="0,5,0,0">
+                            <Path Data="M0 1.15848 1.01007 2.10614 2.02013 3.0538 3.2831 1.86895 2.30113 0.947658 1.29106 0 3.3111 0 4.29307 0.921299 4.29942 0.915336 4.29942 0.927257 4.32117 0.947658 4.29942 0.96806 4.29942 2.81056 11.9698 10.007 13.9899 10.007 15 10.9547 15 12.85 13.9899 11.9023 12.9799 10.9547 11.7357 12.1219 11.7363 12.1225 11.7552 12.1048 11.7551 12.1048 11.7552 12.1047 12.7525 13.0403 12.7549 13.0381 13.7599 13.995 11.7606 13.995 11.7552 14 11.7499 13.995 11.7499 13.995 11.7499 13.995 10.8066 13.1099 10.7877 13.1276 10.8066 13.1099 10.8064 13.1098 10.7876 13.1275 10.7876 13.092 10.7453 13.0523 10.7876 13.0126 10.7875 11.2794 3.0302 4.00145 1.01007 4.00145 0 3.0538Z"
+                                  Stroke="Black" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="23" Stretch="Fill" Width="23"/>
                         </c:ChangePageButton>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">

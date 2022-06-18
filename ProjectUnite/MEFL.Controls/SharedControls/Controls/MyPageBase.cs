@@ -13,6 +13,17 @@ namespace MEFL.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MyPageBase), new FrameworkPropertyMetadata(typeof(MyPageBase)));
         }
 
+        public override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            if (SideBar == null)
+            {
+                (Template.FindName("PART_SideBar", this) as ColumnDefinition)
+                .Width = new GridLength(0);
+                LineBrush= new SolidColorBrush(Colors.Transparent);
+            }
+        }
+
         public void Show(MyPageBase From)
         {
             if (From.Tag as String != this.Tag as String)

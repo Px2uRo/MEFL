@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "bYgQQgX8Eo+zCe74dEvj0RdAdT6AOeYdjQn+TDi1YJqXw3VveX1OAS/SrZ13Abf+rYPD3DCnrjyeSXxkUN1+Bg==",
+  "dgSpecHash": "QF6pG3zqzoaz3c+mPx5Rs8Ob/ohrcSEaVJqn3zlGGtTz8mh+2FYz70DK5FwUIKqKppbqQmvWIF2yu59Vc9i2Eg==",
   "success": true,
   "projectFilePath": "I:\\Xiong's\\MEFLCollection\\MEFLNet6\\MEFLNet6.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Lenovo\\.nuget\\packages\\contractnet6\\1.0.0\\contractnet6.1.0.0.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\contractnet6\\0.0.0\\contractnet6.0.0.0.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\mefl.controls\\0.0.2.2\\mefl.controls.0.0.2.2.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",

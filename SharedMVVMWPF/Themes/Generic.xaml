@@ -8,7 +8,7 @@
                 <ControlTemplate TargetType="{x:Type local:ChangePageButton}">
                     <Grid>
                         <Rectangle Name="Icon" Fill="Gray" Opacity="0"/>
-                        <ContentPresenter/>
+                        <ContentPresenter Margin="5"/>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

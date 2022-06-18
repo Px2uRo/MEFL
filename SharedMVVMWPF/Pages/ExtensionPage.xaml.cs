@@ -31,19 +31,13 @@ namespace MEFL.Pages
             {
                 ContentPage.Children.Add(new MyExtensionCard() { Hosting = item,Margin=new Thickness(0,0,0,15)});
             }
+            DefalutChangeButton.IsChecked = true;
         }
 
         private void ChangePageContentButton_Checked(object sender, RoutedEventArgs e)
         {
-            foreach (Panel item in (this.Content as Panel).Children)
-            {
-                item.Visibility = Visibility.Hidden;
-            }
-            foreach (Panel item in FindControl.FromTag((sender as ChangePageContentButton).Tag, this.Content as Panel))
-            {
-                item.Visibility = Visibility.Visible;
-            }
-            
+            var btn = sender as ChangePageContentButton;
+            btn.Show(btn.Tag.ToString(), this.Content as Grid);
         }
     }
 }

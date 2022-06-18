@@ -54,7 +54,7 @@ namespace MEFL.Pages {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/MEFL;V1.0.0.0;component/pages/settingpage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/MEFL;component/pages/settingpage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\SharedMVVMWPF\Pages\SettingPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

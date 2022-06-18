@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Nullable>enable</Nullable>
@@ -19,11 +19,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ContractNet6" Version="0.0.0" />
+    <PackageReference Include="MEFL.Controls" Version="0.0.1" />
     <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Contract\ContractNet6.csproj" />
   </ItemGroup>
 
 </Project>

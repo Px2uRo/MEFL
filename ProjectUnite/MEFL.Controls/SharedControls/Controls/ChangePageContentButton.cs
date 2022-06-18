@@ -178,6 +178,37 @@ namespace MEFL.Controls
         public static readonly DependencyProperty SideBarBrushProperty =
             DependencyProperty.Register("SideBarBrush", typeof(Brush), typeof(ChangePageContentButton), new PropertyMetadata(new SolidColorBrush(Color.FromRgb(0, 0, 0))));
 
-
+        public void Show(String Tag,Panel Panel)
+        {
+            Hide(Panel);
+            foreach (var item in FindControl.FromTag(Tag,Panel))
+            {
+                item.BeginAnimation(OpacityProperty,new DoubleAnimation()
+                {
+                    Duration=TimeSpan.FromSeconds(0.2),
+                    From=0,
+                    To=1,
+                    EasingFunction=new PowerEase()
+                });
+                item.Visibility = Visibility.Visible;
+            }
+        }
+        public void Hide(Panel Panel)
+        {
+            foreach (FrameworkElement item in Panel.Children)
+            {
+                if (item.Opacity==1)
+                {
+                    item.BeginAnimation(OpacityProperty, new DoubleAnimation()
+                    {
+                        Duration = TimeSpan.FromSeconds(0.2),
+                        From = 1,
+                        To = 0,
+                        EasingFunction = new PowerEase()
+                    });
+                    item.Visibility = Visibility.Hidden;
+                }
+            }
+        }
     }
 }
