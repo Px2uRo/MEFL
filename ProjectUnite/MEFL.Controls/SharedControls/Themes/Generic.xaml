@@ -137,4 +137,35 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style TargetType="{x:Type local:MyButton}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:MyButton}">
+                    <Grid>
+                        <Border
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                Opacity="0.95"
+                                BorderBrush="{TemplateBinding Background}"
+                                Background="{TemplateBinding Background}" 
+                                x:Name="PART_Background_Rect"/>
+                        <Border
+                        Background="Transparent"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        x:Name="PART_Border">
+                            <Grid>
+                                <Path x:Name="PART_Path" Fill="{TemplateBinding BorderBrush}" Opacity="0.6">
+                                    <Path.Data>
+                                        <EllipseGeometry x:Name="PART_MyEllipse" RadiusX="0" RadiusY="{Binding RelativeSource={RelativeSource Mode=Self},Path=RadiusX}"/>
+                                    </Path.Data>
+                                </Path>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

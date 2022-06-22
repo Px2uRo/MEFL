@@ -1,0 +1,35 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <!--#region I18NStrings -->
+    <sys:String x:Key="I18N_String_AddIns">插件</sys:String>
+    <sys:String x:Key="I18N_String_GetMore">获取更多</sys:String>
+    <sys:String x:Key="I18N_String_Insider">预览</sys:String>
+    <sys:String x:Key="I18N_String_Setting_Launcher">启动器配置</sys:String>
+    <sys:String x:Key="I18N_String_Setting_Launcher_SelcetLanguage">选择语言</sys:String>
+
+    <sys:String x:Key="I18N_String_Setting_Custom">个性化</sys:String>
+    <sys:String x:Key="I18N_String_Setting_Game">游戏</sys:String>
+    <sys:String x:Key="I18N_String_AddIns_Author">作者</sys:String>
+    <sys:String x:Key="I18N_String_AddIns_Descripition">描述</sys:String>
+    <sys:String x:Key="I18N_String_AddIns_Version">版本号</sys:String>
+
+    <sys:String x:Key="I18N_String_Language_Opts">语言</sys:String>
+    <sys:String x:Key="I18N_String_Language_Opts_zh_CN">中文(中国)[中文(中国)]</sys:String>
+    <sys:String x:Key="I18N_String_Language_Opts_zh_yue_CN">白话(中国)[粤语(中国)]</sys:String>
+    <sys:String x:Key="I18N_String_Language_Opts_zh_yue_HK">白話(中國香港)[粤语(中国香港)]</sys:String>
+    <sys:String x:Key="I18N_String_Language_Opts_zh_HK">繁體中文(中國香港)[繁体中文(中国香港)]</sys:String>
+    <sys:String x:Key="I18N_String_Language_Opts_zh_MO">繁體中文(中國澳門)[繁体中文(中国澳门)]</sys:String>
+    <sys:String x:Key="I18N_String_Language_Opts_zh_TW">繁體中文(中國台灣)[繁体中文(中国台湾)]</sys:String>
+    <sys:String x:Key="I18N_String_Language_Opts_zh_SG">繁體中文(新加坡)[繁体中文(新加坡)]</sys:String>
+    <sys:String x:Key="I18N_String_Language_Opts_en_US">English(US)[英语(美国)]</sys:String>
+    <sys:String x:Key="I18N_String_Language_Opts_en_UK">English(UK)[英语(英国)]</sys:String>
+    <sys:String x:Key="I18N_String_Language_Opts_ja">日本語(日本)[日语(日本)]</sys:String>
+    <sys:String x:Key="I18N_String_Language_Opts_ru">Русский(Россия)[俄语(俄罗斯)]</sys:String>
+    <sys:String x:Key="I18N_String_Language_Opts_fr">Français(France)[法语(法国)]</sys:String>
+    <sys:String x:Key="I18N_String_Language_Opts_de">Français(France)[法语(法国)]</sys:String>
+    <sys:String x:Key="I18N_String_Language_Opts_es_ES">Español(España)[西班牙语(西班牙)]</sys:String>
+
+    <!--#endregion-->
+</ResourceDictionary>

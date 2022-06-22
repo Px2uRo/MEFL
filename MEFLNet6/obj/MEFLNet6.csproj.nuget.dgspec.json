@@ -128,11 +128,15 @@
             },
             "MEFL.Controls": {
               "target": "Package",
-              "version": "[0.0.2.2, )"
+              "version": "[0.0.3, )"
             },
             "System.ComponentModel.Composition": {
               "target": "Package",
               "version": "[6.0.0, )"
+            },
+            "System.Windows.Interactivity.WPF": {
+              "target": "Package",
+              "version": "[2.0.20525, )"
             }
           },
           "imports": [

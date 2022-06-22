@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MEFL.Controls;assembly=MEFL.Controls"
-             mc:Ignorable="d" Style="{DynamicResource MyCardStyle}"
-             Height="150" >
+             mc:Ignorable="d"
+             Height="150" BorderBrush="{DynamicResource SYTLE_Standard_ColorBrush}">
     <local:MyCard.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="TextWrapping" Value="Wrap"/>
@@ -31,7 +31,7 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <TextBlock Text="作者: "/>
+                        <TextBlock Text="{DynamicResource I18N_String_AddIns_Author}"/>
                         <TextBlock>
                             <Hyperlink NavigateUri="{Binding PulisherUri}" Click="Hyperlink_Click" Cursor="Hand">
                                 <TextBlock Text="{Binding Publisher}"/>
@@ -39,11 +39,11 @@
                         </TextBlock>
                     </StackPanel>
                     <StackPanel Grid.Row="1" Orientation="Horizontal">
-                        <TextBlock Text="描述: "/>
+                        <TextBlock Text="{DynamicResource I18N_String_AddIns_Descripition}"/>
                         <TextBlock Text="{Binding Description}"/>
                     </StackPanel>
                     <StackPanel Grid.Row="2" Orientation="Horizontal">
-                        <TextBlock Text="版本号: "/>
+                        <TextBlock Text="{DynamicResource I18N_String_AddIns_Version}"/>
                         <TextBlock Text="{Binding Version}"/>
                     </StackPanel>
                 </Grid>

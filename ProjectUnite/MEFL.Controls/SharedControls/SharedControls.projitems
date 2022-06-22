@@ -16,6 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ControlModelViews\PageModelViews.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ChangePageContentButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\FindControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\MyButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\MyCard.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\MyPageBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\MyCheckBox.cs" />

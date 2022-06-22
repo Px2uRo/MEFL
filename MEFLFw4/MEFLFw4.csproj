@@ -95,7 +95,7 @@
       <Name>CoreLaunchingNetFw4</Name>
     </ProjectReference>
   </ItemGroup>
-  <Import Project="..\SharedMEFLClass\SharedMEFLClass.projitems" Label="Shared" />
+  <Import Project="..\SharedMEFL\SharedMEFL.projitems" Label="Shared" />
   <Import Project="..\SharedMVVMWPF\SharedMVVMWPF.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

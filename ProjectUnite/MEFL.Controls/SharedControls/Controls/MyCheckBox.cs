@@ -12,6 +12,7 @@ namespace MEFL.Controls
 {
     public class MyCheckBox:ToggleButton
     {
+        
         private IEasingFunction _Ease;
         private SolidColorBrush _Brush1;
         private SolidColorBrush _Brush2;

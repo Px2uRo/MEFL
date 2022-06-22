@@ -11,18 +11,13 @@
             DataContext="{DynamicResource EPMV}">
     <c:MyPageBase.SideBar>
         <StackPanel>
-            <StackPanel.Resources>
-                <Style TargetType="c:ChangePageContentButton">
-                    <Setter Property="SideBarBrush" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>
-                </Style>
-            </StackPanel.Resources>
-            <c:ChangePageContentButton x:Name="DefalutChangeButton" Content="AddIns" Tag="Content" Checked="ChangePageContentButton_Checked"/>
-            <c:ChangePageContentButton Content="Get More..." Tag="GetMore" Checked="ChangePageContentButton_Checked"/>
+            <c:ChangePageContentButton x:Name="DefalutChangeButton" Content="{DynamicResource I18N_String_AddIns}" Tag="{DynamicResource I18N_String_AddIns}" Checked="ChangePageContentButton_Checked"/>
+            <c:ChangePageContentButton Content="{DynamicResource I18N_String_GetMore}" Tag="{DynamicResource I18N_String_GetMore}" Checked="ChangePageContentButton_Checked"/>
         </StackPanel>
     </c:MyPageBase.SideBar>
     <Grid>
-        <StackPanel Tag="Content" Name="ContentPage" Visibility="Hidden"/>
-        <StackPanel Tag="GetMore" Visibility="Hidden">
+        <StackPanel Tag="{DynamicResource I18N_String_AddIns}" Name="ContentPage" Visibility="Hidden"/>
+        <StackPanel Tag="{DynamicResource I18N_String_GetMore}" Visibility="Hidden">
             <TextBlock Text="Please Wait" HorizontalAlignment="Center"/>
         </StackPanel>
     </Grid>

@@ -9,10 +9,6 @@ namespace MEFL.Controls
 {
     public class ChangePageContentButton : RadioButton
     {
-        //  <Rectangle Width="5" Height="35"
-        //   Fill="{TemplateBinding SideBarBrush}" 
-        //   Name="SideRect"/>
-
         static ChangePageContentButton()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ChangePageContentButton), new FrameworkPropertyMetadata(typeof(ChangePageContentButton)));

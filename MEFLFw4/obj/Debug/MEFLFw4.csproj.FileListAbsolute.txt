@@ -11,7 +11,6 @@ I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\MyExtensionCard.baml
 I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\ExtensionPage.baml
 I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\SettingPage.baml
 I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\Generic.baml
-I:\Xiong's\MEFLCollection\MEFLFw4\bin\Debug\ContractNetFw4.dll
 I:\Xiong's\MEFLCollection\MEFLFw4\bin\Debug\CoreLaunchingNetFw4.dll
 I:\Xiong's\MEFLCollection\MEFLFw4\bin\Debug\Newtonsoft.Json.dll
 I:\Xiong's\MEFLCollection\MEFLFw4\bin\Debug\CoreLaunchingNetFw4.pdb

@@ -36,3 +36,14 @@ I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\MyExtensionCard.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\ExtensionPage.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\SettingPage.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\MEFL.Controls.dll
+I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\Microsoft.Expression.Interactions.dll
+I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\System.Windows.Interactivity.dll
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\en_US.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\en_UK.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\zh_HK.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\zh_MO.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\zh_CN.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\zh_TW.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\zh_SG.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\zh_yue_CN.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\zh_yue_HK.baml

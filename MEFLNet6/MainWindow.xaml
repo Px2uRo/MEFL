@@ -7,12 +7,26 @@
         mc:Ignorable="d" xmlns:c="clr-namespace:MEFL.Controls"
         Title="MainWindow" Height="450" Width="800"
         xmlns:p ="clr-namespace:MEFL.Pages"
+        xmlns:con="clr-namespace:MEFL.Controls;assembly=MEFL.Controls"
         WindowStyle="None" StateChanged="Window_StateChanged">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"/>
     </WindowChrome.WindowChrome>
     <Window.Resources>
-
+        <Style TargetType="con:MyCard">
+            <Setter Property="BorderBrush" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>
+        </Style>
+        <Style TargetType="con:MyPageBase">
+            <Setter Property="LineBrush" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>
+        </Style>
+        <Style TargetType="con:ChangePageContentButton">
+            <Setter Property="SideBarBrush" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>
+        </Style>
+        <Style TargetType="con:MyButton">
+            <Setter Property="BorderBrush" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>
+            <Setter Property="Width" Value="140"/>
+            <Setter Property="Height" Value="35"/>
+        </Style>
     </Window.Resources>
     <Grid>
         <TextBlock Text="{DynamicResource I18N_String_Insider}" FontSize="100" Foreground="Gray" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,40,40" FontFamily="Microsoft Yahei" FontWeight="Bold" />

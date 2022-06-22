@@ -8,9 +8,9 @@
         xmlns:h="https://handyorg.github.io/handycontrol"
         Title="MainWindow" Height="450" Width="800"
         xmlns:c="clr-namespace:MEFL.Controls;assembly=MEFL.Controls" Topmost="True">
-    <Grid>
+    <Grid Background="Black">
         <c:MyPageBase LineBrush="Aqua">
-            
+            <c:MyButton Content="666" BorderBrush="Aqua"/>
         </c:MyPageBase>
     </Grid>
 </Window>
