@@ -1,6 +1,8 @@
-﻿using System;
+﻿using MEFL.PageModelViews;
+using System;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace MEFL
 {
@@ -21,6 +23,7 @@ namespace MEFL
             this.DispatcherUnhandledException += App_DispatcherUnhandledException;
             TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            (App.Current.Resources["Background"] as Grid).Children.Add(SettingPageModel.img);
 
             base.OnStartup(e);
         }

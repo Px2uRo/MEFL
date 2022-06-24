@@ -15,6 +15,7 @@
     <Window.Resources>
         <Style TargetType="con:MyCard">
             <Setter Property="BorderBrush" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource SYTLE_Standard_Background}"/>
         </Style>
         <Style TargetType="con:MyPageBase">
             <Setter Property="LineBrush" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>

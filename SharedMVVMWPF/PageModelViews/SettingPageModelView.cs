@@ -1,4 +1,5 @@
 ﻿using MEFL.ControlModelViews;
+using Microsoft.Win32;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,12 +8,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace MEFL.PageModelViews
 {
     public class SettingPageModelView: MEFL.ControlModelViews.PageModelView
     {
+        public ICommand ChangeBackground { get; set; }
         public int LangIndex {
             get
             {
@@ -27,10 +32,12 @@ namespace MEFL.PageModelViews
         public SettingPageModelView()
         {
             LangIndex = SettingPageModel.LangIndex;
+            ChangeBackground = new ChangeBackground();
         }
     }
     public static class SettingPageModel
     {
+        public static Image img { get; set; }
         public static int LangIndex { get; set; }
         public static void SetLang()
         {
@@ -79,6 +86,7 @@ namespace MEFL.PageModelViews
         }
         static SettingPageModel()
         {
+            #region Langs
             if (CultureInfo.CurrentCulture.Name == "zh-CN")
             {
                 LangIndex = 0;
@@ -103,7 +111,7 @@ namespace MEFL.PageModelViews
             {
                 LangIndex = 7;
             }
-            else if(CultureInfo.CurrentCulture.Name == "en-UK")
+            else if (CultureInfo.CurrentCulture.Name == "en-UK")
             {
                 LangIndex = 8;
             }
@@ -112,6 +120,19 @@ namespace MEFL.PageModelViews
                 LangIndex = 7;
             }
             SetLang();
+            #endregion
+            img = new Image();
+            if (APIData.APIModel.SettingConfig.PicturePath != null)
+            {
+                try
+                {
+                    img.Source = new BitmapImage(new Uri(APIData.APIModel.SettingConfig.PicturePath));
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
         }
     }
 
@@ -129,4 +150,33 @@ namespace MEFL.PageModelViews
         ja
     }
 
+    public class ChangeBackground : ICommand
+    {
+        public event EventHandler? CanExecuteChanged;
+
+        public bool CanExecute(object? parameter)
+        {
+            return true;
+        }
+
+        public void Execute(object? parameter)
+        {
+            OpenFileDialog o = new OpenFileDialog();
+            o.Title = App.Current.Resources["I18N_String_Setting_Custom_BackgroundImage_Open"] as String;
+            o.Filter = "(*.jpg)|*.jpg|(*.png)|*.png";
+            o.ShowDialog();
+            (App.Current.Resources["Background"] as Grid).Children.Clear();
+            try
+            {
+                SettingPageModel.img.Source = new BitmapImage(new Uri(o.FileName));
+                (App.Current.Resources["Background"] as Grid).Children.Add(SettingPageModel.img);
+                APIData.APIModel.SettingConfig.PicturePath=o.FileName;
+                APIData.APIModel.SettingConfig.Update();
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+    }
 }

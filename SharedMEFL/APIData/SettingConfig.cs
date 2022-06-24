@@ -11,6 +11,7 @@ namespace MEFL.APIData
     {
         public string MEFLConfigForder;
         public int LogIndex { get; set; }
+        public string PicturePath { get; set; }
         public void Update()
         {
             try

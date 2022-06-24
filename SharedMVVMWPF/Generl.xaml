@@ -26,6 +26,7 @@
 
     <sys:String x:Key="I18N_String_Setting_Custom">个性化</sys:String>
     <sys:String x:Key="I18N_String_Setting_Custom_BackgroundImage">背景图片</sys:String>
+    <sys:String x:Key="I18N_String_Setting_Custom_BackgroundImage_Open">打开...</sys:String>
 
     <sys:String x:Key="I18N_String_Setting_Game">游戏</sys:String>
     <sys:String x:Key="I18N_String_AddIns_Author">作者</sys:String>
