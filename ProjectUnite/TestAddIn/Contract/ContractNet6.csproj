@@ -18,6 +18,10 @@
   <Import Project="..\SharedContract\SharedContract.projitems" Label="Shared" />
 
   <ItemGroup>
+    <PackageReference Include="MEFL.Controls" Version="0.0.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\MEFL.Controls\ControlsNet6\ControlsNet6.csproj" />
   </ItemGroup>
 

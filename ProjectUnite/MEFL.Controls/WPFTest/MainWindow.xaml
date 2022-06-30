@@ -7,10 +7,26 @@
         mc:Ignorable="d"
         xmlns:h="https://handyorg.github.io/handycontrol"
         Title="MainWindow" Height="450" Width="800"
-        xmlns:c="clr-namespace:MEFL.Controls;assembly=MEFL.Controls" Topmost="True">
+        xmlns:c="clr-namespace:MEFL.Controls;assembly=MEFL.Controls" Topmost="True"
+    xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Grid Background="Black">
-        <c:MyPageBase LineBrush="Aqua">
-            <c:MyButton Content="666" BorderBrush="Aqua"/>
-        </c:MyPageBase>
+        <c:MyComboBox Width="60" Height="20" 
+                      Background="Aqua"
+                      HorizontalAlignment="Right" 
+                      Initialized="MyComboBox_Initialized"
+                      >
+            <TextBlock Text="Itm1"/>
+            <TextBlock Text="Itm2"/>
+
+            <c:MyComboBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </c:MyComboBox.RenderTransform>
+
+        </c:MyComboBox>
     </Grid>
 </Window>

@@ -1,4 +1,4 @@
-﻿[13:44:20][MEFL]程序启动了,参数
-[13:44:20][MEFL]加载了一个插件，名称 TestAddIn.dll，版本：1.0.0.0 Guid 436b30c4-7309-4fd8-83eb-939570c2a54b
-[13:44:21][MEFL]加载了一个插件，名称 TestAddIn.dll，版本：1.0.0.0 Guid 436b30c4-7309-4fd8-83eb-939570c2a54b
-[13:44:31][MEFL]程序退出了
+﻿[23:26:07][MEFL]程序启动了,参数
+[23:26:07][MEFL]重写了插件设置,当前文档：[{"Guid":"436b30c4-7309-4fd8-83eb-939570c2a54b","IsOpen":true},{"Guid":"9dff877a-59d2-4337-933e-ce710e7d8f9f","IsOpen":false}]
+[23:26:07][MEFL]重写了插件设置,当前文档：[{"Guid":"436b30c4-7309-4fd8-83eb-939570c2a54b","IsOpen":true},{"Guid":"9dff877a-59d2-4337-933e-ce710e7d8f9f","IsOpen":false}]
+[23:26:07][MEFL]重写了插件设置,当前文档：[{"Guid":"436b30c4-7309-4fd8-83eb-939570c2a54b","IsOpen":true},{"Guid":"9dff877a-59d2-4337-933e-ce710e7d8f9f","IsOpen":false},{"Guid":"9dff877a-59d2-4337-933e-ce710e7d8f9f","IsOpen":false}]

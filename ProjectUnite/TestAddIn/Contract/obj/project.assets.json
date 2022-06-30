@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
-      "MEFL.Controls/0.0.2.2": {
+      "MEFL.Controls/0.0.4.1": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "compile": {
@@ -18,7 +18,7 @@
     }
   },
   "libraries": {
-    "MEFL.Controls/0.0.2.2": {
+    "MEFL.Controls/0.0.4.1": {
       "type": "project",
       "path": "../../MEFL.Controls/ControlsNet6/ControlsNet6.csproj",
       "msbuildProject": "../../MEFL.Controls/ControlsNet6/ControlsNet6.csproj"
@@ -26,7 +26,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
-      "MEFL.Controls >= 0.0.2.2"
+      "MEFL.Controls >= 0.0.4.1"
     ]
   },
   "packageFolders": {
@@ -79,6 +79,12 @@
     "frameworks": {
       "net6.0-windows7.0": {
         "targetAlias": "net6.0-windows",
+        "dependencies": {
+          "MEFL.Controls": {
+            "target": "Package",
+            "version": "[0.0.4.1, )"
+          }
+        },
         "imports": [
           "net461",
           "net462",

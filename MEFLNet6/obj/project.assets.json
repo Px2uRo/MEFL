@@ -17,7 +17,7 @@
           "Microsoft.WindowsDesktop.App.WPF"
         ]
       },
-      "MEFL.Controls/0.0.3": {
+      "MEFL.Controls/0.0.4.1": {
         "type": "package",
         "compile": {
           "lib/net6.0-windows7.0/MEFL.Controls.dll": {}
@@ -366,17 +366,6 @@
           "ref/netstandard1.3/System.Threading.Tasks.dll": {}
         }
       },
-      "System.Windows.Interactivity.WPF/2.0.20525": {
-        "type": "package",
-        "compile": {
-          "lib/net40/Microsoft.Expression.Interactions.dll": {},
-          "lib/net40/System.Windows.Interactivity.dll": {}
-        },
-        "runtime": {
-          "lib/net40/Microsoft.Expression.Interactions.dll": {},
-          "lib/net40/System.Windows.Interactivity.dll": {}
-        }
-      },
       "CoreLaunchingNet6/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
@@ -405,14 +394,14 @@
         "lib/net6.0-windows7.0/ContractNet6.dll"
       ]
     },
-    "MEFL.Controls/0.0.3": {
-      "sha512": "o/cINZ7iTWQYNQ5SNsqoKNq1J+fQ0wszI8+QRQGslzpDcAg6eK+joEArPs/9oXWqxv0xXz8pUq/IEWBW6xnYvQ==",
+    "MEFL.Controls/0.0.4.1": {
+      "sha512": "1JlhSDRvShIDh21BW/XOuQsUdohsChlK1naNmt5YrYhOv0ap6nbRyhIA/FWM2Vx2sXEyrjkCS62LhKtDdRMQeA==",
       "type": "package",
-      "path": "mefl.controls/0.0.3",
+      "path": "mefl.controls/0.0.4.1",
       "files": [
         ".nupkg.metadata",
         "lib/net6.0-windows7.0/MEFL.Controls.dll",
-        "mefl.controls.0.0.3.nupkg.sha512",
+        "mefl.controls.0.0.4.1.nupkg.sha512",
         "mefl.controls.nuspec"
       ]
     },
@@ -1808,21 +1797,6 @@
         "system.threading.tasks.nuspec"
       ]
     },
-    "System.Windows.Interactivity.WPF/2.0.20525": {
-      "sha512": "0r+Le4E7hCm4zToUvBzjSUyTcuU3rFeoPa7JyTdWIzR/F7wH6+O/pWkjHIG40hIA0z1wvRdZayvoizA4wcK1dg==",
-      "type": "package",
-      "path": "system.windows.interactivity.wpf/2.0.20525",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net40/Microsoft.Expression.Interactions.dll",
-        "lib/net40/Microsoft.Expression.Interactions.xml",
-        "lib/net40/System.Windows.Interactivity.dll",
-        "lib/net40/System.Windows.Interactivity.xml",
-        "system.windows.interactivity.wpf.2.0.20525.nupkg.sha512",
-        "system.windows.interactivity.wpf.nuspec"
-      ]
-    },
     "CoreLaunchingNet6/1.0.0": {
       "type": "project",
       "path": "../../CoreLaunching/CoreLaunchingNet6/CoreLaunchingNet6.csproj",
@@ -1833,9 +1807,8 @@
     "net6.0-windows7.0": [
       "ContractNet6 >= 0.0.0",
       "CoreLaunchingNet6 >= 1.0.0",
-      "MEFL.Controls >= 0.0.3",
-      "System.ComponentModel.Composition >= 6.0.0",
-      "System.Windows.Interactivity.WPF >= 2.0.20525"
+      "MEFL.Controls >= 0.0.4.1",
+      "System.ComponentModel.Composition >= 6.0.0"
     ]
   },
   "packageFolders": {
@@ -1895,15 +1868,11 @@
           },
           "MEFL.Controls": {
             "target": "Package",
-            "version": "[0.0.3, )"
+            "version": "[0.0.4.1, )"
           },
           "System.ComponentModel.Composition": {
             "target": "Package",
             "version": "[6.0.0, )"
-          },
-          "System.Windows.Interactivity.WPF": {
-            "target": "Package",
-            "version": "[2.0.20525, )"
           }
         },
         "imports": [
@@ -1927,17 +1896,5 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
       }
     }
-  },
-  "logs": [
-    {
-      "code": "NU1701",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "已使用“.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8”而不是项目目标框架“net6.0-windows7.0”还原包“System.Windows.Interactivity.WPF 2.0.20525”。此包可能与项目不完全兼容。",
-      "libraryId": "System.Windows.Interactivity.WPF",
-      "targetGraphs": [
-        "net6.0-windows7.0"
-      ]
-    }
-  ]
+  }
 }

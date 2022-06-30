@@ -116,6 +116,7 @@ namespace MEFL.APIData
                     File.Create(Path).Close();
                 }
                 File.WriteAllText(Path, JsonConvert.SerializeObject(addInConfigs));
+                Debugger.Logger($"重写了插件设置,当前文档：{File.ReadAllText(Path)}");
             }
             catch (Exception ex)
             {

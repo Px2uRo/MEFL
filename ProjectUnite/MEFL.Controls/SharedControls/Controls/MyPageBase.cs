@@ -60,15 +60,15 @@ namespace MEFL.Controls
             Visibility = Visibility.Hidden;
         }
 
-        public StackPanel SideBar
+        public Panel SideBar
         {
-            get { return (StackPanel)GetValue(SideBarProperty); }
+            get { return (Panel)GetValue(SideBarProperty); }
             set { SetValue(SideBarProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for SideBar.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty SideBarProperty =
-            DependencyProperty.Register("SideBar", typeof(StackPanel), typeof(MyPageBase), new PropertyMetadata(null));
+            DependencyProperty.Register("SideBar", typeof(Panel), typeof(MyPageBase), new PropertyMetadata(null));
 
 
 

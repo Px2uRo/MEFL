@@ -165,13 +165,16 @@ namespace MEFL.PageModelViews
             o.Title = App.Current.Resources["I18N_String_Setting_Custom_BackgroundImage_Open"] as String;
             o.Filter = "(*.jpg)|*.jpg|(*.png)|*.png";
             o.ShowDialog();
-            (App.Current.Resources["Background"] as Grid).Children.Clear();
             try
             {
-                SettingPageModel.img.Source = new BitmapImage(new Uri(o.FileName));
-                (App.Current.Resources["Background"] as Grid).Children.Add(SettingPageModel.img);
-                APIData.APIModel.SettingConfig.PicturePath=o.FileName;
-                APIData.APIModel.SettingConfig.Update();
+                if (o.FileName!=String.Empty)
+                {
+                    (App.Current.Resources["Background"] as Grid).Children.Clear();
+                    SettingPageModel.img.Source = new BitmapImage(new Uri(o.FileName));
+                    (App.Current.Resources["Background"] as Grid).Children.Add(SettingPageModel.img);
+                    APIData.APIModel.SettingConfig.PicturePath = o.FileName;
+                    APIData.APIModel.SettingConfig.Update();
+                }
             }
             catch (Exception ex)
             {

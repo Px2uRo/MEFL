@@ -5,7 +5,7 @@
   },
   "projects": {
     "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\MEFL.Controls\\ControlsNet6\\ControlsNet6.csproj": {
-      "version": "0.0.2.2",
+      "version": "0.0.4.1",
       "restore": {
         "projectUniqueName": "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\MEFL.Controls\\ControlsNet6\\ControlsNet6.csproj",
         "projectName": "MEFL.Controls",
@@ -114,6 +114,12 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
+          "dependencies": {
+            "MEFL.Controls": {
+              "target": "Package",
+              "version": "[0.0.4.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

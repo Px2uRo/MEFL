@@ -2,7 +2,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="clr-namespace:MEFL.Controls;assembly=MEFL.Controls"
-    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:mv="clr-namespace:MEFL.ControlModelViews">
     <Color x:Key="SYTLE_Standard_Color">Aqua</Color>
     <SolidColorBrush x:Key="SYTLE_Standard_ColorBrush">Aqua</SolidColorBrush>
     <SolidColorBrush x:Key="SYTLE_Standard_Background">White</SolidColorBrush>
@@ -11,7 +12,7 @@
     <SolidColorBrush x:Key="SYTLE_Changing_Foreground">White</SolidColorBrush>
     <ExtraAddInPageModelView xmlns="clr-namespace:MEFL.PageModelViews" x:Key="EAIPMV"/>
     <String x:Key="ShowingSymbol" xmlns="clr-namespace:System;assembly=mscorlib">MainPage</String>
-    <ExtensionPageModelView xmlns="clr-namespace:MEFL.ControlModelViews" x:Key="EPMV"/>
+    <mv:ExtensionPageModelView x:Key="EPMV"/>
     <SettingPageModelView xmlns="clr-namespace:MEFL.PageModelViews" x:Key="SPMV"/>
     <StackPanel Orientation="Horizontal" x:Key="AddInChangePageButtons" DataContext="{DynamicResource EAIPMV}"/>
     <Grid x:Key="MainPage"/>

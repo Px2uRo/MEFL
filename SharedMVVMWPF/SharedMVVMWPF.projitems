@@ -20,6 +20,9 @@
       <SubType>Code</SubType>
       <DependentUpon>MyExtensionCard.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ExtraAddInPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\SettingPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ExtensionPage.xaml.cs">
@@ -75,6 +78,11 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)I18N\zh_CN.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)MainWindow.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -116,23 +116,27 @@ namespace MEFL.Controls
                     break;
                 }
             }
-            Hosting = Hosting.LoadOne(Hosting.FullPath);
+            Hosting = Hosting.LoadOne(Hosting.FullPath,true);
+            Hosting.IsOpen = true;
             int i = 0;
-            foreach (var Dir in Hosting.Pages.IconAndPage)
+            if (Hosting.Permissions.UsePagesAPI)
             {
-                ChangePageButton button = new ChangePageButton()
+                foreach (var Dir in Hosting.Pages.IconAndPage)
                 {
-                    Width = 45,
-                    Content = Dir.Key,
-                    Tag = $"{Hosting.Guid}-Pages-{i.ToString()}"
-                };
-                (App.Current.Resources["AddInChangePageButtons"] as StackPanel).Children.Add(button);
-                MyPageBase Page = Dir.Value;
-                Page.Tag = $"{Hosting.Guid}-Pages-{i.ToString()}";
-                Page.Visibility = System.Windows.Visibility.Hidden;
-                (App.Current.Resources["MainPage"] as Grid).Children.Add(Page);
-                Page = null;
-                i++;
+                    ChangePageButton button = new ChangePageButton()
+                    {
+                        Width = 45,
+                        Content = Dir.Key,
+                        Tag = $"{Hosting.Guid}-Pages-{i.ToString()}"
+                    };
+                    (App.Current.Resources["AddInChangePageButtons"] as StackPanel).Children.Add(button);
+                    MyPageBase Page = Dir.Value;
+                    Page.Tag = $"{Hosting.Guid}-Pages-{i.ToString()}";
+                    Page.Visibility = System.Windows.Visibility.Hidden;
+                    (App.Current.Resources["MainPage"] as Grid).Children.Add(Page);
+                    Page = null;
+                    i++;
+                }
             }
         }
 

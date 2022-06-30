@@ -25,7 +25,7 @@ namespace TestAddIn
     {
         public bool UseSeetingPageAPI => true;
 
-        public bool UsePagesAPI => true;
+        public bool UsePagesAPI => false;
     }
 
     [Export(typeof(ISettingPage))]
@@ -42,18 +42,18 @@ namespace TestAddIn
         }
     }
 
-    [Export(typeof(IPages))]
-    public class Pages : IPages
-    {
-        public Dictionary<object, MyPageBase> IconAndPage
-        {
-            get
-            {
-                var res = new Dictionary<object, MyPageBase>();
-                res.Add(new MyIcon(), new MyPage());
-                return res;
-                res = null;
-            }
-        }
-    }
+    //[Export(typeof(IPages))]
+    //public class Pages : IPages
+    //{
+    //    public Dictionary<object, MyPageBase> IconAndPage
+    //    {
+    //        get
+    //        {
+    //            var res = new Dictionary<object, MyPageBase>();
+    //            res.Add(new MyIcon(), new MyPage());
+    //            return res;
+    //            res = null;
+    //        }
+    //    }
+    //}
 }

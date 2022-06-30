@@ -8,6 +8,8 @@
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800" LineBrush="{DynamicResource SYTLE_Standard_ColorBrush}"
              >
+    <c:MyPageBase.Resources>
+    </c:MyPageBase.Resources>
     <c:MyPageBase.SideBar>
         <StackPanel>
             <c:ChangePageContentButton x:Name="DefalutChangeButton" Content="{DynamicResource I18N_String_Setting_Launcher}" Tag="{DynamicResource I18N_String_Setting_Launcher}" Checked="ChangePageContentButton_Checked"/>
@@ -32,22 +34,22 @@
                     <ComboBox Grid.Column="1" 
                               SelectedIndex="{Binding LangIndex}"
                               DataContext="{DynamicResource SPMV}" >
-                        <ComboBoxItem Content="{DynamicResource I18N_String_Language_Opts_zh_CN}"/>
-                        <ComboBoxItem Content="{DynamicResource I18N_String_Language_Opts_zh_yue_CN}"/>
-                        <ComboBoxItem Content="{DynamicResource I18N_String_Language_Opts_zh_yue_HK}"/>
-                        <ComboBoxItem Content="{DynamicResource I18N_String_Language_Opts_zh_HK}"/>
-                        <ComboBoxItem Content="{DynamicResource I18N_String_Language_Opts_zh_MO}"/>
-                        <ComboBoxItem Content="{DynamicResource I18N_String_Language_Opts_zh_TW}"/>
-                        <ComboBoxItem Content="{DynamicResource I18N_String_Language_Opts_zh_SG}"/>
-                        <ComboBoxItem Content="{DynamicResource I18N_String_Language_Opts_en_US}"/>
-                        <ComboBoxItem Content="{DynamicResource I18N_String_Language_Opts_en_UK}"/>
+                        <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_CN}"/>
+                        <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_yue_CN}"/>
+                        <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_yue_HK}"/>
+                        <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_HK}"/>
+                        <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_MO}"/>
+                        <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_TW}"/>
+                        <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_SG}"/>
+                        <TextBlock Text="{DynamicResource I18N_String_Language_Opts_en_US}"/>
+                        <TextBlock Text="{DynamicResource I18N_String_Language_Opts_en_UK}"/>
                     </ComboBox>
                 </Grid>
             </c:MyCard>
         </StackPanel>
         <StackPanel Tag="{DynamicResource I18N_String_Setting_Custom}">
             <c:MyCard Title="{DynamicResource I18N_String_Setting_Custom_BackgroundImage}">
-                <c:MyButton DataContext="{DynamicResource SPMV}" Command="{Binding ChangeBackground}" Content="{DynamicResource I18N_String_Setting_Custom_BackgroundImage_Open}"/>
+                <c:MyButton HorizontalAlignment="Left" DataContext="{DynamicResource SPMV}" Command="{Binding ChangeBackground}" Content="{DynamicResource I18N_String_Setting_Custom_BackgroundImage_Open}"/>
             </c:MyCard>
         </StackPanel>
             <StackPanel Tag="{DynamicResource I18N_String_Setting_Game}"/>

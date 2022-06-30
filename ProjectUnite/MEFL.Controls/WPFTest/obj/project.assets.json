@@ -11,7 +11,7 @@
           "lib/net5.0/HandyControl.dll": {}
         }
       },
-      "MEFL.Controls/0.0.3": {
+      "MEFL.Controls/0.0.4.1": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "compile": {
@@ -74,7 +74,7 @@
         "tools/VisualStudioToolsManifest.xml"
       ]
     },
-    "MEFL.Controls/0.0.3": {
+    "MEFL.Controls/0.0.4.1": {
       "type": "project",
       "path": "../ControlsNet6/ControlsNet6.csproj",
       "msbuildProject": "../ControlsNet6/ControlsNet6.csproj"
@@ -83,7 +83,7 @@
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
       "HandyControl >= 3.3.0",
-      "MEFL.Controls >= 0.0.3"
+      "MEFL.Controls >= 0.0.4.1"
     ]
   },
   "packageFolders": {

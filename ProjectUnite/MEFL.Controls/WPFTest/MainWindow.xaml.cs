@@ -24,5 +24,10 @@ namespace WPFTest
         {
             InitializeComponent();
         }
+
+        private void MyComboBox_Initialized(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -39,7 +39,33 @@ namespace MEFL
         public Uri PulisherUri { get; set; }
         public Uri ExtensionUri { get; set; }
         public string Guid { get; set; }
-        public bool IsOpen { get; set; }
+        private bool _isOpen { get; set; }
+        public bool IsOpen { 
+            get 
+            {
+                foreach (var item in APIData.APIModel.AddInConfigs)
+                {
+                    if (item.Guid==this.Guid)
+                    {
+                        _isOpen = item.IsOpen;
+                        break;
+                    }
+                }
+                return _isOpen;
+            } set 
+            {
+                _isOpen = value;
+                foreach (var item in APIData.APIModel.AddInConfigs)
+                {
+                    if (item.Guid == this.Guid)
+                    {
+                        item.IsOpen = _isOpen;
+                        APIData.APIModel.RemoveAddInsTheSameItem();
+                        break;
+                    }
+                }
+            } 
+        }
 
         public static Hosting LoadOne(string Path)
         {
@@ -114,6 +140,70 @@ namespace MEFL
                 h.ExceptionInfo = ex;
                 return h;
                 h = null;
+            }
+        }
+
+        public static Hosting LoadOne(string Path,bool Force)
+        {
+            if (Force == true)
+            {
+                Hosting h = new Hosting();
+                h.FullPath = Path;
+                h.FileName = System.IO.Path.GetFileName(Path);
+                try
+                {
+                    var fvif = FileVersionInfo.GetVersionInfo(Path);
+                    h.Version = fvif.FileVersion;
+                    h.Publisher = fvif.CompanyName;
+                    h.Description = fvif.FileDescription;
+
+                    try
+                    {
+                        Assembly assembly = Assembly.LoadFile(Path);
+                        string guid = assembly.ManifestModule.ModuleVersionId.ToString();
+                        System.Guid.Parse(guid);
+                        h.Guid = guid;
+                        assembly = null;
+                        guid = null;
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception("Guid 不合法或者无法获取其 Guid");
+                    }
+
+                        var ac = new AssemblyCatalog(Path);
+                        var cc = new CompositionContainer(ac);
+                        h.BaseInfo = cc.GetExport<IBaseInfo>().Value;
+                        h.Permissions = cc.GetExport<IPermissions>().Value;
+                        h.Icon = h.BaseInfo.Icon;
+                        h.PulisherUri = h.BaseInfo.PulisherUri;
+                        h.ExtensionUri = h.BaseInfo.ExtensionUri;
+
+                        if (h.Permissions.UseSeetingPageAPI)
+                        {
+                            h.SettingPage = cc.GetExport<ISettingPage>().Value;
+                        }
+                        if (h.Permissions.UsePagesAPI)
+                        {
+                            h.Pages = cc.GetExport<IPages>().Value;
+                        }
+                        Debugger.Logger($"加载了一个插件，名称 {h.FileName}，版本：{h.Version} Guid {h.Guid}");
+                        ac = null;
+                        cc = null;
+                    fvif = null;
+                    return h;
+                    h = null;
+                }
+                catch (Exception ex)
+                {
+                    h.ExceptionInfo = ex;
+                    return h;
+                    h = null;
+                }
+            }
+            else
+            {
+                return LoadOne(Path);
             }
         }
 

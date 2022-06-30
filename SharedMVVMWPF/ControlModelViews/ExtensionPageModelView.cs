@@ -14,11 +14,13 @@ namespace MEFL.ControlModelViews
             Hostings = Hosting.LoadAll();
 
             var Items = MEFL.APIData.APIModel.AddInConfigs;
+
+
             foreach (var item in Hostings)
             {
-                foreach (var itm in MEFL.APIData.APIModel.AddInConfigs)
+                for (int i=0;i< MEFL.APIData.APIModel.AddInConfigs.Count;i++)
                 {
-                    if (item.Guid != itm.Guid)
+                    if (item.Guid != MEFL.APIData.APIModel.AddInConfigs[i].Guid)
                     {
                         Items.Add(new APIData.AddInConfig() { Guid = item.Guid, IsOpen = false });
                     }
