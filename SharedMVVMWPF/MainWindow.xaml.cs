@@ -47,6 +47,7 @@ namespace MEFL
             //PART_Window_Content.DataContext = this;
             _dbani = new DoubleAnimation();
             _dbani.Duration = new Duration(TimeSpan.FromSeconds(0.2));
+            (App.Current.Resources["MainPage"] as Grid).Children.Add(new Pages.RealMainPage() { Tag = "RealMainPage", Visibility = Visibility.Visible });
             (App.Current.Resources["MainPage"] as Grid).Children.Add(new Pages.SettingPage() { Tag= "SettingPage" ,Visibility=Visibility.Hidden});
             (App.Current.Resources["MainPage"] as Grid).Children.Add(new Pages.ExtensionPage() { Tag = "ExtensionPage" ,Visibility = Visibility.Hidden });
         }

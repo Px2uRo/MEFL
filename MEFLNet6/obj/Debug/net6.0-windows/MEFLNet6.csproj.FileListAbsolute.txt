@@ -45,3 +45,5 @@ I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\zh_TW.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\zh_SG.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\zh_yue_CN.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\zh_yue_HK.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\RealMainPage.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\RealMainPage.g.cs

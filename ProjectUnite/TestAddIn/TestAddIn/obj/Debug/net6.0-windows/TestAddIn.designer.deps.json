@@ -6,22 +6,22 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "ContractNet6/0.0.0": {
+      "ContractNet6/0.0.2.4": {
         "dependencies": {
-          "MEFL.Controls": "0.0.1"
+          "MEFL.Controls": "0.0.4.1"
         },
         "runtime": {
           "lib/net6.0-windows7.0/ContractNet6.dll": {
-            "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.0.0.0"
+            "assemblyVersion": "0.0.2.4",
+            "fileVersion": "0.0.2.4"
           }
         }
       },
-      "MEFL.Controls/0.0.1": {
+      "MEFL.Controls/0.0.4.1": {
         "runtime": {
           "lib/net6.0-windows7.0/MEFL.Controls.dll": {
-            "assemblyVersion": "0.0.1.0",
-            "fileVersion": "0.0.1.0"
+            "assemblyVersion": "0.0.4.1",
+            "fileVersion": "0.0.4.1"
           }
         }
       },
@@ -36,19 +36,19 @@
     }
   },
   "libraries": {
-    "ContractNet6/0.0.0": {
+    "ContractNet6/0.0.2.4": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-R21NqBYGYF8DJVWLfEdN+16zmpyOGwX3bt6hLtdOZ7t2jtEP+V9pqZQtFRX89hyDdrQCmhDRoM70SmFCmze0EQ==",
-      "path": "contractnet6/0.0.0",
-      "hashPath": "contractnet6.0.0.0.nupkg.sha512"
+      "sha512": "sha512-w8hhTuNDmaJ9w3DfOpmhtR66yB5MXP9/sDrNi86EQXknxnG6iqz+9EX0+3rqUiqu454xCiSJgygqgUS/1rOHrA==",
+      "path": "contractnet6/0.0.2.4",
+      "hashPath": "contractnet6.0.0.2.4.nupkg.sha512"
     },
-    "MEFL.Controls/0.0.1": {
+    "MEFL.Controls/0.0.4.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-wXwyv0+4ajibdQ8bZEq6TkeEFiHasDT3wdj6muPD62B3Gnh0fJKJ46bJSyRFUuMLeyRndjQsLt+1GQJZPFua0Q==",
-      "path": "mefl.controls/0.0.1",
-      "hashPath": "mefl.controls.0.0.1.nupkg.sha512"
+      "sha512": "sha512-1JlhSDRvShIDh21BW/XOuQsUdohsChlK1naNmt5YrYhOv0ap6nbRyhIA/FWM2Vx2sXEyrjkCS62LhKtDdRMQeA==",
+      "path": "mefl.controls/0.0.4.1",
+      "hashPath": "mefl.controls.0.0.4.1.nupkg.sha512"
     },
     "System.ComponentModel.Composition/6.0.0": {
       "type": "package",

@@ -13,7 +13,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)ControlModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ControlModelViews\ExtensionPageModelView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)..\..\..\Xiong%27s\MEFLCollection\SharedMVVMWPF\PageModelViews\ExtensionPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ChangePageButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\FindControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\MyExtensionCard.xaml.cs">
@@ -24,10 +24,16 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ExtraAddInPageModelView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\PageModelViewBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\RealMainPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\SettingPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ExtensionPage.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>ExtensionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\RealMainPage.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>RealMainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\SettingPage.xaml.cs">
       <SubType>Code</SubType>
@@ -87,6 +93,11 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Pages\ExtensionPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\RealMainPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

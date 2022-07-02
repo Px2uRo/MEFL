@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MEFL.Contract;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -8,7 +9,7 @@ namespace MEFL.APIData
     {
         public static SettingConfig SettingConfig { get; set; }
         public static List<AddInConfig> AddInConfigs { get; set; }
-        public static void RemoveAddInsTheSameItem()
+        public static void RemoveAddInsTheSameAddIn()
         {
             for (int i = 0; i < AddInConfigs.Count; i++)
             {
@@ -23,11 +24,35 @@ namespace MEFL.APIData
             }
             AddInConfig.Update(AddInConfigs);
         }
+
+        public static List<AccountBase> AccountConfigs;
+        private static int _SelectedAccountIndex { get; set; }
+
+        public static int SelectedAccountIndex
+        {
+            get { return _SelectedAccountIndex; }
+            set { 
+                if(value < AccountConfigs.Count)
+                {
+                    _SelectedAccountIndex = value;
+                    App.Current.Resources["WelcomeWords"] = AccountConfigs[value].WelcomeWords;
+                }
+            }
+        }
+
+
         static APIModel()
         {
             SettingConfig = MEFL.APIData.SettingConfig.Load();
             AddInConfigs = MEFL.APIData.AddInConfig.GetAll();
-            RemoveAddInsTheSameItem();
+            RemoveAddInsTheSameAddIn();
+            AccountConfigs = new List<AccountBase>();
+#if DEBUG
+            AccountConfigs.Add(new MEFLLegacyAccount() {GetSetUserName = "Hongyu"});
+            SelectedAccountIndex = 0;
+#else
+            SlectedAccountIndex = -1;
+#endif
         }
     }
 }

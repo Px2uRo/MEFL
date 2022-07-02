@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -56,6 +57,7 @@ namespace MEFL.Controls
             else
             {
                 Hosting.Icon = "已关闭";
+                this.Title = Hosting.FileName;
             }
             PART_THE_Content.DataContext = Hosting;
         }
@@ -94,7 +96,15 @@ namespace MEFL.Controls
         private void MyCheckBox_Checked(object sender, RoutedEventArgs e)
         {
             Hosting.IsOpen = true;
-            ReloadThis();
+            try
+            {
+                ReloadThis();
+            }
+            catch (Exception ex)
+            {
+                PART_THE_Content.Children.Clear();
+                PART_THE_Content.Children.Add(new TextBlock() { Text=ex.Message});
+            }
             PART_THE_Content.DataContext = Hosting;
         }
         private void MyCheckBox_UnChecked(object sender, RoutedEventArgs e)
@@ -112,13 +122,56 @@ namespace MEFL.Controls
                 if (item.Guid.ToString() == Hosting.Guid.ToString())
                 {
                     item.IsOpen = true;
-                    MEFL.APIData.AddInConfig.Update(APIData.APIModel.AddInConfigs);
                     break;
                 }
             }
             Hosting = Hosting.LoadOne(Hosting.FullPath,true);
             Hosting.IsOpen = true;
             int i = 0;
+            if (Hosting.Permissions == null)
+            {
+                Assembly ass;
+                string AddInContract = "Unknown";
+                try
+                {
+                    Assembly[] assblies = AppDomain.CurrentDomain.GetAssemblies();
+                    ass = assblies[0];
+                    AssemblyName assnm = new AssemblyName();
+                    foreach (var item in assblies)
+                    {
+                        if (item.FullName.Contains(System.IO.Path.GetFileNameWithoutExtension(Hosting.FileName)))
+                        {
+                            ass = item;
+                            var asses = ass.GetReferencedAssemblies();
+                            foreach (var assem in asses)
+                            {
+                                if (assem.FullName.Contains("Contract"))
+                                {
+                                    assnm = assem;
+                                    break;
+                                }
+                            }
+                            asses = null;
+                            break;
+                        }
+                    }
+                    assblies = null;
+                    if (assnm.ToString().Contains("Contract"))
+                    {
+                        AddInContract = assnm.Version.ToString();
+                    }
+                    else
+                    {
+                        AddInContract = "Unknown";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    AddInContract = "Unknown";
+                }
+                ass = null;
+                throw new Exception($"无法获取权限使用情况，可能是因为协议不符合，当前协议版本{PageModelViews.SettingPageModel.ContractVersion}，插件协议版本{AddInContract}");
+            }
             if (Hosting.Permissions.UsePagesAPI)
             {
                 foreach (var Dir in Hosting.Pages.IconAndPage)
@@ -138,6 +191,7 @@ namespace MEFL.Controls
                     i++;
                 }
             }
+            this.Title = Hosting.BaseInfo.Title;
         }
 
         private void RemoveThis()
@@ -147,7 +201,6 @@ namespace MEFL.Controls
                 if (item.Guid.ToString() == Hosting.Guid.ToString())
                 {
                     item.IsOpen = false;
-                    MEFL.APIData.AddInConfig.Update(APIData.APIModel.AddInConfigs);
                     break;
                 }
             }
@@ -171,6 +224,7 @@ namespace MEFL.Controls
             //(App.Current.Resources["MainPage"] as Grid).Children.Remove();
 
             Hosting = Hosting.LoadOne(Hosting.FullPath);
+            this.Title = Hosting.FileName;
         }
     }
 }

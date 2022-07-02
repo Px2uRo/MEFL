@@ -3,21 +3,22 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:c="clr-namespace:MEFL.Controls;assembly=MEFL.Controls"
     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    xmlns:mv="clr-namespace:MEFL.ControlModelViews">
+    xmlns:mv="clr-namespace:MEFL.PageModelViews">
     <Color x:Key="SYTLE_Standard_Color">Aqua</Color>
     <SolidColorBrush x:Key="SYTLE_Standard_ColorBrush">Aqua</SolidColorBrush>
     <SolidColorBrush x:Key="SYTLE_Standard_Background">White</SolidColorBrush>
     <SolidColorBrush x:Key="SYTLE_Standard_BorderBrush">Aqua</SolidColorBrush>
     <SolidColorBrush x:Key="SYTLE_Standard_Foreground">Black</SolidColorBrush>
     <SolidColorBrush x:Key="SYTLE_Changing_Foreground">White</SolidColorBrush>
-    <ExtraAddInPageModelView xmlns="clr-namespace:MEFL.PageModelViews" x:Key="EAIPMV"/>
+    <mv:ExtraAddInPageModelView xmlns="clr-namespace:MEFL.PageModelViews" x:Key="EAIPMV"/>
     <String x:Key="ShowingSymbol" xmlns="clr-namespace:System;assembly=mscorlib">MainPage</String>
     <mv:ExtensionPageModelView x:Key="EPMV"/>
-    <SettingPageModelView xmlns="clr-namespace:MEFL.PageModelViews" x:Key="SPMV"/>
+    <mv:SettingPageModelView xmlns="clr-namespace:MEFL.PageModelViews" x:Key="SPMV"/>
     <StackPanel Orientation="Horizontal" x:Key="AddInChangePageButtons" DataContext="{DynamicResource EAIPMV}"/>
     <Grid x:Key="MainPage"/>
     <Grid x:Key="Background"/>
-    
+    <sys:Object x:Key="WelcomeWords"/>
+
     <!--#region I18NStrings -->
     <sys:String x:Key="I18N_String_AddIns">插件</sys:String>
     <sys:String x:Key="I18N_String_GetMore">获取更多</sys:String>
@@ -34,6 +35,7 @@
     <sys:String x:Key="I18N_String_AddIns_Descripition">描述</sys:String>
     <sys:String x:Key="I18N_String_AddIns_Version">版本号</sys:String>
 
+    <sys:String x:Key="I18N_String_MEFLAccounts_WelcomeWords">欢迎回来 {0}</sys:String>
     <sys:String x:Key="I18N_String_Language_Opts">语言</sys:String>
     <sys:String x:Key="I18N_String_Language_Opts_zh_CN">中文(中国)[中文(中国)]</sys:String>
     <sys:String x:Key="I18N_String_Language_Opts_zh_yue_CN">白话(中国)[粤语(中国)]</sys:String>
@@ -49,6 +51,5 @@
     <sys:String x:Key="I18N_String_Language_Opts_fr">Français(France)[法语(法国)]</sys:String>
     <sys:String x:Key="I18N_String_Language_Opts_de">Français(France)[法语(法国)]</sys:String>
     <sys:String x:Key="I18N_String_Language_Opts_es_ES">Español(España)[西班牙语(西班牙)]</sys:String>
-    
     <!--#endregion-->
 </ResourceDictionary>

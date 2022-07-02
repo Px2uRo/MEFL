@@ -25,7 +25,8 @@ namespace TestAddIn
     {
         public bool UseSeetingPageAPI => true;
 
-        public bool UsePagesAPI => false;
+        public bool UsePagesAPI => true;
+        public bool UseGameManageAPI => true;
     }
 
     [Export(typeof(ISettingPage))]
@@ -42,18 +43,29 @@ namespace TestAddIn
         }
     }
 
-    //[Export(typeof(IPages))]
-    //public class Pages : IPages
-    //{
-    //    public Dictionary<object, MyPageBase> IconAndPage
-    //    {
-    //        get
-    //        {
-    //            var res = new Dictionary<object, MyPageBase>();
-    //            res.Add(new MyIcon(), new MyPage());
-    //            return res;
-    //            res = null;
-    //        }
-    //    }
-    //}
+    [Export(typeof(IPages))]
+    public class Pages : IPages
+    {
+        public Dictionary<object, MyPageBase> IconAndPage
+        {
+            get
+            {
+                var res = new Dictionary<object, MyPageBase>();
+                res.Add(new MyIcon(), new MyPage());
+                return res;
+                res = null;
+            }
+        }
+    }
+
+    [Export(typeof(ILuncherGameType))]
+    public class LuncherGameInfo : ILuncherGameType
+    {
+        public string[] SupportedType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public GameInfoBase Parse(string JsonPath, string VersionType)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

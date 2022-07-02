@@ -13,5 +13,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)APIData\SettingConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Debugger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Hosting.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFLAccount.cs" />
   </ItemGroup>
 </Project>

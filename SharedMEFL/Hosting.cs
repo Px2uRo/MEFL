@@ -60,7 +60,7 @@ namespace MEFL
                     if (item.Guid == this.Guid)
                     {
                         item.IsOpen = _isOpen;
-                        APIData.APIModel.RemoveAddInsTheSameItem();
+                        APIData.APIModel.RemoveAddInsTheSameAddIn();
                         break;
                     }
                 }

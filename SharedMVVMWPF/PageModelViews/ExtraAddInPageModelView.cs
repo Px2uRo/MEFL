@@ -10,7 +10,7 @@ using System.Windows.Media;
 
 namespace MEFL.PageModelViews
 {
-    public class ExtraAddInPageModelView:ControlModelViews.PageModelView
+    public class ExtraAddInPageModelView:PageModelViewBase
     {
         public ExtraAddInPageModelView()
         {

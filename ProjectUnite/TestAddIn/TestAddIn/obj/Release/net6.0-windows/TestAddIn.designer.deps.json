@@ -6,6 +6,25 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
+      "ContractNet6/0.0.2.4": {
+        "dependencies": {
+          "MEFL.Controls": "0.0.4.1"
+        },
+        "runtime": {
+          "lib/net6.0-windows7.0/ContractNet6.dll": {
+            "assemblyVersion": "0.0.2.4",
+            "fileVersion": "0.0.2.4"
+          }
+        }
+      },
+      "MEFL.Controls/0.0.4.1": {
+        "runtime": {
+          "lib/net6.0-windows7.0/MEFL.Controls.dll": {
+            "assemblyVersion": "0.0.4.1",
+            "fileVersion": "0.0.4.1"
+          }
+        }
+      },
       "System.ComponentModel.Composition/6.0.0": {
         "runtime": {
           "lib/net6.0/System.ComponentModel.Composition.dll": {
@@ -17,6 +36,20 @@
     }
   },
   "libraries": {
+    "ContractNet6/0.0.2.4": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-w8hhTuNDmaJ9w3DfOpmhtR66yB5MXP9/sDrNi86EQXknxnG6iqz+9EX0+3rqUiqu454xCiSJgygqgUS/1rOHrA==",
+      "path": "contractnet6/0.0.2.4",
+      "hashPath": "contractnet6.0.0.2.4.nupkg.sha512"
+    },
+    "MEFL.Controls/0.0.4.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-1JlhSDRvShIDh21BW/XOuQsUdohsChlK1naNmt5YrYhOv0ap6nbRyhIA/FWM2Vx2sXEyrjkCS62LhKtDdRMQeA==",
+      "path": "mefl.controls/0.0.4.1",
+      "hashPath": "mefl.controls.0.0.4.1.nupkg.sha512"
+    },
     "System.ComponentModel.Composition/6.0.0": {
       "type": "package",
       "serviceable": true,

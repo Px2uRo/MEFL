@@ -2,10 +2,10 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
-      "ContractNet6/0.0.0": {
+      "ContractNet6/0.0.2.7": {
         "type": "package",
         "dependencies": {
-          "MEFL.Controls": "0.0.0"
+          "MEFL.Controls": "0.0.4.1"
         },
         "compile": {
           "lib/net6.0-windows7.0/ContractNet6.dll": {}
@@ -383,13 +383,13 @@
     }
   },
   "libraries": {
-    "ContractNet6/0.0.0": {
-      "sha512": "R21NqBYGYF8DJVWLfEdN+16zmpyOGwX3bt6hLtdOZ7t2jtEP+V9pqZQtFRX89hyDdrQCmhDRoM70SmFCmze0EQ==",
+    "ContractNet6/0.0.2.7": {
+      "sha512": "1bMatTnpI/gso4Mhm2MRXUpxDYdIeNgAoTjuSVmrNmxQctVIimUPfx5cHMsp0f+PO+k7LzEoMBjZo565d3E6AQ==",
       "type": "package",
-      "path": "contractnet6/0.0.0",
+      "path": "contractnet6/0.0.2.7",
       "files": [
         ".nupkg.metadata",
-        "contractnet6.0.0.0.nupkg.sha512",
+        "contractnet6.0.0.2.7.nupkg.sha512",
         "contractnet6.nuspec",
         "lib/net6.0-windows7.0/ContractNet6.dll"
       ]
@@ -1805,7 +1805,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
-      "ContractNet6 >= 0.0.0",
+      "ContractNet6 >= 0.0.2.7",
       "CoreLaunchingNet6 >= 1.0.0",
       "MEFL.Controls >= 0.0.4.1",
       "System.ComponentModel.Composition >= 6.0.0"
@@ -1864,7 +1864,7 @@
         "dependencies": {
           "ContractNet6": {
             "target": "Package",
-            "version": "[0.0.0, )"
+            "version": "[0.0.2.7, )"
           },
           "MEFL.Controls": {
             "target": "Package",

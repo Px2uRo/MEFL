@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using MEFL.Contract;
 using Newtonsoft.Json;
 
 namespace MEFL.APIData
@@ -97,6 +98,7 @@ namespace MEFL.APIData
                 {
                     ret = new List<AddInConfig>();
                 }
+                Debugger.Logger($"加载了插件设置,当前文档：{File.ReadAllText(Path)}");
             }
             catch (Exception ex)
             {

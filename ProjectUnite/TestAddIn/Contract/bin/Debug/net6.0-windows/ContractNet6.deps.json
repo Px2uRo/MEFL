@@ -8,13 +8,13 @@
     ".NETCoreApp,Version=v6.0": {
       "ContractNet6/0.0.0": {
         "dependencies": {
-          "MEFL.Controls": "0.0.1"
+          "MEFL.Controls": "0.0.4.1"
         },
         "runtime": {
           "ContractNet6.dll": {}
         }
       },
-      "MEFL.Controls/0.0.1": {
+      "MEFL.Controls/0.0.4.1": {
         "runtime": {
           "MEFL.Controls.dll": {}
         }
@@ -27,7 +27,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "MEFL.Controls/0.0.1": {
+    "MEFL.Controls/0.0.4.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -39,9 +39,18 @@
             </Grid.RowDefinitions>
             <Grid Background="{DynamicResource SYTLE_Standard_ColorBrush}" 
                   MouseMove="Grid_MouseMove" Opacity="0.9">
-                <ContentPresenter Content="{Binding Title}" 
+                <StackPanel Orientation="Horizontal">
+                    <c:ChangePageButton Width="45" Margin="0,5,0,0" Tag="RealMainPage">
+                        <Path HorizontalAlignment="Center" 
+                              VerticalAlignment="Center" 
+                              Data="M17.5125 20.2706 17.5125 23.76 20.8937 23.76 20.8937 20.2706ZM13.4631 20.2706 13.4631 23.76 16.8443 23.76 16.8443 20.2706ZM17.5125 16.0189 17.5125 19.5083 20.8937 19.5083 20.8937 16.0189ZM13.4631 16.0189 13.4631 19.5083 16.8443 19.5083 16.8443 16.0189ZM13.5001 0.500053 26.5001 14.0001 22.7178 14.0001 22.7178 27.5001 11.3998 27.5001 11.3998 19.5083 6.34555 19.5083 6.34555 27.5001 4.28224 27.5001 4.28224 14.0001 0.500053 14.0001Z" 
+                              Stroke="Black" 
+                              StrokeThickness="0.8" Height="24" Stretch="Fill" Width="26"/>
+                    </c:ChangePageButton>
+                    <ContentPresenter Content="{Binding Title}" 
                               VerticalAlignment="Center"
                               Margin="10,0,0,0"/>
+                </StackPanel>
                 <StackPanel Orientation="Horizontal" 
                         HorizontalAlignment="Right">
                     <ContentPresenter Content="{DynamicResource AddInChangePageButtons}" Initialized="Ini"/>

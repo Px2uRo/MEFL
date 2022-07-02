@@ -1,1 +1,2 @@
-﻿[18:18:33][MEFL]The process cannot access the file 'I:\Xiong's\MEFLCollection\AddIns\Config.json' because it is being used by another process.
+﻿[13:16:32][MEFL]加载了插件设置,当前文档：
+[13:16:32][MEFL]重写了插件设置,当前文档：[]
