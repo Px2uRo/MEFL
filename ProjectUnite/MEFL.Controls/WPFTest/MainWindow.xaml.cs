@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MEFL.Controls;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +30,32 @@ namespace WPFTest
         private void MyComboBox_Initialized(object sender, EventArgs e)
         {
 
+        }
+
+        private void MyButton_Click(object sender, RoutedEventArgs e)
+        {
+            MyCB.ItemsSource = new List<string>() { "989"};
+        }
+    }
+
+    public class ModelView: INotifyPropertyChanged
+    {
+        public List<String> Foo { get=>Model.Foo; 
+            set 
+            {
+                Model.Foo = value;
+            } 
+        }
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+    }
+
+    public static class Model
+    {
+        public static List<String> Foo { get; set; }
+        static Model() 
+        {
+            Foo = new List<String>() { "4", "5", "6" };
         }
     }
 }

@@ -169,44 +169,6 @@
         </Setter>
     </Style>
     <Style TargetType="{x:Type local:MyComboBox}">
-        <Setter Property="ItemContainerStyle">
-            <Setter.Value>
-                <Style TargetType="ComboBoxItem">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type ComboBoxItem}">
-                                <Grid Height="auto" Width="auto" Background="Transparent">
-                                    <Rectangle Fill="White"/>
-                                    <Rectangle Name="Rect" Opacity="0" Fill="Gray"/>
-                                    <ContentPresenter Content="{Binding}" Margin="0"/>
-                                    <Grid.Triggers>
-                                        <EventTrigger RoutedEvent="MouseEnter">
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <DoubleAnimation From="0" To="0.3" Duration="0:0:0:0.2"
-                                                                     Storyboard.TargetName="Rect" Storyboard.TargetProperty="Opacity">
-
-                                                    </DoubleAnimation>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </EventTrigger>
-                                        <EventTrigger RoutedEvent="MouseLeave">
-                                            <BeginStoryboard>
-                                                <Storyboard>
-                                                    <DoubleAnimation From="0.3" To="0" Duration="0:0:0:0.2"
-                                                                     Storyboard.TargetName="Rect" Storyboard.TargetProperty="Opacity">
-                                                    </DoubleAnimation>
-                                                </Storyboard>
-                                            </BeginStoryboard>
-                                        </EventTrigger>
-                                    </Grid.Triggers>
-                                </Grid>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </Setter.Value>
-        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:MyComboBox}">
@@ -222,9 +184,10 @@
                                 CornerRadius="{Binding ElementName=PART_Popup,Path=IsEnabled,Converter={StaticResource BTCR}}">
                             <StackPanel>
                                 <Grid>
-                                    <ContentControl
+                                    <ContentPresenter
                                         Name="PART_CP" 
-                                        Margin="2,0,0,0"/>
+                                        Margin="2,0,0,0"
+                                        Content="{TemplateBinding Text}"/>
                                     <Path HorizontalAlignment="Right" 
                                           Stroke="Black" StrokeThickness="1" 
                                           IsEnabled="{Binding ElementName=PART_Popup,Path=IsEnabled}"
@@ -239,20 +202,54 @@
                                 <Popup AllowsTransparency="True"
                                        HorizontalOffset="1" 
                                        Width="{Binding ElementName=PART_Root,Path=ActualWidth}" 
-                                       IsEnabled="{TemplateBinding IsDropDownOpen}" 
                                        IsOpen="True"
                                        Name="PART_Popup"
                                        >
                                     <Border Name="PART_Popup_Border" 
+                                            Height="0"
                                             CornerRadius="0,0,2,2"
                                             BorderBrush="Black" 
                                             BorderThickness="1,0,1,1" 
                                             Background="{TemplateBinding Background}">
-                                        <ItemsPresenter Width="{Binding ElementName=PART_Root,Path=ActualWidth}"/>
+                                        <StackPanel Name="PART_Popup_Border_Contents"/>
                                     </Border>
                                 </Popup>
                             </StackPanel>
                         </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type local:MyComboBoxItem}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:MyComboBoxItem}">
+                    <Grid Height="25" Width="auto" Background="Transparent">
+                        <Rectangle Fill="White"/>
+                        <Rectangle Name="Rect" Opacity="0" Fill="Gray"/>
+                        <ContentPresenter VerticalAlignment="Center"/>
+                        <Grid.Triggers>
+                            <EventTrigger RoutedEvent="MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation From="0" To="0.3" Duration="0:0:0:0.2"
+                                                                     Storyboard.TargetName="Rect" Storyboard.TargetProperty="Opacity">
+
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation From="0.3" To="0" Duration="0:0:0:0.2"
+                                                                     Storyboard.TargetName="Rect" Storyboard.TargetProperty="Opacity">
+                                        </DoubleAnimation>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Grid.Triggers>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

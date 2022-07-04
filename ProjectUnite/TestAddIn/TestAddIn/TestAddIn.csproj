@@ -19,7 +19,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ContractNet6" Version="0.0.2.4" />
+    <PackageReference Include="ContractNet6" Version="0.0.2.7" />
     <PackageReference Include="MEFL.Controls" Version="0.0.4.1" />
     <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />
   </ItemGroup>

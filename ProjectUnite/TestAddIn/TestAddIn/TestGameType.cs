@@ -14,8 +14,7 @@ namespace TestAddIn
         public override string Description { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override string Version { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override ImageSource IconSource { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
+        public override object IconSource { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override void Refresh(SettingArgs args)
         {
             throw new NotImplementedException();

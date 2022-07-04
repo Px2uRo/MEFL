@@ -1,6 +1,7 @@
 ﻿using MEFL.Contract;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace MEFL.APIData
@@ -50,6 +51,7 @@ namespace MEFL.APIData
 #if DEBUG
             AccountConfigs.Add(new MEFLLegacyAccount() {GetSetUserName = "Hongyu"});
             SelectedAccountIndex = 0;
+            RegManager.SecurityWrite("","");
 #else
             SlectedAccountIndex = -1;
 #endif

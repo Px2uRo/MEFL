@@ -14,5 +14,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Debugger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Hosting.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFLAccount.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RegManager.cs" />
   </ItemGroup>
 </Project>

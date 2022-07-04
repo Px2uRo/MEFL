@@ -7,17 +7,22 @@
         mc:Ignorable="d"
         xmlns:h="https://handyorg.github.io/handycontrol"
         Title="MainWindow" Height="450" Width="800"
+        DataContext="{DynamicResource MV}"
         xmlns:c="clr-namespace:MEFL.Controls;assembly=MEFL.Controls" Topmost="True"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
+    <Window.Resources>
+        <local:ModelView x:Key="MV"/>
+    </Window.Resources>
     <Grid Background="Black">
         <c:MyComboBox Width="60" Height="20" 
+                      Name="MyCB"
                       Background="Aqua"
                       HorizontalAlignment="Right" 
                       Initialized="MyComboBox_Initialized"
                       >
-            <TextBlock Text="Itm1"/>
-            <TextBlock Text="Itm2"/>
-
+            <TextBlock Text="1"/>
+            <TextBlock Text="2"/>
+            <TextBlock Text="3"/>
             <c:MyComboBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -28,5 +33,10 @@
             </c:MyComboBox.RenderTransform>
 
         </c:MyComboBox>
+        <c:MyButton Content="MyButton" 
+                    HorizontalAlignment="Left" 
+                    Margin="511,292,0,0" 
+                    Click="MyButton_Click"
+                    VerticalAlignment="Top"/>
     </Grid>
 </Window>

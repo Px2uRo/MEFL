@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Globalization;
 using System.Text;
 using System.Windows;
@@ -23,24 +25,39 @@ namespace MEFL.Controls
             (Template.FindName("PART_Border", this) as Border).MouseDown += MyComboBox_MouseDown;
             this.DropDownOpened += MyComboBox_DropDownOpened;
             this.DropDownClosed += MyComboBox_DropDownClosed;
-            (Template.FindName("PART_Popup", this) as Popup).Opened += MyComboBox_Initialized;
-            this.SelectionChanged += MyComboBox_SelectionChanged;
+            this.Loaded += MyComboBox_Loaded;
         }
 
-        private void MyComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        protected override void OnItemsSourceChanged(IEnumerable oldValue, IEnumerable newValue)
         {
-            //object a;
-            //a = (sender as MyComboBox).SelectedItem;
-            //(sender as MyComboBox).Items[(sender as MyComboBox).SelectedIndex] = a;
-            //(Template.FindName("PART_CP", this) as ContentControl).Content = a;
-        }
-
-        private void MyComboBox_Initialized(object? sender, EventArgs e)
-        {
-            if (OrignalHeight == 0.0)
+            base.OnItemsSourceChanged(oldValue, newValue);
+            if (Template != null)
             {
-                this.OrignalHeight = (Template.FindName("PART_Popup_Border", this) as Border).ActualHeight;
-                (Template.FindName("PART_Popup_Border", this) as Border).Height = 0;
+                (Template.FindName("PART_Popup_Border_Contents", this) as StackPanel).Children.Clear();
+                for (int i = 0; i < Items.Count; i++)
+                {
+                    var combo = new MyComboBoxItem() { Content = Items[i], Index = i };
+                    combo.MouseDown += Combo_MouseDown;
+                    (Template.FindName("PART_Popup_Border_Contents", this) as StackPanel)
+                    .Children.Add(combo);
+                }
+            }
+        }
+
+        private void Combo_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.SelectedIndex = (sender as MyComboBoxItem).Index;
+        }
+
+        private void MyComboBox_Loaded(object sender, RoutedEventArgs e)
+        {
+            (Template.FindName("PART_Popup_Border_Contents", this) as StackPanel).Children.Clear();
+            for (int i = 0; i < Items.Count; i++)
+            {
+                var combo = new MyComboBoxItem() { Content = Items[i], Index = i };
+                combo.MouseDown += Combo_MouseDown;
+                (Template.FindName("PART_Popup_Border_Contents", this) as StackPanel)
+                .Children.Add(combo);
             }
         }
 
@@ -50,7 +67,7 @@ namespace MEFL.Controls
     .BeginAnimation(HeightProperty, new DoubleAnimation()
     {
         To = 0,
-        From = OrignalHeight,
+        From = 80,
         Duration = TimeSpan.FromSeconds(0.2),
         EasingFunction = new PowerEase()
     });
@@ -71,7 +88,7 @@ namespace MEFL.Controls
     .BeginAnimation(HeightProperty, new DoubleAnimation()
     {
         From = 0,
-        To = OrignalHeight,
+        To = 80,
         Duration = TimeSpan.FromSeconds(0.2),
         EasingFunction = new PowerEase()
     });
@@ -119,21 +136,6 @@ namespace MEFL.Controls
         // Using a DependencyProperty as the backing store for MyItemColor.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MyItemColorProperty =
             DependencyProperty.Register("MyItemColor", typeof(Brush), typeof(MyComboBox), new PropertyMetadata(new SolidColorBrush(Colors.Transparent)));
-
-
-
-        public double OrignalHeight
-        {
-            get { return (double)GetValue(OrignalHeightProperty); }
-            set { SetValue(OrignalHeightProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for OrignalHeight.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty OrignalHeightProperty =
-            DependencyProperty.Register("OrignalHeight", typeof(double), typeof(MyComboBox), new PropertyMetadata(0.0));
-
-
-
         #endregion
     }
 
