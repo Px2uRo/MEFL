@@ -9,6 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800" LineBrush="{DynamicResource SYTLE_Standard_ColorBrush}"
              >
     <c:MyPageBase.Resources>
+        <SettingPageModelView xmlns="clr-namespace:MEFL.PageModelViews" x:Key="SPMV"/>
     </c:MyPageBase.Resources>
     <c:MyPageBase.SideBar>
         <StackPanel>
@@ -31,19 +32,20 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="{DynamicResource I18N_String_Setting_Launcher_SelcetLanguage}" Margin="0,0,20,0"/>
-                    <ComboBox Grid.Column="1" 
+                    <c:MyComboBox Grid.Column="1"
                               SelectedIndex="{Binding LangIndex}"
-                              DataContext="{DynamicResource SPMV}" >
+                              DataContext="{DynamicResource SPMV}" 
+                              DropDownOpened="MyComboBox_DropDownOpened">
                         <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_CN}"/>
                         <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_yue_CN}"/>
                         <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_yue_HK}"/>
-                        <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_HK}"/>
                         <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_MO}"/>
+                        <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_HK}"/>
                         <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_TW}"/>
                         <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_SG}"/>
                         <TextBlock Text="{DynamicResource I18N_String_Language_Opts_en_US}"/>
                         <TextBlock Text="{DynamicResource I18N_String_Language_Opts_en_UK}"/>
-                    </ComboBox>
+                    </c:MyComboBox>
                 </Grid>
             </c:MyCard>
         </StackPanel>

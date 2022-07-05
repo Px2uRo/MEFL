@@ -13,7 +13,7 @@
     <Window.Resources>
         <local:ModelView x:Key="MV"/>
     </Window.Resources>
-    <Grid Background="Black">
+    <Grid Background="Aqua">
         <c:MyComboBox Width="60" Height="20" 
                       Name="MyCB"
                       Background="Aqua"

@@ -13,7 +13,6 @@
     <mv:ExtraAddInPageModelView xmlns="clr-namespace:MEFL.PageModelViews" x:Key="EAIPMV"/>
     <String x:Key="ShowingSymbol" xmlns="clr-namespace:System;assembly=mscorlib">MainPage</String>
     <mv:ExtensionPageModelView x:Key="EPMV"/>
-    <mv:SettingPageModelView xmlns="clr-namespace:MEFL.PageModelViews" x:Key="SPMV"/>
     <StackPanel Orientation="Horizontal" x:Key="AddInChangePageButtons" DataContext="{DynamicResource EAIPMV}"/>
     <Grid x:Key="MainPage"/>
     <Grid x:Key="Background"/>

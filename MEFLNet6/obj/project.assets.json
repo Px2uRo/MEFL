@@ -17,7 +17,7 @@
           "Microsoft.WindowsDesktop.App.WPF"
         ]
       },
-      "MEFL.Controls/0.0.4.1": {
+      "MEFL.Controls/0.0.4.7": {
         "type": "package",
         "compile": {
           "lib/net6.0-windows7.0/MEFL.Controls.dll": {}
@@ -394,14 +394,14 @@
         "lib/net6.0-windows7.0/ContractNet6.dll"
       ]
     },
-    "MEFL.Controls/0.0.4.1": {
-      "sha512": "1JlhSDRvShIDh21BW/XOuQsUdohsChlK1naNmt5YrYhOv0ap6nbRyhIA/FWM2Vx2sXEyrjkCS62LhKtDdRMQeA==",
+    "MEFL.Controls/0.0.4.7": {
+      "sha512": "rE6TuNgxpgPHHJ3uW0tu0zyBP+kMZoCbUCJrzBWjg4L30/AzRS9KchGqgSBQQ7U6iIssI540x8t1Hc10SxvVCg==",
       "type": "package",
-      "path": "mefl.controls/0.0.4.1",
+      "path": "mefl.controls/0.0.4.7",
       "files": [
         ".nupkg.metadata",
         "lib/net6.0-windows7.0/MEFL.Controls.dll",
-        "mefl.controls.0.0.4.1.nupkg.sha512",
+        "mefl.controls.0.0.4.7.nupkg.sha512",
         "mefl.controls.nuspec"
       ]
     },
@@ -1807,7 +1807,7 @@
     "net6.0-windows7.0": [
       "ContractNet6 >= 0.0.2.7",
       "CoreLaunchingNet6 >= 1.0.0",
-      "MEFL.Controls >= 0.0.4.1",
+      "MEFL.Controls >= 0.0.4.7",
       "System.ComponentModel.Composition >= 6.0.0"
     ]
   },
@@ -1868,7 +1868,7 @@
           },
           "MEFL.Controls": {
             "target": "Package",
-            "version": "[0.0.4.1, )"
+            "version": "[0.0.4.7, )"
           },
           "System.ComponentModel.Composition": {
             "target": "Package",

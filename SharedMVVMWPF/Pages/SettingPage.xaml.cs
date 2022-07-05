@@ -1,6 +1,7 @@
 ﻿using MEFL.Controls;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,10 @@ namespace MEFL.Pages
         {
             var btn = sender as ChangePageContentButton;
             btn.Show(btn.Tag.ToString(), this.Content as Panel);
+        }
+        private void MyComboBox_DropDownOpened(object sender, EventArgs e)
+        {
+
         }
     }
 }

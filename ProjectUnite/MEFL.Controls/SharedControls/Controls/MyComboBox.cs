@@ -30,35 +30,32 @@ namespace MEFL.Controls
 
         protected override void OnItemsSourceChanged(IEnumerable oldValue, IEnumerable newValue)
         {
-            base.OnItemsSourceChanged(oldValue, newValue);
-            if (Template != null)
-            {
-                (Template.FindName("PART_Popup_Border_Contents", this) as StackPanel).Children.Clear();
-                for (int i = 0; i < Items.Count; i++)
-                {
-                    var combo = new MyComboBoxItem() { Content = Items[i], Index = i };
-                    combo.MouseDown += Combo_MouseDown;
-                    (Template.FindName("PART_Popup_Border_Contents", this) as StackPanel)
-                    .Children.Add(combo);
-                }
-            }
+            //(Template.FindName("PART_Popup_Border_Contents", this) as StackPanel).Children.Clear();
+            //for (int i = 0; i < Items.Count; i++)
+            //{
+            //    var combo = new MyComboBoxItem() { Content = Items[i], Index = i };
+            //    combo.MouseDown += Combo_MouseDown;
+            //    (Template.FindName("PART_Popup_Border_Contents", this) as StackPanel)
+            //    .Children.Add(combo);
+            //}
         }
 
         private void Combo_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.SelectedIndex = (sender as MyComboBoxItem).Index;
+            MyComboBox_MouseDown(sender,e);
         }
 
         private void MyComboBox_Loaded(object sender, RoutedEventArgs e)
         {
-            (Template.FindName("PART_Popup_Border_Contents", this) as StackPanel).Children.Clear();
-            for (int i = 0; i < Items.Count; i++)
-            {
-                var combo = new MyComboBoxItem() { Content = Items[i], Index = i };
-                combo.MouseDown += Combo_MouseDown;
-                (Template.FindName("PART_Popup_Border_Contents", this) as StackPanel)
-                .Children.Add(combo);
-            }
+            //(Template.FindName("PART_Popup_Border_Contents", this) as StackPanel).Children.Clear();
+            //for (int i = 0; i < Items.Count; i++)
+            //{
+            //    var combo = new MyComboBoxItem() { Content = Items[i], Index = i };
+            //    combo.MouseDown += Combo_MouseDown;
+            //    (Template.FindName("PART_Popup_Border_Contents", this) as StackPanel)
+            //    .Children.Add(combo);
+            //}
         }
 
         private void MyComboBox_DropDownClosed(object? sender, EventArgs e)
@@ -67,7 +64,7 @@ namespace MEFL.Controls
     .BeginAnimation(HeightProperty, new DoubleAnimation()
     {
         To = 0,
-        From = 80,
+        From = 75,
         Duration = TimeSpan.FromSeconds(0.2),
         EasingFunction = new PowerEase()
     });
@@ -88,7 +85,7 @@ namespace MEFL.Controls
     .BeginAnimation(HeightProperty, new DoubleAnimation()
     {
         From = 0,
-        To = 80,
+        To = 75,
         Duration = TimeSpan.FromSeconds(0.2),
         EasingFunction = new PowerEase()
     });
@@ -143,32 +140,13 @@ namespace MEFL.Controls
     {
         object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if ((bool)value == true)
+            if ((bool)value == false)
             {
                 return new CornerRadius(2, 2, 0, 0);
             }
             else
             {
                 return new CornerRadius(2);
-            }
-        }
-
-        object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-    }
-    public class BoolTotTH : IValueConverter
-    {
-        object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if ((bool)value == true)
-            {
-                return new Thickness(1,1,1,0);
-            }
-            else
-            {
-                return new Thickness(1);
             }
         }
 

@@ -29,7 +29,7 @@ namespace MEFL.PageModelViews
             {
                 SettingPageModel.SettingArgs.LangID = (LangID)value;
                 SettingPageModel.SetLang();
-            } 
+            }
         }
         public SettingPageModelView()
         {
