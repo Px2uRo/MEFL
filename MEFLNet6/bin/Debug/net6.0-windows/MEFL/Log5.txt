@@ -1,33 +1,6 @@
-﻿[17:26:58][MEFL]程序启动了,参数
-[17:26:58][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:26:58][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:26:58][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:26:58][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:27:05][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":true}]
-[17:27:05][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":true}]
-[17:27:05][MEFL]加载了一个插件，名称 TestAddIn.dll，版本：1.0.0.0 Guid 6d621dcf-8a77-47df-aa83-081b3f142ba7
-[17:27:05][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":true}]
-[17:27:09][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:27:09][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:27:09][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:27:09][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:27:09][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:27:09][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":true}]
-[17:27:09][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":true}]
-[17:27:09][MEFL]加载了一个插件，名称 TestAddIn.dll，版本：1.0.0.0 Guid 6d621dcf-8a77-47df-aa83-081b3f142ba7
-[17:27:09][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":true}]
-[17:27:12][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:27:12][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:27:12][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:27:12][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:27:12][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:27:14][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":true}]
-[17:27:14][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":true}]
-[17:27:14][MEFL]加载了一个插件，名称 TestAddIn.dll，版本：1.0.0.0 Guid 6d621dcf-8a77-47df-aa83-081b3f142ba7
-[17:27:14][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":true}]
-[17:27:16][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:27:16][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:27:16][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:27:16][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:27:16][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:27:18][MEFL]程序退出了
+﻿[18:46:53][MEFL]程序启动了,参数
+[18:46:54][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
+[18:46:54][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
+[18:46:54][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
+[18:46:54][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
+[18:46:56][MEFL]程序退出了

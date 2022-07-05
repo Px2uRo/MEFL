@@ -1,5 +1,6 @@
 ﻿using MEFL.Controls;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -45,6 +46,42 @@ namespace WPFTest
             {
                 Model.Foo = value;
             } 
+        }
+
+        private int _LangIndex;
+
+        public int LangIndex
+        {
+            get { 
+                return _LangIndex; 
+            }
+            set {
+                if (value != 0)
+                {
+                    ResourceDictionary dic = new ResourceDictionary();
+                    dic.Source = new Uri(@"I:\Xiong's\MEFLCollection\SharedMVVMWPF\I18N\en_US.xaml");
+                    foreach (DictionaryEntry item in dic)
+                    {
+                        App.Current.Resources[item.Key] = item.Value;
+                    }
+                    dic = null;
+                }
+                else
+                {
+                    ResourceDictionary dic = new ResourceDictionary();
+                    dic.Source = new Uri(@"I:\Xiong's\MEFLCollection\SharedMVVMWPF\I18N\zh_CN.xaml");
+                    foreach (DictionaryEntry item in dic)
+                    {
+                        App.Current.Resources[item.Key] = item.Value;
+                    }
+                    dic = null;
+                }
+                _LangIndex = value;
+            }
+        }
+        public ModelView()
+        {
+            LangIndex = 0;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;

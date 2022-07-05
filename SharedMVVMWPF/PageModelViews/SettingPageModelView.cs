@@ -90,6 +90,7 @@ namespace MEFL.PageModelViews
         static SettingPageModel()
         {
             SettingArgs = new Arguments.SettingArgs();
+            #region 获取 MEFL.Contract 协议版本
             Assembly ass;
             try
             {
@@ -125,7 +126,7 @@ namespace MEFL.PageModelViews
                 ContractVersion = "Unknown";
             }
             ass = null;
-
+            #endregion
             #region Langs
             if (CultureInfo.CurrentCulture.Name == "zh-CN")
             {
@@ -161,6 +162,7 @@ namespace MEFL.PageModelViews
             }
             SetLang();
             #endregion
+            #region 获取背景图片
             img = new Image();
             if (APIData.APIModel.SettingConfig.PicturePath != null)
             {
@@ -173,6 +175,7 @@ namespace MEFL.PageModelViews
 
                 }
             }
+            #endregion
         }
     }
     public class ChangeBackground : ICommand

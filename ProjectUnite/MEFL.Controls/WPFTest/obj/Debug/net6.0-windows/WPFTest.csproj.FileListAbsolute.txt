@@ -23,3 +23,5 @@ I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\WPFTest\obj\Debug\net6.0-wi
 I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\WPFTest\obj\Debug\net6.0-windows\WPFTest.genruntimeconfig.cache
 I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\WPFTest\obj\Debug\net6.0-windows\ref\WPFTest.dll
 I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\WPFTest\bin\Debug\net6.0-windows\HandyControl.dll
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\WPFTest\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\WPFTest\obj\Debug\net6.0-windows\App.baml

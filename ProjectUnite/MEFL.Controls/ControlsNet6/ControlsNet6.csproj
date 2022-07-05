@@ -9,7 +9,7 @@
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     <BaseOutputPath>D:\MyNupkgs\MEFL.Controls</BaseOutputPath>
     <FileVersion></FileVersion>
-    <Version>0.0.4.7</Version>
+    <Version>0.0.4.11</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

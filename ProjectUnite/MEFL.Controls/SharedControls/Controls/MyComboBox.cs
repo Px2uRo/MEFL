@@ -25,39 +25,7 @@ namespace MEFL.Controls
             (Template.FindName("PART_Border", this) as Border).MouseDown += MyComboBox_MouseDown;
             this.DropDownOpened += MyComboBox_DropDownOpened;
             this.DropDownClosed += MyComboBox_DropDownClosed;
-            this.Loaded += MyComboBox_Loaded;
         }
-
-        protected override void OnItemsSourceChanged(IEnumerable oldValue, IEnumerable newValue)
-        {
-            //(Template.FindName("PART_Popup_Border_Contents", this) as StackPanel).Children.Clear();
-            //for (int i = 0; i < Items.Count; i++)
-            //{
-            //    var combo = new MyComboBoxItem() { Content = Items[i], Index = i };
-            //    combo.MouseDown += Combo_MouseDown;
-            //    (Template.FindName("PART_Popup_Border_Contents", this) as StackPanel)
-            //    .Children.Add(combo);
-            //}
-        }
-
-        private void Combo_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            this.SelectedIndex = (sender as MyComboBoxItem).Index;
-            MyComboBox_MouseDown(sender,e);
-        }
-
-        private void MyComboBox_Loaded(object sender, RoutedEventArgs e)
-        {
-            //(Template.FindName("PART_Popup_Border_Contents", this) as StackPanel).Children.Clear();
-            //for (int i = 0; i < Items.Count; i++)
-            //{
-            //    var combo = new MyComboBoxItem() { Content = Items[i], Index = i };
-            //    combo.MouseDown += Combo_MouseDown;
-            //    (Template.FindName("PART_Popup_Border_Contents", this) as StackPanel)
-            //    .Children.Add(combo);
-            //}
-        }
-
         private void MyComboBox_DropDownClosed(object? sender, EventArgs e)
         {
             (Template.FindName("PART_Popup_Border", this) as Border)
@@ -78,7 +46,6 @@ namespace MEFL.Controls
     });
 
         }
-
         private void MyComboBox_DropDownOpened(object? sender, EventArgs e)
         {
             (Template.FindName("PART_Popup_Border", this) as Border)

@@ -69,7 +69,7 @@ namespace MEFL.Pages {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/MEFL;V1.0.0.0;component/pages/extensionpage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/MEFL;component/pages/extensionpage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\SharedMVVMWPF\Pages\ExtensionPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

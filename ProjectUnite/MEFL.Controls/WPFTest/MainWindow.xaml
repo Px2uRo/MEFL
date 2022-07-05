@@ -7,22 +7,30 @@
         mc:Ignorable="d"
         xmlns:h="https://handyorg.github.io/handycontrol"
         Title="MainWindow" Height="450" Width="800"
-        DataContext="{DynamicResource MV}"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:c="clr-namespace:MEFL.Controls;assembly=MEFL.Controls" Topmost="True"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Window.Resources>
-        <local:ModelView x:Key="MV"/>
+        <local:ModelView x:Key="mv"/>
     </Window.Resources>
     <Grid Background="Aqua">
-        <c:MyComboBox Width="60" Height="20" 
+        <c:MyComboBox Width="200" Height="20" 
                       Name="MyCB"
+                      DataContext="{DynamicResource mv}"
                       Background="Aqua"
                       HorizontalAlignment="Right" 
                       Initialized="MyComboBox_Initialized"
+                      SelectedIndex="{Binding LangIndex}"
                       >
-            <TextBlock Text="1"/>
-            <TextBlock Text="2"/>
-            <TextBlock Text="3"/>
+            <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_CN}"/>
+            <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_yue_CN}"/>
+            <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_yue_HK}"/>
+            <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_MO}"/>
+            <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_HK}"/>
+            <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_TW}"/>
+            <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_SG}"/>
+            <TextBlock Text="{DynamicResource I18N_String_Language_Opts_en_US}"/>
+            <TextBlock Text="{DynamicResource I18N_String_Language_Opts_en_UK}"/>
             <c:MyComboBox.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

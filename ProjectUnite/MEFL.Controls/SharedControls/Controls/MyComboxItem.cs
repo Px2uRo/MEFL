@@ -6,7 +6,7 @@ using System.Windows.Controls;
 
 namespace MEFL.Controls
 {
-    public class MyComboBoxItem:UserControl
+    public class MyComboBoxItem:ListBoxItem
     {
         static MyComboBoxItem()
         {
