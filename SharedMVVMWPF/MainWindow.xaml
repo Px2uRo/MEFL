@@ -47,8 +47,9 @@
                               Stroke="Black" 
                               StrokeThickness="0.8" Height="24" Stretch="Fill" Width="26"/>
                     </c:ChangePageButton>
-                    <ContentPresenter Content="{Binding Title}" 
-                              VerticalAlignment="Center"
+                    <ContentPresenter Content="{DynamicResource I18N_String_Setting_Title}" 
+                              TextBlock.FontSize="20"
+                                      VerticalAlignment="Center"
                               Margin="10,0,0,0"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" 

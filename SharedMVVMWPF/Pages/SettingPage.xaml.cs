@@ -34,9 +34,5 @@ namespace MEFL.Pages
             var btn = sender as ChangePageContentButton;
             btn.Show(btn.Tag.ToString(), this.Content as Panel);
         }
-        private void MyComboBox_DropDownOpened(object sender, EventArgs e)
-        {
-
-        }
     }
 }

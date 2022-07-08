@@ -24,7 +24,7 @@
     <sys:String x:Key="I18N_String_Insider">预览</sys:String>
     <sys:String x:Key="I18N_String_Setting_Launcher">启动器配置</sys:String>
     <sys:String x:Key="I18N_String_Setting_Launcher_SelcetLanguage">选择语言</sys:String>
-
+    <sys:String x:Key="I18N_String_Setting_Title">MEFL</sys:String>
     <sys:String x:Key="I18N_String_Setting_Custom">个性化</sys:String>
     <sys:String x:Key="I18N_String_Setting_Custom_BackgroundImage">背景图片</sys:String>
     <sys:String x:Key="I18N_String_Setting_Custom_BackgroundImage_Open">打开...</sys:String>

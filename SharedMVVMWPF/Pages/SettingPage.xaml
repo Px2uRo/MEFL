@@ -35,7 +35,7 @@
                     <c:MyComboBox Grid.Column="1" Height="20"
                               SelectedIndex="{Binding LangIndex}"
                               DataContext="{DynamicResource SPMV}" 
-                              DropDownOpened="MyComboBox_DropDownOpened">
+                              >
                         <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_CN}"/>
                         <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_yue_CN}"/>
                         <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_yue_HK}"/>

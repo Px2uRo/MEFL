@@ -28,11 +28,11 @@ namespace MEFL.Controls
         }
         private void MyComboBox_DropDownClosed(object? sender, EventArgs e)
         {
-            (Template.FindName("PART_Popup_Border", this) as Border)
+            (Template.FindName("PART_Popup", this) as Popup)
     .BeginAnimation(HeightProperty, new DoubleAnimation()
     {
         To = 0,
-        From = 75,
+        From = ComboHeight,
         Duration = TimeSpan.FromSeconds(0.2),
         EasingFunction = new PowerEase()
     });
@@ -48,11 +48,11 @@ namespace MEFL.Controls
         }
         private void MyComboBox_DropDownOpened(object? sender, EventArgs e)
         {
-            (Template.FindName("PART_Popup_Border", this) as Border)
+            (Template.FindName("PART_Popup", this) as Popup)
     .BeginAnimation(HeightProperty, new DoubleAnimation()
     {
         From = 0,
-        To = 75,
+        To = ComboHeight,
         Duration = TimeSpan.FromSeconds(0.2),
         EasingFunction = new PowerEase()
     });
@@ -79,6 +79,20 @@ namespace MEFL.Controls
         }
 
         #region Propdps
+
+
+
+        public double ComboHeight
+        {
+            get { return (double)GetValue(ComboHeightProperty); }
+            set { SetValue(ComboHeightProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ComboHeight.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ComboHeightProperty =
+            DependencyProperty.Register("ComboHeight", typeof(double), typeof(MyComboBox), new PropertyMetadata(75.0));
+
+
         public new Brush Background
         {
             get { return (Brush)GetValue(BackgroundProperty); }

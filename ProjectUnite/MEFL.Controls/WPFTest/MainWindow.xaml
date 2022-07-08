@@ -19,7 +19,6 @@
                       DataContext="{DynamicResource mv}"
                       Background="Aqua"
                       HorizontalAlignment="Right" 
-                      Initialized="MyComboBox_Initialized"
                       SelectedIndex="{Binding LangIndex}"
                       >
             <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_CN}"/>
@@ -31,17 +30,8 @@
             <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_SG}"/>
             <TextBlock Text="{DynamicResource I18N_String_Language_Opts_en_US}"/>
             <TextBlock Text="{DynamicResource I18N_String_Language_Opts_en_UK}"/>
-            <c:MyComboBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </c:MyComboBox.RenderTransform>
-
         </c:MyComboBox>
-        <c:MyButton Content="MyButton" 
+        <c:MyButton Content="{DynamicResource I18N_String_AddIns}" 
                     HorizontalAlignment="Left" 
                     Margin="511,292,0,0" 
                     Click="MyButton_Click"

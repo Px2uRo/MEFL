@@ -209,13 +209,12 @@
                                     </Path>
                                 </Grid>
                                 <Popup AllowsTransparency="True"
-                                       HorizontalOffset="1" 
+                                       Height="0" Opacity="1" Visibility="Visible"
                                        Width="{Binding ElementName=PART_Root,Path=ActualWidth}" 
-                                       IsOpen="True"
-                                       Name="PART_Popup"
+                                       IsOpen="{TemplateBinding IsDropDownOpen}"
+                                       Name="PART_Popup" HorizontalOffset="1"
                                        >
                                     <Border Name="PART_Popup_Border" 
-                                            Height="0"
                                             CornerRadius="0,0,2,2"
                                             BorderBrush="Black" 
                                             BorderThickness="1,0,1,1" 

@@ -5,6 +5,7 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <sys:String x:Key="I18N_String_AddIns">插件</sys:String>
         <sys:String x:Key="I18N_String_Language_Opts_zh_CN">中文(中国)[中文(中国)]</sys:String>
         <sys:String x:Key="I18N_String_Language_Opts_zh_yue_CN">白话(中国)[粤语(中国)]</sys:String>
         <sys:String x:Key="I18N_String_Language_Opts_zh_yue_HK">白話(中國香港)[粤语(中国香港)]</sys:String>

@@ -23,17 +23,17 @@ namespace MEFL.PageModelViews
         public int LangIndex {
             get
             {
-                return (int)SettingPageModel.SettingArgs.LangID;
+                return (int)APIData.APIModel.SettingArgs.LangID;
             }
             set 
             {
-                SettingPageModel.SettingArgs.LangID = (LangID)value;
+                APIData.APIModel.SettingArgs.LangID = (LangID)value;
                 SettingPageModel.SetLang();
             }
         }
         public SettingPageModelView()
         {
-            LangIndex = (int)SettingPageModel.SettingArgs.LangID;
+            LangIndex = (int)APIData.APIModel.SettingArgs.LangID;
             ChangeBackground = new ChangeBackground();
         }
     }
@@ -41,43 +41,42 @@ namespace MEFL.PageModelViews
     {
         public static string ContractVersion { get; set; }
         public static Image img { get; set; }
-        public static Arguments.SettingArgs SettingArgs { get; set; }
         public static void SetLang()
         {
             ResourceDictionary dic = new ResourceDictionary();
-            if (SettingArgs.LangID == LangID.zh_CN)
+            if (APIData.APIModel.SettingArgs.LangID == LangID.zh_CN)
             {
                 dic.Source = new Uri("pack://application:,,,/I18N/zh_CN.xaml");
             }
-            else if (SettingArgs.LangID == LangID.zh_yue_CN)
+            else if (APIData.APIModel.SettingArgs.LangID == LangID.zh_yue_CN)
             {
                 dic.Source = new Uri("pack://application:,,,/I18N/zh_yue_CN.xaml");
             }
-            else if (SettingArgs.LangID == LangID.zh_yue_HK)
+            else if (APIData.APIModel.SettingArgs.LangID == LangID.zh_yue_HK)
             {
                 dic.Source = new Uri("pack://application:,,,/I18N/zh_yue_HK.xaml");
             }
-            else if (SettingArgs.LangID == LangID.zh_HK)
+            else if (APIData.APIModel.SettingArgs.LangID == LangID.zh_HK)
             {
                 dic.Source = new Uri("pack://application:,,,/I18N/zh_HK.xaml");
             }
-            else if (SettingArgs.LangID == LangID.zh_MO)
+            else if (APIData.APIModel.SettingArgs.LangID == LangID.zh_MO)
             {
                 dic.Source = new Uri("pack://application:,,,/I18N/zh_MO.xaml");
             }
-            else if (SettingArgs.LangID == LangID.zh_TW)
+            else if (APIData.APIModel.SettingArgs.LangID == LangID.zh_TW)
             {
                 dic.Source = new Uri("pack://application:,,,/I18N/zh_TW.xaml");
             }
-            else if (SettingArgs.LangID == LangID.zh_SG)
+            else if (APIData.APIModel.SettingArgs.LangID == LangID.zh_SG)
             {
                 dic.Source = new Uri("pack://application:,,,/I18N/zh_SG.xaml");
             }
-            else if (SettingArgs.LangID == LangID.en_US)
+            else if (APIData.APIModel.SettingArgs.LangID == LangID.en_US)
             {
                 dic.Source = new Uri("pack://application:,,,/I18N/en_US.xaml");
             }
-            else if (SettingArgs.LangID == LangID.en_UK)
+            else if (APIData.APIModel.SettingArgs.LangID == LangID.en_UK)
             {
                 dic.Source = new Uri("pack://application:,,,/I18N/en_UK.xaml");
             }
@@ -89,7 +88,6 @@ namespace MEFL.PageModelViews
         }
         static SettingPageModel()
         {
-            SettingArgs = new Arguments.SettingArgs();
             #region 获取 MEFL.Contract 协议版本
             Assembly ass;
             try
@@ -130,35 +128,35 @@ namespace MEFL.PageModelViews
             #region Langs
             if (CultureInfo.CurrentCulture.Name == "zh-CN")
             {
-                SettingArgs.LangID = LangID.zh_CN;
+                APIData.APIModel.SettingArgs.LangID = LangID.zh_CN;
             }
             else if (CultureInfo.CurrentCulture.Name == "zh-HK")
             {
-                SettingArgs.LangID = LangID.zh_HK;
+                APIData.APIModel.SettingArgs.LangID = LangID.zh_HK;
             }
             else if (CultureInfo.CurrentCulture.Name == "zh-MO")
             {
-                SettingArgs.LangID = LangID.zh_MO;
+                APIData.APIModel.SettingArgs.LangID = LangID.zh_MO;
             }
             else if (CultureInfo.CurrentCulture.Name == "zh-TW")
             {
-                SettingArgs.LangID = LangID.zh_TW;
+                APIData.APIModel.SettingArgs.LangID = LangID.zh_TW;
             }
             else if (CultureInfo.CurrentCulture.Name == "zh-SG")
             {
-                SettingArgs.LangID = LangID.zh_SG;
+                APIData.APIModel.SettingArgs.LangID = LangID.zh_SG;
             }
             else if (CultureInfo.CurrentCulture.Name == "en-US")
             {
-                SettingArgs.LangID = LangID.en_US;
+                APIData.APIModel.SettingArgs.LangID = LangID.en_US;
             }
             else if (CultureInfo.CurrentCulture.Name == "en-UK")
             {
-                SettingArgs.LangID = LangID.en_UK;
+                APIData.APIModel.SettingArgs.LangID = LangID.en_UK;
             }
             else
             {
-                SettingArgs.LangID = LangID.en_US;
+                APIData.APIModel.SettingArgs.LangID = LangID.en_US;
             }
             SetLang();
             #endregion

@@ -35,18 +35,12 @@ namespace WPFTest
 
         private void MyButton_Click(object sender, RoutedEventArgs e)
         {
-            MyCB.ItemsSource = new List<string>() { "989"};
+            //MyCB.ItemsSource = new List<string>() { "989"};
         }
     }
 
     public class ModelView: INotifyPropertyChanged
     {
-        public List<String> Foo { get=>Model.Foo; 
-            set 
-            {
-                Model.Foo = value;
-            } 
-        }
 
         private int _LangIndex;
 
@@ -89,10 +83,6 @@ namespace WPFTest
 
     public static class Model
     {
-        public static List<String> Foo { get; set; }
-        static Model() 
-        {
-            Foo = new List<String>() { "4", "5", "6" };
-        }
+
     }
 }

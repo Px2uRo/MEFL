@@ -41,9 +41,11 @@ namespace MEFL.APIData
             }
         }
 
+        public static Arguments.SettingArgs SettingArgs { get; set; }
 
         static APIModel()
         {
+            SettingArgs = new Arguments.SettingArgs();
             SettingConfig = MEFL.APIData.SettingConfig.Load();
             AddInConfigs = MEFL.APIData.AddInConfig.GetAll();
             RemoveAddInsTheSameAddIn();

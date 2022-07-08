@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <PackageReference Include="ContractNet6" Version="0.0.2.7" />
-    <PackageReference Include="MEFL.Controls" Version="0.0.4.11" />
+    <PackageReference Include="MEFL.Controls" Version="0.0.4.18" />
     <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />
   </ItemGroup>
 
@@ -41,21 +41,6 @@
 
   <ItemGroup>
     <PRIResource Remove="MyImages.resw" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Update="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
