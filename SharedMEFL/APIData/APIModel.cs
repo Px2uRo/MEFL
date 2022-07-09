@@ -42,6 +42,7 @@ namespace MEFL.APIData
         }
 
         public static Arguments.SettingArgs SettingArgs { get; set; }
+        public static Contract.GameInfoBase CurretGame { get; set; }
 
         static APIModel()
         {

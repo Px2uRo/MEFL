@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,11 @@ namespace MEFL.Pages
         public RealMainPage()
         {
             InitializeComponent();
+        }
+
+        private void MyButton_Click(object sender, RoutedEventArgs e)
+        {
+            (this.DataContext as PageModelViews.RealMainPageModelView).CurretGame=new MEFLRealseType();
         }
     }
 }

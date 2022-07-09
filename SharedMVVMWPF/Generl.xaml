@@ -22,13 +22,14 @@
     <sys:String x:Key="I18N_String_AddIns">插件</sys:String>
     <sys:String x:Key="I18N_String_GetMore">获取更多</sys:String>
     <sys:String x:Key="I18N_String_Insider">预览</sys:String>
+    <sys:String x:Key="I18N_String_MainPage_CurretGame">当前游戏：</sys:String>
+    <sys:String x:Key="I18N_String_MainPage_ClickHereToChange">点此更改</sys:String>
     <sys:String x:Key="I18N_String_Setting_Launcher">启动器配置</sys:String>
     <sys:String x:Key="I18N_String_Setting_Launcher_SelcetLanguage">选择语言</sys:String>
     <sys:String x:Key="I18N_String_Setting_Title">MEFL</sys:String>
     <sys:String x:Key="I18N_String_Setting_Custom">个性化</sys:String>
     <sys:String x:Key="I18N_String_Setting_Custom_BackgroundImage">背景图片</sys:String>
     <sys:String x:Key="I18N_String_Setting_Custom_BackgroundImage_Open">打开...</sys:String>
-
     <sys:String x:Key="I18N_String_Setting_Game">游戏</sys:String>
     <sys:String x:Key="I18N_String_AddIns_Author">作者</sys:String>
     <sys:String x:Key="I18N_String_AddIns_Descripition">描述</sys:String>

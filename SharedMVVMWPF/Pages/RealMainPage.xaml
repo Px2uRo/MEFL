@@ -10,12 +10,14 @@
               DataContext="{DynamicResource RMPMV}">
     <c:MyPageBase.Resources>
         <mv:RealMainPageModelView x:Key="RMPMV"/>
+        <mv:ConvertGameInfo x:Key="CGI"/>
     </c:MyPageBase.Resources>
     <c:MyPageBase.SideBar>
         <Grid Width="230">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
             <c:MyButton Height="30" Margin="3,0,3,0" Width="220"
@@ -24,6 +26,13 @@
                         BorderBrush="{DynamicResource SYTLE_Standard_ColorBrush}" 
                         Content="{DynamicResource WelcomeWords}"/>
             <c:MyButton Command="{Binding LuanchGameCommand}" Width="60" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1"/>
+            <c:MyButton Width="220" Grid.Row="2" Height="30" Click="MyButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="{DynamicResource I18N_String_MainPage_CurretGame}"/>
+                    <TextBlock Text="{Binding CurretGame,Converter={StaticResource CGI},ConverterParameter=Name}"/>
+                    <TextBlock Text="{DynamicResource I18N_String_MainPage_ClickHereToChange}"/>
+                </StackPanel>
+            </c:MyButton>
         </Grid>
     </c:MyPageBase.SideBar>
 </c:MyPageBase>
