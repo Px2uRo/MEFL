@@ -24,6 +24,7 @@
     <sys:String x:Key="I18N_String_Insider">预览</sys:String>
     <sys:String x:Key="I18N_String_MainPage_CurretGame">当前游戏：</sys:String>
     <sys:String x:Key="I18N_String_MainPage_ClickHereToChange">点此更改</sys:String>
+    <sys:String x:Key="I18N_String_MainPage_GameSeting">游戏设置</sys:String>
     <sys:String x:Key="I18N_String_Setting_Launcher">启动器配置</sys:String>
     <sys:String x:Key="I18N_String_Setting_Launcher_SelcetLanguage">选择语言</sys:String>
     <sys:String x:Key="I18N_String_Setting_Title">MEFL</sys:String>
@@ -35,7 +36,12 @@
     <sys:String x:Key="I18N_String_AddIns_Descripition">描述</sys:String>
     <sys:String x:Key="I18N_String_AddIns_Version">版本号</sys:String>
 
+
     <sys:String x:Key="I18N_String_MEFLAccounts_WelcomeWords">欢迎回来 {0}</sys:String>
+    <sys:String x:Key="I18N_String_MEFLGameInfos_Realse">正式发布版</sys:String>
+    <sys:String x:Key="I18N_String_MEFLGameInfos_Realse_Icon">发布</sys:String>
+    <sys:String x:Key="I18N_String_MEFLGameInfos_Preview">先行预览版</sys:String>
+    <sys:String x:Key="I18N_String_MEFLGameInfos_Preview_Icon">预览</sys:String>
     <sys:String x:Key="I18N_String_Language_Opts">语言</sys:String>
     <sys:String x:Key="I18N_String_Language_Opts_zh_CN">中文(中国)[中文(中国)]</sys:String>
     <sys:String x:Key="I18N_String_Language_Opts_zh_yue_CN">白话(中国)[粤语(中国)]</sys:String>

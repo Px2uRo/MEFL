@@ -18,8 +18,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ContractNet6" Version="0.0.2.7" />
-    <PackageReference Include="MEFL.Controls" Version="0.0.4.18" />
+    <PackageReference Include="ContractNet6" Version="0.0.2.12" />
+    <PackageReference Include="MEFL.Controls" Version="0.0.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />
   </ItemGroup>
 

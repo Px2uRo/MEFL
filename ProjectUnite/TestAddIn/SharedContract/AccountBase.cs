@@ -16,6 +16,5 @@ namespace MEFL.Contract
         public abstract string UserProperties { get; }
         public abstract object WelcomeWords { get; }
         public abstract void LaunchGameAction(AccountBase account);
-        public abstract void ChangeSettingAction(SettingArgs args);
     }
 }

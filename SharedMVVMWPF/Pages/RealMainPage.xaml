@@ -18,21 +18,39 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="30"/>
-                <RowDefinition Height="30"/>
+                <RowDefinition Height="40"/>
             </Grid.RowDefinitions>
             <c:MyButton Height="30" Margin="3,0,3,0" Width="220"
                         Background="Transparent" 
                         BorderThickness="1"
                         BorderBrush="{DynamicResource SYTLE_Standard_ColorBrush}" 
                         Content="{DynamicResource WelcomeWords}"/>
-            <c:MyButton Command="{Binding LuanchGameCommand}" Width="60" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1"/>
-            <c:MyButton Width="220" Grid.Row="2" Height="30" Click="MyButton_Click">
+            <c:MyButton Command="{Binding LuanchGameCommand}" Width="60" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" />
+            <c:MyButton Click="MyButton_Click" Margin="3,0,3,0" Width="220" Grid.Row="2" Height="30">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{DynamicResource I18N_String_MainPage_CurretGame}"/>
                     <TextBlock Text="{Binding CurretGame,Converter={StaticResource CGI},ConverterParameter=Name}"/>
                     <TextBlock Text="{DynamicResource I18N_String_MainPage_ClickHereToChange}"/>
                 </StackPanel>
             </c:MyButton>
+            <c:MyButton Margin="3,0,3,0" Content="{DynamicResource I18N_String_MainPage_GameSeting}" Grid.Row="3" Width="220"/>
         </Grid>
     </c:MyPageBase.SideBar>
+    <Grid>
+        <Border x:Name="ChangeGameBorder" Visibility="Hidden">
+            <StackPanel>
+                <Grid Height="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <c:MyComboBox ItemsSource="{Binding MyFolders}"/>
+                    <c:MyButton Width="20" Height="20" Grid.Column="1" Content="+"/>
+                </Grid>
+                <c:MyItemsCard ItemsSource="{Binding GameInfoConfigs}">
+                    
+                </c:MyItemsCard>
+            </StackPanel>
+        </Border>
+    </Grid>
 </c:MyPageBase>

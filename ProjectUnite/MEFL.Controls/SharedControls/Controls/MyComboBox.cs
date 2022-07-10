@@ -25,6 +25,7 @@ namespace MEFL.Controls
             (Template.FindName("PART_Border", this) as Border).MouseDown += MyComboBox_MouseDown;
             this.DropDownOpened += MyComboBox_DropDownOpened;
             this.DropDownClosed += MyComboBox_DropDownClosed;
+            base.OnApplyTemplate();
         }
         private void MyComboBox_DropDownClosed(object? sender, EventArgs e)
         {

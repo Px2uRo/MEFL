@@ -10,11 +10,13 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AccountBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameInfoBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IBaseInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IPages.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IPermissions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ISettingPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ILuncherGameInfoBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)StandardOtherArgumentTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SettingArgs.cs" />
   </ItemGroup>
 </Project>

@@ -30,7 +30,7 @@ namespace MEFL.Pages
 
         private void MyButton_Click(object sender, RoutedEventArgs e)
         {
-            (this.DataContext as PageModelViews.RealMainPageModelView).CurretGame=new MEFLRealseType();
+            ChangeGameBorder.Visibility = Visibility.Visible;
         }
     }
 }

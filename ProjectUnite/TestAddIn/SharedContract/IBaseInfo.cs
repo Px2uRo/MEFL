@@ -9,6 +9,7 @@ namespace MEFL.Contract
         public object Icon { get; }
         public Uri PulisherUri { get; }
         public Uri ExtensionUri { get; }
+        public void SettingsChange(Arguments.SettingArgs args);
     }
 #endif
 }

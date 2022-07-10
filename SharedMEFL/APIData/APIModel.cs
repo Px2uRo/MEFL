@@ -1,6 +1,8 @@
 ﻿using MEFL.Contract;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -43,6 +45,8 @@ namespace MEFL.APIData
 
         public static Arguments.SettingArgs SettingArgs { get; set; }
         public static Contract.GameInfoBase CurretGame { get; set; }
+        public static ObservableCollection<Contract.GameInfoBase> GameInfoConfigs { get; set; }
+        public static ObservableCollection<MEFLFolderInfo> MyFolders { get; set; }
 
         static APIModel()
         {
@@ -51,6 +55,12 @@ namespace MEFL.APIData
             AddInConfigs = MEFL.APIData.AddInConfig.GetAll();
             RemoveAddInsTheSameAddIn();
             AccountConfigs = new List<AccountBase>();
+            GameInfoConfigs = new ObservableCollection<Contract.GameInfoBase>();
+            if (Directory.Exists(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"))!=true)
+            {
+                Directory.CreateDirectory(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"));
+            }
+            MyFolders = new ObservableCollection<MEFLFolderInfo>() { new MEFLFolderInfo() { Path= System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft") } };
 #if DEBUG
             AccountConfigs.Add(new MEFLLegacyAccount() {GetSetUserName = "Hongyu"});
             SelectedAccountIndex = 0;

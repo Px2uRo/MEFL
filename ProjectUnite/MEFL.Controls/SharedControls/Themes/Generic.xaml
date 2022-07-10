@@ -44,7 +44,8 @@
                                         <ContentPresenter
                                             x:Name="PART_Title" 
                                             Style="{DynamicResource STYLE_Normal_Title}" 
-                                            Content="{TemplateBinding Title}" HorizontalAlignment="Left"/>
+                                            Content="{TemplateBinding Title}" 
+                                            HorizontalAlignment="Left" />
                                         <Rectangle Fill="Transparent" x:Name="PART_CheckBox"/>
                                     </Grid>
                                     <ContentPresenter 
@@ -169,6 +170,8 @@
         </Setter>
     </Style>
     <Style TargetType="{x:Type local:MyComboBox}">
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
                 <Style TargetType="ComboBoxItem">
@@ -196,7 +199,16 @@
                                 CornerRadius="{Binding ElementName=PART_Popup,Path=IsEnabled,Converter={StaticResource BTCR}}">
                             <StackPanel>
                                 <Grid>
-                                    <ContentPresenter x:Name="PART_CP" ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" Content="{TemplateBinding SelectionBoxItem}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" IsHitTestVisible="false" Margin="2,0,0,0" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                    <ContentPresenter x:Name="PART_CP" 
+                                                      ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}" 
+                                                      ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}" 
+                                                      Content="{TemplateBinding SelectionBoxItem}" 
+                                                      ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}" 
+                                                      HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                                                      IsHitTestVisible="false" 
+                                                      Margin="2,0,0,0" 
+                                                      SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                                                      VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                     <Path HorizontalAlignment="Right" 
                                           Stroke="Black" StrokeThickness="1" 
                                           IsEnabled="{Binding ElementName=PART_Popup,Path=IsEnabled}"
@@ -213,6 +225,7 @@
                                        Width="{Binding ElementName=PART_Root,Path=ActualWidth}" 
                                        IsOpen="{TemplateBinding IsDropDownOpen}"
                                        Name="PART_Popup" HorizontalOffset="1"
+                                       VerticalOffset="1"
                                        >
                                     <Border Name="PART_Popup_Border" 
                                             CornerRadius="0,0,2,2"
@@ -237,7 +250,7 @@
                 <ControlTemplate TargetType="{x:Type local:MyComboBoxItem}">
                     <Grid Height="25" Width="auto" Background="Transparent">
                         <Rectangle Fill="White"/>
-                        <Rectangle Name="Rect" Opacity="0" Fill="Gray"/>
+                        <Rectangle Name="Rect" Opacity="0" Fill="{TemplateBinding Decoration}"/>
                         <ContentPresenter VerticalAlignment="Center"/>
                         <Grid.Triggers>
                             <EventTrigger RoutedEvent="MouseEnter">
@@ -245,7 +258,6 @@
                                     <Storyboard>
                                         <DoubleAnimation From="0" To="0.3" Duration="0:0:0:0.2"
                                                                      Storyboard.TargetName="Rect" Storyboard.TargetProperty="Opacity">
-
                                         </DoubleAnimation>
                                     </Storyboard>
                                 </BeginStoryboard>
@@ -261,6 +273,81 @@
                             </EventTrigger>
                         </Grid.Triggers>
                     </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type local:MyItemsCard}">
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="ListBoxItem">
+                                <ContentPresenter/>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:MyItemsCard}">
+                    <local:MyCard Title="{TemplateBinding Title}" CornerRadius="{TemplateBinding CornerRadius}" BorderBrush="{TemplateBinding BorderBrush}" IsSwaped="{TemplateBinding IsSwaped}" IsAbleToSwap="{TemplateBinding IsAbleToSwap}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <ItemsPresenter/>
+                    </local:MyCard>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type local:MyItemsCardItem}">
+        <Setter Property="Height" Value="30"/>
+        <Setter Property="Width" Value="auto"/>
+        <Setter Property="Margin" Value="0,0,0,5"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:MyItemsCardItem}">
+                    <Border Background="{TemplateBinding Background}" CornerRadius="5">
+                        <Grid>
+                            <Border Name="Rect" CornerRadius="5" Opacity="0" Grid.RowSpan="2" Grid.ColumnSpan="2" Background="{TemplateBinding Decoration}"/>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="2*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <ContentPresenter Content="{TemplateBinding Icon}" Grid.RowSpan="2"/>
+                                <TextBlock Text="{TemplateBinding Title}" FontWeight="Bold" FontSize="16" Grid.Column="1" HorizontalAlignment="Left"/>
+                                <TextBlock Text="{TemplateBinding SubTitle}" FontSize="9" Foreground="#CC000000" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left"/>
+                                <ContentPresenter Content="{TemplateBinding PropertyItems}" Grid.RowSpan="2" Grid.Column="1" HorizontalAlignment="Right"/>
+                            </Grid>
+                            <Grid.Triggers>
+                                <EventTrigger RoutedEvent="MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation From="0" To="0.3" Duration="0:0:0:0.2"
+                                                                     Storyboard.TargetName="Rect" Storyboard.TargetProperty="Opacity">
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation From="0.3" To="0" Duration="0:0:0:0.2"
+                                                                     Storyboard.TargetName="Rect" Storyboard.TargetProperty="Opacity">
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Grid.Triggers>
+                        </Grid>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -35,12 +36,30 @@ namespace WPFTest
 
         private void MyButton_Click(object sender, RoutedEventArgs e)
         {
-            //MyCB.ItemsSource = new List<string>() { "989"};
+            (this.DataContext as ModelView).Obs = new ObservableCollection<MyPair>() { new MyPair() { RealName = "112", Value = "22asddas231" }, new MyPair() { RealName = "11asd4514wqewqsda", Value = "191adsdasd981asdsda0" } };
+        }
+
+        private void MyItemsCard_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MessageBox.Show("Changed");
         }
     }
 
     public class ModelView: INotifyPropertyChanged
     {
+        private ObservableCollection<MyPair> _obs;
+        public  ObservableCollection<MyPair> Obs {
+            get 
+            {
+                return _obs;
+            }
+            set 
+            {
+                _obs =value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Obs"));
+            }
+                
+        }
 
         private int _LangIndex;
 
@@ -76,9 +95,17 @@ namespace WPFTest
         public ModelView()
         {
             LangIndex = 0;
+            Obs = new ObservableCollection<MyPair>() { new MyPair() { RealName="112",Value="22231"},new MyPair() { RealName = "114514", Value = "1919810" } };
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
+    }
+
+    public class MyPair
+    {
+        public string RealName { get; set; }
+        public string Value { get; set; }
+        public object Icon { get; set; }
     }
 
     public static class Model

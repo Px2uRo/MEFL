@@ -37,14 +37,9 @@ namespace MEFL
             } 
         }
 
-        public override void ChangeSettingAction(SettingArgs args)
-        {
-            
-        }
-
         public override void LaunchGameAction(AccountBase account)
         {
-            
+            throw new NotImplementedException();
         }
     }
 }

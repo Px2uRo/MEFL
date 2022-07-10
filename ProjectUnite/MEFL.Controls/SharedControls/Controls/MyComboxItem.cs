@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace MEFL.Controls
 {
@@ -14,16 +15,15 @@ namespace MEFL.Controls
         }
 
 
-        public int Index
+        public Brush Decoration
         {
-            get { return (int)GetValue(IndexProperty); }
-            set { SetValue(IndexProperty, value); }
+            get { return (Brush)GetValue(DecorationProperty); }
+            set { SetValue(DecorationProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Index.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty IndexProperty =
-            DependencyProperty.Register("Index", typeof(int), typeof(MyComboBoxItem), new PropertyMetadata(-1));
-
+        // Using a DependencyProperty as the backing store for Decoration.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty DecorationProperty =
+            DependencyProperty.Register("Decoration", typeof(Brush), typeof(MyComboBoxItem), new PropertyMetadata(new SolidColorBrush(Colors.Gray)));
 
 
     }

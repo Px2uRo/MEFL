@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Globalization;
 using System.Text;
@@ -7,6 +8,7 @@ using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using MEFL.APIData;
+using MEFL.Contract;
 
 namespace MEFL.PageModelViews
 {
@@ -21,11 +23,36 @@ namespace MEFL.PageModelViews
             }
             set 
             {
-                    APIModel.CurretGame = value;
-                    Invoke("CurretGame");
+                APIModel.CurretGame = value;
+                Invoke("CurretGame");
             }
         }
 
+        public ObservableCollection<Contract.GameInfoBase> GameInfoConfigs
+        {
+            get
+            {
+                return APIModel.GameInfoConfigs;
+            }
+            set
+            {
+                APIModel.GameInfoConfigs = value;
+                Invoke("GameInfoConfigs");
+            }
+        }
+
+        public ObservableCollection<MEFLFolderInfo> MyFolders 
+        {
+            get
+            {
+                return APIModel.MyFolders;
+            }
+            set
+            {
+                APIModel.MyFolders = value;
+                Invoke("MyFolders");
+            }
+        }
 
         public ICommand LuanchGameCommand
         {
@@ -66,20 +93,27 @@ namespace MEFL.PageModelViews
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (APIModel.CurretGame != null)
+            if (value != null)
             {
                 if (parameter.ToString() == "Name")
                 {
-                    return APIModel.CurretGame.Name;
+                    try
+                    {
+                        return (value as GameInfoBase).Name;
+                    }
+                    catch (Exception ex)
+                    {
+                        return null;
+                    }
                 }
                 else
                 {
-                    return null;
+                    return "未知";
                 }
             }
             else
             {
-                return null;
+                return "未设置";
             }
         }
 

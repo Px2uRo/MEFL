@@ -7,34 +7,22 @@
         mc:Ignorable="d"
         xmlns:h="https://handyorg.github.io/handycontrol"
         Title="MainWindow" Height="450" Width="800"
-        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib" DataContext="{DynamicResource mv}" 
         xmlns:c="clr-namespace:MEFL.Controls;assembly=MEFL.Controls" Topmost="True"
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
     <Window.Resources>
         <local:ModelView x:Key="mv"/>
     </Window.Resources>
-    <Grid Background="Aqua">
-        <c:MyComboBox Width="200" Height="20" 
-                      Name="MyCB"
-                      DataContext="{DynamicResource mv}"
-                      Background="Aqua"
-                      HorizontalAlignment="Right" 
-                      SelectedIndex="{Binding LangIndex}"
-                      >
-            <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_CN}"/>
-            <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_yue_CN}"/>
-            <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_yue_HK}"/>
-            <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_MO}"/>
-            <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_HK}"/>
-            <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_TW}"/>
-            <TextBlock Text="{DynamicResource I18N_String_Language_Opts_zh_SG}"/>
-            <TextBlock Text="{DynamicResource I18N_String_Language_Opts_en_US}"/>
-            <TextBlock Text="{DynamicResource I18N_String_Language_Opts_en_UK}"/>
-        </c:MyComboBox>
-        <c:MyButton Content="{DynamicResource I18N_String_AddIns}" 
-                    HorizontalAlignment="Left" 
-                    Margin="511,292,0,0" 
-                    Click="MyButton_Click"
-                    VerticalAlignment="Top"/>
+    <Grid>
+        <c:MyItemsCard SelectionChanged="MyItemsCard_SelectionChanged"
+            ItemsSource="{Binding Obs}" 
+            Width="500" Height="300" Title="JNTM" BorderBrush="Aqua" BorderThickness="2" IsAbleToSwap="True">
+            <c:MyItemsCard.ItemTemplate>
+                <DataTemplate>
+                    <c:MyItemsCardItem Title="{Binding RealName}" SubTitle="{Binding Value}"/>
+                </DataTemplate>
+            </c:MyItemsCard.ItemTemplate>
+        </c:MyItemsCard>
+        <c:MyButton VerticalAlignment="Bottom" Click="MyButton_Click" Background="Aqua"/>
     </Grid>
 </Window>

@@ -5,7 +5,7 @@
   },
   "projects": {
     "I:\\Xiong's\\CoreLaunching\\CoreLaunchingNet6\\CoreLaunchingNet6.csproj": {
-      "version": "1.0.0",
+      "version": "0.0.0",
       "restore": {
         "projectUniqueName": "I:\\Xiong's\\CoreLaunching\\CoreLaunchingNet6\\CoreLaunchingNet6.csproj",
         "projectName": "CoreLaunchingNet6",
@@ -124,11 +124,15 @@
           "dependencies": {
             "ContractNet6": {
               "target": "Package",
-              "version": "[0.0.2.7, )"
+              "version": "[0.0.2.12, )"
             },
             "MEFL.Controls": {
               "target": "Package",
-              "version": "[0.0.4.18, )"
+              "version": "[0.0.5, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
             },
             "System.ComponentModel.Composition": {
               "target": "Package",
