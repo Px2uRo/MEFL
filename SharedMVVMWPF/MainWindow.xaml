@@ -16,6 +16,7 @@
         <Style TargetType="con:MyCard">
             <Setter Property="BorderBrush" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>
             <Setter Property="Background" Value="{DynamicResource SYTLE_Standard_Background}"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
         </Style>
         <Style TargetType="con:MyPageBase">
             <Setter Property="LineBrush" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>
@@ -35,49 +36,46 @@
             <Setter Property="Decoration" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>
         </Style>
         <Style TargetType="con:MyItemsCard">
-            <Setter Property="BorderBrush" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource SYTLE_Standard_BorderBrush}"/>
             <Setter Property="Background" Value="{DynamicResource SYTLE_Standard_Background}"/>
+            <Setter Property="BorderThickness" Value="5"/>
         </Style>
     </Window.Resources>
     <Grid>
+        <!--这个是 Insider 装饰-->
         <TextBlock Text="{DynamicResource I18N_String_Insider}" FontSize="100" Foreground="Gray" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,40,40" FontFamily="Microsoft Yahei" FontWeight="Bold" />
+        <!--这个是 Backgorund 装饰-->
         <ContentPresenter Content="{DynamicResource Background}"/>
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="40"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
+            <!--这个是 窗口 装饰-->
             <Grid Background="{DynamicResource SYTLE_Standard_ColorBrush}" 
                   MouseMove="Grid_MouseMove" Opacity="0.9">
                 <StackPanel Orientation="Horizontal">
-                    <c:ChangePageButton Width="45" Margin="0,5,0,0" Tag="RealMainPage">
+                    <!--这个是窗口左边主页按钮装饰-->
+                    <c:ChangePageButton Width="45" Margin="0,5,0,0" Tag="{DynamicResource HomePageButtonStatu}">
                         <Path HorizontalAlignment="Center" 
                               VerticalAlignment="Center" 
                               Data="M17.5125 20.2706 17.5125 23.76 20.8937 23.76 20.8937 20.2706ZM13.4631 20.2706 13.4631 23.76 16.8443 23.76 16.8443 20.2706ZM17.5125 16.0189 17.5125 19.5083 20.8937 19.5083 20.8937 16.0189ZM13.4631 16.0189 13.4631 19.5083 16.8443 19.5083 16.8443 16.0189ZM13.5001 0.500053 26.5001 14.0001 22.7178 14.0001 22.7178 27.5001 11.3998 27.5001 11.3998 19.5083 6.34555 19.5083 6.34555 27.5001 4.28224 27.5001 4.28224 14.0001 0.500053 14.0001Z" 
                               Stroke="Black" 
                               StrokeThickness="0.8" Height="24" Stretch="Fill" Width="26"/>
                     </c:ChangePageButton>
-                    <ContentPresenter Content="{DynamicResource I18N_String_Setting_Title}" 
+                    <ContentPresenter Content="{DynamicResource I18N_String_Setting_Title_Now}" 
                               TextBlock.FontSize="20"
                                       VerticalAlignment="Center"
                               Margin="10,0,0,0"/>
                 </StackPanel>
+                <!--这个是右边切换页面和关闭窗口的装饰-->
                 <StackPanel Orientation="Horizontal" 
                         HorizontalAlignment="Right">
+                    <!--这些是插件的切换按钮-->
                     <ContentPresenter Content="{DynamicResource AddInChangePageButtons}" Initialized="Ini"/>
-                    <StackPanel Orientation="Horizontal">
-                        <c:ChangePageButton Width="45" Tag="ExtensionPage"
-                        Margin="0,5,0,0">
-                            <!--#region Icon -->
-                            <Path Data="M0.500053 0.500053 8.15191 0.500053 8.13135 0.700159C8.13135 2.63976 9.73378 4.21211 11.7105 4.21211 13.6872 4.21211 15.2896 2.63976 15.2896 0.700159L15.2691 0.500053 22.9209 0.500053 22.9209 8.10635 22.9209 8.10635C24.8976 8.10635 26.5001 9.6787 26.5001 11.6183 26.5001 13.5579 24.8976 15.1302 22.9209 15.1302L22.9209 15.1302 22.9209 22.5001 4.23694 22.5001C2.17312 22.5001 0.500053 20.8584 0.500053 18.8333Z"
-                              Stroke="Black" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                            <!--#endregion-->
-                        </c:ChangePageButton>
-                        <c:ChangePageButton Width="45" Tag="SettingPage" Margin="0,5,0,0">
-                            <Path Data="M0 1.15848 1.01007 2.10614 2.02013 3.0538 3.2831 1.86895 2.30113 0.947658 1.29106 0 3.3111 0 4.29307 0.921299 4.29942 0.915336 4.29942 0.927257 4.32117 0.947658 4.29942 0.96806 4.29942 2.81056 11.9698 10.007 13.9899 10.007 15 10.9547 15 12.85 13.9899 11.9023 12.9799 10.9547 11.7357 12.1219 11.7363 12.1225 11.7552 12.1048 11.7551 12.1048 11.7552 12.1047 12.7525 13.0403 12.7549 13.0381 13.7599 13.995 11.7606 13.995 11.7552 14 11.7499 13.995 11.7499 13.995 11.7499 13.995 10.8066 13.1099 10.7877 13.1276 10.8066 13.1099 10.8064 13.1098 10.7876 13.1275 10.7876 13.092 10.7453 13.0523 10.7876 13.0126 10.7875 11.2794 3.0302 4.00145 1.01007 4.00145 0 3.0538Z"
-                                  Stroke="Black" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center" Height="23" Stretch="Fill" Width="23"/>
-                        </c:ChangePageButton>
-                    </StackPanel>
+                    <!--这些是MEFL的切换按钮-->
+                    <ContentPresenter Content="{DynamicResource ChangePageButtons}"/>
+                    <!--这些是MEFL的关闭按钮-->
                     <StackPanel Orientation="Horizontal">
                         <Grid Width="45" 
                         Margin="0,5,0,0">

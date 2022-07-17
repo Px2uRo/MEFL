@@ -17,8 +17,13 @@
     <Grid x:Key="MainPage"/>
     <Grid x:Key="Background"/>
     <sys:Object x:Key="WelcomeWords"/>
+    <StackPanel x:Key="ChangePageButtons" Orientation="Horizontal"/>
 
+    <String x:Key="HomePageButtonStatu" xmlns="clr-namespace:System;assembly=mscorlib">RealMainPage</String>
     <!--#region I18NStrings -->
+    <sys:String x:Key="I18N_String_App_OnStartUp">程序启动了，参数{0}</sys:String>
+    <sys:String x:Key="I18N_String_App_OnExit">程序退出了</sys:String>
+
     <sys:String x:Key="I18N_String_AddIns">插件</sys:String>
     <sys:String x:Key="I18N_String_GetMore">获取更多</sys:String>
     <sys:String x:Key="I18N_String_Insider">预览</sys:String>
@@ -27,7 +32,8 @@
     <sys:String x:Key="I18N_String_MainPage_GameSeting">游戏设置</sys:String>
     <sys:String x:Key="I18N_String_Setting_Launcher">启动器配置</sys:String>
     <sys:String x:Key="I18N_String_Setting_Launcher_SelcetLanguage">选择语言</sys:String>
-    <sys:String x:Key="I18N_String_Setting_Title">MEFL</sys:String>
+    <sys:String x:Key="I18N_String_Setting_Default_Title">MEFL</sys:String>
+    <sys:String x:Key="I18N_String_Setting_Title_Now">咖啡不断加加加加到厌倦</sys:String>
     <sys:String x:Key="I18N_String_Setting_Custom">个性化</sys:String>
     <sys:String x:Key="I18N_String_Setting_Custom_BackgroundImage">背景图片</sys:String>
     <sys:String x:Key="I18N_String_Setting_Custom_BackgroundImage_Open">打开...</sys:String>

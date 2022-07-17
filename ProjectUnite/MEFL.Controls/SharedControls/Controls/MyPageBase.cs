@@ -6,6 +6,7 @@ using System.Windows.Media.Animation;
 
 namespace MEFL.Controls
 {
+    [Obsolete("正在考虑是否移除")]
     public class MyPageBase : UserControl
     {
         static MyPageBase()

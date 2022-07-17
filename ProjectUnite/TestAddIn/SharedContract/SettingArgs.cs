@@ -3,6 +3,11 @@
     public class SettingArgs
     {
         public LangID LangID { get; set; }
+        public Contract.GameInfoBase CurretGame { get; set; }
+        public Contract.AccountBase CurretAccount { get; set; }
+        public string CurretJavaPath { get; set; }
+        public string DefaultJavaArgs { get; set; }
+        public string DefaultOtherGameArgs { get; set; }
     }
 
     /// <summary>

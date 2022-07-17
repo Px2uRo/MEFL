@@ -43,8 +43,32 @@ namespace MEFL.APIData
             }
         }
 
+        private static int _SelectedFolderIndex { get; set; }
+
+        public static int SelectedFolderIndex
+        {
+            get { return _SelectedFolderIndex; }
+            set
+            {
+                if (value < MyFolders.Count)
+                {
+                    _SelectedFolderIndex = value;
+                    SelectedForder = MyFolders[value];
+                }
+            }
+        }
+
+        private static MEFLFolderInfo _SelectedForder;
+
+        public static MEFLFolderInfo SelectedForder
+        {
+            get { return _SelectedForder; }
+            set { _SelectedForder = value; }
+        }
+
+
         public static Arguments.SettingArgs SettingArgs { get; set; }
-        public static Contract.GameInfoBase CurretGame { get; set; }
+        public static Contract.GameInfoBase CurretGame { get => SettingArgs.CurretGame; set => SettingArgs.CurretGame = value; }
         public static ObservableCollection<Contract.GameInfoBase> GameInfoConfigs { get; set; }
         public static ObservableCollection<MEFLFolderInfo> MyFolders { get; set; }
 
@@ -60,7 +84,9 @@ namespace MEFL.APIData
             {
                 Directory.CreateDirectory(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"));
             }
-            MyFolders = new ObservableCollection<MEFLFolderInfo>() { new MEFLFolderInfo() { Path= System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft") } };
+            MyFolders = new ObservableCollection<MEFLFolderInfo>() { new MEFLFolderInfo(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"), "本地文件夹") };
+            //todo 设置JSON
+            SelectedFolderIndex = 0;
 #if DEBUG
             AccountConfigs.Add(new MEFLLegacyAccount() {GetSetUserName = "Hongyu"});
             SelectedAccountIndex = 0;

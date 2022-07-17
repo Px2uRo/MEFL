@@ -14,15 +14,20 @@
         <local:ModelView x:Key="mv"/>
     </Window.Resources>
     <Grid>
-        <c:MyItemsCard SelectionChanged="MyItemsCard_SelectionChanged"
+        <c:MyCard IsAbleToSwap="True" IsSwaped="True" Background="Aqua" BorderThickness="5" BorderBrush="Black" Title="Title"/>
+        <!--<c:MyItemsCard SelectionChanged="MyItemsCard_SelectionChanged"
             ItemsSource="{Binding Obs}" 
-            Width="500" Height="300" Title="JNTM" BorderBrush="Aqua" BorderThickness="2" IsAbleToSwap="True">
+            Width="500" Height="300" 
+                       Title="JNTM" 
+                       BorderBrush="Aqua" 
+                       BorderThickness="2" 
+                       IsAbleToSwap="True">
             <c:MyItemsCard.ItemTemplate>
                 <DataTemplate>
                     <c:MyItemsCardItem Title="{Binding RealName}" SubTitle="{Binding Value}"/>
                 </DataTemplate>
             </c:MyItemsCard.ItemTemplate>
         </c:MyItemsCard>
-        <c:MyButton VerticalAlignment="Bottom" Click="MyButton_Click" Background="Aqua"/>
+        <c:MyButton VerticalAlignment="Bottom" Click="MyButton_Click" Background="Aqua"/>-->
     </Grid>
 </Window>

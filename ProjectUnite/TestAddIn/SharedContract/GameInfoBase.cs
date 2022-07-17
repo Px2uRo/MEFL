@@ -21,7 +21,9 @@ namespace MEFL.Contract
         public abstract string OtherGameArgs { get; set; }
         public abstract string OtherJVMArgs { get; set; }
         public abstract bool IsFavorate { get; set; }
+        public abstract bool LaunchByLauncher { get; }
         public abstract Process Launch(Arguments.SettingArgs args);
+        public abstract int JavaVersion { get; set; }
     }
 
     public class JavaVersion

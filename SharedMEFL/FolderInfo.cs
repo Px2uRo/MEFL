@@ -14,7 +14,7 @@ namespace MEFL
             {
                 _path=value;
                 Games = new ObservableCollection<GameInfoBase>();
-                _VersionPath = System.IO.Path.Combine(_path, "\\version");
+                _VersionPath = System.IO.Path.Combine(_path, "versions");
                 if (Directory.Exists(_VersionPath) != true)
                 {
                     Directory.CreateDirectory(_VersionPath);
@@ -31,7 +31,7 @@ namespace MEFL
                         var jOb = FastLoadJson.Load(SubJson);
                         if (jOb["type"] == null)
                         {
-                            Games.Add(new GameTypes.MEFLErrorType("无法获取版本类型", SubJson));
+                            Games.Add(new Contract.MEFLErrorType("不合法 Json", SubJson));
                         }
                         else
                         {
@@ -40,12 +40,16 @@ namespace MEFL
                             {
                                 Games.Add(new GameTypes.MEFLRealseType(SubJson));
                             }
+                            else
+                            {
+                                Games.Add(new Contract.MEFLErrorType(string.Format("不支持此版本：{0}", jOb["type"].ToString()),SubJson));
+                            }
                         }
                         jOb = null;
                     }
                     else
                     {
-                        Games.Add(new GameTypes.MEFLErrorType("不存在Json",SubJson));
+                        Games.Add(new Contract.MEFLErrorType("不存在Json",SubJson));
                     }
                     SubJson = null;
                 }
@@ -56,10 +60,12 @@ namespace MEFL
         public string FriendlyName { get; set; }
         public ObservableCollection<String> VersionJsons { get; set; }
         public ObservableCollection<GameInfoBase> Games { get; set; }
-        public MEFLFolderInfo()
+        public MEFLFolderInfo(string Path,string FriendlyName)
         {
             VersionJsons=new ObservableCollection<String>();
             Games=new ObservableCollection<GameInfoBase>();
+            this.Path = Path;
+            this.FriendlyName = FriendlyName;
         }
     }
 }

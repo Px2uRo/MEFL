@@ -225,7 +225,6 @@
                                        Width="{Binding ElementName=PART_Root,Path=ActualWidth}" 
                                        IsOpen="{TemplateBinding IsDropDownOpen}"
                                        Name="PART_Popup" HorizontalOffset="1"
-                                       VerticalOffset="1"
                                        >
                                     <Border Name="PART_Popup_Border" 
                                             CornerRadius="0,0,2,2"
@@ -294,7 +293,9 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:MyItemsCard}">
-                    <local:MyCard Title="{TemplateBinding Title}" CornerRadius="{TemplateBinding CornerRadius}" BorderBrush="{TemplateBinding BorderBrush}" IsSwaped="{TemplateBinding IsSwaped}" IsAbleToSwap="{TemplateBinding IsAbleToSwap}" BorderThickness="{TemplateBinding BorderThickness}">
+                    <local:MyCard Title="{TemplateBinding Title}" 
+                                  CornerRadius="{TemplateBinding CornerRadius}" 
+                                  BorderBrush="{TemplateBinding BorderBrush}" IsSwaped="{TemplateBinding IsSwaped}" IsAbleToSwap="{TemplateBinding IsAbleToSwap}" BorderThickness="{TemplateBinding BorderThickness}">
                         <ItemsPresenter/>
                     </local:MyCard>
                 </ControlTemplate>

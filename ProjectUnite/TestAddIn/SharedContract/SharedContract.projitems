@@ -16,6 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IPermissions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ISettingPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ILuncherGameInfoBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFLErrorType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StandardOtherArgumentTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SettingArgs.cs" />
   </ItemGroup>

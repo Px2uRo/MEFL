@@ -10,8 +10,15 @@ namespace MEFL
     {
         public static JObject Load(string JsonPath)
         {
-            var Content =System.IO.File.ReadAllText(JsonPath);
-            return JObject.Parse(Content);
+            try
+            {
+                var Content = System.IO.File.ReadAllText(JsonPath);
+                return JObject.Parse(Content);
+            }
+            catch (Exception ex)
+            {
+                return new JObject();
+            }
         }
     }
 }

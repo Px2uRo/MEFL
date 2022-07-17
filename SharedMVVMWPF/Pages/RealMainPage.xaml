@@ -9,8 +9,17 @@
              d:DesignHeight="450" d:DesignWidth="800"
               DataContext="{DynamicResource RMPMV}">
     <c:MyPageBase.Resources>
-        <mv:RealMainPageModelView x:Key="RMPMV"/>
+        <mv:RealMainPageModelView x:Key="RMPMV" PropertyChanged="RealMainPageModelView_PropertyChanged"/>
         <mv:ConvertGameInfo x:Key="CGI"/>
+        <Style TargetType="ListBoxItem" x:Key="ContainerStyle">
+            <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBoxItem">
+                            <c:MyItemsCardItem MouseDown="MyComboBox_MouseDown" Icon="{Binding IconSource}" Title="{Binding Name}" SubTitle="{Binding Description}"/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
     </c:MyPageBase.Resources>
     <c:MyPageBase.SideBar>
         <Grid Width="230">
@@ -33,23 +42,41 @@
                     <TextBlock Text="{DynamicResource I18N_String_MainPage_ClickHereToChange}"/>
                 </StackPanel>
             </c:MyButton>
-            <c:MyButton Margin="3,0,3,0" Content="{DynamicResource I18N_String_MainPage_GameSeting}" Grid.Row="3" Width="220"/>
+            <c:MyButton Margin="3,0,3,0" Command="{Binding }" Content="{DynamicResource I18N_String_MainPage_GameSeting}" Grid.Row="3" Width="220"/>
         </Grid>
     </c:MyPageBase.SideBar>
     <Grid>
         <Border x:Name="ChangeGameBorder" Visibility="Hidden">
             <StackPanel>
-                <Grid Height="20">
+                <Grid Height="30" Margin="0,0,0,5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="30"/>
                     </Grid.ColumnDefinitions>
-                    <c:MyComboBox ItemsSource="{Binding MyFolders}"/>
-                    <c:MyButton Width="20" Height="20" Grid.Column="1" Content="+"/>
+                    <c:MyComboBox ItemsSource="{Binding MyFolders}"
+                                  BorderBrush="{DynamicResource SYTLE_Standard_BorderBrush}"
+                                  BorderThickness="5" 
+                                  SelectedIndex="{Binding SelectedFolderIndex}">
+                        <c:MyComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding FriendlyName}"/>
+                            </DataTemplate>
+                        </c:MyComboBox.ItemTemplate>
+                        <c:MyComboBox.ItemContainerStyle>
+                            <Style TargetType="ComboBoxItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ComboBoxItem">
+                                            <c:MyComboBoxItem Content="{Binding FriendlyName}"/>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </c:MyComboBox.ItemContainerStyle>
+                    </c:MyComboBox>
+                    <c:MyButton Width="30" Height="30" Grid.Column="1" Content="+" Command="{Binding AddFolderInfoCommand}"/>
                 </Grid>
-                <c:MyItemsCard ItemsSource="{Binding GameInfoConfigs}">
-                    
-                </c:MyItemsCard>
+                <StackPanel x:Name="MyGamesSP"/>
             </StackPanel>
         </Border>
     </Grid>

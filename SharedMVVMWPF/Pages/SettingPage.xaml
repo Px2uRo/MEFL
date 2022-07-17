@@ -13,9 +13,9 @@
     </c:MyPageBase.Resources>
     <c:MyPageBase.SideBar>
         <StackPanel>
-            <c:ChangePageContentButton x:Name="DefalutChangeButton" Content="{DynamicResource I18N_String_Setting_Launcher}" Tag="{DynamicResource I18N_String_Setting_Launcher}" Checked="ChangePageContentButton_Checked"/>
-            <c:ChangePageContentButton Content="{DynamicResource I18N_String_Setting_Custom}" Tag="{DynamicResource I18N_String_Setting_Custom}" Checked="ChangePageContentButton_Checked"/>
-            <c:ChangePageContentButton Content="{DynamicResource I18N_String_Setting_Game}" Tag="{DynamicResource I18N_String_Setting_Game}" Checked="ChangePageContentButton_Checked"/>
+            <c:ChangePageContentButton x:Name="DefalutChangeButton" Content="{DynamicResource I18N_String_Setting_Game}" Tag="Game" Checked="ChangePageContentButton_Checked"/>
+            <c:ChangePageContentButton Content="{DynamicResource I18N_String_Setting_Launcher}" Tag="Launcher" Checked="ChangePageContentButton_Checked"/>
+            <c:ChangePageContentButton Content="{DynamicResource I18N_String_Setting_Custom}" Tag="Custom" Checked="ChangePageContentButton_Checked"/>
             <StackPanel.Resources>
                 <Style TargetType="c:ChangePageContentButton">
                     <Setter Property="SideBarBrush" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>
@@ -23,8 +23,8 @@
             </StackPanel.Resources>
         </StackPanel>
     </c:MyPageBase.SideBar>
-    <Grid >
-        <StackPanel Tag="{DynamicResource I18N_String_Setting_Launcher}">
+    <Grid>
+        <StackPanel Tag="Launcher">
             <c:MyCard Title="{DynamicResource I18N_String_Language_Opts}">
                 <Grid>
                     <Grid.ColumnDefinitions >
@@ -50,11 +50,15 @@
                 </Grid>
             </c:MyCard>
         </StackPanel>
-        <StackPanel Tag="{DynamicResource I18N_String_Setting_Custom}">
+        <StackPanel Tag="Custom">
             <c:MyCard Title="{DynamicResource I18N_String_Setting_Custom_BackgroundImage}">
                 <c:MyButton HorizontalAlignment="Left" DataContext="{DynamicResource SPMV}" Command="{Binding ChangeBackground}" Content="{DynamicResource I18N_String_Setting_Custom_BackgroundImage_Open}"/>
             </c:MyCard>
         </StackPanel>
-            <StackPanel Tag="{DynamicResource I18N_String_Setting_Game}"/>
+        <StackPanel Tag="Game">
+            <c:MyCard >
+
+            </c:MyCard>
+        </StackPanel>
     </Grid>
 </c:MyPageBase>

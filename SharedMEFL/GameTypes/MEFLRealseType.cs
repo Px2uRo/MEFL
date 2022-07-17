@@ -77,6 +77,21 @@ namespace MEFL.GameTypes
         public override string OtherJVMArgs { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override bool IsFavorate { get => _MSOAT.IsFavorite; set => _MSOAT.IsFavorite=value; }
         public override string GameJsonPath { get;set; }
+        public override bool LaunchByLauncher => true;
+
+        public override int JavaVersion {
+            get
+            {
+                try
+                {
+                    return _Root.JavaVersion.MajorVersion;
+                }
+                catch (Exception ex)
+                {
+                    return 8;
+                }
+            }
+            set => throw new NotImplementedException(); }
 
         public override Process Launch(SettingArgs args)
         {
@@ -84,6 +99,9 @@ namespace MEFL.GameTypes
         }
         public MEFLRealseType(string JsonPath)
         {
+            string otherArgsPath = Path.Combine(Path.GetDirectoryName(JsonPath), "MEFLOtherArguments.json");
+            _MSOAT =new MEFLStandardOtherArgumentTemplate(otherArgsPath);
+            otherArgsPath = string.Empty;
             GameJsonPath=JsonPath;
             try
             {

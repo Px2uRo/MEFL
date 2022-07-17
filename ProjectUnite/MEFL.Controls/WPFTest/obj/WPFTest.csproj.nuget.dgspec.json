@@ -5,7 +5,7 @@
   },
   "projects": {
     "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\MEFL.Controls\\ControlsNet6\\ControlsNet6.csproj": {
-      "version": "0.0.5",
+      "version": "0.0.5.2",
       "restore": {
         "projectUniqueName": "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\MEFL.Controls\\ControlsNet6\\ControlsNet6.csproj",
         "projectName": "MEFL.Controls",
@@ -64,7 +64,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -138,7 +138,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       }
     }

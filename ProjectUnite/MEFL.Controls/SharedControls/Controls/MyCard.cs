@@ -19,11 +19,20 @@ namespace MEFL.Controls
         private double Time { get; set; }
         private IEasingFunction Ease;
         private DoubleAnimation dbaniIcon;
-        private double OriginalOpacity;
+        private double OriginalOpacity = 0.0;
         #endregion
         static MyCard()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MyCard), new FrameworkPropertyMetadata(typeof(MyCard)));
+        }
+
+        protected override Size ArrangeOverride(Size arrangeBounds)
+        {
+            if (OriginalHeight==0.0)
+            {
+                OriginalHeight = base.ArrangeOverride(arrangeBounds).Height;
+            }
+            return base.ArrangeOverride(arrangeBounds);
         }
 
         public override void OnApplyTemplate()
@@ -55,7 +64,6 @@ namespace MEFL.Controls
 
         private void MyCard_Initialized(object sender, EventArgs e)
         {
-            OriginalHeight = this.ActualHeight;
             OriginalOpacity = (this.Template.FindName("PART_Background_Rect", this) as Border).Opacity;
             if (IsSwaped == true)
             {

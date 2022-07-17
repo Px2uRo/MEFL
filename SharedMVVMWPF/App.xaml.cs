@@ -18,7 +18,7 @@ namespace MEFL
             {
                 str += item;
             }
-            Debugger.Logger($"程序启动了,参数{str}");
+            Debugger.Logger(string.Format((this.Resources["I18N_String_App_OnStartUp"] as String),str));
 
             this.DispatcherUnhandledException += App_DispatcherUnhandledException;
             TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
@@ -30,7 +30,7 @@ namespace MEFL
 
         protected override void OnExit(ExitEventArgs e)
         {
-            Debugger.Logger("程序退出了");
+            Debugger.Logger(this.Resources["I18N_String_App_OnExit"] as String);
             base.OnExit(e);
         }
 
@@ -49,7 +49,6 @@ namespace MEFL
             MessageBox.Show(e.Exception.Message);
             Debugger.Logger(e.Exception.Message,"ERROR");
             e.Handled = true;
-            this.Shutdown();
         }
     }
 }

@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using MEFL.APIData;
 using MEFL.Contract;
+using MEFL.Controls;
 
 namespace MEFL.PageModelViews
 {
     public class RealMainPageModelView:PageModelViewBase
     {
-
         public Contract.GameInfoBase CurretGame
         {
             get 
@@ -54,26 +56,36 @@ namespace MEFL.PageModelViews
             }
         }
 
+        public int SelectedFolderIndex
+        {
+            get { return APIData.APIModel.SelectedFolderIndex; }
+            set { 
+                APIData.APIModel.SelectedFolderIndex = value;
+                APIData.APIModel.GameInfoConfigs =APIData.APIModel.MyFolders[value].Games;
+                Invoke("GameInfoConfigs"); 
+            }
+        }
+
         public ICommand LuanchGameCommand
         {
             get { return RealMainPageModel.LuanchGameCommand; }
             set { RealMainPageModel.LuanchGameCommand = value; }
         }
-        public RealMainPageModelView()
-        {
-            LuanchGameCommand = new LuanchGameCommand();
-        }
+        public ICommand AddFolderInfoCommand { get=> RealMainPageModel.AddFolderInfoCommand; set { RealMainPageModel.AddFolderInfoCommand = value; } }
     }
 
     public static class RealMainPageModel
     {
         public static ICommand LuanchGameCommand { get; set; }
-
+        public static ICommand AddFolderInfoCommand { get; set; }
         static RealMainPageModel()
         {
-
+            LuanchGameCommand = new LuanchGameCommand();
+            AddFolderInfoCommand = new AddFolderInfoCommand();
         }
     }
+
+
     public class LuanchGameCommand : ICommand
     {
         public event EventHandler? CanExecuteChanged;
@@ -85,7 +97,51 @@ namespace MEFL.PageModelViews
 
         public void Execute(object? parameter)
         {
-            MessageBox.Show("没准备好呐！");
+            if (APIModel.CurretGame != null)
+            {
+                if (APIModel.CurretGame.LaunchByLauncher == false)
+                {
+                    APIModel.CurretGame.Launch(APIModel.SettingArgs).Start();
+                }
+                else
+                {
+                    Process p = new Process();
+                    
+                }
+            }
+        }
+    }
+
+    public class AddFolderInfoCommand : ICommand
+    {
+        public event EventHandler? CanExecuteChanged;
+
+        public bool CanExecute(object? parameter)
+        {
+            return true;
+        }
+
+        public void Execute(object? parameter)
+        {
+            ///Todo 做一下添加文件夹。
+            (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.PickUpAFolder() { Tag="PickUP"});
+            MyPageBase From = new MyPageBase();
+            foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
+            {
+                if (item.Visibility == Visibility.Visible)
+                {
+                    From = item;
+                    if (item.Tag as String == From.Tag as String)
+                    {
+                        item.Hide();
+                    }
+                }
+            }
+            foreach (MyPageBase item in FindControl.FromTag("PickUP", (App.Current.Resources["MainPage"] as Grid)))
+            {
+                item.Show(From);
+            }
+            From = null;
         }
     }
 

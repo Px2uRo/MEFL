@@ -170,7 +170,7 @@ namespace MEFL.Controls
                     AddInContract = "Unknown";
                 }
                 ass = null;
-                throw new Exception($"无法获取权限使用情况，可能是因为协议不符合，当前协议版本{PageModelViews.SettingPageModel.ContractVersion}，插件协议版本{AddInContract}");
+                throw new Exception($"无法启用插件，可能是因为协议不符合，当前协议版本{PageModelViews.SettingPageModel.ContractVersion}，插件协议版本{AddInContract}");
             }
             if (Hosting.Permissions.UsePagesAPI)
             {

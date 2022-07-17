@@ -28,3 +28,12 @@ I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\MEFL.g.resources
 I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\MEFL.Properties.Resources.resources
 I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\MEFL.exe
 I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\MEFL.pdb
+I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\en_US.baml
+I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\en_UK.baml
+I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\zh_HK.baml
+I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\zh_TW.baml
+I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\zh_SG.baml
+I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\zh_yue_CN.baml
+I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\zh_yue_HK.baml
+I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\zh_MO.baml
+I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\zh_CN.baml
