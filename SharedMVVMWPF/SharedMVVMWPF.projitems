@@ -25,6 +25,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ExtraAddInPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\PageModelViewBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\PickUpAFolderPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\RealMainPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\SettingPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ExtensionPage.xaml.cs">

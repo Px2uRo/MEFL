@@ -11,9 +11,6 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AssemblyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ControlModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ControlModelViews\MainModelViews.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ControlModelViews\MyCardModelView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ControlModelViews\PageModelViews.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ChangePageContentButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\MyItemsCardItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\FindControl.cs" />

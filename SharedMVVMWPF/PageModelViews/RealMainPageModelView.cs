@@ -123,7 +123,16 @@ namespace MEFL.PageModelViews
 
         public void Execute(object? parameter)
         {
-            ///Todo 做一下添加文件夹。
+            //Todo 做一下添加文件夹。
+            for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
+            {
+                if (
+                ((App.Current.Resources["MainPage"] as Grid).Children[i] as MyPageBase).Tag == "PickUP"
+                )
+                {
+                    (App.Current.Resources["MainPage"] as Grid).Children.RemoveAt(i);
+                }
+            }
             (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.PickUpAFolder() { Tag="PickUP"});
             MyPageBase From = new MyPageBase();
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
@@ -135,13 +144,13 @@ namespace MEFL.PageModelViews
                     {
                         item.Hide();
                     }
+                    break;
                 }
             }
             foreach (MyPageBase item in FindControl.FromTag("PickUP", (App.Current.Resources["MainPage"] as Grid)))
             {
                 item.Show(From);
             }
-            From = null;
         }
     }
 

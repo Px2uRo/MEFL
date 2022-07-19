@@ -1,5 +1,4 @@
-﻿using MEFL.ControlModelViews;
-using System;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -38,7 +37,6 @@ namespace MEFL.Controls
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
-            this.DataContext = MainModelViews.MyCardModelView;
 
             this.MouseEnter += MyCard_MouseEnter;
             this.MouseLeave += MyCard_MouseLeave;
