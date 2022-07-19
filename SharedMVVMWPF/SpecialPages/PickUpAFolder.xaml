@@ -16,7 +16,7 @@
                 <RowDefinition />
             </Grid.RowDefinitions>
             <TextBox Margin="3" Validation.Error="ErrorAppeard"
-                     MouseMove="Moving"
+                     MouseDoubleClick="DoubleClick"
                      Background="Transparent">
                 <TextBox.Text>
                     <Binding Path="Curret" NotifyOnValidationError="True">
@@ -26,8 +26,11 @@
                     </Binding>
                 </TextBox.Text>
             </TextBox>
-            <UniformGrid Columns="3" Rows="3" Grid.Row="1" Name="PART_UniformGrid" Width="340" Height="340">
-
-            </UniformGrid>
+        <Grid Grid.Row="1">
+            <UniformGrid Name="PART_UniformGrid" Columns="{Binding Columns}" Height="Auto" />
+            <Border x:Name="ErrorBorder" Background="{DynamicResource SYTLE_Standard_Background}">
+                <TextBlock Name="ErrorBOX" FontSize="24" FontWeight="Bold"/>
+            </Border>
+        </Grid>
         </Grid>
 </c:MyPageBase>

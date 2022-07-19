@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ControlModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)..\..\..\Xiong%27s\MEFLCollection\SharedMVVMWPF\PageModelViews\ExtensionPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ChangePageButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\FileOrDictoryItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\FindControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\MyExtensionCard.xaml.cs">
       <SubType>Code</SubType>

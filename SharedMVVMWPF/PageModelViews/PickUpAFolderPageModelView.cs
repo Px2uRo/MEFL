@@ -4,13 +4,30 @@ using System.Globalization;
 using System.IO;
 using System.Windows.Controls;
 
-namespace MEFL.PageModelViews {
-
-public class PickUpAFolderPageModelView : PageModelViewBase
+namespace MEFL.PageModelViews 
 {
 
-    public string Curret
+    public class PickUpAFolderPageModelView : PageModelViewBase
     {
+
+        public int Columns
+        {
+            get { return PickUpAFolderPageModel.Columns; }
+            set {
+                if (value < 1)
+                {
+                    PickUpAFolderPageModel.Columns = 1;
+                }
+                else
+                {
+                    PickUpAFolderPageModel.Columns = value;
+                }
+                Invoke("Columns"); }
+        }
+
+
+        public string Curret
+        {
         get { return PickUpAFolderPageModel.Curret; }
         set
         {
@@ -23,18 +40,20 @@ public class PickUpAFolderPageModelView : PageModelViewBase
                 {
                     Items.Add(new DirectoryInfo(item));
                 }
-                Invoke("Drives");
+                Invoke("Items");
             }
             else
             {
-                    PickUpAFolderPageModel.Curret = value;
-                    Items = new List<DirectoryInfo>();
-                    foreach (var item in Directory.GetDirectories(value))
+                    if (Directory.Exists(value))
                     {
-                        Items.Add(new DirectoryInfo(item));
+                        PickUpAFolderPageModel.Curret = value;
+                        Items = new List<DirectoryInfo>();
+                        foreach (var item in Directory.GetDirectories(value))
+                        {
+                            Items.Add(new DirectoryInfo(item));
+                        }
                     }
-                    
-            }
+                }
                 Invoke("Items");
                 Invoke("Curret");
         }
@@ -50,22 +69,24 @@ public class PickUpAFolderPageModelView : PageModelViewBase
         }
     }
 
-    public string[] Drives
-    {
+        public string[] Drives
+        {
         get { return PickUpAFolderPageModel.Drives; }
-    }
+        }
 
-}
+    }
 
 public static class PickUpAFolderPageModel
 {
     public static List<DirectoryInfo> Items { get; set; }
     public static string[] Drives { get => Environment.GetLogicalDrives(); }
     public static string Curret { get; set; }
-    static PickUpAFolderPageModel()
+        public static int Columns { get; set; }
+        static PickUpAFolderPageModel()
     {
         //TODO 加载注册表
         Items = new List<DirectoryInfo>();
+            Columns = 1;
     }
 }
 

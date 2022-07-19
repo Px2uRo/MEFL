@@ -1,6 +1,6 @@
-﻿[17:26:46][MEFL]程序启动了，参数
-[17:26:47][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:26:47][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:26:47][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:26:47][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[17:26:57][MEFL]程序退出了
+﻿[23:15:42][MEFL]程序启动了，参数
+[23:15:43][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
+[23:15:43][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
+[23:15:43][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
+[23:15:43][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
+[23:15:53][MEFL]程序退出了
