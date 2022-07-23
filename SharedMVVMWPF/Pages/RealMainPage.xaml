@@ -9,7 +9,6 @@
              d:DesignHeight="450" d:DesignWidth="800"
               DataContext="{DynamicResource RMPMV}">
     <c:MyPageBase.Resources>
-        <mv:RealMainPageModelView x:Key="RMPMV" PropertyChanged="RealMainPageModelView_PropertyChanged"/>
         <mv:ConvertGameInfo x:Key="CGI"/>
         <Style TargetType="ListBoxItem" x:Key="ContainerStyle">
             <Setter Property="Template">

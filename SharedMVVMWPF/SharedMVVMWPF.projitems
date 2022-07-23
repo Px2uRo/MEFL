@@ -28,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\PageModelViewBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\PickUpAFolderPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\RealMainPageModelView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ReNameAFolderModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\SettingPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ExtensionPage.xaml.cs">
       <SubType>Code</SubType>
@@ -44,6 +45,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\PickUpAFolder.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>PickUpAFolder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\RenameFolderPage.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>RenameFolderPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -114,6 +119,11 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)SpecialPages\PickUpAFolder.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)SpecialPages\RenameFolderPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

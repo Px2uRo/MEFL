@@ -1,8 +1,12 @@
-﻿using System;
+﻿using MEFL.Controls;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Input;
 
 namespace MEFL.PageModelViews 
 {
@@ -24,42 +28,54 @@ namespace MEFL.PageModelViews
                 }
                 Invoke("Columns"); }
         }
-
-
         public string Curret
         {
-        get { return PickUpAFolderPageModel.Curret; }
-        set
-        {
-            if (value == "根目录")
+            get { return PickUpAFolderPageModel.Curret; }
+            set
             {
-                //TODO i18N
-                PickUpAFolderPageModel.Curret = "根目录";
-                    Items = new List<DirectoryInfo>();
-                foreach (var item in Drives)
+                PickUpAFolderPageModel.Curret = value;
+                Invoke("Curret");
+                if (value == "根目录")
                 {
-                    Items.Add(new DirectoryInfo(item));
-                }
-                Invoke("Items");
-            }
-            else
-            {
+                    //TODO i18N
+                    PickUpAFolderPageModel.Curret = "根目录";
+                    Items = new List<DirectoryInfo>();
+                    foreach (var item in Drives)
+                    {
+                        Items.Add(new DirectoryInfo(item));
+                    }
+                    Invoke("Items");
+                    ExceptionInfo = String.Empty;
+                    }
+                else
+                {
                     if (Directory.Exists(value))
                     {
-                        PickUpAFolderPageModel.Curret = value;
-                        Items = new List<DirectoryInfo>();
-                        foreach (var item in Directory.GetDirectories(value))
+                        try
                         {
-                            Items.Add(new DirectoryInfo(item));
+                            PickUpAFolderPageModel.Curret = value;
+                            Items = new List<DirectoryInfo>();
+                            foreach (var item in Directory.GetDirectories(value))
+                            {
+                                Items.Add(new DirectoryInfo(item));
+                            }
+                            Selected = new DirectoryInfo(value);
+                            ExceptionInfo = String.Empty;
+                        }
+                        catch (Exception ex)
+                        {
+                            Selected = null;
+                            ExceptionInfo = ex.Message;
                         }
                     }
                 }
                 Invoke("Items");
                 Invoke("Curret");
-        }
-    }
+                Invoke("ExceptionInfo");
 
-    public List<DirectoryInfo> Items
+            }
+        }
+        public List<DirectoryInfo> Items
     {
         get { return PickUpAFolderPageModel.Items; }
         set
@@ -68,32 +84,94 @@ namespace MEFL.PageModelViews
             Invoke("Items");
         }
     }
-
         public string[] Drives
         {
         get { return PickUpAFolderPageModel.Drives; }
         }
+        private string _ExceptionInfo;
+        public string ExceptionInfo
+        {
+            get { return _ExceptionInfo; }
+            set { _ExceptionInfo = value;
+                Invoke("ExceptionInfo");
+            }
+        }
+        public DirectoryInfo Selected
+        {
+            get { return PickUpAFolderPageModel.Selected; }
+            set { PickUpAFolderPageModel.Selected = value; Invoke("Selected");Invoke("SelectItemCommand"); }
+        }
 
+        public ICommand RenameFolderCommand
+        {
+            get { return PickUpAFolderPageModel.RenameFolderCommand; }
+            set { PickUpAFolderPageModel.RenameFolderCommand = value; }
+        }
+
+
+
+        public PickUpAFolderPageModelView()
+        {
+            PickUpAFolderPageModel.Selected = null;
+        }
     }
 
-public static class PickUpAFolderPageModel
-{
-    public static List<DirectoryInfo> Items { get; set; }
-    public static string[] Drives { get => Environment.GetLogicalDrives(); }
-    public static string Curret { get; set; }
+    public static class PickUpAFolderPageModel
+    {
+        public static List<DirectoryInfo> Items { get; set; }
+        public static ICommand RenameFolderCommand { get; set; }
+        public static string[] Drives { get => Environment.GetLogicalDrives(); }
+        public static string Curret { get; set; }
+        public static DirectoryInfo Selected { get; set; }
         public static int Columns { get; set; }
         static PickUpAFolderPageModel()
-    {
-        //TODO 加载注册表
-        Items = new List<DirectoryInfo>();
+        {
+            //TODO 加载注册表
+            Items = new List<DirectoryInfo>();
+            RenameFolderCommand = new RenameFolderCommand();
             Columns = 1;
+        }
     }
-}
 
-public class AuthPathRule : ValidationRule
-{
-    public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+    internal class RenameFolderCommand : ICommand
     {
+        public event EventHandler? CanExecuteChanged;
+
+        public bool CanExecute(object? parameter)
+        {
+            return true;
+        }
+
+        public void Execute(object? parameter)
+        {
+            for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
+            {
+                if (((App.Current.Resources["MainPage"] as Grid).Children[i] as MyPageBase).Tag == "PickUP"
+                )
+                {
+                    (App.Current.Resources["MainPage"] as Grid).Children.RemoveAt(i);
+                }
+            }
+            (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.RenameFolderPage() { Tag = "RenameFolder", Visibility = Visibility.Hidden,SelectedPath=PickUpAFolderPageModel.Selected.FullName });
+            MyPageBase From = new MyPageBase();
+            foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
+            {
+                if (item.Visibility == Visibility.Visible)
+                {
+                    From = item;
+                }
+            }
+            foreach (MyPageBase item in FindControl.FromTag("RenameFolder", (App.Current.Resources["MainPage"] as Grid)))
+            {
+                item.Show(From);
+            }
+        }
+    }
+
+    public class AuthPathRule : ValidationRule
+    {
+        public override ValidationResult Validate(object value, CultureInfo cultureInfo)
+        {
         //TODO i18N
         var isValid = false;
         var errorText = "不存在的文件夹";
@@ -109,6 +187,46 @@ public class AuthPathRule : ValidationRule
             isValid = true;
         }
         return new ValidationResult(isValid, errorText);
+        }
     }
-}
+
+    public class ExceptionInfoToVisbility : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if((value as String) == String.Empty||value==null)
+            {
+                return Visibility.Hidden;
+            }
+            else
+            {
+                return Visibility.Visible;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class NullToBool : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if(value == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

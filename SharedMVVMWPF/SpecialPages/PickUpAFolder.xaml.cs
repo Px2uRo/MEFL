@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,8 +28,26 @@ namespace MEFL.SpecialPages
         public PickUpAFolder()
         {
             InitializeComponent();
-            (this.DataContext as ModelView).Curret= "根目录";
+            //todo 戳啦！注册表嘛！
         }
+
+
+
+        public string Currect
+        {
+            get { return (string)GetValue(CurrectProperty); }
+            set 
+            {
+                (this.DataContext as ModelView).Curret = value;
+                SetValue(CurrectProperty, value); 
+            }
+        }
+
+        // Using a DependencyProperty as the backing store for Currect.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CurrectProperty =
+            DependencyProperty.Register("Currect", typeof(string), typeof(PickUpAFolder), new PropertyMetadata(null));
+
+
 
         protected override Size ArrangeOverride(Size arrangeBounds)
         {
@@ -39,19 +58,6 @@ namespace MEFL.SpecialPages
 
         private void Changed(object? sender, PropertyChangedEventArgs e)
         {
-            if (e.PropertyName == "Curret")
-            {
-                if(Directory.Exists((this.DataContext as ModelView).Curret))
-                {
-                    ErrorBorder.Visibility = Visibility.Hidden;
-                }
-                else
-                {
-                    ErrorBorder.Visibility = Visibility.Hidden;
-                    //TODO i18N
-                    ErrorBOX.Text = "不存在此文件夹";
-                }
-            }
             if (e.PropertyName == "Items")
             {
                 PART_UniformGrid.Children.Clear();
@@ -63,13 +69,19 @@ namespace MEFL.SpecialPages
                 foreach (var item in (this.DataContext as ModelView).Items)
                 {
                     var Child = new FileOrDictoryItem() { DataContext = item };
-                    Child.MouseDown += Child_MouseDown;
+                    Child.Checked += Child_Checked;
+                    Child.MouseDoubleClick += Child_MouseDoubleClick;
                     PART_UniformGrid.Children.Add(Child);
                 }
             }
         }
 
-        private void Child_MouseDown(object sender, MouseButtonEventArgs e)
+        private void Child_Checked(object sender, RoutedEventArgs e)
+        {
+            (this.DataContext as ModelView).Selected = (sender as FileOrDictoryItem).DataContext as DirectoryInfo;
+        }
+
+        private void Child_MouseDoubleClick(object sender, RoutedEventArgs e)
         {
             (this.DataContext as ModelView).Curret = ((sender as FileOrDictoryItem).DataContext as DirectoryInfo).FullName;
         }
@@ -84,5 +96,37 @@ namespace MEFL.SpecialPages
             (sender as TextBox).SelectAll();
         }
 
+        private void BackToRoot(object sender, RoutedEventArgs e)
+        {
+            (this.DataContext as ModelView).Curret = "根目录";
+            (this.DataContext as ModelView).Selected = null;
+        }
+
+        private void DeleteSelected(object sender, RoutedEventArgs e)
+        {
+            //todo 删除选中的文件夹。
+        }
+
+        private void CreateNew(object sender, RoutedEventArgs e)
+        {
+            //todo 在当前目录下新建文件夹。
+        }
+
+        private void BackToParent(object sender, RoutedEventArgs e)
+        {
+            var parent = Directory.GetParent((DataContext as ModelView).Curret);
+            if (parent == null || (DataContext as ModelView).Curret == "根目录")
+            {
+                (this.DataContext as ModelView).Curret = "根目录";
+            }
+            else
+            {
+                (this.DataContext as ModelView).Curret = parent.FullName;
+            }
+        }
+        private void SelectThis(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

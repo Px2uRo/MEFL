@@ -25,14 +25,6 @@ namespace MEFL.Controls
             this.Click += MyButton_Click;
             this.MouseEnter += MyButton_MouseEnter;
             this.MouseLeave += MyButton_MouseLeave;
-            if (Height.ToString() == "NaN")
-            {
-                Height = 25;
-            }
-            if (Width.ToString() == "NaN")
-            {
-                Width = 70;
-            }
         }
         private void MyButton_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {

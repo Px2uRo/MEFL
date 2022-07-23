@@ -35,6 +35,7 @@ namespace MEFL.Pages
         public RealMainPage()
         {
             InitializeComponent();
+            (this.DataContext as RealMainPageModelView).PropertyChanged += RealMainPageModelView_PropertyChanged;
         }
 
         private void MyButton_Click(object sender, RoutedEventArgs e)

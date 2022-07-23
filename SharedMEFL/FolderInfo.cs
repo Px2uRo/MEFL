@@ -1,4 +1,5 @@
 ﻿using MEFL.Contract;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -58,7 +59,9 @@ namespace MEFL
         }
         private string _VersionPath;
         public string FriendlyName { get; set; }
+        [JsonIgnore]
         public ObservableCollection<String> VersionJsons { get; set; }
+        [JsonIgnore]
         public ObservableCollection<GameInfoBase> Games { get; set; }
         public MEFLFolderInfo(string Path,string FriendlyName)
         {

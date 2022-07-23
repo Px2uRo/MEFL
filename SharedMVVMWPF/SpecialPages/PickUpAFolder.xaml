@@ -10,27 +10,55 @@
     <c:MyPageBase.DataContext>
         <PickUpAFolderPageModelView xmlns="clr-namespace:MEFL.PageModelViews" PropertyChanged="Changed"/>
     </c:MyPageBase.DataContext>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="30"/>
-                <RowDefinition />
-            </Grid.RowDefinitions>
-            <TextBox Margin="3" Validation.Error="ErrorAppeard"
+    <c:MyPageBase.Resources>
+        <NullToBool xmlns="clr-namespace:MEFL.PageModelViews" x:Key="CV"/>
+    </c:MyPageBase.Resources>
+    <Grid>
+        <c:MyCard Title="{DynamicResource I18N_String_MainPage_SelectFolder}">
+            <Grid VerticalAlignment="Stretch">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="36"/>
+                        <ColumnDefinition Width="36"/>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="36"/>
+                        <ColumnDefinition Width="36"/>
+                    </Grid.ColumnDefinitions>
+                    <c:MyButton Content="\" Click="BackToRoot" Grid.Column="0" Margin="0,0,3,0" Height="30" Width="30"/>
+                    <c:MyButton Content="&lt;" Click="BackToParent" Grid.Column="1" Margin="0,0,3,0" Height="30" Width="30"/>
+                    <TextBox Margin="3" Validation.Error="ErrorAppeard" Grid.Column="2"
                      MouseDoubleClick="DoubleClick"
                      Background="Transparent">
-                <TextBox.Text>
-                    <Binding Path="Curret" NotifyOnValidationError="True">
-                        <Binding.ValidationRules>
-                            <AuthPathRule xmlns="clr-namespace:MEFL.PageModelViews"/>
-                        </Binding.ValidationRules>
-                    </Binding>
-                </TextBox.Text>
-            </TextBox>
-        <Grid Grid.Row="1">
-            <UniformGrid Name="PART_UniformGrid" Columns="{Binding Columns}" Height="Auto" />
-            <Border x:Name="ErrorBorder" Background="{DynamicResource SYTLE_Standard_Background}">
-                <TextBlock Name="ErrorBOX" FontSize="24" FontWeight="Bold"/>
-            </Border>
-        </Grid>
-        </Grid>
+                        <TextBox.Text>
+                            <Binding Path="Curret" NotifyOnValidationError="True">
+                                <Binding.ValidationRules>
+                                    <AuthPathRule xmlns="clr-namespace:MEFL.PageModelViews"/>
+                                </Binding.ValidationRules>
+                            </Binding>
+                        </TextBox.Text>
+                    </TextBox>
+                    <c:MyButton Content="×" Click="DeleteSelected" Grid.Column="3" Margin="3,0,3,0" Height="30" Width="30"/>
+                    <c:MyButton Content="+" Click="CreateNew" Grid.Column="4" Margin="3,0,3,0" Height="30" Width="30"/>
+                </Grid>
+                <Grid Grid.Row="1" VerticalAlignment="Stretch">
+                    <UniformGrid Name="PART_UniformGrid" Columns="{Binding Columns}" Height="auto" VerticalAlignment="Top" />
+                    <Border x:Name="ErrorBorder" BorderBrush="Red" BorderThickness="2" Background="{DynamicResource SYTLE_Standard_Background}">
+                        <Border.Visibility>
+                            <Binding Path="ExceptionInfo">
+                                <Binding.Converter>
+                                    <ExceptionInfoToVisbility xmlns="clr-namespace:MEFL.PageModelViews"/>
+                                </Binding.Converter>
+                            </Binding>
+                        </Border.Visibility>
+                        <TextBlock Name="ErrorBOX" Text="{Binding ExceptionInfo}" FontSize="24" FontWeight="Bold" TextWrapping="Wrap"/>
+                    </Border>
+                </Grid>
+            </Grid>
+        </c:MyCard>
+        <c:MyButton Content="OK!" IsEnabled="{Binding Selected,Converter={StaticResource CV}}" Command="{Binding RenameFolderCommand}" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,30,30"/>
+    </Grid>
 </c:MyPageBase>

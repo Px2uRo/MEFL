@@ -16,41 +16,25 @@
         </Setter>
     </Style>
     <Style TargetType="{x:Type local:FileOrDictoryItem}">
+        <Style.Resources>
+            <local:BoolToVisiblilty x:Key="CV"/>
+        </Style.Resources>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate>
+                <ControlTemplate TargetType="local:FileOrDictoryItem">
                     <Grid Width="250" Height="50">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="50"/>
                             <ColumnDefinition Width="200"/>
                         </Grid.ColumnDefinitions>
-                        <Rectangle Name="Rect" Opacity="0" Grid.ColumnSpan="2" Fill="{DynamicResource SYTLE_Standard_ColorBrush}"/>
+                        <Rectangle Name="Fake_Rect" Visibility="{TemplateBinding Property=IsChecked,Converter={StaticResource CV}}" Grid.ColumnSpan="2" Fill="{DynamicResource SYTLE_Standard_ColorBrush}"/>
+                        <Rectangle Name="Rect" Grid.ColumnSpan="2" Opacity="0" Fill="{DynamicResource SYTLE_Standard_ColorBrush}"/>
                         <!--todo Icon-->
                         <Path Grid.Column="0"/>
                         <StackPanel Grid.Column="1">
                             <TextBlock Text="{Binding Name}"/>
                             <TextBlock Text="{Binding LastWriteTime}" />
                         </StackPanel>
-                        <Grid.Triggers>
-                            <EventTrigger RoutedEvent="MouseEnter">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation From="0" To="0.5" Duration="0:0:0:0.2"
-                                                                     Storyboard.TargetName="Rect" Storyboard.TargetProperty="Opacity">
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="MouseLeave">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation From="0.5" To="0" Duration="0:0:0:0.2"
-                                                                     Storyboard.TargetName="Rect" Storyboard.TargetProperty="Opacity">
-                                        </DoubleAnimation>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </Grid.Triggers>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

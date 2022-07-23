@@ -12,6 +12,7 @@ using System.Windows.Input;
 using MEFL.APIData;
 using MEFL.Contract;
 using MEFL.Controls;
+using Newtonsoft.Json;
 
 namespace MEFL.PageModelViews
 {
@@ -47,10 +48,23 @@ namespace MEFL.PageModelViews
         {
             get
             {
-                return APIModel.MyFolders;
+                RegManager.Write("Folders", JsonConvert.SerializeObject(APIModel.MyFolders));
+                ObservableCollection<MEFLFolderInfo> res = new ObservableCollection<MEFLFolderInfo>() { { new MEFLFolderInfo(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"), "本地文件夹") } };
+                foreach (var item in APIModel.MyFolders)
+                {
+                    res.Add(item);
+                }
+                return res;
             }
             set
             {
+                for (int i = 0; i < value.Count; i++)
+                {
+                    if (value[i].Path == System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"))
+                    {
+                        value.RemoveAt(i);
+                    }
+                }
                 APIModel.MyFolders = value;
                 Invoke("MyFolders");
             }
@@ -61,8 +75,9 @@ namespace MEFL.PageModelViews
             get { return APIData.APIModel.SelectedFolderIndex; }
             set { 
                 APIData.APIModel.SelectedFolderIndex = value;
-                APIData.APIModel.GameInfoConfigs =APIData.APIModel.MyFolders[value].Games;
-                Invoke("GameInfoConfigs"); 
+                APIData.APIModel.GameInfoConfigs =MyFolders[value].Games;
+                Invoke("GameInfoConfigs");
+                Invoke("SelectedFolderIndex");
             }
         }
 
@@ -123,34 +138,32 @@ namespace MEFL.PageModelViews
 
         public void Execute(object? parameter)
         {
-            //Todo 做一下添加文件夹。
+            //Todo 注册表嘛！i18N嘛！
+            string RegKey = "根目录";
+
             for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
             {
-                if (
-                ((App.Current.Resources["MainPage"] as Grid).Children[i] as MyPageBase).Tag == "PickUP"
+                if (((App.Current.Resources["MainPage"] as Grid).Children[i] as MyPageBase).Tag == "PickUP"|| ((App.Current.Resources["MainPage"] as Grid).Children[i] as MyPageBase).Tag == "RenameFolder"
                 )
                 {
                     (App.Current.Resources["MainPage"] as Grid).Children.RemoveAt(i);
                 }
             }
-            (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.PickUpAFolder() { Tag="PickUP"});
+            (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.PickUpAFolder() { Tag="PickUP",Visibility=Visibility.Hidden,Currect=RegKey});
             MyPageBase From = new MyPageBase();
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
             {
                 if (item.Visibility == Visibility.Visible)
                 {
                     From = item;
-                    if (item.Tag as String == From.Tag as String)
-                    {
-                        item.Hide();
-                    }
-                    break;
                 }
             }
             foreach (MyPageBase item in FindControl.FromTag("PickUP", (App.Current.Resources["MainPage"] as Grid)))
             {
                 item.Show(From);
             }
+
+            RegKey = null;
         }
     }
 

@@ -4,6 +4,9 @@ using System.Security.Cryptography;
 using System.Text;
 using System.IO;
 using System.Diagnostics;
+#if WINDOWS
+using Microsoft.Win32;
+#endif
 
 namespace MEFL
 {
@@ -12,8 +15,14 @@ namespace MEFL
         static RegManager()
         {
             rsa = new RSACryptoServiceProvider();
+#if WINDOWS
+            WinRegKey = Registry.CurrentUser.CreateSubKey("Software").CreateSubKey("MEFL");
+#endif
         }
-        private static RSACryptoServiceProvider rsa {get;set;}
+        private static RSACryptoServiceProvider rsa { get; set; }
+#if WINDOWS
+        private static RegistryKey WinRegKey { get; set; }
+#endif
         public static void SecurityWrite(string Key, string Value)
         {
             string PublicKey = string.Empty;
@@ -31,11 +40,24 @@ namespace MEFL
         }
         public static void Write(string Key, string Value)
         {
-
+#if WINDOWS
+            WinRegKey.SetValue(Key, Value);
+            //todo i18N;
+            Debugger.Logger($"写入了注册表，键：{Key}，值：{Value}");
+#endif
         }
-        public static object Read(string Key)
+        public static string Read(string Key)
         {
-            return null;
+#if WINDOWS
+            if(WinRegKey.GetValue(Key)==string.Empty)
+            {
+                WinRegKey.SetValue(Key, string.Empty);
+            }
+            var res = WinRegKey.GetValue(Key).ToString();
+            //todo i18N;
+            Debugger.Logger($"读取了注册表，键：{Key}，值：{res}");
+            return res;
+#endif
         }
     }
 }
