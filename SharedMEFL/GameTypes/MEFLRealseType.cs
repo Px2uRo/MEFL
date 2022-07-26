@@ -93,6 +93,8 @@ namespace MEFL.GameTypes
             }
             set => throw new NotImplementedException(); }
 
+        public override string GameFolder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public override Process Launch(SettingArgs args)
         {
             throw new NotImplementedException();

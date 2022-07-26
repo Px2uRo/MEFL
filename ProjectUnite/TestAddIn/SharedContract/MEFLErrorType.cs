@@ -3,6 +3,7 @@ using MEFL.Contract;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 
 namespace MEFL.Contract
@@ -27,6 +28,7 @@ namespace MEFL.Contract
         public override bool LaunchByLauncher => true;
 
         public override int JavaVersion { get; set; }
+        public override string GameFolder { get; set; }
 
         public override Process Launch(SettingArgs args)
         {

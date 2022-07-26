@@ -6,15 +6,15 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "ContractNet6/0.0.2.15": {
+      "ContractNet6/0.0.2.17": {
         "dependencies": {
           "MEFL.Controls": "0.0.5.7",
           "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/net6.0-windows7.0/ContractNet6.dll": {
-            "assemblyVersion": "0.0.2.15",
-            "fileVersion": "0.0.2.15"
+            "assemblyVersion": "0.0.2.17",
+            "fileVersion": "0.0.2.17"
           }
         }
       },
@@ -267,12 +267,12 @@
     }
   },
   "libraries": {
-    "ContractNet6/0.0.2.15": {
+    "ContractNet6/0.0.2.17": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-+PhuW3UP3/xcITujjfszf6BTsuWvDoubL/6N5+LFw3o2653+jPJFn5LGew757QgeGCk0VZTCOEA+hc+ewUcBGQ==",
-      "path": "contractnet6/0.0.2.15",
-      "hashPath": "contractnet6.0.0.2.15.nupkg.sha512"
+      "sha512": "sha512-ApFcx45u7+OeAeG2cbiH2wofyciamPQX3Z6+dpx4BfDQk12fVhZB2kgIVmZDaazznbzFCuHZ00xiwdVDhSCpfQ==",
+      "path": "contractnet6/0.0.2.17",
+      "hashPath": "contractnet6.0.0.2.17.nupkg.sha512"
     },
     "MEFL.Controls/0.0.5.7": {
       "type": "package",

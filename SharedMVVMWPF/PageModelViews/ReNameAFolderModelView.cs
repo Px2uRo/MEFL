@@ -1,5 +1,6 @@
 ﻿
 using MEFL.Controls;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -80,6 +81,7 @@ namespace MEFL.PageModelViews
             {
                 item.Show(From);
             }
+            RegManager.Write("Folders", JsonConvert.SerializeObject(APIData.APIModel.MyFolders));
         }
     }
 }

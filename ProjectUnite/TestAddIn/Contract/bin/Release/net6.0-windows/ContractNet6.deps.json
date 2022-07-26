@@ -6,7 +6,7 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "ContractNet6/0.0.2.15": {
+      "ContractNet6/0.0.2.17": {
         "dependencies": {
           "MEFL.Controls": "0.0.4.18",
           "Newtonsoft.Json": "13.0.1"
@@ -34,7 +34,7 @@
     }
   },
   "libraries": {
-    "ContractNet6/0.0.2.15": {
+    "ContractNet6/0.0.2.17": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

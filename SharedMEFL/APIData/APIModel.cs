@@ -1,5 +1,6 @@
 ﻿using MEFL.Contract;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -51,17 +52,11 @@ namespace MEFL.APIData
             get { return _SelectedFolderIndex; }
             set
             {
-                ObservableCollection<MEFLFolderInfo> tmp = new ObservableCollection<MEFLFolderInfo>() { { new MEFLFolderInfo(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"), "本地文件夹") } };
-                foreach (var item in MyFolders)
-                {
-                    tmp.Add(item);
-                }
-                if (value < tmp.Count)
+                if (value < MyFolders.Count+1)
                 {
                     _SelectedFolderIndex = value;
-                    SelectedForder = tmp[value];
+                    RegManager.Write("SelectedFolderIndex", value.ToString());
                 }
-                tmp = null;
             }
         }
 
@@ -84,6 +79,9 @@ namespace MEFL.APIData
 
         static APIModel()
         {
+            SettingArgs = new Arguments.SettingArgs();
+            #region Reg
+            #region RegFolders
             MyFolders = new ObservableCollection<MEFLFolderInfo>();
             try
             {
@@ -94,21 +92,57 @@ namespace MEFL.APIData
             }
             catch (Exception ex)
             {
+                Debugger.Logger(ex.Message);
                 RegManager.Write("Folders", "[]");
-                MyFolders = new ObservableCollection<MEFLFolderInfo>();
             }
-            SettingArgs = new Arguments.SettingArgs();
+            #endregion
+            #region RegSelectedFolderIndex
+            try
+            {
+                SelectedFolderIndex = Convert.ToUInt16(RegManager.Read("SelectedFolderIndex"));
+            }
+            catch (Exception ex)
+            {
+                Debugger.Logger(ex.Message);
+                RegManager.Write("SelectedFolderIndex", 0.ToString());
+            }
+            #endregion
+            #region GameConfigs
+            ObservableCollection<MEFLFolderInfo> res = new ObservableCollection<MEFLFolderInfo>() { { new MEFLFolderInfo(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"), "本地文件夹") } };
+            foreach (var item in APIModel.MyFolders)
+            {
+                res.Add(item);
+            }
+            GameInfoConfigs = res[SelectedFolderIndex].Games;
+            #endregion
+            #region RegCurretGame
+            try
+            {
+
+                foreach (var item in GameInfoConfigs)
+                {
+                    if (item.RootFolder == RegManager.Read("CurretGame"))
+                    {
+                        CurretGame = item;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debugger.Logger(ex.Message);
+                RegManager.Write("CurretGame", String.Empty);
+            }
+            #endregion
+            #endregion
             SettingConfig = MEFL.APIData.SettingConfig.Load();
             AddInConfigs = MEFL.APIData.AddInConfig.GetAll();
             RemoveAddInsTheSameAddIn();
             AccountConfigs = new List<AccountBase>();
-            GameInfoConfigs = new ObservableCollection<Contract.GameInfoBase>();
+
             if (Directory.Exists(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"))!=true)
             {
                 Directory.CreateDirectory(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"));
             }
-            //todo 设置JSON
-            SelectedFolderIndex = 0;
 #if DEBUG
             AccountConfigs.Add(new MEFLLegacyAccount() {GetSetUserName = "Hongyu"});
             SelectedAccountIndex = 0;

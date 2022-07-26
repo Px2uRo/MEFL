@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using System.Windows.Media;
 using MEFL.APIData;
 using MEFL.Contract;
 using MEFL.Controls;
@@ -48,7 +49,6 @@ namespace MEFL.PageModelViews
         {
             get
             {
-                RegManager.Write("Folders", JsonConvert.SerializeObject(APIModel.MyFolders));
                 ObservableCollection<MEFLFolderInfo> res = new ObservableCollection<MEFLFolderInfo>() { { new MEFLFolderInfo(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"), "本地文件夹") } };
                 foreach (var item in APIModel.MyFolders)
                 {
@@ -72,8 +72,14 @@ namespace MEFL.PageModelViews
 
         public int SelectedFolderIndex
         {
-            get { return APIData.APIModel.SelectedFolderIndex; }
-            set { 
+            get
+            {
+                return APIData.APIModel.SelectedFolderIndex; }
+            set {
+                if (value < 0)
+                {
+                    value = 0;
+                }
                 APIData.APIModel.SelectedFolderIndex = value;
                 APIData.APIModel.GameInfoConfigs =MyFolders[value].Games;
                 Invoke("GameInfoConfigs");
@@ -166,7 +172,6 @@ namespace MEFL.PageModelViews
             RegKey = null;
         }
     }
-
     public class ConvertGameInfo : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
@@ -193,6 +198,81 @@ namespace MEFL.PageModelViews
             {
                 return "未设置";
             }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class IndexToUI : IValueConverter
+    {
+        #region 一堆字段而已
+        Thickness VarMargin = new Thickness(0, 0, 0, 2);
+        Thickness VarBorderThickness = new Thickness(5);
+        Brush VarBorderBrush = App.Current.Resources["SYTLE_Standard_BorderBrush"] as SolidColorBrush;
+        CornerRadius VarConrnerRadius = new CornerRadius(5);
+        StackPanel MyGamesSP = new StackPanel();
+        #endregion
+
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            MyGamesSP.Children.Clear();
+
+            #region 收藏夹而已
+            List<Controls.MyItemsCard> cards = new List<Controls.MyItemsCard>();
+            Controls.MyItemsCard favorcard = new Controls.MyItemsCard() { 
+                IsAbleToSwap = true, Title = "Favorite", 
+                Margin = VarMargin, BorderThickness = VarBorderThickness, 
+                BorderBrush = VarBorderBrush, CornerRadius = VarConrnerRadius };
+            ObservableCollection<Contract.GameInfoBase> favoritem = new ObservableCollection<Contract.GameInfoBase>();
+            foreach (var item in APIModel.GameInfoConfigs)
+            {
+                if (item.IsFavorate)
+                {
+                    favoritem.Add(item);
+                }
+            }
+            if (favoritem.Count > 0)
+            {
+                favorcard.ItemsSource = favoritem;
+                cards.Add(favorcard);
+            }
+            #endregion
+
+            #region 确定有多少卡片而已
+            List<string> recorded = new List<string>();
+            foreach (var item in APIModel.GameInfoConfigs)
+            {
+                if (recorded.Contains(item.ToString()) != true)
+                {
+                    cards.Add(new Controls.MyItemsCard() { IsAbleToSwap = true, Title = item.ToString(), Margin = VarMargin, BorderThickness = VarBorderThickness, BorderBrush = VarBorderBrush, CornerRadius = VarConrnerRadius });
+                    recorded.Add(item.ToString());
+                }
+            }
+            #endregion
+
+            #region 给卡片加 ItemSources 而已
+            for (int i = 0; i < cards.Count; i++)
+            {
+                var cardItemSources = new ObservableCollection<Contract.GameInfoBase>();
+                foreach (var item in APIModel.GameInfoConfigs)
+                {
+                    if (item.ToString() == cards[i].Title.ToString())
+                    {
+                        cardItemSources.Add(item);
+                    }
+                }
+                cards[i].ItemsSource = cardItemSources;
+            }
+            #endregion
+
+            foreach (var item in cards)
+            {
+                MyGamesSP.Children.Add(item);
+            }
+
+            return MyGamesSP;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

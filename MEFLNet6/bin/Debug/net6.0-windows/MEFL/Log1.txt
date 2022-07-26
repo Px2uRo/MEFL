@@ -1,10 +1,6 @@
-﻿[20:32:17][MEFL]程序启动了，参数
-[20:32:18][MEFL]写入了注册表，键：Folders，值：[{"Path":"D:\\Gaming\\Minecraft\\My_Minecraft\\.minecraft","FriendlyName":"PCL2"}]
-[20:32:18][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[20:32:18][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[20:32:18][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[20:32:18][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
-[20:32:21][MEFL]写入了注册表，键：Folders，值：[{"Path":"D:\\Gaming\\Minecraft\\My_Minecraft\\.minecraft","FriendlyName":"PCL2"}]
-[20:32:23][MEFL]写入了注册表，键：Folders，值：[{"Path":"D:\\Gaming\\Minecraft\\My_Minecraft\\.minecraft","FriendlyName":"PCL2"}]
-[20:32:24][MEFL]写入了注册表，键：Folders，值：[{"Path":"D:\\Gaming\\Minecraft\\My_Minecraft\\.minecraft","FriendlyName":"PCL2"}]
-[20:47:06][MEFL]程序退出了
+﻿[21:56:21][MEFL]程序启动了，参数
+[21:56:22][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
+[21:56:22][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
+[21:56:22][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
+[21:56:22][MEFL]重写了插件设置,当前文档：[{"Guid":"4ba645dc-1b5c-4138-8579-c9536c0a0e38","IsOpen":false},{"Guid":"f7e94fe3-180b-428e-861b-2f473593c1ad","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false}]
+[21:56:26][MEFL]程序退出了

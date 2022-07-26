@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Text;
 
 namespace MEFL.Contract
@@ -24,6 +25,8 @@ namespace MEFL.Contract
         public abstract bool LaunchByLauncher { get; }
         public abstract Process Launch(Arguments.SettingArgs args);
         public abstract int JavaVersion { get; set; }
+        public abstract string GameFolder { get; set; }
+        public string RootFolder { get => Path.GetDirectoryName(GameJsonPath); }
     }
 
     public class JavaVersion

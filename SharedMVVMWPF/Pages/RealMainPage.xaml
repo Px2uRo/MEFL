@@ -10,15 +10,21 @@
               DataContext="{DynamicResource RMPMV}">
     <c:MyPageBase.Resources>
         <mv:ConvertGameInfo x:Key="CGI"/>
-        <Style TargetType="ListBoxItem" x:Key="ContainerStyle">
-            <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="ListBoxItem">
-                            <c:MyItemsCardItem MouseDown="MyComboBox_MouseDown" Icon="{Binding IconSource}" Title="{Binding Name}" SubTitle="{Binding Description}"/>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
+        <Style TargetType="c:MyItemsCard">
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <c:MyItemsCardItem MouseDown="MyComboBox_MouseDown" Icon="{Binding IconSource}" Title="{Binding Name}" SubTitle="{Binding Description}"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </c:MyPageBase.Resources>
     <c:MyPageBase.SideBar>
         <Grid Width="230">
@@ -75,7 +81,15 @@
                     </c:MyComboBox>
                     <c:MyButton Width="30" Height="30" Grid.Column="1" Content="+" Command="{Binding AddFolderInfoCommand}"/>
                 </Grid>
-                <StackPanel x:Name="MyGamesSP"/>
+                <ContentPresenter>
+                    <ContentPresenter.Content>
+                        <Binding Path="GameInfoConfigs">
+                            <Binding.Converter>
+                                <mv:IndexToUI/>
+                            </Binding.Converter>
+                        </Binding>
+                    </ContentPresenter.Content>
+                </ContentPresenter>
             </StackPanel>
         </Border>
     </Grid>
