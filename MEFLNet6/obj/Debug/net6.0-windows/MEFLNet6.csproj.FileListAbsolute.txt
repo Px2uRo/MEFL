@@ -51,3 +51,15 @@ I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\PickUpAFolder.g.cs
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\PickUpAFolder.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\RenameFolderPage.g.cs
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\RenameFolderPage.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\UserManagePage.g.cs
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\UserManagePage.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\AddNewAccount.g.cs
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\AddNewAccount.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\AddAccountPage.g.cs
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\AddAccountPage.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\AddALegacyAccount.g.cs
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\AddALegacyAccount.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\ManageLegacyAccountPage.g.cs
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\ManageLegacyAccountPage.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\SpecialPages\ManageProcessesPage.g.cs
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\SpecialPages\ManageProcessesPage.baml

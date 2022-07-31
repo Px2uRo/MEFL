@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
@@ -14,6 +15,12 @@ namespace MEFL.GameTypes
 {
     public class MEFLRealseType : MEFL.Contract.GameInfoBase
     {
+        public override void Dispose()
+        {
+
+        }
+        private static FrameworkElement _settingPage;
+        public static FrameworkElement _managePage;
         private MEFLStandardOtherArgumentTemplate _MSOAT { get; set; }
         private CoreLaunching.JsonTemplates.Root _Root { get; set; }
         public override string GameTypeFriendlyName { get => App.Current.Resources["I18N_String_MEFLGameInfos_Realse"].ToString(); set => throw new NotImplementedException(); }
@@ -94,6 +101,10 @@ namespace MEFL.GameTypes
             set => throw new NotImplementedException(); }
 
         public override string GameFolder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public override FrameworkElement ManagePage => _managePage;
+
+        public override FrameworkElement SettingsPage => _settingPage;
 
         public override Process Launch(SettingArgs args)
         {

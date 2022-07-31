@@ -13,12 +13,80 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using MEFL.Arguments;
 using System.Reflection;
+using System.IO;
+using System.Collections.ObjectModel;
+using System.Windows.Data;
+using System.Diagnostics;
 
 namespace MEFL.PageModelViews
 {
+    public class IsJavaNullConverter : IValueConverter
+    {
+        ObservableCollection<String> res;
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if(value != null)
+            {
+                if ((value as ObservableCollection<FileInfo>).Count == 0)
+                {
+                    if (parameter.ToString() == "ItemsSource")
+                    {
+                        return new string[1] { "请添加一个Java,如果没有看到的话，点击旁边的刷新按钮" };
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    if (parameter.ToString() == "ItemsSource")
+                    {
+                        res = new ObservableCollection<string>();
+                        foreach (var item in value as ObservableCollection<FileInfo>)
+                        {
+                            var resitem = string.Empty;
+                            try
+                            {
+                                FileVersionInfo fi = FileVersionInfo.GetVersionInfo(item.FullName);
+                                resitem = $"VER:{fi.ProductMajorPart}，{item.FullName}";
+                                fi = null;
+                            }
+                            catch (Exception ex)
+                            {
+                                resitem = $"VER:未知，{item.FullName}";
+                            }
+                            res.Add(resitem);
+                        }
+                        return res;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+            }
+            else
+            {
+                if (parameter.ToString() == "ItemsSource")
+                {
+                    return new string[1] { "正在刷新" };
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
     public class SettingPageModelView: PageModelViewBase
     {
-        public ICommand ChangeBackground { get; set; }
+        public ICommand ChangeBackgroundCommand { get; set; }
         public int LangIndex {
             get
             {
@@ -30,10 +98,48 @@ namespace MEFL.PageModelViews
                 SettingPageModel.SetLang();
             }
         }
+
+        public int SelectedJavaIndex
+        {
+            get { 
+                int res = 0;
+                for(int i = 0; i < Javas.Count; i++)
+                {
+                    if (Javas[i].FullName.ToString() == APIData.APIModel.SettingArgs.SelectedJava.FullName.ToString())
+                    {
+                        res = i;
+                    }
+                }
+                return res;
+            }
+            set {
+                try
+                {
+                    APIData.APIModel.SettingArgs.SelectedJava = Javas[value];
+                    RegManager.Write("SelectedJava", Javas[value].FullName);
+                }
+                catch (Exception ex)
+                {
+
+                }
+                Invoke("SelectedJavaIndex"); 
+            }
+        }
+
+        public ObservableCollection<FileInfo> Javas { get => APIData.APIModel.Javas; set { APIData.APIModel.Javas = value;Invoke("Javas"); } }
+        private bool _EnableSearchJava;
+
+        public bool EnableSearchJava
+        {
+            get { return _EnableSearchJava; }
+            set { _EnableSearchJava = value;Invoke("EnableSearchJava"); }
+        }
+
         public SettingPageModelView()
         {
+            _EnableSearchJava = true;
             LangIndex = (int)APIData.APIModel.SettingArgs.LangID;
-            ChangeBackground = new ChangeBackground();
+            ChangeBackgroundCommand = new ChangeBackground();
         }
     }
     public static class SettingPageModel
@@ -198,7 +304,6 @@ namespace MEFL.PageModelViews
                     SettingPageModel.img.Source = new BitmapImage(new Uri(o.FileName));
                     (App.Current.Resources["Background"] as Grid).Children.Add(SettingPageModel.img);
                     APIData.APIModel.SettingConfig.PicturePath = o.FileName;
-                    APIData.APIModel.SettingConfig.Update();
                 }
             }
             catch (Exception ex)

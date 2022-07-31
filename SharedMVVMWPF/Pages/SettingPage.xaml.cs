@@ -1,20 +1,11 @@
 ﻿using MEFL.Controls;
+using MEFL.PageModelViews;
+using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Timers;
 
 namespace MEFL.Pages
 {
@@ -27,12 +18,47 @@ namespace MEFL.Pages
         {
             InitializeComponent();
             this.DefalutChangeButton.IsChecked = true;
+            timer.Elapsed += T_Elapsed;
         }
 
         private void ChangePageContentButton_Checked(object sender, RoutedEventArgs e)
         {
             var btn = sender as ChangePageContentButton;
             btn.Show(btn.Tag.ToString(), this.Content as Panel);
+        }
+        Thread t;
+        System.Timers.Timer timer = new System.Timers.Timer(1000);
+        private void SearchJava(object sender, RoutedEventArgs e)
+        {
+            (this.Resources["SPMV"] as SettingPageModelView).EnableSearchJava = false;
+            t = new Thread(() =>
+            {
+                (this.Resources["SPMV"] as SettingPageModelView).Javas = APIData.APIModel.SearchJavas();
+                timer.Start();
+            });
+            t.Start();
+        }
+
+        private void T_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            if (APIData.APIModel.SearchJavaThreadIsOK == true)
+            {
+                if ((this.Resources["SPMV"] as SettingPageModelView).Javas.Count > 0)
+                {
+                    (this.Resources["SPMV"] as SettingPageModelView).SelectedJavaIndex = 0;
+                    (this.Resources["SPMV"] as SettingPageModelView).Invoke("SelectedJavaIndex");
+                }
+                (this.Resources["SPMV"] as SettingPageModelView).Invoke("Javas");
+                (this.Resources["SPMV"] as SettingPageModelView).EnableSearchJava = true;
+                (sender as System.Timers.Timer).Stop();
+            }
+        }
+
+        private void AddNewJava(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog o = new OpenFileDialog();
+            o.ShowDialog();
+            o = null;
         }
     }
 }

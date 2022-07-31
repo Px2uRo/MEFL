@@ -24,12 +24,19 @@
     <Compile Include="$(MSBuildThisFileDirectory)MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\AddALegacyAccountModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ExtraAddInPageModelView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\GenerlManageGameModelView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\GenerlSettingGameModelView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\GenerlManageAccountModelView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\GenerlAddAccountModelView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ManageProcessesPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\PageModelViewBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\PickUpAFolderPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\RealMainPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ReNameAFolderModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\SettingPageModelView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\UserManageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ExtensionPage.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>ExtensionPage.xaml</DependentUpon>
@@ -42,6 +49,22 @@
       <SubType>Code</SubType>
       <DependentUpon>SettingPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\UserManagePage.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>UserManagePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\AddAccountPage.xaml.cs">
+      <DependentUpon>AddAccountPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\AddALegacyAccount.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>AddALegacyAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\AddNewAccount.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>AddNewAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\ManageLegacyAccountPage.xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\PickUpAFolder.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>PickUpAFolder.xaml</DependentUpon>
@@ -114,6 +137,30 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Pages\SettingPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\UserManagePage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)SpecialPages\AddAccountPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)SpecialPages\ManageLegacyAccountPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)SpecialPages\AddALegacyAccount.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)SpecialPages\AddNewAccount.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

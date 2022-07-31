@@ -33,23 +33,30 @@ namespace MEFL
 #endif
         public static void SecurityWrite(string Key, string Value)
         {
-            string PublicKey = string.Empty;
-            string PrivateKey = string.Empty;
-
-            PublicKey = rsa.ToXmlString(false); // 获取公匙，用于加密
-            PrivateKey = rsa.ToXmlString(true); // 获取公匙和私匙，用于解密
-
-            Debug.WriteLine(PublicKey);// 将公匙保存到运行目录下的PublicKey
-            Debug.WriteLine(PrivateKey); // 将公匙&私匙保存到运行目录下的PrivateKey
+            //todo Security
+            Write(Key, Value);
         }
         public static object SecurityRead(string Key)
         {
-            return null;
+            //todo Security
+            return Read(Key);
         }
         public static void Write(string Key, string Value)
         {
 #if WINDOWS
-            if (App.Current.Windows.Count!=0)
+            Write(Key, Value, false);
+#endif
+        }
+        public static void Write(string Key, string Value,bool ForceWrite)
+        {
+#if WINDOWS
+            if (App.Current.Windows.Count != 0)
+            {
+                WinRegKey.SetValue(Key, Value);
+                //todo i18N;
+                Debugger.Logger($"写入了注册表，键：{Key}，值：{Value}");
+            }
+            else if(ForceWrite == true)
             {
                 WinRegKey.SetValue(Key, Value);
                 //todo i18N;

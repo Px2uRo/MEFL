@@ -22,3 +22,8 @@ I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\Contract\obj\Release\net6.0-win
 I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\Contract\obj\Release\net6.0-windows\refint\ContractNet6.dll
 I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\Contract\obj\Release\net6.0-windows\ContractNet6.pdb
 I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\Contract\obj\Release\net6.0-windows\ref\ContractNet6.dll
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\Contract\obj\Release\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\Contract\obj\Release\net6.0-windows\ContractNet6_MarkupCompile.cache
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\Contract\obj\Release\net6.0-windows\ContractNet6_MarkupCompile.lref
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\Contract\obj\Release\net6.0-windows\Generic.baml
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\Contract\obj\Release\net6.0-windows\ContractNet6.g.resources

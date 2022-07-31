@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using System.Windows;
 
 namespace MEFL.Contract
 {
-    public abstract class GameInfoBase
+    public abstract class GameInfoBase:IDisposable
     {
         public abstract string GameJsonPath { get; set; }
         public abstract string GameTypeFriendlyName { get; set; }
@@ -24,9 +25,14 @@ namespace MEFL.Contract
         public abstract bool IsFavorate { get; set; }
         public abstract bool LaunchByLauncher { get; }
         public abstract Process Launch(Arguments.SettingArgs args);
+
+        public abstract void Dispose();
+
         public abstract int JavaVersion { get; set; }
         public abstract string GameFolder { get; set; }
         public string RootFolder { get => Path.GetDirectoryName(GameJsonPath); }
+        public abstract FrameworkElement ManagePage { get; }
+        public abstract FrameworkElement SettingsPage { get; }
     }
 
     public class JavaVersion

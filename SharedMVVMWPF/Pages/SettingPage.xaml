@@ -9,6 +9,7 @@
              d:DesignHeight="450" d:DesignWidth="800" LineBrush="{DynamicResource SYTLE_Standard_ColorBrush}"
              >
     <c:MyPageBase.Resources>
+        <IsJavaNullConverter xmlns="clr-namespace:MEFL.PageModelViews" x:Key="isNull"/>
         <SettingPageModelView xmlns="clr-namespace:MEFL.PageModelViews" x:Key="SPMV"/>
     </c:MyPageBase.Resources>
     <c:MyPageBase.SideBar>
@@ -52,12 +53,33 @@
         </StackPanel>
         <StackPanel Tag="Custom">
             <c:MyCard Title="{DynamicResource I18N_String_Setting_Custom_BackgroundImage}">
-                <c:MyButton HorizontalAlignment="Left" DataContext="{DynamicResource SPMV}" Command="{Binding ChangeBackground}" Content="{DynamicResource I18N_String_Setting_Custom_BackgroundImage_Open}"/>
+                <c:MyButton HorizontalAlignment="Left" DataContext="{DynamicResource SPMV}" Command="{Binding ChangeBackgroundCommand}" Content="{DynamicResource I18N_String_Setting_Custom_BackgroundImage_Open}"/>
             </c:MyCard>
         </StackPanel>
-        <StackPanel Tag="Game">
-            <c:MyCard >
-
+        <StackPanel Tag="Game" DataContext="{DynamicResource SPMV}">
+            <c:MyCard Title="通用设置">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="默认 Java" VerticalAlignment="Center"/>
+                    <Grid Grid.Column="1">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="30" />
+                                <ColumnDefinition Width="30" />
+                            </Grid.ColumnDefinitions>
+                            <c:MyComboBox ItemsSource="{Binding Javas,ConverterParameter=ItemsSource,Converter={StaticResource isNull}}" IsEnabled="{Binding Javas,ConverterParameter=IsEnabled,Converter={StaticResource isNull}}" SelectedIndex="{Binding SelectedJavaIndex}" Name="JavaCB"/>
+                            <c:MyButton Content="R" Grid.Column="1" Width="27" Height="27" Click="SearchJava" IsEnabled="{Binding EnableSearchJava}"/>
+                            <c:MyButton Content="+" Grid.Column="2" HorizontalAlignment="Left" Width="27" Height="27" Click="AddNewJava" IsEnabled="{Binding EnableSearchJava}"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
             </c:MyCard>
         </StackPanel>
     </Grid>

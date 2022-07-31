@@ -10,6 +10,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AccountBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AssemblyInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\AddAccountItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameInfoBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IBaseInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IPages.cs" />
@@ -19,5 +21,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)MEFLErrorType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)StandardOtherArgumentTemplate.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SettingArgs.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>

@@ -87,6 +87,7 @@ namespace MEFL.PageModelViews
             }
         }
 
+        public ICommand ChangeAccountCommand { get => RealMainPageModel.ChangeAccountCommand; }
         public ICommand LuanchGameCommand
         {
             get { return RealMainPageModel.LuanchGameCommand; }
@@ -97,15 +98,42 @@ namespace MEFL.PageModelViews
 
     public static class RealMainPageModel
     {
-        public static ICommand LuanchGameCommand { get; set; }
-        public static ICommand AddFolderInfoCommand { get; set; }
+        public static ICommand LuanchGameCommand;
+        public static ICommand AddFolderInfoCommand;
+        public static ICommand ChangeAccountCommand;
         static RealMainPageModel()
         {
             LuanchGameCommand = new LuanchGameCommand();
             AddFolderInfoCommand = new AddFolderInfoCommand();
+            ChangeAccountCommand = new ChangeAccountCommand();
         }
     }
 
+    public class ChangeAccountCommand : ICommand
+    {
+        public event EventHandler? CanExecuteChanged;
+
+        public bool CanExecute(object? parameter)
+        {
+            return true;
+        }
+
+        public void Execute(object? parameter)
+        {
+            MyPageBase From = new MyPageBase();
+            foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
+            {
+                if (item.Visibility == Visibility.Visible)
+                {
+                    From = item;
+                }
+            }
+            foreach (MyPageBase item in FindControl.FromTag("UserManagePage", (App.Current.Resources["MainPage"] as Grid)))
+            {
+                item.Show(From);
+            }
+        }
+    }
 
     public class LuanchGameCommand : ICommand
     {
@@ -127,7 +155,7 @@ namespace MEFL.PageModelViews
                 else
                 {
                     Process p = new Process();
-                    
+                    //todo 启动游戏嘛！
                 }
             }
         }
@@ -170,39 +198,6 @@ namespace MEFL.PageModelViews
             }
 
             RegKey = null;
-        }
-    }
-    public class ConvertGameInfo : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            if (value != null)
-            {
-                if (parameter.ToString() == "Name")
-                {
-                    try
-                    {
-                        return (value as GameInfoBase).Name;
-                    }
-                    catch (Exception ex)
-                    {
-                        return null;
-                    }
-                }
-                else
-                {
-                    return "未知";
-                }
-            }
-            else
-            {
-                return "未设置";
-            }
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            throw new NotImplementedException();
         }
     }
     public class IndexToUI : IValueConverter

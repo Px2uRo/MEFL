@@ -9,7 +9,6 @@
              d:DesignHeight="450" d:DesignWidth="800"
               DataContext="{DynamicResource RMPMV}">
     <c:MyPageBase.Resources>
-        <mv:ConvertGameInfo x:Key="CGI"/>
         <Style TargetType="c:MyItemsCard">
             <Setter Property="ItemContainerStyle">
                 <Setter.Value>
@@ -38,12 +37,13 @@
                         Background="Transparent" 
                         BorderThickness="1"
                         BorderBrush="{DynamicResource SYTLE_Standard_ColorBrush}" 
-                        Content="{DynamicResource WelcomeWords}"/>
+                        Content="{DynamicResource WelcomeWords}"
+                        Command="{Binding ChangeAccountCommand}"/>
             <c:MyButton Command="{Binding LuanchGameCommand}" Width="60" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" />
             <c:MyButton Click="MyButton_Click" Margin="3,0,3,0" Width="220" Grid.Row="2" Height="30">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{DynamicResource I18N_String_MainPage_CurretGame}"/>
-                    <TextBlock Text="{Binding CurretGame,Converter={StaticResource CGI},ConverterParameter=Name}"/>
+                    <TextBlock Text="{Binding CurretGame.Name}"/>
                     <TextBlock Text="{DynamicResource I18N_String_MainPage_ClickHereToChange}"/>
                 </StackPanel>
             </c:MyButton>

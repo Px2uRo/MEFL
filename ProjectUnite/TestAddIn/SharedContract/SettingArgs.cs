@@ -1,4 +1,6 @@
-﻿namespace MEFL.Arguments
+﻿using System.IO;
+
+namespace MEFL.Arguments
 {
     public class SettingArgs
     {
@@ -8,6 +10,7 @@
         public string CurretJavaPath { get; set; }
         public string DefaultJavaArgs { get; set; }
         public string DefaultOtherGameArgs { get; set; }
+        public FileInfo SelectedJava { get; set; }
     }
 
     /// <summary>

@@ -8,11 +8,18 @@ using Newtonsoft.Json;
 
 namespace MEFL.APIData
 {
+    /// <summary>
+    /// SettingConfig 一般会放在 Json 里面
+    /// </summary>
     public class SettingConfig
     {
         public string MEFLConfigForder;
-        public int LogIndex { get; set; }
-        public string PicturePath { get; set; }
+        private int _LogIndex;
+        public int LogIndex { get => _LogIndex; set { _LogIndex = value; Update(); } }
+        private string _PicturePath;
+        public string PicturePath { get => _PicturePath; set { _PicturePath = value;Update(); } }
+        private string _SelectedGame;
+        public string SelectedGame { get => _SelectedGame; set { _SelectedGame = value;Update(); } }
         public void Update()
         {
             try
@@ -30,7 +37,6 @@ namespace MEFL.APIData
                 Debug.WriteLine($"[ERROR]无法更新设置 {ex.Message}");
             }
         }
-
         public static SettingConfig Load()
         {
             FileInfo fi = new FileInfo(Path.Combine(Environment.CurrentDirectory, "MEFL\\Config.json"));
@@ -62,7 +68,6 @@ namespace MEFL.APIData
             }
             return sc;
         }
-
         public SettingConfig()
         {
             LogIndex = 0;

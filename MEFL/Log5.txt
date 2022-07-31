@@ -1,2 +1,4 @@
-﻿[19:10:24][MEFL]加载了插件设置,当前文档：[]
-[19:10:24][MEFL]重写了插件设置,当前文档：[]
+﻿[20:46:14][MEFL]读取了注册表，键：Folders，值：[{"Path":"D:\\Gaming\\Minecraft\\My_Minecraft\\.minecraft","FriendlyName":"PCL2"}]
+[20:46:14][MEFL]读取了注册表，键：SelectedFolderIndex，值：1
+[20:46:14][MEFL]读取了注册表，键：LegacyAccounts，值：[{"UserName":"Hongyu","Uuid":"9eb63515-8803-48f5-b34f-d419246b1520"}]
+[20:46:14][MEFL]读取了注册表，键：PlayerUuid，值：9eb63515-8803-48f5-b34f-d419246b1520

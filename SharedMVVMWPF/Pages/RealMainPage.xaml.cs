@@ -48,7 +48,6 @@ namespace MEFL.Pages
             (this.DataContext as RealMainPageModelView).CurretGame=
                 ((sender as Controls.MyItemsCardItem).DataContext 
                 as Contract.GameInfoBase);
-            RegManager.Write("CurretGame", (this.DataContext as RealMainPageModelView).CurretGame.RootFolder);
         }
     }
 }

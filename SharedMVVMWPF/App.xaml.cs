@@ -1,8 +1,10 @@
 ﻿using MEFL.PageModelViews;
 using System;
+using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace MEFL
 {
@@ -47,7 +49,10 @@ namespace MEFL
 
         private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            MessageBox.Show(e.Exception.Message);
+            if(e.Exception.Source.ToString()!= "MEFL.Controls")
+            {
+                MessageBox.Show(e.Exception.Message);
+            }
             Debugger.Logger(e.Exception.Message,"ERROR");
             e.Handled = true;
         }

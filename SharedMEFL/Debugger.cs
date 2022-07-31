@@ -49,7 +49,6 @@ namespace MEFL
             {
                 APIModel.SettingConfig.LogIndex = 0;
             }
-            APIModel.SettingConfig.Update();
         }
     }
 }

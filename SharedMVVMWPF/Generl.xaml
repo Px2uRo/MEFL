@@ -16,12 +16,13 @@
     <StackPanel Orientation="Horizontal" x:Key="AddInChangePageButtons" DataContext="{DynamicResource EAIPMV}"/>
     <Grid x:Key="MainPage"/>
     <Grid x:Key="Background"/>
-    <sys:Object x:Key="WelcomeWords"/>
     <StackPanel x:Key="ChangePageButtons" Orientation="Horizontal"/>
     <mv:RealMainPageModelView x:Key="RMPMV"/>
 
     <String x:Key="HomePageButtonStatu" xmlns="clr-namespace:System;assembly=mscorlib">RealMainPage</String>
     <!--#region I18NStrings -->
+    <sys:String x:Key="WelcomeWords_NoAccounts">没有选择账户,点击此处操作</sys:String>
+    <sys:String x:Key="WelcomeWords">没有选择账户,点击此处操作</sys:String>
     <sys:String x:Key="I18N_String_App_OnStartUp">程序启动了，参数{0}</sys:String>
     <sys:String x:Key="I18N_String_App_OnExit">程序退出了</sys:String>
 

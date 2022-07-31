@@ -18,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ContractNet6" Version="0.0.2.17" />
+    <PackageReference Include="ContractNet6" Version="0.0.3.9" />
     <PackageReference Include="MEFL.Controls" Version="0.0.5.7" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />
@@ -42,10 +42,6 @@
 
   <ItemGroup>
     <PRIResource Remove="MyImages.resw" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="SpecialPages\" />
   </ItemGroup>
 
 </Project>
