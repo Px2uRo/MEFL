@@ -18,7 +18,6 @@ namespace MEFL.Controls
         private double Time { get; set; }
         private IEasingFunction Ease;
         private DoubleAnimation dbaniIcon;
-        private double OriginalOpacity = 0.0;
         #endregion
         static MyCard()
         {
@@ -62,7 +61,6 @@ namespace MEFL.Controls
 
         private void MyCard_Initialized(object sender, EventArgs e)
         {
-            OriginalOpacity = (this.Template.FindName("PART_Background_Rect", this) as Border).Opacity;
             if (IsSwaped == true)
             {
                 this.Height = 40;
@@ -108,8 +106,8 @@ namespace MEFL.Controls
         private void MyCard_MouseLeave(object sender, MouseEventArgs e)
         {
             OpacityAni = new DoubleAnimation();
-            OpacityAni.To = this.OriginalOpacity - 0.05;
-            OpacityAni.From = this.OriginalOpacity;
+            OpacityAni.To =  0.8;
+            OpacityAni.From = 0.9;
             OpacityAni.EasingFunction = Ease;
             OpacityAni.Duration = new Duration(TimeSpan.FromSeconds(1));
             (this.Template.FindName("PART_Background_Rect", this) as Border).BeginAnimation(OpacityProperty, OpacityAni);
@@ -119,8 +117,8 @@ namespace MEFL.Controls
         private void MyCard_MouseEnter(object sender, MouseEventArgs e)
         {
             OpacityAni = new DoubleAnimation();
-            OpacityAni.From = this.OriginalOpacity;
-            OpacityAni.To = this.OriginalOpacity + 0.05;
+            OpacityAni.From = 0.8;
+            OpacityAni.To = 0.9;
             OpacityAni.EasingFunction = Ease;
             OpacityAni.Duration = new Duration(TimeSpan.FromSeconds(1));
             (this.Template.FindName("PART_Background_Rect", this) as Border).BeginAnimation(OpacityProperty, OpacityAni);

@@ -26,7 +26,6 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\AddALegacyAccountModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ExtraAddInPageModelView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\GenerlManageGameModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\GenerlSettingGameModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\GenerlManageAccountModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\GenerlAddAccountModelView.cs" />

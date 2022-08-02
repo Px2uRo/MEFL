@@ -85,7 +85,14 @@ namespace MEFL.PageModelViews
         }
     }
     public class SettingPageModelView: PageModelViewBase
-    {
+    {       
+
+        public string OtherJVMArgs
+        {
+            get { return APIData.APIModel.SettingConfig.OtherJVMArgs; }
+            set { APIData.APIModel.SettingConfig.OtherJVMArgs = value; Invoke(nameof(OtherJVMArgs)); }
+        }
+
         public ICommand ChangeBackgroundCommand { get; set; }
         public int LangIndex {
             get

@@ -21,6 +21,14 @@ namespace MEFL.PageModelViews
 
         private void RunningGames_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            if((sender as ObservableCollection<Process>).Count > 0)
+            {
+                LoadButton();
+            }
+            else
+            {
+                ReturnToMainPage();
+            }
             Invoke("RunningGames");
         }
 

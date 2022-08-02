@@ -27,7 +27,6 @@ I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\MEFL.runtimeconfig.j
 I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\MEFL.pdb
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\MEFLNet6.genruntimeconfig.cache
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\ref\MEFL.dll
-I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\ContractNet6.dll
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\Generl.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\MyExtensionCard.g.cs
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\ExtensionPage.g.cs
@@ -63,3 +62,10 @@ I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\ManageLegacyAccountP
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\ManageLegacyAccountPage.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\SpecialPages\ManageProcessesPage.g.cs
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\SpecialPages\ManageProcessesPage.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\SpecialPages\GameSettingPage.g.cs
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\SpecialPages\MEFLRealseTypeManage.g.cs
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\SpecialPages\MEFLRealseTypeSetting.g.cs
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\SpecialPages\GameSettingPage.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\SpecialPages\MEFLRealseTypeManage.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\SpecialPages\MEFLRealseTypeSetting.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\MEFL.Contract.dll

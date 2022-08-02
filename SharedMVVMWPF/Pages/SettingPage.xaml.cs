@@ -38,6 +38,10 @@ namespace MEFL.Pages
             });
             t.Start();
         }
+        private void ReSetJVMArgs(object sender, RoutedEventArgs e)
+        {
+            (this.Resources["SPMV"] as SettingPageModelView).OtherJVMArgs = "-XX:+UseG1GC -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Dfml.ignoreInvalidMinecraftCertificates=True -Dfml.ignorePatchDiscrepancies=True -Dlog4j2.formatMsgNoLookups=true";
+        }
 
         private void T_Elapsed(object sender, ElapsedEventArgs e)
         {

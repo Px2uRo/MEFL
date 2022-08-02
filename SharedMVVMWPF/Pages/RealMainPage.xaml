@@ -16,7 +16,22 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">
-                                    <c:MyItemsCardItem MouseDown="MyComboBox_MouseDown" Icon="{Binding IconSource}" Title="{Binding Name}" SubTitle="{Binding Description}"/>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="35" />
+                                            <ColumnDefinition Width="35" />
+                                            <ColumnDefinition Width="35" />
+                                        </Grid.ColumnDefinitions>
+                                        <c:MyItemsCardItem MouseDown="MyComboBox_MouseDown" ToolTip="{Binding Name}" Title="{Binding Name}" SubTitle="{Binding Description}">
+                                            <c:MyItemsCardItem.Icon>
+                                                <Image Source="{Binding IconSource}"/>
+                                            </c:MyItemsCardItem.Icon>
+                                        </c:MyItemsCardItem>
+                                        <c:MyButton Grid.Column="1" Content="★" Width="30" Height="30" Click="SetItemToFavorite"/>
+                                        <c:MyButton Grid.Column="2" Content="×" Width="30" Height="30" Click="DeleteItem"/>
+                                        <c:MyButton Grid.Column="3" Content="..." Width="30" Height="30" Click="ItemSetting"/>
+                                    </Grid>
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
@@ -39,7 +54,14 @@
                         BorderBrush="{DynamicResource SYTLE_Standard_ColorBrush}" 
                         Content="{DynamicResource WelcomeWords}"
                         Command="{Binding ChangeAccountCommand}"/>
-            <c:MyButton Command="{Binding LuanchGameCommand}" Width="60" Height="60" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" />
+            <c:MyButton Command="{Binding LuanchGameCommand}" Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1">
+                <c:MyButton.Content>
+                    <StackPanel>
+                        <Image Source="{Binding CurretGame.IconSource}" Width="40" Height="40"/>
+                        <TextBlock Text="{Binding CurretGame.Name}" FontSize="8" HorizontalAlignment="Center" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </c:MyButton.Content>
+            </c:MyButton>
             <c:MyButton Click="MyButton_Click" Margin="3,0,3,0" Width="220" Grid.Row="2" Height="30">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{DynamicResource I18N_String_MainPage_CurretGame}"/>

@@ -1,4 +1,6 @@
-﻿using MEFL.Controls;
+﻿using MEFL.APIData;
+using MEFL.Contract;
+using MEFL.Controls;
 using MEFL.PageModelViews;
 using System;
 using System.Collections.Generic;
@@ -36,6 +38,37 @@ namespace MEFL.Pages
         private void MyButton_Click(object sender, RoutedEventArgs e)
         {
             ChangeGameBorder.Visibility = Visibility.Visible;
+        }
+        private void DeleteItem(object sender, RoutedEventArgs e)
+        {
+            ((sender as FrameworkElement).DataContext as GameInfoBase).Delete();
+            (this.DataContext as RealMainPageModelView).GameInfoConfigs.Remove((sender as FrameworkElement).DataContext as GameInfoBase);
+            (this.DataContext as RealMainPageModelView).Invoke("GameInfoConfigs");
+        }
+        private void SetItemToFavorite(object sender, RoutedEventArgs e)
+        {
+            (App.Current.Resources["RMPMV"] as RealMainPageModelView).MyFolders[APIModel.SelectedFolderIndex].SetToFavorite((sender as FrameworkElement).DataContext as GameInfoBase);
+            (App.Current.Resources["RMPMV"] as RealMainPageModelView).Invoke("GameInfoConfigs");
+        }
+        private void ItemSetting(object sender, RoutedEventArgs e)
+        {
+            foreach (MyPageBase item in FindControl.FromTag("SettingGamePage", (App.Current.Resources["MainPage"] as Grid)))
+            {
+                (App.Current.Resources["MainPage"] as Grid).Children.Remove(item);
+            }
+            (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.GameSettingPage() { Tag = "SettingGamePage", Visibility = Visibility.Hidden, Content = ((sender as FrameworkElement).DataContext as GameInfoBase).SettingsPage, DataContext = new GenerlSettingGameModelView((sender as FrameworkElement).DataContext as GameInfoBase) });
+            MyPageBase From = new MyPageBase();
+            foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
+            {
+                if (item.Visibility == Visibility.Visible)
+                {
+                    From = item;
+                }
+            }
+            foreach (MyPageBase item in FindControl.FromTag("SettingGamePage", (App.Current.Resources["MainPage"] as Grid)))
+            {
+                item.Show(From);
+            }
         }
 
         private void RealMainPageModelView_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)

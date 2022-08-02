@@ -18,20 +18,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ContractNet6" Version="0.0.3.9" />
-    <PackageReference Include="MEFL.Controls" Version="0.0.5.7" />
+    <PackageReference Include="MEFL.Contract" Version="0.0.3.17" />
+    <PackageReference Include="MEFL.Controls" Version="0.0.5.8" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\CoreLaunching\CoreLaunchingNet6\CoreLaunchingNet6.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="ContractNet6">
-      <HintPath>..\ProjectUnite\TestAddIn\Contract\bin\Debug\net6.0-windows\ContractNet6.dll</HintPath>
-    </Reference>
   </ItemGroup>
 
   <Import Project="..\SharedMVVMWPF\SharedMVVMWPF.projitems" Label="Shared" />

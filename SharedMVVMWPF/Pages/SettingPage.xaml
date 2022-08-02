@@ -65,6 +65,7 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
+                        <RowDefinition Height="30"/>
                     </Grid.RowDefinitions>
                     <TextBlock Text="默认 Java" VerticalAlignment="Center"/>
                     <Grid Grid.Column="1">
@@ -78,6 +79,15 @@
                             <c:MyButton Content="R" Grid.Column="1" Width="27" Height="27" Click="SearchJava" IsEnabled="{Binding EnableSearchJava}"/>
                             <c:MyButton Content="+" Grid.Column="2" HorizontalAlignment="Left" Width="27" Height="27" Click="AddNewJava" IsEnabled="{Binding EnableSearchJava}"/>
                         </Grid>
+                    </Grid>
+                    <TextBlock Text="其他 JVM 参数" Grid.Column="0" Grid.Row="1" Margin="0,10,0,0"/>
+                    <Grid Grid.Column="1" Grid.Row="1" Margin="0,10,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Text="{Binding OtherJVMArgs}" />
+                        <c:MyButton Content="R" Grid.Column="1" Width="27" Height="27" Click="ReSetJVMArgs"/>
                     </Grid>
                 </Grid>
             </c:MyCard>

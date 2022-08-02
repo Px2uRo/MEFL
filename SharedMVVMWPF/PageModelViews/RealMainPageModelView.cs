@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -14,9 +15,13 @@ using MEFL.APIData;
 using MEFL.Contract;
 using MEFL.Controls;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace MEFL.PageModelViews
 {
+    /// <summary>
+    /// 也叫做RMPMV
+    /// </summary>
     public class RealMainPageModelView:PageModelViewBase
     {
         public Contract.GameInfoBase CurretGame
@@ -148,14 +153,34 @@ namespace MEFL.PageModelViews
         {
             if (APIModel.CurretGame != null)
             {
-                if (APIModel.CurretGame.LaunchByLauncher == false)
+                try
                 {
-                    APIModel.CurretGame.Launch(APIModel.SettingArgs).Start();
+                    if (APIModel.CurretGame.LaunchByLauncher == false)
+                    {
+                        ManageProcessesPageModel.ModelView.RunningGames.Add(APIModel.CurretGame.Launch(APIModel.SettingArgs));
+                        ManageProcessesPageModel.ModelView.RunningGames[ManageProcessesPageModel.ModelView.RunningGames.Count - 1].Start();
+                    }
+                    else
+                    {
+                        ManageProcessesPageModel.ModelView.RunningGames.Add(ProcessCreater.NewGame(APIModel.CurretGame));
+                        ManageProcessesPageModel.ModelView.RunningGames[ManageProcessesPageModel.ModelView.RunningGames.Count - 1].Start();
+                    }
+                    MyPageBase From = new MyPageBase();
+                    foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
+                    {
+                        if (item.Visibility == Visibility.Visible)
+                        {
+                            From = item;
+                        }
+                    }
+                    foreach (MyPageBase item in FindControl.FromTag("ProcessesManagePage", (App.Current.Resources["MainPage"] as Grid)))
+                    {
+                        item.Show(From);
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    Process p = new Process();
-                    //todo 启动游戏嘛！
+                    MessageBox.Show(ex.Message);
                 }
             }
         }
@@ -212,20 +237,33 @@ namespace MEFL.PageModelViews
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            foreach (var item in value as ObservableCollection<Contract.GameInfoBase>)
+            {
+                item.Dispose();
+            }
             MyGamesSP.Children.Clear();
 
             #region 收藏夹而已
             List<Controls.MyItemsCard> cards = new List<Controls.MyItemsCard>();
-            Controls.MyItemsCard favorcard = new Controls.MyItemsCard() { 
-                IsAbleToSwap = true, Title = "Favorite", 
-                Margin = VarMargin, BorderThickness = VarBorderThickness, 
-                BorderBrush = VarBorderBrush, CornerRadius = VarConrnerRadius };
+            Controls.MyItemsCard favorcard = new Controls.MyItemsCard()
+            {
+                IsAbleToSwap = true,
+                Title = "Favorite",
+                Margin = VarMargin,
+                BorderThickness = VarBorderThickness,
+                BorderBrush = VarBorderBrush,
+                CornerRadius = VarConrnerRadius
+            };
             ObservableCollection<Contract.GameInfoBase> favoritem = new ObservableCollection<Contract.GameInfoBase>();
+            ObservableCollection<String> favorites = (App.Current.Resources["RMPMV"] as RealMainPageModelView).MyFolders[APIModel.SelectedFolderIndex].Favorites;
             foreach (var item in APIModel.GameInfoConfigs)
             {
-                if (item.IsFavorate)
+                foreach (var item2 in favorites)
                 {
-                    favoritem.Add(item);
+                    if (item.GameJsonPath == item2)
+                    {
+                        favoritem.Add(item);
+                    }
                 }
             }
             if (favoritem.Count > 0)
@@ -248,7 +286,12 @@ namespace MEFL.PageModelViews
             #endregion
 
             #region 给卡片加 ItemSources 而已
-            for (int i = 0; i < cards.Count; i++)
+            var startindex = 0;
+            if(favoritem.Count > 0)
+            {
+                startindex = 1;
+            }
+            for (int i = startindex; i < cards.Count; i++)
             {
                 var cardItemSources = new ObservableCollection<Contract.GameInfoBase>();
                 foreach (var item in APIModel.GameInfoConfigs)
@@ -266,7 +309,6 @@ namespace MEFL.PageModelViews
             {
                 MyGamesSP.Children.Add(item);
             }
-
             return MyGamesSP;
         }
 

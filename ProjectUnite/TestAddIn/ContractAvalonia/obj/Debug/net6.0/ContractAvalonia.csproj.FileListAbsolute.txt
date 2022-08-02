@@ -1,0 +1,5 @@
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\ContractAvalonia\obj\Debug\net6.0\ContractAvalonia.csproj.AssemblyReference.cache
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\ContractAvalonia\obj\Debug\net6.0\ContractAvalonia.GeneratedMSBuildEditorConfig.editorconfig
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\ContractAvalonia\obj\Debug\net6.0\ContractAvalonia.AssemblyInfoInputs.cache
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\ContractAvalonia\obj\Debug\net6.0\ContractAvalonia.AssemblyInfo.cs
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\ContractAvalonia\obj\Debug\net6.0\ContractAvalonia.csproj.CoreCompileInputs.cache

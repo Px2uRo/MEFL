@@ -1,0 +1,17 @@
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\bin\Debug\net6.0-windows\MEFL.Contract.deps.json
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\bin\Debug\net6.0-windows\MEFL.Contract.dll
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\bin\Debug\net6.0-windows\MEFL.Contract.pdb
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Debug\net6.0-windows\MEFL.Contract.csproj.AssemblyReference.cache
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Debug\net6.0-windows\GeneratedInternalTypeHelper.g.cs
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Debug\net6.0-windows\MEFL.Contract_MarkupCompile.cache
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Debug\net6.0-windows\MEFL.Contract_MarkupCompile.lref
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Debug\net6.0-windows\Generic.baml
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Debug\net6.0-windows\MEFL.Contract.g.resources
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Debug\net6.0-windows\MEFL.Contract.GeneratedMSBuildEditorConfig.editorconfig
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Debug\net6.0-windows\MEFL.Contract.AssemblyInfoInputs.cache
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Debug\net6.0-windows\MEFL.Contract.AssemblyInfo.cs
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Debug\net6.0-windows\MEFL.Contract.csproj.CoreCompileInputs.cache
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Debug\net6.0-windows\MEFL.Contract.dll
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Debug\net6.0-windows\refint\MEFL.Contract.dll
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Debug\net6.0-windows\MEFL.Contract.pdb
+I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Debug\net6.0-windows\ref\MEFL.Contract.dll

@@ -17,9 +17,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Hosting.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFLAccount.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)..\..\..\Xiong%27s\MEFLCollection\SharedMEFL\GameTypes\MEFLRealseType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ProcessCreater.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RegManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)GameTypes\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="$(MSBuildThisFileDirectory)realsetypelogo.png" />
   </ItemGroup>
 </Project>

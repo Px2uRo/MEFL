@@ -16,6 +16,9 @@ namespace MEFL.PageModelViews
         public ICommand SelectCommand { get; set; }
         public ICommand BackCommand { get; set; }
         public ICommand RemoveCommand { get; set; }
+        public ICommand RenameFileCommand { get; set; }
+        public InvokeMainPageCommand InvokeMainPage { get; set; }
+
         public static string CurrectName; 
         public static string CurrectUuid;
         public GenerlSettingGameModelView(GameInfoBase game)
@@ -24,9 +27,42 @@ namespace MEFL.PageModelViews
             SelectCommand = new SelectGameCommand();
             BackCommand = new BackGameCommand();
             RemoveCommand = new RemoveGameCommand();
+            RenameFileCommand = new RenameGameFileCommand();
+            InvokeMainPage = new InvokeMainPageCommand();
             GenerlSettingGameModel.ModelView = this;
         }
     }
+
+    public class RenameGameFileCommand : ICommand
+    {
+        public event EventHandler? CanExecuteChanged;
+
+        public bool CanExecute(object? parameter)
+        {
+            return true;
+        }
+
+        public void Execute(object? parameter)
+        {
+            //todo 文件操作
+        }
+    }
+
+    public class InvokeMainPageCommand : ICommand
+    {
+        public event EventHandler? CanExecuteChanged;
+
+        public bool CanExecute(object? parameter)
+        {
+            return true;
+        }
+
+        public void Execute(object? parameter)
+        {
+
+        }
+    }
+
 
     internal class SelectGameCommand : ICommand
     {
@@ -39,7 +75,26 @@ namespace MEFL.PageModelViews
 
         public void Execute(object? parameter)
         {
-            //todo 重写
+            (App.Current.Resources["RMPMV"] as RealMainPageModelView).CurretGame = (GenerlSettingGameModel.Game);
+            MyPageBase From = new MyPageBase();
+            foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
+            {
+                if (item.Visibility == Visibility.Visible)
+                {
+                    From = item;
+                }
+            }
+            foreach (MyPageBase item in FindControl.FromTag("RealMainPage", (App.Current.Resources["MainPage"] as Grid)))
+            {
+                item.Show(From);
+            }
+            for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
+            {
+                if ((App.Current.Resources["MainPage"] as Grid).Children[i] == From)
+                {
+                    (App.Current.Resources["MainPage"] as Grid).Children.RemoveAt(i);
+                }
+            }
         }
     }
 
@@ -54,7 +109,6 @@ namespace MEFL.PageModelViews
 
         public void Execute(object? parameter)
         {
-            //todo 重写
             MyPageBase From = new MyPageBase();
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
             {
@@ -63,7 +117,7 @@ namespace MEFL.PageModelViews
                     From = item;
                 }
             }
-            foreach (MyPageBase item in FindControl.FromTag("UserManagePage", (App.Current.Resources["MainPage"] as Grid)))
+            foreach (MyPageBase item in FindControl.FromTag("RealMainPage", (App.Current.Resources["MainPage"] as Grid)))
             {
                 item.Show(From);
             }
@@ -88,8 +142,29 @@ namespace MEFL.PageModelViews
 
         public void Execute(object? parameter)
         {
-            //todo 重写
+            (GenerlSettingGameModel.Game).Delete();
+            (App.Current.Resources["RMPMV"] as RealMainPageModelView).GameInfoConfigs.Remove((GenerlSettingGameModel.Game));
+            (App.Current.Resources["RMPMV"] as RealMainPageModelView).Invoke("GameInfoConfigs");
             GenerlSettingGameModel.Game.Dispose();
+            MyPageBase From = new MyPageBase();
+            foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
+            {
+                if (item.Visibility == Visibility.Visible)
+                {
+                    From = item;
+                }
+            }
+            foreach (MyPageBase item in FindControl.FromTag("RealMainPage", (App.Current.Resources["MainPage"] as Grid)))
+            {
+                item.Show(From);
+            }
+            for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
+            {
+                if ((App.Current.Resources["MainPage"] as Grid).Children[i] == From)
+                {
+                    (App.Current.Resources["MainPage"] as Grid).Children.RemoveAt(i);
+                }
+            }
         }
     }
 

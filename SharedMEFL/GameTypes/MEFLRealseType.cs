@@ -9,84 +9,113 @@ using System.IO;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using io = System.IO;
 
 namespace MEFL.GameTypes
 {
     public class MEFLRealseType : MEFL.Contract.GameInfoBase
     {
+        public override FrameworkElement GetManageProcessPage(Process process, SettingArgs args)
+        {
+            return _managePage;
+        }
         public override void Dispose()
         {
 
         }
-        private static FrameworkElement _settingPage;
-        public static FrameworkElement _managePage;
+        private static FrameworkElement _settingPage = new SpecialPages.MEFLRealseTypeSetting();
+        public static FrameworkElement _managePage = new SpecialPages.MEFLRealseTypeManage();
         private MEFLStandardOtherArgumentTemplate _MSOAT { get; set; }
         private CoreLaunching.JsonTemplates.Root _Root { get; set; }
         public override string GameTypeFriendlyName { get => App.Current.Resources["I18N_String_MEFLGameInfos_Realse"].ToString(); set => throw new NotImplementedException(); }
-        public override string Description 
-        { 
-            get { 
+        public override string Description
+        {
+            get {
                 if (_MSOAT.Description != null)
                 {
                     return _MSOAT.Description;
                 }
-                else 
+                else
                 {
                     return _Root.Id;
                 }
-            } 
-            set => _MSOAT.Description=value; 
+            }
+            set => _MSOAT.Description = value;
         }
-        public override string Version { get => _Root.Id; set => _Root.Id=value; }
-        public override string Name { get => _Root.Id; set => _Root.Id = value; }
-        public override object IconSource { 
-            get 
+        public override string Version { get => _Root.Id; set => _Root.Id = value; }
+        static BitmapImage Icon = new BitmapImage(new Uri("pack://application:,,,/RealseTypeLogo.png", UriKind.Absolute));
+        public override ImageSource IconSource {
+            get
             {
-                if (_MSOAT.CustomIconPath != null)
-                {
-                    return new Image() { Source=new BitmapImage(new Uri(_MSOAT.CustomIconPath))};
-                }
-                else
-                {
-                    return App.Current.Resources["I18N_String_MEFLGameInfos_Realse_Icon"];
-                }
-            } 
-            set 
-            {
-                if(value is String)
-                {
-                    _MSOAT.CustomIconPath = value as String;
-                }
-            } 
+                return Icon;
+            }
         }
-        public override string NativeLibrariesPath { get 
-            { 
-                if (_MSOAT.NativeLibrariesPath != null) 
+
+        public override string NativeLibrariesPath { get
+            {
+                if (_MSOAT.NativeLibrariesPath != null)
                 {
                     return _MSOAT.NativeLibrariesPath;
                 }
                 else
                 {
-                    return Path.Combine(Path.GetDirectoryName(GameJsonPath),"\\natives");
+                    return System.IO.Path.Combine(dotMinecraftPath, "natives");
                 }
-            } 
-            set 
+            }
+            set
             {
-                _MSOAT.NativeLibrariesPath=value;
-            } 
+                _MSOAT.NativeLibrariesPath = value;
+            }
         }
         public override List<Root_Libraries> GameLibraries { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override Contract.JavaVersion JavaVerion { get => new Contract.JavaVersion() { Component= _Root.JavaVersion.Component,MajorVersion= _Root.JavaVersion.MajorVersion }; set => throw new NotImplementedException(); }
-        public override string GameArgs { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override string JVMArgs { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string GameArgs { get 
+            {
+                var res = string.Empty;
+                if (_Root.Arguments!=null)
+                {
+                    foreach (var item in _Root.Arguments.Game.Array)
+                    {
+                        res += $" {item}";
+                    }
+                }
+                else
+                {
+                    res = _Root.MinecraftArguments;
+                }
+                return res;
+            } 
+        }
+        public override string JVMArgs { get
+            {
+                String res = String.Empty;
+                if (_Root.Arguments != null)
+                {
+
+                }
+                else
+                {
+                    res += " \"-Dos.name=${Dos.name}\" -Dos.version=${Dos.version} -XX:HeapDumpPath=${HeapDumpPath} \"-Djava.library.path=${natives_directory}\" -Dminecraft.launcher.brand=${launcher_name} -Dminecraft.launcher.version=${launcher_version} -Dminecraft.client.jar=${Dminecraft.client.jar}";
+                    string cps = string.Empty;
+                    foreach (var item in ClassPaths)
+                    {
+                        cps += item;
+                        cps += ";";
+                    }
+                    cps += GameJarPath;
+                    res += $" -cp \"{cps}\"";
+                }
+                return res;
+            }
+        }
         public override string OtherGameArgs { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override string OtherJVMArgs { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override bool IsFavorate { get => _MSOAT.IsFavorite; set => _MSOAT.IsFavorite=value; }
-        public override string GameJsonPath { get;set; }
+        public override string OtherJVMArgs { get => _MSOAT.OtherJVMArguments; set => _MSOAT.OtherJVMArguments = value; }
+        public override string GameJsonPath { get; set; }
         public override bool LaunchByLauncher => true;
 
-        public override int JavaVersion {
+        public override int JavaMajorVersion {
             get
             {
                 try
@@ -98,21 +127,55 @@ namespace MEFL.GameTypes
                     return 8;
                 }
             }
-            set => throw new NotImplementedException(); }
+        }
 
-        public override string GameFolder { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
-        public override FrameworkElement ManagePage => _managePage;
+        public override string GameFolder { get => dotMinecraftPath; set => throw new NotImplementedException(); }
 
         public override FrameworkElement SettingsPage => _settingPage;
+
+        public override string GameJarPath => GameJsonPath.Replace(".json", ".jar");
+
+        public override string HeapDumpPath => "${HeapDumpPath}";
+
+        public override int GameMaxMem { get => 0; set => throw new NotImplementedException(); }
+        public override int GameMinMem { get => 0; set => throw new NotImplementedException(); }
+
+        public override List<string> ClassPaths { get 
+            {
+                var res = new List<string>();
+                foreach (var item in _Root.Libraries)
+                {
+                    if (item.Downloads.Artifact.Path != null)
+                    {
+                        res.Add(io.Path.Combine(dotMinecraftPath,"libraries", item.Downloads.Artifact.Path.Replace(@"/","\\")));
+                    }
+                }
+                return res;
+            } 
+        }
+
+        public override string MainClassName => _Root.MainClass;
+
+        public override string AssetsRoot => io.Path.Combine(dotMinecraftPath,"assets");
+
+        public override string AssetsIndexName => _Root.AssetIndex.Id;
+
+        public override string VersionType => _Root.Type;
 
         public override Process Launch(SettingArgs args)
         {
             throw new NotImplementedException();
         }
+
+        public override void Delete()
+        {
+            Dispose();
+
+        }
+
         public MEFLRealseType(string JsonPath)
         {
-            string otherArgsPath = Path.Combine(Path.GetDirectoryName(JsonPath), "MEFLOtherArguments.json");
+            string otherArgsPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(JsonPath), "MEFLOtherArguments.json");
             _MSOAT =new MEFLStandardOtherArgumentTemplate(otherArgsPath);
             otherArgsPath = string.Empty;
             GameJsonPath=JsonPath;

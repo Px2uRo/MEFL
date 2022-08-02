@@ -76,7 +76,7 @@
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
-    "version": "0.0.3.9",
+    "version": "0.0.3.13",
     "restore": {
       "projectUniqueName": "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\TestAddIn\\Contract\\ContractNet6.csproj",
       "projectName": "ContractNet6",

@@ -68,14 +68,6 @@ namespace MEFL.APIData
                 }
             }
         }
-
-        private static MEFLFolderInfo _SelectedForder;
-
-        public static MEFLFolderInfo SelectedForder
-        {
-            get { return _SelectedForder; }
-            set { _SelectedForder = value; }
-        }
         public static Arguments.SettingArgs SettingArgs { get; set; }
         public static Contract.GameInfoBase CurretGame { get => SettingArgs.CurretGame; set { SettingConfig.SelectedGame = value.RootFolder; SettingArgs.CurretGame = value; } }
         public static ObservableCollection<Contract.GameInfoBase> GameInfoConfigs { get; set; }

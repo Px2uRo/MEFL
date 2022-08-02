@@ -84,14 +84,14 @@ namespace MEFL
             } 
         }
         [JsonIgnore]
-        public override string AccessToken { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string AccessToken { get => "0123456789abcdef0123456789ABCDEF"; set => throw new NotImplementedException(); }
 
         [JsonIgnore] 
         public override string ClientID { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         [JsonIgnore]
         public override string Xuid { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         [JsonIgnore]
-        public override string UserType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string UserType { get => "Legacy"; set => throw new NotImplementedException(); }
         [JsonIgnore]
         public override string UserProperties { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         [JsonIgnore]

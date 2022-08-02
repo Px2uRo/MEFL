@@ -13,6 +13,7 @@ namespace MEFL.APIData
     /// </summary>
     public class SettingConfig
     {
+        [JsonIgnore]
         public string MEFLConfigForder;
         private int _LogIndex;
         public int LogIndex { get => _LogIndex; set { _LogIndex = value; Update(); } }
@@ -20,6 +21,8 @@ namespace MEFL.APIData
         public string PicturePath { get => _PicturePath; set { _PicturePath = value;Update(); } }
         private string _SelectedGame;
         public string SelectedGame { get => _SelectedGame; set { _SelectedGame = value;Update(); } }
+        private string _OtherJVMArgs;
+        public string OtherJVMArgs { get => _OtherJVMArgs; set { _OtherJVMArgs = value; Update(); } }
         public void Update()
         {
             try
@@ -59,12 +62,16 @@ namespace MEFL.APIData
             }
             catch (Exception ex)
             {
-                Debug.WriteLine($"无法加载配置： {ex.Message}");
+                Debugger.Logger($"无法加载配置： {ex.Message}");
                 sc = new SettingConfig();
             }
             if (sc == null)
             {
                 sc = new SettingConfig();
+            }
+            if (String.IsNullOrEmpty(sc.OtherJVMArgs))
+            {
+                sc.OtherJVMArgs = "-XX:+UseG1GC -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Dfml.ignoreInvalidMinecraftCertificates=True -Dfml.ignorePatchDiscrepancies=True -Dlog4j2.formatMsgNoLookups=true";
             }
             return sc;
         }
