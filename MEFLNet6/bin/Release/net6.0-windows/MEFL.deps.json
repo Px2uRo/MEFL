@@ -9,24 +9,25 @@
       "MEFL/1.0.0": {
         "dependencies": {
           "CoreLaunchingNet6": "0.0.0",
-          "MEFL.Contract": "0.0.3.18",
+          "MEFL.Contract": "0.0.3.29",
           "MEFL.Controls": "0.0.5.8",
           "Newtonsoft.Json": "13.0.1",
+          "OctaneEngine": "2.1.0",
           "System.ComponentModel.Composition": "6.0.0"
         },
         "runtime": {
           "MEFL.dll": {}
         }
       },
-      "MEFL.Contract/0.0.3.18": {
+      "MEFL.Contract/0.0.3.29": {
         "dependencies": {
           "MEFL.Controls": "0.0.5.8",
           "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/net6.0-windows7.0/MEFL.Contract.dll": {
-            "assemblyVersion": "0.0.3.18",
-            "fileVersion": "0.0.3.18"
+            "assemblyVersion": "0.0.3.29",
+            "fileVersion": "0.0.3.29"
           }
         }
       },
@@ -45,6 +46,14 @@
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
             "assemblyVersion": "13.0.0.0",
             "fileVersion": "13.0.1.25517"
+          }
+        }
+      },
+      "OctaneEngine/2.1.0": {
+        "runtime": {
+          "lib/net6.0/OctaneEngine.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       },
@@ -255,12 +264,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "MEFL.Contract/0.0.3.18": {
+    "MEFL.Contract/0.0.3.29": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-usMAmOnVbtLPBQyjYTxHuaDPu1cBGVhWEMEkEiDGnQcYYpGtFVD5EuTbOXkNNfkdjgp5C0nft/uFKiaqYbSF0A==",
-      "path": "mefl.contract/0.0.3.18",
-      "hashPath": "mefl.contract.0.0.3.18.nupkg.sha512"
+      "sha512": "sha512-brugL2bxzLP19DtFGtey7ACLqXKM/PYM3vZJQ+gvM53hSZqJx3QyKgd0qeqPOy+JYZ22Kf2QBD/bYYva8RbPeQ==",
+      "path": "mefl.contract/0.0.3.29",
+      "hashPath": "mefl.contract.0.0.3.29.nupkg.sha512"
     },
     "MEFL.Controls/0.0.5.8": {
       "type": "package",
@@ -289,6 +298,13 @@
       "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
       "path": "newtonsoft.json/13.0.1",
       "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
+    },
+    "OctaneEngine/2.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-nF/8Hk7/cgl/Uq4UiiwU4Q0icVbITBKAXzeOoyVP3AUjMvxM62QU+iiuMej9/VOEKLrozInYH4Datfe7vqwXbQ==",
+      "path": "octaneengine/2.1.0",
+      "hashPath": "octaneengine.2.1.0.nupkg.sha512"
     },
     "runtime.native.System/4.3.0": {
       "type": "package",

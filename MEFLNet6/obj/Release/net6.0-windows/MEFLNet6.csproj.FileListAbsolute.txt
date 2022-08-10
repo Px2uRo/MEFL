@@ -45,10 +45,6 @@ I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\zh_yue_HK.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\zh_MO.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\zh_CN.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\AddAccountPage.baml
-I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\SpecialPages\GameSettingPage.g.cs
-I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\SpecialPages\ManageProcessesPage.g.cs
-I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\SpecialPages\MEFLRealseTypeManage.g.cs
-I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\SpecialPages\MEFLRealseTypeSetting.g.cs
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\RealMainPage.g.cs
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\UserManagePage.g.cs
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\AddAccountPage.g.cs
@@ -59,10 +55,6 @@ I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\PickUpAFolder.g.cs
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\RenameFolderPage.g.cs
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\MEFL_Content.g.cs
 I:\Xiong's\MEFLCollection\MEFLNet6\bin\Release\net6.0-windows\MEFL.Contract.dll
-I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\SpecialPages\GameSettingPage.baml
-I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\SpecialPages\ManageProcessesPage.baml
-I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\SpecialPages\MEFLRealseTypeManage.baml
-I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\SpecialPages\MEFLRealseTypeSetting.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\RealMainPage.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\UserManagePage.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\ManageLegacyAccountPage.baml
@@ -70,3 +62,14 @@ I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\AddALegacyAccount.
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\AddNewAccount.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\PickUpAFolder.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\RenameFolderPage.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\bin\Release\net6.0-windows\OctaneEngine.dll
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\Pages\DownloadPage.g.cs
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\GameSettingPage.g.cs
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\ManageProcessesPage.g.cs
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\MEFLRealseTypeManage.g.cs
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\MEFLRealseTypeSetting.g.cs
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\Pages\DownloadPage.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\GameSettingPage.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\ManageProcessesPage.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\MEFLRealseTypeManage.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Release\net6.0-windows\MEFLRealseTypeSetting.baml

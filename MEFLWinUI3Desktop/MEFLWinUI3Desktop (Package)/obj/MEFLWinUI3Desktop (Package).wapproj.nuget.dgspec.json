@@ -140,6 +140,24 @@
       "frameworks": {
         "net5.0-windows10.0.19041": {
           "targetAlias": "net5.0-windows10.0.19041.0",
+          "dependencies": {
+            "Microsoft.WindowsAppSDK": {
+              "target": "Package",
+              "version": "[1.0.0-experimental1, )"
+            },
+            "Microsoft.WindowsAppSDK.Foundation": {
+              "target": "Package",
+              "version": "[1.0.0-experimental1, )"
+            },
+            "Microsoft.WindowsAppSDK.InteractiveExperiences": {
+              "target": "Package",
+              "version": "[1.0.0-experimental1, )"
+            },
+            "Microsoft.WindowsAppSDK.WinUI": {
+              "target": "Package",
+              "version": "[1.0.0-experimental1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -150,6 +168,56 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Runtime.win-arm64",
+              "version": "[5.0.17, 5.0.17]"
+            },
+            {
+              "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
+              "version": "[5.0.17, 5.0.17]"
+            },
+            {
+              "name": "Microsoft.AspNetCore.App.Runtime.win-x86",
+              "version": "[5.0.17, 5.0.17]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Runtime.win-arm64",
+              "version": "[5.0.17, 5.0.17]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Runtime.win-x64",
+              "version": "[5.0.17, 5.0.17]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Runtime.win-x86",
+              "version": "[5.0.17, 5.0.17]"
+            },
+            {
+              "name": "Microsoft.Windows.SDK.NET.Ref",
+              "version": "[10.0.19041.26, 10.0.19041.26]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Runtime.win-arm64",
+              "version": "[5.0.17, 5.0.17]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
+              "version": "[5.0.17, 5.0.17]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x86",
+              "version": "[5.0.17, 5.0.17]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.Windows.SDK.NET.Ref": {
+              "privateAssets": "all"
+            }
+          },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       },

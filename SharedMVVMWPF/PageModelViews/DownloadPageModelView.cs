@@ -199,17 +199,18 @@ namespace MEFL.PageModelViews
             var itms = new List<LauncherWebVersionInfo>();
             if (!IVEGOT)
             {
+                IVEGOT = true;
                 var websrm = HttpWebRequest.Create("https://piston-meta.mojang.com/mc/game/version_manifest.json").GetResponse().GetResponseStream();
                 StreamReader sr = new StreamReader(websrm);
                 FileStream fs;
-                if (File.Exists($"{tmpFolderPath}\\RecordedVersion.json"))
+                if (!File.Exists($"{tmpFolderPath}\\RecordedVersion.json"))
                 {
-                    fs = new FileStream($"{tmpFolderPath}\\RecordedVersion.json", FileMode.Create);
+                    fs = new FileStream($"{tmpFolderPath}\\RecordedVersion.json", FileMode.CreateNew);
                 }
                 else
                 {
                     File.Delete($"{tmpFolderPath}\\RecordedVersion.json");
-                    fs = new FileStream($"{tmpFolderPath}\\RecordedVersion.json", FileMode.Open);
+                    fs = new FileStream($"{tmpFolderPath}\\RecordedVersion.json", FileMode.CreateNew);
                 }
                 byte[] bArr = new byte[1024];
                 int size = websrm.Read(bArr, 0, (int)bArr.Length);
@@ -221,7 +222,6 @@ namespace MEFL.PageModelViews
                 fs.Close();
                 sr.Close();
                 websrm.Close();
-                IVEGOT = true;
             }
             jOb = FastLoadJson.Load($"{tmpFolderPath}\\RecordedVersion.json");
             foreach (var item in jOb["versions"])
@@ -242,17 +242,18 @@ namespace MEFL.PageModelViews
             var itms = new List<LauncherWebVersionInfo>();
             if (!IVEGOT)
             {
+                IVEGOT = true;
                 var websrm = HttpWebRequest.Create("https://piston-meta.mojang.com/mc/game/version_manifest.json").GetResponse().GetResponseStream();
                 StreamReader sr = new StreamReader(websrm);
                 FileStream fs;
-                if (File.Exists($"{tmpFolderPath}\\RecordedVersion.json"))
+                if (!File.Exists($"{tmpFolderPath}\\RecordedVersion.json"))
                 {
-                    fs = new FileStream($"{tmpFolderPath}\\RecordedVersion.json", FileMode.Create);
+                    fs = new FileStream($"{tmpFolderPath}\\RecordedVersion.json", FileMode.CreateNew);
                 }
                 else
                 {
                     File.Delete($"{tmpFolderPath}\\RecordedVersion.json");
-                    fs = new FileStream($"{tmpFolderPath}\\RecordedVersion.json", FileMode.Open);
+                    fs = new FileStream($"{tmpFolderPath}\\RecordedVersion.json", FileMode.CreateNew);
                 }
                 byte[] bArr = new byte[1024];
                 int size = websrm.Read(bArr, 0, (int)bArr.Length);
@@ -264,7 +265,6 @@ namespace MEFL.PageModelViews
                 fs.Close();
                 sr.Close();
                 websrm.Close();
-                IVEGOT = true;
             }
             jOb = FastLoadJson.Load($"{tmpFolderPath}\\RecordedVersion.json");
             foreach (var item in jOb["versions"])
