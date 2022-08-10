@@ -2,10 +2,12 @@
 using MEFL.Arguments;
 using MEFL.Contract;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Net;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,16 +20,18 @@ namespace MEFL.GameTypes
 {
     public class MEFLRealseType : MEFL.Contract.GameInfoBase
     {
+        private List<String> _ItemsNeedsToExtract = new List<string>();
+        public override List<string> ItemsNeedsToExtract => _ItemsNeedsToExtract;
         public override FrameworkElement GetManageProcessPage(Process process, SettingArgs args)
         {
-            return _managePage;
+            var res = new SpecialPages.MEFLRealseTypeManage();
+            return res;
         }
         public override void Dispose()
         {
 
         }
         private static FrameworkElement _settingPage = new SpecialPages.MEFLRealseTypeSetting();
-        public static FrameworkElement _managePage = new SpecialPages.MEFLRealseTypeManage();
         private MEFLStandardOtherArgumentTemplate _MSOAT { get; set; }
         private CoreLaunching.JsonTemplates.Root _Root { get; set; }
         public override string GameTypeFriendlyName { get => App.Current.Resources["I18N_String_MEFLGameInfos_Realse"].ToString(); set => throw new NotImplementedException(); }
@@ -56,30 +60,76 @@ namespace MEFL.GameTypes
 
         public override string NativeLibrariesPath { get
             {
+                var res = string.Empty;
                 if (_MSOAT.NativeLibrariesPath != null)
                 {
-                    return _MSOAT.NativeLibrariesPath;
+                    res = _MSOAT.NativeLibrariesPath;
                 }
                 else
                 {
-                    return System.IO.Path.Combine(dotMinecraftPath, "natives");
+                    res = System.IO.Path.Combine(dotMinecraftPath, "natives");
                 }
+                foreach (var item in _Root.Libraries)
+                {
+                    if (item.Downloads.Classifiers != null)
+                    {
+                        if (item.Downloads.Artifact.Path != null)
+                        {
+                            if (item.Rules != null)
+                            {
+                                foreach (var rls in item.Rules)
+                                {
+                                    if (rls["action"].ToString() == "allow")
+                                    {
+                                        if (rls["os"] == null)
+                                        {
+                                            _ItemsNeedsToExtract.Add(io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")));
+                                        }
+                                        else if (rls["os"]["name"].ToString() == "osx")
+                                        {
+                                            //todo 这个交给osx来处理
+                                        }
+                                        else if (rls["os"]["name"].ToString() == "windows")
+                                        {
+                                            _ItemsNeedsToExtract.Add(io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")));
+                                        }
+                                    }
+                                    else if (rls["action"].ToString() == "disallow")
+                                    {
+                                        if (rls["os"].ToString() == "osx")
+                                        {
+                                            //todo 这个交给osx来处理
+                                        }
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                _ItemsNeedsToExtract.Add(io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")));
+                            }
+                        }
+                    }
+                }
+                return res;
             }
             set
             {
                 _MSOAT.NativeLibrariesPath = value;
             }
         }
-        public override List<Root_Libraries> GameLibraries { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override string GameArgs { get 
             {
                 var res = string.Empty;
                 if (_Root.Arguments!=null)
                 {
-                    foreach (var item in _Root.Arguments.Game.Array)
-                    {
-                        res += $" {item}";
-                    }
+                    foreach (var item in _Root.Arguments.Game)
+                        {
+                            if (!item.HasValues)
+                            {
+                                res += $" {item.ToString()}";
+                            }
+                        }
+                    return res;
                 }
                 else
                 {
@@ -93,7 +143,17 @@ namespace MEFL.GameTypes
                 String res = String.Empty;
                 if (_Root.Arguments != null)
                 {
-
+                    foreach (var item in _Root.Arguments.Jvm)
+                    {
+                        if (item.Contains(' '))
+                        {
+                            res += $" \"{item}\"";
+                        }
+                        else
+                        {
+                            res += $" {item}";
+                        }
+                    }
                 }
                 else
                 {
@@ -113,7 +173,6 @@ namespace MEFL.GameTypes
         public override string OtherGameArgs { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override string OtherJVMArgs { get => _MSOAT.OtherJVMArguments; set => _MSOAT.OtherJVMArguments = value; }
         public override string GameJsonPath { get; set; }
-        public override bool LaunchByLauncher => true;
 
         public override int JavaMajorVersion {
             get
@@ -147,8 +206,47 @@ namespace MEFL.GameTypes
                 {
                     if (item.Downloads.Artifact.Path != null)
                     {
-                        res.Add(io.Path.Combine(dotMinecraftPath,"libraries", item.Downloads.Artifact.Path.Replace(@"/","\\")));
+                        if (item.Rules != null)
+                        {
+                            foreach (var rls in item.Rules)
+                            {
+                                if (rls["action"].ToString() == "allow")
+                                {
+                                    if (rls["os"] == null)
+                                    {
+                                        res.Add(io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")));
+                                    }
+                                    else if (rls["os"]["name"].ToString() == "osx")
+                                    {
+                                        //todo 这个交给osx来处理
+                                    }
+                                    else if (rls["os"]["name"].ToString() == "windows")
+                                    {
+                                        res.Add(io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")));
+                                    }
+                                }
+                                else if (rls["action"].ToString() == "disallow")
+                                {
+                                    if (rls["os"].ToString() == "osx")
+                                    {
+                                        //todo 这个交给osx来处理
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            res.Add(io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")));
+                        }
+                        if (io.File.Exists(io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\"))) == false)
+                        {
+                            FileNeedsToDownload.Add(new LauncherWebFileInfo() { Url=item.Downloads.Artifact.Url,size=Convert.ToInt32(item.Downloads.Artifact.Size),localpath= io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")) ,sha1=item.Downloads.Artifact.Sha1});
+                        }
                     }
+                }
+                if (io.File.Exists(GameJarPath) != true)
+                {
+                    FileNeedsToDownload.Add(new LauncherWebFileInfo() { Url=_Root.Downloads.Client.Url,sha1=_Root.Downloads.Client.Sha1,size=System.Convert.ToInt32(_Root.Downloads.Client.Size),localpath=GameJarPath });
                 }
                 return res;
             } 
@@ -156,25 +254,83 @@ namespace MEFL.GameTypes
 
         public override string MainClassName => _Root.MainClass;
 
-        public override string AssetsRoot => io.Path.Combine(dotMinecraftPath,"assets");
+        public override string AssetsRoot { get 
+            {
+                var AssetsJson = io.Path.Combine(dotMinecraftPath, "AssetsJsons", $"{_Root.AssetIndex.Id}.json");
+                if (!Directory.Exists(io.Path.Combine(dotMinecraftPath,"AssetsJsons")))
+                {
+                    Directory.CreateDirectory(io.Path.Combine(dotMinecraftPath, "AssetsJsons"));
+                }
+                Stream strm;
+                if (!io.File.Exists(AssetsJson))
+                {
+                    var websrm = HttpWebRequest.Create(_Root.AssetIndex.Url).GetResponse().GetResponseStream();
+                    StreamReader sr = new StreamReader(websrm);
+                    FileStream fs = new FileStream(AssetsJson, FileMode.CreateNew);
+                    byte[] bArr = new byte[1024];
+                    int size = websrm.Read(bArr, 0, (int)bArr.Length);
+                    while (size > 0)
+                    {
+                        fs.Write(bArr, 0, size);
+                        size = websrm.Read(bArr, 0, (int)bArr.Length);
+                    }
+                    fs.Close();
+                    sr.Close();
+                    websrm.Close();
+                }
+                else
+                {
+                    strm = io.File.Open(AssetsJson, FileMode.Open);
+                    if (strm.Length != _Root.AssetIndex.Size)
+                    {
+                        strm.Close();
+                        var websrm = HttpWebRequest.Create(_Root.AssetIndex.Url).GetResponse().GetResponseStream();
+                        StreamReader sr = new StreamReader(websrm);
+                        FileStream fs = new FileStream(AssetsJson, FileMode.CreateNew);
+                        byte[] bArr = new byte[1024];
+                        int size = websrm.Read(bArr, 0, (int)bArr.Length);
+                        while (size > 0)
+                        {
+                            fs.Write(bArr, 0, size);
+                            size = websrm.Read(bArr, 0, (int)bArr.Length);
+                        }
+                        fs.Close();
+                        sr.Close();
+                        websrm.Close();
+                    }
+                    strm.Close();
+                }
+                var AssetsJOb = JsonConvert.DeserializeObject<CoreLaunching.JsonTemplates.AssetsObject>(io.File.ReadAllText(AssetsJson));
+                foreach (var item in AssetsJOb.Objects)
+                {
+                    var tst = io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0,2)}");
+                    if (!Directory.Exists(io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0,2)}")))
+                    {
+                        Directory.CreateDirectory(io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}"));
+                    }
+                    if (!io.File.Exists(io.Path.Combine(dotMinecraftPath, "assets\\objects",$"{item.Hash.Substring(0,2)}\\{item.Hash}")))
+                    {
+                        FileNeedsToDownload.Add(new LauncherWebFileInfo() { localpath= io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}\\{item.Hash}"),Url=$"http://resources.download.minecraft.net/{item.Hash.Substring(0, 2)}/{item.Hash}"});
+                    }
+                }
+                return io.Path.Combine(dotMinecraftPath, "assets");
+            } 
+        }
 
         public override string AssetsIndexName => _Root.AssetIndex.Id;
 
         public override string VersionType => _Root.Type;
 
-        public override Process Launch(SettingArgs args)
-        {
-            throw new NotImplementedException();
-        }
-
+        public override List<LauncherWebFileInfo> FileNeedsToDownload { get; set ; }
+        public override List<LauncherWebFileInfo> NativeFilesNeedToDepackage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override void Delete()
         {
             Dispose();
-
         }
 
         public MEFLRealseType(string JsonPath)
         {
+            FileNeedsToDownload = new List<LauncherWebFileInfo>();
             string otherArgsPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(JsonPath), "MEFLOtherArguments.json");
             _MSOAT =new MEFLStandardOtherArgumentTemplate(otherArgsPath);
             otherArgsPath = string.Empty;

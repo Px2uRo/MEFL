@@ -16,6 +16,7 @@ using MEFL.Contract;
 using MEFL.Controls;
 using Newtonsoft.Json;
 using System.Linq;
+using MEFL.Pages;
 
 namespace MEFL.PageModelViews
 {
@@ -24,6 +25,8 @@ namespace MEFL.PageModelViews
     /// </summary>
     public class RealMainPageModelView:PageModelViewBase
     {
+        private Pages.ProcessModelView _ProcessModelView;
+        public Pages.ProcessModelView ProcessModelView { get => _ProcessModelView; set { _ProcessModelView = value; Invoke(nameof(ProcessModelView)); } }
         public Contract.GameInfoBase CurretGame
         {
             get 
@@ -93,22 +96,46 @@ namespace MEFL.PageModelViews
         }
 
         public ICommand ChangeAccountCommand { get => RealMainPageModel.ChangeAccountCommand; }
-        public ICommand LuanchGameCommand
-        {
-            get { return RealMainPageModel.LuanchGameCommand; }
-            set { RealMainPageModel.LuanchGameCommand = value; }
-        }
         public ICommand AddFolderInfoCommand { get=> RealMainPageModel.AddFolderInfoCommand; set { RealMainPageModel.AddFolderInfoCommand = value; } }
+
+        public RefreshFolderInfoCommand RefreshFolderInfoCommand { get; set; }
+
+        public RealMainPageModelView()
+        {
+            RefreshFolderInfoCommand = new RefreshFolderInfoCommand();
+            RefreshFolderInfoCommand.ClickBeihavior += RefreshFolderInfoCommand_ClickBeihavior;
+        }
+
+        private void RefreshFolderInfoCommand_ClickBeihavior()
+        {
+            MyFolders[SelectedFolderIndex].Refresh(MyFolders[SelectedFolderIndex].Path);
+            SelectedFolderIndex = SelectedFolderIndex;
+        }
+    }
+
+    public class RefreshFolderInfoCommand : ICommand
+    {
+        public event EventHandler? CanExecuteChanged;
+
+        public bool CanExecute(object? parameter)
+        {
+            return true;
+        }
+
+        public void Execute(object? parameter)
+        {
+            ClickBeihavior.Invoke();
+        }
+        public delegate void clickBehavior();
+        public event clickBehavior ClickBeihavior;
     }
 
     public static class RealMainPageModel
     {
-        public static ICommand LuanchGameCommand;
         public static ICommand AddFolderInfoCommand;
         public static ICommand ChangeAccountCommand;
         static RealMainPageModel()
         {
-            LuanchGameCommand = new LuanchGameCommand();
             AddFolderInfoCommand = new AddFolderInfoCommand();
             ChangeAccountCommand = new ChangeAccountCommand();
         }
@@ -140,51 +167,6 @@ namespace MEFL.PageModelViews
         }
     }
 
-    public class LuanchGameCommand : ICommand
-    {
-        public event EventHandler? CanExecuteChanged;
-
-        public bool CanExecute(object? parameter)
-        {
-            return true;
-        }
-
-        public void Execute(object? parameter)
-        {
-            if (APIModel.CurretGame != null)
-            {
-                try
-                {
-                    if (APIModel.CurretGame.LaunchByLauncher == false)
-                    {
-                        ManageProcessesPageModel.ModelView.RunningGames.Add(APIModel.CurretGame.Launch(APIModel.SettingArgs));
-                        ManageProcessesPageModel.ModelView.RunningGames[ManageProcessesPageModel.ModelView.RunningGames.Count - 1].Start();
-                    }
-                    else
-                    {
-                        ManageProcessesPageModel.ModelView.RunningGames.Add(ProcessCreater.NewGame(APIModel.CurretGame));
-                        ManageProcessesPageModel.ModelView.RunningGames[ManageProcessesPageModel.ModelView.RunningGames.Count - 1].Start();
-                    }
-                    MyPageBase From = new MyPageBase();
-                    foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
-                    {
-                        if (item.Visibility == Visibility.Visible)
-                        {
-                            From = item;
-                        }
-                    }
-                    foreach (MyPageBase item in FindControl.FromTag("ProcessesManagePage", (App.Current.Resources["MainPage"] as Grid)))
-                    {
-                        item.Show(From);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-        }
-    }
 
     public class AddFolderInfoCommand : ICommand
     {

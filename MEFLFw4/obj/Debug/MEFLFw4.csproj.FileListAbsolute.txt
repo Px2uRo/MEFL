@@ -37,3 +37,5 @@ I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\zh_yue_CN.baml
 I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\zh_yue_HK.baml
 I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\zh_MO.baml
 I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\zh_CN.baml
+I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\MEFLRealseTypeManage.g.cs
+I:\Xiong's\MEFLCollection\MEFLFw4\obj\Debug\MEFL_Content.g.cs

@@ -268,7 +268,7 @@ namespace MEFL.APIData
 #if DEBUG
 
 #else
-            SlectedAccountIndex = -1;
+            
 #endif
         }
     }

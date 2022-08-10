@@ -5,7 +5,7 @@
   },
   "projects": {
     "I:\\Xiong's\\CoreLaunching\\CoreLaunchingNet6\\CoreLaunchingNet6.csproj": {
-      "version": "1.0.0",
+      "version": "0.0.0",
       "restore": {
         "projectUniqueName": "I:\\Xiong's\\CoreLaunching\\CoreLaunchingNet6\\CoreLaunchingNet6.csproj",
         "projectName": "CoreLaunchingNet6",
@@ -71,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
@@ -127,13 +127,17 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "dependencies": {
-            "ContractNet6": {
+            "MEFL.Contract": {
               "target": "Package",
-              "version": "[1.0.2, )"
+              "version": "[0.0.3.18, )"
             },
             "MEFL.Controls": {
               "target": "Package",
-              "version": "[1.0.2, )"
+              "version": "[0.0.5.8, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
             },
             "System.ComponentModel.Composition": {
               "target": "Package",
@@ -158,7 +162,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {

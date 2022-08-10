@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("realsetypelogo.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("fanbal_%e6%9d%9f.png")]
 
 

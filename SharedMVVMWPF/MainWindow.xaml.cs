@@ -52,6 +52,7 @@ namespace MEFL
             (App.Current.Resources["MainPage"] as Grid).Children.Add(new Pages.SettingPage() { Tag = "SettingPage", Visibility = Visibility.Hidden });
             (App.Current.Resources["MainPage"] as Grid).Children.Add(new Pages.ExtensionPage() { Tag = "ExtensionPage", Visibility = Visibility.Hidden });
             (App.Current.Resources["MainPage"] as Grid).Children.Add(new Pages.UserManagePage() { Tag = "UserManagePage", Visibility = Visibility.Hidden });
+            (App.Current.Resources["MainPage"] as Grid).Children.Add(new Pages.DownloadPage() { Tag = "DownloadPage", Visibility = Visibility.Hidden });
             (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.ManageProcessesPage() { Tag = "ProcessesManagePage", Visibility = Visibility.Hidden });
 
             (App.Current.Resources["ChangePageButtons"] as StackPanel).Children.Add(
@@ -107,6 +108,24 @@ namespace MEFL
                 });
             (App.Current.Resources["ChangePageButtons"] as StackPanel).Children.Add(
                 new ChangePageButton
+                {
+                    Width = 45,
+                    Tag = "DownloadPage",
+                    Margin = new Thickness(0, 5, 0, 0),
+                    Content = new System.Windows.Shapes.Path()
+                    {
+                        Height = 23,
+                        Width = 23,
+                        Stretch = Stretch.Fill,
+                        Data = new PathGeometry() { Figures = PathFigureCollection.Parse("M86.5001 25.4257 101 25.4257 115.5 25.4257 115.5 29.5001 86.5001 29.5001ZM86.5001 0.500053 115.5 0.500053 101 25.4257Z") },
+                        Stroke = new SolidColorBrush(Colors.Black),
+                        StrokeThickness = 1.0,
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center
+                    }
+                });
+            (App.Current.Resources["ChangePageButtons"] as StackPanel).Children.Add(
+                new ChangePageButton
     {
         Width = 0,
         Tag = "ProcessesManagePage",
@@ -154,6 +173,7 @@ namespace MEFL
                 else if (a.Name == "CloseWindowsButton")
                 {
                     Close();
+                    App.Current.Shutdown();
                 }
                 else if (a.Tag != null&&a.Tag is String)
                 {

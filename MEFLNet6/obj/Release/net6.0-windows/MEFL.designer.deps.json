@@ -6,22 +6,23 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "ContractNet6/0.0.2.7": {
+      "MEFL.Contract/0.0.3.18": {
         "dependencies": {
-          "MEFL.Controls": "0.0.4.18"
+          "MEFL.Controls": "0.0.5.8",
+          "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
-          "lib/net6.0-windows7.0/ContractNet6.dll": {
-            "assemblyVersion": "0.0.2.7",
-            "fileVersion": "0.0.2.7"
+          "lib/net6.0-windows7.0/MEFL.Contract.dll": {
+            "assemblyVersion": "0.0.3.18",
+            "fileVersion": "0.0.3.18"
           }
         }
       },
-      "MEFL.Controls/0.0.4.18": {
+      "MEFL.Controls/0.0.5.8": {
         "runtime": {
           "lib/net6.0-windows7.0/MEFL.Controls.dll": {
-            "assemblyVersion": "0.0.4.18",
-            "fileVersion": "0.0.4.18"
+            "assemblyVersion": "0.0.5.8",
+            "fileVersion": "0.0.5.8"
           }
         }
       },
@@ -266,19 +267,19 @@
     }
   },
   "libraries": {
-    "ContractNet6/0.0.2.7": {
+    "MEFL.Contract/0.0.3.18": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-1bMatTnpI/gso4Mhm2MRXUpxDYdIeNgAoTjuSVmrNmxQctVIimUPfx5cHMsp0f+PO+k7LzEoMBjZo565d3E6AQ==",
-      "path": "contractnet6/0.0.2.7",
-      "hashPath": "contractnet6.0.0.2.7.nupkg.sha512"
+      "sha512": "sha512-usMAmOnVbtLPBQyjYTxHuaDPu1cBGVhWEMEkEiDGnQcYYpGtFVD5EuTbOXkNNfkdjgp5C0nft/uFKiaqYbSF0A==",
+      "path": "mefl.contract/0.0.3.18",
+      "hashPath": "mefl.contract.0.0.3.18.nupkg.sha512"
     },
-    "MEFL.Controls/0.0.4.18": {
+    "MEFL.Controls/0.0.5.8": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-nPvuOrp3EwsnUU6DRAQL1X4LcVqJIdWlswyxAVxh7yI0ZthyOkeAsGcUkmAHTk0n9V7D2mfWaH7zqZeuqmxy1A==",
-      "path": "mefl.controls/0.0.4.18",
-      "hashPath": "mefl.controls.0.0.4.18.nupkg.sha512"
+      "sha512": "sha512-o2E1jRvEbdnzyU0y4e+BoaEqELs9AH6R2ubK/JJKVJjJKJ1ckbesvCKgGEuoHBMvR39tGCuhIyGeTcv8F1YdsA==",
+      "path": "mefl.controls/0.0.5.8",
+      "hashPath": "mefl.controls.0.0.5.8.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",

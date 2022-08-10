@@ -17,6 +17,7 @@
             <c:ChangePageContentButton x:Name="DefalutChangeButton" Content="{DynamicResource I18N_String_Setting_Game}" Tag="Game" Checked="ChangePageContentButton_Checked"/>
             <c:ChangePageContentButton Content="{DynamicResource I18N_String_Setting_Launcher}" Tag="Launcher" Checked="ChangePageContentButton_Checked"/>
             <c:ChangePageContentButton Content="{DynamicResource I18N_String_Setting_Custom}" Tag="Custom" Checked="ChangePageContentButton_Checked"/>
+            <c:ChangePageContentButton Content="{DynamicResource I18N_String_Setting_Info_MEFL}" Tag="Info" Checked="ChangePageContentButton_Checked"/>
             <StackPanel.Resources>
                 <Style TargetType="c:ChangePageContentButton">
                     <Setter Property="SideBarBrush" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>
@@ -90,6 +91,117 @@
                         <c:MyButton Content="R" Grid.Column="1" Width="27" Height="27" Click="ReSetJVMArgs"/>
                     </Grid>
                 </Grid>
+            </c:MyCard>
+        </StackPanel>
+        <StackPanel Tag="Info">
+            <c:MyCard Title="关于 MEFL">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Image Width="80" Height="80" Grid.Column="0" Source="pack://application:,,,/MEFL_Logo.png"/>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition />
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="MEFL" FontSize="40" FontWeight="Bold"/>
+                        <TextBlock Text="Version 0.0.0" Grid.Row="1"/>
+                        <c:MyButton Background="Transparent" TextBlock.FontSize="18" BorderThickness="1" Height="25" Content="微软粉作品" Width="auto" Grid.Row="2" VerticalAlignment="Bottom" Click="OpenWebSite" Tag="https://space.bilibili.com/283605961"/>
+                    </Grid>
+                </Grid>
+            </c:MyCard>
+            <c:MyCard Title="特别鸣谢">
+                <StackPanel>
+                    <Grid Margin="0,0,0,5" Height="50">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <Image Grid.Column="0" Margin="0,0,0,5" Source="pack://application:,,,/fanbal_束.png"/>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Grid.Column="1" Text="fanbal 束" FontWeight="Bold" FontSize="16"/>
+                            <TextBlock Grid.Column="1" Opacity="0.8" TextWrapping="Wrap" Text="对 MEFL 提供了很多技术支持，尽管项目里面没有他的手写的一行代码，但是每一行代码都是他教给我的。"/>
+                        </StackPanel>
+                        <c:MyButton Height="40" Width="150" VerticalAlignment="Center" Grid.Column="2" Content="访问主页" Tag="https://space.bilibili.com/337176361/" Click="OpenWebSite"/>
+                    </Grid>
+                </StackPanel>
+            </c:MyCard>
+            <c:MyCard Title="鸣谢" IsAbleToSwap="True" IsSwaped="True">
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Grid Margin="0,0,15,5" Height="50" Width="250">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="60"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Margin="0,0,0,5" Source="pack://application:,,,/RCKejijun.png"/>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Grid.Column="1" Text="科技菌Byte" FontWeight="Bold" FontSize="15"/>
+                                <TextBlock Grid.Column="1" Opacity="0.8" TextWrapping="Wrap" Text="很早认识的一个朋友。感谢对微软粉的支持。"/>
+                            </StackPanel>
+                            <c:MyButton Height="30" Width="60" VerticalAlignment="Center" Grid.Column="2" Content="访问主页" Tag="https://space.bilibili.com/454258954" Click="OpenWebSite"/>
+                        </Grid>
+                        <Grid Margin="0,0,15,5" Height="50" Width="250">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="60"/>
+                            </Grid.ColumnDefinitions>
+                            <Rectangle Fill="White" Grid.Column="0" Margin="0,0,0,5"/>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Grid.Column="1" Text="清水ユウヒ" FontWeight="Bold" FontSize="15"/>
+                                <TextBlock Grid.Column="1" Opacity="0.8" TextWrapping="Wrap" Text="认识两年的朋友，谢谢大会员，孩子很喜欢。"/>
+                            </StackPanel>
+                            <c:MyButton Height="30" Width="60" VerticalAlignment="Center" Grid.Column="2" Content="访问主页" Tag="https://space.bilibili.com/487121153" Click="OpenWebSite"/>
+                        </Grid>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                        <Grid Margin="0,0,0,5" Height="50" Width="250">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="60"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Margin="0,0,0,5" Source="pack://application:,,,/TunaFish2K.png"/>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Grid.Column="1" Text="TunaFish2K" FontWeight="Bold" FontSize="15"/>
+                                <TextBlock Grid.Column="1" Opacity="0.8" TextWrapping="Wrap" Text="在 2022 年之前为 MEFL 发电的朋友"/>
+                            </StackPanel>
+                            <c:MyButton Height="30" Width="60" VerticalAlignment="Center" Grid.Column="2" Content="访问主页" Tag="https://afdian.net/@TunaFish2K" Click="OpenWebSite"/>
+                        </Grid>
+                    </StackPanel>
+                </StackPanel>
+            </c:MyCard>
+            <c:MyCard Title="开源许可" IsAbleToSwap="True" IsSwaped="True">
+                <StackPanel>
+                    <Grid Margin="0,0,0,5" Height="40">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Grid.Column="1" Text="NewtonSoft.Json" FontWeight="Bold" FontSize="16"/>
+                            <TextBlock Grid.Column="1" Opacity="0.8" TextWrapping="Wrap" Text="[MIT LICENSE]Popular high-performance JSON framework for .NET"/>
+                        </StackPanel>
+                        <c:MyButton Height="30" Width="80" VerticalAlignment="Center" Grid.Column="2" Content="访问项目" Tag="https://www.newtonsoft.com/json" Click="OpenWebSite"/>
+                    </Grid>
+                    <Grid Margin="0,0,0,5" Height="40">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Grid.Column="1" Text="OctaneDownloader" FontWeight="Bold" FontSize="16"/>
+                            <TextBlock Grid.Column="1" Opacity="0.8" TextWrapping="Wrap" Text="[MIT LICENSE]A high performance, multi-threaded C# file download library."/>
+                        </StackPanel>
+                        <c:MyButton Height="30" Width="80" VerticalAlignment="Center" Grid.Column="2" Content="访问项目" Tag="https://github.com/gregyjames/OctaneDownloader" Click="OpenWebSite"/>
+                    </Grid>
+                </StackPanel>
             </c:MyCard>
         </StackPanel>
     </Grid>

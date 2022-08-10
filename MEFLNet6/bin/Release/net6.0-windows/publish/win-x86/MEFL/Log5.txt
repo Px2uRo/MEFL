@@ -1,0 +1,4 @@
+﻿[0:05:52][MEFL]程序启动了，参数
+[0:05:52][MEFL]重写了插件设置,当前文档：[]
+[0:07:24][ERROR]An error occurred trying to start process 'explorer.exe' with working directory 'I:\Xiong's\MEFLCollection\MEFLNet6\bin\Release\net6.0-windows\publish\win-x86'. 拒绝访问。
+[0:12:20][MEFL]程序退出了

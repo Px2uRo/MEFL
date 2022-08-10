@@ -8,11 +8,15 @@ namespace MEFL.PageModelViews
 {
     public class ExtensionPageModelView:PageModelViewBase
     {
-        public Hosting[] Hostings { get; set; }
+        public static Hosting[] Hostings { get; set; }
+
+        static ExtensionPageModelView()
+        {
+            Hostings = Hosting.LoadAll();
+        }
 
         public ExtensionPageModelView()
         {
-            Hostings = Hosting.LoadAll();
 
             var Items = MEFL.APIData.APIModel.AddInConfigs;
 

@@ -18,9 +18,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MEFL.Contract" Version="0.0.3.17" />
+    <PackageReference Include="MEFL.Contract" Version="0.0.3.29" />
     <PackageReference Include="MEFL.Controls" Version="0.0.5.8" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="OctaneEngine" Version="2.1.0" />
     <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />
   </ItemGroup>
 
@@ -28,14 +29,14 @@
     <ProjectReference Include="..\..\CoreLaunching\CoreLaunchingNet6\CoreLaunchingNet6.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="SpecialPages\" />
+  </ItemGroup>
+
   <Import Project="..\SharedMVVMWPF\SharedMVVMWPF.projitems" Label="Shared" />
 
   <Import Project="..\SharedSources\SharedSources.projitems" Label="Shared" />
 
   <Import Project="..\SharedMEFL\SharedMEFL.projitems" Label="Shared" />
-
-  <ItemGroup>
-    <PRIResource Remove="MyImages.resw" />
-  </ItemGroup>
 
 </Project>

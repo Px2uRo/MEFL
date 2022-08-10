@@ -1,4 +1,5 @@
 ﻿using MEFL.Contract;
+using MEFL.PageModelViews;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -11,6 +12,7 @@ namespace MEFL
 {
     public class MEFLFolderInfo
     {
+        private static List<String> SupporttedTypes=new List<String>();
         private string _configPath { get => System.IO.Path.Combine(_path, ".mefl.json"); }
         private string _path;
         public string Path { get => _path; set 
@@ -45,14 +47,40 @@ namespace MEFL
                     }
                     else
                     {
-                        //TODO 对多个插件进行处理
+
+                        foreach (var Hst in ExtensionPageModelView.Hostings)
+                        {
+                            if (Hst.IsOpen)
+                            {
+                                if (Hst.Permissions != null)
+                                {
+                                    if (Hst.Permissions.UseGameManageAPI)
+                                    {
+                                        foreach (var type in Hst.LuncherGameType.SupportedType)
+                                        {
+                                            if (SupporttedTypes.Contains(type) != true)
+                                            {
+                                                SupporttedTypes.Add(type);
+                                            }
+                                            if (jOb["type"].ToString() == type&& jOb["type"].ToString() != "release")
+                                            {
+                                                Games.Add(Hst.LuncherGameType.Parse(SubJson));
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
                         if (jOb["type"].ToString() == "release")
                         {
                             Games.Add(new GameTypes.MEFLRealseType(SubJson));
                         }
                         else
                         {
-                            Games.Add(new Contract.MEFLErrorType(string.Format("不支持此版本：{0}", jOb["type"].ToString()), SubJson));
+                            if (SupporttedTypes.Contains(jOb["type"].ToString()) != true&& jOb["type"].ToString() != "release")
+                            {
+                                Games.Add(new Contract.MEFLErrorType(string.Format("不支持此版本：{0}", jOb["type"].ToString()), SubJson));
+                            }
                         }
                     }
                     jOb = null;

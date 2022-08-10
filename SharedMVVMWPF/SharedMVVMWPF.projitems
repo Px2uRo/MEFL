@@ -25,6 +25,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\AddALegacyAccountModelView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\DownloadPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ExtraAddInPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\GenerlSettingGameModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\GenerlManageAccountModelView.cs" />
@@ -63,7 +64,23 @@
       <SubType>Code</SubType>
       <DependentUpon>AddNewAccount.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\GameSettingPage.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>GameSettingPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\ManageLegacyAccountPage.xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\ManageProcessesPage.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>ManageProcessesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\MEFLRealseTypeManage.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>MEFLRealseTypeManage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\MEFLRealseTypeSetting.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>MEFLRealseTypeSetting.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\PickUpAFolder.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>PickUpAFolder.xaml</DependentUpon>
@@ -149,6 +166,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)SpecialPages\GameSettingPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)SpecialPages\ManageLegacyAccountPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
@@ -160,6 +182,21 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)SpecialPages\AddNewAccount.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)SpecialPages\ManageProcessesPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)SpecialPages\MEFLRealseTypeManage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)SpecialPages\MEFLRealseTypeSetting.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

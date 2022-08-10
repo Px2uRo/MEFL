@@ -1,4 +1,5 @@
-﻿[21:01:04][MEFL]读取了注册表，键：Folders，值：[{"Path":"D:\\Gaming\\Minecraft\\My_Minecraft\\.minecraft","FriendlyName":"PCL2"}]
-[21:01:05][MEFL]读取了注册表，键：SelectedFolderIndex，值：1
-[21:01:05][MEFL]读取了注册表，键：LegacyAccounts，值：[{"UserName":"Hongyu","Uuid":"a759f1ef-904a-46a1-9194-a140ca736124"}]
-[21:01:05][MEFL]读取了注册表，键：PlayerUuid，值：a759f1ef-904a-46a1-9194-a140ca736124
+﻿[0:18:28][MEFL]读取了注册表，键：Folders，值：[{"Path":"D:\\Gaming\\Minecraft\\My_Minecraft\\.minecraft","FriendlyName":"PCL2"}]
+[0:18:28][MEFL]重写了插件设置,当前文档：null
+[0:18:28][MEFL]读取了注册表，键：SelectedFolderIndex，值：1
+[0:18:28][MEFL]读取了注册表，键：LegacyAccounts，值：[{"UserName":"Hongyu","Uuid":"a759f1ef-904a-46a1-9194-a140ca736124"}]
+[0:18:28][MEFL]读取了注册表，键：PlayerUuid，值：a759f1ef-904a-46a1-9194-a140ca736124

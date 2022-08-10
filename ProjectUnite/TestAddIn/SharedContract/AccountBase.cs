@@ -8,7 +8,7 @@ namespace MEFL.Contract
 {
     public abstract class AccountBase:IDisposable
     {
-        public abstract object ProfileAvator { get; set; }
+        public abstract FrameworkElement ProfileAvator { get; set; }
         public abstract string UserName { get; set; }
         public abstract string Uuid { get; set; }
         public abstract string AccessToken { get; set; }

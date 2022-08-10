@@ -29,6 +29,12 @@ namespace MEFL
 
         [Import(AllowRecomposition = true)]
         public IPages Pages;
+
+        [Import(AllowRecomposition = true)]
+        public ILuncherGameType LuncherGameType; 
+        
+        [Import(AllowRecomposition = true)]
+        public IDownloadPage DownloadPages;
         public Exception ExceptionInfo { get; set; }
         public string FileName { get; set; }
         public string FullPath { get; set; }
@@ -92,12 +98,12 @@ namespace MEFL
                 {
                     throw new Exception("Guid 不合法或者无法获取其 Guid");
                 }
-
-                foreach (var item in APIData.APIModel.AddInConfigs)
+                APIData.APIModel.AddInConfigs = APIData.AddInConfig.GetAll();
+                for (int i = 0; i < APIData.APIModel.AddInConfigs.Count; i++)
                 {
-                    if (item.Guid == h.Guid)
+                    if (APIData.APIModel.AddInConfigs[i].Guid == h.Guid)
                     {
-                        h.IsOpen = item.IsOpen;
+                        h.IsOpen = APIData.APIModel.AddInConfigs[i].IsOpen;
                     }
                     else
                     {
@@ -119,13 +125,21 @@ namespace MEFL
                     h.PulisherUri = h.BaseInfo.PulisherUri;
                     h.ExtensionUri = h.BaseInfo.ExtensionUri;
 
-                    if (h.Permissions.UseSeetingPageAPI)
+                    if (h.Permissions.UseSettingPageAPI)
                     {
                         h.SettingPage = cc.GetExport<ISettingPage>().Value;
                     }
                     if (h.Permissions.UsePagesAPI)
                     {
                         h.Pages = cc.GetExport<IPages>().Value;
+                    }
+                    if (h.Permissions.UseGameManageAPI)
+                    {
+                        h.LuncherGameType = cc.GetExport<ILuncherGameType>().Value;
+                    }
+                    if (h.Permissions.UseDownloadPageAPI)
+                    {
+                        h.DownloadPages= cc.GetExport<IDownloadPage>().Value;
                     }
                     Debugger.Logger($"加载了一个插件，名称 {h.FileName}，版本：{h.Version} Guid {h.Guid}");
                     ac = null;
@@ -179,7 +193,7 @@ namespace MEFL
                         h.PulisherUri = h.BaseInfo.PulisherUri;
                         h.ExtensionUri = h.BaseInfo.ExtensionUri;
 
-                        if (h.Permissions.UseSeetingPageAPI)
+                        if (h.Permissions.UseSettingPageAPI)
                         {
                             h.SettingPage = cc.GetExport<ISettingPage>().Value;
                         }

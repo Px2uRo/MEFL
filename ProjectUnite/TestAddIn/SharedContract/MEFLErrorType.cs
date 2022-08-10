@@ -20,14 +20,10 @@ namespace MEFL.Contract
         public override string Version { get; set; }
         public override ImageSource IconSource { get;  }
         public override string NativeLibrariesPath { get; set; }
-        public override List<Root_Libraries> GameLibraries { get; set; }
         public override string GameArgs { get; }
         public override string JVMArgs { get; }
         public override string OtherGameArgs { get; set; }
         public override string OtherJVMArgs { get; set; }
-
-        public override bool LaunchByLauncher => true;
-
         public override string GameFolder { get; set; }
 
         public override FrameworkElement GetManageProcessPage(Process process, SettingArgs args)
@@ -54,10 +50,10 @@ namespace MEFL.Contract
 
         public override string VersionType => throw new NotImplementedException();
 
-        public override Process Launch(SettingArgs args)
-        {
-            throw new NotImplementedException();
-        }
+        public override List<LauncherWebFileInfo> FileNeedsToDownload { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override List<LauncherWebFileInfo> NativeFilesNeedToDepackage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public override List<string> ItemsNeedsToExtract => throw new NotImplementedException();
 
         public override void Dispose()
         {

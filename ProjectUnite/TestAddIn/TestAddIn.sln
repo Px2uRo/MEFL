@@ -13,7 +13,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedControls", "..\MEFL.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContractAvalonia", "ContractAvalonia\ContractAvalonia.csproj", "{F9543A69-E132-4E0C-A7B8-73919603D3D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MEFL.Contract", "MEFL.Contract\MEFL.Contract.csproj", "{FE4EAFB4-F516-478A-BCF2-8935D815E4AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MEFL.Contract", "MEFL.Contract\MEFL.Contract.csproj", "{FE4EAFB4-F516-478A-BCF2-8935D815E4AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,6 +25,8 @@ Global
 		{F7FC8CD6-059E-48A6-A637-A113897AD846}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7FC8CD6-059E-48A6-A637-A113897AD846}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7FC8CD6-059E-48A6-A637-A113897AD846}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23BB0CC4-2D6A-456B-A157-AD89E84C401D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23BB0CC4-2D6A-456B-A157-AD89E84C401D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BA0C586-7150-4269-80F7-7DF159131CDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5BA0C586-7150-4269-80F7-7DF159131CDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BA0C586-7150-4269-80F7-7DF159131CDC}.Release|Any CPU.ActiveCfg = Release|Any CPU

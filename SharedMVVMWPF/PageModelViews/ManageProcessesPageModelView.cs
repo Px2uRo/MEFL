@@ -17,6 +17,7 @@ namespace MEFL.PageModelViews
         {
             RunningGames = new ObservableCollection<Process>();
             RunningGames.CollectionChanged += RunningGames_CollectionChanged;
+            _ContentGrid = new Grid();
         }
 
         private void RunningGames_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -31,13 +32,20 @@ namespace MEFL.PageModelViews
             }
             Invoke("RunningGames");
         }
+        private Grid _ContentGrid;
+
+        public Grid ContentGrid
+        {
+            get { return _ContentGrid; }
+            set { _ContentGrid = value; Invoke(nameof(ContentGrid)); }
+        }
 
         public ObservableCollection<Process> RunningGames { get; set; }
         public void LoadButton()
         {
             foreach (ChangePageButton item in FindControl.FromTag("ProcessesManagePage", (App.Current.Resources["ChangePageButtons"] as StackPanel)))
             {
-                    _dbani.From = 0.0;
+                    _dbani.From = item.Width;
                     _dbani.To = 45.0;
                     item.BeginAnimation(FrameworkElement.WidthProperty, _dbani);
             }
@@ -66,7 +74,7 @@ namespace MEFL.PageModelViews
             From = null;
             foreach (ChangePageButton item in FindControl.FromTag("ProcessesManagePage", (App.Current.Resources["ChangePageButtons"] as StackPanel)))
             {
-                _dbani.From = 45.0;
+                _dbani.From = item.Width;
                 _dbani.To = 0.0;
                 item.BeginAnimation(FrameworkElement.WidthProperty, _dbani);
             }

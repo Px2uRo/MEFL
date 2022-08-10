@@ -39,6 +39,7 @@
     <sys:String x:Key="I18N_String_MainPage_RenameFolder_Path">路径</sys:String>
     <sys:String x:Key="I18N_String_Setting_Launcher">启动器配置</sys:String>
     <sys:String x:Key="I18N_String_Setting_Launcher_SelcetLanguage">选择语言</sys:String>
+    <sys:String x:Key="I18N_String_Setting_Info_MEFL">信息</sys:String>
     <sys:String x:Key="I18N_String_Setting_Default_Title">MEFL</sys:String>
     <sys:String x:Key="I18N_String_Setting_Title_Now">咖啡不断加加加加到厌倦</sys:String>
     <sys:String x:Key="I18N_String_Setting_Custom">个性化</sys:String>

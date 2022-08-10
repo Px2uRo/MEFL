@@ -17,7 +17,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Hosting.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFLAccount.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)..\..\..\Xiong%27s\MEFLCollection\SharedMEFL\GameTypes\MEFLRealseType.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ProcessCreater.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RegManager.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -25,5 +24,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="$(MSBuildThisFileDirectory)realsetypelogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="$(MSBuildThisFileDirectory)Images\fanbal_束.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)fanbal_束.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)MEFL_Logo.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)RCKejijun.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)TunaFish2K.png" />
   </ItemGroup>
 </Project>

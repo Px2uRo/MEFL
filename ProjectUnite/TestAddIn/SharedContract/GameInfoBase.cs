@@ -13,8 +13,18 @@ using Avalonia.Media;
 
 namespace MEFL.Contract
 {
+    public class LauncherWebFileInfo
+    {
+        public string Url { get; set; }
+        public string sha1 { get; set; }
+        public string localpath { get; set; }
+        public int size { get; set; }
+    }
     public abstract class GameInfoBase:IDisposable
     {
+        public abstract List<String> ItemsNeedsToExtract { get; }
+        public abstract List<LauncherWebFileInfo> FileNeedsToDownload { get; set; }
+        public abstract List<LauncherWebFileInfo> NativeFilesNeedToDepackage { get; set; }
         public string dotMinecraftPath 
         { 
             get 
@@ -52,48 +62,16 @@ namespace MEFL.Contract
         #endregion
 
         public abstract string NativeLibrariesPath { get; set; }
-        public abstract List<Root_Libraries> GameLibraries { get; set; }
         public abstract string GameArgs { get; }
         public abstract string JVMArgs { get; }
         public abstract string OtherGameArgs { get; set; }
         public abstract string OtherJVMArgs { get; set; }
-        public abstract bool LaunchByLauncher { get; }
-        public abstract Process Launch(Arguments.SettingArgs args);
-
         public abstract void Dispose();
         public abstract void Delete();
-
         public abstract int JavaMajorVersion { get; }
         public abstract string GameFolder { get; set; }
         public string RootFolder { get => Path.GetDirectoryName(GameJsonPath); }
         public abstract FrameworkElement GetManageProcessPage(Process process,Arguments.SettingArgs args);
         public abstract FrameworkElement SettingsPage { get; }
-    }
-
-    public class JavaVersion
-    {
-        public string Component { get; set; }
-        public int MajorVersion { get; set; }
-    }
-    public class Root_Libraries
-    {
-        public Root_Downloads Downloads { get; set; }
-
-        public string Name { get; set; }
-        public string native { get; set; }
-    }
-
-    public class Root_Downloads
-    {
-        public Root_AFileBase Artifact { get; set; }
-        public Root_AFileBase Classifiers { get; set; }
-        public string Name { get; set; }
-    }
-    public class Root_AFileBase
-    {
-        public string path { get; set; }
-        public string sha1 { get; set; }
-        public int size { get; set; }
-        public string url { get; set; }
     }
 }

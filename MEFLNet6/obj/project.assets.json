@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
-      "MEFL.Contract/0.0.3.17": {
+      "MEFL.Contract/0.0.3.29": {
         "type": "package",
         "dependencies": {
           "MEFL.Controls": "0.0.4.18",
@@ -55,6 +55,15 @@
         },
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      },
+      "OctaneEngine/2.1.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/OctaneEngine.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/OctaneEngine.dll": {}
         }
       },
       "runtime.native.System/4.3.0": {
@@ -384,14 +393,14 @@
     }
   },
   "libraries": {
-    "MEFL.Contract/0.0.3.17": {
-      "sha512": "1oxmJ2sg3WNZnXzbHhU5Ia/Ad5j2Khppdp6sSnjzTE7SNX5VF2twfamNdUGJg4Bl6aKgxeA5DzZBxCu1CTqGZg==",
+    "MEFL.Contract/0.0.3.29": {
+      "sha512": "brugL2bxzLP19DtFGtey7ACLqXKM/PYM3vZJQ+gvM53hSZqJx3QyKgd0qeqPOy+JYZ22Kf2QBD/bYYva8RbPeQ==",
       "type": "package",
-      "path": "mefl.contract/0.0.3.17",
+      "path": "mefl.contract/0.0.3.29",
       "files": [
         ".nupkg.metadata",
         "lib/net6.0-windows7.0/MEFL.Contract.dll",
-        "mefl.contract.0.0.3.17.nupkg.sha512",
+        "mefl.contract.0.0.3.29.nupkg.sha512",
         "mefl.contract.nuspec"
       ]
     },
@@ -461,6 +470,19 @@
         "newtonsoft.json.13.0.1.nupkg.sha512",
         "newtonsoft.json.nuspec",
         "packageIcon.png"
+      ]
+    },
+    "OctaneEngine/2.1.0": {
+      "sha512": "nF/8Hk7/cgl/Uq4UiiwU4Q0icVbITBKAXzeOoyVP3AUjMvxM62QU+iiuMej9/VOEKLrozInYH4Datfe7vqwXbQ==",
+      "type": "package",
+      "path": "octaneengine/2.1.0",
+      "files": [
+        ".nupkg.metadata",
+        "lib/net461/OctaneEngine.dll",
+        "lib/net472/OctaneEngine.dll",
+        "lib/net6.0/OctaneEngine.dll",
+        "octaneengine.2.1.0.nupkg.sha512",
+        "octaneengine.nuspec"
       ]
     },
     "runtime.native.System/4.3.0": {
@@ -1807,9 +1829,10 @@
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
       "CoreLaunchingNet6 >= 0.0.0",
-      "MEFL.Contract >= 0.0.3.17",
+      "MEFL.Contract >= 0.0.3.29",
       "MEFL.Controls >= 0.0.5.8",
       "Newtonsoft.Json >= 13.0.1",
+      "OctaneEngine >= 2.1.0",
       "System.ComponentModel.Composition >= 6.0.0"
     ]
   },
@@ -1866,7 +1889,7 @@
         "dependencies": {
           "MEFL.Contract": {
             "target": "Package",
-            "version": "[0.0.3.17, )"
+            "version": "[0.0.3.29, )"
           },
           "MEFL.Controls": {
             "target": "Package",
@@ -1875,6 +1898,10 @@
           "Newtonsoft.Json": {
             "target": "Package",
             "version": "[13.0.1, )"
+          },
+          "OctaneEngine": {
+            "target": "Package",
+            "version": "[2.1.0, )"
           },
           "System.ComponentModel.Composition": {
             "target": "Package",

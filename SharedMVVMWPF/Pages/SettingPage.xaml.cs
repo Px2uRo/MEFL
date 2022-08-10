@@ -6,6 +6,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Timers;
+using System.Diagnostics;
 
 namespace MEFL.Pages
 {
@@ -41,6 +42,10 @@ namespace MEFL.Pages
         private void ReSetJVMArgs(object sender, RoutedEventArgs e)
         {
             (this.Resources["SPMV"] as SettingPageModelView).OtherJVMArgs = "-XX:+UseG1GC -XX:-UseAdaptiveSizePolicy -XX:-OmitStackTraceInFastThrow -Dfml.ignoreInvalidMinecraftCertificates=True -Dfml.ignorePatchDiscrepancies=True -Dlog4j2.formatMsgNoLookups=true";
+        }
+        private void OpenWebSite(object sender, RoutedEventArgs e)
+        {
+            Process.Start("explorer.exe",(sender as Button).Tag.ToString());
         }
 
         private void T_Elapsed(object sender, ElapsedEventArgs e)

@@ -1,4 +1,4 @@
-﻿[13:57:23][MEFL]读取了注册表，键：Folders，值：[{"Path":"D:\\Gaming\\Minecraft\\My_Minecraft\\.minecraft","FriendlyName":"PCL2"}]
-[13:57:23][MEFL]读取了注册表，键：SelectedFolderIndex，值：1
-[13:57:23][MEFL]读取了注册表，键：LegacyAccounts，值：[{"UserName":"Hongyu","Uuid":"a759f1ef-904a-46a1-9194-a140ca736124"}]
-[13:57:23][MEFL]读取了注册表，键：PlayerUuid，值：a759f1ef-904a-46a1-9194-a140ca736124
+﻿[20:17:53][MEFL]读取了注册表，键：Folders，值：[{"Path":"D:\\Gaming\\Minecraft\\My_Minecraft\\.minecraft","FriendlyName":"PCL2"}]
+[20:17:53][MEFL]读取了注册表，键：SelectedFolderIndex，值：1
+[20:17:53][MEFL]读取了注册表，键：LegacyAccounts，值：[{"UserName":"Hongyu","Uuid":"a759f1ef-904a-46a1-9194-a140ca736124"}]
+[20:17:53][MEFL]读取了注册表，键：PlayerUuid，值：a759f1ef-904a-46a1-9194-a140ca736124

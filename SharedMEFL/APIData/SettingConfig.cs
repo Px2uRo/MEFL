@@ -23,6 +23,8 @@ namespace MEFL.APIData
         public string SelectedGame { get => _SelectedGame; set { _SelectedGame = value;Update(); } }
         private string _OtherJVMArgs;
         public string OtherJVMArgs { get => _OtherJVMArgs; set { _OtherJVMArgs = value; Update(); } }
+        private bool _AlwaysOpenNewExtensions;
+        public bool AlwaysOpenNewExtensions { get =>_AlwaysOpenNewExtensions; set { _AlwaysOpenNewExtensions = value;Update(); } }
         public void Update()
         {
             try

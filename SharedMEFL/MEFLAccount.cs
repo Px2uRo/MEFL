@@ -32,7 +32,7 @@ namespace MEFL
             } set=>throw new NotImplementedException();
         }
         [JsonIgnore]
-        public override object ProfileAvator 
+        public override FrameworkElement ProfileAvator 
         { 
             get 
             {
@@ -101,7 +101,7 @@ namespace MEFL
 
         public override void LaunchGameAction(Arguments.SettingArgs args)
         {
-            throw new NotImplementedException();
+            
         }
         public MEFLLegacyAccount(string Name,string Uuid)
         {

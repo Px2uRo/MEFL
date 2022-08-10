@@ -27,7 +27,7 @@ namespace MEFL.Pages
         public ExtensionPage()
         {
             InitializeComponent();
-            foreach (var item in (this.DataContext as ExtensionPageModelView).Hostings)
+            foreach (var item in ExtensionPageModelView.Hostings)
             {
                 ContentPage.Children.Add(new MyExtensionCard() { Hosting = item,Margin=new Thickness(0,0,0,15)});
             }
