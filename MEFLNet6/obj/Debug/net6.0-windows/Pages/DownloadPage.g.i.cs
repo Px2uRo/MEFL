@@ -55,7 +55,7 @@ namespace MEFL.Pages {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/MEFL;V1.0.0.0;component/pages/downloadpage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/MEFL;component/pages/downloadpage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Pages\DownloadPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

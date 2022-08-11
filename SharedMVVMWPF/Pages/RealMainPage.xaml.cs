@@ -246,8 +246,15 @@ namespace MEFL.Pages
                         IsStarting = true;
                         Process p = new Process();
                         ProcessStartInfo i = new ProcessStartInfo();
+                        Game.Refresh();
                         #region 处理Java
                         Statu = "处理Java";
+                        if (APIModel.SettingArgs.SelectedJava == null)
+                        {
+                            ErrorInfo = $"未选中 JAVA 设置页面去看一下先。";
+                            Failed = true;
+                            return;
+                        }
                         if (Game.JavaMajorVersion == FileVersionInfo.GetVersionInfo(APIModel.SettingArgs.SelectedJava.FullName).FileMajorPart)
                         {
                             i.FileName = APIModel.SettingArgs.SelectedJava.FullName;
@@ -328,7 +335,7 @@ namespace MEFL.Pages
                 {"${launcher_version}","0.1" },
                 {"${Dos.name}","Windows 10"},
                 {"${Dos.version}","10.0"},
-                {"${natives_directory}",Game.NativeLibrariesPath},
+                {"${natives_directory}",$"\"{Game.NativeLibrariesPath}\""},
                 {"${Dminecraft.client.jar}",Game.GameJarPath }
             };
                             foreach (var item in dic)
@@ -375,8 +382,33 @@ namespace MEFL.Pages
                                 {
                                     Directory.CreateDirectory(Path.GetDirectoryName(item.localpath));
                                     File.Create(item.localpath).Close();
+                                    var parts = 1;
+                                    if (item.size > 0 && item.size <= 64)
+                                    {
+                                        parts = 1;
+                                    }
+                                    else if (item.size > 64 && item.size <= 512)
+                                    {
+                                        parts = 4;
+                                    }
+                                    else if (item.size > 512 && item.size <= 4096)
+                                    {
+                                        parts = 8;
+                                    }
+                                    else if (item.size > 4096 && item.size <= 10240)
+                                    {
+                                        parts = 16;
+                                    }
+                                    else if (item.size > 10240 && item.size <= 51200)
+                                    {
+                                        parts = 32;
+                                    }
+                                    else if (item.size > 51200)
+                                    {
+                                        parts = 48;
+                                    }
                                     Engine.DownloadFile(item.Url,
-                48, 8192, false, item.localpath, x =>
+                parts, 8192, false, item.localpath, x =>
                 {
                     DownloadedItems++;
                     Debug.WriteLine(DownloadedItems);
@@ -388,7 +420,7 @@ namespace MEFL.Pages
                 },
                 x =>
                 {
-                    DownloadedSize += ((1.0 / 48.0) * item.size);
+                    DownloadedSize += ((1.0 / parts) * item.size);
                     Progress = 20 + ((DownloadedSize / TotalSize) * 80);
                 }).Wait();
                                 }

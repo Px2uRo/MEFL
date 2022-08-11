@@ -159,7 +159,7 @@ namespace MEFL.APIData
             catch (Exception ex)
             {
                 Debugger.Logger(ex.Message);
-                RegManager.Write("Folders", "[]");
+                RegManager.Write("Folders", "[]",true);
             }
             #endregion
             #region RegSelectedFolderIndex

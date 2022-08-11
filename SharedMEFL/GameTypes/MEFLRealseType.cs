@@ -24,7 +24,7 @@ namespace MEFL.GameTypes
         public override List<string> ItemsNeedsToExtract => _ItemsNeedsToExtract;
         public override FrameworkElement GetManageProcessPage(Process process, SettingArgs args)
         {
-            var res = new SpecialPages.MEFLRealseTypeManage();
+            var res = new SpecialPages.MEFLRealseTypeManage(process);
             return res;
         }
         public override void Dispose()
@@ -67,6 +67,10 @@ namespace MEFL.GameTypes
                 }
                 else
                 {
+                    if (!Directory.Exists(System.IO.Path.Combine(dotMinecraftPath, "natives")))
+                    {
+                        Directory.CreateDirectory(System.IO.Path.Combine(dotMinecraftPath, "natives"));
+                    }
                     res = System.IO.Path.Combine(dotMinecraftPath, "natives");
                 }
                 foreach (var item in _Root.Libraries)
@@ -278,28 +282,6 @@ namespace MEFL.GameTypes
                     sr.Close();
                     websrm.Close();
                 }
-                else
-                {
-                    strm = io.File.Open(AssetsJson, FileMode.Open);
-                    if (strm.Length != _Root.AssetIndex.Size)
-                    {
-                        strm.Close();
-                        var websrm = HttpWebRequest.Create(_Root.AssetIndex.Url).GetResponse().GetResponseStream();
-                        StreamReader sr = new StreamReader(websrm);
-                        FileStream fs = new FileStream(AssetsJson, FileMode.CreateNew);
-                        byte[] bArr = new byte[1024];
-                        int size = websrm.Read(bArr, 0, (int)bArr.Length);
-                        while (size > 0)
-                        {
-                            fs.Write(bArr, 0, size);
-                            size = websrm.Read(bArr, 0, (int)bArr.Length);
-                        }
-                        fs.Close();
-                        sr.Close();
-                        websrm.Close();
-                    }
-                    strm.Close();
-                }
                 var AssetsJOb = JsonConvert.DeserializeObject<CoreLaunching.JsonTemplates.AssetsObject>(io.File.ReadAllText(AssetsJson));
                 foreach (var item in AssetsJOb.Objects)
                 {
@@ -326,6 +308,11 @@ namespace MEFL.GameTypes
         public override void Delete()
         {
             Dispose();
+        }
+
+        public override void Refresh()
+        {
+            FileNeedsToDownload= new List<LauncherWebFileInfo>();
         }
 
         public MEFLRealseType(string JsonPath)

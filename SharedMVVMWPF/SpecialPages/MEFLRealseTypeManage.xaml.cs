@@ -22,11 +22,21 @@ namespace MEFL.SpecialPages
     /// </summary>
     public partial class MEFLRealseTypeManage : UserControl
     {
-
-        public MEFLRealseTypeManage()
+        public Process P { get; set; }
+        public MEFLRealseTypeManage(Process Pro)
         {
             InitializeComponent();
             ContentTB.Text = "你也许启动了，但是就是还在加载窗口";
+            P = Pro;
+            P.Exited += P_Exited;
+        }
+
+        private void P_Exited(object? sender, EventArgs e)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                ContentTB.Text = "退出了，或者启动失败了";
+            });
         }
     }
 }

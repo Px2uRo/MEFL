@@ -65,6 +65,11 @@ namespace MEFL.Contract
             //todo Delete This
         }
 
+        public override void Refresh()
+        {
+            throw new NotImplementedException();
+        }
+
         public MEFLErrorType(string ErrorDescription,string JsonPath)
         {
             Description=ErrorDescription;

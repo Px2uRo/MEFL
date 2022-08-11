@@ -6,15 +6,15 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "MEFL.Contract/0.0.3.29": {
+      "MEFL.Contract/0.0.3.30": {
         "dependencies": {
           "MEFL.Controls": "0.0.5.8",
           "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/net6.0-windows7.0/MEFL.Contract.dll": {
-            "assemblyVersion": "0.0.3.29",
-            "fileVersion": "0.0.3.29"
+            "assemblyVersion": "0.0.3.30",
+            "fileVersion": "0.0.3.30"
           }
         }
       },
@@ -275,12 +275,12 @@
     }
   },
   "libraries": {
-    "MEFL.Contract/0.0.3.29": {
+    "MEFL.Contract/0.0.3.30": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-brugL2bxzLP19DtFGtey7ACLqXKM/PYM3vZJQ+gvM53hSZqJx3QyKgd0qeqPOy+JYZ22Kf2QBD/bYYva8RbPeQ==",
-      "path": "mefl.contract/0.0.3.29",
-      "hashPath": "mefl.contract.0.0.3.29.nupkg.sha512"
+      "sha512": "sha512-kohpgU8KrV1384rkSXQz2oxq32jJinCENbX7ddk5O6dHADz64S9bMKCfjWio5MbJ2UtKXgMfD0657DRgha3u4A==",
+      "path": "mefl.contract/0.0.3.30",
+      "hashPath": "mefl.contract.0.0.3.30.nupkg.sha512"
     },
     "MEFL.Controls/0.0.5.8": {
       "type": "package",

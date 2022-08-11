@@ -22,6 +22,7 @@ namespace MEFL.Contract
     }
     public abstract class GameInfoBase:IDisposable
     {
+        public abstract void Refresh();
         public abstract List<String> ItemsNeedsToExtract { get; }
         public abstract List<LauncherWebFileInfo> FileNeedsToDownload { get; set; }
         public abstract List<LauncherWebFileInfo> NativeFilesNeedToDepackage { get; set; }
