@@ -13,25 +13,11 @@ namespace MEFL.APIData
 {
     public static class APIModel
     {
+        public static ObservableCollection<Hosting> Hostings { get; set; }
         public static bool SearchJavaThreadIsOK;
         public static ObservableCollection<FileInfo> Javas { get; set; }
         public static SettingConfig SettingConfig { get; set; }
-        public static List<AddInConfig> AddInConfigs { get; set; }
-        public static void RemoveAddInsTheSameAddIn()
-        {
-            for (int i = 0; i < AddInConfigs.Count; i++)
-            {
-                if(i != 0)
-                {
-                    if (AddInConfigs[i].Guid == AddInConfigs[(i - 1)].Guid)
-                    {
-                        AddInConfigs.RemoveAt(i);
-                        i--;
-                    }
-                }
-            }
-            AddInConfig.Update(AddInConfigs);
-        }
+        public static ObservableCollection<AddInConfig> AddInConfigs { get; set; }
 
         public static ObservableCollection<AccountBase> AccountConfigs;
         private static AccountBase _SelectedAccount { get; set; }
@@ -80,6 +66,8 @@ namespace MEFL.APIData
 
         public static ObservableCollection<AccountBase> LegacyAccounts { get => _LegacyAccounts; set { _LegacyAccounts = value;}
         }
+
+        public static bool AlwaysOpenNewAddIns { get => SettingConfig.AlwaysOpenNewExtensions; set { SettingConfig.AlwaysOpenNewExtensions = value; } }
 
         private static ObservableCollection<FileInfo> _SearchedJavas = new ObservableCollection<FileInfo>();
 
@@ -144,8 +132,10 @@ namespace MEFL.APIData
         }
         static APIModel()
         {
-            SettingArgs = new Arguments.SettingArgs();
             SettingConfig = MEFL.APIData.SettingConfig.Load();
+            AddInConfigs = MEFL.APIData.AddInConfig.GetAll();
+            Hostings = Hosting.LoadAll();
+            SettingArgs = new Arguments.SettingArgs();
             #region Reg
             #region RegFolders
             MyFolders = new ObservableCollection<MEFLFolderInfo>();
@@ -258,8 +248,6 @@ namespace MEFL.APIData
             }
             #endregion
             #endregion
-            AddInConfigs = MEFL.APIData.AddInConfig.GetAll();
-            RemoveAddInsTheSameAddIn();
 
             if (Directory.Exists(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"))!=true)
             {

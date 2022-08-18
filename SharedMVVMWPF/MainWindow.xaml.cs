@@ -114,10 +114,10 @@ namespace MEFL
                     Margin = new Thickness(0, 5, 0, 0),
                     Content = new System.Windows.Shapes.Path()
                     {
-                        Height = 23,
-                        Width = 23,
+                        Height = 26,
+                        Width = 25,
                         Stretch = Stretch.Fill,
-                        Data = new PathGeometry() { Figures = PathFigureCollection.Parse("M86.5001 25.4257 101 25.4257 115.5 25.4257 115.5 29.5001 86.5001 29.5001ZM86.5001 0.500053 115.5 0.500053 101 25.4257Z") },
+                        Data = new PathGeometry() { Figures = PathFigureCollection.Parse("M157.025 10.0534 157.025 17.1451 154.418 14.4389 153.745 15.1371 157.427 18.9591 153.507 18.9591 153.507 19.9466 161.493 19.9466 161.493 18.9591 157.427 18.9591 157.493 18.8905 157.559 18.9591 161.24 15.1371 160.567 14.4389 157.976 17.1295 157.976 10.0534ZM157.407 0.5 170.5 5.9375 170.5 22.5089 157.22 29.5 144.5 22.3795 144.5 5.41965Z") },
                         Stroke = new SolidColorBrush(Colors.Black),
                         StrokeThickness = 1.0,
                         HorizontalAlignment = HorizontalAlignment.Center,

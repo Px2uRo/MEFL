@@ -1,5 +1,6 @@
 ﻿using MEFL.PageModelViews;
 using System;
+using System.Diagnostics;
 using System.Runtime.Serialization;
 using System.Threading.Tasks;
 using System.Windows;
@@ -35,6 +36,7 @@ namespace MEFL
             RegManager.Close();
             Debugger.Logger(this.Resources["I18N_String_App_OnExit"] as String);
             base.OnExit(e);
+            Process.GetCurrentProcess().Kill();
         }
 
         private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)

@@ -1,36 +1,43 @@
-﻿using System;
+﻿using MEFL.APIData;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Text;
+using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Input;
+using MEFL.Controls;
 
 namespace MEFL.PageModelViews
 {
     public class ExtensionPageModelView:PageModelViewBase
     {
-        public static Hosting[] Hostings { get; set; }
 
-        static ExtensionPageModelView()
+        public ObservableCollection<Hosting> Hostings
         {
-            Hostings = Hosting.LoadAll();
+            get { return APIModel.Hostings; }
+            set { Hostings = value; Invoke(nameof(Hostings)); }
+        }
+    }
+    public class HostingsToUI : IValueConverter
+    {
+        static StackPanel res = new StackPanel();
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            res.Children.Clear();
+            foreach (var item in (value as ObservableCollection<Hosting>))
+            {
+                var element = new MyExtensionCard() { Margin=new System.Windows.Thickness(0,0,0,15)};
+                element.DataContext = new HostingModelView(item);
+                res.Children.Add(element);
+            }
+            return res;
         }
 
-        public ExtensionPageModelView()
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-
-            var Items = MEFL.APIData.APIModel.AddInConfigs;
-
-
-            foreach (var item in Hostings)
-            {
-                for (int i=0;i< MEFL.APIData.APIModel.AddInConfigs.Count;i++)
-                {
-                    if (item.Guid != MEFL.APIData.APIModel.AddInConfigs[i].Guid)
-                    {
-                        Items.Add(new APIData.AddInConfig() { Guid = item.Guid, IsOpen = false });
-                    }
-                }
-            }
+            throw new NotImplementedException();
         }
     }
 }

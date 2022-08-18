@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using MEFL.APIData;
 
 namespace MEFL
 {
@@ -35,15 +36,12 @@ namespace MEFL
         
         [Import(AllowRecomposition = true)]
         public IDownloadPage DownloadPages;
-        public Exception ExceptionInfo { get; set; }
+        public string ExceptionInfo { get; set; }
         public string FileName { get; set; }
         public string FullPath { get; set; }
         public string Version { get; set; }
         public string Publisher { get; set; }
         public string Description { get; set; }
-        public object Icon { get; set; }
-        public Uri PulisherUri { get; set; }
-        public Uri ExtensionUri { get; set; }
         public string Guid { get; set; }
         private bool _isOpen { get; set; }
         public bool IsOpen { 
@@ -66,165 +64,49 @@ namespace MEFL
                     if (item.Guid == this.Guid)
                     {
                         item.IsOpen = _isOpen;
-                        APIData.APIModel.RemoveAddInsTheSameAddIn();
                         break;
+                    }
+                }
+                if(IsOpen)
+                {
+                    try
+                    {
+                        var ac = new AssemblyCatalog(FullPath);
+                        var cc = new CompositionContainer(ac);
+                        BaseInfo = cc.GetExport<IBaseInfo>().Value;
+                        Permissions = cc.GetExport<IPermissions>().Value;
+
+                        if (Permissions.UseSettingPageAPI)
+                        {
+                            SettingPage = cc.GetExport<ISettingPage>().Value;
+                        }
+                        if (Permissions.UsePagesAPI)
+                        {
+                            Pages = cc.GetExport<IPages>().Value;
+                        }
+                        if (Permissions.UseGameManageAPI)
+                        {
+                            LuncherGameType = cc.GetExport<ILuncherGameType>().Value;
+                        }
+                        if (Permissions.UseDownloadPageAPI)
+                        {
+                            DownloadPages = cc.GetExport<IDownloadPage>().Value;
+                        }
+                        Debugger.Logger($"加载了一个插件，名称 {FileName}，版本：{Version} Guid {Guid}");
+                        ac = null;
+                        cc = null;
+                    }
+                    catch (Exception ex)
+                    {
+                        ExceptionInfo = ex.Message;
                     }
                 }
             } 
         }
 
-        public static Hosting LoadOne(string Path)
+        public static ObservableCollection<Hosting> LoadAll()
         {
-            Hosting h = new Hosting();
-            h.FullPath = Path;
-            h.FileName = System.IO.Path.GetFileName(Path);
-            try
-            {
-                var fvif = FileVersionInfo.GetVersionInfo(Path);
-                h.Version = fvif.FileVersion;
-                h.Publisher = fvif.CompanyName;
-                h.Description = fvif.FileDescription;
-
-                try
-                {
-                    Assembly assembly = Assembly.LoadFile(Path);
-                    string guid = assembly.ManifestModule.ModuleVersionId.ToString(); 
-                    System.Guid.Parse(guid);
-                    h.Guid = guid;
-                    assembly = null;
-                    guid = null;
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Guid 不合法或者无法获取其 Guid");
-                }
-                APIData.APIModel.AddInConfigs = APIData.AddInConfig.GetAll();
-                for (int i = 0; i < APIData.APIModel.AddInConfigs.Count; i++)
-                {
-                    if (APIData.APIModel.AddInConfigs[i].Guid == h.Guid)
-                    {
-                        h.IsOpen = APIData.APIModel.AddInConfigs[i].IsOpen;
-                    }
-                    else
-                    {
-                        h.IsOpen = false;
-                    }
-                }
-                if (h.IsOpen == null)
-                {
-                    h.IsOpen = false;
-                }
-
-                if (h.IsOpen == true)
-                {
-                    var ac = new AssemblyCatalog(Path);
-                    var cc = new CompositionContainer(ac);
-                    h.BaseInfo = cc.GetExport<IBaseInfo>().Value;
-                    h.Permissions = cc.GetExport<IPermissions>().Value;
-                    h.Icon = h.BaseInfo.Icon;
-                    h.PulisherUri = h.BaseInfo.PulisherUri;
-                    h.ExtensionUri = h.BaseInfo.ExtensionUri;
-
-                    if (h.Permissions.UseSettingPageAPI)
-                    {
-                        h.SettingPage = cc.GetExport<ISettingPage>().Value;
-                    }
-                    if (h.Permissions.UsePagesAPI)
-                    {
-                        h.Pages = cc.GetExport<IPages>().Value;
-                    }
-                    if (h.Permissions.UseGameManageAPI)
-                    {
-                        h.LuncherGameType = cc.GetExport<ILuncherGameType>().Value;
-                    }
-                    if (h.Permissions.UseDownloadPageAPI)
-                    {
-                        h.DownloadPages= cc.GetExport<IDownloadPage>().Value;
-                    }
-                    Debugger.Logger($"加载了一个插件，名称 {h.FileName}，版本：{h.Version} Guid {h.Guid}");
-                    ac = null;
-                    cc = null;
-                }
-                fvif = null;
-                return h;
-                h = null;
-            }
-            catch (Exception ex)
-            {
-                h.ExceptionInfo = ex;
-                return h;
-                h = null;
-            }
-        }
-
-        public static Hosting LoadOne(string Path,bool Force)
-        {
-            if (Force == true)
-            {
-                Hosting h = new Hosting();
-                h.FullPath = Path;
-                h.FileName = System.IO.Path.GetFileName(Path);
-                try
-                {
-                    var fvif = FileVersionInfo.GetVersionInfo(Path);
-                    h.Version = fvif.FileVersion;
-                    h.Publisher = fvif.CompanyName;
-                    h.Description = fvif.FileDescription;
-
-                    try
-                    {
-                        Assembly assembly = Assembly.LoadFile(Path);
-                        string guid = assembly.ManifestModule.ModuleVersionId.ToString();
-                        System.Guid.Parse(guid);
-                        h.Guid = guid;
-                        assembly = null;
-                        guid = null;
-                    }
-                    catch (Exception ex)
-                    {
-                        throw new Exception("Guid 不合法或者无法获取其 Guid");
-                    }
-
-                        var ac = new AssemblyCatalog(Path);
-                        var cc = new CompositionContainer(ac);
-                        h.BaseInfo = cc.GetExport<IBaseInfo>().Value;
-                        h.Permissions = cc.GetExport<IPermissions>().Value;
-                        h.Icon = h.BaseInfo.Icon;
-                        h.PulisherUri = h.BaseInfo.PulisherUri;
-                        h.ExtensionUri = h.BaseInfo.ExtensionUri;
-
-                        if (h.Permissions.UseSettingPageAPI)
-                        {
-                            h.SettingPage = cc.GetExport<ISettingPage>().Value;
-                        }
-                        if (h.Permissions.UsePagesAPI)
-                        {
-                            h.Pages = cc.GetExport<IPages>().Value;
-                        }
-                        Debugger.Logger($"加载了一个插件，名称 {h.FileName}，版本：{h.Version} Guid {h.Guid}");
-                        ac = null;
-                        cc = null;
-                    fvif = null;
-                    return h;
-                    h = null;
-                }
-                catch (Exception ex)
-                {
-                    h.ExceptionInfo = ex;
-                    return h;
-                    h = null;
-                }
-            }
-            else
-            {
-                return LoadOne(Path);
-            }
-        }
-
-
-        public static Hosting[] LoadAll()
-        {
-            Hosting[] hc;
+            var res = new ObservableCollection<Hosting>();
             string path = System.IO.Path.Combine( 
                 Environment.CurrentDirectory,"AddIns");
             List<FileInfo> l = new List<FileInfo>();
@@ -238,56 +120,85 @@ namespace MEFL
             {
                 if (item.Name.EndsWith(".dll"))
                 {
-                    try
-                    {
-                        Assembly assembly = Assembly.LoadFile(item.FullName);
-                        string guid = assembly.ManifestModule.ModuleVersionId.ToString();
-                        System.Guid.Parse(guid);
-                        assembly = null;
-                        if (lg.Contains(guid)!=true)
-                        {
-                            l.Add(item);
-                            lg.Add(guid);
-                        }
-                        guid = null;
-                    }
-                    catch (Exception ex)
-                    {
-                        
-                    }
+                    res.Add(LoadOne(item.FullName));
+                }
+            }
 
-                }
-            }
             lg = null;
-            hc = new Hosting[l.Count];
-            for (int i = 0; i < l.Count; i++)
-            {
-                var h = LoadOne(l[i].FullName);
-                for (int j = 0; j < APIData.APIModel.AddInConfigs.Count|| APIData.APIModel.AddInConfigs.Count==0; j++)
-                {
-                    if(APIData.APIModel.AddInConfigs.Count == 0)
-                    {
-                        APIData.AddInConfig item = new APIData.AddInConfig() { Guid = h.Guid, IsOpen = h.IsOpen };
-                        APIData.APIModel.AddInConfigs.Add(item);
-                        item = null;
-                    }
-                    else if (APIData.APIModel.AddInConfigs[j].Guid != h.Guid)
-                    {
-                        APIData.AddInConfig item = new APIData.AddInConfig() { Guid = h.Guid, IsOpen = h.IsOpen };
-                        APIData.APIModel.AddInConfigs.Add(item);
-                        item = null;
-                    }
-                }
-                hc.SetValue(h,i);
-                h=null;
-            }
-            APIData.AddInConfig.Update(APIData.APIModel.AddInConfigs);
-            l = null;
-            path = null;
-            di=null;
-            return hc;
+            return res;
         }
 
+        private static Hosting LoadOne(string Path)
+        {
+            Hosting h = new Hosting();
+            h.FullPath = Path;
+            h.FileName = System.IO.Path.GetFileName(Path);
+            try
+            {
+                try
+                {
+                    Assembly assembly = Assembly.LoadFile(Path);
+                    h.Guid = assembly.ManifestModule.ModuleVersionId.ToString();
+                    foreach (var item in assembly.CustomAttributes)
+                    {
+                        if (item.AttributeType == typeof(AssemblyCompanyAttribute))
+                        {
+                            foreach (var arg in item.ConstructorArguments)
+                            {
+                                h.Publisher += arg.ToString();
+                            }
+                        }
+                        else if (item.AttributeType == typeof(AssemblyDescriptionAttribute))
+                        {
+                            foreach (var arg in item.ConstructorArguments)
+                            {
+                                h.Description += arg.ToString();
+                            }
+                        }
+                        else if (item.AttributeType == typeof(AssemblyFileVersionAttribute))
+                        {
+                            foreach (var arg in item.ConstructorArguments)
+                            {
+                                h.Version += arg.ToString();
+                            }
+                        }
+                    }
+                    assembly = null;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("Guid 不合法或者无法获取其 Guid");
+                }
+            }
+            catch(Exception ex)
+            {
+                h.ExceptionInfo = ex.Message;
+            }
+
+            bool Contians = false;
+            foreach (var item in APIModel.AddInConfigs)
+            {
+                if (item.Guid == h.Guid)
+                {
+                    Contians = true;
+                }
+            }
+            if (Contians)
+            {
+                foreach (var item in APIModel.AddInConfigs)
+                {
+                    if (item.Guid == h.Guid)
+                    {
+                        h.IsOpen = item.IsOpen;
+                    }
+                }
+            }
+            else
+            {
+                h.IsOpen = APIModel.AlwaysOpenNewAddIns;
+            }
+            return h;
+        }
     }
 #endif
 }

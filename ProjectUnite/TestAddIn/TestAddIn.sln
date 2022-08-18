@@ -5,15 +5,15 @@ VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestAddIn", "TestAddIn\TestAddIn.csproj", "{F7FC8CD6-059E-48A6-A637-A113897AD846}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedContract", "SharedContract\SharedContract.shproj", "{23BB0CC4-2D6A-456B-A157-AD89E84C401D}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContractNetFw4", "ContractNetFw4\ContractNetFw4.csproj", "{5BA0C586-7150-4269-80F7-7DF159131CDC}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedControls", "..\MEFL.Controls\SharedControls\SharedControls.shproj", "{BEE8441A-56DA-48D5-AABF-E76594B47403}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContractAvalonia", "ContractAvalonia\ContractAvalonia.csproj", "{F9543A69-E132-4E0C-A7B8-73919603D3D1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MEFL.Contract", "MEFL.Contract\MEFL.Contract.csproj", "{FE4EAFB4-F516-478A-BCF2-8935D815E4AA}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedContract", "SharedContract\SharedContract.shproj", "{15B3E578-1681-42A1-88D8-D9E48EE6CF97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MEFL.Contract", "MEFL.Contract\MEFL.Contract.csproj", "{21C862EA-A69A-476D-8514-FA4CE11BE400}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,25 +22,22 @@ Global
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{F7FC8CD6-059E-48A6-A637-A113897AD846}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F7FC8CD6-059E-48A6-A637-A113897AD846}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7FC8CD6-059E-48A6-A637-A113897AD846}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7FC8CD6-059E-48A6-A637-A113897AD846}.Release|Any CPU.Build.0 = Release|Any CPU
-		{23BB0CC4-2D6A-456B-A157-AD89E84C401D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{23BB0CC4-2D6A-456B-A157-AD89E84C401D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BA0C586-7150-4269-80F7-7DF159131CDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5BA0C586-7150-4269-80F7-7DF159131CDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BA0C586-7150-4269-80F7-7DF159131CDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BA0C586-7150-4269-80F7-7DF159131CDC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BEE8441A-56DA-48D5-AABF-E76594B47403}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BEE8441A-56DA-48D5-AABF-E76594B47403}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9543A69-E132-4E0C-A7B8-73919603D3D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F9543A69-E132-4E0C-A7B8-73919603D3D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9543A69-E132-4E0C-A7B8-73919603D3D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9543A69-E132-4E0C-A7B8-73919603D3D1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FE4EAFB4-F516-478A-BCF2-8935D815E4AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FE4EAFB4-F516-478A-BCF2-8935D815E4AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FE4EAFB4-F516-478A-BCF2-8935D815E4AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FE4EAFB4-F516-478A-BCF2-8935D815E4AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15B3E578-1681-42A1-88D8-D9E48EE6CF97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15B3E578-1681-42A1-88D8-D9E48EE6CF97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21C862EA-A69A-476D-8514-FA4CE11BE400}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21C862EA-A69A-476D-8514-FA4CE11BE400}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21C862EA-A69A-476D-8514-FA4CE11BE400}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21C862EA-A69A-476D-8514-FA4CE11BE400}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -49,10 +46,10 @@ Global
 		SolutionGuid = {D57DFECC-029B-4F5A-8BCF-AC7B3D8EDC04}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		SharedContract\SharedContract.projitems*{23bb0cc4-2d6a-456b-a157-ad89e84c401d}*SharedItemsImports = 13
+		SharedContract\SharedContract.projitems*{15b3e578-1681-42a1-88d8-d9e48ee6cf97}*SharedItemsImports = 13
+		SharedContract\SharedContract.projitems*{21c862ea-a69a-476d-8514-fa4ce11be400}*SharedItemsImports = 5
 		SharedContract\SharedContract.projitems*{5ba0c586-7150-4269-80f7-7df159131cdc}*SharedItemsImports = 4
 		..\MEFL.Controls\SharedControls\SharedControls.projitems*{bee8441a-56da-48d5-aabf-e76594b47403}*SharedItemsImports = 13
 		SharedContract\SharedContract.projitems*{f9543a69-e132-4e0c-a7b8-73919603d3d1}*SharedItemsImports = 5
-		SharedContract\SharedContract.projitems*{fe4eafb4-f516-478a-bcf2-8935d815e4aa}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

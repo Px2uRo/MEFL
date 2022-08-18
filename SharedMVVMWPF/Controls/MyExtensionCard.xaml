@@ -51,8 +51,6 @@
         </StackPanel>
         <local:MyCheckBox IsChecked="{Binding IsOpen}"
                           Background="{DynamicResource SYTLE_Standard_ColorBrush}"
-                          Checked="MyCheckBox_Checked"
-                          Unchecked="MyCheckBox_UnChecked"
                           HorizontalAlignment="Right"
                           VerticalAlignment="Top"/>
     </Grid>

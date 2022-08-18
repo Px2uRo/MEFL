@@ -4,10 +4,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+              xmlns:mv="clr-namespace:MEFL.PageModelViews"
              mc:Ignorable="d"
              d:DesignHeight="450" d:DesignWidth="800" 
               LineBrush="{DynamicResource SYTLE_Standard_ColorBrush}"
             DataContext="{DynamicResource EPMV}">
+    <c:MyPageBase.Resources>
+        <mv:HostingsToUI x:Key="HTUI"/>
+    </c:MyPageBase.Resources>
     <c:MyPageBase.SideBar>
         <StackPanel>
             <c:ChangePageContentButton x:Name="DefalutChangeButton" Content="{DynamicResource I18N_String_AddIns}" Tag="{DynamicResource I18N_String_AddIns}" Checked="ChangePageContentButton_Checked"/>
@@ -15,7 +19,7 @@
         </StackPanel>
     </c:MyPageBase.SideBar>
     <Grid>
-        <StackPanel Tag="{DynamicResource I18N_String_AddIns}" Name="ContentPage" Visibility="Hidden"/>
+        <ContentPresenter Content="{Binding Hostings,Converter={StaticResource HTUI}}" Visibility="Hidden" Tag="{DynamicResource I18N_String_AddIns}"/>
         <StackPanel Tag="{DynamicResource I18N_String_GetMore}" Visibility="Hidden">
             <TextBlock Text="Please Wait" HorizontalAlignment="Center"/>
         </StackPanel>

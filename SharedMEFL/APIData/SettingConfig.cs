@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -90,12 +91,16 @@ namespace MEFL.APIData
 
     public class AddInConfig
     {
+        public override string ToString()
+        {
+            return $"{Guid}:{IsOpen}";
+        }
         public string Guid { get; set; }
         public bool IsOpen { get; set; }
 
-        public static List<AddInConfig> GetAll()
+        public static ObservableCollection<AddInConfig> GetAll()
         {
-            List<AddInConfig> ret;
+            ObservableCollection<AddInConfig> ret;
             var Path = System.IO.Path.Combine(Environment.CurrentDirectory, "AddIns\\Config.json");
             try
             {
@@ -106,20 +111,34 @@ namespace MEFL.APIData
                 }
                 using (StreamReader sr = new StreamReader(Path))
                 {
-                    ret = JsonConvert.DeserializeObject<List<AddInConfig>>(sr.ReadToEnd());
+                    ret = JsonConvert.DeserializeObject<ObservableCollection<AddInConfig>>(sr.ReadToEnd());
                 }
                 if (ret == null)
                 {
-                    ret = new List<AddInConfig>();
+                    ret = new ObservableCollection<AddInConfig>();
                 }
                 Debugger.Logger($"加载了插件设置,当前文档：{File.ReadAllText(Path)}");
             }
             catch (Exception ex)
             {
                 Debugger.Logger(ex.Message);
-                ret = new List<AddInConfig>();
+                ret = new ObservableCollection<AddInConfig>();
             }
+            ret.CollectionChanged += Ret_CollectionChanged;
             return ret;
+        }
+
+        private static void Ret_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            List<AddInConfig> NewList = new List<AddInConfig>();
+            foreach (var item in sender as ObservableCollection<AddInConfig>)
+            {
+                if (!NewList.Contains(item))
+                {
+                    NewList.Add(item);
+                }
+            }
+            Update(NewList);
         }
 
         public static void Update(List<AddInConfig> addInConfigs)

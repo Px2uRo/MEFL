@@ -3,28 +3,33 @@
   <PropertyGroup>
     <MSBuildAllProjects Condition="'$(MSBuildVersion)' == '' Or '$(MSBuildVersion)' &lt; '16.0'">$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
     <HasSharedItems>true</HasSharedItems>
-    <SharedGUID>23bb0cc4-2d6a-456b-a157-ad89e84c401d</SharedGUID>
+    <SharedGUID>15b3e578-1681-42a1-88d8-d9e48ee6cf97</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>MEFL.Contract</Import_RootNamespace>
+    <Import_RootNamespace>SharedContract</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)AccountBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)AssemblyInfo.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\AddAccountItem.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)GameInfoBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IBaseInfo.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IDownloadPage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IPages.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)IPermissions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ISettingPage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ILuncherGameInfoBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MEFLErrorType.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)StandardOtherArgumentTemplate.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SettingArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFL.Arguments\LangID.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFL.Arguments\SettingArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract.Controls\AddAccountItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\AccountBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\DownloadPageItemPair.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\GameInfoBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\IAccount.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\IBaseInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\IconTitlePagePair.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\IDownloadPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\ILuncherGameType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\IPages.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\IPermissions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\ISettingPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\LauncherWebFileInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\LauncherWebVersionInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\MEFLErrorType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFL\OtherArgumentTemplateBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)Themes\Generic.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)themes\generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
