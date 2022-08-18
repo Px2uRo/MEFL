@@ -79,38 +79,7 @@ namespace MEFL.GameTypes
                     {
                         if (item.Downloads.Artifact.Path != null)
                         {
-                            if (item.Rules != null)
-                            {
-                                foreach (var rls in item.Rules)
-                                {
-                                    if (rls["action"].ToString() == "allow")
-                                    {
-                                        if (rls["os"] == null)
-                                        {
-                                            _ItemsNeedsToExtract.Add(io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")));
-                                        }
-                                        else if (rls["os"]["name"].ToString() == "osx")
-                                        {
-                                            //todo 这个交给osx来处理
-                                        }
-                                        else if (rls["os"]["name"].ToString() == "windows")
-                                        {
-                                            _ItemsNeedsToExtract.Add(io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")));
-                                        }
-                                    }
-                                    else if (rls["action"].ToString() == "disallow")
-                                    {
-                                        if (rls["os"].ToString() == "osx")
-                                        {
-                                            //todo 这个交给osx来处理
-                                        }
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                _ItemsNeedsToExtract.Add(io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")));
-                            }
+                            _ItemsNeedsToExtract.Add(io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")));
                         }
                     }
                 }
@@ -210,38 +179,7 @@ namespace MEFL.GameTypes
                 {
                     if (item.Downloads.Artifact.Path != null)
                     {
-                        if (item.Rules != null)
-                        {
-                            foreach (var rls in item.Rules)
-                            {
-                                if (rls["action"].ToString() == "allow")
-                                {
-                                    if (rls["os"] == null)
-                                    {
-                                        res.Add(io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")));
-                                    }
-                                    else if (rls["os"]["name"].ToString() == "osx")
-                                    {
-                                        //todo 这个交给osx来处理
-                                    }
-                                    else if (rls["os"]["name"].ToString() == "windows")
-                                    {
-                                        res.Add(io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")));
-                                    }
-                                }
-                                else if (rls["action"].ToString() == "disallow")
-                                {
-                                    if (rls["os"].ToString() == "osx")
-                                    {
-                                        //todo 这个交给osx来处理
-                                    }
-                                }
-                            }
-                        }
-                        else
-                        {
-                            res.Add(io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")));
-                        }
+                        res.Add(io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")));
                         if (io.File.Exists(io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\"))) == false)
                         {
                             FileNeedsToDownload.Add(new LauncherWebFileInfo() { Url=item.Downloads.Artifact.Url,size=Convert.ToInt32(item.Downloads.Artifact.Size),localpath= io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")) ,sha1=item.Downloads.Artifact.Sha1});

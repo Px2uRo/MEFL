@@ -63,13 +63,13 @@ I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\ManageLegacyAccountP
 I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\MEFL.Contract.dll
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\MEFL_Content.g.cs
 I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\OctaneEngine.dll
-I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\Pages\DownloadPage.g.cs
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\GameSettingPage.g.cs
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\ManageProcessesPage.g.cs
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\MEFLRealseTypeManage.g.cs
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\MEFLRealseTypeSetting.g.cs
-I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\Pages\DownloadPage.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\GameSettingPage.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\ManageProcessesPage.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\MEFLRealseTypeManage.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\MEFLRealseTypeSetting.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\DownloadPage.g.cs
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\DownloadPage.baml
