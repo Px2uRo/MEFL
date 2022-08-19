@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Export.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameTypes\MEFLRealseType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFLAccount.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\AddALegacyAccountModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\AddALegacyAccount.xaml.cs">
@@ -22,6 +23,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Pages\MCERPage.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>MCERPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\MEFLRealseTypeManage.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>MEFLRealseTypeManage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\MEFLRealseTypeSetting.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>MEFLRealseTypeSetting.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -36,6 +45,16 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Pages\MCERPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\MEFLRealseTypeManage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\MEFLRealseTypeSetting.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

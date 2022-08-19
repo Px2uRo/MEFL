@@ -71,14 +71,6 @@
       <SubType>Code</SubType>
       <DependentUpon>ManageProcessesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\MEFLRealseTypeManage.xaml.cs">
-      <SubType>Code</SubType>
-      <DependentUpon>MEFLRealseTypeManage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\MEFLRealseTypeSetting.xaml.cs">
-      <SubType>Code</SubType>
-      <DependentUpon>MEFLRealseTypeSetting.xaml</DependentUpon>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\PickUpAFolder.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>PickUpAFolder.xaml</DependentUpon>
@@ -180,16 +172,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)SpecialPages\ManageProcessesPage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)SpecialPages\MEFLRealseTypeManage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)SpecialPages\MEFLRealseTypeSetting.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

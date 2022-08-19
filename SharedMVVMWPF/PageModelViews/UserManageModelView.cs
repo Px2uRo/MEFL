@@ -112,6 +112,13 @@ namespace MEFL.PageModelViews
 
         private void Element_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
+            {
+                if (((App.Current.Resources["MainPage"] as Grid).Children[i] as MyPageBase).Tag == "AddNewAccount")
+                {
+                    (App.Current.Resources["MainPage"] as Grid).Children.RemoveAt(i);
+                }
+            }
             var Content = ((sender as MyItemsCardItem).DataContext as AccountBase).ManagePage as FrameworkElement;
             Content.DataContext = new GenerlManageAccountModelView((sender as MyItemsCardItem).DataContext as AccountBase);
             (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.AddAccountPage() { Tag = "AddNewAccount", Visibility = Visibility.Hidden,Content= Content});
@@ -126,13 +133,6 @@ namespace MEFL.PageModelViews
             foreach (MyPageBase item in FindControl.FromTag("AddNewAccount", (App.Current.Resources["MainPage"] as Grid)))
             {
                 item.Show(From);
-            }
-            for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
-            {
-                if (((App.Current.Resources["MainPage"] as Grid).Children[i] as MyPageBase).Tag == "AddAccountPage")
-                {
-                    (App.Current.Resources["MainPage"] as Grid).Children.RemoveAt(i);
-                }
             }
         }
 

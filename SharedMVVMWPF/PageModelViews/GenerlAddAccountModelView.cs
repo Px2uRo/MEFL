@@ -20,6 +20,7 @@ namespace MEFL.PageModelViews
             Account = account;
             AddCommand = new AddCommand();
             CancelCommand = new CancelCommand();
+            GenerlAddAccountModel.ModelView = this;
         }
     }
 

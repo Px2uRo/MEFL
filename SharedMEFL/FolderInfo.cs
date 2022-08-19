@@ -47,6 +47,7 @@ namespace MEFL
                     }
                     else
                     {
+                        List<String> Support = new List<string>();
                             foreach (var Hst in APIModel.Hostings)
                             {
                                 if (Hst.IsOpen)
@@ -57,22 +58,56 @@ namespace MEFL
                                     {
                                         if (Hst.Permissions.UseGameManageAPI)
                                         {
-                                            foreach (var type in Hst.LuncherGameType.SupportedType)
+                                            try
                                             {
-                                                if (jOb["type"].ToString() == type)
+                                                foreach (var type in Hst.LuncherGameType.SupportedType)
                                                 {
-                                                    Games.Add(Hst.LuncherGameType.Parse(SubJson));
+                                                    Support.Add(type);
                                                 }
+                                            }
+                                            catch (Exception ex)
+                                            {
+
                                             }
                                         }
                                     }
                                 }
                                 catch (Exception ex)
                                 {
-                                    Games.Add(new Contract.MEFLErrorType($"从{Hst.FileName}中加载失败：{ex.Message}", SubJson));
+                                    Debugger.Logger($"未知错误 {ex.Message} at {Hst.FileName} at {ex.Message}");
                                 }
                                 }
                             }
+                        if (Support.Contains(jOb["type"].ToString()))
+                        {
+                            foreach (var Hst in APIModel.Hostings)
+                            {
+                                if (Hst.IsOpen)
+                                {
+                                    try
+                                    {
+                                        if (Hst.Permissions != null)
+                                        {
+                                            if (Hst.Permissions.UseGameManageAPI)
+                                            {
+                                                foreach (var type in Hst.LuncherGameType.SupportedType)
+                                                {
+                                                    Games.Add(Hst.LuncherGameType.Parse(SubJson));
+                                                }
+                                            }
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Games.Add(new Contract.MEFLErrorType($"从{Hst.FileName}中加载失败：{ex.Message}", SubJson));
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            Games.Add(new Contract.MEFLErrorType($"不支持 {jOb["type"].ToString()} 版本", SubJson));
+                        }
                     }
                     jOb = null;
                 }

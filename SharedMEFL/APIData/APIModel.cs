@@ -140,9 +140,10 @@ namespace MEFL.APIData
             AddInConfigs = MEFL.APIData.AddInConfig.GetAll();
             Hostings = Hosting.LoadAll();
             SettingArgs = new Arguments.SettingArgs();
+            GameInfoConfigs = new ObservableCollection<GameInfoBase>();
             #region Reg
             #region RegFolders
-            MyFolders = new ObservableCollection<MEFLFolderInfo>();
+           MyFolders = new ObservableCollection<MEFLFolderInfo>();
             try
             {
                 foreach (var item in Newtonsoft.Json.JsonConvert.DeserializeObject<ObservableCollection<MEFLFolderInfo>>(RegManager.Read("Folders")))
@@ -173,7 +174,6 @@ namespace MEFL.APIData
             {
                 res.Add(item);
             }
-            GameInfoConfigs = res[SelectedFolderIndex].Games;
             #endregion
             #region CurretGame
             try

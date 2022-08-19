@@ -46,6 +46,7 @@ namespace MEFL.SpecialPages
                                 item.Height = 60;
                                 item.FinnalReturn.AddInGuid= hst.Guid;
                                 item.AddAccountContent.DataContext = new GenerlAddAccountModelView(item.FinnalReturn);
+                                item.MouseDown += Item_MouseDown;
                                 MyStackPanel.Children.Add(item);
                             }
                         }
@@ -60,7 +61,9 @@ namespace MEFL.SpecialPages
 
         private void Item_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            
+            var NewPage = new AddAccountPage() { Content = (sender as AddAccountItem).AddAccountContent,DataContext=new GenerlAddAccountModelView((sender as AddAccountItem).FinnalReturn),Tag= "AddNewAccount" };
+            (App.Current.Resources["MainPage"] as Grid).Children.Add(NewPage);
+            NewPage.Show(this);
         }
     }
 }

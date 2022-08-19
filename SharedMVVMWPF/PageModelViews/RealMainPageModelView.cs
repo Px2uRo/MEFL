@@ -104,6 +104,7 @@ namespace MEFL.PageModelViews
         {
             RefreshFolderInfoCommand = new RefreshFolderInfoCommand();
             RefreshFolderInfoCommand.ClickBeihavior += RefreshFolderInfoCommand_ClickBeihavior;
+            GameInfoConfigs = MyFolders[SelectedFolderIndex].Games;
         }
 
         private void RefreshFolderInfoCommand_ClickBeihavior()

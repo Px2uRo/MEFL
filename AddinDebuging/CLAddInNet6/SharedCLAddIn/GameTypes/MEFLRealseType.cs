@@ -16,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using io = System.IO;
 
-namespace MEFL.GameTypes
+namespace MEFL.CLAddIn.GameTypes
 {
     public class MEFLRealseType : MEFL.Contract.GameInfoBase
     {
@@ -24,17 +24,17 @@ namespace MEFL.GameTypes
         public override List<string> ItemsNeedsToExtract => _ItemsNeedsToExtract;
         public override FrameworkElement GetManageProcessPage(Process process, SettingArgs args)
         {
-            var res = new SpecialPages.MEFLRealseTypeManage(process);
+            var res = new Pages.MEFLRealseTypeManage(process);
             return res;
         }
         public override void Dispose()
         {
 
         }
-        private static FrameworkElement _settingPage = new SpecialPages.MEFLRealseTypeSetting();
+        private static FrameworkElement _settingPage = new Pages.MEFLRealseTypeSetting();
         private MEFLStandardOtherArgumentTemplate _MSOAT { get; set; }
         private CoreLaunching.JsonTemplates.Root _Root { get; set; }
-        public override string GameTypeFriendlyName { get => App.Current.Resources["I18N_String_MEFLGameInfos_Realse"].ToString(); set => throw new NotImplementedException(); }
+        public override string GameTypeFriendlyName { get => "发布"; set => throw new NotImplementedException(); }
         public override string Description
         {
             get {

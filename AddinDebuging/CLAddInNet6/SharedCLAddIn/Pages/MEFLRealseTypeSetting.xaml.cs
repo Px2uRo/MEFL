@@ -1,5 +1,4 @@
 ﻿using MEFL.Contract;
-using MEFL.PageModelViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MEFL.SpecialPages
+namespace MEFL.CLAddIn.Pages
 {
     /// <summary>
     /// MEFLRealseTypeSetting.xaml 的交互逻辑

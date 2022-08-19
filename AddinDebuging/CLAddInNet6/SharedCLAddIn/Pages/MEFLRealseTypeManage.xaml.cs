@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MEFL.SpecialPages
+namespace MEFL.CLAddIn.Pages
 {
     /// <summary>
     /// MEFLRealseTypeManage.xaml 的交互逻辑
