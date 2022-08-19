@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MEFL.Controls;assembly=MEFL.Controls"
              mc:Ignorable="d" Background="White"
-             Height="150" BorderBrush="{DynamicResource SYTLE_Standard_ColorBrush}">
+             MinHeight="150" BorderBrush="{DynamicResource SYTLE_Standard_ColorBrush}">
     <local:MyCard.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="TextWrapping" Value="Wrap"/>
@@ -16,42 +16,47 @@
             <ContentPresenter TextBlock.FontWeight="Bold"/>
         </Grid>
     </local:MyCard.Title>
-    <Grid x:Name="PART_THE_Content">
-        <StackPanel>
-            <Grid Height="50">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="50"/>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <ContentPresenter Width="50" Height="50" Content="{Binding Icon}" HorizontalAlignment="Left" />
-                <Grid Grid.Column="1" Margin="5,0,0,0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" Orientation="Horizontal">
-                        <TextBlock Text="{DynamicResource I18N_String_AddIns_Author}"/>
-                        <TextBlock>
-                            <Hyperlink NavigateUri="{Binding PulisherUri}" Click="Hyperlink_Click" Cursor="Hand">
+    <Grid>
+        <Grid Visibility="{Binding NoError}">
+            <StackPanel>
+                <Grid Height="50">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <ContentPresenter Width="50" Height="50" Content="{Binding Icon}" HorizontalAlignment="Left" />
+                    <Grid Grid.Column="1" Margin="5,0,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <StackPanel Grid.Row="0" Orientation="Horizontal">
+                            <TextBlock Text="{DynamicResource I18N_String_AddIns_Author}"/>
+                            <TextBlock>
+                            <Hyperlink NavigateUri="{Binding PublisherUri}" Click="Hyperlink_Click" Cursor="Hand">
                                 <TextBlock Text="{Binding Publisher}"/>
                             </Hyperlink>
                         </TextBlock>
-                    </StackPanel>
-                    <StackPanel Grid.Row="1" Orientation="Horizontal">
-                        <TextBlock Text="{DynamicResource I18N_String_AddIns_Descripition}"/>
-                        <TextBlock Text="{Binding Description}"/>
-                    </StackPanel>
-                    <StackPanel Grid.Row="2" Orientation="Horizontal">
-                        <TextBlock Text="{DynamicResource I18N_String_AddIns_Version}"/>
-                        <TextBlock Text="{Binding Version}"/>
-                    </StackPanel>
+                        </StackPanel>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal">
+                            <TextBlock Text="{DynamicResource I18N_String_AddIns_Descripition}"/>
+                            <TextBlock Text="{Binding Description}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Row="2" Orientation="Horizontal">
+                            <TextBlock Text="{DynamicResource I18N_String_AddIns_Version}"/>
+                            <TextBlock Text="{Binding Version}"/>
+                        </StackPanel>
+                    </Grid>
                 </Grid>
-            </Grid>
-        </StackPanel>
-        <local:MyCheckBox IsChecked="{Binding IsOpen}"
+            </StackPanel>
+            <local:MyCheckBox IsChecked="{Binding IsOpen}"
                           Background="{DynamicResource SYTLE_Standard_ColorBrush}"
                           HorizontalAlignment="Right"
                           VerticalAlignment="Top"/>
+        </Grid>
+        <Grid Visibility="{Binding HasError}" >
+            <TextBlock Text="{Binding ErrorInfo}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Grid>
     </Grid>
 </local:MyCard>

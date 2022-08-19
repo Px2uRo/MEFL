@@ -15,6 +15,8 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedMEFL", "..\..\SharedM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MEFLNet6", "..\..\MEFLNet6\MEFLNet6.csproj", "{0A4E8C50-1BB7-425F-96E7-F63ADFB1C34A}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedCLAddIn", "SharedCLAddIn\SharedCLAddIn.shproj", "{FB473F32-00DB-4CE3-BBBA-C88716C07ADA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,8 +47,10 @@ Global
 		..\..\SharedMVVMWPF\SharedMVVMWPF.projitems*{0a4e8c50-1bb7-425f-96e7-f63adfb1c34a}*SharedItemsImports = 5
 		..\..\SharedSources\SharedSources.projitems*{0a4e8c50-1bb7-425f-96e7-f63adfb1c34a}*SharedItemsImports = 5
 		..\..\..\CoreLaunching\SharedCore\SharedCore.projitems*{20b4625c-48e0-410a-bddf-950a8676da1a}*SharedItemsImports = 5
+		SharedCLAddIn\SharedCLAddIn.projitems*{9df8dd53-85ee-4fff-bc0e-6eab6bcec9eb}*SharedItemsImports = 5
 		..\..\SharedMVVMWPF\SharedMVVMWPF.projitems*{a76e17ed-57bf-45e9-b5e8-9a16c228fb70}*SharedItemsImports = 13
 		..\..\SharedMEFL\SharedMEFL.projitems*{a979137b-21df-4076-aacc-eb503c3f6a1e}*SharedItemsImports = 13
 		..\..\..\CoreLaunching\SharedCore\SharedCore.projitems*{e2a9f52b-6053-4004-9d43-aa972d0da2cf}*SharedItemsImports = 13
+		SharedCLAddIn\SharedCLAddIn.projitems*{fb473f32-00db-4ce3-bbba-c88716c07ada}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

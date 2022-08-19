@@ -32,18 +32,19 @@ namespace MEFL
         public IPages Pages;
 
         [Import(AllowRecomposition = true)]
-        public ILuncherGameType LuncherGameType; 
+        public ILuncherGameType LuncherGameType;
         
         [Import(AllowRecomposition = true)]
         public IDownloadPage DownloadPages;
         public string ExceptionInfo { get; set; }
-        public string FileName { get; set; }
-        public string FullPath { get; set; }
-        public string Version { get; set; }
-        public string Publisher { get; set; }
-        public string Description { get; set; }
-        public string Guid { get; set; }
-        private bool _isOpen { get; set; }
+        public string FileName { get; private set; }
+        public string FullPath { get; private set; }
+        public string Version { get; private set; }
+        public string Publisher { get; private set; }
+        public string Description { get; private set; }
+        public string Guid { get; private set; }
+        private bool _isOpen;
+
         public bool IsOpen { 
             get 
             {
@@ -59,15 +60,29 @@ namespace MEFL
             } set 
             {
                 _isOpen = value;
-                foreach (var item in APIData.APIModel.AddInConfigs)
+                bool Contians = false;
+                foreach (var item in APIModel.AddInConfigs)
                 {
-                    if (item.Guid == this.Guid)
+                    if (item.Guid == Guid)
                     {
-                        item.IsOpen = _isOpen;
-                        break;
+                        Contians = true;
                     }
                 }
-                if(IsOpen)
+                if (Contians)
+                {
+                    foreach (var item in APIModel.AddInConfigs)
+                    {
+                        if (item.Guid == Guid)
+                        {
+                            item.IsOpen = _isOpen;
+                        }
+                    }
+                }
+                else
+                {
+                    APIModel.AddInConfigs.Add(new AddInConfig() { Guid = Guid, IsOpen = _isOpen });
+                }
+                if (IsOpen)
                 {
                     try
                     {
@@ -98,9 +113,34 @@ namespace MEFL
                     }
                     catch (Exception ex)
                     {
-                        ExceptionInfo = ex.Message;
+                        ExceptionInfo = $"{ex.Message} at {ex.Source}";
+                        IsOpen = false;
                     }
                 }
+                else
+                {
+                    try
+                    {
+                        SettingPage = null;
+
+                        Permissions = null;
+
+                        BaseInfo = null;
+
+                        Pages = null;
+
+                        LuncherGameType = null;
+
+                        DownloadPages = null;
+
+                        Debugger.Logger($"卸载了一个插件，名称 {FileName}，版本：{Version} Guid {Guid}");
+                    }
+                    catch (Exception ex)
+                    {
+                        ExceptionInfo = $"{ex.Message} at {ex.Source}";
+                    }
+                }
+                AddInConfig.Update(APIModel.AddInConfigs);
             } 
         }
 
@@ -172,7 +212,7 @@ namespace MEFL
             }
             catch(Exception ex)
             {
-                h.ExceptionInfo = ex.Message;
+                h.ExceptionInfo = $"{ex.Message} at {ex.Source}";
             }
 
             bool Contians = false;

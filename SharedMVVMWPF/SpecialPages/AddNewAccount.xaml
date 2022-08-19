@@ -7,5 +7,7 @@
              mc:Ignorable="d" 
              xmlns:c="clr-namespace:MEFL.Controls;assembly=MEFL.Controls"
              d:DesignHeight="450" d:DesignWidth="800">
-    <StackPanel Name="MyStackPanel" VerticalAlignment="Center" Background="{DynamicResource SYTLE_Standard_Background}" HorizontalAlignment="Center" Margin="0,30,0,0"/>
+    <Border BorderBrush="{DynamicResource SYTLE_Standard_BorderBrush}" BorderThickness="1"  VerticalAlignment="Center" HorizontalAlignment="Center">
+        <StackPanel Name="MyStackPanel" Background="{DynamicResource SYTLE_Standard_Background}" />
+    </Border>
 </c:MyPageBase>

@@ -9,6 +9,7 @@
     <Import_RootNamespace>SharedContract</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AssemblyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFL.Arguments\LangID.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFL.Arguments\SettingArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract.Controls\AddAccountItem.cs" />

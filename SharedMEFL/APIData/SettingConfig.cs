@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -96,6 +97,7 @@ namespace MEFL.APIData
             return $"{Guid}:{IsOpen}";
         }
         public string Guid { get; set; }
+
         public bool IsOpen { get; set; }
 
         public static ObservableCollection<AddInConfig> GetAll()
@@ -130,19 +132,19 @@ namespace MEFL.APIData
 
         private static void Ret_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
+            Update(sender as ObservableCollection<AddInConfig>);
+        }
+
+        public static void Update(ObservableCollection<AddInConfig> addInConfigs)
+        {
             List<AddInConfig> NewList = new List<AddInConfig>();
-            foreach (var item in sender as ObservableCollection<AddInConfig>)
+            foreach (var item in addInConfigs)
             {
                 if (!NewList.Contains(item))
                 {
                     NewList.Add(item);
                 }
             }
-            Update(NewList);
-        }
-
-        public static void Update(List<AddInConfig> addInConfigs)
-        {
             var Path = System.IO.Path.Combine(Environment.CurrentDirectory, "AddIns\\Config.json");
             try
             {
@@ -150,7 +152,7 @@ namespace MEFL.APIData
                 {
                     File.Create(Path).Close();
                 }
-                File.WriteAllText(Path, JsonConvert.SerializeObject(addInConfigs));
+                File.WriteAllText(Path, JsonConvert.SerializeObject(NewList));
                 Debugger.Logger($"重写了插件设置,当前文档：{File.ReadAllText(Path)}");
             }
             catch (Exception ex)
