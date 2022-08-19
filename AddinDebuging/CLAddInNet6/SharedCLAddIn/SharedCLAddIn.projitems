@@ -10,12 +10,31 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Export.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFLAccount.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\AddALegacyAccountModelView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\AddALegacyAccount.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>AddALegacyAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\ManageLegacyAccountPage.xaml.cs">
+      <DependentUpon>ManageLegacyAccountPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\MCERPage.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>MCERPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\AddALegacyAccount.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\ManageLegacyAccountPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Pages\MCERPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>

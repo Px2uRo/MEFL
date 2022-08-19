@@ -153,7 +153,7 @@ namespace MEFL.PageModelViews
                 }
             }
             (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.RenameFolderPage() { Tag = "RenameFolder", Visibility = Visibility.Hidden,SelectedPath=PickUpAFolderPageModel.Selected.FullName });
-            MyPageBase From = new MyPageBase();
+            MyPageBase From = null;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
             {
                 if (item.Visibility == Visibility.Visible)

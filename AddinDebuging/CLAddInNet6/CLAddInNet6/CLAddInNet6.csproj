@@ -20,6 +20,10 @@
     <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\CoreLaunching\CoreLaunchingNet6\CoreLaunchingNet6.csproj" />
+  </ItemGroup>
+
   <Import Project="..\SharedCLAddIn\SharedCLAddIn.projitems" Label="Shared" />
 
 </Project>

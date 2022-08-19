@@ -24,7 +24,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\AddALegacyAccountModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\DownloadPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ExtraAddInPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\GenerlSettingGameModelView.cs" />
@@ -60,10 +59,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\AddAccountPage.xaml.cs">
       <DependentUpon>AddAccountPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\AddALegacyAccount.xaml.cs">
-      <SubType>Code</SubType>
-      <DependentUpon>AddALegacyAccount.xaml</DependentUpon>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\AddNewAccount.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>AddNewAccount.xaml</DependentUpon>
@@ -72,7 +67,6 @@
       <SubType>Code</SubType>
       <DependentUpon>GameSettingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\ManageLegacyAccountPage.xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\ManageProcessesPage.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>ManageProcessesPage.xaml</DependentUpon>
@@ -176,16 +170,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)SpecialPages\GameSettingPage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)SpecialPages\ManageLegacyAccountPage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)SpecialPages\AddALegacyAccount.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

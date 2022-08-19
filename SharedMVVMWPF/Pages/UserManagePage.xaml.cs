@@ -21,7 +21,7 @@ namespace MEFL.Pages
             var Content = (this.DataContext as UserManageModelView).SelectedAccount.ManagePage as FrameworkElement;
             Content.DataContext = new GenerlManageAccountModelView((this.DataContext as UserManageModelView).SelectedAccount);
             (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.AddAccountPage() { Tag = "AddNewAccount", Visibility = Visibility.Hidden, Content = Content });
-            MyPageBase From = new MyPageBase();
+            MyPageBase From = null;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
             {
                 if (item.Visibility == Visibility.Visible)

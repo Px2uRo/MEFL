@@ -69,7 +69,7 @@ namespace MEFL.PageModelViews
             MEFL.APIData.APIModel.MyFolders.Add(new MEFLFolderInfo(RenameAFolderModel.SelectedPath, RenameAFolderModel.Name));
             (App.Current.Resources["RMPMV"] as RealMainPageModelView).Invoke("MyFolders");
             (App.Current.Resources["RMPMV"] as RealMainPageModelView).SelectedFolderIndex = (App.Current.Resources["RMPMV"] as RealMainPageModelView).MyFolders.Count - 1;
-            MyPageBase From = new MyPageBase();
+            MyPageBase From = null;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
             {
                 if (item.Visibility == Visibility.Visible)

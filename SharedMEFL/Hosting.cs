@@ -33,9 +33,12 @@ namespace MEFL
 
         [Import(AllowRecomposition = true)]
         public ILuncherGameType LuncherGameType;
+
+        [Import(AllowRecomposition = true)]
+        public IDownloadPage DownloadPages; 
         
         [Import(AllowRecomposition = true)]
-        public IDownloadPage DownloadPages;
+        public IAccount Account;
         public string ExceptionInfo { get; set; }
         public string FileName { get; private set; }
         public string FullPath { get; private set; }
@@ -107,6 +110,10 @@ namespace MEFL
                         {
                             DownloadPages = cc.GetExport<IDownloadPage>().Value;
                         }
+                        if (Permissions.UseAccountAPI)
+                        {
+                            Account = cc.GetExport<IAccount>().Value;
+                        }
                         Debugger.Logger($"加载了一个插件，名称 {FileName}，版本：{Version} Guid {Guid}");
                         ac = null;
                         cc = null;
@@ -132,6 +139,8 @@ namespace MEFL
                         LuncherGameType = null;
 
                         DownloadPages = null;
+
+                        Account = null;
 
                         Debugger.Logger($"卸载了一个插件，名称 {FileName}，版本：{Version} Guid {Guid}");
                     }

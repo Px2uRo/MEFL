@@ -34,7 +34,7 @@ namespace MEFL.PageModelViews
 
         public void Execute(object? parameter)
         {
-            MyPageBase From = new MyPageBase();
+            MyPageBase From = null;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
             {
                 if (item.Visibility == Visibility.Visible)
@@ -71,7 +71,7 @@ namespace MEFL.PageModelViews
             UserManageModel.ModelView.SelectedAccount = GenerlAddAccountModel.Account;
             MEFL.APIData.APIModel.AccountConfigs.Add(GenerlAddAccountModel.Account);
             UserManageModel.ModelView.Invoke("Accounts");
-            MyPageBase From = new MyPageBase();
+            MyPageBase From = null;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
             {
                 if (item.Visibility == Visibility.Visible)

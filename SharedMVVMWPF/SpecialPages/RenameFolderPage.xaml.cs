@@ -43,7 +43,7 @@ namespace MEFL.SpecialPages
                     }
                 }
             (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.PickUpAFolder() { Tag = "PickUP", Visibility = Visibility.Hidden, Currect = this.SelectedPath });
-                MyPageBase From = new MyPageBase();
+                MyPageBase From = null;
                 foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
                 {
                     if (item.Visibility == Visibility.Visible)

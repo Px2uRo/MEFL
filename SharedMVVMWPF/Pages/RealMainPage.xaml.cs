@@ -49,7 +49,7 @@ namespace MEFL.Pages
                 (App.Current.Resources["MainPage"] as Grid).Children.Remove(item);
             }
             (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.GameSettingPage() { Tag = "SettingGamePage", Visibility = Visibility.Hidden, Content = ((sender as FrameworkElement).DataContext as GameInfoBase).SettingsPage, DataContext = new GenerlSettingGameModelView((sender as FrameworkElement).DataContext as GameInfoBase) });
-            MyPageBase From = new MyPageBase();
+            MyPageBase From = null;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
             {
                 if (item.Visibility == Visibility.Visible)
@@ -108,7 +108,7 @@ namespace MEFL.Pages
                         ManageProcessesPageModel.ModelView.RunningGames.Add((DataContext as RealMainPageModelView).ProcessModelView.GetProcess);
                         ManageProcessesPageModel.ModelView.ContentGrid.Children.Add((DataContext as RealMainPageModelView).ProcessModelView.Game.GetManageProcessPage(ManageProcessesPageModel.ModelView.RunningGames[ManageProcessesPageModel.ModelView.RunningGames.Count - 1], APIModel.SettingArgs));
                         ManageProcessesPageModel.ModelView.RunningGames[ManageProcessesPageModel.ModelView.RunningGames.Count - 1].Start();
-                        MyPageBase From = new MyPageBase();
+                        MyPageBase From = null;
                         foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
                         {
                             if (item.Visibility == Visibility.Visible)

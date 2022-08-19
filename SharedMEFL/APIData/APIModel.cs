@@ -24,7 +24,10 @@ namespace MEFL.APIData
 
         public static AccountBase SelectedAccount
         {
-            get { return _SelectedAccount; }
+            get {
+                //todo return null
+                return null;
+            }
             set {
                 if (value == null)
                 {
@@ -132,6 +135,7 @@ namespace MEFL.APIData
         }
         static APIModel()
         {
+            AccountConfigs = new ObservableCollection<AccountBase>();
             SettingConfig = MEFL.APIData.SettingConfig.Load();
             AddInConfigs = MEFL.APIData.AddInConfig.GetAll();
             Hostings = Hosting.LoadAll();
@@ -189,30 +193,6 @@ namespace MEFL.APIData
             }
             #endregion
             #region Singed Up Accounts
-            AccountConfigs = new ObservableCollection<AccountBase>();
-            LegacyAccounts=new ObservableCollection<AccountBase>();
-            try
-            {
-                foreach (var item in JsonConvert.DeserializeObject<JArray>(RegManager.Read("LegacyAccounts")))
-                {
-                    LegacyAccounts.Add(new MEFLLegacyAccount(item["UserName"].ToString(), item["Uuid"].ToString()));
-                }
-            }
-            catch (Exception)
-            {
-                LegacyAccounts = new ObservableCollection<AccountBase>();
-            }
-            foreach (var item in LegacyAccounts)
-            {
-                AccountConfigs.Add(item);
-            }
-            foreach (var item in AccountConfigs)
-            {
-                if (item.Uuid == RegManager.Read("PlayerUuid"))
-                {
-                    SelectedAccount = item;
-                }
-            }
             #endregion
             #region Javas
             Javas = new ObservableCollection<FileInfo>();

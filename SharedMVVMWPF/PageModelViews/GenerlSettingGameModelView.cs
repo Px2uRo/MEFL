@@ -76,7 +76,7 @@ namespace MEFL.PageModelViews
         public void Execute(object? parameter)
         {
             (App.Current.Resources["RMPMV"] as RealMainPageModelView).CurretGame = (GenerlSettingGameModel.Game);
-            MyPageBase From = new MyPageBase();
+            MyPageBase From = null;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
             {
                 if (item.Visibility == Visibility.Visible)
@@ -109,7 +109,7 @@ namespace MEFL.PageModelViews
 
         public void Execute(object? parameter)
         {
-            MyPageBase From = new MyPageBase();
+            MyPageBase From = null;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
             {
                 if (item.Visibility == Visibility.Visible)
@@ -146,7 +146,7 @@ namespace MEFL.PageModelViews
             (App.Current.Resources["RMPMV"] as RealMainPageModelView).GameInfoConfigs.Remove((GenerlSettingGameModel.Game));
             (App.Current.Resources["RMPMV"] as RealMainPageModelView).Invoke("GameInfoConfigs");
             GenerlSettingGameModel.Game.Dispose();
-            MyPageBase From = new MyPageBase();
+            MyPageBase From = null;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
             {
                 if (item.Visibility == Visibility.Visible)

@@ -56,10 +56,6 @@ I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\AddNewAccount.g.cs
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\AddNewAccount.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\AddAccountPage.g.cs
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\AddAccountPage.baml
-I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\AddALegacyAccount.g.cs
-I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\AddALegacyAccount.baml
-I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\ManageLegacyAccountPage.g.cs
-I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\ManageLegacyAccountPage.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\MEFL.Contract.dll
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\MEFL_Content.g.cs
 I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\OctaneEngine.dll

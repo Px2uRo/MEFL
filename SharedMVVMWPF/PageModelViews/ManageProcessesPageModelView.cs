@@ -52,7 +52,7 @@ namespace MEFL.PageModelViews
         }
         public void ReturnToMainPage()
         {
-            MyPageBase From = new MyPageBase();
+            MyPageBase From = null;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
             {
                 if (item.Visibility == Visibility.Visible)

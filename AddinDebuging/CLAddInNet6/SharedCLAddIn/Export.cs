@@ -1,6 +1,8 @@
 ﻿using MEFL.Arguments;
+using MEFL.CLAddIn;
 using MEFL.CLAddIn.Pages;
 using MEFL.Contract;
+using MEFL.Contract.Controls;
 using MEFL.Controls;
 using System;
 using System.Collections.Generic;
@@ -37,7 +39,7 @@ namespace SharedCLAddIn
 
         public bool UseDownloadPageAPI => false;
 
-        public bool UseAccountAPI => false;
+        public bool UseAccountAPI => true;
     }
 
     [Export(typeof(IPages))]
@@ -46,5 +48,29 @@ namespace SharedCLAddIn
         public Dictionary<object, MyPageBase> IconAndPage => new Dictionary<object, MyPageBase>() {
             {"MCER",new MCERPage() }
         };
+    }
+
+    [Export(typeof(IAccount))]
+    public class Account : IAccount
+    {
+        public List<AccountBase> GetSingUpAccounts(SettingArgs args)
+        {
+            return new List<AccountBase>();
+        }
+
+        public List<AddAccountItem> GetSingUpPage(SettingArgs args)
+        {
+            var res = new List<AddAccountItem>();
+            var Legacy = new AddAccountItem() { Width = 400, Height = 60, AddAccountContent = new AddALegacyAccountPage(), FinnalReturn = new MEFLLegacyAccount(String.Empty, Guid.NewGuid().ToString()) };
+            res.Add(Legacy);
+            return res;
+        }
+
+        //private AddAccountItem Legacy = new AddAccountItem() { Width=400,Height=60, AddAccountContent = new AddALegacyAccountPage(),FinnalReturn=new MEFLLegacyAccount(String.Empty,Guid.NewGuid().ToString()) };
+        //todo i18n thx
+        //Legacy.Content= new TextBlock() { Text="离线账户",HorizontalAlignment=HorizontalAlignment.Center,VerticalAlignment=VerticalAlignment.Center,FontSize=30,FontWeight=FontWeight.FromOpenTypeWeight(999)};
+        //Legacy.MouseDown += Item_MouseDown;
+        //MyStackPanel.Children.Add(Legacy);
+
     }
 }

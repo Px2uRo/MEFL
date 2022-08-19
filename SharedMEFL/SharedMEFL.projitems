@@ -15,7 +15,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)FastLoadJson.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FolderInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Hosting.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MEFLAccount.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)..\..\..\Xiong%27s\MEFLCollection\SharedMEFL\GameTypes\MEFLRealseType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RegManager.cs" />
   </ItemGroup>

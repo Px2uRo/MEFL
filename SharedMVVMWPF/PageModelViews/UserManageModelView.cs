@@ -76,7 +76,7 @@ namespace MEFL.PageModelViews
                 }
             }
             (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.AddNewAccount() { Tag = "AddAccountPage", Visibility = Visibility.Hidden});
-            MyPageBase From = new MyPageBase();
+            MyPageBase From = null;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
             {
                 if (item.Visibility == Visibility.Visible)
@@ -115,7 +115,7 @@ namespace MEFL.PageModelViews
             var Content = ((sender as MyItemsCardItem).DataContext as AccountBase).ManagePage as FrameworkElement;
             Content.DataContext = new GenerlManageAccountModelView((sender as MyItemsCardItem).DataContext as AccountBase);
             (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.AddAccountPage() { Tag = "AddNewAccount", Visibility = Visibility.Hidden,Content= Content});
-            MyPageBase From = new MyPageBase();
+            MyPageBase From = null;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
             {
                 if (item.Visibility == Visibility.Visible)

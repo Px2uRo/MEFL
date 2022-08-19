@@ -66,7 +66,7 @@ namespace MEFL.Controls
 
         private void ChangePageButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            MyPageBase From = new MyPageBase();
+            MyPageBase From = null;
             bool TRUE = false;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
             {
