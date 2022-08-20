@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
+using System.Threading;
 
 namespace MEFL
 {
@@ -20,126 +21,145 @@ namespace MEFL
                 Refresh(value);
             } 
         }
+
+        public bool Refreshing;
+        static List<String> Support = new List<string>();
+        static Thread t;
         public void Refresh(string path)
         {
-            _path = path;
-            #region 加载游戏嘛
             Games.Clear();
+            Support.Clear();
+            Favorites = new ObservableCollection<string>();
             Games = new ObservableCollection<GameInfoBase>();
-            _VersionPath = System.IO.Path.Combine(_path, "versions");
-            if (Directory.Exists(_VersionPath) != true)
+            t = new Thread(() =>
             {
-                Directory.CreateDirectory(_VersionPath);
-            }
-            string[] directories = Directory.GetDirectories(_VersionPath);
-            foreach (var item in directories)
-            {
-                var PrtDir = System.IO.Path.GetDirectoryName(item);
-                var SubDirName = item.Replace(PrtDir + "\\", string.Empty);
-                PrtDir = null;
-                var SubJson = System.IO.Path.Combine(item, $"{SubDirName}.json");
-                if (File.Exists(SubJson))
+                _path = path;
+                try
                 {
-                    var jOb = FastLoadJson.Load(SubJson);
-                    if (jOb["type"] == null)
+                    Refreshing = true;
+                    #region 加载游戏嘛
+                    _VersionPath = System.IO.Path.Combine(_path, "versions");
+                    if (Directory.Exists(_VersionPath) != true)
                     {
-                        Games.Add(new Contract.MEFLErrorType("不合法 Json", SubJson));
+                        Directory.CreateDirectory(_VersionPath);
                     }
-                    else
+                    string[] directories = Directory.GetDirectories(_VersionPath);
+                    foreach (var item in directories)
                     {
-                        List<String> Support = new List<string>();
-                            foreach (var Hst in APIModel.Hostings)
+                        var PrtDir = System.IO.Path.GetDirectoryName(item);
+                        var SubDirName = item.Replace(PrtDir + "\\", string.Empty);
+                        PrtDir = null;
+                        var SubJson = System.IO.Path.Combine(item, $"{SubDirName}.json");
+                        if (File.Exists(SubJson))
+                        {
+                            var jOb = FastLoadJson.Load(SubJson);
+                            if (jOb["type"] == null)
                             {
-                                if (Hst.IsOpen)
+                                Games.Add(new Contract.MEFLErrorType("不合法 Json", SubJson));
+                            }
+                            else
+                            {
+                                foreach (var Hst in APIModel.Hostings)
                                 {
-                                try
-                                {
-                                    if (Hst.Permissions != null)
+                                    if (Hst.IsOpen)
                                     {
-                                        if (Hst.Permissions.UseGameManageAPI)
+                                        try
+                                        {
+                                            if (Hst.Permissions != null)
+                                            {
+                                                if (Hst.Permissions.UseGameManageAPI)
+                                                {
+                                                    try
+                                                    {
+                                                        foreach (var type in Hst.LuncherGameType.SupportedType)
+                                                        {
+                                                            Support.Add(type);
+                                                        }
+                                                    }
+                                                    catch (Exception ex)
+                                                    {
+
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            Debugger.Logger($"未知错误 {ex.Message} at {Hst.FileName} at {ex.Message}");
+                                        }
+                                    }
+                                }
+                                if (Support.Contains(jOb["type"].ToString()))
+                                {
+                                    foreach (var Hst in APIModel.Hostings)
+                                    {
+                                        if (Hst.IsOpen)
                                         {
                                             try
                                             {
-                                                foreach (var type in Hst.LuncherGameType.SupportedType)
+                                                if (Hst.Permissions != null)
                                                 {
-                                                    Support.Add(type);
+                                                    if (Hst.Permissions.UseGameManageAPI)
+                                                    {
+                                                        foreach (var type in Hst.LuncherGameType.SupportedType)
+                                                        {
+                                                            Games.Add(Hst.LuncherGameType.Parse(jOb["type"].ToString(), SubJson));
+                                                        }
+                                                    }
                                                 }
                                             }
                                             catch (Exception ex)
                                             {
-
+                                                Games.Add(new Contract.MEFLErrorType($"从{Hst.FileName}中加载失败：{ex.Message}", SubJson));
                                             }
                                         }
                                     }
                                 }
-                                catch (Exception ex)
+                                else
                                 {
-                                    Debugger.Logger($"未知错误 {ex.Message} at {Hst.FileName} at {ex.Message}");
-                                }
+                                    Games.Add(new Contract.MEFLErrorType($"不支持 {jOb["type"].ToString()} 版本", SubJson));
                                 }
                             }
-                        if (Support.Contains(jOb["type"].ToString()))
-                        {
-                            foreach (var Hst in APIModel.Hostings)
-                            {
-                                if (Hst.IsOpen)
-                                {
-                                    try
-                                    {
-                                        if (Hst.Permissions != null)
-                                        {
-                                            if (Hst.Permissions.UseGameManageAPI)
-                                            {
-                                                foreach (var type in Hst.LuncherGameType.SupportedType)
-                                                {
-                                                    Games.Add(Hst.LuncherGameType.Parse(jOb["type"].ToString(), SubJson));
-                                                }
-                                            }
-                                        }
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        Games.Add(new Contract.MEFLErrorType($"从{Hst.FileName}中加载失败：{ex.Message}", SubJson));
-                                    }
-                                }
-                            }
+                            jOb = null;
                         }
                         else
                         {
-                            Games.Add(new Contract.MEFLErrorType($"不支持 {jOb["type"].ToString()} 版本", SubJson));
+                            Games.Add(new Contract.MEFLErrorType("不存在Json", SubJson));
+                        }
+                        SubJson = null;
+                    }
+                    directories = null;
+                    #endregion
+                    #region 设置收藏夹嘛
+                    if (File.Exists(_configPath) != true)
+                    {
+                        File.Create(_configPath).Close();
+                    }
+                    JObject jOb2 = new JObject();
+                    try
+                    {
+                        jOb2 = FastLoadJson.Load(_configPath);
+                        if (jOb2["Favorites"] == null)
+                        {
+                            throw new Exception();
                         }
                     }
-                    jOb = null;
+                    catch (Exception ex)
+                    {
+                        jOb2.Add(new JProperty("Favorites", "[]"));
+                        File.WriteAllText(_configPath, JsonConvert.SerializeObject(jOb2));
+                    }
+                    Favorites = JsonConvert.DeserializeObject<ObservableCollection<String>>(jOb2["Favorites"].ToString());
+                    Refreshing = false;
+                    #endregion
                 }
-                else
+                catch (Exception ex)
                 {
-                    Games.Add(new Contract.MEFLErrorType("不存在Json", SubJson));
+                    Debugger.Logger($"刷新时发现未知错误 {ex.Message} at {ex.Source}");
+                    Refreshing = false;
                 }
-                SubJson = null;
-            }
-            directories = null;
-            #endregion
-            #region 设置收藏夹嘛
-            if (File.Exists(_configPath) != true)
-            {
-                File.Create(_configPath).Close();
-            }
-            JObject jOb2 = new JObject();
-            try
-            {
-                jOb2 = FastLoadJson.Load(_configPath);
-                if(jOb2["Favorites"] == null)
-                {
-                    throw new Exception();
-                }
-            }
-            catch (Exception ex)
-            {
-                jOb2.Add(new JProperty("Favorites", "[]"));
-                File.WriteAllText(_configPath, JsonConvert.SerializeObject(jOb2));
-            }
-            Favorites = JsonConvert.DeserializeObject<ObservableCollection<String>>(jOb2["Favorites"].ToString());
-            #endregion
+            });
+            t.Start();
         }
         JObject jOb2 = new JObject();
         int symbol;

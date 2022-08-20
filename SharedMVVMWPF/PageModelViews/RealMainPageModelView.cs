@@ -109,8 +109,33 @@ namespace MEFL.PageModelViews
 
         private void RefreshFolderInfoCommand_ClickBeihavior()
         {
-            MyFolders[SelectedFolderIndex].Refresh(MyFolders[SelectedFolderIndex].Path);
-            SelectedFolderIndex = SelectedFolderIndex;
+            new Thread(() =>
+            {
+                App.Current.Dispatcher.Invoke(() =>
+                {
+                    MyFolders[SelectedFolderIndex].Refresh(MyFolders[SelectedFolderIndex].Path);
+                    while (MyFolders[SelectedFolderIndex].Refreshing)
+                    {
+                    }
+                    SelectedFolderIndex = SelectedFolderIndex;
+                    try
+                    {
+                        foreach (var item in GameInfoConfigs)
+                        {
+                            if (item.RootFolder == APIModel.SettingConfig.SelectedGame)
+                            {
+                                CurretGame = item;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debugger.Logger(ex.Message);
+                        RegManager.Write("CurretGame", String.Empty);
+                    }
+                    Invoke(nameof(GameInfoConfigs));
+                });
+            }).Start();
         }
     }
 

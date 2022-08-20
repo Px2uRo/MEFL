@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MEFL.PageModelViews;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -178,6 +179,9 @@ namespace MEFL.Controls
                     }
                     #endregion
                 }
+                #region Games
+                (App.Current.Resources["RMPMV"] as RealMainPageModelView).RefreshFolderInfoCommand.Execute(null);
+                #endregion
             }
             catch (Exception ex)
             {

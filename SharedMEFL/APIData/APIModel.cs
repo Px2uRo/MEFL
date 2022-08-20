@@ -174,23 +174,6 @@ namespace MEFL.APIData
                 res.Add(item);
             }
             #endregion
-            #region CurretGame
-            try
-            {
-                foreach (var item in GameInfoConfigs)
-                {
-                    if (item.RootFolder == SettingConfig.SelectedGame)
-                    {
-                        CurretGame = item;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Debugger.Logger(ex.Message);
-                RegManager.Write("CurretGame", String.Empty);
-            }
-            #endregion
             #region Singed Up Accounts
             #endregion
             #region Javas

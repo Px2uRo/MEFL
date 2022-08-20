@@ -1,6 +1,23 @@
-﻿[12:59:06][MEFL]程序启动了，参数
-[12:59:13][MEFL]加载了一个插件，名称 CLAddIn.dll，版本："0.0.0.0" Guid b2efc1af-5dd8-493b-b109-4d4435c9f9ad
-[12:59:13][MEFL]重写了插件设置,当前文档：[{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"698bb71d-568e-41e4-ad36-2bfd592fe01b","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"698bb71d-568e-41e4-ad36-2bfd592fe01b","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"847b35fb-9dbd-4be8-a5eb-04b6e6f19869","IsOpen":true},{"Guid":"3131895d-143f-4e99-a56c-dd7265461821","IsOpen":true},{"Guid":"70cb7482-cd8b-4628-9cff-b54353976805","IsOpen":true},{"Guid":"f83f8fdf-8047-436a-b337-34952c0ad646","IsOpen":true},{"Guid":"b2efc1af-5dd8-493b-b109-4d4435c9f9ad","IsOpen":true}]
-[12:59:34][MEFL]写入了注册表，键：PlayerUuid，值：f1d04548-d83a-45ea-91df-41e48928a3c8
-[12:59:45][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[13:04:13][MEFL]程序退出了
+﻿[19:16:29][MEFL]程序启动了，参数
+[19:16:31][MEFL]刷新时发现未知错误 Value cannot be null. (Parameter 'path1') at System.Private.CoreLib
+[19:16:31][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[19:16:31][MEFL]刷新时发现未知错误 Value cannot be null. (Parameter 'path1') at System.Private.CoreLib
+[19:16:31][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[19:16:31][MEFL]刷新时发现未知错误 Value cannot be null. (Parameter 'path1') at System.Private.CoreLib
+[19:16:32][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[19:16:32][MEFL]刷新时发现未知错误 Value cannot be null. (Parameter 'path1') at System.Private.CoreLib
+[19:16:32][MEFL]刷新时发现未知错误 Value cannot be null. (Parameter 'path1') at System.Private.CoreLib
+[19:16:32][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[19:16:32][MEFL]刷新时发现未知错误 Value cannot be null. (Parameter 'path1') at System.Private.CoreLib
+[19:16:32][MEFL]刷新时发现未知错误 Value cannot be null. (Parameter 'path1') at System.Private.CoreLib
+[19:16:32][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[19:16:32][MEFL]刷新时发现未知错误 Value cannot be null. (Parameter 'path1') at System.Private.CoreLib
+[19:16:33][MEFL]刷新时发现未知错误 Value cannot be null. (Parameter 'path1') at System.Private.CoreLib
+[19:16:33][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[19:16:33][MEFL]刷新时发现未知错误 Value cannot be null. (Parameter 'path1') at System.Private.CoreLib
+[19:16:33][MEFL]刷新时发现未知错误 Value cannot be null. (Parameter 'path1') at System.Private.CoreLib
+[19:16:33][MEFL]刷新时发现未知错误 Value cannot be null. (Parameter 'path1') at System.Private.CoreLib
+[19:16:35][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[19:16:35][MEFL]刷新时发现未知错误 Value cannot be null. (Parameter 'path1') at System.Private.CoreLib
+[19:16:36][MEFL]刷新时发现未知错误 Value cannot be null. (Parameter 'path1') at System.Private.CoreLib
+[19:16:37][MEFL]程序退出了
