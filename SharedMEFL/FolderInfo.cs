@@ -92,7 +92,7 @@ namespace MEFL
                                             {
                                                 foreach (var type in Hst.LuncherGameType.SupportedType)
                                                 {
-                                                    Games.Add(Hst.LuncherGameType.Parse(SubJson));
+                                                    Games.Add(Hst.LuncherGameType.Parse(jOb["type"].ToString(), SubJson));
                                                 }
                                             }
                                         }

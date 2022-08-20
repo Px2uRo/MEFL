@@ -271,12 +271,16 @@ namespace MEFL.Pages
                         Statu = "登录用户";
                         try
                         {
+                            if(APIModel.SelectedAccount == null)
+                            {
+                                throw new Exception("未登陆账户");
+                            }
                             APIModel.SelectedAccount.LaunchGameAction(APIModel.SettingArgs);
                             Progress = 10;
                         }
                         catch (Exception ex)
                         {
-                            ErrorInfo = $"无法登录用户{ex.Message}，错误发生在{ex.Source}";
+                            ErrorInfo = $"无法登录用户 {ex.Message}，错误发生在 {ex.Source}";
                             Failed = true;
                             return;
                         }

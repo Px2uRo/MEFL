@@ -4,5 +4,5 @@ public interface ILuncherGameType
 {
 	string[] SupportedType { get; set; }
 
-	GameInfoBase Parse(string JsonPath);
+	GameInfoBase Parse(string type,string JsonPath);
 }

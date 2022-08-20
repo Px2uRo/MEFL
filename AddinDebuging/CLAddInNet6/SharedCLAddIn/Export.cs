@@ -8,8 +8,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.Text;
+using System.Windows;
+using System.Windows.Controls;
 
-namespace SharedCLAddIn
+namespace MEFL.CLAddIn.Export
 {
     [Export(typeof(IBaseInfo))]
     public class BaseInfo : IBaseInfo
@@ -35,11 +37,27 @@ namespace SharedCLAddIn
 
         public bool UsePagesAPI => true;
 
-        public bool UseGameManageAPI => false;
+        public bool UseGameManageAPI => true;
 
         public bool UseDownloadPageAPI => false;
 
         public bool UseAccountAPI => true;
+    }
+
+    [Export(typeof(ILuncherGameType))]
+
+    public class Games : ILuncherGameType
+    {
+        public string[] SupportedType { get => new[] { "release" } ;set { } }
+
+        public GameInfoBase Parse(string type ,string JsonPath)
+        {
+            if (type == "release")
+            {
+                return new GameTypes.MEFLRealseType(JsonPath);
+            }
+            else return null;
+        }
     }
 
     [Export(typeof(IPages))]
@@ -61,7 +79,9 @@ namespace SharedCLAddIn
         public List<AddAccountItem> GetSingUpPage(SettingArgs args)
         {
             var res = new List<AddAccountItem>();
-            var Legacy = new AddAccountItem() { Width = 400, Height = 60, AddAccountContent = new AddALegacyAccountPage(), FinnalReturn = new MEFLLegacyAccount(String.Empty, Guid.NewGuid().ToString()) };
+            var Legacy = new AddAccountItem() { Width = 400, Height = 60, AddAccountContent = new AddALegacyAccountPage(), 
+                Content = new TextBlock() { Text = "离线账户", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, FontSize = 30, FontWeight = FontWeight.FromOpenTypeWeight(999) }, 
+                FinnalReturn = new MEFLLegacyAccount(String.Empty, Guid.NewGuid().ToString()) };
             res.Add(Legacy);
             return res;
         }

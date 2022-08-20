@@ -25,8 +25,7 @@ namespace MEFL.APIData
         public static AccountBase SelectedAccount
         {
             get {
-                //todo return null
-                return null;
+                return _SelectedAccount;
             }
             set {
                 if (value == null)
@@ -143,7 +142,7 @@ namespace MEFL.APIData
             GameInfoConfigs = new ObservableCollection<GameInfoBase>();
             #region Reg
             #region RegFolders
-           MyFolders = new ObservableCollection<MEFLFolderInfo>();
+            MyFolders = new ObservableCollection<MEFLFolderInfo>();
             try
             {
                 foreach (var item in Newtonsoft.Json.JsonConvert.DeserializeObject<ObservableCollection<MEFLFolderInfo>>(RegManager.Read("Folders")))
