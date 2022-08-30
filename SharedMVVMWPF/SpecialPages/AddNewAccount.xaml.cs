@@ -44,7 +44,6 @@ namespace MEFL.SpecialPages
                                 item.MinHeight = 60; 
                                 item.Width = 400;
                                 item.Height = 60;
-                                item.FinnalReturn.AddInGuid= hst.Guid;
                                 item.AddAccountContent.DataContext = new GenerlAddAccountModelView(item.FinnalReturn);
                                 item.MouseDown += Item_MouseDown;
                                 MyStackPanel.Children.Add(item);

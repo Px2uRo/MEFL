@@ -21,7 +21,7 @@ namespace MEFL
                 Refresh(value);
             } 
         }
-
+        [JsonIgnore]
         public bool Refreshing;
         static List<String> Support = new List<string>();
         static Thread t;
@@ -152,6 +152,7 @@ namespace MEFL
                     Favorites = JsonConvert.DeserializeObject<ObservableCollection<String>>(jOb2["Favorites"].ToString());
                     Refreshing = false;
                     #endregion
+                    Refreshing = false;
                 }
                 catch (Exception ex)
                 {

@@ -48,12 +48,8 @@ namespace MEFL.APIData
         {
             get { return _SelectedFolderIndex; }
             set
-            {
-                if (0<=value&&value< MyFolders.Count+1)
-                {
-                    _SelectedFolderIndex = value;
-                    RegManager.Write("SelectedFolderIndex", value.ToString());
-                }
+            {       _SelectedFolderIndex = value;
+                    RegManager.Write("SelectedFolderIndex", value.ToString(),true);
             }
         }
         public static Arguments.SettingArgs SettingArgs { get; set; }
@@ -134,6 +130,47 @@ namespace MEFL.APIData
         }
         static APIModel()
         {
+            #region RegFolders
+            try
+            {
+                var regKey = Newtonsoft.Json.JsonConvert.DeserializeObject<ObservableCollection<MEFLFolderInfo>>(RegManager.Read("Folders"));
+                if (Directory.Exists(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft")) == false)
+                {
+                    Directory.CreateDirectory(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"));
+                }
+                if (regKey.Count == 0)
+                {
+                    regKey.Add(new MEFLFolderInfo(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"), "本地文件夹"));
+                }
+                else if (regKey[0].Path != System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"))
+                {
+                    regKey.Add(new MEFLFolderInfo(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"), "本地文件夹"));
+                    SelectedFolderIndex = 0;
+                }
+                RegManager.Write("Folders", JsonConvert.SerializeObject(regKey), true);
+                MyFolders = regKey;
+                try
+                {
+                    SelectedFolderIndex = Convert.ToInt32(RegManager.Read("SelectedFolderIndex"));
+                    GameInfoConfigs = MyFolders[SelectedFolderIndex].Games;
+                }
+                catch (Exception ex)
+                {
+                    MyFolders = new ObservableCollection<MEFLFolderInfo>();
+                    MyFolders.Add(new MEFLFolderInfo(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"), "本地文件夹"));
+                    SelectedFolderIndex = 0;
+                    GameInfoConfigs = MyFolders[SelectedFolderIndex].Games;
+                }
+            }
+            catch (Exception ex)
+            {
+                MyFolders = new ObservableCollection<MEFLFolderInfo>();
+                MyFolders.Add(new MEFLFolderInfo(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"), "本地文件夹"));
+                GameInfoConfigs = MyFolders[SelectedFolderIndex].Games;
+                Debugger.Logger(ex.Message);
+                RegManager.Write("Folders", JsonConvert.SerializeObject(new ObservableCollection<MEFLFolderInfo>() { new MEFLFolderInfo(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"), "本地文件夹") }), true);
+            }
+            #endregion
             AccountConfigs = new ObservableCollection<AccountBase>();
             SettingConfig = MEFL.APIData.SettingConfig.Load();
             AddInConfigs = MEFL.APIData.AddInConfig.GetAll();
@@ -141,21 +178,6 @@ namespace MEFL.APIData
             SettingArgs = new Arguments.SettingArgs();
             GameInfoConfigs = new ObservableCollection<GameInfoBase>();
             #region Reg
-            #region RegFolders
-            MyFolders = new ObservableCollection<MEFLFolderInfo>();
-            try
-            {
-                foreach (var item in Newtonsoft.Json.JsonConvert.DeserializeObject<ObservableCollection<MEFLFolderInfo>>(RegManager.Read("Folders")))
-                {
-                    MyFolders.Add(item);
-                }
-            }
-            catch (Exception ex)
-            {
-                Debugger.Logger(ex.Message);
-                RegManager.Write("Folders", "[]",true);
-            }
-            #endregion
             #region RegSelectedFolderIndex
             try
             {

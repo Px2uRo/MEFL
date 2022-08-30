@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
-      "MEFL.Contract/0.0.4.6": {
+      "MEFL.Contract/0.0.4.12": {
         "type": "package",
         "dependencies": {
           "MEFL.Controls": "0.0.4.18",
@@ -18,7 +18,7 @@
           "Microsoft.WindowsDesktop.App.WPF"
         ]
       },
-      "MEFL.Controls/0.0.5.8": {
+      "MEFL.Controls/0.0.6": {
         "type": "package",
         "compile": {
           "lib/net6.0-windows7.0/MEFL.Controls.dll": {}
@@ -51,10 +51,14 @@
       "Newtonsoft.Json/13.0.1": {
         "type": "package",
         "compile": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {
+            "related": ".xml"
+          }
         }
       },
       "OctaneEngine/2.1.0": {
@@ -116,16 +120,22 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/_._": {
+            "related": ".xml"
+          }
         }
       },
       "System.ComponentModel.Composition/6.0.0": {
         "type": "package",
         "compile": {
-          "lib/net6.0/System.ComponentModel.Composition.dll": {}
+          "lib/net6.0/System.ComponentModel.Composition.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
-          "lib/net6.0/System.ComponentModel.Composition.dll": {}
+          "lib/net6.0/System.ComponentModel.Composition.dll": {
+            "related": ".xml"
+          }
         },
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
@@ -139,7 +149,9 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/_._": {
+            "related": ".xml"
+          }
         }
       },
       "System.Diagnostics.Tracing/4.3.0": {
@@ -150,7 +162,9 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.5/_._": {}
+          "ref/netstandard1.5/_._": {
+            "related": ".xml"
+          }
         }
       },
       "System.Globalization/4.3.0": {
@@ -161,7 +175,9 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/_._": {
+            "related": ".xml"
+          }
         }
       },
       "System.IO/4.3.0": {
@@ -174,7 +190,9 @@
           "System.Threading.Tasks": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.5/System.IO.dll": {}
+          "ref/netstandard1.5/System.IO.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.IO.Compression/4.3.0": {
@@ -197,7 +215,9 @@
           "runtime.native.System.IO.Compression": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.3/System.IO.Compression.dll": {}
+          "ref/netstandard1.3/System.IO.Compression.dll": {
+            "related": ".xml"
+          }
         },
         "runtimeTargets": {
           "runtimes/unix/lib/netstandard1.3/System.IO.Compression.dll": {
@@ -224,7 +244,9 @@
           "System.Text.Encoding": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.3/System.IO.Compression.ZipFile.dll": {}
+          "ref/netstandard1.3/System.IO.Compression.ZipFile.dll": {
+            "related": ".xml"
+          }
         },
         "runtime": {
           "lib/netstandard1.3/System.IO.Compression.ZipFile.dll": {}
@@ -243,7 +265,9 @@
           "System.Threading.Tasks": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/_._": {
+            "related": ".xml"
+          }
         }
       },
       "System.IO.FileSystem.Primitives/4.3.0": {
@@ -252,7 +276,9 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/_._": {
+            "related": ".xml"
+          }
         },
         "runtime": {
           "lib/netstandard1.3/System.IO.FileSystem.Primitives.dll": {}
@@ -268,7 +294,9 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.5/_._": {}
+          "ref/netstandard1.5/_._": {
+            "related": ".xml"
+          }
         }
       },
       "System.Reflection.Primitives/4.3.0": {
@@ -279,7 +307,9 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.0/_._": {}
+          "ref/netstandard1.0/_._": {
+            "related": ".xml"
+          }
         }
       },
       "System.Resources.ResourceManager/4.3.0": {
@@ -292,7 +322,9 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.0/_._": {}
+          "ref/netstandard1.0/_._": {
+            "related": ".xml"
+          }
         }
       },
       "System.Runtime/4.3.0": {
@@ -302,7 +334,9 @@
           "Microsoft.NETCore.Targets": "1.1.0"
         },
         "compile": {
-          "ref/netstandard1.5/System.Runtime.dll": {}
+          "ref/netstandard1.5/System.Runtime.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Runtime.Extensions/4.3.0": {
@@ -313,7 +347,9 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.5/_._": {}
+          "ref/netstandard1.5/_._": {
+            "related": ".xml"
+          }
         }
       },
       "System.Runtime.Handles/4.3.0": {
@@ -324,7 +360,9 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/_._": {
+            "related": ".xml"
+          }
         }
       },
       "System.Runtime.InteropServices/4.3.0": {
@@ -349,7 +387,9 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.3/System.Text.Encoding.dll": {}
+          "ref/netstandard1.3/System.Text.Encoding.dll": {
+            "related": ".xml"
+          }
         }
       },
       "System.Threading/4.3.0": {
@@ -359,7 +399,9 @@
           "System.Threading.Tasks": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.3/_._": {}
+          "ref/netstandard1.3/_._": {
+            "related": ".xml"
+          }
         },
         "runtime": {
           "lib/netstandard1.3/System.Threading.dll": {}
@@ -373,7 +415,9 @@
           "System.Runtime": "4.3.0"
         },
         "compile": {
-          "ref/netstandard1.3/System.Threading.Tasks.dll": {}
+          "ref/netstandard1.3/System.Threading.Tasks.dll": {
+            "related": ".xml"
+          }
         }
       },
       "CoreLaunchingNet6/0.0.0": {
@@ -393,26 +437,27 @@
     }
   },
   "libraries": {
-    "MEFL.Contract/0.0.4.6": {
-      "sha512": "uNhDC/KyNVgdbTIXRtPSHqvA0hWXfKgNuq26C6fQAMRGBu0aqb/cNprlSdgIZpOW//llITU5RY2VZYAZwNv8yA==",
+    "MEFL.Contract/0.0.4.12": {
+      "sha512": "b1UdMH15qXq64gqLpufRehnZh5tFCBHpa0Jrli3fMWIeORuHLG5kMm+bGAH8cM8gO2IoRAP8gbDXb10gtAdrmg==",
       "type": "package",
-      "path": "mefl.contract/0.0.4.6",
+      "path": "mefl.contract/0.0.4.12",
       "files": [
         ".nupkg.metadata",
         "MEFL.Contract_NuGet_Logo.png",
         "lib/net6.0-windows7.0/MEFL.Contract.dll",
-        "mefl.contract.0.0.4.6.nupkg.sha512",
+        "mefl.contract.0.0.4.12.nupkg.sha512",
         "mefl.contract.nuspec"
       ]
     },
-    "MEFL.Controls/0.0.5.8": {
-      "sha512": "o2E1jRvEbdnzyU0y4e+BoaEqELs9AH6R2ubK/JJKVJjJKJ1ckbesvCKgGEuoHBMvR39tGCuhIyGeTcv8F1YdsA==",
+    "MEFL.Controls/0.0.6": {
+      "sha512": "CwHCKIoqMd86K+tByvFwrFaA07F2MfuIU/HpZVPAzQOujjd70UcGcNgFwsqZKpu+indJnBCtl0Bj9xdId4L6tA==",
       "type": "package",
-      "path": "mefl.controls/0.0.5.8",
+      "path": "mefl.controls/0.0.6",
       "files": [
         ".nupkg.metadata",
+        "MEFL.Controls_NuGet_Logo.png",
         "lib/net6.0-windows7.0/MEFL.Controls.dll",
-        "mefl.controls.0.0.5.8.nupkg.sha512",
+        "mefl.controls.0.0.6.nupkg.sha512",
         "mefl.controls.nuspec"
       ]
     },
@@ -1830,8 +1875,8 @@
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
       "CoreLaunchingNet6 >= 0.0.0",
-      "MEFL.Contract >= 0.0.4.6",
-      "MEFL.Controls >= 0.0.5.8",
+      "MEFL.Contract >= 0.0.4.12",
+      "MEFL.Controls >= 0.0.6",
       "Newtonsoft.Json >= 13.0.1",
       "OctaneEngine >= 2.1.0",
       "System.ComponentModel.Composition >= 6.0.0"
@@ -1859,7 +1904,7 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net6.0-windows7.0"
+        "net6.0-windows"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -1890,11 +1935,11 @@
         "dependencies": {
           "MEFL.Contract": {
             "target": "Package",
-            "version": "[0.0.4.6, )"
+            "version": "[0.0.4.12, )"
           },
           "MEFL.Controls": {
             "target": "Package",
-            "version": "[0.0.5.8, )"
+            "version": "[0.0.6, )"
           },
           "Newtonsoft.Json": {
             "target": "Package",
@@ -1915,7 +1960,8 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -1927,7 +1973,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

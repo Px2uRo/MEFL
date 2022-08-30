@@ -1,1 +1,9 @@
-﻿[19:14:06][MEFL]程序启动了，参数
+﻿[23:48:54][MEFL]程序启动了，参数
+[23:48:55][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[23:48:59][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[23:49:03][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[23:49:06][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[23:49:08][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[23:49:10][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[23:49:13][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[23:49:18][MEFL]程序退出了

@@ -40,10 +40,24 @@ namespace MEFL.PageModelViews
             }
         }
 
+        public Visibility IsRefreshing { get; set; }
+        public Visibility IsNotRefreshing { get {
+                if (IsRefreshing == Visibility.Visible)
+                {
+                    return Visibility.Hidden;
+                }
+                else
+                {
+                    return Visibility.Visible;
+                }
+            } }
+
         public ObservableCollection<Contract.GameInfoBase> GameInfoConfigs
         {
             get
             {
+                Invoke(nameof(IsRefreshing));
+                Invoke(nameof(IsNotRefreshing));
                 return APIModel.GameInfoConfigs;
             }
             set
@@ -57,22 +71,10 @@ namespace MEFL.PageModelViews
         {
             get
             {
-                ObservableCollection<MEFLFolderInfo> res = new ObservableCollection<MEFLFolderInfo>() { { new MEFLFolderInfo(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"), "本地文件夹") } };
-                foreach (var item in APIModel.MyFolders)
-                {
-                    res.Add(item);
-                }
-                return res;
+                return APIModel.MyFolders;
             }
             set
             {
-                for (int i = 0; i < value.Count; i++)
-                {
-                    if (value[i].Path == System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"))
-                    {
-                        value.RemoveAt(i);
-                    }
-                }
                 APIModel.MyFolders = value;
                 Invoke("MyFolders");
             }
@@ -98,40 +100,79 @@ namespace MEFL.PageModelViews
         public ICommand ChangeAccountCommand { get => RealMainPageModel.ChangeAccountCommand; }
         public ICommand AddFolderInfoCommand { get=> RealMainPageModel.AddFolderInfoCommand; set { RealMainPageModel.AddFolderInfoCommand = value; } }
 
-        public RefreshFolderInfoCommand RefreshFolderInfoCommand { get; set; }
+        public ICommand RefreshFolderInfoCommand { get; set; }
 
         public RealMainPageModelView()
         {
             RefreshFolderInfoCommand = new RefreshFolderInfoCommand();
-            RefreshFolderInfoCommand.ClickBeihavior += RefreshFolderInfoCommand_ClickBeihavior;
             GameInfoConfigs = MyFolders[SelectedFolderIndex].Games;
+            RefreshFolderInfoCommand_ClickBeihavior(null);
         }
 
-        private void RefreshFolderInfoCommand_ClickBeihavior()
+        public void RefreshFolderInfoCommand_ClickBeihavior(string parameter)
         {
             new Thread(() =>
             {
                 App.Current.Dispatcher.Invoke(() =>
                 {
-                    MyFolders[SelectedFolderIndex].Refresh(MyFolders[SelectedFolderIndex].Path);
-                    while (MyFolders[SelectedFolderIndex].Refreshing)
-                    {
-                    }
-                    SelectedFolderIndex = SelectedFolderIndex;
-                    try
-                    {
-                        foreach (var item in GameInfoConfigs)
+                    if (MyFolders[SelectedFolderIndex].Refreshing != true){
+                        MyFolders[SelectedFolderIndex].Refresh(MyFolders[SelectedFolderIndex].Path);
+                        IsRefreshing = Visibility.Visible;
+                        Invoke(nameof(IsRefreshing));
+                        Invoke(nameof(IsNotRefreshing));
+                        while (MyFolders[SelectedFolderIndex].Refreshing)
                         {
-                            if (item.RootFolder == APIModel.SettingConfig.SelectedGame)
+                        }
+                        SelectedFolderIndex = SelectedFolderIndex;
+                        Invoke(nameof(IsRefreshing));
+                        Invoke(nameof(IsNotRefreshing));
+                        IsRefreshing = Visibility.Hidden;
+                        try
+                        {
+                            foreach (var item in GameInfoConfigs)
                             {
-                                CurretGame = item;
+                                if (item.RootFolder == APIModel.SettingConfig.SelectedGame)
+                                {
+                                    CurretGame = item;
+                                }
                             }
                         }
+                        catch (Exception ex)
+                        {
+                            Debugger.Logger(ex.Message);
+                            RegManager.Write("CurretGame", String.Empty);
+                        }
                     }
-                    catch (Exception ex)
+                    else if(parameter == "Force")
                     {
-                        Debugger.Logger(ex.Message);
-                        RegManager.Write("CurretGame", String.Empty);
+                        MyFolders[SelectedFolderIndex].Games = new ObservableCollection<GameInfoBase>();
+                        MyFolders[SelectedFolderIndex].Refreshing = false;
+                        MyFolders[SelectedFolderIndex].Refresh(MyFolders[SelectedFolderIndex].Path);
+                        IsRefreshing = Visibility.Visible;
+                        Invoke(nameof(IsRefreshing));
+                        Invoke(nameof(IsNotRefreshing));
+                        while (MyFolders[SelectedFolderIndex].Refreshing)
+                        {
+                        }
+                        SelectedFolderIndex = SelectedFolderIndex;
+                        Invoke(nameof(IsRefreshing));
+                        Invoke(nameof(IsNotRefreshing));
+                        IsRefreshing = Visibility.Hidden;
+                        try
+                        {
+                            foreach (var item in GameInfoConfigs)
+                            {
+                                if (item.RootFolder == APIModel.SettingConfig.SelectedGame)
+                                {
+                                    CurretGame = item;
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Debugger.Logger(ex.Message);
+                            RegManager.Write("CurretGame", String.Empty);
+                        }
                     }
                     Invoke(nameof(GameInfoConfigs));
                 });
@@ -150,10 +191,8 @@ namespace MEFL.PageModelViews
 
         public void Execute(object? parameter)
         {
-            ClickBeihavior.Invoke();
+            (App.Current.Resources["RMPMV"] as RealMainPageModelView).RefreshFolderInfoCommand_ClickBeihavior(parameter as String);
         }
-        public delegate void clickBehavior();
-        public event clickBehavior ClickBeihavior;
     }
 
     public static class RealMainPageModel
@@ -205,6 +244,7 @@ namespace MEFL.PageModelViews
 
         public void Execute(object? parameter)
         {
+            
             //Todo 注册表嘛！i18N嘛！
             string RegKey = "根目录";
 

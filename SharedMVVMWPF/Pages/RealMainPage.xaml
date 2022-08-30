@@ -56,7 +56,7 @@
                         Command="{Binding ChangeAccountCommand}"/>
             <StackPanel Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid Width="80" Height="80">
-                    <c:MyButton Click="LaunchGame" Width="80" Height="80" Name="LaunchGameBox">
+                    <c:MyButton Click="LaunchGame" Width="80" Height="80" Name="LaunchGameBox" Visibility="{Binding IsNotRefreshing}">
                         <c:MyButton.Content>
                             <StackPanel>
                                 <Image Source="{Binding CurretGame.IconSource}" Width="40" Height="40"/>
@@ -90,6 +90,17 @@
                                     </Rectangle>
                                 </Grid>
                                 <TextBlock Text="取消" FontSize="8" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </c:MyButton.Content>
+                    </c:MyButton>
+                    <c:MyButton Width="80" Height="80" Visibility="{Binding IsRefreshing}">
+                        <c:MyButton.Content>
+                            <StackPanel>
+                                <Grid>
+                                    <Ellipse Width="50" Height="50" Fill="Black"/>
+                                    <Ellipse Width="30" Height="30" Fill="White"/>
+                                </Grid>
+                                <TextBlock Text="刷新中" FontSize="8" HorizontalAlignment="Center"/>
                             </StackPanel>
                         </c:MyButton.Content>
                     </c:MyButton>

@@ -423,4 +423,15 @@
             </Setter.Value>
         </Setter>
     </Style>
+    <Style TargetType="{x:Type local:MyLoadingAnimation}">
+        <Style.Setters>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type local:MyLoadingAnimation}">
+                        <Rectangle Fill="{TemplateBinding Color}" Name="PART_Rectangle"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
 </ResourceDictionary>

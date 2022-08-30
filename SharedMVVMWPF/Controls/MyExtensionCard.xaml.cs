@@ -180,7 +180,7 @@ namespace MEFL.Controls
                     #endregion
                 }
                 #region Games
-                (App.Current.Resources["RMPMV"] as RealMainPageModelView).RefreshFolderInfoCommand.Execute(null);
+                (App.Current.Resources["RMPMV"] as RealMainPageModelView).RefreshFolderInfoCommand.Execute("Force");
                 #endregion
             }
             catch (Exception ex)

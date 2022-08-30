@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using System.Windows;
 using MEFL.Arguments;
 
@@ -8,9 +9,9 @@ public abstract class AccountBase : IDisposable
 {
 	public bool Selected { get; set; }
 
-	public string AddInGuid { get; set; }
+	public string AddInGuid => Assembly.GetAssembly(this.GetType()).ManifestModule.ModuleVersionId.ToString();
 
-	public abstract FrameworkElement ProfileAvator { get; set; }
+    public abstract FrameworkElement ProfileAvator { get; set; }
 
 	public abstract string UserName { get; set; }
 

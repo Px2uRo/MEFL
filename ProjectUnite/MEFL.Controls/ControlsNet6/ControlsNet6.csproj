@@ -9,7 +9,8 @@
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     <BaseOutputPath>D:\MyNupkgs\MEFL.Controls</BaseOutputPath>
     <FileVersion></FileVersion>
-    <Version>0.0.5.8</Version>
+    <Version>0.0.6</Version>
+    <PackageIcon>MEFL.Controls_NuGet_Logo.png</PackageIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -21,5 +22,12 @@
   </PropertyGroup>
 
   <Import Project="..\SharedControls\SharedControls.projitems" Label="Shared" />
+
+  <ItemGroup>
+    <None Include="C:\Users\Lenovo\Desktop\MEFL.Controls_NuGet_Logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>

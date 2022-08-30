@@ -5,13 +5,17 @@
       "HandyControl/3.3.0": {
         "type": "package",
         "compile": {
-          "lib/net5.0/HandyControl.dll": {}
+          "lib/net5.0/HandyControl.dll": {
+            "related": ".deps.json;.xml"
+          }
         },
         "runtime": {
-          "lib/net5.0/HandyControl.dll": {}
+          "lib/net5.0/HandyControl.dll": {
+            "related": ".deps.json;.xml"
+          }
         }
       },
-      "MEFL.Controls/0.0.5.8": {
+      "MEFL.Controls/0.0.6": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "compile": {
@@ -74,7 +78,7 @@
         "tools/VisualStudioToolsManifest.xml"
       ]
     },
-    "MEFL.Controls/0.0.5.8": {
+    "MEFL.Controls/0.0.6": {
       "type": "project",
       "path": "../ControlsNet6/ControlsNet6.csproj",
       "msbuildProject": "../ControlsNet6/ControlsNet6.csproj"
@@ -83,7 +87,7 @@
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
       "HandyControl >= 3.3.0",
-      "MEFL.Controls >= 0.0.5.8"
+      "MEFL.Controls >= 0.0.6"
     ]
   },
   "packageFolders": {
@@ -108,7 +112,7 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net6.0-windows7.0"
+        "net6.0-windows"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -148,7 +152,8 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -160,7 +165,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
       }
     }
   }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
 using MEFL.Arguments;
@@ -10,9 +11,9 @@ namespace MEFL.Contract;
 
 public abstract class GameInfoBase : IDisposable
 {
-	public string AssemblyGuid { get; set; }
+	public string AssemblyGuid => Assembly.GetAssembly(this.GetType()).ManifestModule.ModuleVersionId.ToString();
 
-	public abstract List<string> ItemsNeedsToExtract { get; }
+    public abstract List<string> ItemsNeedsToExtract { get; }
 
 	public abstract List<LauncherWebFileInfo> FileNeedsToDownload { get; set; }
 

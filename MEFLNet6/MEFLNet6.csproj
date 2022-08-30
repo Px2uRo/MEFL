@@ -18,8 +18,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MEFL.Contract" Version="0.0.4.6" />
-    <PackageReference Include="MEFL.Controls" Version="0.0.5.8" />
+    <PackageReference Include="MEFL.Contract" Version="0.0.4.12" />
+    <PackageReference Include="MEFL.Controls" Version="0.0.6" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="OctaneEngine" Version="2.1.0" />
     <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />

@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net6.0-windows</TargetFramework>
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
-		<Version>0.0.4.6</Version>
+		<Version>0.0.4.12</Version>
 		<PackageIcon>MEFL.Contract_NuGet_Logo.png</PackageIcon>
 	</PropertyGroup>
 

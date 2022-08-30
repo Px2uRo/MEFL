@@ -219,7 +219,7 @@ namespace MEFL.PageModelViews
                 {
                     foreach (var item in ass.CustomAttributes)
                     {
-                        if (item.AttributeType.ToString().Contains("AssemblyFileVersionAttribute"))
+                        if (item.AttributeType==typeof(AssemblyFileVersionAttribute))
                         {
                             ContractVersion = item.ConstructorArguments[0].Value.ToString();
                             break;
