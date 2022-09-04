@@ -24,6 +24,16 @@ namespace MEFL.CLAddIn.Pages
         public MCERPage()
         {
             InitializeComponent();
+            Checked.IsChecked = true;
+        }
+
+        private void Load(object sender, RoutedEventArgs e)
+        {
+            foreach (FrameworkElement item in (this.Content as Panel).Children)
+            {
+                item.Visibility = Visibility.Hidden;
+            }
+            FindControl.FromTag((sender as FrameworkElement).Tag,this.Content as Panel)[0].Visibility=Visibility.Visible;
         }
     }
 }

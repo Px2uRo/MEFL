@@ -152,6 +152,7 @@ namespace MEFL.Controls
                             Page.Tag = $"{Hosting.Guid}-Pages-{i}";
                             Page.Visibility = System.Windows.Visibility.Hidden;
                             (App.Current.Resources["MainPage"] as Grid).Children.Add(Page);
+                            Hosting.Pages.Added(i,APIData.APIModel.SettingArgs);
                             Page = null;
                             i++;
                         }
@@ -169,11 +170,14 @@ namespace MEFL.Controls
                             i--;
                         }
                     }
+                    int AddInPageIndex = 0;
                     for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
                     {
                         if (((App.Current.Resources["MainPage"] as Grid).Children[i] as FrameworkElement).Tag.ToString().Contains(Hosting.Guid))
                         {
                             (App.Current.Resources["MainPage"] as Grid).Children.RemoveAt(i);
+                            Hosting.Pages.Delected(AddInPageIndex, APIData.APIModel.SettingArgs);
+                            AddInPageIndex++;
                             i--;
                         }
                     }
@@ -187,26 +191,36 @@ namespace MEFL.Controls
             {
                 ErrorInfo = $"{ex.Message} at {ex.Source}";
             }
+            Invoke(nameof(IsOpen));
             Invoke(nameof(PublisherUri));
+            Invoke(nameof(Icon));
+            Invoke(nameof(ErrorInfo));
         }
         public bool IsOpen
         {
             get
             {
-                UIReload(Hosting.IsOpen);
                 return Hosting.IsOpen; 
             }
-            set {
-                Hosting.IsOpen = value;
-                Invoke(nameof(IsOpen));
-                Invoke(nameof(Icon));
-                Invoke(nameof(ErrorInfo));
+            set
+            {
+                if (value)
+                {
+                    Hosting.IsOpen = value;
+                    UIReload(value);
+                }
+                else
+                {
+                    UIReload(value);
+                    Hosting.IsOpen = value;
+                }
             }
         }
 
         public HostingModelView(Hosting hosting)
         {
             Hosting = hosting;
+            UIReload(Hosting.IsOpen);
         }
     }
 }

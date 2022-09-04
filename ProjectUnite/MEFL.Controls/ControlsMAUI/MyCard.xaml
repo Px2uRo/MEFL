@@ -6,6 +6,9 @@
         <ControlTemplate>
             <Border StrokeThickness="{TemplateBinding BorderThickness}" Stroke="{TemplateBinding BorderBrush}" 
                     x:Name="PART_Border" StrokeShape="{DynamicResource RES_StrokeShape}">
+                <Grid>
+                    <Button Text="ChangeMe" Clicked="Button_Clicked" WidthRequest="40" HeightRequest="40" Margin="0,2,2,0" HorizontalOptions="End" VerticalOptions="Start"/>
+                </Grid>
             </Border>
         </ControlTemplate>
     </ContentView.ControlTemplate>

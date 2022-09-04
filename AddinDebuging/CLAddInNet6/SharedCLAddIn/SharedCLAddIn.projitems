@@ -13,6 +13,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)GameTypes\MEFLRealseType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFLAccount.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\AddALegacyAccountModelView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\MCERModelView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ModelViewBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\AddALegacyAccount.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>AddALegacyAccount.xaml</DependentUpon>

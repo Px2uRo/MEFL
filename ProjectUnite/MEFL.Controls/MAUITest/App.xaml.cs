@@ -1,12 +1,16 @@
-﻿namespace MAUITest
+﻿using Window=Microsoft.UI.Xaml.Window;
+
+namespace MAUITest
 {
     public partial class App : Application
     {
         public App()
         {
-            InitializeComponent();
+           InitializeComponent();
 
-            MainPage = new AppShell();
+#if WINDOWS
+            //new Window().Activate();
+#endif
         }
     }
 }

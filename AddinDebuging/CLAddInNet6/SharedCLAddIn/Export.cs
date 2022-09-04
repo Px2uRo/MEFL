@@ -60,12 +60,24 @@ namespace MEFL.CLAddIn.Export
         }
     }
 
+
     [Export(typeof(IPages))]
     public class Pages : IPages
     {
-        public Dictionary<object, MyPageBase> IconAndPage => new Dictionary<object, MyPageBase>() {
+        static Dictionary<object, MyPageBase> StaticDic = new Dictionary<object, MyPageBase>() {
             {"MCER",new MCERPage() }
         };
+
+        public Dictionary<object, MyPageBase> IconAndPage => StaticDic;
+
+        public void Added(int index, SettingArgs args)
+        {
+            
+        }
+        public void Delected(int index, SettingArgs args)
+        {
+
+        }
     }
 
     [Export(typeof(IAccount))]
