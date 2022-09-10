@@ -5,9 +5,34 @@
     <ContentView.ControlTemplate>
         <ControlTemplate>
             <Border StrokeThickness="{TemplateBinding BorderThickness}" Stroke="{TemplateBinding BorderBrush}" 
-                    x:Name="PART_Border" StrokeShape="{DynamicResource RES_StrokeShape}">
-                <Grid>
-                    <Button Text="ChangeMe" Clicked="Button_Clicked" WidthRequest="40" HeightRequest="40" Margin="0,2,2,0" HorizontalOptions="End" VerticalOptions="Start"/>
+                    StrokeShape="{DynamicResource RES_StrokeShape}">
+                <Grid x:Name="PART_Grid">
+                    <StackLayout>
+                        <Grid>
+                            <Grid HeightRequest="40" WidthRequest="{Binding Path=Width,Source=PART_Grid}">
+                                <Ellipse
+                                    WidthRequest="17"
+                                    HeightRequest="17"
+                                      TranslationX="0.5"
+                                      TranslationY="0.5"
+                                    Margin="0,5,5,0"
+                                      VerticalOptions="Start"
+                                      Fill="Red" 
+                                      HorizontalOptions="End"
+                                    />
+
+                                <Label
+                                Margin="5,5,0,0"
+                                FontAttributes="Bold"
+                                VerticalOptions="Start"
+                                Text="{TemplateBinding Title}" 
+                                HorizontalOptions="Start" />
+                            </Grid>
+                            <Button Opacity="0" Background="Transparent" Clicked="SwapMe"/>
+                        </Grid>
+                        <ContentPresenter 
+                                        Margin="25,0,23,15" />
+                    </StackLayout>
                 </Grid>
             </Border>
         </ControlTemplate>

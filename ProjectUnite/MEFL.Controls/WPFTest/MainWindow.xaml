@@ -14,6 +14,6 @@
         <local:ModelView x:Key="mv"/>
     </Window.Resources>
     <Grid>
-        <c:MyLoadingAnimation Color="Aqua"/>
+        <c:MyCard IsAbleToSwap="True"/>
     </Grid>
 </Window>

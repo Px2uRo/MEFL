@@ -23,13 +23,13 @@ public partial class MyCard : ContentView
 
     public static readonly BindableProperty IsAbleToSwapProperty = BindableProperty.Create(nameof(IsAbleToSwap), typeof(bool), typeof(MyCard), false);
 
-    public object Title
+    public string Title
     {
-        get { return (object)GetValue(TitleProperty); }
+        get { return (string)GetValue(TitleProperty); }
         set { SetValue(TitleProperty, value); }
     }
 
-    public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(object), typeof(MyCard), string.Empty);
+    public static readonly BindableProperty TitleProperty = BindableProperty.Create(nameof(Title), typeof(string), typeof(MyCard), string.Empty);
 
     public double BorderThickness
     {
@@ -45,7 +45,7 @@ public partial class MyCard : ContentView
         set { SetValue(CornerRadiusProperty, value); }
     }
 
-    public static readonly BindableProperty CornerRadiusProperty = BindableProperty.Create(nameof(CornerRadius), typeof(CornerRadius), typeof(MyCard), new CornerRadius(20));
+    public static readonly BindableProperty CornerRadiusProperty = BindableProperty.Create(nameof(CornerRadius), typeof(CornerRadius), typeof(MyCard), new CornerRadius(10));
 
 
     public Brush BorderBrush
@@ -62,6 +62,18 @@ public partial class MyCard : ContentView
     public const string MySwapAniBhv = "MySwapAniBhv";
     #endregion
     Animation HeightAni = null;
+    double ProbaHeight = 0.0;
+    private uint Time;
+
+    protected override Size ArrangeOverride(Rect bounds)
+    {
+        var res = base.ArrangeOverride(bounds);
+        if (ProbaHeight == 0)
+        {
+            ProbaHeight = res.Height;
+        }
+        return res;
+    }
     public MyCard()
 	{
         InitializeComponent();
@@ -88,22 +100,42 @@ public partial class MyCard : ContentView
     {
         if (Statu)
         {
-            if(HeightAni != null)
+            Time = (uint)((Height / 0.5) * ControlModel.TimeMultiple);
+
+            if (HeightAni != null)
             {
                 HeightAni.Dispose();
             }
-            HeightAni = new Animation(v => this.HeightRequest = v, this.HeightRequest, 40);
-            HeightAni.Commit(this, MySwapAni);
-            this.Animate(MySwapAniBhv, HeightAni, length: 200, easing: Easing.Linear);
+            HeightAni = new Animation(v => this.HeightRequest = v, Height, 40);
+            HeightAni.Commit(this, MySwapAni,easing:Easing.CubicOut,length:Time);
         }
         else
         {
+            Time = (uint)((ProbaHeight-Height) / 0.5 * ControlModel.TimeMultiple);
 
+            if (HeightAni != null)
+            {
+                HeightAni.Dispose();
+            }
+            HeightAni = new Animation(v => this.HeightRequest = v, Height, ProbaHeight);
+            HeightAni.Commit(this, MySwapAni, easing: Easing.CubicOut, length: Time);
         }
     }
 
     private void Button_Clicked(object sender, EventArgs e)
     {
-        this.IsSwaped =true;
+
+    }
+
+    private void SwapMe(object sender, EventArgs e)
+    {
+        if (this.IsSwaped)
+        {
+            this.IsSwaped = false;
+        }
+        else
+        {
+            IsSwaped = true;
+        }
     }
 }
