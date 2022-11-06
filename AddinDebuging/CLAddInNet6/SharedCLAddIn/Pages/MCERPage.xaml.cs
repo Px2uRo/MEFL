@@ -34,6 +34,7 @@ namespace MEFL.CLAddIn.Pages
                 item.Visibility = Visibility.Hidden;
             }
             FindControl.FromTag((sender as FrameworkElement).Tag,this.Content as Panel)[0].Visibility=Visibility.Visible;
+            
         }
     }
 }

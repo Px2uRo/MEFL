@@ -5,11 +5,13 @@ using MEFL.Arguments;
 
 namespace MEFL.Contract;
 
-public abstract class AccountBase : IDisposable
+public abstract class AccountBase : MEFLClass
 {
-	public bool Selected { get; set; }
-
-	public string AddInGuid => Assembly.GetAssembly(this.GetType()).ManifestModule.ModuleVersionId.ToString();
+	public override string ToString()
+	{
+		return $"{UserName} {Uuid}";
+	}
+	public virtual bool Selected { get; set; }
 
     public abstract FrameworkElement ProfileAvator { get; set; }
 
@@ -32,8 +34,6 @@ public abstract class AccountBase : IDisposable
 	public abstract string EmailAddress { get; set; }
 
 	public abstract FrameworkElement ManagePage { get; }
-
-	public abstract void Dispose();
 
 	public abstract void LaunchGameAction(SettingArgs args);
 }

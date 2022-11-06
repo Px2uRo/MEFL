@@ -1,4 +1,5 @@
-﻿using MEFL.PageModelViews;
+﻿using MEFL.APIData;
+using MEFL.PageModelViews;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -158,6 +159,22 @@ namespace MEFL.Controls
                         }
                     }
                     #endregion
+                    #region Accounts
+                    if (Hosting.Permissions.UseAccountAPI)
+                    {
+                        foreach (var item in Hosting.Account.GetSingUpAccounts(APIData.APIModel.SettingArgs))
+                        {
+                            APIData.APIModel.AccountConfigs.Add(item);
+                            if(item.Uuid != null)
+                            {
+                                if (APIModel.SelectedAccountUUID == item.Uuid)
+                                {
+                                    APIModel.SelectedAccount=item;
+                                }
+                            }
+                        }
+                    }
+                    #endregion
                 }
                 else
                 {
@@ -182,6 +199,26 @@ namespace MEFL.Controls
                         }
                     }
                     #endregion
+                    #region Accounts
+                        for (int i = 0; i < APIModel.AccountConfigs.Count; i++)
+                        {
+                            var item = APIModel.AccountConfigs[i];
+                            if (item.AddInGuid == Hosting.Guid)
+                            {
+                                item.Dispose();
+                                APIModel.AccountConfigs.Remove(item);
+                                i--;
+                            }
+                        }
+                    
+                    if (APIData.APIModel.SelectedAccount != null)
+                    {
+                        if (APIData.APIModel.SelectedAccount.AddInGuid == Hosting.Guid)
+                        {
+                            APIData.APIModel.SelectedAccount = null;
+                        }
+                    }
+                    #endregion
                 }
                 #region Games
                 (App.Current.Resources["RMPMV"] as RealMainPageModelView).RefreshFolderInfoCommand.Execute("Force");
@@ -189,7 +226,14 @@ namespace MEFL.Controls
             }
             catch (Exception ex)
             {
-                ErrorInfo = $"{ex.Message} at {ex.Source}";
+                if (Hosting.ExceptionInfo != null)
+                {
+                    ErrorInfo = Hosting.ExceptionInfo;
+                }
+                else
+                {
+                    ErrorInfo = $"{ex.Message} at {ex.Source}";
+                }
             }
             Invoke(nameof(IsOpen));
             Invoke(nameof(PublisherUri));

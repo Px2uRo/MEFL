@@ -14,7 +14,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Debugger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FastLoadJson.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FolderInfo.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Hosting.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Refresher.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RegManager.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -434,4 +434,17 @@
             </Setter>
         </Style.Setters>
     </Style>
+    <Style TargetType="{x:Type local:MyWindow}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type local:MyWindow}">
+                    <Grid Margin="6">
+                        <AdornerDecorator>
+                            <ContentPresenter Margin="1" Content="{TemplateBinding Content}" />
+                        </AdornerDecorator>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

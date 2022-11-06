@@ -21,8 +21,20 @@ namespace MEFL.APIData
         public int LogIndex { get => _LogIndex; set { _LogIndex = value; Update(); } }
         private string _PicturePath;
         public string PicturePath { get => _PicturePath; set { _PicturePath = value;Update(); } }
-        private string _SelectedGame;
-        public string SelectedGame { get => _SelectedGame; set { _SelectedGame = value;Update(); } }
+        public string SelectedGameVersion;
+        [JsonIgnore]
+        public string SelectedGame { get {
+                try
+                {
+                   return Path.Combine($"{APIModel.MyFolders[APIModel.SelectedFolderIndex].Path}\\versions\\", SelectedGameVersion);
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            } set {
+                SelectedGameVersion = Path.GetRelativePath($"{APIModel.MyFolders[APIModel.SelectedFolderIndex].Path}\\versions\\", value);
+                Update(); } }
         private string _OtherJVMArgs;
         public string OtherJVMArgs { get => _OtherJVMArgs; set { _OtherJVMArgs = value; Update(); } }
         private bool _AlwaysOpenNewExtensions;

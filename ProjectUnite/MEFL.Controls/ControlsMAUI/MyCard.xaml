@@ -10,7 +10,7 @@
                     <StackLayout>
                         <Grid>
                             <Grid HeightRequest="40" WidthRequest="{Binding Path=Width,Source=PART_Grid}">
-                                <Ellipse
+                                <Ellipse IsVisible="{TemplateBinding IsAbleToSwap}"
                                     WidthRequest="17"
                                     HeightRequest="17"
                                       TranslationX="0.5"
@@ -20,7 +20,6 @@
                                       Fill="Red" 
                                       HorizontalOptions="End"
                                     />
-
                                 <Label
                                 Margin="5,5,0,0"
                                 FontAttributes="Bold"
@@ -28,10 +27,9 @@
                                 Text="{TemplateBinding Title}" 
                                 HorizontalOptions="Start" />
                             </Grid>
-                            <Button Opacity="0" Background="Transparent" Clicked="SwapMe"/>
+                            <Button Opacity="0" Background="Transparent" Clicked="SwapMe" IsVisible="{TemplateBinding IsAbleToSwap}"/>
                         </Grid>
-                        <ContentPresenter 
-                                        Margin="25,0,23,15" />
+                        <ContentPresenter Margin="25,0,23,15" />
                     </StackLayout>
                 </Grid>
             </Border>

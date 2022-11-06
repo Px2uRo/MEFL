@@ -23,5 +23,5 @@ I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\WPFTest\obj\Release\net6.0-
 I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\WPFTest\obj\Release\net6.0-windows\WPFTest.pdb
 I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\WPFTest\obj\Release\net6.0-windows\WPFTest.genruntimeconfig.cache
 I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\WPFTest\obj\Release\net6.0-windows\ref\WPFTest.dll
-I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\WPFTest\obj\Release\net6.0-windows\GeneratedInternalTypeHelper.g.cs
 I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\WPFTest\obj\Release\net6.0-windows\App.baml
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\WPFTest\obj\Release\net6.0-windows\GeneratedInternalTypeHelper.g.cs

@@ -4,6 +4,6 @@
              xmlns:c="clr-namespace:MEFL.Controls;assembly=MEFL.Controls.Maui"
              x:Class="MAUITESTME.MainPage">
     <Grid>
-        <c:MyCard BorderBrush="Aqua" Title="TESTION" VerticalOptions="Start"/>
+        <c:MyCard BorderBrush="Aqua" Title="TESTION" VerticalOptions="Start" IsAbleToSwap="False"/>
     </Grid>
 </ContentPage>

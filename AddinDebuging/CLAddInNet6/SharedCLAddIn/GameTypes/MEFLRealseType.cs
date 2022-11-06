@@ -27,9 +27,9 @@ namespace MEFL.CLAddIn.GameTypes
             var res = new Pages.MEFLRealseTypeManage(process);
             return res;
         }
-        public override void Dispose()
+        protected override void Dispose(bool disposing)
         {
-
+            base.Dispose(disposing);
         }
         private static FrameworkElement _settingPage = new Pages.MEFLRealseTypeSetting();
         private MEFLStandardOtherArgumentTemplate _MSOAT { get; set; }

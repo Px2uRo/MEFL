@@ -1,9 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using MEFL.Arguments;
+using MEFL.Contract.Properties;
 
 namespace MEFL.Contract;
 
@@ -13,7 +16,7 @@ public class MEFLErrorType : GameInfoBase
 	{
 		get
 		{
-			throw new NotImplementedException();
+			return string.Empty;
 		}
 	}
 
@@ -25,7 +28,15 @@ public class MEFLErrorType : GameInfoBase
 
 	public override string Version { get; set; }
 
-	public override ImageSource IconSource { get; }
+	public override ImageSource IconSource { get 
+		{
+			BitmapImage Image = new();
+			Image.BeginInit();
+			Image.StreamSource = new MemoryStream(Resources.Error);
+            Image.EndInit();
+			return Image;
+		} 
+	}
 
 	public override string NativeLibrariesPath { get; set; }
 
@@ -119,13 +130,7 @@ public class MEFLErrorType : GameInfoBase
 		}
 	}
 
-	public override string VersionType
-	{
-		get
-		{
-			throw new NotImplementedException();
-		}
-	}
+	public override string VersionType => "Error";
 
 	public override List<LauncherWebFileInfo> FileNeedsToDownload
 	{
@@ -164,8 +169,9 @@ public class MEFLErrorType : GameInfoBase
 		throw new NotImplementedException();
 	}
 
-	public override void Dispose()
+	protected override void Dispose(bool disposing)
 	{
+		
 	}
 
 	public override void Delete()

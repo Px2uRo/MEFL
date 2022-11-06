@@ -4,6 +4,8 @@ using MEFL.CLAddIn.Pages;
 using MEFL.Contract;
 using MEFL.Contract.Controls;
 using MEFL.Controls;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
@@ -83,19 +85,51 @@ namespace MEFL.CLAddIn.Export
     [Export(typeof(IAccount))]
     public class Account : IAccount
     {
-        public List<AccountBase> GetSingUpAccounts(SettingArgs args)
+        AccountBase[] IAccount.GetSingUpAccounts(SettingArgs args)
         {
-            return new List<AccountBase>();
+            var ret = new List<AccountBase>();
+            try
+            {
+                var reg = RegManager.Read("LegacyAccounts");
+                if (!string.IsNullOrEmpty(reg))
+                {
+                    var jOb = JToken.Parse(reg);
+                    var List = new List<MEFLLegacyAccount>();
+                    foreach (var item in jOb)
+                    {
+                        List.Add(new(item["UserName"].ToString(), item["Uuid"].ToString()));
+                    }
+                    foreach (var item in List)
+                    {
+                        ret.Add(item);
+                    }
+                }
+                else
+                {
+                    RegManager.Write("LegacyAccounts", "[]");
+                }
+            }
+            catch (Exception ex)
+            {
+                ret = new List<AccountBase>();
+                //todo HandleException
+            }
+            return ret.ToArray();
         }
 
-        public List<AddAccountItem> GetSingUpPage(SettingArgs args)
+        AddAccountItem[] IAccount.GetSingUpPage(SettingArgs args)
         {
             var res = new List<AddAccountItem>();
-            var Legacy = new AddAccountItem() { Width = 400, Height = 60, AddAccountContent = new AddALegacyAccountPage(), 
-                Content = new TextBlock() { Text = "离线账户", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, FontSize = 30, FontWeight = FontWeight.FromOpenTypeWeight(999) }, 
-                FinnalReturn = new MEFLLegacyAccount(String.Empty, Guid.NewGuid().ToString()) };
+            var Legacy = new AddAccountItem()
+            {
+                Width = 400,
+                Height = 60,
+                AddAccountContent = new AddALegacyAccountPage(),
+                Content = new TextBlock() { Text = "离线账户", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, FontSize = 30, FontWeight = FontWeight.FromOpenTypeWeight(999) },
+                FinnalReturn = new MEFLLegacyAccount(String.Empty, Guid.NewGuid().ToString())
+            };
             res.Add(Legacy);
-            return res;
+            return res.ToArray();
         }
 
         //private AddAccountItem Legacy = new AddAccountItem() { Width=400,Height=60, AddAccountContent = new AddALegacyAccountPage(),FinnalReturn=new MEFLLegacyAccount(String.Empty,Guid.NewGuid().ToString()) };

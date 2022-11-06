@@ -6,7 +6,7 @@ namespace MEFL.Contract;
 
 public interface IAccount
 {
-	List<AccountBase> GetSingUpAccounts(SettingArgs args);
+	AccountBase[] GetSingUpAccounts(SettingArgs args);
 
-	List<AddAccountItem> GetSingUpPage(SettingArgs args);
+	AddAccountItem[] GetSingUpPage(SettingArgs args);
 }

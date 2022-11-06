@@ -1,4 +1,5 @@
-﻿using MEFL.Contract;
+﻿using CoreLaunching.JsonTemplates;
+using MEFL.Contract;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -21,7 +22,15 @@ namespace MEFL.APIData
 
         public static ObservableCollection<AccountBase> AccountConfigs;
         private static AccountBase _SelectedAccount { get; set; }
+        private static string _SelectedAccountUUID;
 
+        public static string SelectedAccountUUID
+        {
+            get => _SelectedAccountUUID; set { 
+                _SelectedAccountUUID = value;
+                RegManager.Write("PlayerUuid",value);
+            }
+        }
         public static AccountBase SelectedAccount
         {
             get {
@@ -35,9 +44,19 @@ namespace MEFL.APIData
                 }
                 else
                 {
+                    string uuid = value.Uuid;
+                    for (int i = 0; i < AccountConfigs.Count; i++)
+                    {
+                        if (AccountConfigs[i].Selected)
+                        {
+                            AccountConfigs[i].Selected = false;
+                        }
+                    }
+                    value.Selected = true;
                     _SelectedAccount = value;
-                    RegManager.Write("PlayerUuid", value.Uuid);
+                    SelectedAccountUUID = value.Uuid;
                     App.Current.Resources["WelcomeWords"] = value.WelcomeWords;
+                    uuid = string.Empty;
                 }
             }
         }
@@ -54,7 +73,7 @@ namespace MEFL.APIData
         }
         public static Arguments.SettingArgs SettingArgs { get; set; }
         public static Contract.GameInfoBase CurretGame { get => SettingArgs.CurretGame; set { SettingConfig.SelectedGame = value.RootFolder; SettingArgs.CurretGame = value; } }
-        public static ObservableCollection<Contract.GameInfoBase> GameInfoConfigs { get; set; }
+        public static GameInfoCollection GameInfoConfigs { get; set; }
         public static ObservableCollection<MEFLFolderInfo> MyFolders 
         {
             get;set;
@@ -176,7 +195,7 @@ namespace MEFL.APIData
             AddInConfigs = MEFL.APIData.AddInConfig.GetAll();
             Hostings = Hosting.LoadAll();
             SettingArgs = new Arguments.SettingArgs();
-            GameInfoConfigs = new ObservableCollection<GameInfoBase>();
+            GameInfoConfigs = new GameInfoCollection();
             #region Reg
             #region RegSelectedFolderIndex
             try
@@ -232,7 +251,7 @@ namespace MEFL.APIData
             }
             #endregion
             #endregion
-
+            _SelectedAccountUUID = RegManager.Read("PlayerUuid");
             if (Directory.Exists(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"))!=true)
             {
                 Directory.CreateDirectory(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"));

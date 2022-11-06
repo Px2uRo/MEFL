@@ -77,8 +77,25 @@ public partial class MyCard : ContentView
     public MyCard()
 	{
         InitializeComponent();
+        this.Loaded += MyCard_Loaded;
         (this.Resources["RES_StrokeShape"] as RoundRectangle).CornerRadius = CornerRadius;
     }
+
+    private void MyCard_Loaded(object sender, EventArgs e)
+    {
+        if (IsSwaped)
+        {
+            if (IsAbleToSwap)
+            {
+                HeightRequest = 40;
+            }
+            else
+            {
+                throw new Exception("«Îœ»‘ –Ì’€µ˛");
+            }
+        }
+    }
+
     //private void ChangeCornerRadius(CornerRadius value)
     //{
     //    string xaml = "<ControlTemplate xmlns=\"http://schemas.microsoft.com/dotnet/2021/maui\" xmlns:x=\"http://schemas.microsoft.com/winfx/2009/xaml\">" +
@@ -91,10 +108,6 @@ public partial class MyCard : ContentView
     //    ControlTemplate = new ControlTemplate().LoadFromXaml(xaml);
     //    xaml = string.Empty;
     //}
-    protected override void OnApplyTemplate()
-    {
-        base.OnApplyTemplate();
-    }
 
     public void SwapChanged(bool Statu)
     {

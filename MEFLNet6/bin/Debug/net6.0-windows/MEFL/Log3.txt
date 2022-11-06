@@ -1,6 +1,7 @@
-﻿[17:58:00][MEFL]程序启动了，参数
-[17:58:03][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[17:58:03][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[17:58:03][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[17:58:03][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[18:07:35][MEFL]程序退出了
+﻿[22:36:01][MEFL]程序启动了，参数
+[22:36:01][MEFL]写入了注册表，键：PlayerUuid，值：6e9ec642-89aa-477d-bbd5-c856633f11a3
+[22:36:02][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[22:36:02][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[22:36:02][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[22:36:02][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[22:36:44][MEFL]程序退出了

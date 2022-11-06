@@ -21,6 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\IconTitlePagePair.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\IDownloadPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\ILuncherGameType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\MEFLClass.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\IPages.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\IPermissions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\ISettingPage.cs" />

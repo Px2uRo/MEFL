@@ -15,7 +15,7 @@
   </Target>
 
   <ItemGroup>
-    <PackageReference Include="MEFL.Contract" Version="0.0.4.15" />
+    <PackageReference Include="MEFL.Contract" Version="0.0.4.19" />
     <PackageReference Include="MEFL.Controls" Version="0.0.6" />
     <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />
   </ItemGroup>

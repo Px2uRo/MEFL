@@ -18,6 +18,10 @@ namespace MEFL
 #if HOSTING
     public class Hosting
     {
+        public override string ToString()
+        {
+            return FileName + Description;
+        }
 
         [Import(AllowRecomposition = true)]
         public ISettingPage SettingPage;

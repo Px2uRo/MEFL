@@ -52,7 +52,7 @@ namespace MEFL.PageModelViews
                 }
             } }
 
-        public ObservableCollection<Contract.GameInfoBase> GameInfoConfigs
+        public GameInfoCollection GameInfoConfigs
         {
             get
             {
@@ -115,12 +115,12 @@ namespace MEFL.PageModelViews
             {
                 App.Current.Dispatcher.Invoke(() =>
                 {
-                    if (MyFolders[SelectedFolderIndex].Refreshing != true){
-                        MyFolders[SelectedFolderIndex].Refresh(MyFolders[SelectedFolderIndex].Path);
+                    if (Refresher.Refreshing != true){
+                        Refresher.RefreshCurrect();
                         IsRefreshing = Visibility.Visible;
                         Invoke(nameof(IsRefreshing));
                         Invoke(nameof(IsNotRefreshing));
-                        while (MyFolders[SelectedFolderIndex].Refreshing)
+                        while (Refresher.Refreshing)
                         {
                         }
                         SelectedFolderIndex = SelectedFolderIndex;
@@ -145,13 +145,13 @@ namespace MEFL.PageModelViews
                     }
                     else if(parameter == "Force")
                     {
-                        MyFolders[SelectedFolderIndex].Games = new ObservableCollection<GameInfoBase>();
-                        MyFolders[SelectedFolderIndex].Refreshing = false;
-                        MyFolders[SelectedFolderIndex].Refresh(MyFolders[SelectedFolderIndex].Path);
+                        MyFolders[SelectedFolderIndex].Games = new GameInfoCollection();
+                        Refresher.Refreshing = false;
+                        Refresher.RefreshCurrect();
                         IsRefreshing = Visibility.Visible;
                         Invoke(nameof(IsRefreshing));
                         Invoke(nameof(IsNotRefreshing));
-                        while (MyFolders[SelectedFolderIndex].Refreshing)
+                        while (Refresher.Refreshing)
                         {
                         }
                         SelectedFolderIndex = SelectedFolderIndex;
@@ -325,10 +325,10 @@ namespace MEFL.PageModelViews
             List<string> recorded = new List<string>();
             foreach (var item in APIModel.GameInfoConfigs)
             {
-                if (recorded.Contains(item.ToString()) != true)
+                if (recorded.Contains(item.VersionType) != true)
                 {
-                    cards.Add(new Controls.MyItemsCard() { IsAbleToSwap = true, Title = item.ToString(), Margin = VarMargin, BorderThickness = VarBorderThickness, BorderBrush = VarBorderBrush, CornerRadius = VarConrnerRadius });
-                    recorded.Add(item.ToString());
+                    cards.Add(new Controls.MyItemsCard() { IsAbleToSwap = true, Title = item.VersionType, Margin = VarMargin, BorderThickness = VarBorderThickness, BorderBrush = VarBorderBrush, CornerRadius = VarConrnerRadius });
+                    recorded.Add(item.VersionType);
                 }
             }
             #endregion
@@ -344,7 +344,7 @@ namespace MEFL.PageModelViews
                 var cardItemSources = new ObservableCollection<Contract.GameInfoBase>();
                 foreach (var item in APIModel.GameInfoConfigs)
                 {
-                    if (item.ToString() == cards[i].Title.ToString())
+                    if (item.VersionType == cards[i].Title.ToString())
                     {
                         cardItemSources.Add(item);
                     }

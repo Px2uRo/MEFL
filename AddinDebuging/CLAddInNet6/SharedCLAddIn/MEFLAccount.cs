@@ -18,9 +18,16 @@ namespace MEFL.CLAddIn
     }
     public class MEFLLegacyAccount : MEFL.Contract.AccountBase
     {
-        public override void Dispose()
+        public override bool Selected { get => base.Selected;
+            set {
+                _Avator.Width = 200;
+                _Avator.Height = 200;
+                base.Selected = value; 
+            } 
+        }
+        protected override void Dispose(bool disposing)
         {
-            
+            base.Dispose(disposing);
         }
         private Grid _Avator = new Grid();
         private TextBlock _AvatorText = new TextBlock() { VerticalAlignment = System.Windows.VerticalAlignment.Center, HorizontalAlignment = System.Windows.HorizontalAlignment.Center,FontSize=36,FontWeight=FontWeight.FromOpenTypeWeight(5),Foreground=new SolidColorBrush(Colors.White) };

@@ -9,8 +9,12 @@ using MEFL.Arguments;
 
 namespace MEFL.Contract;
 
-public abstract class GameInfoBase : IDisposable
+public abstract class GameInfoBase : MEFLClass
 {
+	public override string ToString()
+	{
+		return $"{Version} {VersionType}";
+	}
 	public string AssemblyGuid => Assembly.GetAssembly(this.GetType()).ManifestModule.ModuleVersionId.ToString();
 
     public abstract List<string> ItemsNeedsToExtract { get; }
@@ -70,8 +74,6 @@ public abstract class GameInfoBase : IDisposable
 	public abstract FrameworkElement SettingsPage { get; }
 
 	public abstract void Refresh();
-
-	public abstract void Dispose();
 
 	public abstract void Delete();
 
