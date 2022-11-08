@@ -6,7 +6,11 @@ using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using MEFL.Arguments;
+#if NET6_0
 using MEFL.Contract.Properties;
+#elif NET4_0
+using ContractNetFw4.Properties;
+#endif
 
 namespace MEFL.Contract;
 

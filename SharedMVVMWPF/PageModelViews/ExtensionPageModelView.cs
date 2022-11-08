@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 using MEFL.Controls;
+using System.Windows;
 
 namespace MEFL.PageModelViews
 {
@@ -22,7 +23,7 @@ namespace MEFL.PageModelViews
     }
     public class HostingsToUI : IValueConverter
     {
-        static StackPanel res = new StackPanel();
+        internal static StackPanel res = new StackPanel();
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             res.Children.Clear();

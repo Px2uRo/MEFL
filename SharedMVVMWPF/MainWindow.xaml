@@ -13,6 +13,9 @@
         <WindowChrome CaptionHeight="0"/>
     </WindowChrome.WindowChrome>
     <Window.Resources>
+        <Style TargetType="con:MyLoadingAnimation">
+            <Setter Property="Color" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>
+        </Style>
         <Style TargetType="con:MyCard">
             <Setter Property="BorderBrush" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>
             <Setter Property="Background" Value="{DynamicResource SYTLE_Standard_Background}"/>

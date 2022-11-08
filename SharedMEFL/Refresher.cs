@@ -8,6 +8,8 @@ using System.IO;
 using System;
 using System.Collections.Generic;
 using System.Windows.Shapes;
+using MEFL.PageModelViews;
+using MEFL.Controls;
 
 namespace MEFL
 {
@@ -15,7 +17,10 @@ namespace MEFL
     {
         static List<String> Support = new List<string>();
         static Thread t;
-        public static bool Refreshing { get; set; }
+        private static bool _Refreshing;
+        public static bool Refreshing { get => _Refreshing; set { 
+                _Refreshing = value;
+            } }
         public static void RefreshCurrect()
         {
             if (APIData.APIModel.MyFolders[SelectedFolderIndex] == null)
@@ -153,11 +158,25 @@ namespace MEFL
                     Refreshing = false;
                     #endregion
                     Refreshing = false;
+                    App.Current.Dispatcher.Invoke(() =>
+                    {
+                        foreach (var item in HostingsToUI.res.Children)
+                        {
+                            ((item as MyExtensionCard).DataContext as HostingModelView).Invoke("IsRefreshing");
+                        }
+                    });
                 }
                 catch (Exception ex)
                 {
                     Debugger.Logger($"刷新时发现未知错误 {ex.Message} at {ex.Source}");
                     Refreshing = false;
+                    App.Current.Dispatcher.Invoke(() =>
+                    {
+                        foreach (var item in HostingsToUI.res.Children)
+                        {
+                            ((item as MyExtensionCard).DataContext as HostingModelView).Invoke("IsRefreshing");
+                        }
+                    });
                 }
                 return;
             });

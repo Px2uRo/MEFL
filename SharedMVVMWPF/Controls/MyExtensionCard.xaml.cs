@@ -53,6 +53,37 @@ namespace MEFL.Controls
 
     public class HostingModelView : PageModelViews.PageModelViewBase
     {
+        public Visibility IsRefreshing
+        {
+            get
+            {
+                Invoke(nameof(IsNotRefreshing));
+                if (Refresher.Refreshing)
+                {
+                    return Visibility.Visible;
+                }
+                else
+                {
+                    return Visibility.Hidden;
+                }
+            }
+        }
+
+        public Visibility IsNotRefreshing
+        {
+            get
+            {
+                if (!Refresher.Refreshing)
+                {
+                    return Visibility.Visible;
+                }
+                else
+                {
+                    return Visibility.Hidden;
+                }
+            }
+        }
+
         Hosting Hosting;
 
         public Visibility NoError
@@ -223,6 +254,15 @@ namespace MEFL.Controls
                 #region Games
                 (App.Current.Resources["RMPMV"] as RealMainPageModelView).RefreshFolderInfoCommand.Execute("Force");
                 #endregion
+                Refresher.Refreshing = true;
+                App.Current.Dispatcher.Invoke(() =>
+                {
+                    foreach (var item in HostingsToUI.res.Children)
+                    {
+                        ((item as MyExtensionCard).DataContext as HostingModelView).Invoke("IsRefreshing");
+                    }
+                });
+                Refresher.RefreshCurrect();
             }
             catch (Exception ex)
             {

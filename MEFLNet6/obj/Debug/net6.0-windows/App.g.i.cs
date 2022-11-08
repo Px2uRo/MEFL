@@ -59,7 +59,7 @@ namespace MEFL {
             
             #line default
             #line hidden
-            System.Uri resourceLocater = new System.Uri("/MEFL;V1.0.0.0;component/app.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/MEFL;component/app.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\SharedMVVMWPF\App.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

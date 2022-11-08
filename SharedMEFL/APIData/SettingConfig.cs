@@ -33,8 +33,17 @@ namespace MEFL.APIData
                     return null;
                 }
             } set {
-                SelectedGameVersion = Path.GetRelativePath($"{APIModel.MyFolders[APIModel.SelectedFolderIndex].Path}\\versions\\", value);
-                Update(); } }
+                if (string.IsNullOrEmpty(value))
+                {
+                    SelectedGameVersion = value;
+                }
+                else
+                {
+                    SelectedGameVersion = Path.GetRelativePath($"{APIModel.MyFolders[APIModel.SelectedFolderIndex].Path}\\versions\\", value);
+                }
+                Update(); 
+            } 
+        }
         private string _OtherJVMArgs;
         public string OtherJVMArgs { get => _OtherJVMArgs; set { _OtherJVMArgs = value; Update(); } }
         private bool _AlwaysOpenNewExtensions;

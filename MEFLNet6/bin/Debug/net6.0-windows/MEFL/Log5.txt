@@ -1,7 +1,14 @@
-﻿[22:43:35][MEFL]程序启动了，参数
-[22:43:36][MEFL]写入了注册表，键：PlayerUuid，值：6e9ec642-89aa-477d-bbd5-c856633f11a3
-[22:43:36][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[22:43:36][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[22:43:36][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[22:43:36][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[22:47:47][MEFL]程序退出了
+﻿[23:21:25][MEFL]程序启动了，参数
+[23:21:25][MEFL]写入了注册表，键：PlayerUuid，值：6e9ec642-89aa-477d-bbd5-c856633f11a3
+[23:21:28][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[23:21:30][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[23:21:32][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[23:21:36][MEFL]卸载了一个插件，名称 CLAddIn.dll，版本："0.0.0.0" Guid ae3db001-22c7-478a-94a2-8120eee12908
+[23:21:36][MEFL]重写了插件设置,当前文档：[{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"698bb71d-568e-41e4-ad36-2bfd592fe01b","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"698bb71d-568e-41e4-ad36-2bfd592fe01b","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"847b35fb-9dbd-4be8-a5eb-04b6e6f19869","IsOpen":true},{"Guid":"3131895d-143f-4e99-a56c-dd7265461821","IsOpen":true},{"Guid":"70cb7482-cd8b-4628-9cff-b54353976805","IsOpen":true},{"Guid":"f83f8fdf-8047-436a-b337-34952c0ad646","IsOpen":true},{"Guid":"b2efc1af-5dd8-493b-b109-4d4435c9f9ad","IsOpen":true},{"Guid":"3bd894f5-546c-4b0d-bc67-8852be1a8817","IsOpen":true},{"Guid":"43d95069-9bad-45ca-9965-f0c56172e277","IsOpen":true},{"Guid":"3072f559-66ca-4450-9898-c979933b1590","IsOpen":true},{"Guid":"656ee4e0-2f44-4150-80ac-6d03d8eeff28","IsOpen":true},{"Guid":"5e3888f1-f57f-4609-976e-83736c764330","IsOpen":false},{"Guid":"d854c076-02b6-4cc2-a041-35b623d1e013","IsOpen":false},{"Guid":"c05ea880-c1bd-479e-a5f8-d08187ea87a9","IsOpen":true},{"Guid":"6b45c2e9-f602-4923-ada6-752aea6922b5","IsOpen":false},{"Guid":"7da7541e-5633-4116-9733-fc0b6d2dddda","IsOpen":true},{"Guid":"dc8c5272-a33b-43de-9de3-60407cf072d4","IsOpen":true},{"Guid":"61dbc81e-a0d2-41d8-b65c-0aac7b52dbd1","IsOpen":true},{"Guid":"276eaf20-0ea7-403c-bc5d-c0685069af64","IsOpen":true},{"Guid":"902d4bd9-eb8f-476b-acc8-1cff59f6db07","IsOpen":true},{"Guid":"a823a36e-6cd1-4772-875b-d4cc09983c49","IsOpen":true},{"Guid":"ae3db001-22c7-478a-94a2-8120eee12908","IsOpen":false}]
+[23:21:36][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[23:21:38][MEFL]加载了一个插件，名称 CLAddIn.dll，版本："0.0.0.0" Guid ae3db001-22c7-478a-94a2-8120eee12908
+[23:21:38][MEFL]重写了插件设置,当前文档：[{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"698bb71d-568e-41e4-ad36-2bfd592fe01b","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"698bb71d-568e-41e4-ad36-2bfd592fe01b","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"847b35fb-9dbd-4be8-a5eb-04b6e6f19869","IsOpen":true},{"Guid":"3131895d-143f-4e99-a56c-dd7265461821","IsOpen":true},{"Guid":"70cb7482-cd8b-4628-9cff-b54353976805","IsOpen":true},{"Guid":"f83f8fdf-8047-436a-b337-34952c0ad646","IsOpen":true},{"Guid":"b2efc1af-5dd8-493b-b109-4d4435c9f9ad","IsOpen":true},{"Guid":"3bd894f5-546c-4b0d-bc67-8852be1a8817","IsOpen":true},{"Guid":"43d95069-9bad-45ca-9965-f0c56172e277","IsOpen":true},{"Guid":"3072f559-66ca-4450-9898-c979933b1590","IsOpen":true},{"Guid":"656ee4e0-2f44-4150-80ac-6d03d8eeff28","IsOpen":true},{"Guid":"5e3888f1-f57f-4609-976e-83736c764330","IsOpen":false},{"Guid":"d854c076-02b6-4cc2-a041-35b623d1e013","IsOpen":false},{"Guid":"c05ea880-c1bd-479e-a5f8-d08187ea87a9","IsOpen":true},{"Guid":"6b45c2e9-f602-4923-ada6-752aea6922b5","IsOpen":false},{"Guid":"7da7541e-5633-4116-9733-fc0b6d2dddda","IsOpen":true},{"Guid":"dc8c5272-a33b-43de-9de3-60407cf072d4","IsOpen":true},{"Guid":"61dbc81e-a0d2-41d8-b65c-0aac7b52dbd1","IsOpen":true},{"Guid":"276eaf20-0ea7-403c-bc5d-c0685069af64","IsOpen":true},{"Guid":"902d4bd9-eb8f-476b-acc8-1cff59f6db07","IsOpen":true},{"Guid":"a823a36e-6cd1-4772-875b-d4cc09983c49","IsOpen":true},{"Guid":"ae3db001-22c7-478a-94a2-8120eee12908","IsOpen":true}]
+[23:21:38][MEFL]写入了注册表，键：PlayerUuid，值：6e9ec642-89aa-477d-bbd5-c856633f11a3
+[23:21:40][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[23:21:42][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[23:21:47][MEFL]程序退出了

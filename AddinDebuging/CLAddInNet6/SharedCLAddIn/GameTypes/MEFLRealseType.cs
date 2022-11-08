@@ -29,6 +29,17 @@ namespace MEFL.CLAddIn.GameTypes
         }
         protected override void Dispose(bool disposing)
         {
+            if (disposing)
+            {
+                _ItemsNeedsToExtract.Clear();
+                FileNeedsToDownload.Clear();
+                GC.SuppressFinalize(Icon);
+                GC.SuppressFinalize(_MSOAT);
+                GC.SuppressFinalize(_Root);
+                GC.SuppressFinalize(FileNeedsToDownload);
+
+                GC.WaitForPendingFinalizers();
+            }
             base.Dispose(disposing);
         }
         private static FrameworkElement _settingPage = new Pages.MEFLRealseTypeSetting();

@@ -1,5 +1,6 @@
 ﻿using CoreLaunching.JsonTemplates;
 using MEFL.Contract;
+using MEFL.PageModelViews;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -72,7 +73,20 @@ namespace MEFL.APIData
             }
         }
         public static Arguments.SettingArgs SettingArgs { get; set; }
-        public static Contract.GameInfoBase CurretGame { get => SettingArgs.CurretGame; set { SettingConfig.SelectedGame = value.RootFolder; SettingArgs.CurretGame = value; } }
+        public static Contract.GameInfoBase CurretGame { get => SettingArgs.CurretGame; set { 
+                if(value == null)
+                {
+                    SettingConfig.SelectedGame = string.Empty;
+                    SettingArgs.CurretGame = null;
+                }
+                else
+                {
+                    SettingConfig.SelectedGame = value.RootFolder;
+                    SettingArgs.CurretGame = value;
+                }
+                (App.Current.Resources["RMPMV"] as RealMainPageModelView).Invoke("CurretGame");
+            } 
+        }
         public static GameInfoCollection GameInfoConfigs { get; set; }
         public static ObservableCollection<MEFLFolderInfo> MyFolders 
         {
