@@ -21,7 +21,7 @@ namespace MEFL.APIData
         public static SettingConfig SettingConfig { get; set; }
         public static ObservableCollection<AddInConfig> AddInConfigs { get; set; }
 
-        public static ObservableCollection<AccountBase> AccountConfigs;
+        public static AccountCollection AccountConfigs;
         private static AccountBase _SelectedAccount { get; set; }
         private static string _SelectedAccountUUID;
 
@@ -59,6 +59,7 @@ namespace MEFL.APIData
                     App.Current.Resources["WelcomeWords"] = value.WelcomeWords;
                     uuid = string.Empty;
                 }
+                UserManageModel.ModelView.Invoke("SelectedAccount");
             }
         }
 
@@ -92,11 +93,7 @@ namespace MEFL.APIData
         {
             get;set;
         }
-        private static ObservableCollection<AccountBase> _LegacyAccounts;
         private static FileInfo[] tmp1;
-
-        public static ObservableCollection<AccountBase> LegacyAccounts { get => _LegacyAccounts; set { _LegacyAccounts = value;}
-        }
 
         public static bool AlwaysOpenNewAddIns { get => SettingConfig.AlwaysOpenNewExtensions; set { SettingConfig.AlwaysOpenNewExtensions = value; } }
 
@@ -204,7 +201,7 @@ namespace MEFL.APIData
                 RegManager.Write("Folders", JsonConvert.SerializeObject(new ObservableCollection<MEFLFolderInfo>() { new MEFLFolderInfo(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"), "本地文件夹") }), true);
             }
             #endregion
-            AccountConfigs = new ObservableCollection<AccountBase>();
+            AccountConfigs = new();
             SettingConfig = MEFL.APIData.SettingConfig.Load();
             AddInConfigs = MEFL.APIData.AddInConfig.GetAll();
             Hostings = Hosting.LoadAll();

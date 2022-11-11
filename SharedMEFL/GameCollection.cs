@@ -8,7 +8,7 @@ using System.Text;
 
 namespace MEFL
 {
-    public class GameInfoCollection:ObservableCollection<GameInfoBase>
+    public class GameInfoCollection : ObservableCollection<GameInfoBase>
     {
 
         protected override void RemoveItem(int index)
@@ -25,9 +25,9 @@ namespace MEFL
         {
             foreach (var item in this)
             {
-                if (item== APIModel.CurretGame)
+                if (item == APIModel.CurretGame)
                 {
-                    if (!Refresher.Refreshing)
+                    if (!GameRefresher.Refreshing)
                     {
                         APIModel.CurretGame = null;
                     }
@@ -39,26 +39,65 @@ namespace MEFL
 
         public override string ToString()
         {
-            try
-            {
-                var res = "";
+            var res = "";
                 foreach (var item in this.Items)
                 {
-                    try
+                    if (item == null)
                     {
-                        res += $"{item.Name}\n";
-                    }
-                    catch (Exception ex)
-                    {
+                    res += $"空值\n";
+                }
+                else
+                {
+                    res += $"{item.Name}: {item.GameTypeFriendlyName}\n";
+                }
+            }
+            return res;
+        }
+    }
+    public class AccountCollection : ObservableCollection<AccountBase>
+    {
 
+        protected override void RemoveItem(int index)
+        {
+            if (this[index] == APIModel.SelectedAccount)
+            {
+                APIModel.SelectedAccount = null;
+            }
+            this[index].Dispose();
+            base.RemoveItem(index);
+        }
+
+        protected override void ClearItems()
+        {
+            foreach (var item in this)
+            {
+                if (item == APIModel.SelectedAccount)
+                {
+                    if (!GameRefresher.Refreshing)
+                    {
+                        APIModel.SelectedAccount = null;
                     }
                 }
-                return res;
+                item.Dispose();
             }
-            catch (Exception ex)
+            base.ClearItems();
+        }
+
+        public override string ToString()
+        {
+            var res = "";
+            foreach (var item in this.Items)
             {
-                return base.ToString();
+                if (item == null)
+                {
+                    res += $"空值\n";
+                }
+                else
+                {
+                    res += $"{item.UserName}:{item.Uuid}\n";
+                }
             }
+            return res;
         }
     }
 }

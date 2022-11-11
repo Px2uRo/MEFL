@@ -58,7 +58,7 @@ namespace MEFL.Controls
             get
             {
                 Invoke(nameof(IsNotRefreshing));
-                if (Refresher.Refreshing)
+                if (GameRefresher.Refreshing)
                 {
                     return Visibility.Visible;
                 }
@@ -73,7 +73,7 @@ namespace MEFL.Controls
         {
             get
             {
-                if (!Refresher.Refreshing)
+                if (!GameRefresher.Refreshing)
                 {
                     return Visibility.Visible;
                 }
@@ -254,7 +254,7 @@ namespace MEFL.Controls
                 #region Games
                 (App.Current.Resources["RMPMV"] as RealMainPageModelView).RefreshFolderInfoCommand.Execute("Force");
                 #endregion
-                Refresher.Refreshing = true;
+                GameRefresher.Refreshing = true;
                 App.Current.Dispatcher.Invoke(() =>
                 {
                     foreach (var item in HostingsToUI.res.Children)
@@ -262,7 +262,7 @@ namespace MEFL.Controls
                         ((item as MyExtensionCard).DataContext as HostingModelView).Invoke("IsRefreshing");
                     }
                 });
-                Refresher.RefreshCurrect();
+                GameRefresher.RefreshCurrect();
             }
             catch (Exception ex)
             {

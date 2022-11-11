@@ -115,12 +115,12 @@ namespace MEFL.PageModelViews
             {
                 App.Current.Dispatcher.Invoke(() =>
                 {
-                    if (Refresher.Refreshing != true){
-                        Refresher.RefreshCurrect();
+                    if (GameRefresher.Refreshing != true){
+                        GameRefresher.RefreshCurrect();
                         IsRefreshing = Visibility.Visible;
                         Invoke(nameof(IsRefreshing));
                         Invoke(nameof(IsNotRefreshing));
-                        while (Refresher.Refreshing)
+                        while (GameRefresher.Refreshing)
                         {
                         }
                         SelectedFolderIndex = SelectedFolderIndex;
@@ -146,12 +146,12 @@ namespace MEFL.PageModelViews
                     else if(parameter == "Force")
                     {
                         MyFolders[SelectedFolderIndex].Games = new GameInfoCollection();
-                        Refresher.Refreshing = false;
-                        Refresher.RefreshCurrect();
+                        GameRefresher.Refreshing = false;
+                        GameRefresher.RefreshCurrect();
                         IsRefreshing = Visibility.Visible;
                         Invoke(nameof(IsRefreshing));
                         Invoke(nameof(IsNotRefreshing));
-                        while (Refresher.Refreshing)
+                        while (GameRefresher.Refreshing)
                         {
                         }
                         SelectedFolderIndex = SelectedFolderIndex;

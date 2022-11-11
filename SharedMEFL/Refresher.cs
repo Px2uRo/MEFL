@@ -13,7 +13,7 @@ using MEFL.Controls;
 
 namespace MEFL
 {
-    public static class Refresher
+    public static class GameRefresher
     {
         static List<String> Support = new List<string>();
         static Thread t;
@@ -184,4 +184,14 @@ namespace MEFL
         }
     }
 
+    public static class DownloadRefresher
+    {
+        private static bool _IsRefreshingList;
+
+        public static bool IsRefreshing
+        {
+            get { return _IsRefreshingList; }
+            set { _IsRefreshingList = value; }
+        }
+    }
 }

@@ -27,6 +27,11 @@ namespace MEFL.CLAddIn
         }
         protected override void Dispose(bool disposing)
         {
+            GC.SuppressFinalize(_Avator);
+            GC.SuppressFinalize(_AvatorText);
+            GC.SuppressFinalize(_username);
+            GC.SuppressFinalize(_uuid);
+
             base.Dispose(disposing);
         }
         private Grid _Avator = new Grid();

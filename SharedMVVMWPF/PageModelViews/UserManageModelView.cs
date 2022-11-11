@@ -14,8 +14,8 @@ namespace MEFL.PageModelViews
 {
     public class UserManageModelView : PageModelViewBase
     {
-        public ObservableCollection<Contract.AccountBase> Accounts { get => APIData.APIModel.AccountConfigs; set { APIData.APIModel.AccountConfigs = value; Invoke("Accounts"); } }
-        public Contract.AccountBase SelectedAccount { get => APIData.APIModel.SelectedAccount; set { APIData.APIModel.SelectedAccount = value; Invoke("SelectedAccount"); } }
+        public AccountCollection Accounts { get => APIData.APIModel.AccountConfigs; set { APIData.APIModel.AccountConfigs = value; Invoke("Accounts"); } }
+        public Contract.AccountBase SelectedAccount { get => APIData.APIModel.SelectedAccount; set { APIData.APIModel.SelectedAccount = value; } }
         public ICommand AddAccountCommand { get; set; }
         public UserManageModelView()
         {
