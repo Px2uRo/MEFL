@@ -17,6 +17,7 @@ using System.IO;
 using System.Collections.ObjectModel;
 using System.Windows.Data;
 using System.Diagnostics;
+using MEFL.APIData;
 
 namespace MEFL.PageModelViews
 {
@@ -85,7 +86,12 @@ namespace MEFL.PageModelViews
         }
     }
     public class SettingPageModelView: PageModelViewBase
-    {       
+    {
+        public string TempFolderPath
+        {
+            get { return APIModel.SettingConfig.TempFolderPath; }
+            set { APIModel.SettingConfig.TempFolderPath = value;Invoke(nameof(TempFolderPath)); }
+        }
 
         public string OtherJVMArgs
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using MEFL.Arguments;
@@ -16,6 +17,7 @@ namespace MEFL.Contract;
 
 public class MEFLErrorType : GameInfoBase
 {
+	static MemoryStream stream;
 	public override string GameJarPath
 	{
 		get
@@ -36,7 +38,7 @@ public class MEFLErrorType : GameInfoBase
 		{
 			BitmapImage Image = new();
 			Image.BeginInit();
-			Image.StreamSource = new MemoryStream(Resources.Error);
+			Image.StreamSource = stream;
             Image.EndInit();
 			return Image;
 		} 
@@ -54,11 +56,13 @@ public class MEFLErrorType : GameInfoBase
 
 	public override string GameFolder { get; set; }
 
+	static TextBlock Text = new();
 	public override FrameworkElement SettingsPage
 	{
 		get
 		{
-			throw new NotImplementedException();
+			Text.Text = Description;
+			return Text;
 		}
 	}
 
@@ -187,6 +191,10 @@ public class MEFLErrorType : GameInfoBase
 		throw new NotImplementedException();
 	}
 
+	static MEFLErrorType()
+	{
+        stream = new MemoryStream(Resources.Error);
+    }
 	public MEFLErrorType(string ErrorDescription, string JsonPath)
 	{
 		Description = ErrorDescription;

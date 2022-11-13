@@ -1,4 +1,5 @@
 ﻿using MEFL.APIData;
+using MEFL.Contract;
 using MEFL.PageModelViews;
 using System;
 using System.Collections.Generic;
@@ -7,6 +8,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -206,6 +208,50 @@ namespace MEFL.Controls
                         }
                     }
                     #endregion
+                    #region Downloads
+                    if (Hosting.Permissions.UseDownloadPageAPI)
+                    {
+                        foreach (var pair in Hosting.Download.GetPairs(APIData.APIModel.SettingArgs))
+                        {
+                            var btn = new ChangePageContentButton() { Content = pair.Title ,Tag=$"{Hosting.Guid}:{pair.Tag}",DataContext=pair};
+                            btn.Checked += Btn_Checked;
+                            if (DownloadPageModelView.UI != null)
+                            {
+                                App.Current.Dispatcher.Invoke(() =>
+                                {
+                                    (DownloadPageModelView.UI.SideBar as StackPanel).Children.Add(btn);
+                                });
+                                if (!DownloadPageModelView.UI.Inied && (DownloadPageModelView.UI.SideBar as StackPanel).Children.Count > 0)
+                                {
+                                    ((DownloadPageModelView.UI.SideBar as StackPanel).Children[0] as ChangePageContentButton).IsChecked = true;
+                                    DownloadPageModelView.UI.Inied = true;
+                                }
+                            }
+                            else
+                            {
+                                new Thread(() =>
+                                {
+                                    Thread.Sleep(2000);
+                                    App.Current.Dispatcher.Invoke(() =>
+                                    {
+                                        if (DownloadPageModelView.UI != null)
+                                        {
+                                            App.Current.Dispatcher.Invoke(() =>
+                                            {
+                                                (DownloadPageModelView.UI.SideBar as StackPanel).Children.Add(btn);
+                                            });
+                                            if (!DownloadPageModelView.UI.Inied && (DownloadPageModelView.UI.SideBar as StackPanel).Children.Count > 0)
+                                            {
+                                                ((DownloadPageModelView.UI.SideBar as StackPanel).Children[0] as ChangePageContentButton).IsChecked = true;
+                                                DownloadPageModelView.UI.Inied = true;
+                                            }
+                                        }
+                                    });
+                                }).Start();
+                            }
+                        }
+                    }
+                    #endregion
                 }
                 else
                 {
@@ -250,6 +296,26 @@ namespace MEFL.Controls
                         }
                     }
                     #endregion
+                    #region Downloads
+                        if (DownloadPageModelView.UI != null)
+                        {
+                        for (int i = 0; i < (DownloadPageModelView.UI.SideBar as StackPanel).Children.Count; i++)
+                        {
+                            var btn = (FrameworkElement)(DownloadPageModelView.UI.SideBar as StackPanel).Children[i];
+                            if (btn.Tag.ToString().Contains(Hosting.Guid))
+                            {
+                                i--;
+                                (DownloadPageModelView.UI.SideBar as StackPanel).Children.Remove(btn);
+                                GC.SuppressFinalize(btn);
+                            }
+                        }
+                        if ((DownloadPageModelView.UI.SideBar as StackPanel).Children.Count == 0)
+                        {
+                            DownloadPageModelView.UI.Inied = false;
+                        }
+                    }
+
+                    #endregion
                 }
                 #region Games
                 (App.Current.Resources["RMPMV"] as RealMainPageModelView).RefreshFolderInfoCommand.Execute("Force");
@@ -280,6 +346,41 @@ namespace MEFL.Controls
             Invoke(nameof(Icon));
             Invoke(nameof(ErrorInfo));
         }
+
+        private void Btn_Checked(object sender, RoutedEventArgs e)
+        {
+            DownloadPageItemPair pair = null ;
+            new Thread(() =>
+            {
+                DownloadRefresher.IsRefreshing = true;
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                pair = (sender as FrameworkElement).DataContext as DownloadPageItemPair;
+            });
+                if (pair != null)
+                {
+                    pair.Refresh(APIModel.SettingConfig.TempFolderPath);
+                    while (pair.IsRefreshing)
+                    {
+
+                    }
+                    if (pair.HasError)
+                    {
+                        DownloadPageModelView.ModelView.ErrorDescription=pair.ErrorDescription;
+                        DownloadPageModelView.ModelView.Invoke("ErrorDescription");
+                    }
+                    else
+                    {
+                        DownloadPageModelView.ModelView.ItemSource = pair.Content;
+                    }
+                    DownloadPageModelView.ModelView.HasErrors = pair.HasError;
+                    DownloadPageModelView.ModelView.Invoke("HasErrors");
+                    DownloadPageModelView.ModelView.Invoke("IsRefreshing");
+                    DownloadPageModelView.ModelView.Invoke("ItemSource");
+                }
+            }).Start();
+        }
+
         public bool IsOpen
         {
             get

@@ -11,8 +11,5 @@ namespace MEFL.PageModelViews
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
     }
-
-
 }

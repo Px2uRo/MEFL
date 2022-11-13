@@ -17,6 +17,7 @@ using MEFL.Controls;
 using Newtonsoft.Json;
 using System.Linq;
 using MEFL.Pages;
+using System.Reflection.Metadata;
 
 namespace MEFL.PageModelViews
 {
@@ -98,8 +99,9 @@ namespace MEFL.PageModelViews
         }
 
         public ICommand ChangeAccountCommand { get => RealMainPageModel.ChangeAccountCommand; }
-        public ICommand AddFolderInfoCommand { get=> RealMainPageModel.AddFolderInfoCommand; set { RealMainPageModel.AddFolderInfoCommand = value; } }
-
+        public ICommand AddFolderInfoCommand { get=> RealMainPageModel.AddFolderInfoCommand; 
+            set { RealMainPageModel.AddFolderInfoCommand = value; } }
+        public ICommand GameSettingCommand { get; set; }
         public ICommand RefreshFolderInfoCommand { get; set; }
 
         public RealMainPageModelView()
@@ -107,6 +109,7 @@ namespace MEFL.PageModelViews
             RefreshFolderInfoCommand = new RefreshFolderInfoCommand();
             GameInfoConfigs = MyFolders[SelectedFolderIndex].Games;
             RefreshFolderInfoCommand_ClickBeihavior(null);
+            GameSettingCommand = new GameSettingCommand();
         }
 
         public void RefreshFolderInfoCommand_ClickBeihavior(string parameter)
@@ -180,6 +183,56 @@ namespace MEFL.PageModelViews
         }
     }
 
+    public class GameSettingCommand : ICommand
+    {
+        public event EventHandler? CanExecuteChanged;
+
+        public bool CanExecute(object? parameter)
+        {
+            return true;
+        }
+
+
+        public void Execute(object? parameter)
+        {
+            if (APIModel.CurretGame == null)
+            {
+                MessageBox.Show("没有选中的游戏");
+                return;
+            }
+            bool yes = false;
+            GenerlSettingGameModel.ModelView.Game = APIModel.CurretGame;
+            if (FindControl.FromTag("SettingGamePage", (App.Current.Resources["MainPage"] as Grid)).Length == 0)
+            {
+                yes = true;
+            }
+            if (yes)
+            {
+                GenerlSettingGameModel.UI = new SpecialPages.GameSettingPage()
+                {
+                    Tag = "SettingGamePage",
+                    Visibility = Visibility.Hidden,
+                    Content = APIModel.CurretGame.SettingsPage,
+                    DataContext = GenerlSettingGameModel.ModelView
+                };
+                (App.Current.Resources["MainPage"] as Grid).Children.Add(GenerlSettingGameModel.UI);
+            }
+            GenerlSettingGameModel.UI.Content = APIModel.CurretGame.SettingsPage;
+            MyPageBase From = null;
+            foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
+            {
+                if (item.Visibility == Visibility.Visible)
+                {
+                    From = item;
+                }
+            }
+            foreach (MyPageBase item in FindControl.FromTag("SettingGamePage", (App.Current.Resources["MainPage"] as Grid)))
+            {
+                item.Show(From);
+            }
+
+        }
+    }
     public class RefreshFolderInfoCommand : ICommand
     {
         public event EventHandler? CanExecuteChanged;

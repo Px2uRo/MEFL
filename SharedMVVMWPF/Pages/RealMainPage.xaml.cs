@@ -44,11 +44,23 @@ namespace MEFL.Pages
         }
         private void ItemSetting(object sender, RoutedEventArgs e)
         {
-            foreach (MyPageBase item in FindControl.FromTag("SettingGamePage", (App.Current.Resources["MainPage"] as Grid)))
+            bool yes =false;
+            GenerlSettingGameModel.ModelView.Game = (sender as FrameworkElement).DataContext as GameInfoBase;
+            if(FindControl.FromTag("SettingGamePage", (App.Current.Resources["MainPage"] as Grid)).Length == 0)
             {
-                (App.Current.Resources["MainPage"] as Grid).Children.Remove(item);
+                yes = true;
             }
-            (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.GameSettingPage() { Tag = "SettingGamePage", Visibility = Visibility.Hidden, Content = ((sender as FrameworkElement).DataContext as GameInfoBase).SettingsPage, DataContext = new GenerlSettingGameModelView((sender as FrameworkElement).DataContext as GameInfoBase) });
+            if (yes)
+            {
+                GenerlSettingGameModel.UI = new SpecialPages.GameSettingPage()
+                {
+                    Tag = "SettingGamePage",
+                    Visibility = Visibility.Hidden,
+                    Content = ((sender as FrameworkElement).DataContext as GameInfoBase).SettingsPage,
+                    DataContext = GenerlSettingGameModel.ModelView
+                };
+                (App.Current.Resources["MainPage"] as Grid).Children.Add(GenerlSettingGameModel.UI);
+            }
             MyPageBase From = null;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
             {

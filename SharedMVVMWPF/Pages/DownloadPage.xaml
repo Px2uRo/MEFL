@@ -7,31 +7,20 @@
              xmlns:local="clr-namespace:MEFL.Pages"
               xmlns:mv="clr-namespace:MEFL.PageModelViews"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" SideBar="{Binding ChangePageContentButtons}">
+             d:DesignHeight="450" d:DesignWidth="800">
     <c:MyPageBase.Resources>
-        <mv:BoolToVisiblility x:Key="btv"/>
+
     </c:MyPageBase.Resources>
+    <c:MyPageBase.SideBar>
+        <StackPanel/>
+    </c:MyPageBase.SideBar>
     <Grid>
-        <c:MyItemsCard ItemsSource="{Binding Items}" Visibility="{Binding HasErrors,Converter={StaticResource btv},ConverterParameter=ContentBox}">
-            <c:MyItemsCard.ItemContainerStyle>
-                <Style TargetType="ListBoxItem">
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="ListBoxItem">
-                                <Grid>
-                                    <c:MyItemsCardItem ToolTip="{Binding Id}" Title="{Binding Id}" SubTitle="{Binding Type}" MouseDown="MyItemsCardItem_MouseDown"/>
-                                </Grid>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                </Style>
-            </c:MyItemsCard.ItemContainerStyle>
+        <c:MyItemsCard ItemsSource="{Binding ItemSource}" Title="下载页">
+            <c:MyItemsCard.ItemTemplate>
+                <ItemContainerTemplate>
+                    <c:MyItemsCardItem Title="{Binding Id}" SubTitle="{Binding Type}" Height="30"/>
+                </ItemContainerTemplate>
+            </c:MyItemsCard.ItemTemplate>
         </c:MyItemsCard>
-        <c:MyCard Title="刷新中" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" Height="300" Visibility="{Binding Refreshing,Converter={StaticResource btv}}">
-            <TextBlock Text="朝辞白帝彩云间，千里江陵一日还" TextWrapping="Wrap"/>
-        </c:MyCard>
-        <c:MyCard Title="错误！" HorizontalAlignment="Center" VerticalAlignment="Center" Width="400" Height="300" Visibility="{Binding HasErrors,Converter={StaticResource btv}}">
-            <TextBlock Text="{Binding ErrorText}" TextWrapping="Wrap"/>
-        </c:MyCard>
     </Grid>
 </c:MyPageBase>

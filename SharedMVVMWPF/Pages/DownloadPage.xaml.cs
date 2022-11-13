@@ -23,9 +23,11 @@ namespace MEFL.Pages
     /// </summary>
     public partial class DownloadPage : MyPageBase
     {
+        public bool Inied;
         public DownloadPage()
         {
             this.DataContext = ModelView.ModelView;
+            ModelView.UI=this;
             InitializeComponent();
         }
 
@@ -33,7 +35,8 @@ namespace MEFL.Pages
         {
             for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
             {
-                if (((App.Current.Resources["MainPage"] as Grid).Children[i] as MyPageBase).Tag == "PickUP" || ((App.Current.Resources["MainPage"] as Grid).Children[i] as MyPageBase).Tag == "RenameFolder"
+                if (((App.Current.Resources["MainPage"] as Grid).Children[i] as MyPageBase).Tag == "PickUP" ||
+                    ((App.Current.Resources["MainPage"] as Grid).Children[i] as MyPageBase).Tag == "RenameFolder"
                 )
                 {
                     (App.Current.Resources["MainPage"] as Grid).Children.RemoveAt(i);

@@ -1,5 +1,6 @@
 ﻿using MEFL.Contract;
 using MEFL.Controls;
+using MEFL.SpecialPages;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,8 @@ namespace MEFL.PageModelViews
 {
     public class GenerlSettingGameModelView:PageModelViewBase
     {
-        public GameInfoBase Game { get => GenerlSettingGameModel.Game; set { GenerlSettingGameModel.Game = value;Invoke("Game"); } }
+        public GameInfoBase Game { get => GenerlSettingGameModel.Game; set { GenerlSettingGameModel.Game = value;
+                Invoke("Game"); } }
         public ICommand SelectCommand { get; set; }
         public ICommand BackCommand { get; set; }
         public ICommand RemoveCommand { get; set; }
@@ -21,9 +23,8 @@ namespace MEFL.PageModelViews
 
         public static string CurrectName; 
         public static string CurrectUuid;
-        public GenerlSettingGameModelView(GameInfoBase game)
+        public GenerlSettingGameModelView()
         {
-            Game = game;
             SelectCommand = new SelectGameCommand();
             BackCommand = new BackGameCommand();
             RemoveCommand = new RemoveGameCommand();
@@ -172,5 +173,12 @@ namespace MEFL.PageModelViews
     {
         public static GameInfoBase Game { get; set; }
         public static GenerlSettingGameModelView ModelView { get; set; }
+
+        internal static GameSettingPage UI { get; set; }
+
+        static GenerlSettingGameModel()
+        {
+            ModelView = new();
+        }
     }
 }

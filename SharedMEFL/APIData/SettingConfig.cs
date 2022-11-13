@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
+using CoreLaunching.JsonTemplates;
 using MEFL.Contract;
 using Newtonsoft.Json;
 
@@ -45,6 +46,39 @@ namespace MEFL.APIData
             } 
         }
         private string _OtherJVMArgs;
+        private string _tempFolderPath;
+
+        public string TempFolderPath
+        {
+            get {
+                if (string.IsNullOrEmpty(_tempFolderPath))
+                {
+                    return System.IO.Path.GetTempPath();
+                }
+                else
+                {
+                    if (!Directory.Exists(_tempFolderPath))
+                    {
+                        try
+                        {
+                            Directory.CreateDirectory(_tempFolderPath);
+                        }
+                        catch (Exception ex)
+                        {
+                            return System.IO.Path.GetTempPath();
+                        }
+
+                    }
+
+
+
+                    return _tempFolderPath;
+                }
+            }
+            set { 
+                _tempFolderPath = value; }
+        }
+
         public string OtherJVMArgs { get => _OtherJVMArgs; set { _OtherJVMArgs = value; Update(); } }
         private bool _AlwaysOpenNewExtensions;
         public bool AlwaysOpenNewExtensions { get =>_AlwaysOpenNewExtensions; set { _AlwaysOpenNewExtensions = value;Update(); } }
@@ -52,7 +86,7 @@ namespace MEFL.APIData
         {
             try
             {
-                FileInfo fi = new FileInfo(Path.Combine(Environment.CurrentDirectory, "MEFL\\Config.json"));
+                System.IO.FileInfo fi = new System.IO.FileInfo(Path.Combine(Environment.CurrentDirectory, "MEFL\\Config.json"));
                 if (fi.Exists!=true)
                 {
                     fi.Create().Close();
@@ -67,7 +101,7 @@ namespace MEFL.APIData
         }
         public static SettingConfig Load()
         {
-            FileInfo fi = new FileInfo(Path.Combine(Environment.CurrentDirectory, "MEFL\\Config.json"));
+            System.IO.FileInfo fi = new System.IO.FileInfo(Path.Combine(Environment.CurrentDirectory, "MEFL\\Config.json"));
             try
             {
                 if (fi.Exists != true)
@@ -82,7 +116,7 @@ namespace MEFL.APIData
             SettingConfig sc;
             try
             {
-                sc = JsonConvert.DeserializeObject<SettingConfig>(File.ReadAllText(fi.FullName));
+                sc = JsonConvert.DeserializeObject<SettingConfig>(System.IO.File.ReadAllText(fi.FullName));
                 fi = null;
             }
             catch (Exception ex)
@@ -127,10 +161,10 @@ namespace MEFL.APIData
             var Path = System.IO.Path.Combine(Environment.CurrentDirectory, "AddIns\\Config.json");
             try
             {
-                if (File.Exists(Path) != true)
+                if (System.IO.File.Exists(Path) != true)
                 {
                     Directory.CreateDirectory(System.IO.Path.GetDirectoryName(Path));
-                    File.Create(Path).Close();
+                    System.IO.File.Create(Path).Close();
                 }
                 using (StreamReader sr = new StreamReader(Path))
                 {
@@ -140,7 +174,7 @@ namespace MEFL.APIData
                 {
                     ret = new ObservableCollection<AddInConfig>();
                 }
-                Debugger.Logger($"加载了插件设置,当前文档：{File.ReadAllText(Path)}");
+                Debugger.Logger($"加载了插件设置,当前文档：{System.IO.File.ReadAllText(Path)}");
             }
             catch (Exception ex)
             {
@@ -171,10 +205,10 @@ namespace MEFL.APIData
             {
                 if (Directory.Exists(Path) != true)
                 {
-                    File.Create(Path).Close();
+                    System.IO.File.Create(Path).Close();
                 }
-                File.WriteAllText(Path, JsonConvert.SerializeObject(NewList));
-                Debugger.Logger($"重写了插件设置,当前文档：{File.ReadAllText(Path)}");
+                System.IO.File.WriteAllText(Path, JsonConvert.SerializeObject(NewList));
+                Debugger.Logger($"重写了插件设置,当前文档：{System.IO.File.ReadAllText(Path)}");
             }
             catch (Exception ex)
             {

@@ -4,25 +4,27 @@ namespace MEFL.Contract;
 
 public class DownloadPageItemPair
 {
-	public delegate void RefreshBeihvior(object sender, string tmpFolderPath);
+	public bool HasError { get; set; }
+	public bool IsRefreshing { get; set; }
+	public delegate void delRefreshEvent(object sender, string tmpFolderPath);
 
 	public string Title { get; private set; }
 
 	public string Tag { get; set; }
+	public string ErrorDescription;
 
-	public List<LauncherWebVersionInfo> Items { get; set; }
+	public List<LauncherWebVersionInfo> Content { get; set; }
 
-	public event RefreshBeihvior? RefreshEvent;
+	public event delRefreshEvent? RefreshEvent;
+	public void Refresh(string tmpFolderPath)
+	{
+		RefreshEvent?.Invoke(this, tmpFolderPath);
+	}
 
 	public DownloadPageItemPair(string title, List<LauncherWebVersionInfo> items, string tag)
 	{
 		Title = title;
-		Items = items;
+		Content = items;
 		Tag = tag;
-	}
-
-	public void InvokeRefreshEvent(object sender, string tmpFolderPath)
-	{
-		this.RefreshEvent!(sender, tmpFolderPath);
 	}
 }

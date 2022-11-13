@@ -9,6 +9,8 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
+using System.IO;
+using System.Net;
 using System.Text;
 using System.Threading;
 using System.Windows;
@@ -42,9 +44,109 @@ namespace MEFL.CLAddIn.Export
 
         public bool UseGameManageAPI => true;
 
-        public bool UseDownloadPageAPI => false;
+        public bool UseDownloadPageAPI => true;
 
         public bool UseAccountAPI => true;
+    }
+
+    [Export(typeof(IDownload))]
+    public class Download : IDownload
+    {
+        static string website = "https://launchermeta.mojang.com/mc/game/version_manifest.json";
+        static WebRequest req;
+        public Downloader[] GetDownloaders(SettingArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DownloadSource[] GetDownloadSources(SettingArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public DownloadPageItemPair[] GetPairs(SettingArgs args)
+        {
+            DownloadPageItemPair RealsePair = new("realse", realret, "realse");
+            DownloadPageItemPair SnapsortPair = new("snapsort", snapret, "snapsort");
+            DownloadPageItemPair[] ret = new DownloadPageItemPair[] { RealsePair,SnapsortPair};
+            foreach (var pair in ret)
+            {
+                pair.RefreshEvent += Pair_RefreshEvent;
+            }
+            return ret;
+        }
+
+        private void Pair_RefreshEvent(object sender, string tmpFolderPath)
+        {
+            var pair = (sender as DownloadPageItemPair);
+            pair.IsRefreshing = true;
+            pair.Content = Refresh(pair,tmpFolderPath);
+            pair.IsRefreshing =false;
+        }
+        List<LauncherWebVersionInfo> realret = new();
+        List<LauncherWebVersionInfo> snapret = new();
+        string ResponString;
+        JObject jOb;
+        private List<LauncherWebVersionInfo> Refresh(DownloadPageItemPair pair,string tmpFolderPath)
+        {
+            if (string.IsNullOrEmpty(ResponString))
+            {
+                try
+                {
+                    req.Method = "GET";
+                    using (WebResponse wr = req.GetResponse())
+                    {
+                        var strm1 = wr.GetResponseStream();
+                        var strm2 = new StreamReader(strm1);
+                        ResponString = strm2.ReadToEnd();
+                        strm1.Close();
+                        strm1.Dispose();
+                        strm2.Close();
+                        strm2.Dispose();
+                        jOb = JObject.Parse(ResponString);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    pair.HasError = true;
+                    pair.ErrorDescription = ex.Message;
+                    return null;
+                }
+            }
+            if (pair.Tag== "realse") 
+            {
+                if (realret.Count == 0)
+                {
+                    foreach (var item in jOb["versions"])
+                    {
+                        if (item["type"].ToString() == "release")
+                        {
+                            realret.Add(new() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString() });
+                        }
+                    }
+                }
+                return realret;
+            }
+            else
+            {
+                if (snapret.Count == 0)
+                {
+                    foreach (var item in jOb["versions"])
+                    {
+                        if (item["type"].ToString() == "snapshot")
+                        {
+                            snapret.Add(new() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString() });
+                        }
+                    }
+                }
+                return snapret;
+            }
+        }
+
+        static Download()
+        {
+            req = HttpWebRequest.Create(website);
+        }
     }
 
     [Export(typeof(ILuncherGameType))]

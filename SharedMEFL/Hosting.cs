@@ -39,7 +39,7 @@ namespace MEFL
         public ILuncherGameType LuncherGameType;
 
         [Import(AllowRecomposition = true)]
-        public IDownloadPage DownloadPages; 
+        public IDownload Download; 
         
         [Import(AllowRecomposition = true)]
         public IAccount Account;
@@ -51,7 +51,8 @@ namespace MEFL
         public string Description { get; private set; }
         public string Guid { get; private set; }
         private bool _isOpen;
-
+        AssemblyCatalog ac;
+        CompositionContainer cc;
         public bool IsOpen { 
             get 
             {
@@ -93,8 +94,11 @@ namespace MEFL
                 {
                     try
                     {
-                        var ac = new AssemblyCatalog(FullPath);
-                        var cc = new CompositionContainer(ac);
+                        if (ac == null)
+                        {
+                            ac = new AssemblyCatalog(FullPath);
+                        }
+                        cc = new CompositionContainer(ac);
                         BaseInfo = cc.GetExport<IBaseInfo>().Value;
                         Permissions = cc.GetExport<IPermissions>().Value;
 
@@ -112,7 +116,7 @@ namespace MEFL
                         }
                         if (Permissions.UseDownloadPageAPI)
                         {
-                            DownloadPages = cc.GetExport<IDownloadPage>().Value;
+                            Download = cc.GetExport<IDownload>().Value;
                         }
                         if (Permissions.UseAccountAPI)
                         {
@@ -130,30 +134,37 @@ namespace MEFL
                 }
                 else
                 {
-                    try
+                    if (cc != null)
                     {
-                        SettingPage = null;
+                        if (Permissions != null)
+                        {
+                            if (Permissions.UseSettingPageAPI)
+                            {
+                                cc.ReleaseExport(cc.GetExport<ISettingPage>());
+                            }
+                            if (Permissions.UsePagesAPI)
+                            {
+                                cc.ReleaseExport(cc.GetExport<IPages>());
+                            }
+                            if (Permissions.UseGameManageAPI)
+                            {
+                                cc.ReleaseExport(cc.GetExport<ILuncherGameType>());
+                            }
+                            if (Permissions.UseDownloadPageAPI)
+                            {
+                                cc.ReleaseExport(cc.GetExport<IDownload>());
+                            }
+                            if (Permissions.UseAccountAPI)
+                            {
+                                cc.ReleaseExport(cc.GetExport<IAccount>());
+                            }
+                        }
 
-                        Permissions = null;
-
-                        BaseInfo = null;
-
-                        Pages = null;
-
-                        LuncherGameType = null;
-
-                        DownloadPages = null;
-
-                        Account = null;
-
-                        Debugger.Logger($"卸载了一个插件，名称 {FileName}，版本：{Version} Guid {Guid}");
+                        cc.Dispose();
                     }
-                    catch (Exception ex)
-                    {
-                        ExceptionInfo = $"{ex.Message} at {ex.Source}";
-                    }
+
+                   Debugger.Logger($"卸载了一个插件，名称 {FileName}，版本：{Version} Guid {Guid}");
                 }
-               
                 AddInConfig.Update(APIModel.AddInConfigs);
             } 
         }

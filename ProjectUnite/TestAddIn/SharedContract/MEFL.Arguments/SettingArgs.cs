@@ -18,4 +18,5 @@ public class SettingArgs
 	public string DefaultOtherGameArgs { get; set; }
 
 	public FileInfo SelectedJava { get; set; }
+	public string Location { get; set; }
 }

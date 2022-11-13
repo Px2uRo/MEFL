@@ -51,6 +51,16 @@
                     
                 </Grid>
             </c:MyCard>
+            <c:MyCard Title="系统" IsAbleToSwap="True">
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="临时文件夹路径" Margin="0,0,20,0"/>
+                    <TextBox Text="{Binding TempFolderPath}" Grid.Column="1" DataContext="{DynamicResource SPMV}"/>
+                </Grid>
+            </c:MyCard>
         </StackPanel>
         <StackPanel Tag="Custom">
             <c:MyCard Title="{DynamicResource I18N_String_Setting_Custom_BackgroundImage}">

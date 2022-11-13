@@ -125,7 +125,9 @@
                     <TextBlock Text="{DynamicResource I18N_String_MainPage_ClickHereToChange}"/>
                 </StackPanel>
             </c:MyButton>
-            <c:MyButton Margin="3,0,3,0" Command="{Binding }" Content="{DynamicResource I18N_String_MainPage_GameSeting}" Grid.Row="3" Width="220"/>
+            <c:MyButton Margin="3,0,3,0" Command="{Binding GameSettingCommand}" 
+                        Content="{DynamicResource I18N_String_MainPage_GameSeting}" 
+                        Grid.Row="3" Width="220"/>
         </Grid>
     </c:MyPageBase.SideBar>
     <Grid>
