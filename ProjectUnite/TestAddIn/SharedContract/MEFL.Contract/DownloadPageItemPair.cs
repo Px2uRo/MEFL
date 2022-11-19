@@ -2,6 +2,20 @@ using System.Collections.Generic;
 
 namespace MEFL.Contract;
 
+public class LauncherWebVersionInfoList: List<LauncherWebVersionInfo>
+{
+	public string VersionMajor;
+	public LauncherWebVersionInfoList(string versionMajor)
+	{
+		VersionMajor = versionMajor;
+	}
+
+	public override string ToString()
+	{
+		return VersionMajor;
+	}
+}
+
 public class DownloadPageItemPair
 {
 	public bool HasError { get; set; }
@@ -13,7 +27,7 @@ public class DownloadPageItemPair
 	public string Tag { get; set; }
 	public string ErrorDescription;
 
-	public List<LauncherWebVersionInfo> Content { get; set; }
+    public List<LauncherWebVersionInfoList> Contents { get; set; }
 
 	public event delRefreshEvent? RefreshEvent;
 	public void Refresh(string tmpFolderPath)
@@ -21,10 +35,10 @@ public class DownloadPageItemPair
 		RefreshEvent?.Invoke(this, tmpFolderPath);
 	}
 
-	public DownloadPageItemPair(string title, List<LauncherWebVersionInfo> items, string tag)
+	public DownloadPageItemPair(string title, List<LauncherWebVersionInfoList> contents, string tag)
 	{
 		Title = title;
-		Content = items;
+		Contents = contents;
 		Tag = tag;
 	}
 }

@@ -9,7 +9,7 @@
       "MEFL/1.0.0": {
         "dependencies": {
           "CoreLaunchingNet6": "0.0.0",
-          "MEFL.Contract": "0.0.5.4",
+          "MEFL.Contract": "0.0.5.8",
           "MEFL.Controls": "0.0.6",
           "Newtonsoft.Json": "13.0.1",
           "OctaneEngine": "2.1.0",
@@ -19,15 +19,15 @@
           "MEFL.dll": {}
         }
       },
-      "MEFL.Contract/0.0.5.4": {
+      "MEFL.Contract/0.0.5.8": {
         "dependencies": {
           "MEFL.Controls": "0.0.6",
           "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/net6.0-windows7.0/MEFL.Contract.dll": {
-            "assemblyVersion": "0.0.5.4",
-            "fileVersion": "0.0.5.4"
+            "assemblyVersion": "0.0.5.8",
+            "fileVersion": "0.0.5.8"
           }
         }
       },
@@ -264,12 +264,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "MEFL.Contract/0.0.5.4": {
+    "MEFL.Contract/0.0.5.8": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-0E+8sdKBTc9Ev2kYgZIQUsNVfd2WSO826RklISbqIeMGvbtxNtQW7wSKThUmCJF/CJtBuHq9TvICIDRubZEwuA==",
-      "path": "mefl.contract/0.0.5.4",
-      "hashPath": "mefl.contract.0.0.5.4.nupkg.sha512"
+      "sha512": "sha512-nbApNBC03rBVrOHPbV2j6OeF6nlSjhf7NyWS5EueZwSJaLYep3Kn7uaeHU1DGPYtdYvc8JIhcZeG+yrJ9Cdv1A==",
+      "path": "mefl.contract/0.0.5.8",
+      "hashPath": "mefl.contract.0.0.5.8.nupkg.sha512"
     },
     "MEFL.Controls/0.0.6": {
       "type": "package",

@@ -1,11 +1,5 @@
-﻿[23:48:40][MEFL]程序启动了，参数
-[23:48:40][MEFL]刷新时发现未知错误 The type initializer for 'MEFL.Contract.MEFLErrorType' threw an exception. at MEFL.Contract
-[23:48:40][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[23:48:40][MEFL]刷新时发现未知错误 The type initializer for 'MEFL.Contract.MEFLErrorType' threw an exception. at MEFL.Contract
-[23:48:40][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[23:49:31][MEFL]加载了一个插件，名称 CLAddIn.dll，版本："0.0.0.0" Guid 915e3b18-a9c7-4993-b3bb-27e4eb1438d1
-[23:49:31][MEFL]重写了插件设置,当前文档：[{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"698bb71d-568e-41e4-ad36-2bfd592fe01b","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"698bb71d-568e-41e4-ad36-2bfd592fe01b","IsOpen":false},{"Guid":"6d621dcf-8a77-47df-aa83-081b3f142ba7","IsOpen":false},{"Guid":"847b35fb-9dbd-4be8-a5eb-04b6e6f19869","IsOpen":true},{"Guid":"3131895d-143f-4e99-a56c-dd7265461821","IsOpen":true},{"Guid":"70cb7482-cd8b-4628-9cff-b54353976805","IsOpen":true},{"Guid":"f83f8fdf-8047-436a-b337-34952c0ad646","IsOpen":true},{"Guid":"b2efc1af-5dd8-493b-b109-4d4435c9f9ad","IsOpen":true},{"Guid":"3bd894f5-546c-4b0d-bc67-8852be1a8817","IsOpen":true},{"Guid":"43d95069-9bad-45ca-9965-f0c56172e277","IsOpen":true},{"Guid":"3072f559-66ca-4450-9898-c979933b1590","IsOpen":true},{"Guid":"656ee4e0-2f44-4150-80ac-6d03d8eeff28","IsOpen":true},{"Guid":"5e3888f1-f57f-4609-976e-83736c764330","IsOpen":false},{"Guid":"d854c076-02b6-4cc2-a041-35b623d1e013","IsOpen":false},{"Guid":"c05ea880-c1bd-479e-a5f8-d08187ea87a9","IsOpen":true},{"Guid":"6b45c2e9-f602-4923-ada6-752aea6922b5","IsOpen":false},{"Guid":"7da7541e-5633-4116-9733-fc0b6d2dddda","IsOpen":true},{"Guid":"dc8c5272-a33b-43de-9de3-60407cf072d4","IsOpen":true},{"Guid":"61dbc81e-a0d2-41d8-b65c-0aac7b52dbd1","IsOpen":true},{"Guid":"276eaf20-0ea7-403c-bc5d-c0685069af64","IsOpen":true},{"Guid":"902d4bd9-eb8f-476b-acc8-1cff59f6db07","IsOpen":true},{"Guid":"a823a36e-6cd1-4772-875b-d4cc09983c49","IsOpen":true},{"Guid":"ae3db001-22c7-478a-94a2-8120eee12908","IsOpen":true},{"Guid":"87762cd9-3e9d-4420-ab5e-06d2de7246a0","IsOpen":true},{"Guid":"00ac4503-6081-4e82-9116-e07c40bd867b","IsOpen":true},{"Guid":"cd33fcc1-6a5c-42e5-bd89-49f8d98e35de","IsOpen":true},{"Guid":"daa2ecad-385a-45c9-8afa-11327716267a","IsOpen":true},{"Guid":"35565ccd-2a12-4aa0-a88d-1e7ba80009a1","IsOpen":true},{"Guid":"915e3b18-a9c7-4993-b3bb-27e4eb1438d1","IsOpen":true}]
-[23:49:31][MEFL]写入了注册表，键：PlayerUuid，值：6e9ec642-89aa-477d-bbd5-c856633f11a3
-[23:49:31][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[23:49:31][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[23:50:18][MEFL]程序退出了
+﻿[22:54:14][MEFL]程序启动了，参数
+[22:54:15][MEFL]写入了注册表，键：PlayerUuid，值：6e9ec642-89aa-477d-bbd5-c856633f11a3
+[22:54:15][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[22:54:16][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[22:54:16][MEFL]写入了注册表，键：SelectedFolderIndex，值：0

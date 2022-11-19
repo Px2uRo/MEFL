@@ -9,18 +9,14 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <c:MyPageBase.Resources>
-
+        <ItemContainerTemplate x:Key="ICT">
+                <c:MyItemsCardItem Title="{Binding Id}" SubTitle="{Binding Type}" Height="30"/>
+            </ItemContainerTemplate>
     </c:MyPageBase.Resources>
     <c:MyPageBase.SideBar>
         <StackPanel/>
     </c:MyPageBase.SideBar>
-    <Grid>
-        <c:MyItemsCard ItemsSource="{Binding ItemSource}" Title="下载页">
-            <c:MyItemsCard.ItemTemplate>
-                <ItemContainerTemplate>
-                    <c:MyItemsCardItem Title="{Binding Id}" SubTitle="{Binding Type}" Height="30"/>
-                </ItemContainerTemplate>
-            </c:MyItemsCard.ItemTemplate>
-        </c:MyItemsCard>
-    </Grid>
+    <StackPanel Name="MySP">
+        
+    </StackPanel>
 </c:MyPageBase>

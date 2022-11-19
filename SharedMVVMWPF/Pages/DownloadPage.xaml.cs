@@ -27,8 +27,18 @@ namespace MEFL.Pages
         public DownloadPage()
         {
             this.DataContext = ModelView.ModelView;
+            ModelView.ModelView.PropertyChanged += ModelView_PropertyChanged;
             ModelView.UI=this;
             InitializeComponent();
+        }
+
+        private void ModelView_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            //for (int i = 0; i < MySP.Children.Count; i++)
+            //{
+            //    MySP.Children.RemoveAt(i);
+            //    i--;
+            //}
         }
 
         private void MyItemsCardItem_MouseDown(object sender, MouseButtonEventArgs e)

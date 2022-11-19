@@ -27,7 +27,7 @@ namespace MEFL.PageModelViews
                 Invoke(nameof(ErrorDescription));
             } 
         }
-        public List<LauncherWebVersionInfo> ItemSource { get; set; }
+        public List<LauncherWebVersionInfoList> ItemSource { get; set; }
         public static DownloadPageModelView ModelView = new DownloadPageModelView();
         public DownloadPageModelView()
         {

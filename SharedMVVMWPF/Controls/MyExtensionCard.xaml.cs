@@ -371,7 +371,7 @@ namespace MEFL.Controls
                     }
                     else
                     {
-                        DownloadPageModelView.ModelView.ItemSource = pair.Content;
+                        DownloadPageModelView.ModelView.ItemSource = pair.Contents;
                     }
                     DownloadPageModelView.ModelView.HasErrors = pair.HasError;
                     DownloadPageModelView.ModelView.Invoke("HasErrors");

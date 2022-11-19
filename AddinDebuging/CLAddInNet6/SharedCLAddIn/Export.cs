@@ -10,11 +10,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 
 namespace MEFL.CLAddIn.Export
 {
@@ -80,14 +82,14 @@ namespace MEFL.CLAddIn.Export
         {
             var pair = (sender as DownloadPageItemPair);
             pair.IsRefreshing = true;
-            pair.Content = Refresh(pair,tmpFolderPath);
+            pair.Contents = Refresh(pair,tmpFolderPath);
             pair.IsRefreshing =false;
         }
-        List<LauncherWebVersionInfo> realret = new();
-        List<LauncherWebVersionInfo> snapret = new();
+        List<LauncherWebVersionInfoList> realret = new() { new("Other")};
+        List<LauncherWebVersionInfoList> snapret = new() { new("Other") };
         string ResponString;
         JObject jOb;
-        private List<LauncherWebVersionInfo> Refresh(DownloadPageItemPair pair,string tmpFolderPath)
+        private List<LauncherWebVersionInfoList> Refresh(DownloadPageItemPair pair,string tmpFolderPath)
         {
             if (string.IsNullOrEmpty(ResponString))
             {
@@ -115,13 +117,31 @@ namespace MEFL.CLAddIn.Export
             }
             if (pair.Tag== "realse") 
             {
-                if (realret.Count == 0)
+                if (realret.Count == 1)
                 {
                     foreach (var item in jOb["versions"])
                     {
                         if (item["type"].ToString() == "release")
                         {
-                            realret.Add(new() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString() });
+                            if (Version.TryParse(item["id"].ToString(),out var version))
+                            {
+                                var Tag = $"{version.Major.ToString()}.{version.Minor.ToString()}";
+                                var list = realret.Where(a => a.VersionMajor == Tag).ToList();
+                                if (list.Count == 0)
+                                {
+                                    var nc = new LauncherWebVersionInfoList(Tag);
+                                    nc.Add(new() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString() , Time = item["time"].ToString() });
+                                    realret.Add(nc);
+                                }
+                                else
+                                {
+                                    list[0].Add(new() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString() , Time = item["time"].ToString() });
+                                }
+                            }
+                            else
+                            {
+                                realret[0].Add(new() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), Time = item["time"].ToString() });
+                            }
                         }
                     }
                 }
@@ -129,13 +149,31 @@ namespace MEFL.CLAddIn.Export
             }
             else
             {
-                if (snapret.Count == 0)
+                if (snapret.Count == 1)
                 {
                     foreach (var item in jOb["versions"])
                     {
                         if (item["type"].ToString() == "snapshot")
                         {
-                            snapret.Add(new() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString() });
+                            if (Version.TryParse(item["id"].ToString(), out var version))
+                            {
+                                var Tag = $"{version.Major.ToString()}.{version.Major.ToString()}";
+                                var list = snapret.Where(a => a.VersionMajor == Tag).ToList();
+                                if (list.Count == 0)
+                                {
+                                    var nc = new LauncherWebVersionInfoList(Tag);
+                                    nc.Add(new() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), Time = item["time"].ToString() });
+                                    snapret.Add(nc);
+                                }
+                                else
+                                {
+                                    list[0].Add(new() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString() , Time = item["time"].ToString() });
+                                }
+                            }
+                            else
+                            {
+                                snapret[0].Add(new() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString() , Time = item["time"].ToString() });
+                            }
                         }
                     }
                 }
