@@ -350,23 +350,28 @@ namespace MEFL.Controls
         private void Btn_Checked(object sender, RoutedEventArgs e)
         {
             DownloadPageItemPair pair = null ;
+            DownloadRefresher.IsRefreshing = true;
+            DownloadPageModelView.ModelView.Invoke("IsRefreshing");
             new Thread(() =>
             {
-                DownloadRefresher.IsRefreshing = true;
-            App.Current.Dispatcher.Invoke(() =>
-            {
-                pair = (sender as FrameworkElement).DataContext as DownloadPageItemPair;
-            });
-                if (pair != null)
+                App.Current.Dispatcher.Invoke(() =>
+                {
+                    pair = (sender as FrameworkElement).DataContext as DownloadPageItemPair;
+                });
+                new Thread(() =>
                 {
                     pair.Refresh(APIModel.SettingConfig.TempFolderPath);
+                }).Start();
+                if (pair != null)
+                {
+                    Thread.Sleep(200);
                     while (pair.IsRefreshing)
                     {
 
                     }
                     if (pair.HasError)
                     {
-                        DownloadPageModelView.ModelView.ErrorDescription=pair.ErrorDescription;
+                        DownloadPageModelView.ModelView.ErrorDescription = pair.ErrorDescription;
                         DownloadPageModelView.ModelView.Invoke("ErrorDescription");
                     }
                     else

@@ -15,6 +15,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ModelView = MEFL.PageModelViews.DownloadPageModelView;
 using MEFL.Controls;
+using System.Collections;
+using CoreLaunching.JsonTemplates;
 
 namespace MEFL.Pages
 {
@@ -31,14 +33,77 @@ namespace MEFL.Pages
             ModelView.UI=this;
             InitializeComponent();
         }
-
+        int ChildCount = 0;
         private void ModelView_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            //for (int i = 0; i < MySP.Children.Count; i++)
-            //{
-            //    MySP.Children.RemoveAt(i);
-            //    i--;
-            //}
+            var mv = sender as ModelView;
+            if(e.PropertyName == "ItemSource")
+            {
+                Dispatcher.Invoke(() => {
+                    for (int i = 0; i < MySP.Children.Count; i++)
+                    {
+                        GC.SuppressFinalize(MySP.Children[i]);
+                        MySP.Children.RemoveAt(i);
+                        i--;
+                    }
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                    ChildCount = MySP.Children.Count;
+                });
+                if (mv.ItemSource.Count >= ChildCount)
+                {
+                    for (int i = 0; i < mv.ItemSource.Count; i++)
+                    {
+                        if (ChildCount > i)
+                        {
+                            Dispatcher.Invoke(() => {
+                                (MySP.Children[i] as MyItemsCard).ItemsSource = mv.ItemSource[i];
+                                (MySP.Children[i] as MyItemsCard).Title = mv.ItemSource[i].VersionMajor;
+                            });
+                        }
+                        else
+                        {
+                            Dispatcher.Invoke(() => {
+                                MySP.Children.Add(new MyItemsCard() { ItemsSource = mv.ItemSource[i], Title = mv.ItemSource[i].VersionMajor });
+                            });
+                            ChildCount++;
+                        }
+                    }
+                }
+                Dispatcher.Invoke(() => {
+                    for (int i = 0; i < MySP.Children.Count; i++)
+                    {
+                        if (((MySP.Children[i] as MyItemsCard).ItemsSource as IList).Count == 0)
+                        {
+                            MySP.Children.RemoveAt(i);
+                            i--;
+                        }
+                    }
+                    for (int i = 0; i < MySP.Children.Count; i++)
+                    {
+                        if(i > 2)
+                        {
+                            (MySP.Children[i] as MyItemsCard).IsSwaped = true;
+                        }
+                    }
+                });
+                mv.IsRefreshing = false;
+            }
+            else if (e.PropertyName == "IsRefreshing")
+            {
+                Dispatcher.Invoke(() => {
+                    if (mv.IsRefreshing == true)
+                    {
+                        RefreshingBox.Visibility = Visibility.Visible;
+                        MySP.Visibility = Visibility.Hidden;
+                    }
+                    else
+                    {
+                        RefreshingBox.Visibility = Visibility.Hidden;
+                        MySP.Visibility = Visibility.Visible;
+                    }
+                });
+            }
         }
 
         private void MyItemsCardItem_MouseDown(object sender, MouseButtonEventArgs e)

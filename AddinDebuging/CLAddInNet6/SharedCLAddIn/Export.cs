@@ -1,6 +1,7 @@
 ﻿using MEFL.Arguments;
 using MEFL.CLAddIn;
 using MEFL.CLAddIn.Pages;
+using MEFL.CLAddIn.WebVersion;
 using MEFL.Contract;
 using MEFL.Contract.Controls;
 using MEFL.Controls;
@@ -56,7 +57,7 @@ namespace MEFL.CLAddIn.Export
     {
         static string website = "https://launchermeta.mojang.com/mc/game/version_manifest.json";
         static WebRequest req;
-        public Downloader[] GetDownloaders(SettingArgs args)
+        public MEFLDownloader[] GetDownloaders(SettingArgs args)
         {
             throw new NotImplementedException();
         }
@@ -130,17 +131,17 @@ namespace MEFL.CLAddIn.Export
                                 if (list.Count == 0)
                                 {
                                     var nc = new LauncherWebVersionInfoList(Tag);
-                                    nc.Add(new() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString() , Time = item["time"].ToString() });
+                                    nc.Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString() , Time = item["time"].ToString() });
                                     realret.Add(nc);
                                 }
                                 else
                                 {
-                                    list[0].Add(new() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString() , Time = item["time"].ToString() });
+                                    list[0].Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString() , Time = item["time"].ToString() });
                                 }
                             }
                             else
                             {
-                                realret[0].Add(new() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), Time = item["time"].ToString() });
+                                realret[0].Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), Time = item["time"].ToString() });
                             }
                         }
                     }
@@ -157,22 +158,22 @@ namespace MEFL.CLAddIn.Export
                         {
                             if (Version.TryParse(item["id"].ToString(), out var version))
                             {
-                                var Tag = $"{version.Major.ToString()}.{version.Major.ToString()}";
+                                var Tag = $"{version.Major.ToString()}.{version.Minor.ToString()}";
                                 var list = snapret.Where(a => a.VersionMajor == Tag).ToList();
                                 if (list.Count == 0)
                                 {
                                     var nc = new LauncherWebVersionInfoList(Tag);
-                                    nc.Add(new() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), Time = item["time"].ToString() });
+                                    nc.Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), Time = item["time"].ToString() });
                                     snapret.Add(nc);
                                 }
                                 else
                                 {
-                                    list[0].Add(new() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString() , Time = item["time"].ToString() });
+                                    list[0].Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString() , Time = item["time"].ToString() });
                                 }
                             }
                             else
                             {
-                                snapret[0].Add(new() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString() , Time = item["time"].ToString() });
+                                snapret[0].Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString() , Time = item["time"].ToString() });
                             }
                         }
                     }

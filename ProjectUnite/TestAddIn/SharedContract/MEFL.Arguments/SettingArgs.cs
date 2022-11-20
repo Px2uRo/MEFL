@@ -19,4 +19,5 @@ public class SettingArgs
 
 	public FileInfo SelectedJava { get; set; }
 	public string Location { get; set; }
+	public string CurrectFolder { get; set; }
 }

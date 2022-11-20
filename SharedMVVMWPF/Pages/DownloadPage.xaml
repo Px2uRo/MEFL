@@ -9,14 +9,33 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <c:MyPageBase.Resources>
-        <ItemContainerTemplate x:Key="ICT">
-                <c:MyItemsCardItem Title="{Binding Id}" SubTitle="{Binding Type}" Height="30"/>
-            </ItemContainerTemplate>
+        <Style TargetType="c:MyItemsCard">
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <c:MyItemsCardItem Title="{Binding Id}" SubTitle="{Binding Time}" Height="30"/>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="BorderBrush" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>
+            <Setter Property="Background" Value="{DynamicResource SYTLE_Standard_Background}"/>
+            <Setter Property="Margin" Value="0,0,0,0"/>
+            <Setter Property="IsAbleToSwap" Value="True"/>
+        </Style>
     </c:MyPageBase.Resources>
     <c:MyPageBase.SideBar>
         <StackPanel/>
     </c:MyPageBase.SideBar>
-    <StackPanel Name="MySP">
-        
-    </StackPanel>
+    <Grid>
+        <StackPanel Name="MySP"/>
+        <Grid Width="600" Height="400">
+            <c:MyCard Title="加载中" Content="朝辞白帝彩云间，千里江陵一日还" Name="RefreshingBox" Width="300" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        </Grid>
+    </Grid>
 </c:MyPageBase>

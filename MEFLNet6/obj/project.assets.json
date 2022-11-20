@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
-      "MEFL.Contract/0.0.5.8": {
+      "MEFL.Contract/0.0.5.9": {
         "type": "package",
         "dependencies": {
           "MEFL.Controls": "0.0.4.18",
@@ -18,7 +18,7 @@
           "Microsoft.WindowsDesktop.App.WPF"
         ]
       },
-      "MEFL.Controls/0.0.6": {
+      "MEFL.Controls/0.0.6.3": {
         "type": "package",
         "compile": {
           "lib/net6.0-windows7.0/MEFL.Controls.dll": {}
@@ -437,27 +437,27 @@
     }
   },
   "libraries": {
-    "MEFL.Contract/0.0.5.8": {
-      "sha512": "nbApNBC03rBVrOHPbV2j6OeF6nlSjhf7NyWS5EueZwSJaLYep3Kn7uaeHU1DGPYtdYvc8JIhcZeG+yrJ9Cdv1A==",
+    "MEFL.Contract/0.0.5.9": {
+      "sha512": "yXdSqApZ0TPJAxzeaI9hsSJa/t4A+hyxSfQAE3VieFl1BU5eaOUNsR3eg1Dc135b3hSE2SrbvhJ9PxOPzHfdQw==",
       "type": "package",
-      "path": "mefl.contract/0.0.5.8",
+      "path": "mefl.contract/0.0.5.9",
       "files": [
         ".nupkg.metadata",
         "MEFL.Contract_NuGet_Logo.png",
         "lib/net6.0-windows7.0/MEFL.Contract.dll",
-        "mefl.contract.0.0.5.8.nupkg.sha512",
+        "mefl.contract.0.0.5.9.nupkg.sha512",
         "mefl.contract.nuspec"
       ]
     },
-    "MEFL.Controls/0.0.6": {
-      "sha512": "CwHCKIoqMd86K+tByvFwrFaA07F2MfuIU/HpZVPAzQOujjd70UcGcNgFwsqZKpu+indJnBCtl0Bj9xdId4L6tA==",
+    "MEFL.Controls/0.0.6.3": {
+      "sha512": "r9efVznmqtFilUg2ge3uJs4Cs1/fSryk0WJ+ZwyExliGAGhnEUg+ptz90r20DzApIjkLlh+PkISDAB4DB66YZA==",
       "type": "package",
-      "path": "mefl.controls/0.0.6",
+      "path": "mefl.controls/0.0.6.3",
       "files": [
         ".nupkg.metadata",
         "MEFL.Controls_NuGet_Logo.png",
         "lib/net6.0-windows7.0/MEFL.Controls.dll",
-        "mefl.controls.0.0.6.nupkg.sha512",
+        "mefl.controls.0.0.6.3.nupkg.sha512",
         "mefl.controls.nuspec"
       ]
     },
@@ -1875,8 +1875,8 @@
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
       "CoreLaunchingNet6 >= 0.0.0",
-      "MEFL.Contract >= 0.0.5.8",
-      "MEFL.Controls >= 0.0.6",
+      "MEFL.Contract >= 0.0.5.9",
+      "MEFL.Controls >= 0.0.6.3",
       "Newtonsoft.Json >= 13.0.1",
       "OctaneEngine >= 2.1.0",
       "System.ComponentModel.Composition >= 6.0.0"
@@ -1935,11 +1935,11 @@
         "dependencies": {
           "MEFL.Contract": {
             "target": "Package",
-            "version": "[0.0.5.8, )"
+            "version": "[0.0.5.9, )"
           },
           "MEFL.Controls": {
             "target": "Package",
-            "version": "[0.0.6, )"
+            "version": "[0.0.6.3, )"
           },
           "Newtonsoft.Json": {
             "target": "Package",

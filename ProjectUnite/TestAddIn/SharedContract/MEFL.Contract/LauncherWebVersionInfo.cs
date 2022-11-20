@@ -1,6 +1,9 @@
+using MEFL.Arguments;
+using System.IO;
+
 namespace MEFL.Contract;
 
-public class LauncherWebVersionInfo
+public abstract class LauncherWebVersionInfo:MEFLClass
 {
 	public string Id { get; set; }
 
@@ -12,4 +15,6 @@ public class LauncherWebVersionInfo
 	{
 		return $"{Id},{Type}";
 	}
+
+	public abstract void Download(MEFLDownloader downloader, SettingArgs args);
 }

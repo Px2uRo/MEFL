@@ -9,8 +9,8 @@
       "MEFL/1.0.0": {
         "dependencies": {
           "CoreLaunchingNet6": "0.0.0",
-          "MEFL.Contract": "0.0.5.8",
-          "MEFL.Controls": "0.0.6",
+          "MEFL.Contract": "0.0.5.9",
+          "MEFL.Controls": "0.0.6.3",
           "Newtonsoft.Json": "13.0.1",
           "OctaneEngine": "2.1.0",
           "System.ComponentModel.Composition": "6.0.0"
@@ -19,23 +19,23 @@
           "MEFL.dll": {}
         }
       },
-      "MEFL.Contract/0.0.5.8": {
+      "MEFL.Contract/0.0.5.9": {
         "dependencies": {
-          "MEFL.Controls": "0.0.6",
+          "MEFL.Controls": "0.0.6.3",
           "Newtonsoft.Json": "13.0.1"
         },
         "runtime": {
           "lib/net6.0-windows7.0/MEFL.Contract.dll": {
-            "assemblyVersion": "0.0.5.8",
-            "fileVersion": "0.0.5.8"
+            "assemblyVersion": "0.0.5.9",
+            "fileVersion": "0.0.5.9"
           }
         }
       },
-      "MEFL.Controls/0.0.6": {
+      "MEFL.Controls/0.0.6.3": {
         "runtime": {
           "lib/net6.0-windows7.0/MEFL.Controls.dll": {
-            "assemblyVersion": "0.0.6.0",
-            "fileVersion": "0.0.6.0"
+            "assemblyVersion": "0.0.6.3",
+            "fileVersion": "0.0.6.3"
           }
         }
       },
@@ -264,19 +264,19 @@
       "serviceable": false,
       "sha512": ""
     },
-    "MEFL.Contract/0.0.5.8": {
+    "MEFL.Contract/0.0.5.9": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-nbApNBC03rBVrOHPbV2j6OeF6nlSjhf7NyWS5EueZwSJaLYep3Kn7uaeHU1DGPYtdYvc8JIhcZeG+yrJ9Cdv1A==",
-      "path": "mefl.contract/0.0.5.8",
-      "hashPath": "mefl.contract.0.0.5.8.nupkg.sha512"
+      "sha512": "sha512-yXdSqApZ0TPJAxzeaI9hsSJa/t4A+hyxSfQAE3VieFl1BU5eaOUNsR3eg1Dc135b3hSE2SrbvhJ9PxOPzHfdQw==",
+      "path": "mefl.contract/0.0.5.9",
+      "hashPath": "mefl.contract.0.0.5.9.nupkg.sha512"
     },
-    "MEFL.Controls/0.0.6": {
+    "MEFL.Controls/0.0.6.3": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-CwHCKIoqMd86K+tByvFwrFaA07F2MfuIU/HpZVPAzQOujjd70UcGcNgFwsqZKpu+indJnBCtl0Bj9xdId4L6tA==",
-      "path": "mefl.controls/0.0.6",
-      "hashPath": "mefl.controls.0.0.6.nupkg.sha512"
+      "sha512": "sha512-r9efVznmqtFilUg2ge3uJs4Cs1/fSryk0WJ+ZwyExliGAGhnEUg+ptz90r20DzApIjkLlh+PkISDAB4DB66YZA==",
+      "path": "mefl.controls/0.0.6.3",
+      "hashPath": "mefl.controls.0.0.6.3.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",

@@ -6,7 +6,7 @@ namespace MEFL.Contract
 
     public interface IDownload
     {
-        public Downloader[] GetDownloaders(SettingArgs args);
+        public MEFLDownloader[] GetDownloaders(SettingArgs args);
         public DownloadSource[] GetDownloadSources(SettingArgs args);
         public DownloadPageItemPair[] GetPairs(SettingArgs args);
     }

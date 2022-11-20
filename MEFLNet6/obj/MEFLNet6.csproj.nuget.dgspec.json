@@ -125,11 +125,11 @@
           "dependencies": {
             "MEFL.Contract": {
               "target": "Package",
-              "version": "[0.0.5.8, )"
+              "version": "[0.0.5.9, )"
             },
             "MEFL.Controls": {
               "target": "Package",
-              "version": "[0.0.6, )"
+              "version": "[0.0.6.3, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

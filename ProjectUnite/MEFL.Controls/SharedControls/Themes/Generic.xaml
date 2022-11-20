@@ -89,7 +89,7 @@
                                           HorizontalAlignment="Left"/>
                         </Grid>
                         <ScrollViewer Grid.Column="2" Margin="25">
-                            <ContentPresenter/>
+                            <ContentPresenter Margin="0,0,20,0"/>
                         </ScrollViewer>
                     </Grid>
                 </ControlTemplate>

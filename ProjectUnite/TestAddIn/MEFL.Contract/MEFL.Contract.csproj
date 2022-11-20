@@ -4,7 +4,7 @@
 		<TargetFramework>net6.0-windows</TargetFramework>
 		<Nullable>enable</Nullable>
 		<UseWPF>true</UseWPF>
-		<Version>0.0.5.8</Version>
+		<Version>0.0.5.9</Version>
 		<PackageIcon>MEFL.Contract_NuGet_Logo.png</PackageIcon>
 	</PropertyGroup>
 

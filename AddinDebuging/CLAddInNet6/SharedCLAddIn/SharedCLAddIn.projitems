@@ -35,6 +35,7 @@
       <DependentUpon>MEFLRealseTypeSetting.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)RegManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)WebVersion\Generic.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="$(MSBuildThisFileDirectory)Pages\AddALegacyAccount.xaml">
