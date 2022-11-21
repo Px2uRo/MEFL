@@ -17,6 +17,8 @@ using ModelView = MEFL.PageModelViews.DownloadPageModelView;
 using MEFL.Controls;
 using System.Collections;
 using CoreLaunching.JsonTemplates;
+using MEFL.Contract;
+using MEFL.APIData;
 
 namespace MEFL.Pages
 {
@@ -25,6 +27,12 @@ namespace MEFL.Pages
     /// </summary>
     public partial class DownloadPage : MyPageBase
     {
+        protected override Size MeasureOverride(Size constraint)
+        {
+            PART_Boxes.Width = constraint.Width - 200;
+            PART_Boxes.Height = this.ActualHeight;
+            return base.MeasureOverride(constraint);
+        }
         public bool Inied;
         public DownloadPage()
         {
@@ -129,6 +137,19 @@ namespace MEFL.Pages
             foreach (MyPageBase item in FindControl.FromTag("PickUP", (App.Current.Resources["MainPage"] as Grid)))
             {
                 item.Show(From);
+            }
+        }
+
+        private void DownloadItem(object sender, MouseButtonEventArgs e)
+        {
+            var file = (sender as MyItemsCardItem).DataContext as LauncherWebVersionInfo;
+            if(APIModel.SelectedDownloader == null)
+            {
+                MessageBox.Show("(开发中)没有选中的下载器呢");
+            }
+            else
+            {
+                file.Download(APIModel.SelectedDownloader, APIModel.SettingArgs);
             }
         }
     }

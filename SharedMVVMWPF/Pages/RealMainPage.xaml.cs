@@ -2,7 +2,6 @@
 using MEFL.Contract;
 using MEFL.Controls;
 using MEFL.PageModelViews;
-using OctaneEngine;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -423,22 +422,7 @@ namespace MEFL.Pages
                                     {
                                         parts = 48;
                                     }
-                                    Engine.DownloadFile(item.Url,
-                parts, 8192, false, item.localpath, x =>
-                {
-                    DownloadedItems++;
-                    Debug.WriteLine(DownloadedItems);
-                    if (DownloadedItems == TotalItems)
-                    {
-                        GetProcess = p;
-                        Succeed = true;
-                    }
-                },
-                x =>
-                {
-                    DownloadedSize += ((1.0 / parts) * item.size);
-                    Progress = 20 + ((DownloadedSize / TotalSize) * 80);
-                }).Wait();
+                                    APIModel.SelectedDownloader.Download(item.Url, item.localpath);
                                 }
                                 catch (Exception ex)
                                 {

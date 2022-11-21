@@ -125,7 +125,7 @@
           "dependencies": {
             "MEFL.Contract": {
               "target": "Package",
-              "version": "[0.0.5.9, )"
+              "version": "[0.0.5.10, )"
             },
             "MEFL.Controls": {
               "target": "Package",
@@ -134,10 +134,6 @@
             "Newtonsoft.Json": {
               "target": "Package",
               "version": "[13.0.1, )"
-            },
-            "OctaneEngine": {
-              "target": "Package",
-              "version": "[2.1.0, )"
             },
             "System.ComponentModel.Composition": {
               "target": "Package",

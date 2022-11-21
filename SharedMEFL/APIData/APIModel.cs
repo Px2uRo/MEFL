@@ -13,26 +13,26 @@ using System.Threading;
 
 namespace MEFL.APIData
 {
-    public static class APIModel
+    internal static class APIModel
     {
-        public static ObservableCollection<Hosting> Hostings { get; set; }
-        public static bool SearchJavaThreadIsOK;
-        public static ObservableCollection<FileInfo> Javas { get; set; }
-        public static SettingConfig SettingConfig { get; set; }
-        public static ObservableCollection<AddInConfig> AddInConfigs { get; set; }
+        internal static ObservableCollection<Hosting> Hostings { get; set; }
+        internal static bool SearchJavaThreadIsOK;
+        internal static ObservableCollection<FileInfo> Javas { get; set; }
+        internal static SettingConfig SettingConfig { get; set; }
+        internal static ObservableCollection<AddInConfig> AddInConfigs { get; set; }
 
-        public static AccountCollection AccountConfigs;
+        internal static AccountCollection AccountConfigs;
         private static AccountBase _SelectedAccount { get; set; }
         private static string _SelectedAccountUUID;
 
-        public static string SelectedAccountUUID
+        internal static string SelectedAccountUUID
         {
             get => _SelectedAccountUUID; set { 
                 _SelectedAccountUUID = value;
                 RegManager.Write("PlayerUuid",value);
             }
         }
-        public static AccountBase SelectedAccount
+        internal static AccountBase SelectedAccount
         {
             get {
                 return _SelectedAccount;
@@ -65,7 +65,7 @@ namespace MEFL.APIData
 
         private static int _SelectedFolderIndex { get; set; }
 
-        public static int SelectedFolderIndex
+        internal static int SelectedFolderIndex
         {
             get { return _SelectedFolderIndex; }
             set
@@ -73,8 +73,8 @@ namespace MEFL.APIData
                     RegManager.Write("SelectedFolderIndex", value.ToString(),true);
             }
         }
-        public static Arguments.SettingArgs SettingArgs { get; set; }
-        public static Contract.GameInfoBase CurretGame { get => SettingArgs.CurretGame; set { 
+        internal static Arguments.SettingArgs SettingArgs { get; set; }
+        internal static Contract.GameInfoBase CurretGame { get => SettingArgs.CurretGame; set { 
                 if(value == null)
                 {
                     SettingConfig.SelectedGame = string.Empty;
@@ -88,18 +88,20 @@ namespace MEFL.APIData
                 (App.Current.Resources["RMPMV"] as RealMainPageModelView).Invoke("CurretGame");
             } 
         }
-        public static GameInfoCollection GameInfoConfigs { get; set; }
-        public static ObservableCollection<MEFLFolderInfo> MyFolders 
+        internal static GameInfoCollection GameInfoConfigs { get; set; }
+        internal static ObservableCollection<MEFLFolderInfo> MyFolders 
         {
             get;set;
         }
         private static FileInfo[] tmp1;
 
-        public static bool AlwaysOpenNewAddIns { get => SettingConfig.AlwaysOpenNewExtensions; set { SettingConfig.AlwaysOpenNewExtensions = value; } }
+        internal static bool AlwaysOpenNewAddIns { get => SettingConfig.AlwaysOpenNewExtensions; set { SettingConfig.AlwaysOpenNewExtensions = value; } }
 
         private static ObservableCollection<FileInfo> _SearchedJavas = new ObservableCollection<FileInfo>();
+        internal static Contract.MEFLDownloader SelectedDownloader;
+        internal static DownloaderCollection Downloaders;
 
-        public static ObservableCollection<FileInfo> SearchJavas()
+        internal static ObservableCollection<FileInfo> SearchJavas()
         {
             _SearchedJavas = new ObservableCollection<FileInfo>();
             SearchJavaThreadIsOK = false;

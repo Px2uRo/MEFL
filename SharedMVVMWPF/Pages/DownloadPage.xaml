@@ -16,7 +16,7 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">
-                                    <c:MyItemsCardItem Title="{Binding Id}" SubTitle="{Binding Time}" Height="30"/>
+                                    <c:MyItemsCardItem Title="{Binding Id}" SubTitle="{Binding Time}" Height="30" MouseDown="DownloadItem"/>
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>
@@ -34,8 +34,17 @@
     </c:MyPageBase.SideBar>
     <Grid>
         <StackPanel Name="MySP"/>
-        <Grid Width="600" Height="400">
-            <c:MyCard Title="加载中" Content="朝辞白帝彩云间，千里江陵一日还" Name="RefreshingBox" Width="300" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <Grid Name="PART_Boxes" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <c:MyCard Title="加载中" Name="RefreshingBox" Width="300" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="110" />
+                        <RowDefinition Height="20" />
+                    </Grid.RowDefinitions>
+                    <c:MyLoadingAnimation Grid.Row="0"/>
+                    <TextBlock Text="朝辞白帝彩云间，千里江陵一日还" Grid.Row="1"/>
+                </Grid>
+            </c:MyCard>
         </Grid>
     </Grid>
 </c:MyPageBase>
