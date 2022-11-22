@@ -184,7 +184,7 @@ namespace MEFL
         }
     }
 
-    public static class DownloadRefresher
+    public static class WebListRefresher
     {
         private static bool _IsRefreshingList;
 

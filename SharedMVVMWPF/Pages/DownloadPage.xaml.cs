@@ -40,6 +40,8 @@ namespace MEFL.Pages
             ModelView.ModelView.PropertyChanged += ModelView_PropertyChanged;
             ModelView.UI=this;
             InitializeComponent();
+            ModelView.ModelView.HasErrors = true;
+            ModelView.ModelView.ErrorDescription = "没有要显示的项目";
         }
         int ChildCount = 0;
         private void ModelView_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -94,6 +96,10 @@ namespace MEFL.Pages
                             (MySP.Children[i] as MyItemsCard).IsSwaped = true;
                         }
                     }
+                    if (MySP.Children.Count == 0)
+                    {
+                        mv.HasErrors = true;
+                    }
                 });
                 mv.IsRefreshing = false;
             }
@@ -104,11 +110,21 @@ namespace MEFL.Pages
                     {
                         RefreshingBox.Visibility = Visibility.Visible;
                         MySP.Visibility = Visibility.Hidden;
+                        ErrorBox.Visibility = Visibility.Hidden;
                     }
                     else
                     {
                         RefreshingBox.Visibility = Visibility.Hidden;
-                        MySP.Visibility = Visibility.Visible;
+                        if (mv.HasErrors == true)
+                        {
+                            ErrorBox.Visibility = Visibility.Visible;
+                            MySP.Visibility = Visibility.Hidden;
+                        }
+                        else
+                        {
+                            ErrorBox.Visibility = Visibility.Hidden;
+                            MySP.Visibility = Visibility.Visible;
+                        }
                     }
                 });
             }

@@ -35,7 +35,10 @@
     <Grid>
         <StackPanel Name="MySP"/>
         <Grid Name="PART_Boxes" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <c:MyCard Title="加载中" Name="RefreshingBox" Width="300" Height="200" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <c:MyCard Title="加载中" Name="RefreshingBox" 
+                      Width="300" Height="200" 
+                      VerticalAlignment="Center" HorizontalAlignment="Center"
+                      Visibility="Hidden">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="110" />
@@ -44,6 +47,13 @@
                     <c:MyLoadingAnimation Grid.Row="0"/>
                     <TextBlock Text="朝辞白帝彩云间，千里江陵一日还" Grid.Row="1"/>
                 </Grid>
+            </c:MyCard>
+            <c:MyCard Title="{Binding ErrorStatu}" 
+                      Name="ErrorBox" BorderBrush="Red" 
+                      Width="300" Height="200" 
+                      VerticalAlignment="Center" HorizontalAlignment="Center"
+                      Visibility="Hidden">
+                <TextBlock Text="{Binding ErrorDescription}" TextWrapping="Wrap"/>
             </c:MyCard>
         </Grid>
     </Grid>

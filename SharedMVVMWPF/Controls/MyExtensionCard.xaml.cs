@@ -306,9 +306,15 @@ namespace MEFL.Controls
                             {
                                 i--;
                                 (DownloadPageModelView.UI.SideBar as StackPanel).Children.Remove(btn);
+                                DownloadPageItemPair pair = btn.DataContext as DownloadPageItemPair;
+                                if(pair.Contents != null)
+                                {
+                                    pair.Dispose();
+                                }
                                 GC.SuppressFinalize(btn);
                             }
                         }
+                        DownloadPageModelView.ModelView.Invoke("ItemSource");
                         if ((DownloadPageModelView.UI.SideBar as StackPanel).Children.Count == 0)
                         {
                             DownloadPageModelView.UI.Inied = false;
@@ -350,7 +356,7 @@ namespace MEFL.Controls
         private void Btn_Checked(object sender, RoutedEventArgs e)
         {
             DownloadPageItemPair pair = null ;
-            DownloadRefresher.IsRefreshing = true;
+            WebListRefresher.IsRefreshing = true;
             DownloadPageModelView.ModelView.Invoke("IsRefreshing");
             new Thread(() =>
             {

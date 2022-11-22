@@ -9,7 +9,7 @@ namespace MEFL.PageModelViews
     public class DownloadPageModelView : PageModelViewBase
     {
         public static DownloadPage UI { get; set; }
-        public bool IsRefreshing { get => DownloadRefresher.IsRefreshing; set {DownloadRefresher.IsRefreshing = value; Invoke(nameof(IsRefreshing)); } }
+        public bool IsRefreshing { get => WebListRefresher.IsRefreshing; set {WebListRefresher.IsRefreshing = value; Invoke(nameof(IsRefreshing)); } }
         private bool _hasErrors;
 
         public bool HasErrors
@@ -18,6 +18,13 @@ namespace MEFL.PageModelViews
             set { _hasErrors = value;
                 Invoke(nameof(HasErrors));
             }
+        }
+        private string _errorStatu;
+
+        public string ErrorStatu
+        {
+            get { return _errorStatu; }
+            set { _errorStatu = value;Invoke(nameof(ErrorStatu)); }
         }
 
         private string _errorDescription;
@@ -31,7 +38,8 @@ namespace MEFL.PageModelViews
         public static DownloadPageModelView ModelView = new DownloadPageModelView();
         public DownloadPageModelView()
         {
-            
+            ItemSource = new();
+            ErrorDescription = "没有要显示的项目";
         }
     }
 }

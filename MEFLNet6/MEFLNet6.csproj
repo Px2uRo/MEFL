@@ -18,7 +18,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MEFL.Contract" Version="0.0.5.10" />
+    <PackageReference Include="MEFL.Contract" Version="0.0.5.12" />
     <PackageReference Include="MEFL.Controls" Version="0.0.6.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />

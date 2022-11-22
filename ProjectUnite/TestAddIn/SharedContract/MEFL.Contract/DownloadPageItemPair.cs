@@ -1,9 +1,15 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace MEFL.Contract;
 
-public class LauncherWebVersionInfoList: List<LauncherWebVersionInfo>
+public class LauncherWebVersionInfoList: ObservableCollection<LauncherWebVersionInfo>
 {
+	public virtual new void RemoveItem(int index)
+	{
+		this[index].Dispose();
+		base.RemoveItem(index);	
+	}
 	public string VersionMajor;
 	public LauncherWebVersionInfoList(string versionMajor)
 	{
@@ -16,8 +22,17 @@ public class LauncherWebVersionInfoList: List<LauncherWebVersionInfo>
 	}
 }
 
-public class DownloadPageItemPair
+public class DownloadPageItemPair:MEFLClass
 {
+	protected override void Dispose(bool disposing)
+	{
+		for (int i = 0; i < Contents.Count;)
+		{
+			Contents[i].Clear();
+			Contents.RemoveAt(i);
+		}
+		base.Dispose(disposing);
+	}
 	public bool HasError { get; set; }
 	public bool IsRefreshing { get; set; }
 	public delegate void delRefreshEvent(object sender, string tmpFolderPath);

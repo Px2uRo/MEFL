@@ -96,6 +96,7 @@ namespace MEFL.CLAddIn.Export
             {
                 try
                 {
+                    req = HttpWebRequest.Create(website);
                     req.Method = "GET";
                     using (WebResponse wr = req.GetResponse())
                     {
@@ -108,6 +109,7 @@ namespace MEFL.CLAddIn.Export
                         strm2.Dispose();
                         jOb = JObject.Parse(ResponString);
                     }
+                    req.Abort();
                 }
                 catch (Exception ex)
                 {
@@ -118,7 +120,7 @@ namespace MEFL.CLAddIn.Export
             }
             if (pair.Tag== "realse") 
             {
-                if (realret.Count == 1)
+                if (realret.Count <= 1)
                 {
                     foreach (var item in jOb["versions"])
                     {
@@ -150,7 +152,7 @@ namespace MEFL.CLAddIn.Export
             }
             else
             {
-                if (snapret.Count == 1)
+                if (snapret.Count <= 1)
                 {
                     foreach (var item in jOb["versions"])
                     {
@@ -182,10 +184,6 @@ namespace MEFL.CLAddIn.Export
             }
         }
 
-        static Download()
-        {
-            req = HttpWebRequest.Create(website);
-        }
     }
 
     [Export(typeof(ILuncherGameType))]
