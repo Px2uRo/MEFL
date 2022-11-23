@@ -16,7 +16,7 @@
                         <Setter Property="Template">
                             <Setter.Value>
                                 <ControlTemplate TargetType="ListBoxItem">
-                                    <c:MyItemsCardItem Title="{Binding Id}" SubTitle="{Binding Time}" Height="30" MouseDown="DownloadItem"/>
+                                    <c:MyItemsCardItem Icon="{Binding Icon}" Title="{Binding Id}" SubTitle="{Binding ReleaseTime}" Height="30" MouseDown="DownloadItem"/>
                                 </ControlTemplate>
                             </Setter.Value>
                         </Setter>

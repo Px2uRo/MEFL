@@ -10,11 +10,12 @@ public abstract class LauncherWebVersionInfo:MEFLClass
 	public string Url { get; set; }
 
 	public string Type { get; set; }
-	public string Time { get; set; }
+	public string ReleaseTime { get; set; }
+	public object Icon { get; set; }
 	public override string ToString()
 	{
 		return $"{Id},{Type}";
 	}
 
-	public abstract void Download(MEFLDownloader downloader, SettingArgs args);
+	public abstract DownloadProgress Download(MEFLDownloader downloader, SettingArgs args);
 }

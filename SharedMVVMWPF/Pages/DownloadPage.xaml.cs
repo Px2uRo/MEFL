@@ -19,6 +19,7 @@ using System.Collections;
 using CoreLaunching.JsonTemplates;
 using MEFL.Contract;
 using MEFL.APIData;
+using MEFL.SpecialPages;
 
 namespace MEFL.Pages
 {
@@ -130,32 +131,6 @@ namespace MEFL.Pages
             }
         }
 
-        private void MyItemsCardItem_MouseDown(object sender, MouseButtonEventArgs e)
-        {
-            for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
-            {
-                if (((App.Current.Resources["MainPage"] as Grid).Children[i] as MyPageBase).Tag == "PickUP" ||
-                    ((App.Current.Resources["MainPage"] as Grid).Children[i] as MyPageBase).Tag == "RenameFolder"
-                )
-                {
-                    (App.Current.Resources["MainPage"] as Grid).Children.RemoveAt(i);
-                }
-            }
-            (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.PickUpAFolder() { Tag = "PickUP", Visibility = Visibility.Hidden });
-            MyPageBase From = null;
-            foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
-            {
-                if (item.Visibility == Visibility.Visible)
-                {
-                    From = item;
-                }
-            }
-            foreach (MyPageBase item in FindControl.FromTag("PickUP", (App.Current.Resources["MainPage"] as Grid)))
-            {
-                item.Show(From);
-            }
-        }
-
         private void DownloadItem(object sender, MouseButtonEventArgs e)
         {
             var file = (sender as MyItemsCardItem).DataContext as LauncherWebVersionInfo;
@@ -165,7 +140,7 @@ namespace MEFL.Pages
             }
             else
             {
-                file.Download(APIModel.SelectedDownloader, APIModel.SettingArgs);
+                DownloadingProgressPageModel.ModelView.DownloadingProgresses.Add(file.Download(APIModel.SelectedDownloader, APIModel.SettingArgs));
             }
         }
     }

@@ -35,7 +35,7 @@ public class DownloadPageItemPair:MEFLClass
 	}
 	public bool HasError { get; set; }
 	public bool IsRefreshing { get; set; }
-	public delegate void delRefreshEvent(object sender, string tmpFolderPath);
+	public delegate void RefreshEvent(object sender, string tmpFolderPath);
 
 	public string Title { get; private set; }
 
@@ -44,13 +44,18 @@ public class DownloadPageItemPair:MEFLClass
 
     public List<LauncherWebVersionInfoList> Contents { get; set; }
 
-	public event delRefreshEvent? RefreshEvent;
-	public void Refresh(string tmpFolderPath)
-	{
-		RefreshEvent?.Invoke(this, tmpFolderPath);
-	}
+    public event RefreshEvent? ListRefreshEvent;
+    public void RefreshList(string tmpFolderPath)
+    {
+        ListRefreshEvent?.Invoke(this, tmpFolderPath);
+    }
+    public event RefreshEvent? WebRefreshEvent;
+    public void WebRefresh(string tmpFolderPath)
+    {
+        WebRefreshEvent?.Invoke(this, tmpFolderPath);
+    }
 
-	public DownloadPageItemPair(string title, List<LauncherWebVersionInfoList> contents, string tag)
+    public DownloadPageItemPair(string title, List<LauncherWebVersionInfoList> contents, string tag)
 	{
 		Title = title;
 		Contents = contents;

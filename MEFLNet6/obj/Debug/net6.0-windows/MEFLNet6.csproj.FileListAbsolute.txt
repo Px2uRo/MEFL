@@ -64,3 +64,5 @@ I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\GameSettingPage.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\ManageProcessesPage.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\DownloadPage.g.cs
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\DownloadPage.baml
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\DownloadingProgressPage.g.cs
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\DownloadingProgressPage.baml

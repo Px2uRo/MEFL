@@ -43,7 +43,7 @@ namespace MEFL.CLAddIn.Export
     {
         public bool UseSettingPageAPI =>false;
 
-        public bool UsePagesAPI => true;
+        public bool UsePagesAPI => false;
 
         public bool UseGameManageAPI => true;
 
@@ -74,12 +74,42 @@ namespace MEFL.CLAddIn.Export
             DownloadPageItemPair[] ret = new DownloadPageItemPair[] { RealsePair,SnapsortPair};
             foreach (var pair in ret)
             {
-                pair.RefreshEvent += Pair_RefreshEvent;
+                pair.ListRefreshEvent += Pair_ListRefreshEvent;
+                pair.WebRefreshEvent += Pair_WebRefreshEvent;
             }
             return ret;
         }
 
-        private void Pair_RefreshEvent(object sender, string tmpFolderPath)
+        private void Pair_WebRefreshEvent(object sender, string tmpFolderPath)
+        {
+            var pair = sender as DownloadPageItemPair;
+            pair.IsRefreshing = true;
+            try
+            {
+                req = HttpWebRequest.Create(website);
+                req.Method = "GET";
+                using (WebResponse wr = req.GetResponse())
+                {
+                    var strm1 = wr.GetResponseStream();
+                    var strm2 = new StreamReader(strm1);
+                    ResponString = strm2.ReadToEnd();
+                    strm1.Close();
+                    strm1.Dispose();
+                    strm2.Close();
+                    strm2.Dispose();
+                    jOb = JObject.Parse(ResponString);
+                }
+                req.Abort();
+            }
+            catch (Exception ex)
+            {
+                pair.IsRefreshing = false;
+                pair.HasError = true;
+                pair.ErrorDescription = ex.Message;
+            }
+        }
+
+        private void Pair_ListRefreshEvent(object sender, string tmpFolderPath)
         {
             var pair = (sender as DownloadPageItemPair);
             pair.IsRefreshing = true;
@@ -92,33 +122,15 @@ namespace MEFL.CLAddIn.Export
         JObject jOb;
         private List<LauncherWebVersionInfoList> Refresh(DownloadPageItemPair pair,string tmpFolderPath)
         {
-            if (string.IsNullOrEmpty(ResponString))
+            while (string.IsNullOrEmpty(ResponString))
             {
-                try
+                if (pair.HasError)
                 {
-                    req = HttpWebRequest.Create(website);
-                    req.Method = "GET";
-                    using (WebResponse wr = req.GetResponse())
-                    {
-                        var strm1 = wr.GetResponseStream();
-                        var strm2 = new StreamReader(strm1);
-                        ResponString = strm2.ReadToEnd();
-                        strm1.Close();
-                        strm1.Dispose();
-                        strm2.Close();
-                        strm2.Dispose();
-                        jOb = JObject.Parse(ResponString);
-                    }
-                    req.Abort();
-                }
-                catch (Exception ex)
-                {
-                    pair.HasError = true;
-                    pair.ErrorDescription = ex.Message;
-                    return null;
+                    pair.IsRefreshing = false;
+                    return new();
                 }
             }
-            if (pair.Tag== "realse") 
+            if (pair.Tag == "realse")
             {
                 if (realret.Count <= 1)
                 {
@@ -126,24 +138,24 @@ namespace MEFL.CLAddIn.Export
                     {
                         if (item["type"].ToString() == "release")
                         {
-                            if (Version.TryParse(item["id"].ToString(),out var version))
+                            if (Version.TryParse(item["id"].ToString(), out var version))
                             {
                                 var Tag = $"{version.Major.ToString()}.{version.Minor.ToString()}";
                                 var list = realret.Where(a => a.VersionMajor == Tag).ToList();
                                 if (list.Count == 0)
                                 {
                                     var nc = new LauncherWebVersionInfoList(Tag);
-                                    nc.Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString() , Time = item["time"].ToString() });
+                                    nc.Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
                                     realret.Add(nc);
                                 }
                                 else
                                 {
-                                    list[0].Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString() , Time = item["time"].ToString() });
+                                    list[0].Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
                                 }
                             }
                             else
                             {
-                                realret[0].Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), Time = item["time"].ToString() });
+                                realret[0].Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
                             }
                         }
                     }
@@ -165,23 +177,24 @@ namespace MEFL.CLAddIn.Export
                                 if (list.Count == 0)
                                 {
                                     var nc = new LauncherWebVersionInfoList(Tag);
-                                    nc.Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), Time = item["time"].ToString() });
+                                    nc.Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
                                     snapret.Add(nc);
                                 }
                                 else
                                 {
-                                    list[0].Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString() , Time = item["time"].ToString() });
+                                    list[0].Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
                                 }
                             }
                             else
                             {
-                                snapret[0].Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString() , Time = item["time"].ToString() });
+                                snapret[0].Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
                             }
                         }
                     }
                 }
                 return snapret;
             }
+
         }
 
     }
@@ -202,25 +215,6 @@ namespace MEFL.CLAddIn.Export
         }
     }
 
-
-    [Export(typeof(IPages))]
-    public class Pages : IPages
-    {
-        static Dictionary<object, MyPageBase> StaticDic = new Dictionary<object, MyPageBase>() {
-            {"MCER",new MCERPage() }
-        };
-
-        public Dictionary<object, MyPageBase> IconAndPage => StaticDic;
-
-        public void Added(int index, SettingArgs args)
-        {
-            
-        }
-        public void Delected(int index, SettingArgs args)
-        {
-
-        }
-    }
 
     [Export(typeof(IAccount))]
     public class Account : IAccount

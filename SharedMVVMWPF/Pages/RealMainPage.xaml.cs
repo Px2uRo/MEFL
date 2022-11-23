@@ -397,32 +397,9 @@ namespace MEFL.Pages
                                 {
                                     Directory.CreateDirectory(Path.GetDirectoryName(item.localpath));
                                     File.Create(item.localpath).Close();
-                                    var parts = 1;
-                                    if (item.size > 0 && item.size <= 64)
-                                    {
-                                        parts = 1;
-                                    }
-                                    else if (item.size > 64 && item.size <= 512)
-                                    {
-                                        parts = 4;
-                                    }
-                                    else if (item.size > 512 && item.size <= 4096)
-                                    {
-                                        parts = 8;
-                                    }
-                                    else if (item.size > 4096 && item.size <= 10240)
-                                    {
-                                        parts = 16;
-                                    }
-                                    else if (item.size > 10240 && item.size <= 51200)
-                                    {
-                                        parts = 32;
-                                    }
-                                    else if (item.size > 51200)
-                                    {
-                                        parts = 48;
-                                    }
-                                    APIModel.SelectedDownloader.Download(item.Url, item.localpath);
+
+                                    //todo 补全文件
+                                    //APIModel.SelectedDownloader.CreateProgress(item.Url, item.localpath);
                                 }
                                 catch (Exception ex)
                                 {

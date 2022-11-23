@@ -8,7 +8,7 @@ namespace MEFL.CLAddIn.WebVersion
 {
     public class Generic : LauncherWebVersionInfo
     {
-        public override void Download(MEFLDownloader downloader, SettingArgs args)
+        public override DownloadProgress Download(MEFLDownloader downloader, SettingArgs args)
         {
             throw new NotImplementedException();
         }

@@ -8,7 +8,7 @@
         Title="MainWindow" Height="450" Width="800"
         xmlns:p ="clr-namespace:MEFL.Pages"
         xmlns:con="clr-namespace:MEFL.Controls;assembly=MEFL.Controls"
-        WindowStyle="None" StateChanged="Window_StateChanged">
+        WindowStyle="None" StateChanged="Window_StateChanged" MinHeight="320" MinWidth="600">
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"/>
     </WindowChrome.WindowChrome>

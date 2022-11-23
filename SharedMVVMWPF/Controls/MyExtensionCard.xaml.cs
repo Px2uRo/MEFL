@@ -366,7 +366,8 @@ namespace MEFL.Controls
                 });
                 new Thread(() =>
                 {
-                    pair.Refresh(APIModel.SettingConfig.TempFolderPath);
+                    pair.WebRefresh(APIModel.SettingConfig.TempFolderPath);
+                    pair.RefreshList(APIModel.SettingConfig.TempFolderPath);
                 }).Start();
                 if (pair != null)
                 {

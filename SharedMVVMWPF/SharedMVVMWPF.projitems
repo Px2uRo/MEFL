@@ -12,7 +12,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)ControlModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)..\..\..\Xiong%27s\MEFLCollection\SharedMVVMWPF\PageModelViews\ExtensionPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ChangePageButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\FileOrDictoryItem.cs" />
@@ -29,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\GenerlSettingGameModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\GenerlManageAccountModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\GenerlAddAccountModelView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\DownloadingProgressPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ManageProcessesPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\PageModelViewBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\PickUpAFolderPageModelView.cs" />
@@ -62,6 +62,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\AddNewAccount.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>AddNewAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\DownloadingProgressPage.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>DownloadingProgressPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\GameSettingPage.xaml.cs">
       <SubType>Code</SubType>
@@ -158,6 +162,11 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)SpecialPages\AddAccountPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)SpecialPages\DownloadingProgressPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
