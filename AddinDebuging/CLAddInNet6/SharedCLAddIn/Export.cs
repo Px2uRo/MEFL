@@ -18,6 +18,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
+using System.Windows.Media;
 
 namespace MEFL.CLAddIn.Export
 {
@@ -26,7 +27,24 @@ namespace MEFL.CLAddIn.Export
     {
         public object Title => "CoreLaunching fo MEFL";
 
-        public object Icon => "MEFL.jpg";
+        public object Icon { get {
+                    var path = new System.Windows.Shapes.Path()
+                    {
+                        Width = 80,
+                        Height = 80,
+                        Fill = new SolidColorBrush(Colors.Aqua),
+                        Data = new PathGeometry()
+                        {
+                            FillRule = FillRule.EvenOdd,
+                            Figures = PathFigureCollection.Parse(
+"M34.0609 32.2539 29.202 34.7632 29.2603 34.7951 34.0609 32.3328ZM19.7771 17.5252 22.5147 18.6349 22.5147 21.9929 19.734 23.4289 17.0683 21.9639 17.0683 18.5188ZM25.7469 13.6493 15.2005 17.5177 15.2005 30.9303 25.579 36.6342 29.202 34.7632 24.7112 32.312 24.7112 26.4383 29.3614 24.7442 34.0609 26.6361 34.0609 32.2539 36.4051 31.0433 36.4051 17.9695ZM10.7255 8.68032 8.52369 9.48796 8.52369 12.2882 10.6905 13.4791 12.9508 12.3118 12.9508 9.5823ZM0 0 14.5205 0 14.6624 1.40584C15.3138 4.58457 18.1306 6.97573 21.5068 6.97573 24.883 6.97573 27.6998 4.58457 28.3512 1.40584L28.4932 0 43.0136 0 43.0136 13.5243C46.8721 13.5243 50 16.6474 50 20.5 50 24.3526 46.8721 27.4757 43.0136 27.4757L43.0136 41 12.1257 41C5.42887 41 0 35.5794 0 28.8927Z"
+                    )
+                        }
+                    };
+                return path;
+            } 
+        }
+
 
         public Uri PulisherUri => new Uri("https://space.bilibili.com/283605961");
 

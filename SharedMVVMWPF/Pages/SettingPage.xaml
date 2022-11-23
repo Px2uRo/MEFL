@@ -18,6 +18,7 @@
             <c:ChangePageContentButton Content="{DynamicResource I18N_String_Setting_Launcher}" Tag="Launcher" Checked="ChangePageContentButton_Checked"/>
             <c:ChangePageContentButton Content="{DynamicResource I18N_String_Setting_Custom}" Tag="Custom" Checked="ChangePageContentButton_Checked"/>
             <c:ChangePageContentButton Content="{DynamicResource I18N_String_Setting_Info_MEFL}" Tag="Info" Checked="ChangePageContentButton_Checked"/>
+            <c:ChangePageContentButton Content="下载器" Tag="Downloader" Checked="ChangePageContentButton_Checked"/>
             <StackPanel.Resources>
                 <Style TargetType="c:ChangePageContentButton">
                     <Setter Property="SideBarBrush" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>
@@ -213,6 +214,10 @@
                     </Grid>
                 </StackPanel>
             </c:MyCard>
+        </StackPanel>
+        <StackPanel Tag="Downloader">
+            <c:MyCard Title="下载器"/>
+            <c:MyCard Title="管理下载源"/>
         </StackPanel>
     </Grid>
 </c:MyPageBase>
