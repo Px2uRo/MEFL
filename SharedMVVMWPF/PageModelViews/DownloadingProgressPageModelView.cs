@@ -17,7 +17,7 @@ namespace MEFL.PageModelViews
         {
             DownloadingProgresses = new ();
             DownloadingProgresses.CollectionChanged += DownloadingProgresses_CollectionChanged;
-            _ContentGrid = new Grid();
+            _ContentGrid = new();
         }
 
         private void DownloadingProgresses_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -32,15 +32,15 @@ namespace MEFL.PageModelViews
             }
             Invoke(nameof(DownloadingProgresses));
         }
-        private Grid _ContentGrid;
+        private StackPanel _ContentGrid;
 
-        public Grid ContentGrid
+        public StackPanel ContentGrid
         {
             get { return _ContentGrid; }
             set { _ContentGrid = value; Invoke(nameof(ContentGrid)); }
         }
 
-        public DownloadeProgressCollection DownloadingProgresses { get; set; }
+        public DownloadProgressCollection DownloadingProgresses { get; set; }
         public void LoadButton()
         {
             foreach (ChangePageButton item in FindControl.FromTag("DownloadingProgressPage", (App.Current.Resources["ChangePageButtons"] as StackPanel)))

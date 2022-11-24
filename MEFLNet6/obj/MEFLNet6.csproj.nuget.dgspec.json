@@ -125,7 +125,7 @@
           "dependencies": {
             "MEFL.Contract": {
               "target": "Package",
-              "version": "[0.0.5.18, )"
+              "version": "[0.0.5.21, )"
             },
             "MEFL.Controls": {
               "target": "Package",

@@ -14,6 +14,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Export.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameTypes\MEFLRealseType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFLAccount.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)..\..\..\..\..\Xiong%27s\MEFLCollection\AddinDebuging\CLAddInNet6\SharedCLAddIn\Downloaders\NormalDownloadProgress.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\AddALegacyAccountModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\MCERModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ModelViewBase.cs" />

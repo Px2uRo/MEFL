@@ -6,11 +6,11 @@ using System.Text;
 
 namespace MEFL.CLAddIn.WebVersion
 {
-    public class Generic : LauncherWebVersionInfo
+    public class GenericWebVersion : LauncherWebVersionInfo
     {
-        public override DownloadProgress Download(MEFLDownloader downloader, SettingArgs args)
+        public override DownloadProgress Download(MEFLDownloader downloader, string CurrectFolderPath, SettingArgs args, DownloadSource[] sources)
         {
-            throw new NotImplementedException();
+            return downloader.CreateProgress(Url,CurrectFolderPath,sources);
         }
     }
 }

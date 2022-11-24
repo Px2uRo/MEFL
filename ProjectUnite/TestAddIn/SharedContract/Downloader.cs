@@ -10,8 +10,8 @@ namespace MEFL.Contract
         public abstract string Description { get; }
         public abstract Version Version { get; }
         public abstract object Icon { get; }
-        public abstract DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, List<DownloadSource> Sources);
-        public abstract DownloadProgress CreateProgress(Dictionary<string,string> NativeLocalPairs, List<DownloadSource> Sources);
+        public abstract DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] Sources);
+        public abstract DownloadProgress CreateProgress(Dictionary<string,string> NativeLocalPairs, DownloadSource[] Sources);
     }
 
     public abstract class DownloadProgress:MEFLClass,INotifyPropertyChanged
@@ -41,9 +41,9 @@ namespace MEFL.Contract
         {
             Statu = DownloaderStatu.Downloading;
         }
-        public virtual void Stop()
+        public virtual void Cancel()
         {
-            Statu = DownloaderStatu.Stopped;
+            Statu = DownloaderStatu.Canceled;
         }
         public virtual void Close()
         {
@@ -83,7 +83,7 @@ namespace MEFL.Contract
 
         public DownloadProgress()
         {
-            Statu = DownloaderStatu.Stopped;
+            Statu = DownloaderStatu.Canceled;
         }
     }
 
@@ -91,7 +91,7 @@ namespace MEFL.Contract
     {
         Downloading=0,
         Paused=1,
-        Stopped =2,
+        Canceled =2,
         Finished=3
     }
 }

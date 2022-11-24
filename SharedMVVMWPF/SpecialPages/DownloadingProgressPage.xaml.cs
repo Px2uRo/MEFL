@@ -1,4 +1,5 @@
 ﻿using MEFL.Controls;
+using MEFL.PageModelViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,7 @@ namespace MEFL.SpecialPages
     {
         public DownloadingProgressPage()
         {
+            this.DataContext = DownloadingProgressPageModel.ModelView;
             InitializeComponent();
         }
     }

@@ -99,7 +99,8 @@ namespace MEFL.APIData
 
         private static ObservableCollection<FileInfo> _SearchedJavas = new ObservableCollection<FileInfo>();
         internal static Contract.MEFLDownloader SelectedDownloader;
-        internal static DownloaderCollection Downloaders;
+        public static DownloaderCollection Downloaders = new();
+        public static DownloadSourceCollection DownloadSources = new();
 
         internal static ObservableCollection<FileInfo> SearchJavas()
         {

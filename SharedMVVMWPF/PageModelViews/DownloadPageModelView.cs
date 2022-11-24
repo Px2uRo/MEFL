@@ -1,4 +1,5 @@
-﻿using MEFL.Contract;
+﻿using MEFL.APIData;
+using MEFL.Contract;
 using MEFL.Pages;
 using System.Collections.Generic;
 using System.Windows;
@@ -35,6 +36,7 @@ namespace MEFL.PageModelViews
             } 
         }
         public List<LauncherWebVersionInfoList> ItemSource { get; set; }
+        internal DownloaderCollection Downloaders { get => APIModel.Downloaders; }
         public static DownloadPageModelView ModelView = new DownloadPageModelView();
         public DownloadPageModelView()
         {

@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Timers;
 using System.Diagnostics;
+using System.ComponentModel;
 
 namespace MEFL.Pages
 {
@@ -20,6 +21,10 @@ namespace MEFL.Pages
             InitializeComponent();
             this.DefalutChangeButton.IsChecked = true;
             timer.Elapsed += T_Elapsed;
+        }
+        private void propChanged(object sender, PropertyChangedEventArgs e)
+        {
+
         }
 
         private void ChangePageContentButton_Checked(object sender, RoutedEventArgs e)

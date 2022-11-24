@@ -250,6 +250,10 @@ namespace MEFL.Controls
                                 }).Start();
                             }
                         }
+                        foreach (var item in Hosting.Download.GetDownloaders(APIData.APIModel.SettingArgs))
+                        {
+                            APIModel.Downloaders.Add(item);
+                        }
                     }
                     #endregion
                 }
@@ -314,10 +318,19 @@ namespace MEFL.Controls
                                 GC.SuppressFinalize(btn);
                             }
                         }
-                        DownloadPageModelView.ModelView.Invoke("ItemSource");
-                        if ((DownloadPageModelView.UI.SideBar as StackPanel).Children.Count == 0)
-                        {
+                            DownloadPageModelView.ModelView.Invoke("ItemSource");
+                            if ((DownloadPageModelView.UI.SideBar as StackPanel).Children.Count == 0)
+                            {
                             DownloadPageModelView.UI.Inied = false;
+                            }
+                        }
+
+                    for (int i = 0; i < APIModel.Downloaders.Count; i++)
+                    {
+                        if (APIModel.Downloaders[i].AddInGuid == Hosting.Guid)
+                        {
+                            APIModel.Downloaders.RemoveAt(i);
+                            i--;
                         }
                     }
 

@@ -19,9 +19,9 @@ namespace MEFL.CLAddIn.Downloaders
         {
             base.Start();
         }
-        public override void Stop()
+        public override void Cancel()
         {
-            base.Stop();
+            base.Cancel();
         }
     }
 }

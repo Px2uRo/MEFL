@@ -9,7 +9,10 @@ namespace MEFL.PageModelViews
         public event PropertyChangedEventHandler PropertyChanged;
         public void Invoke(string propertyName)
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            if(PropertyChanged != null)
+            {
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
         }
     }
 }

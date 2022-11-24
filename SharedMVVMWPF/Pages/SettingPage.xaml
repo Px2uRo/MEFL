@@ -10,15 +10,15 @@
              >
     <c:MyPageBase.Resources>
         <IsJavaNullConverter xmlns="clr-namespace:MEFL.PageModelViews" x:Key="isNull"/>
-        <SettingPageModelView xmlns="clr-namespace:MEFL.PageModelViews" x:Key="SPMV"/>
+        <SettingPageModelView xmlns="clr-namespace:MEFL.PageModelViews" x:Key="SPMV" PropertyChanged="propChanged"/>
     </c:MyPageBase.Resources>
     <c:MyPageBase.SideBar>
         <StackPanel>
             <c:ChangePageContentButton x:Name="DefalutChangeButton" Content="{DynamicResource I18N_String_Setting_Game}" Tag="Game" Checked="ChangePageContentButton_Checked"/>
             <c:ChangePageContentButton Content="{DynamicResource I18N_String_Setting_Launcher}" Tag="Launcher" Checked="ChangePageContentButton_Checked"/>
             <c:ChangePageContentButton Content="{DynamicResource I18N_String_Setting_Custom}" Tag="Custom" Checked="ChangePageContentButton_Checked"/>
-            <c:ChangePageContentButton Content="{DynamicResource I18N_String_Setting_Info_MEFL}" Tag="Info" Checked="ChangePageContentButton_Checked"/>
             <c:ChangePageContentButton Content="下载器" Tag="Downloader" Checked="ChangePageContentButton_Checked"/>
+            <c:ChangePageContentButton Content="{DynamicResource I18N_String_Setting_Info_MEFL}" Tag="Info" Checked="ChangePageContentButton_Checked"/>
             <StackPanel.Resources>
                 <Style TargetType="c:ChangePageContentButton">
                     <Setter Property="SideBarBrush" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>
@@ -215,9 +215,68 @@
                 </StackPanel>
             </c:MyCard>
         </StackPanel>
-        <StackPanel Tag="Downloader">
-            <c:MyCard Title="下载器"/>
-            <c:MyCard Title="管理下载源"/>
+        <StackPanel Tag="Downloader" DataContext="{DynamicResource SPMV}">
+            <StackPanel.Resources>
+                <Style TargetType="c:MyItemsCard" x:Key="MyS">
+                    <Setter Property="ItemContainerStyle">
+                        <Setter.Value>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListBoxItem">
+                                            <Grid Height="60" Margin="0,0,0,5">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="60"/>
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+                                                <Rectangle Name="Rect" Opacity="0" Fill="{DynamicResource SYTLE_Standard_ColorBrush}" Grid.ColumnSpan="2"/>
+                                                <ContentPresenter Content="{Binding Icon}"/>
+                                                <StackPanel Grid.Column="1">
+                                                    <TextBlock Text="{Binding Name}"/>
+                                                    <TextBlock Text="{Binding Description}"/>
+                                                    <TextBlock Text="{Binding Version}"/>
+                                                </StackPanel>
+                                                <Grid.Triggers>
+                                                    <EventTrigger RoutedEvent="MouseEnter">
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation From="0" To="0.3" Duration="0:0:0:0.2"
+                                                                     Storyboard.TargetName="Rect" Storyboard.TargetProperty="Opacity">
+                                                                </DoubleAnimation>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </EventTrigger>
+                                                    <EventTrigger RoutedEvent="MouseLeave">
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation From="0.3" To="0" Duration="0:0:0:0.2"
+                                                                     Storyboard.TargetName="Rect" Storyboard.TargetProperty="Opacity">
+                                                                </DoubleAnimation>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </EventTrigger>
+                                                </Grid.Triggers>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="BorderBrush" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>
+                    <Setter Property="Background" Value="{DynamicResource SYTLE_Standard_Background}"/>
+                    <Setter Property="Margin" Value="0,0,0,0"/>
+                </Style>
+            </StackPanel.Resources>
+            <c:MyItemsCard Name="MyC" ItemsSource="{Binding Downloaders}" Style="{DynamicResource MyS}">
+                <c:MyItemsCard.Title>
+                    <TextBlock>
+                        <Run Text="当前选中下载器："/>
+                        <Run Text="{Binding SelectedDownloaderString,Mode=OneWay}"/>
+                    </TextBlock>
+                </c:MyItemsCard.Title>
+            </c:MyItemsCard>
+            <c:MyItemsCard Title="管理下载源"/>
         </StackPanel>
     </Grid>
 </c:MyPageBase>

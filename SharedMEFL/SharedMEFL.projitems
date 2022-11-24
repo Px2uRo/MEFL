@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)APIData\SettingConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Debugger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DownloaderCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DownloadSourceCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FastLoadJson.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FolderInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameCollection.cs" />

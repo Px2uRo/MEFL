@@ -18,6 +18,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Data;
 using System.Diagnostics;
 using MEFL.APIData;
+using MEFL.Contract;
 
 namespace MEFL.PageModelViews
 {
@@ -148,8 +149,34 @@ namespace MEFL.PageModelViews
             set { _EnableSearchJava = value;Invoke("EnableSearchJava"); }
         }
 
+
+        public DownloaderCollection Downloaders
+        {
+            get { return APIModel.Downloaders; }
+        }
+
+
+        public string SelectedDownloaderString
+        {
+            get {
+                if (APIData.APIModel.SelectedDownloader == null)
+                {
+                    return "未选中下载器";
+                }
+                else
+                {
+                    return APIModel.SelectedDownloader.Name;
+                }
+            }
+        }
+
+
+
         public SettingPageModelView()
         {
+            #region 什么单例            
+            SettingPageModel.ModelView = this;
+            #endregion
             _EnableSearchJava = true;
             LangIndex = (int)APIData.APIModel.SettingArgs.LangID;
             ChangeBackgroundCommand = new ChangeBackground();
@@ -204,6 +231,7 @@ namespace MEFL.PageModelViews
             }
             dic = null;
         }
+        internal static SettingPageModelView ModelView;
         static SettingPageModel()
         {
             #region 获取 MEFL.Contract 协议版本

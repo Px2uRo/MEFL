@@ -1,5 +1,6 @@
 ﻿using MEFL.Arguments;
 using MEFL.CLAddIn;
+using MEFL.CLAddIn.Downloaders;
 using MEFL.CLAddIn.Pages;
 using MEFL.CLAddIn.WebVersion;
 using MEFL.Contract;
@@ -77,7 +78,7 @@ namespace MEFL.CLAddIn.Export
         static WebRequest req;
         public MEFLDownloader[] GetDownloaders(SettingArgs args)
         {
-            throw new NotImplementedException();
+            return new MEFLDownloader[] {new NormalDownloader(),};
         }
 
         public DownloadSource[] GetDownloadSources(SettingArgs args)
@@ -163,17 +164,17 @@ namespace MEFL.CLAddIn.Export
                                 if (list.Count == 0)
                                 {
                                     var nc = new LauncherWebVersionInfoList(Tag);
-                                    nc.Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
+                                    nc.Add(new GenericWebVersion() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
                                     realret.Add(nc);
                                 }
                                 else
                                 {
-                                    list[0].Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
+                                    list[0].Add(new GenericWebVersion() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
                                 }
                             }
                             else
                             {
-                                realret[0].Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
+                                realret[0].Add(new GenericWebVersion() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
                             }
                         }
                     }
@@ -195,17 +196,17 @@ namespace MEFL.CLAddIn.Export
                                 if (list.Count == 0)
                                 {
                                     var nc = new LauncherWebVersionInfoList(Tag);
-                                    nc.Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
+                                    nc.Add(new GenericWebVersion() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
                                     snapret.Add(nc);
                                 }
                                 else
                                 {
-                                    list[0].Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
+                                    list[0].Add(new GenericWebVersion() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
                                 }
                             }
                             else
                             {
-                                snapret[0].Add(new Generic() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
+                                snapret[0].Add(new GenericWebVersion() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
                             }
                         }
                     }
