@@ -140,8 +140,25 @@ namespace MEFL.Pages
             }
             else
             {
-                DownloadingProgressPageModel.ModelView.DownloadingProgresses.Add(file.Download(APIModel.SelectedDownloader,APIModel.MyFolders[APIModel.SelectedFolderIndex].Path ,APIModel.SettingArgs,APIModel.DownloadSources.ToArray()));
+                var result = file.Download(APIModel.SelectedDownloader, APIModel.MyFolders[APIModel.SelectedFolderIndex].Path, APIModel.SettingArgs, APIModel.DownloadSources.ToArray());
+                if (result.HasError != true) {
+                    DownloadingProgressPageModel.ModelView.DownloadingProgresses.Add(result.Progress);
+                }
+                else
+                {
+                    result.DownloadButtonClickEvent += Result_DownloadButtonClickEvent;
+                    WebListRefresher.SovlePage.Content=result.Page;
+                    WebListRefresher.SovlePage.DataContext = result;
+                    WebListRefresher.ShowSovlePage();
+                }
             }
+        }
+
+        private void Result_DownloadButtonClickEvent(LauncherProgressResult result)
+        {
+            DownloadingProgressPageModel.ModelView.DownloadingProgresses.Add(result.Progress);
+            WebListRefresher.CleanSovlePage();
+            WebListRefresher.GoToDownloadProgressPage();
         }
     }
 }

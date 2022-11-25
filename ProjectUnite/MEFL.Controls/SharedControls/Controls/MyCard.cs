@@ -125,6 +125,20 @@ namespace MEFL.Controls
         }
 
         #region Propdp
+
+
+
+        public object RightTitlePanel
+        {
+            get { return (object)GetValue(RightTitlePanelProperty); }
+            set { SetValue(RightTitlePanelProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for RightTitlePanel.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty RightTitlePanelProperty =
+            DependencyProperty.Register("RightTitlePanel", typeof(object), typeof(MyCard), new PropertyMetadata(string.Empty));
+
+
         public object Title
         {
             get

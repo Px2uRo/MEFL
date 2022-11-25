@@ -16,16 +16,16 @@ namespace MEFL
         {
             DownloadingProgressPageModel.ModelView.ContentGrid.Children.Add(new Controls.DownloadProgressCard() { DataContext=item});
             base.InsertItem(index, item);
-            new Thread(() =>
-            {
-                item.Start();
-            }).Start();
         }
         protected override void RemoveItem(int index)
         {
             this[index].Close();
             this[index].Dispose();
+            App.Current.Dispatcher.Invoke(() => {
+                DownloadingProgressPageModel.ModelView.ContentGrid.Children.RemoveAt(index);
+            });
             base.RemoveItem(index);
+
         }
     }
     public class DownloaderCollection : ObservableCollection<Contract.MEFLDownloader>

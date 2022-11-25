@@ -43,41 +43,42 @@ namespace MEFL.PageModelViews
         public DownloadProgressCollection DownloadingProgresses { get; set; }
         public void LoadButton()
         {
-            foreach (ChangePageButton item in FindControl.FromTag("DownloadingProgressPage", (App.Current.Resources["ChangePageButtons"] as StackPanel)))
+            App.Current.Dispatcher.Invoke(() =>
             {
-                    _dbani.From = item.Width;
-                    _dbani.To = 45.0;
-                    item.BeginAnimation(FrameworkElement.WidthProperty, _dbani);
-            }
+
+            });
         }
         public void ReturnToMainPage()
         {
-            MyPageBase From = null;
-            foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
+            App.Current.Dispatcher.Invoke(() =>
             {
-                if (item.Visibility == Visibility.Visible)
+                MyPageBase From = null;
+                foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
                 {
-                    From = item;
-                    if (item.Tag as String != From.Tag as String)
+                    if (item.Visibility == Visibility.Visible)
                     {
-                        item.Hide();
+                        From = item;
+                        if (item.Tag as String != From.Tag as String)
+                        {
+                            item.Hide();
+                        }
                     }
                 }
-            }
-            foreach (MyPageBase item in FindControl.FromTag("RealMainPage", (App.Current.Resources["MainPage"] as Grid)))
-            {
-                if(From.Tag.ToString()== "DownloadingProgressPage")
+                foreach (MyPageBase item in FindControl.FromTag("RealMainPage", (App.Current.Resources["MainPage"] as Grid)))
                 {
-                    item.Show(From);
+                    if (From.Tag.ToString() == "DownloadingProgressPage")
+                    {
+                        item.Show(From);
+                    }
                 }
-            }
-            From = null;
-            foreach (ChangePageButton item in FindControl.FromTag("DownloadingProgressPage", (App.Current.Resources["ChangePageButtons"] as StackPanel)))
-            {
-                _dbani.From = item.Width;
-                _dbani.To = 0.0;
-                item.BeginAnimation(FrameworkElement.WidthProperty, _dbani);
-            }
+                From = null;
+                foreach (ChangePageButton item in FindControl.FromTag("DownloadingProgressPage", (App.Current.Resources["ChangePageButtons"] as StackPanel)))
+                {
+                    _dbani.From = item.Width;
+                    _dbani.To = 0.0;
+                    item.BeginAnimation(FrameworkElement.WidthProperty, _dbani);
+                }
+            });
         }
     }
 

@@ -16,6 +16,7 @@ namespace MEFL.Contract
 
     public abstract class DownloadProgress:MEFLClass,INotifyPropertyChanged
     {
+        public Dictionary<string, string> NativeLocalPairs;
         private string _currectFile;
 
         public string CurrectFile
@@ -32,7 +33,14 @@ namespace MEFL.Contract
                 PropertyChanged.Invoke(this, new(propName));
             }
         }
-        public DownloaderStatu Statu { get; set; }
+        private DownloaderStatu _statu;
+
+        public DownloaderStatu Statu
+        {
+            get { return _statu; }
+            set { _statu = value; ChangeProperty(nameof(Statu)); }
+        }
+
         public virtual void Pause()
         {
             Statu = DownloaderStatu.Paused;
@@ -48,6 +56,11 @@ namespace MEFL.Contract
         public virtual void Close()
         {
             Dispose();
+        }
+
+        public virtual void Continue()
+        {
+            Statu = DownloaderStatu.Downloading;
         }
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -92,6 +105,7 @@ namespace MEFL.Contract
         Downloading=0,
         Paused=1,
         Canceled =2,
-        Finished=3
+        Finished=3,
+        Failed=4
     }
 }

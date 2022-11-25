@@ -55,6 +55,7 @@ namespace MEFL
             (App.Current.Resources["MainPage"] as Grid).Children.Add(new Pages.DownloadPage() { Tag = "DownloadPage", Visibility = Visibility.Hidden });
             (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.ManageProcessesPage() { Tag = "ProcessesManagePage", Visibility = Visibility.Hidden });
             (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.DownloadingProgressPage() { Tag = "DownloadingProgressPage", Visibility = Visibility.Hidden });
+            (App.Current.Resources["MainPage"] as Grid).Children.Add(WebListRefresher.SovlePage);
 
             (App.Current.Resources["ChangePageButtons"] as StackPanel).Children.Add(
                 new ChangePageButton

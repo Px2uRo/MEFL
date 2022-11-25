@@ -10,7 +10,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Downloaders\NormalDownloader.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Downloaders\NormalProgress.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Export.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameTypes\MEFLRealseType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFLAccount.cs" />
@@ -38,6 +37,10 @@
       <DependentUpon>MEFLRealseTypeSetting.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)RegManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)..\..\..\..\..\Xiong%27s\MEFLCollection\AddinDebuging\CLAddInNet6\SharedCLAddIn\Downloaders\SolveDupNamePage.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>SolveDupNamePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)WebVersion\Generic.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -62,6 +65,11 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Pages\MEFLRealseTypeSetting.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)..\..\..\..\..\Xiong%27s\MEFLCollection\AddinDebuging\CLAddInNet6\SharedCLAddIn\Downloaders\SolveDupNamePage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

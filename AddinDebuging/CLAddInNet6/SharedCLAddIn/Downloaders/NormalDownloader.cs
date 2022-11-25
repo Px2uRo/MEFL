@@ -17,12 +17,12 @@ namespace MEFL.CLAddIn.Downloaders
 
         public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] Sources)
         {
-            return new NormalDownloadProgress();
+            return new NormalDownloadProgress(NativeUrl,LoaclPath);
         }
 
         public override DownloadProgress CreateProgress(Dictionary<string, string> NativeLocalPairs, DownloadSource[] Sources)
         {
-            return new NormalDownloadProgress();
+            return new NormalDownloadProgress(NativeLocalPairs);
         }
     }
 }

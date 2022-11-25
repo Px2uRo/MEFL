@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using System.Windows.Shapes;
 using MEFL.PageModelViews;
 using MEFL.Controls;
+using System.Windows.Controls;
+using System.Windows;
 
 namespace MEFL
 {
@@ -192,6 +194,67 @@ namespace MEFL
         {
             get { return _IsRefreshingList; }
             set { _IsRefreshingList = value; }
+        }
+
+        public static MyPageBase SovlePage = new() { Tag="SovlePage",Visibility=System.Windows.Visibility.Hidden};
+        public static void ShowSovlePage()
+        {
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                MyPageBase From = null;
+                foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
+                {
+                    if (item.Visibility == Visibility.Visible)
+                    {
+                        From = item;
+                        if (item.Tag as String != From.Tag as String)
+                        {
+                            item.Hide();
+                        }
+                    }
+                }
+                foreach (MyPageBase item in FindControl.FromTag("SovlePage", (App.Current.Resources["MainPage"] as Grid)))
+                {
+                    item.Show(From);
+                }
+                From = null;
+            });
+        }
+
+        public static void CleanSovlePage()
+        {
+            if(SovlePage.DataContext != null)
+            {
+                GC.SuppressFinalize(SovlePage.Content);
+                SovlePage.Content = null;
+                (SovlePage.DataContext as Contract.LauncherProgressResult).Dispose();
+                SovlePage.DataContext = null;
+            }
+        }
+
+
+        internal static void GoToDownloadProgressPage()
+        {
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                MyPageBase From = null;
+                foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
+                {
+                    if (item.Visibility == Visibility.Visible)
+                    {
+                        From = item;
+                        if (item.Tag as String != From.Tag as String)
+                        {
+                            item.Hide();
+                        }
+                    }
+                }
+                foreach (MyPageBase item in FindControl.FromTag("DownloadingProgressPage", (App.Current.Resources["MainPage"] as Grid)))
+                {
+                    item.Show(From);
+                }
+                From = null;
+            });
         }
     }
 }

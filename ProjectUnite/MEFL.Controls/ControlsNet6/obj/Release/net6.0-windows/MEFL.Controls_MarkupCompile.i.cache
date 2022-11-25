@@ -1,5 +1,5 @@
 ﻿MEFL.Controls
-0.0.6.3
+0.0.6.4
 
 library
 C#
@@ -16,5 +16,5 @@ TRACETRACE;WPF;RELEASE;NET;NET6_0;NETCOREAPP
 194-200944676
 I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\SharedControls\Themes\Generic.xaml;
 
-False
+True
 

@@ -1,14 +1,27 @@
 ﻿using MEFL.Contract;
+using System.Collections.Generic;
 using System.Timers;
+using System.Windows.Controls;
 
 namespace MEFL.CLAddIn.Downloaders
 {
     internal class NormalDownloadProgress : DownloadProgress
     {
-        Timer t;
+        public NormalDownloadProgress(string nativeUrl, string loaclPath)
+        {
+            CurrectFile = nativeUrl;
+            this.NativeLocalPairs = new () { { nativeUrl, loaclPath } };
+        }
+
+
+        public NormalDownloadProgress(Dictionary<string, string> nativeLocalPairs)
+        {
+            this.NativeLocalPairs = nativeLocalPairs;
+        }
+        bool paused;
         public override void Pause()
         {
-            t.Stop();
+            paused = true;
             base.Pause();
         }
         public override void Cancel()
@@ -21,29 +34,13 @@ namespace MEFL.CLAddIn.Downloaders
         }
         public override void Start()
         {
+            paused = false;
             base.Start();
-            TotalSize = 2500;
-            while (DownloadedSize < TotalSize)
-            {
-                System.Threading.Thread.Sleep(20);
-                DownloadedSize++;
-                if (DownloadedSize >= TotalSize)
-                {
-                    this.Statu = DownloaderStatu.Finished;
-                }
-            }
-
         }
-
-        private void T_Elapsed(object? sender, ElapsedEventArgs e)
+        public override void Continue()
         {
-            this.DownloadedSize++;
-            if(DownloadedSize >= TotalSize)
-            {
-                this.Statu = DownloaderStatu.Finished;
-                (sender as Timer).Stop();
-                (sender as Timer).Dispose();
-            }
+            paused = false;
+            Start();
         }
     }
 }
