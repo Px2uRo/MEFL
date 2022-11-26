@@ -1,6 +1,8 @@
 using System.ComponentModel;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
+using System.Linq;
 
 namespace MEFL.Contract
 {
@@ -10,8 +12,8 @@ namespace MEFL.Contract
         public abstract string Description { get; }
         public abstract Version Version { get; }
         public abstract object Icon { get; }
-        public abstract DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] Sources);
-        public abstract DownloadProgress CreateProgress(Dictionary<string,string> NativeLocalPairs, DownloadSource[] Sources);
+        public abstract DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] Sources,string dotMCFolder);
+        public abstract DownloadProgress CreateProgress(Dictionary<string,string> NativeLocalPairs, DownloadSource[] Sources,string dotMCFolder);
     }
 
     public abstract class DownloadProgress:MEFLClass,INotifyPropertyChanged

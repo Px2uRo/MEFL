@@ -138,6 +138,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="30"/>
                         <ColumnDefinition Width="30"/>
+                        <ColumnDefinition Width="30"/>
                     </Grid.ColumnDefinitions>
                     <c:MyComboBox ItemsSource="{Binding MyFolders}"
                                   BorderBrush="{DynamicResource SYTLE_Standard_BorderBrush}"
@@ -162,6 +163,7 @@
                     </c:MyComboBox>
                     <c:MyButton Width="30" Height="30" Grid.Column="1" Content="+" Command="{Binding AddFolderInfoCommand}"/>
                     <c:MyButton Width="30" Height="30" Grid.Column="2" Content="R" Command="{Binding RefreshFolderInfoCommand}"/>
+                    <c:MyButton Width="30" Height="30" Grid.Column="3" Content="E" Command="{Binding OpenInExplorer}"/>
                 </Grid>
                 <ContentPresenter>
                     <ContentPresenter.Content>

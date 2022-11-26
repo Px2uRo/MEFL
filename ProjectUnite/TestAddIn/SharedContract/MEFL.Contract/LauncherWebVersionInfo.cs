@@ -19,7 +19,7 @@ public abstract class LauncherWebVersionInfo:MEFLClass
 		return $"{Id},{Type}";
 	}
 
-	public abstract LauncherProgressResult Download(MEFLDownloader downloader,string CurrectFolderPath, SettingArgs args, DownloadSource[] sources);
+	public abstract LauncherProgressResult Download(MEFLDownloader downloader,string dotMCFolder, SettingArgs args, DownloadSource[] sources);
 }
 
 public class LauncherProgressResult : MEFLClass

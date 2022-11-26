@@ -1,20 +1,35 @@
-﻿using MEFL.Contract;
+﻿using CoreLaunching.JsonTemplates;
+using MEFL.Contract;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net;
+using System.Text;
+using System.Threading;
 using System.Timers;
 using System.Windows.Controls;
 
 namespace MEFL.CLAddIn.Downloaders
 {
-    internal class NormalDownloadProgress : DownloadProgress
+    public class NormalDownloadProgress : DownloadProgress
     {
-        public NormalDownloadProgress(string nativeUrl, string loaclPath)
+        List<bool> bools = new();
+        WebClient webClient;
+        string versionPath;
+        string GameJarPath;
+        //Directory.CreateDirectory(System.IO.Path.Combine(fp, "versions", NameBox.Text));
+        public NormalDownloadProgress(string nativeUrl, string loaclPath,string dotMCFolder)
         {
-            CurrectFile = nativeUrl;
-            this.NativeLocalPairs = new () { { nativeUrl, loaclPath } };
+            CurrectFile = Path.GetFileName( loaclPath);
+            versionPath = Path.Combine(dotMCFolder, "versions", Path.GetFileNameWithoutExtension(CurrectFile));
+            GameJarPath = Path.Combine(versionPath, $"{Path.GetFileNameWithoutExtension(CurrectFile)}.jar");
+            this.NativeLocalPairs = new() { { nativeUrl, loaclPath } };
         }
 
 
-        public NormalDownloadProgress(Dictionary<string, string> nativeLocalPairs)
+        public NormalDownloadProgress(Dictionary<string, string> nativeLocalPairs,string dotMCFolder)
         {
             this.NativeLocalPairs = nativeLocalPairs;
         }
@@ -32,11 +47,65 @@ namespace MEFL.CLAddIn.Downloaders
         {
             base.Close();
         }
+        bool Decided = false;
         public override void Start()
         {
             paused = false;
+            new Thread(() => {
+                for (int i = 0; i < this.NativeLocalPairs.Count; i++)
+                {
+                    var Key = NativeLocalPairs.ToList()[i].Key.ToString();
+                    var Value = NativeLocalPairs.ToList()[i].Value.ToString();
+                    bools.Add(false);
+                    webClient = new();
+                    webClient.DownloadProgressChanged += WebClient_DownloadProgressChanged;
+                    webClient.Encoding = Encoding.UTF8;
+                    try
+                    {
+                        if (!Directory.Exists(Path.GetDirectoryName(Value)))
+                        {
+                            Directory.CreateDirectory(Path.GetDirectoryName(Value));
+                        }
+                        webClient.DownloadFileTaskAsync(Key, Value).Wait();
+                    }
+                    catch (System.Exception ex)
+                    {
+
+                    }
+                    webClient.Dispose();
+                    webClient = null;
+                    while (!Decided)
+                    {
+                        if (Value.EndsWith(".json"))
+                        {
+                            var root = JsonConvert.DeserializeObject<Root>(System.IO.File.ReadAllText(Value));
+                            if(root != null)
+                            {
+                                NativeLocalPairs.Add(root.Downloads.Client.Url,Path.Combine(versionPath,GameJarPath));
+                            }
+                        }
+                        Decided = true;
+                    }
+                }
+            }).Start();
             base.Start();
         }
+
+        int _SavedFileSizes;
+        private void WebClient_DownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            if(bools[bools.Count - 1] == false)
+            {
+                bools[bools.Count - 1] = true;
+                TotalSize += (int)e.TotalBytesToReceive;
+            }
+            DownloadedSize = _SavedFileSizes + (int)e.BytesReceived;
+            if (e.ProgressPercentage == 100)
+            {
+                _SavedFileSizes = (int)e.TotalBytesToReceive;
+            }
+        }
+
         public override void Continue()
         {
             paused = false;

@@ -103,6 +103,7 @@ namespace MEFL.PageModelViews
             set { RealMainPageModel.AddFolderInfoCommand = value; } }
         public ICommand GameSettingCommand { get; set; }
         public ICommand RefreshFolderInfoCommand { get; set; }
+        public ICommand OpenInExplorer =>new OpenInExplorer();
 
         public RealMainPageModelView()
         {
@@ -180,6 +181,21 @@ namespace MEFL.PageModelViews
                     Invoke(nameof(GameInfoConfigs));
                 });
             }).Start();
+        }
+    }
+
+    public class OpenInExplorer : ICommand
+    {
+        public event EventHandler? CanExecuteChanged;
+
+        public bool CanExecute(object? parameter)
+        {
+            return true;
+        }
+
+        public void Execute(object? parameter)
+        {
+            System.Diagnostics.Process.Start("explorer.exe", APIModel.MyFolders[APIModel.SelectedFolderIndex].Path);
         }
     }
 

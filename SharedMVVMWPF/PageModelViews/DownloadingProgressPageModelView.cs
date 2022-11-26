@@ -45,7 +45,12 @@ namespace MEFL.PageModelViews
         {
             App.Current.Dispatcher.Invoke(() =>
             {
-
+                foreach (ChangePageButton item in FindControl.FromTag("DownloadingProgressPage", (App.Current.Resources["ChangePageButtons"] as StackPanel)))
+                {
+                    _dbani.From = item.Width;
+                    _dbani.To = 45.0;
+                    item.BeginAnimation(FrameworkElement.WidthProperty, _dbani);
+                }
             });
         }
         public void ReturnToMainPage()

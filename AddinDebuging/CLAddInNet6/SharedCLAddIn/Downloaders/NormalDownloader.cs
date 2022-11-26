@@ -15,14 +15,14 @@ namespace MEFL.CLAddIn.Downloaders
 
         public override object Icon => "C#";
 
-        public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] Sources)
+        public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] Sources,string dotMCFolder)
         {
-            return new NormalDownloadProgress(NativeUrl,LoaclPath);
+            return new NormalDownloadProgress(NativeUrl,LoaclPath,dotMCFolder);
         }
 
-        public override DownloadProgress CreateProgress(Dictionary<string, string> NativeLocalPairs, DownloadSource[] Sources)
+        public override DownloadProgress CreateProgress(Dictionary<string, string> NativeLocalPairs, DownloadSource[] Sources,string dotMCFolder)
         {
-            return new NormalDownloadProgress(NativeLocalPairs);
+            return new NormalDownloadProgress(NativeLocalPairs,dotMCFolder);
         }
     }
 }

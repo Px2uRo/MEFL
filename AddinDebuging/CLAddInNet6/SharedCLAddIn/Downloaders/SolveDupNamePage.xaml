@@ -6,7 +6,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        
-    </Grid>
+    <StackPanel>
+        <c:MyCard Title="解决同名问题">
+            <StackPanel>
+                <Grid Margin="0,0,0,15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="70"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Image Height="70" Grid.RowSpan="2" />
+                    <TextBox Background="Transparent" BorderBrush="Transparent" Name="NameBox" FontWeight="Bold" FontSize="30" Grid.Column="1"/>
+                    <TextBlock Background="Transparent" Name="InfoBox" FontSize="20" Grid.Column="1" Grid.Row="1"/>
+                </Grid>
+                <StackPanel Orientation="Horizontal">
+                    <c:MyButton Content="下载" Margin="0,0,5,0" Name="DownloadBtn" Click="Button_Cliked"/>
+                </StackPanel>
+            </StackPanel>
+        </c:MyCard>
+    </StackPanel>
 </UserControl>
