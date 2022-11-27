@@ -2,6 +2,7 @@
 using MEFL.Contract;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -17,19 +18,21 @@ namespace MEFL.CLAddIn.Downloaders
     {
         List<bool> bools = new();
         WebClient webClient;
+        string dotMCPath;
         string versionPath;
         string GameJarPath;
         //Directory.CreateDirectory(System.IO.Path.Combine(fp, "versions", NameBox.Text));
         public NormalDownloadProgress(string nativeUrl, string loaclPath,string dotMCFolder)
         {
+            dotMCPath = dotMCFolder;
             CurrectFile = Path.GetFileName( loaclPath);
             versionPath = Path.Combine(dotMCFolder, "versions", Path.GetFileNameWithoutExtension(CurrectFile));
             GameJarPath = Path.Combine(versionPath, $"{Path.GetFileNameWithoutExtension(CurrectFile)}.jar");
-            this.NativeLocalPairs = new() { { nativeUrl, loaclPath } };
+            this.NativeLocalPairs = new() { new(nativeUrl, loaclPath) };
         }
 
 
-        public NormalDownloadProgress(Dictionary<string, string> nativeLocalPairs,string dotMCFolder)
+        public NormalDownloadProgress(List<NativeLocalPair> nativeLocalPairs,string dotMCFolder)
         {
             this.NativeLocalPairs = nativeLocalPairs;
         }
@@ -54,9 +57,10 @@ namespace MEFL.CLAddIn.Downloaders
             new Thread(() => {
                 for (int i = 0; i < this.NativeLocalPairs.Count; i++)
                 {
-                    var Key = NativeLocalPairs.ToList()[i].Key.ToString();
-                    var Value = NativeLocalPairs.ToList()[i].Value.ToString();
+                    var Key = NativeLocalPairs[i].NativeUrl;
+                    var Value = NativeLocalPairs[i].LoaclPath;
                     bools.Add(false);
+                    CurrectFile = System.IO.Path.GetFileName(Key);
                     webClient = new();
                     webClient.DownloadProgressChanged += WebClient_DownloadProgressChanged;
                     webClient.Encoding = Encoding.UTF8;
@@ -70,7 +74,7 @@ namespace MEFL.CLAddIn.Downloaders
                     }
                     catch (System.Exception ex)
                     {
-
+                        Statu = DownloaderStatu.Failed;
                     }
                     webClient.Dispose();
                     webClient = null;
@@ -81,7 +85,51 @@ namespace MEFL.CLAddIn.Downloaders
                             var root = JsonConvert.DeserializeObject<Root>(System.IO.File.ReadAllText(Value));
                             if(root != null)
                             {
-                                NativeLocalPairs.Add(root.Downloads.Client.Url,Path.Combine(versionPath,GameJarPath));
+                                NativeLocalPairs.Add(new(root.Downloads.Client.Url, Path.Combine(versionPath, GameJarPath)));
+                                TotalSize += root.Downloads.Client.Size;
+                                CurrectFile = "判断缺失的文件中";
+                                if(!Directory.Exists(Path.Combine(dotMCPath, "assets", "indexs")))
+                                {
+                                    Directory.CreateDirectory(Path.Combine(dotMCPath, "assets", "indexs"));
+                                    var clt = new WebClient();
+                                    clt.DownloadFile(root.AssetIndex.Url,Path.Combine(dotMCPath, "assets", "indexs", $"{root.AssetIndex.Id}.json"));
+                                    clt.Dispose();
+                                }
+                                if (!System.IO.File.Exists(Path.Combine(dotMCPath, "assets", "indexs", $"{root.AssetIndex.Id}.json")))
+                                {
+                                    var clt = new WebClient();
+                                    clt.DownloadFile(root.AssetIndex.Url,Path.Combine(dotMCPath, "assets", "indexs", $"{root.AssetIndex.Id}.json"));
+                                    clt.Dispose();
+                                }
+                                var assets = JsonConvert.DeserializeObject<AssetsObject>(System.IO.File.ReadAllText(Path.Combine(dotMCPath, "assets", "indexs", $"{root.AssetIndex.Id}.json")));
+                                if (assets == null)
+                                {
+                                    var clt = new WebClient();
+                                    clt.DownloadFile(root.AssetIndex.Url, Path.Combine(dotMCPath, "assets", "indexs", $"{root.AssetIndex.Id}.json"));
+                                    clt.Dispose();
+                                }
+                                GC.SuppressFinalize(assets);
+                                assets = JsonConvert.DeserializeObject<AssetsObject>(System.IO.File.ReadAllText(Path.Combine(dotMCPath, "assets", "indexs", $"{root.AssetIndex.Id}.json")));
+                                if(assets == null)
+                                {
+                                    Statu = DownloaderStatu.Failed;
+                                }
+                                else
+                                {
+                                    foreach (var item in assets.Objects)
+                                    {
+                                        var objectPath = Path.Combine(dotMCPath, "assets", "objects",item.Hash.Substring(0,2),item.Hash);
+                                        if (!System.IO.File.Exists(objectPath))
+                                        {
+                                            NativeLocalPairs.Add(new($"http://resources.download.minecraft.net/{item.Hash.Substring(0, 2)}/{item.Hash}", objectPath));
+                                            TotalSize += item.Size;
+                                        }
+                                    }
+                                }
+                                for (int j = 0; j < root.Libraries.Count; j++)
+                                {
+
+                                }
                             }
                         }
                         Decided = true;
@@ -96,13 +144,19 @@ namespace MEFL.CLAddIn.Downloaders
         {
             if(bools[bools.Count - 1] == false)
             {
+                if(bools.Count - 1 == 0)
+                {
+                    if( bools[0] == false)
+                    {
+                        TotalSize = (int)e.TotalBytesToReceive;
+                    }
+                }
                 bools[bools.Count - 1] = true;
-                TotalSize += (int)e.TotalBytesToReceive;
             }
             DownloadedSize = _SavedFileSizes + (int)e.BytesReceived;
             if (e.ProgressPercentage == 100)
             {
-                _SavedFileSizes = (int)e.TotalBytesToReceive;
+                _SavedFileSizes += (int)e.TotalBytesToReceive;
             }
         }
 

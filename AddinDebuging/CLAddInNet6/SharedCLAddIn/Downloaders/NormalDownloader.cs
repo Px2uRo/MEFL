@@ -20,7 +20,7 @@ namespace MEFL.CLAddIn.Downloaders
             return new NormalDownloadProgress(NativeUrl,LoaclPath,dotMCFolder);
         }
 
-        public override DownloadProgress CreateProgress(Dictionary<string, string> NativeLocalPairs, DownloadSource[] Sources,string dotMCFolder)
+        public override DownloadProgress CreateProgress(List<NativeLocalPair> NativeLocalPairs, DownloadSource[] Sources,string dotMCFolder)
         {
             return new NormalDownloadProgress(NativeLocalPairs,dotMCFolder);
         }

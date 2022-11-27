@@ -13,12 +13,35 @@ namespace MEFL.Contract
         public abstract Version Version { get; }
         public abstract object Icon { get; }
         public abstract DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] Sources,string dotMCFolder);
-        public abstract DownloadProgress CreateProgress(Dictionary<string,string> NativeLocalPairs, DownloadSource[] Sources,string dotMCFolder);
+        public abstract DownloadProgress CreateProgress(List<NativeLocalPair> NativeLocalPairs, DownloadSource[] Sources,string dotMCFolder);
     }
+    public class NativeLocalPair
+    {
+        public string NativeUrl;
+        public string LoaclPath;
 
+        public NativeLocalPair(string nativeUrl, string loaclPath)
+        {
+            NativeUrl = nativeUrl;
+            LoaclPath = loaclPath;
+        }
+    }
     public abstract class DownloadProgress:MEFLClass,INotifyPropertyChanged
     {
-        public Dictionary<string, string> NativeLocalPairs;
+        private string _ErrorInfo;
+
+        public string ErrorInfo
+        {
+            get { return _ErrorInfo; }
+            set { _ErrorInfo = value; ChangeProperty(nameof(ErrorInfo)); }
+        }
+
+        public virtual void Retry()
+        {
+            Statu = DownloaderStatu.Downloading;
+        }
+
+        public List<NativeLocalPair> NativeLocalPairs;
         private string _currectFile;
 
         public string CurrectFile

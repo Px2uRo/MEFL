@@ -56,7 +56,7 @@ namespace MEFL.CLAddIn
         private void Button_Cliked(object sender,RoutedEventArgs e)
         {
             (this.DataContext as Contract.LauncherProgressResult).Progress.NativeLocalPairs.Clear();
-            (this.DataContext as Contract.LauncherProgressResult).Progress.NativeLocalPairs.Add(_native,System.IO.Path.Combine(fp, "versions", NameBox.Text,$"{NameBox.Text}.json"));
+            (this.DataContext as Contract.LauncherProgressResult).Progress.NativeLocalPairs.Add(new(_native, System.IO.Path.Combine(fp, "versions", NameBox.Text, $"{NameBox.Text}.json")));
             (this.DataContext as Contract.LauncherProgressResult).NowDownload();
         }
     }
