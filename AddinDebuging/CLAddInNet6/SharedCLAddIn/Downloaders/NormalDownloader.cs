@@ -7,9 +7,9 @@ namespace MEFL.CLAddIn.Downloaders
 {
     public class NormalDownloader : MEFLDownloader
     {
-        public override string Name => "NormalDownloader";
+        public override string Name => "WebClientC#";
 
-        public override string Description => "普通下载器";
+        public override string Description => "WebClientC#";
 
         public override Version Version => new(0, 0, 0);
 

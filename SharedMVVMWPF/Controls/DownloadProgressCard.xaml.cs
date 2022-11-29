@@ -65,22 +65,46 @@ namespace MEFL.Controls
         private void DownloadProgressCard_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             var source = sender as DownloadProgress;
-            if(e.PropertyName == nameof(source.Statu))
+            if(e.PropertyName == nameof(source.State))
             {
-                if (source.Statu == DownloaderStatu.Finished)
+                if (source.State == DownloadProgressState.Finished)
                 {
                     DownloadingProgressPageModel.ModelView.DownloadingProgresses.Remove(source);
                 }
-                else if (source.Statu == DownloaderStatu.Failed)
+                else if (source.State == DownloadProgressState.Failed)
                 {
-
+                    this.Content = source.ErrorInfo;
                 }
-                else if (source.Statu == DownloaderStatu.Canceled)
+                else if (source.State == DownloadProgressState.Canceled)
                 {
                     DownloadingProgressPageModel.ModelView.DownloadingProgresses.Remove(source);
+                }
+                else if(source.State == DownloadProgressState.Pauseing||source.State == DownloadProgressState.RetryingOrContiuning)
+                {
+                    Dispatcher.Invoke(() => {
+                        ControlingBtn.Visibility = Visibility.Visible;
+                    });
+                }
+                else if (source.State == DownloadProgressState.Paused|| source.State == DownloadProgressState.Downloading)
+                {
+                    Dispatcher.Invoke(() => {
+                        ControlingBtn.Visibility = Visibility.Hidden;
+                    });
                 }
             }
-            if (e.PropertyName == nameof(source.DownloadedSize))
+            else if (e.PropertyName == nameof(source.TotalCount))
+            {
+                Dispatcher.Invoke(() => {
+                    FileNums.Text = $"{source.DownloadedItems}/{source.TotalCount}";
+                });
+            }
+            else if(e.PropertyName == nameof(source.DownloadedItems))
+            {
+                Dispatcher.Invoke(() => {
+                    FileNums.Text = $"{source.DownloadedItems}/{source.TotalCount}";
+                });
+            }
+            else if (e.PropertyName == nameof(source.DownloadedSize))
             {
                 Dispatcher.Invoke(() =>
                 {

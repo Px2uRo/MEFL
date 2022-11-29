@@ -10,7 +10,7 @@
     <c:MyCard.Title>
         <Grid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                <TextBlock Text="{Binding Statu}"/>
+                <TextBlock Text="{Binding State}"/>
                 <TextBlock Text="  "/>
                 <TextBlock Name="Percents"/>
                 <TextBlock Text="  "/>
@@ -39,7 +39,10 @@
         <TextBlock Grid.Column="2" Name="FileNums" Grid.Row="2"/>
         <ProgressBar Name="PB" Height="15" Grid.ColumnSpan="3" Grid.Row="3"/>
             <StackPanel Grid.ColumnSpan="3" Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-            <c:MyButton Content="暂停" Margin="0,0,10,0" Width="60" Height="30" Click="PauseBtn" Name="PauseButn"/>
+            <Grid>
+                <c:MyButton Content="暂停" Margin="0,0,10,0" Width="60" Height="30" Click="PauseBtn" Name="PauseButn"/>
+                <c:MyButton Content="操作中" Name="ControlingBtn" IsEnabled="False" Width="60" Height="30" Visibility="Hidden"/>
+            </Grid>
             <c:MyButton Content="取消" BorderBrush="Red" Width="60" Height="30" Click="CancelBtn"/>
         </StackPanel>
     </Grid>

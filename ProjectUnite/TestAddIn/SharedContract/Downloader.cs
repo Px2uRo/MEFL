@@ -28,6 +28,33 @@ namespace MEFL.Contract
     }
     public abstract class DownloadProgress:MEFLClass,INotifyPropertyChanged
     {
+        #region methods
+        public virtual void Retry()
+        {
+            State = DownloadProgressState.Downloading;
+        }
+
+        public virtual void Pause()
+        {
+            State = DownloadProgressState.Paused;
+        }
+        public virtual void Start()
+        {
+            State = DownloadProgressState.Downloading;
+        }
+        public virtual void Cancel()
+        {
+            State = DownloadProgressState.Canceled;
+        }
+        public virtual void Continue()
+        {
+            State = DownloadProgressState.Downloading;
+        }
+        public virtual void Close()
+        {
+            Dispose();
+        }
+        #endregion
         private string _ErrorInfo;
 
         public string ErrorInfo
@@ -36,10 +63,6 @@ namespace MEFL.Contract
             set { _ErrorInfo = value; ChangeProperty(nameof(ErrorInfo)); }
         }
 
-        public virtual void Retry()
-        {
-            Statu = DownloaderStatu.Downloading;
-        }
 
         public List<NativeLocalPair> NativeLocalPairs;
         private string _currectFile;
@@ -58,35 +81,14 @@ namespace MEFL.Contract
                 PropertyChanged.Invoke(this, new(propName));
             }
         }
-        private DownloaderStatu _statu;
+        private DownloadProgressState _statu;
 
-        public DownloaderStatu Statu
+        public DownloadProgressState State
         {
             get { return _statu; }
-            set { _statu = value; ChangeProperty(nameof(Statu)); }
+            set { _statu = value; ChangeProperty(nameof(State)); }
         }
 
-        public virtual void Pause()
-        {
-            Statu = DownloaderStatu.Paused;
-        }
-        public virtual void Start()
-        {
-            Statu = DownloaderStatu.Downloading;
-        }
-        public virtual void Cancel()
-        {
-            Statu = DownloaderStatu.Canceled;
-        }
-        public virtual void Close()
-        {
-            Dispose();
-        }
-
-        public virtual void Continue()
-        {
-            Statu = DownloaderStatu.Downloading;
-        }
         public event PropertyChangedEventHandler PropertyChanged;
 
         private int _totalCount;
@@ -121,16 +123,20 @@ namespace MEFL.Contract
 
         public DownloadProgress()
         {
-            Statu = DownloaderStatu.Canceled;
+            State = DownloadProgressState.Canceled;
         }
     }
 
-    public enum DownloaderStatu
+    public enum DownloadProgressState
     {
         Downloading=0,
         Paused=1,
         Canceled =2,
         Finished=3,
-        Failed=4
+        Failed=4,
+        Stopping=5,
+        Pauseing=6,
+        Canceling=7,
+        RetryingOrContiuning=8
     }
 }

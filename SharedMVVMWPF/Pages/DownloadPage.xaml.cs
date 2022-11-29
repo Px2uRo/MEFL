@@ -136,7 +136,7 @@ namespace MEFL.Pages
             var file = (sender as MyItemsCardItem).DataContext as LauncherWebVersionInfo;
             if(APIModel.SelectedDownloader == null)
             {
-                MessageBox.Show("(开发中)没有选中的下载器呢");
+                MessageBox.Show("没有选中的下载器，去整个插件先？");
             }
             else
             {

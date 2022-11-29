@@ -39,11 +39,12 @@ namespace MEFL.CLAddIn.Downloaders
         bool paused;
         public override void Pause()
         {
+            State = DownloadProgressState.Pauseing;
             paused = true;
-            base.Pause();
         }
         public override void Cancel()
         {
+            State = DownloadProgressState.Canceling;
             base.Cancel();
         }
         public override void Close()
@@ -57,6 +58,24 @@ namespace MEFL.CLAddIn.Downloaders
             new Thread(() => {
                 for (int i = 0; i < this.NativeLocalPairs.Count; i++)
                 {
+                    if (State == DownloadProgressState.Canceling)
+                    {
+                        State = DownloadProgressState.Canceled;
+                        break;
+                    }
+                    if (paused)
+                    {
+                        State = DownloadProgressState.Paused;
+                    }
+                    while (paused)
+                    {
+                        Thread.Sleep(100);
+                        if(State == DownloadProgressState.RetryingOrContiuning)
+                        {
+                            paused = false;
+                            State = DownloadProgressState.Downloading;
+                        }
+                    }
                     var Key = NativeLocalPairs[i].NativeUrl;
                     var Value = NativeLocalPairs[i].LoaclPath;
                     bools.Add(false);
@@ -74,7 +93,7 @@ namespace MEFL.CLAddIn.Downloaders
                     }
                     catch (System.Exception ex)
                     {
-                        Statu = DownloaderStatu.Failed;
+                        State = DownloadProgressState.Failed;
                     }
                     webClient.Dispose();
                     webClient = null;
@@ -112,7 +131,7 @@ namespace MEFL.CLAddIn.Downloaders
                                 assets = JsonConvert.DeserializeObject<AssetsObject>(System.IO.File.ReadAllText(Path.Combine(dotMCPath, "assets", "indexs", $"{root.AssetIndex.Id}.json")));
                                 if(assets == null)
                                 {
-                                    Statu = DownloaderStatu.Failed;
+                                    State = DownloadProgressState.Failed;
                                 }
                                 else
                                 {
@@ -123,18 +142,50 @@ namespace MEFL.CLAddIn.Downloaders
                                         {
                                             NativeLocalPairs.Add(new($"http://resources.download.minecraft.net/{item.Hash.Substring(0, 2)}/{item.Hash}", objectPath));
                                             TotalSize += item.Size;
+                                            TotalCount ++;
                                         }
                                     }
                                 }
-                                for (int j = 0; j < root.Libraries.Count; j++)
+                                foreach (var item in root.Libraries)
                                 {
-
+                                    var native = string.Empty;
+                                    var local = string.Empty;
+                                    if (item.Downloads.Artifact != null)
+                                    {
+                                        native = item.Downloads.Artifact.Url;
+                                        local = Path.Combine(dotMCPath, "libraries", item.Downloads.Artifact.Path.Replace("/", "\\"));
+                                    }
+                                    if(item.Downloads.Classifiers!=null)
+                                    {
+                                        for (int j = 0; j < item.Downloads.Classifiers.Count; j++)
+                                        {
+                                            var classifier = item.Downloads.Classifiers[j];
+                                            var classnative = classifier.Item.Url;
+                                            var classlocal = Path.Combine(dotMCPath, "libraries", classifier.Item.Path.Replace("/", "\\"));
+                                            if (!System.IO.File.Exists(classlocal))
+                                            {
+                                                NativeLocalPairs.Add(new(classnative, classlocal));
+                                                TotalSize += classifier.Item.Size;
+                                                TotalCount++;
+                                            }
+                                        }
+                                    }
+                                    if (!(string.IsNullOrEmpty(native) && string.IsNullOrEmpty(local)))
+                                    {
+                                        if (!System.IO.File.Exists(local))
+                                        {
+                                            NativeLocalPairs.Add(new(native, local));
+                                            TotalSize += item.Downloads.Artifact.Size;
+                                            TotalCount++;
+                                        }
+                                    }
                                 }
                             }
                         }
                         Decided = true;
                     }
                 }
+                State = DownloadProgressState.Finished;
             }).Start();
             base.Start();
         }
@@ -156,14 +207,15 @@ namespace MEFL.CLAddIn.Downloaders
             DownloadedSize = _SavedFileSizes + (int)e.BytesReceived;
             if (e.ProgressPercentage == 100)
             {
+                DownloadedItems++;
                 _SavedFileSizes += (int)e.TotalBytesToReceive;
             }
         }
 
         public override void Continue()
         {
+            State = DownloadProgressState.RetryingOrContiuning;
             paused = false;
-            Start();
         }
     }
 }

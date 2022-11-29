@@ -1,9 +1,6 @@
-﻿[12:02:17][MEFL]程序启动了，参数
-[12:02:18][MEFL]写入了注册表，键：PlayerUuid，值：6e9ec642-89aa-477d-bbd5-c856633f11a3
-[12:02:18][MEFL]刷新时发现未知错误 The type initializer for 'MEFL.Contract.MEFLErrorType' threw an exception. at MEFL.Contract
-[12:02:18][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[12:02:18][MEFL]刷新时发现未知错误 The type initializer for 'MEFL.Contract.MEFLErrorType' threw an exception. at MEFL.Contract
-[12:02:18][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[12:02:18][MEFL]刷新时发现未知错误 The type initializer for 'MEFL.Contract.MEFLErrorType' threw an exception. at MEFL.Contract
-[12:02:18][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[12:05:26][MEFL]程序退出了
+﻿[12:14:33][MEFL]程序启动了，参数
+[12:14:34][MEFL]写入了注册表，键：PlayerUuid，值：6e9ec642-89aa-477d-bbd5-c856633f11a3
+[12:14:34][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[12:14:34][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[12:14:34][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[12:14:36][MEFL]程序退出了
