@@ -49,7 +49,7 @@ namespace MEFL.CLAddIn.Export
 
         public Uri PulisherUri => new Uri("https://space.bilibili.com/283605961");
 
-        public Uri ExtensionUri => throw new NotImplementedException("https://space.bilibili.com/283605961");
+        public Uri ExtensionUri => new("https://space.bilibili.com/283605961");
 
         public void SettingsChange(SettingArgs args)
         {
@@ -279,7 +279,6 @@ namespace MEFL.CLAddIn.Export
                 Height = 60,
                 AddAccountContent = new AddALegacyAccountPage(),
                 Content = new TextBlock() { Text = "离线账户", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, FontSize = 30, FontWeight = FontWeight.FromOpenTypeWeight(999) },
-                FinnalReturn = new MEFLLegacyAccount(String.Empty, Guid.NewGuid().ToString())
             };
             res.Add(Legacy);
             return res.ToArray();

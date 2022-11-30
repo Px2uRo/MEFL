@@ -2,22 +2,6 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
-      "MEFL.Contract/0.0.5.40": {
-        "type": "package",
-        "dependencies": {
-          "MEFL.Controls": "0.0.4.18",
-          "Newtonsoft.Json": "13.0.1"
-        },
-        "compile": {
-          "lib/net6.0-windows7.0/MEFL.Contract.dll": {}
-        },
-        "runtime": {
-          "lib/net6.0-windows7.0/MEFL.Contract.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.WindowsDesktop.App.WPF"
-        ]
-      },
       "MEFL.Controls/0.0.6.3": {
         "type": "package",
         "compile": {
@@ -424,22 +408,27 @@
         "runtime": {
           "bin/placeholder/CoreLaunchingNet6.dll": {}
         }
+      },
+      "MEFL.Contract/0.0.5.41": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "MEFL.Controls": "0.0.4.18",
+          "Newtonsoft.Json": "13.0.1"
+        },
+        "compile": {
+          "bin/placeholder/MEFL.Contract.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/MEFL.Contract.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App.WPF"
+        ]
       }
     }
   },
   "libraries": {
-    "MEFL.Contract/0.0.5.40": {
-      "sha512": "gyEvXm89IHAhkNHCQsW3puntZgBSB4GEwgfpNXgbmuYwdxTmkm3VUWOFkf/PoSlDyYdeHzaDSPLJN1PMlOZZ5A==",
-      "type": "package",
-      "path": "mefl.contract/0.0.5.40",
-      "files": [
-        ".nupkg.metadata",
-        "MEFL.Contract_NuGet_Logo.png",
-        "lib/net6.0-windows7.0/MEFL.Contract.dll",
-        "mefl.contract.0.0.5.40.nupkg.sha512",
-        "mefl.contract.nuspec"
-      ]
-    },
     "MEFL.Controls/0.0.6.3": {
       "sha512": "r9efVznmqtFilUg2ge3uJs4Cs1/fSryk0WJ+ZwyExliGAGhnEUg+ptz90r20DzApIjkLlh+PkISDAB4DB66YZA==",
       "type": "package",
@@ -1848,12 +1837,17 @@
       "type": "project",
       "path": "../../CoreLaunching/CoreLaunchingNet6/CoreLaunchingNet6.csproj",
       "msbuildProject": "../../CoreLaunching/CoreLaunchingNet6/CoreLaunchingNet6.csproj"
+    },
+    "MEFL.Contract/0.0.5.41": {
+      "type": "project",
+      "path": "../ProjectUnite/TestAddIn/MEFL.Contract/MEFL.Contract.csproj",
+      "msbuildProject": "../ProjectUnite/TestAddIn/MEFL.Contract/MEFL.Contract.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
       "CoreLaunchingNet6 >= 0.0.0",
-      "MEFL.Contract >= 0.0.5.40",
+      "MEFL.Contract >= 0.0.5.41",
       "MEFL.Controls >= 0.0.6.3",
       "Newtonsoft.Json >= 13.0.1",
       "System.ComponentModel.Composition >= 6.0.0"
@@ -1896,6 +1890,9 @@
           "projectReferences": {
             "I:\\Xiong's\\CoreLaunching\\CoreLaunchingNet6\\CoreLaunchingNet6.csproj": {
               "projectPath": "I:\\Xiong's\\CoreLaunching\\CoreLaunchingNet6\\CoreLaunchingNet6.csproj"
+            },
+            "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj": {
+              "projectPath": "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj"
             }
           }
         }
@@ -1910,10 +1907,6 @@
       "net6.0-windows7.0": {
         "targetAlias": "net6.0-windows",
         "dependencies": {
-          "MEFL.Contract": {
-            "target": "Package",
-            "version": "[0.0.5.40, )"
-          },
           "MEFL.Controls": {
             "target": "Package",
             "version": "[0.0.6.3, )"
@@ -1946,7 +1939,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

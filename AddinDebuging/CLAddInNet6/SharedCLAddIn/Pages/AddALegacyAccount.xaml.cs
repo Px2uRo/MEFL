@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MEFL.Contract;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,12 +20,14 @@ namespace MEFL.CLAddIn.Pages;
 /// <summary>
 /// AddALegacyAccount.xaml 的交互逻辑
 /// </summary>
-public partial class AddALegacyAccountPage : UserControl
+public partial class AddALegacyAccountPage : UserControl, Contract.IAddAccountPage
 {
     public AddALegacyAccountPage()
     {
         InitializeComponent();
     }
+
+    public event IAddAccountPage.AccountAdded OnAccountAdded;
 
     private void TextBox_Error(object sender, ValidationErrorEventArgs e)
     {
@@ -33,7 +36,11 @@ public partial class AddALegacyAccountPage : UserControl
 
     private void MyButton_Click(object sender, RoutedEventArgs e)
     {
-        //MEFL.APIData.APIModel.LegacyAccounts.Add(GenerlAddAccountModel.Account);
-        //RegManager.Write("LegacyAccounts", JsonConvert.SerializeObject(APIData.APIModel.LegacyAccounts));
+        OnAccountAdded.Invoke(this);
+    }
+
+    public AccountBase GetFinalReturn()
+    {
+        return new MEFLLegacyAccount(UserNameBox.Text,GuidBox.Text);
     }
 }

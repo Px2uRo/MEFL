@@ -18,20 +18,20 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MEFL.Contract" Version="0.0.5.40" />
     <PackageReference Include="MEFL.Controls" Version="0.0.6.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\CoreLaunching\CoreLaunchingNet6\CoreLaunchingNet6.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="Controls\" />
     <Folder Include="Pages\" />
     <Folder Include="SpecialPages\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\CoreLaunching\CoreLaunchingNet6\CoreLaunchingNet6.csproj" />
+    <ProjectReference Include="..\ProjectUnite\TestAddIn\MEFL.Contract\MEFL.Contract.csproj" />
   </ItemGroup>
 
   <Import Project="..\SharedMVVMWPF\SharedMVVMWPF.projitems" Label="Shared" />

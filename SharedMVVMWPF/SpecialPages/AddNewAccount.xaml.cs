@@ -44,7 +44,6 @@ namespace MEFL.SpecialPages
                                 item.MinHeight = 60; 
                                 item.Width = 400;
                                 item.Height = 60;
-                                item.AddAccountContent.DataContext = new GenerlAddAccountModelView(item.FinnalReturn);
                                 item.MouseDown += Item_MouseDown;
                                 MyStackPanel.Children.Add(item);
                             }
@@ -58,9 +57,44 @@ namespace MEFL.SpecialPages
             }
         }
 
+        private void Item_OnAccountAdded(object sender)
+        {
+            var FinalReturn = (sender as Contract.IAddAccountPage).GetFinalReturn();
+            UserManageModel.ModelView.SelectedAccount = FinalReturn;
+            MEFL.APIData.APIModel.AccountConfigs.Add(FinalReturn);
+            UserManageModel.ModelView.Invoke("Accounts");
+            MyPageBase From = null;
+            foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
+            {
+                if (item.Visibility == Visibility.Visible)
+                {
+                    From = item;
+                }
+            }
+            foreach (MyPageBase item in FindControl.FromTag("UserManagePage", (App.Current.Resources["MainPage"] as Grid)))
+            {
+                item.Show(From);
+            }
+            for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
+            {
+                if (((App.Current.Resources["MainPage"] as Grid).Children[i] as FrameworkElement).Tag as String == "AddAccountPage")
+                {
+                    (App.Current.Resources["MainPage"] as Grid).Children.RemoveAt(i);
+                }
+            }
+        }
+
         private void Item_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            var NewPage = new AddAccountPage() { Content = (sender as AddAccountItem).AddAccountContent,DataContext=new GenerlAddAccountModelView((sender as AddAccountItem).FinnalReturn),Tag= "AddNewAccount" };
+            var content = (sender as AddAccountItem).AddAccountContent;
+            var NewPage = new AddAccountPage() { Content = content
+                ,Tag= "AddNewAccount" };
+            if(!(content is FrameworkElement))
+            {
+                MessageBox.Show("添加用户页面不是FrameworkElement，请联系开发者");
+                return;
+            }
+            content.OnAccountAdded += Item_OnAccountAdded;
             (App.Current.Resources["MainPage"] as Grid).Children.Add(NewPage);
             NewPage.Show(this);
         }

@@ -9,15 +9,39 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using Newtonsoft.Json;
 using MEFL.CLAddIn.Pages;
+using System.Configuration;
 
 namespace MEFL.CLAddIn
 {
-    public static class ManagePageForMEFLLegacyAccount 
+    public class MEFLMicrosoftAccount : AccountBase
     {
-        public static ManageALegacyAccountPage page = new ManageALegacyAccountPage();
+        public override FrameworkElement ProfileAvator { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string UserName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string Uuid { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string AccessToken { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string ClientID { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string Xuid { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string UserType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string UserProperties { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override object WelcomeWords { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string EmailAddress { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public override FrameworkElement ManagePage => throw new NotImplementedException();
+
+        public override void LaunchGameAction(SettingArgs args)
+        {
+            throw new NotImplementedException();
+        }
+
+        public MEFLMicrosoftAccount(string code)
+        {
+
+        }
     }
     public class MEFLLegacyAccount : MEFL.Contract.AccountBase
     {
+        public static ManageALegacyAccountPage page = new ManageALegacyAccountPage();
+
         public override bool Selected { get => base.Selected;
             set {
                 _Avator.Width = 200;
@@ -109,7 +133,7 @@ namespace MEFL.CLAddIn
         [JsonIgnore]
         public override string EmailAddress { get => "离线"; set => throw new NotImplementedException(); }
         [JsonIgnore]
-        public override FrameworkElement ManagePage => ManagePageForMEFLLegacyAccount.page;
+        public override FrameworkElement ManagePage => page;
 
         public override void LaunchGameAction(Arguments.SettingArgs args)
         {

@@ -16,29 +16,15 @@ public class AddAccountItem : UserControl
 
 	public static readonly DependencyProperty AddAccountContentProperty;
 
-	public static readonly DependencyProperty FinnalReturnProperty;
-
-	public FrameworkElement AddAccountContent
+	public IAddAccountPage AddAccountContent
 	{
 		get
 		{
-			return (FrameworkElement)GetValue(AddAccountContentProperty);
+			return (IAddAccountPage)GetValue(AddAccountContentProperty);
 		}
 		set
 		{
 			SetValue(AddAccountContentProperty, value);
-		}
-	}
-
-	public AccountBase FinnalReturn
-	{
-		get
-		{
-			return (AccountBase)GetValue(FinnalReturnProperty);
-		}
-		set
-		{
-			SetValue(FinnalReturnProperty, value);
 		}
 	}
 
@@ -66,7 +52,6 @@ public class AddAccountItem : UserControl
 	static AddAccountItem()
 	{
 		AddAccountContentProperty = DependencyProperty.Register("AddAccountContent", typeof(FrameworkElement), typeof(AddAccountItem), new PropertyMetadata(null));
-		FinnalReturnProperty = DependencyProperty.Register("FinnalReturn", typeof(AccountBase), typeof(AddAccountItem), new PropertyMetadata(null));
 		FrameworkElement.DefaultStyleKeyProperty.OverrideMetadata(typeof(AddAccountItem), new FrameworkPropertyMetadata(typeof(AddAccountItem)));
 	}
 }
