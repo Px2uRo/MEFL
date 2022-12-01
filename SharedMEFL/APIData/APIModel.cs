@@ -45,7 +45,7 @@ namespace MEFL.APIData
                 }
                 else
                 {
-                    string uuid = value.Uuid;
+                    string uuid = value.Uuid.ToString();
                     for (int i = 0; i < AccountConfigs.Count; i++)
                     {
                         if (AccountConfigs[i].Selected)
@@ -55,7 +55,7 @@ namespace MEFL.APIData
                     }
                     value.Selected = true;
                     _SelectedAccount = value;
-                    SelectedAccountUUID = value.Uuid;
+                    SelectedAccountUUID = value.Uuid.ToString();
                     App.Current.Resources["WelcomeWords"] = value.WelcomeWords;
                     uuid = string.Empty;
                 }

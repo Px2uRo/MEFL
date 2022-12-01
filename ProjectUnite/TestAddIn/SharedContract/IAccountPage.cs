@@ -2,8 +2,8 @@
 {
     public interface IAddAccountPage
     {
-        public delegate void AccountAdded(object sender);
-        public event AccountAdded OnAccountAdded;
+        public delegate void AccountAdd(object sender);
+        public event AccountAdd OnAccountAdd;
         public AccountBase GetFinalReturn();
     }
 }

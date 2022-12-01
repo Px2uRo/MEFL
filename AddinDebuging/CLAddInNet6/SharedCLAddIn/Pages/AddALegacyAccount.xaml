@@ -36,15 +36,7 @@
                     </TextBox>
                     <TextBlock Grid.Row="1" VerticalAlignment="Center" Name="ErrorInfoBox" Grid.ColumnSpan="2" Foreground="Red" />
                     <TextBlock Grid.Row="2" Text="GUID:" HorizontalAlignment="Right"/>
-                    <TextBox Name="GuidBox" Grid.Column="1" Grid.Row="2" Validation.Error="TextBox_Error">
-                        <TextBox.Text>
-                            <Binding Path="Account.Uuid" NotifyOnValidationError="True">
-                                <Binding.ValidationRules>
-                                    <!--<mv:AuthUuid/>-->
-                                </Binding.ValidationRules>
-                            </Binding>
-                        </TextBox.Text>
-                    </TextBox>
+                    <TextBox Name="GuidBox" Grid.Column="1" Grid.Row="2" />
                 </Grid>
             </Grid>
             <c:MyButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding CancelCommand}" Content="取消" Width="70" Margin="0,0,80,10"/>

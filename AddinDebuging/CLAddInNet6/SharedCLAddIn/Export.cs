@@ -1,4 +1,5 @@
-﻿using MEFL.Arguments;
+﻿using CLAddInNet6;
+using MEFL.Arguments;
 using MEFL.CLAddIn;
 using MEFL.CLAddIn.Downloaders;
 using MEFL.CLAddIn.Pages;
@@ -250,7 +251,10 @@ namespace MEFL.CLAddIn.Export
                     var List = new List<MEFLLegacyAccount>();
                     foreach (var item in jOb)
                     {
-                        List.Add(new(item["UserName"].ToString(), item["Uuid"].ToString()));
+                        if(Guid.TryParse(item["Uuid"].ToString(),out var uuid))
+                        {
+                            List.Add(new(item["UserName"].ToString(), uuid));
+                        }
                     }
                     foreach (var item in List)
                     {
@@ -270,17 +274,24 @@ namespace MEFL.CLAddIn.Export
             return ret.ToArray();
         }
 
+        static AddAccountItem Legacy = new AddAccountItem()
+        {
+            Width = 400,
+            Height = 60,
+            AddAccountContent = new AddALegacyAccountPage(),
+            Content = new TextBlock() { Text = "离线账户", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, FontSize = 30, FontWeight = FontWeight.FromOpenTypeWeight(999) },
+        };
+        static AddAccountItem msa = new AddAccountItem()
+        {
+            Width = 400,
+            Height = 60,
+            AddAccountContent = new AddNewMSAccount(),
+            Content = new TextBlock() { Text = "微软登录", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, FontSize = 30, FontWeight = FontWeight.FromOpenTypeWeight(999) },
+        };
+
         AddAccountItem[] IAccount.GetSingUpPage(SettingArgs args)
         {
-            var res = new List<AddAccountItem>();
-            var Legacy = new AddAccountItem()
-            {
-                Width = 400,
-                Height = 60,
-                AddAccountContent = new AddALegacyAccountPage(),
-                Content = new TextBlock() { Text = "离线账户", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, FontSize = 30, FontWeight = FontWeight.FromOpenTypeWeight(999) },
-            };
-            res.Add(Legacy);
+            var res = new List<AddAccountItem>{Legacy,msa};
             return res.ToArray();
         }
 

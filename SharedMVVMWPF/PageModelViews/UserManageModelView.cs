@@ -65,6 +65,8 @@ namespace MEFL.PageModelViews
             {
                 if (item.Tag as String == "AddAccountPage")
                 {
+                    GC.SuppressFinalize(item);
+                    item.Hide();
                     (App.Current.Resources["MainPage"] as Grid).Children.Remove(item);
                 }
             }

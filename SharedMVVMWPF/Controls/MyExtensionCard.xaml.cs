@@ -200,7 +200,7 @@ namespace MEFL.Controls
                             APIData.APIModel.AccountConfigs.Add(item);
                             if(item.Uuid != null)
                             {
-                                if (APIModel.SelectedAccountUUID == item.Uuid)
+                                if (APIModel.SelectedAccountUUID == item.Uuid.ToString())
                                 {
                                     APIModel.SelectedAccount=item;
                                 }

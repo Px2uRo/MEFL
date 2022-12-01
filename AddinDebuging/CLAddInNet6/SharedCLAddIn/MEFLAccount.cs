@@ -17,7 +17,7 @@ namespace MEFL.CLAddIn
     {
         public override FrameworkElement ProfileAvator { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override string UserName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override string Uuid { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override Guid Uuid { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override string AccessToken { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override string ClientID { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override string Xuid { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -106,17 +106,9 @@ namespace MEFL.CLAddIn
                 }
             } 
         }
-        private string _uuid;
-        public override string Uuid { get => _uuid; set {
-                try
-                {
-                    Guid.Parse(value);
-                    _uuid = value;
-                }
-                catch (Exception ex)
-                {
-                    
-                }
+        private Guid _uuid;
+        public override Guid Uuid { get => _uuid; set {
+                _uuid=value;
             } 
         }
         [JsonIgnore]
@@ -139,7 +131,7 @@ namespace MEFL.CLAddIn
         {
             
         }
-        public MEFLLegacyAccount(string Name,string Uuid)
+        public MEFLLegacyAccount(string Name,Guid Uuid)
         {
             UserName = Name;
             this.Uuid = Uuid;

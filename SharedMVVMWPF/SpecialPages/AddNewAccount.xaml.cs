@@ -86,15 +86,17 @@ namespace MEFL.SpecialPages
 
         private void Item_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            MyStackPanel.Children.Clear();
             var content = (sender as AddAccountItem).AddAccountContent;
             var NewPage = new AddAccountPage() { Content = content
-                ,Tag= "AddNewAccount" };
+                ,Tag = "AddAccountPage"
+            };
             if(!(content is FrameworkElement))
             {
-                MessageBox.Show("添加用户页面不是FrameworkElement，请联系开发者");
+                MessageBox.Show("添加用户页面不是 FrameworkElement，请联系开发者");
                 return;
             }
-            content.OnAccountAdded += Item_OnAccountAdded;
+            content.OnAccountAdd += Item_OnAccountAdded;
             (App.Current.Resources["MainPage"] as Grid).Children.Add(NewPage);
             NewPage.Show(this);
         }

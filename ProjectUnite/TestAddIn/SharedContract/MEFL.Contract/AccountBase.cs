@@ -17,7 +17,7 @@ public abstract class AccountBase : MEFLClass
 
 	public abstract string UserName { get; set; }
 
-	public abstract string Uuid { get; set; }
+	public abstract Guid Uuid { get; set; }
 
 	public abstract string AccessToken { get; set; }
 

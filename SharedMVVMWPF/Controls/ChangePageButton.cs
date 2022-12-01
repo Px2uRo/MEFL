@@ -53,36 +53,6 @@ namespace MEFL.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ChangePageButton), new FrameworkPropertyMetadata(typeof(ChangePageButton)));
         }
-
-        public void Click()
-        {
-            MyPageBase From = null;
-            bool TRUE = false;
-            foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
-            {
-                if (item.Visibility == Visibility.Visible)
-                {
-                    From = item;
-                    TRUE = true;
-                    if (item.Tag as String != From.Tag as String)
-                    {
-                        item.Hide();
-                    }
-                }
-            }
-            foreach (MyPageBase item in FindControl.FromTag(Tag, (App.Current.Resources["MainPage"] as Grid)))
-            {
-                if (TRUE)
-                {
-                    item.Show(From);
-                }
-                else
-                {
-                    item.Show();
-                }
-            }
-            From = null;
-        }
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -95,6 +65,14 @@ namespace MEFL.Controls
 
         private void ChangePageButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
+            {
+                if (((App.Current.Resources["MainPage"] as Grid).Children[i] as FrameworkElement).Tag as String == "AddAccountPage")
+                {
+                    (App.Current.Resources["MainPage"] as Grid).Children.RemoveAt(i);
+                    i--;
+                }
+            }
             MyPageBase From = null;
             bool TRUE = false;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)

@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="CLAddInNet6.AddNewMSAccount"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CLAddInNet6"
+             mc:Ignorable="d"
+             xmlns:c="clr-namespace:MEFL.Controls;assembly=MEFL.Controls"
+             d:DesignHeight="450" d:DesignWidth="800" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <c:MyCard Title="微软账户登录">
+        <StackPanel>
+            <c:MyButton Content="打开登录页面"  Width="200" Height="50" Click="MyButton_Click"/>
+            <TextBlock />
+            <TextBox Width="400" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <TextBlock />
+            <TextBlock TextWrapping="Wrap" Width="300" Text="请点击上面的登录按钮，浏览器变空白（说明登录成功）后，复制网址粘贴到上方文本框。"/>
+            <TextBlock />
+            <c:MyButton Content="登录"  Width="100" Height="50" Click="MyButton_Click_1"/>
+            <TextBlock />
+            <TextBlock TextWrapping="Wrap" Width="300" Text="因为设计本插件时，并没有准备任何打算内置浏览器，请参阅另一个未开发的插件 MEFL.MSAuth with WebView2"/>
+        </StackPanel>
+
+    </c:MyCard>
+</UserControl>

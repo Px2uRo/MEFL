@@ -25,9 +25,10 @@ public partial class AddALegacyAccountPage : UserControl, Contract.IAddAccountPa
     public AddALegacyAccountPage()
     {
         InitializeComponent();
+        GuidBox.Text = Guid.NewGuid().ToString();
     }
 
-    public event IAddAccountPage.AccountAdded OnAccountAdded;
+    public event IAddAccountPage.AccountAdd OnAccountAdd;
 
     private void TextBox_Error(object sender, ValidationErrorEventArgs e)
     {
@@ -36,11 +37,18 @@ public partial class AddALegacyAccountPage : UserControl, Contract.IAddAccountPa
 
     private void MyButton_Click(object sender, RoutedEventArgs e)
     {
-        OnAccountAdded.Invoke(this);
+        if (Guid.TryParse(GuidBox.Text,out var res))
+        {
+            OnAccountAdd.Invoke(this);
+        }
+        else
+        {
+            MessageBox.Show("不合法Guid");
+        }
     }
 
     public AccountBase GetFinalReturn()
     {
-        return new MEFLLegacyAccount(UserNameBox.Text,GuidBox.Text);
+        return new MEFLLegacyAccount(UserNameBox.Text, Guid.Parse(GuidBox.Text));
     }
 }

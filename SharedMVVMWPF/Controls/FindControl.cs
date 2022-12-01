@@ -18,13 +18,8 @@ namespace MEFL.Controls
                     l.Add(item);
                 }
             }
-            FrameworkElement[] res = new FrameworkElement[l.Count];
-            for (int i = 0; i < l.Count; i++)
-            {
-                res.SetValue(l[i], i);
-            }
-            l = null;
-            return res;
+            GC.SuppressFinalize(l);
+            return l.ToArray();
         }
     }
 }
