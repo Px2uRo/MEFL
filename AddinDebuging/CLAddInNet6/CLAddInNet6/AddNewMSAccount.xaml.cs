@@ -1,4 +1,5 @@
 ﻿using MEFL.Contract;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -36,7 +37,20 @@ namespace CLAddInNet6
 
         private void MyButton_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start("https://login.live.com/oauth20_authorize.srf?client_id=00000000402b5328&response_type=code&scope=service%3A%3Auser.auth.xboxlive.com%3A%3AMBI_SSL&redirect_uri=https%3A%2F%2Flogin.live.com%2Foauth20_desktop.srf");
+            RegistryKey key = Registry.ClassesRoot.OpenSubKey(@"http\shell\open\command\");
+            string s = key.GetValue("").ToString();
+            var url = @"https://login.live.com/oauth20_authorize.srf?client_id=00000000402b5328^&^response_type=code^&^scope=service^%^3A^%^3Auser.auth.xboxlive.com^%^3A^%^3AMBI_SSL^&^redirect_uri=https^%^3A^%^2F^%^2Flogin.live.com^%^2Foauth20_desktop.srf";
+            key.Close();
+            key.Dispose();
+
+            s = s.Replace("%1",url);
+            var p = new Process();
+            p.StartInfo.RedirectStandardInput= true;
+            p.StartInfo.FileName = "cmd.exe";
+            p.StartInfo.CreateNoWindow = true;
+            p.Start();
+            p.StandardInput.WriteLine(s);
+            p.Close();
         }
 
         private void MyButton_Click_1(object sender, RoutedEventArgs e)
