@@ -20,15 +20,24 @@ namespace MEFL.CLAddIn.Pages;
 /// <summary>
 /// AddALegacyAccount.xaml 的交互逻辑
 /// </summary>
-public partial class AddALegacyAccountPage : UserControl, Contract.IAddAccountPage
+public partial class AddALegacyAccountPage : UserControl, IAddAccountPage
 {
     public AddALegacyAccountPage()
     {
         InitializeComponent();
+        this.KeyDown += AddALegacyAccountPage_KeyDown;
         GuidBox.Text = Guid.NewGuid().ToString();
     }
 
+    private void AddALegacyAccountPage_KeyDown(object sender, KeyEventArgs e)
+    {
+        if(e.Key == Key.Escape) {
+            OnCanceled.Invoke(this);
+        }
+    }
+
     public event IAddAccountPage.AccountAdd OnAccountAdd;
+    public event IAddAccountPage.Canceled OnCanceled;
 
     private void TextBox_Error(object sender, ValidationErrorEventArgs e)
     {

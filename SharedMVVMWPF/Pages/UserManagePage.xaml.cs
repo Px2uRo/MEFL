@@ -18,7 +18,7 @@ namespace MEFL.Pages
 
         private void ManageCurret(object sender, RoutedEventArgs e)
         {
-            var Content = (this.DataContext as UserManageModelView).SelectedAccount.ManagePage as FrameworkElement;
+            var Content = (this.DataContext as UserManageModelView).SelectedAccount.ManagePage;
             Content.DataContext = new GenerlManageAccountModelView((this.DataContext as UserManageModelView).SelectedAccount);
             (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.AddAccountPage() { Tag = "AddNewAccount", Visibility = Visibility.Hidden, Content = Content });
             MyPageBase From = null;

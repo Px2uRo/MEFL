@@ -1,4 +1,5 @@
 ﻿using MEFL.APIData;
+using MEFL.Contract;
 using MEFL.Contract.Controls;
 using MEFL.Controls;
 using MEFL.PageModelViews;
@@ -97,8 +98,14 @@ namespace MEFL.SpecialPages
                 return;
             }
             content.OnAccountAdd += Item_OnAccountAdded;
+            content.OnCanceled += Content_OnCanceled;
             (App.Current.Resources["MainPage"] as Grid).Children.Add(NewPage);
             NewPage.Show(this);
+        }
+
+        private void Content_OnCanceled(object sender)
+        {
+            throw new NotImplementedException();
         }
     }
 }

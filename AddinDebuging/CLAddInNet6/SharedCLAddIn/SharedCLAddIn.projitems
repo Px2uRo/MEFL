@@ -9,6 +9,9 @@
     <Import_RootNamespace>MEFL.CLAddIn</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AccountsManagement\Legacy.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AccountsManagement\Microsoft.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AccountsManagement\Model.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Downloaders\NormalDownloader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Export.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameTypes\MEFLRealseType.cs" />
@@ -20,6 +23,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Pages\AddALegacyAccount.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>AddALegacyAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\AddNewMSAccount.xaml.cs">
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\ManageLegacyAccountPage.xaml.cs">
       <DependentUpon>ManageLegacyAccountPage.xaml</DependentUpon>
@@ -47,6 +53,9 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\AddNewMSAccount.xaml">
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Pages\ManageLegacyAccountPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>

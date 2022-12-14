@@ -1,13 +1,23 @@
 using System;
+using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
 using MEFL.Arguments;
 
 namespace MEFL.Contract;
 
-public abstract class AccountBase : MEFLClass
+public abstract class AccountBase : MEFLClass,INotifyPropertyChanged
 {
-	public override string ToString()
+    public event PropertyChangedEventHandler? PropertyChanged;
+	public virtual void PropChange(string Prop)
+	{
+		if (PropertyChanged != null)
+		{
+			PropertyChanged.Invoke(this,new(Prop));
+		}
+	}
+
+    public override string ToString()
 	{
 		return $"{UserName} {Uuid}";
 	}

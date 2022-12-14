@@ -2,7 +2,7 @@ using System;
 using System.Reflection;
 
 namespace MEFL.Contract{
-    public abstract class MEFLClass:IDisposable
+    public abstract class MEFLClass : IDisposable
     {
         public bool Disposed { get; set; }
 

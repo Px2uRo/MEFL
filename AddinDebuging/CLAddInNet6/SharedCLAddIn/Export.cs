@@ -241,37 +241,7 @@ namespace MEFL.CLAddIn.Export
     {
         AccountBase[] IAccount.GetSingUpAccounts(SettingArgs args)
         {
-            var ret = new List<AccountBase>();
-            try
-            {
-                var reg = RegManager.Read("LegacyAccounts");
-                if (!string.IsNullOrEmpty(reg))
-                {
-                    var jOb = JToken.Parse(reg);
-                    var List = new List<MEFLLegacyAccount>();
-                    foreach (var item in jOb)
-                    {
-                        if(Guid.TryParse(item["Uuid"].ToString(),out var uuid))
-                        {
-                            List.Add(new(item["UserName"].ToString(), uuid));
-                        }
-                    }
-                    foreach (var item in List)
-                    {
-                        ret.Add(item);
-                    }
-                }
-                else
-                {
-                    RegManager.Write("LegacyAccounts", "[]");
-                }
-            }
-            catch (Exception ex)
-            {
-                ret = new List<AccountBase>();
-                //todo HandleException
-            }
-            return ret.ToArray();
+            return AccountsManagement.Model.List.ToArray();
         }
 
         static AddAccountItem Legacy = new AddAccountItem()

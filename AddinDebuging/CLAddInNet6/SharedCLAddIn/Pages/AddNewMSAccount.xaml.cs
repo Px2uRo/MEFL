@@ -29,6 +29,7 @@ namespace CLAddInNet6
         }
 
         public event IAddAccountPage.AccountAdd OnAccountAdd;
+        public event IAddAccountPage.Canceled OnCanceled;
 
         public AccountBase GetFinalReturn()
         {
@@ -51,11 +52,12 @@ namespace CLAddInNet6
             p.Start();
             p.StandardInput.WriteLine(s);
             p.Close();
+            p.Dispose();
         }
 
         private void MyButton_Click_1(object sender, RoutedEventArgs e)
         {
-
+            OnAccountAdd.Invoke(this);
         }
     }
 }
