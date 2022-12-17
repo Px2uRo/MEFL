@@ -10,6 +10,7 @@ using System.Windows.Shapes;
 using Newtonsoft.Json;
 using MEFL.CLAddIn.Pages;
 using System.Configuration;
+using System.ComponentModel;
 
 namespace MEFL.CLAddIn
 {
@@ -26,7 +27,7 @@ namespace MEFL.CLAddIn
         public override object WelcomeWords { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override string EmailAddress { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public override FrameworkElement ManagePage => throw new NotImplementedException();
+        public override IManageAccountPage ManagePage => throw new NotImplementedException();
 
         public override void LaunchGameAction(SettingArgs args)
         {
@@ -38,7 +39,7 @@ namespace MEFL.CLAddIn
 
         }
     }
-    public class MEFLLegacyAccount : MEFL.Contract.AccountBase
+    public class MEFLLegacyAccount : MEFL.Contract.AccountBase,INotifyPropertyChanged
     {
         public static ManageALegacyAccountPage page = new ManageALegacyAccountPage();
 
@@ -125,7 +126,14 @@ namespace MEFL.CLAddIn
         [JsonIgnore]
         public override string EmailAddress { get => "离线"; set => throw new NotImplementedException(); }
         [JsonIgnore]
-        public override FrameworkElement ManagePage => page;
+        public override IManageAccountPage ManagePage
+        {
+            get
+            {
+                page.DataContext= this;
+                return page;
+            }
+        }
 
         public override void LaunchGameAction(Arguments.SettingArgs args)
         {

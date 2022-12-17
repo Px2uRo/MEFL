@@ -27,7 +27,7 @@
                     <TextBlock Text="用户名"  HorizontalAlignment="Right"/>
                     <TextBox Grid.Column="1" Validation.Error="TextBox_Error">
                         <TextBox.Text>
-                            <Binding Path="Account.UserName" NotifyOnValidationError="True">
+                            <Binding Path="UserName" NotifyOnValidationError="True">
                                 <Binding.ValidationRules>
                                     <!--<mv:SorryButForManage/>-->
                                 </Binding.ValidationRules>
@@ -38,7 +38,7 @@
                     <TextBlock Grid.Row="2" Text="GUID:" HorizontalAlignment="Right"/>
                     <TextBox Name="GuidBox" Grid.Column="1" Grid.Row="2" Validation.Error="TextBox_Error">
                         <TextBox.Text>
-                            <Binding Path="Account.Uuid" NotifyOnValidationError="True">
+                            <Binding Path="Uuid" NotifyOnValidationError="True">
                                 <Binding.ValidationRules>
                                     <!--<mv:AuthManageUuid/>-->
                                 </Binding.ValidationRules>
@@ -47,9 +47,9 @@
                     </TextBox>
                 </Grid>
             </Grid>
-            <c:MyButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding BackCommand}" Content="返回" Width="70" Margin="0,0,155,10"/>
-            <c:MyButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding SelectCommand}" Content="选择" Width="70" Margin="0,0,80,10"/>
-            <c:MyButton BorderBrush="Red" HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding RemoveCommand}" Content="删除" Width="70" Margin="0,0,5,10" Click="MyButton_Click"/>
+            <c:MyButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="MyButton_Click_1" Content="返回" Width="70" Margin="0,0,155,10"/>
+            <c:MyButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="MyButton_Click_2" Content="选择" Width="70" Margin="0,0,80,10"/>
+            <c:MyButton BorderBrush="Red" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="MyButton_Click_3" Content="删除" Width="70" Margin="0,0,5,10"/>
         </Grid>
     </c:MyCard>
 </UserControl>

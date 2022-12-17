@@ -32,7 +32,7 @@ public partial class AddALegacyAccountPage : UserControl, IAddAccountPage
     private void AddALegacyAccountPage_KeyDown(object sender, KeyEventArgs e)
     {
         if(e.Key == Key.Escape) {
-            OnCanceled.Invoke(this);
+            OnCanceled.Invoke(this,null);
         }
     }
 
@@ -48,16 +48,11 @@ public partial class AddALegacyAccountPage : UserControl, IAddAccountPage
     {
         if (Guid.TryParse(GuidBox.Text,out var res))
         {
-            OnAccountAdd.Invoke(this);
+            OnAccountAdd.Invoke(this,new MEFLLegacyAccount(UserNameBox.Text, Guid.Parse(GuidBox.Text)));
         }
         else
         {
             MessageBox.Show("不合法Guid");
         }
-    }
-
-    public AccountBase GetFinalReturn()
-    {
-        return new MEFLLegacyAccount(UserNameBox.Text, Guid.Parse(GuidBox.Text));
     }
 }

@@ -43,7 +43,7 @@ public abstract class AccountBase : MEFLClass,INotifyPropertyChanged
 
 	public abstract string EmailAddress { get; set; }
 
-	public abstract FrameworkElement ManagePage { get; }
+	public abstract IManageAccountPage ManagePage { get; }
 
 	public abstract void LaunchGameAction(SettingArgs args);
 }

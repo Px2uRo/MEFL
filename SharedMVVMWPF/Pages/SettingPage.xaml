@@ -224,7 +224,7 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="ListBoxItem">
-                                            <Grid Height="60" Margin="0,0,0,5">
+                                            <Grid Height="60" Margin="0,0,0,5" MouseDown="ChangeDownloader">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="60"/>
                                                     <ColumnDefinition />

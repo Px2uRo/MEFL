@@ -15,14 +15,34 @@ namespace MEFL.CLAddIn.Downloaders
 
         public override object Icon => "C#";
 
-        public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] Sources,string dotMCFolder)
+        public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] Sources, string dotMCFolder)
         {
-            return new NormalDownloadProgress(NativeUrl,LoaclPath,dotMCFolder);
+            return new NormalDownloadProgress(NativeUrl, LoaclPath, dotMCFolder);
         }
 
-        public override DownloadProgress CreateProgress(List<NativeLocalPair> NativeLocalPairs, DownloadSource[] Sources,string dotMCFolder)
+        public override DownloadProgress CreateProgress(List<NativeLocalPair> NativeLocalPairs, DownloadSource[] Sources, string dotMCFolder)
         {
-            return new NormalDownloadProgress(NativeLocalPairs,dotMCFolder);
+            return new NormalDownloadProgress(NativeLocalPairs, dotMCFolder);
+        }
+    }
+    public class CLDownloader : MEFLDownloader
+    {
+        public override string Name => "CoreLaunchingDownloader";
+
+        public override string Description => "CoreLaunching的多线程下载器";
+
+        public override Version Version => new(0, 0, 0);
+
+        public override object Icon => "CL";
+
+        public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] Sources, string dotMCFolder)
+        {
+            return new CLDownloadProgress(NativeUrl, LoaclPath, dotMCFolder);
+        }
+
+        public override DownloadProgress CreateProgress(List<NativeLocalPair> NativeLocalPairs, DownloadSource[] Sources, string dotMCFolder)
+        {
+            return new CLDownloadProgress(NativeLocalPairs, dotMCFolder);
         }
     }
 }

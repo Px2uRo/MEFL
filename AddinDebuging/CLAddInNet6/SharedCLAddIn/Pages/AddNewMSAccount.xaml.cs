@@ -57,7 +57,7 @@ namespace CLAddInNet6
 
         private void MyButton_Click_1(object sender, RoutedEventArgs e)
         {
-            OnAccountAdd.Invoke(this);
+            OnAccountAdd.Invoke(this,null);
         }
     }
 }

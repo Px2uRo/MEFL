@@ -35,7 +35,6 @@
             </Grid>
         </c:MyCard>
         <c:MyCard Title="管理其他用户">
-            <StackPanel>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
@@ -52,7 +51,6 @@
                     </ContentPresenter>
                     <c:MyButton Content="+" Command="{Binding AddAccountCommand}" VerticalAlignment="Top" HorizontalAlignment="Right" Width="30" Height="30" Grid.Column="1"/>
                 </Grid>
-            </StackPanel>
         </c:MyCard>
     </StackPanel>
 </c:MyPageBase>

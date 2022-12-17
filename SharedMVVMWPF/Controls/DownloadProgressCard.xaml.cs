@@ -73,7 +73,9 @@ namespace MEFL.Controls
                 }
                 else if (source.State == DownloadProgressState.Failed)
                 {
-                    this.Content = source.ErrorInfo;
+                    Dispatcher.Invoke(() => {
+                        this.Content = source.ErrorInfo;
+                    });
                 }
                 else if (source.State == DownloadProgressState.Canceled)
                 {

@@ -8,6 +8,9 @@ using System.Windows.Controls;
 using System.Timers;
 using System.Diagnostics;
 using System.ComponentModel;
+using System.Windows.Input;
+using MEFL.APIData;
+using MEFL.Contract;
 
 namespace MEFL.Pages
 {
@@ -25,6 +28,12 @@ namespace MEFL.Pages
         private void propChanged(object sender, PropertyChangedEventArgs e)
         {
 
+        }
+
+        private void ChangeDownloader(object sender, MouseButtonEventArgs e)
+        {
+            APIModel.SelectedDownloader = (sender as FrameworkElement).DataContext as MEFLDownloader;
+            (this.Resources["SPMV"] as SettingPageModelView).Invoke("SelectedDownloaderString");
         }
 
         private void ChangePageContentButton_Checked(object sender, RoutedEventArgs e)

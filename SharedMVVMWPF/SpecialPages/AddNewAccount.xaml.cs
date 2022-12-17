@@ -58,11 +58,10 @@ namespace MEFL.SpecialPages
             }
         }
 
-        private void Item_OnAccountAdded(object sender)
+        private void Item_OnAccountAdded(object sender,AccountBase account)
         {
-            var FinalReturn = (sender as Contract.IAddAccountPage).GetFinalReturn();
-            UserManageModel.ModelView.SelectedAccount = FinalReturn;
-            MEFL.APIData.APIModel.AccountConfigs.Add(FinalReturn);
+            UserManageModel.ModelView.SelectedAccount = account;
+            MEFL.APIData.APIModel.AccountConfigs.Add(account);
             UserManageModel.ModelView.Invoke("Accounts");
             MyPageBase From = null;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
@@ -97,13 +96,15 @@ namespace MEFL.SpecialPages
                 MessageBox.Show("添加用户页面不是 FrameworkElement，请联系开发者");
                 return;
             }
+            content.OnAccountAdd -= Item_OnAccountAdded;
             content.OnAccountAdd += Item_OnAccountAdded;
+            content.OnCanceled -= Content_OnCanceled;
             content.OnCanceled += Content_OnCanceled;
             (App.Current.Resources["MainPage"] as Grid).Children.Add(NewPage);
             NewPage.Show(this);
         }
 
-        private void Content_OnCanceled(object sender)
+        private void Content_OnCanceled(object sender, AccountBase account)
         {
             throw new NotImplementedException();
         }

@@ -121,9 +121,19 @@ namespace MEFL.PageModelViews
                     (App.Current.Resources["MainPage"] as Grid).Children.RemoveAt(i);
                 }
             }
-            var Content = ((sender as MyItemsCardItem).DataContext as AccountBase).ManagePage as FrameworkElement;
-            Content.DataContext = new GenerlManageAccountModelView((sender as MyItemsCardItem).DataContext as AccountBase);
-            (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.AddAccountPage() { Tag = "AddNewAccount", Visibility = Visibility.Hidden,Content= Content});
+            if(!(((sender as MyItemsCardItem).DataContext as AccountBase).ManagePage is FrameworkElement))
+            {
+                MessageBox.Show("应该是个FrameworkElement");
+                return;
+            }
+            var Content = ((sender as MyItemsCardItem).DataContext as AccountBase).ManagePage;
+            Content.OnAccountDeleted -= Content_OnAccountDeleted;
+            Content.OnAccountDeleted += Content_OnAccountDeleted;
+            Content.OnCanceled -= Content_OnCanceled;
+            Content.OnCanceled += Content_OnCanceled;
+            Content.OnSelected -= Content_OnSelected;
+            Content.OnSelected += Content_OnSelected;
+            (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.AddAccountPage() { Tag = "AddNewAccount", Visibility = Visibility.Hidden,Content = Content as FrameworkElement});
             MyPageBase From = null;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
             {
@@ -133,9 +143,100 @@ namespace MEFL.PageModelViews
                 }
             }
             foreach (MyPageBase item in FindControl.FromTag("AddNewAccount", (App.Current.Resources["MainPage"] as Grid)))
+            { 
+                item.Show(From);
+            }
+        }
+
+        private void Content_OnSelected(object sender, AccountBase account)
+        {
+            if (account != UserManageModel.ModelView.SelectedAccount)
+            {
+                UserManageModel.ModelView.SelectedAccount = account;
+            }
+            MyPageBase From = null;
+            foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
+            {
+                if (item.Visibility == Visibility.Visible)
+                {
+                    From = item;
+                }
+            }
+            foreach (MyPageBase item in FindControl.FromTag("UserManagePage", (App.Current.Resources["MainPage"] as Grid)))
             {
                 item.Show(From);
             }
+            for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
+            {
+                if ((App.Current.Resources["MainPage"] as Grid).Children[i] == From)
+                {
+                    (App.Current.Resources["MainPage"] as Grid).Children.RemoveAt(i);
+                }
+            }
+            UserManageModel.ModelView.Invoke("SelectedAccount");
+            UserManageModel.ModelView.Invoke("Accounts");
+        }
+
+        private void Content_OnCanceled(object sender, AccountBase account)
+        {
+            MyPageBase From = null;
+            foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
+            {
+                if (item.Visibility == Visibility.Visible)
+                {
+                    From = item;
+                }
+            }
+            foreach (MyPageBase item in FindControl.FromTag("UserManagePage", (App.Current.Resources["MainPage"] as Grid)))
+            {
+                item.Show(From);
+            }
+            for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
+            {
+                if ((App.Current.Resources["MainPage"] as Grid).Children[i] == From)
+                {
+                    (App.Current.Resources["MainPage"] as Grid).Children.RemoveAt(i);
+                }
+            }
+        }
+
+        private void Content_OnAccountDeleted(object sender, AccountBase account)
+        {
+            UserManageModel.ModelView.SelectedAccount = account;
+            MEFL.APIData.APIModel.AccountConfigs.Remove(account);
+            if (UserManageModel.ModelView.SelectedAccount == UserManageModel.ModelView.SelectedAccount)
+            {
+                if (MEFL.APIData.APIModel.AccountConfigs.Count >= 1)
+                {
+                    UserManageModel.ModelView.SelectedAccount = APIData.APIModel.AccountConfigs[0];
+                }
+                else
+                {
+                    UserManageModel.ModelView.SelectedAccount = null;
+                }
+            }
+            UserManageModel.ModelView.Invoke("Accounts");
+            UserManageModel.ModelView.Invoke("SelectedAccount");
+            MyPageBase From = null;
+            foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
+            {
+                if (item.Visibility == Visibility.Visible)
+                {
+                    From = item;
+                }
+            }
+            foreach (MyPageBase item in FindControl.FromTag("UserManagePage", (App.Current.Resources["MainPage"] as Grid)))
+            {
+                item.Show(From);
+            }
+            for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
+            {
+                if ((App.Current.Resources["MainPage"] as Grid).Children[i] == From)
+                {
+                    (App.Current.Resources["MainPage"] as Grid).Children.RemoveAt(i);
+                }
+            }
+            account.Dispose();
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

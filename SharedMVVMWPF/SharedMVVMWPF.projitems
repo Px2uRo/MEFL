@@ -30,7 +30,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\DownloadPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ExtraAddInPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\GenerlSettingGameModelView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\GenerlManageAccountModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\DownloadingProgressPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ManageProcessesPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\PageModelViewBase.cs" />
