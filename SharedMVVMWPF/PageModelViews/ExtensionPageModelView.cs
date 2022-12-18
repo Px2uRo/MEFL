@@ -9,6 +9,8 @@ using System.Windows.Data;
 using System.Windows.Input;
 using MEFL.Controls;
 using System.Windows;
+using MEFL.Configs;
+using Newtonsoft.Json;
 
 namespace MEFL.PageModelViews
 {
@@ -31,6 +33,20 @@ namespace MEFL.PageModelViews
             {
                 var element = new MyExtensionCard() { Margin=new System.Windows.Thickness(0,0,0,15)};
                 element.DataContext = new HostingModelView(item);
+                #region 加载好之后才能做的事情
+                //todo 这里能做一些等插件加载好之后才能做的事情
+                var reg = JsonConvert.DeserializeObject<DownloaderConfig>(RegManager.Read("Downloader"));
+                if (reg != null)
+                {
+                    foreach (var down in APIModel.Downloaders)
+                    {
+                        if (down.FileName == reg.FileName && down.Name == reg.DownloaderName)
+                        {
+                            APIModel.SelectedDownloader = down;
+                        }
+                    }
+                }
+                #endregion
                 res.Children.Add(element);
             }
             return res;

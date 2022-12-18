@@ -201,17 +201,6 @@
                         </StackPanel>
                         <c:MyButton Height="30" Width="80" VerticalAlignment="Center" Grid.Column="2" Content="访问项目" Tag="https://www.newtonsoft.com/json" Click="OpenWebSite"/>
                     </Grid>
-                    <Grid Margin="0,0,0,5" Height="40">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition Width="150"/>
-                        </Grid.ColumnDefinitions>
-                        <StackPanel Grid.Column="0">
-                            <TextBlock Grid.Column="1" Text="OctaneDownloader" FontWeight="Bold" FontSize="16"/>
-                            <TextBlock Grid.Column="1" Opacity="0.8" TextWrapping="Wrap" Text="[MIT LICENSE]A high performance, multi-threaded C# file download library."/>
-                        </StackPanel>
-                        <c:MyButton Height="30" Width="80" VerticalAlignment="Center" Grid.Column="2" Content="访问项目" Tag="https://github.com/gregyjames/OctaneDownloader" Click="OpenWebSite"/>
-                    </Grid>
                 </StackPanel>
             </c:MyCard>
         </StackPanel>
@@ -276,7 +265,9 @@
                     </TextBlock>
                 </c:MyItemsCard.Title>
             </c:MyItemsCard>
-            <c:MyItemsCard Title="管理下载源"/>
+            <c:MyItemsCard Title="管理下载源">
+                
+            </c:MyItemsCard>
         </StackPanel>
     </Grid>
 </c:MyPageBase>

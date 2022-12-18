@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AccountsManagement\Microsoft.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AccountsManagement\Model.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Downloaders\NormalDownloader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DownloadSources.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Export.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameTypes\MEFLRealseType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFLAccount.cs" />

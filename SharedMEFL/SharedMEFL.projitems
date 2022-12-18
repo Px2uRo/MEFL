@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)APIData\APIModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)APIData\SettingConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configs\DownloaderConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Debugger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DownloaderCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DownloadSourceCollection.cs" />

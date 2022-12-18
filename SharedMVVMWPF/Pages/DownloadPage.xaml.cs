@@ -140,7 +140,7 @@ namespace MEFL.Pages
             }
             else
             {
-                var result = file.Download(APIModel.SelectedDownloader, APIModel.MyFolders[APIModel.SelectedFolderIndex].Path, APIModel.SettingArgs, APIModel.DownloadSources.ToArray());
+                var result = file.Download(APIModel.SelectedDownloader, APIModel.MyFolders[APIModel.SelectedFolderIndex].Path, APIModel.SettingArgs, APIModel.DownloadSources);
                 if (result.HasError != true) {
                     DownloadingProgressPageModel.ModelView.DownloadingProgresses.Add(result.Progress);
                 }

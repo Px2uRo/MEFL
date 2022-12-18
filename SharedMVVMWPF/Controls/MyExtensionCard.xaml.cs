@@ -1,6 +1,8 @@
 ﻿using MEFL.APIData;
+using MEFL.Configs;
 using MEFL.Contract;
 using MEFL.PageModelViews;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -249,6 +251,10 @@ namespace MEFL.Controls
                                     });
                                 }).Start();
                             }
+                        }
+                        foreach (var item in Hosting.Download.GetDownloadSources(APIData.APIModel.SettingArgs))
+                        {
+                            APIModel.DownloadSources.AddItem(item);
                         }
                         foreach (var item in Hosting.Download.GetDownloaders(APIData.APIModel.SettingArgs))
                         {

@@ -9,7 +9,7 @@ namespace MEFL.CLAddIn.WebVersion
 {
     public class GenericWebVersion : LauncherWebVersionInfo
     {
-        public override Contract.LauncherProgressResult Download(MEFLDownloader downloader, string dotMCFolder, SettingArgs args, DownloadSource[] sources)
+        public override Contract.LauncherProgressResult Download(MEFLDownloader downloader, string dotMCFolder, SettingArgs args, Dictionary<string,List<DownloadSource>> sources)
         {
             var SubFolderString = Path.GetFileNameWithoutExtension(Url);
             if (!Directory.Exists( Path.Combine(dotMCFolder, "versions", SubFolderString)))

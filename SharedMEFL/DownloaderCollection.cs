@@ -32,10 +32,6 @@ namespace MEFL
     {
         protected override void InsertItem(int index, MEFLDownloader item)
         {
-            if (APIModel.SelectedDownloader == null)
-            {
-                APIModel.SelectedDownloader = item;
-            }
             base.InsertItem(index, item);
             SettingPageModel.ModelView.Invoke(nameof(SettingPageModel.ModelView.Downloaders));
             SettingPageModel.ModelView.Invoke(nameof(SettingPageModel.ModelView.SelectedDownloaderString));

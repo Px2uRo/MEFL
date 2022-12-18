@@ -18,12 +18,12 @@ namespace OctaneForMEFL
 
         public override object Icon => "Octane";
 
-        public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] Sources, string dotMCFolder)
+        public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, Dictionary<string, List<DownloadSource>> sources, string dotMCFolder)
         {
             return new OctaneProgress(NativeUrl, LoaclPath, dotMCFolder);
         }
 
-        public override DownloadProgress CreateProgress(List<NativeLocalPair> NativeLocalPairs, DownloadSource[] Sources, string dotMCFolder)
+        public override DownloadProgress CreateProgress(List<NativeLocalPair> NativeLocalPairs, Dictionary<string, List<DownloadSource>> sources, string dotMCFolder)
         {
             return new OctaneProgress(NativeLocalPairs, dotMCFolder);
         }

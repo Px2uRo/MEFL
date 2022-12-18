@@ -2,6 +2,7 @@
 using MEFL.Arguments;
 using MEFL.CLAddIn;
 using MEFL.CLAddIn.Downloaders;
+using MEFL.CLAddIn.DownloadSources;
 using MEFL.CLAddIn.Pages;
 using MEFL.CLAddIn.WebVersion;
 using MEFL.Contract;
@@ -84,7 +85,8 @@ namespace MEFL.CLAddIn.Export
 
         public DownloadSource[] GetDownloadSources(SettingArgs args)
         {
-            throw new NotImplementedException();
+            var lst = new List<DownloadSource>() {new BAVMSource(),new BAAsetSource(),new BALibSource(),new BAJSONAssIndSource()};
+            return lst.ToArray();
         }
 
         public DownloadPageItemPair[] GetPairs(SettingArgs args)

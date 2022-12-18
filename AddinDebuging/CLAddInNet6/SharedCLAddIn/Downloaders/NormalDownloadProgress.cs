@@ -288,6 +288,7 @@ namespace MEFL.CLAddIn.Downloaders
                     CurrectFile = System.IO.Path.GetFileName(Key);
                     webClient = new();
                     webClient.SpeedChanged += WebClient_DownloadProgressChanged;
+                    webClient.Finished += WebClient_Finished;
                     //webClient.Encoding = Encoding.UTF8;
                     try
                     {
@@ -396,6 +397,12 @@ namespace MEFL.CLAddIn.Downloaders
             base.Start();
         }
 
+        private void WebClient_Finished(object sender)
+        {
+                DownloadedItems++;
+                _SavedFileSizes += (int)(sender as CoreLaunching.Downloader).contentleng;
+        }
+
         int _SavedFileSizes;
         private void WebClient_DownloadProgressChanged(object sender)
         {
@@ -411,11 +418,6 @@ namespace MEFL.CLAddIn.Downloaders
                 bools[bools.Count - 1] = true;
             }
             DownloadedSize = _SavedFileSizes + (int)(sender as CoreLaunching.Downloader).Downloaded;
-            if ((int)(sender as CoreLaunching.Downloader).Downloaded == (int)(sender as CoreLaunching.Downloader).contentleng)
-            {
-                DownloadedItems++;
-                _SavedFileSizes += (int)(sender as CoreLaunching.Downloader).contentleng;
-            }
         }
 
         public override void Continue()

@@ -1,21 +1,30 @@
 ﻿using MEFL.Contract;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace MEFL.APIData
 {
-    public class DownloadSourceCollection:ObservableCollection<DownloadSource>
+    public class DownloadSourceCollection:Dictionary<string,List<DownloadSource>>
     {
-        protected override void InsertItem(int index, DownloadSource item)
+        public void AddItem(DownloadSource item)
         {
-
-            base.InsertItem(index, item);
+            if (!this.ContainsKey(item.ELItem))
+            {
+                this.Add(item.ELItem, new List<DownloadSource>());
+            }
+            this[item.ELItem].Add(item);
         }
 
-        protected override void RemoveItem(int index)
+        public void RemoveItem(DownloadSource item)
         {
-            this[index].Dispose();
-            base.RemoveItem(index);
-            
+            this[item.ELItem].Remove(item);
+            if (this[item.ELItem].Count == 0)
+            {
+                GC.SuppressFinalize(item.ELItem);
+                this.Remove(item.ELItem);
+            }
+            GC.SuppressFinalize(item);
         }
     }
 }

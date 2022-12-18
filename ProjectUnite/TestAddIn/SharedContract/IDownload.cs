@@ -1,4 +1,5 @@
 using MEFL.Arguments;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace MEFL.Contract 
@@ -18,6 +19,7 @@ namespace MEFL.Contract
         /// <param name="args"></param>
         /// <returns></returns>
         public DownloadSource[] GetDownloadSources(SettingArgs args);
+
         /// <summary>
         /// 获取下载游戏页面的条目
         /// </summary>

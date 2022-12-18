@@ -1,10 +1,12 @@
 using System;
+using System.IO;
 using System.Reflection;
 
 namespace MEFL.Contract{
     public abstract class MEFLClass : IDisposable
     {
         public bool Disposed { get; set; }
+        public string FileName => Path.GetFileName(Assembly.GetAssembly(GetType()).Location);
 
         public string AddInGuid => Assembly.GetAssembly(GetType()).ManifestModule.ModuleVersionId.ToString();
 

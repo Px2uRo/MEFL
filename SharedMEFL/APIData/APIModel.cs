@@ -1,4 +1,5 @@
 ﻿using CoreLaunching.JsonTemplates;
+using MEFL.Configs;
 using MEFL.Contract;
 using MEFL.PageModelViews;
 using Newtonsoft.Json;
@@ -98,7 +99,12 @@ namespace MEFL.APIData
         internal static bool AlwaysOpenNewAddIns { get => SettingConfig.AlwaysOpenNewExtensions; set { SettingConfig.AlwaysOpenNewExtensions = value; } }
 
         private static ObservableCollection<FileInfo> _SearchedJavas = new ObservableCollection<FileInfo>();
-        internal static Contract.MEFLDownloader SelectedDownloader;
+        private static Contract.MEFLDownloader _selectedDownloader;
+        internal static Contract.MEFLDownloader SelectedDownloader { get => _selectedDownloader; set {
+                RegManager.Write("Downloader",JsonConvert.SerializeObject(new DownloaderConfig(value.FileName,value.Name)));
+                _selectedDownloader= value;
+            } 
+        }
         public static DownloaderCollection Downloaders = new();
         public static DownloadSourceCollection DownloadSources = new();
 
