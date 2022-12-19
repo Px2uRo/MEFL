@@ -2,10 +2,10 @@ using System;
 
 namespace MEFL.Contract
 {
-    public abstract class DownloadSource:MEFLClass
+    public class DownloadSource:MEFLClass
     {
-        public abstract string ELItem { get; }
-        public abstract string RuleSourceName { get; }
-        public abstract string GetUri(Arguments.SettingArgs args);
+        public string ELItem { get; set; }
+        public string RuleSourceName { get; set; }
+        public string Uri { get; set; }
     }
 }

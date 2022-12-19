@@ -12,8 +12,8 @@ namespace MEFL.Contract
         public abstract string Description { get; }
         public abstract Version Version { get; }
         public abstract object Icon { get; }
-        public abstract DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, Dictionary<string, List<DownloadSource>> sources,string dotMCFolder);
-        public abstract DownloadProgress CreateProgress(List<NativeLocalPair> NativeLocalPairs, Dictionary<string, List<DownloadSource>> sources, string dotMCFolder);
+        public abstract DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources,string dotMCFolder);
+        public abstract DownloadProgress CreateProgress(List<NativeLocalPair> NativeLocalPairs, DownloadSource[] sources, string dotMCFolder);
     }
     public class NativeLocalPair
     {

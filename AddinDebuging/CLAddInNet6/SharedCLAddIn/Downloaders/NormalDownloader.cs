@@ -15,14 +15,14 @@ namespace MEFL.CLAddIn.Downloaders
 
         public override object Icon => "C#";
 
-        public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, Dictionary<string, List<DownloadSource>> sources, string dotMCFolder)
+        public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string dotMCFolder)
         {
-            return new NormalDownloadProgress(NativeUrl, LoaclPath, dotMCFolder);
+            return new NormalDownloadProgress(NativeUrl, LoaclPath, dotMCFolder,sources);
         }
 
-        public override DownloadProgress CreateProgress(List<NativeLocalPair> NativeLocalPairs, Dictionary<string, List<DownloadSource>> sources, string dotMCFolder)
+        public override DownloadProgress CreateProgress(List<NativeLocalPair> NativeLocalPairs, DownloadSource[] sources, string dotMCFolder)
         {
-            return new NormalDownloadProgress(NativeLocalPairs, dotMCFolder);
+            return new NormalDownloadProgress(NativeLocalPairs, dotMCFolder,sources);
         }
     }
     public class CLDownloader : MEFLDownloader
@@ -35,12 +35,12 @@ namespace MEFL.CLAddIn.Downloaders
 
         public override object Icon => "CL";
 
-        public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, Dictionary<string, List<DownloadSource>> sources, string dotMCFolder)
+        public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string dotMCFolder)
         {
             return new CLDownloadProgress(NativeUrl, LoaclPath, dotMCFolder);
         }
 
-        public override DownloadProgress CreateProgress(List<NativeLocalPair> NativeLocalPairs, Dictionary<string, List<DownloadSource>> sources, string dotMCFolder)
+        public override DownloadProgress CreateProgress(List<NativeLocalPair> NativeLocalPairs, DownloadSource[] sources, string dotMCFolder)
         {
             return new CLDownloadProgress(NativeLocalPairs, dotMCFolder);
         }

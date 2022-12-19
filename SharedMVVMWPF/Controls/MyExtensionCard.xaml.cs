@@ -339,7 +339,30 @@ namespace MEFL.Controls
                             i--;
                         }
                     }
-
+                    for (int i = 0; i < APIModel.DownloadSources.Count; i++)
+                    {
+                        var lst = APIModel.DownloadSources.Values.ToArray()[i];
+                        for (int j = 0; j < lst.Count; j++)
+                        {
+                            if (lst[j].AddInGuid == Hosting.Guid)
+                            {
+                                if (lst.Selected == lst[j])
+                                {
+                                    if (lst.Count - 1 > 0)
+                                    {
+                                        lst.Selected = lst[0];
+                                    }
+                                    else
+                                    {
+                                        lst.Selected = null;
+                                    }
+                                }
+                                APIModel.DownloadSources.RemoveItem(lst[j]);
+                                j--;
+                            }
+                        }
+                        i = i + APIModel.DownloadSources.ChangedCount;
+                    }
                     #endregion
                 }
                 #region Games

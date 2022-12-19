@@ -17,23 +17,27 @@ namespace MEFL.CLAddIn.Downloaders
 {
     public class NormalDownloadProgress : DownloadProgress
     {
+        DownloadSource[] Sources;
         List<bool> bools = new();
         WebClient webClient;
         string dotMCPath;
         string versionPath;
         string GameJarPath;
         //Directory.CreateDirectory(System.IO.Path.Combine(fp, "versions", NameBox.Text));
-        public NormalDownloadProgress(string nativeUrl, string loaclPath,string dotMCFolder)
+        public NormalDownloadProgress(string nativeUrl, string loaclPath,string dotMCFolder, DownloadSource[] sources)
         {
             dotMCPath = dotMCFolder;
             CurrectFile = Path.GetFileName( loaclPath);
             versionPath = Path.Combine(dotMCFolder, "versions", Path.GetFileNameWithoutExtension(CurrectFile));
             GameJarPath = Path.Combine(versionPath, $"{Path.GetFileNameWithoutExtension(CurrectFile)}.jar");
+            Sources = sources;
+            nativeUrl = SourceReplacer.Replace(nativeUrl,sources);
             this.NativeLocalPairs = new() { new(nativeUrl, loaclPath) };
+            
         }
 
 
-        public NormalDownloadProgress(List<NativeLocalPair> nativeLocalPairs,string dotMCFolder)
+        public NormalDownloadProgress(List<NativeLocalPair> nativeLocalPairs,string dotMCFolder, DownloadSource[] sources)
         {
             this.NativeLocalPairs = nativeLocalPairs;
         }
@@ -57,6 +61,8 @@ namespace MEFL.CLAddIn.Downloaders
         {
             paused = false;
             new Thread(() => {
+                try
+                {
                 for (int i = 0; i < this.NativeLocalPairs.Count; i++)
                 {
                     if (State == DownloadProgressState.Canceling)
@@ -105,27 +111,31 @@ namespace MEFL.CLAddIn.Downloaders
                             var root = JsonConvert.DeserializeObject<Root>(System.IO.File.ReadAllText(Value));
                             if(root != null)
                             {
-                                NativeLocalPairs.Add(new(root.Downloads.Client.Url, Path.Combine(versionPath, GameJarPath)));
+                                GameJarPath = Path.Combine(versionPath,$"{Path.GetFileNameWithoutExtension(Value)}\\{Path.GetFileNameWithoutExtension(Value)}.jar");
+                                NativeLocalPairs.Add(new(SourceReplacer.Replace(root.Downloads.Client.Url,Sources), GameJarPath));
                                 TotalSize += root.Downloads.Client.Size;
                                 CurrectFile = "判断缺失的文件中";
                                 if(!Directory.Exists(Path.Combine(dotMCPath, "assets", "indexs")))
                                 {
                                     Directory.CreateDirectory(Path.Combine(dotMCPath, "assets", "indexs"));
                                     var clt = new WebClient();
-                                    clt.DownloadFile(root.AssetIndex.Url,Path.Combine(dotMCPath, "assets", "indexs", $"{root.AssetIndex.Id}.json"));
+                                    var address = SourceReplacer.Replace(root.AssetIndex.Url, Sources);
+                                    clt.DownloadFile(address,Path.Combine(dotMCPath, "assets", "indexs", $"{root.AssetIndex.Id}.json"));
                                     clt.Dispose();
                                 }
                                 if (!System.IO.File.Exists(Path.Combine(dotMCPath, "assets", "indexs", $"{root.AssetIndex.Id}.json")))
                                 {
                                     var clt = new WebClient();
-                                    clt.DownloadFile(root.AssetIndex.Url,Path.Combine(dotMCPath, "assets", "indexs", $"{root.AssetIndex.Id}.json"));
+                                    var address = SourceReplacer.Replace(root.AssetIndex.Url, Sources);
+                                    clt.DownloadFile(address,Path.Combine(dotMCPath, "assets", "indexs", $"{root.AssetIndex.Id}.json"));
                                     clt.Dispose();
                                 }
                                 var assets = JsonConvert.DeserializeObject<AssetsObject>(System.IO.File.ReadAllText(Path.Combine(dotMCPath, "assets", "indexs", $"{root.AssetIndex.Id}.json")));
                                 if (assets == null)
                                 {
                                     var clt = new WebClient();
-                                    clt.DownloadFile(root.AssetIndex.Url, Path.Combine(dotMCPath, "assets", "indexs", $"{root.AssetIndex.Id}.json"));
+                                    var address = SourceReplacer.Replace(root.AssetIndex.Url, Sources);
+                                    clt.DownloadFile(address, Path.Combine(dotMCPath, "assets", "indexs", $"{root.AssetIndex.Id}.json"));
                                     clt.Dispose();
                                 }
                                 GC.SuppressFinalize(assets);
@@ -141,7 +151,9 @@ namespace MEFL.CLAddIn.Downloaders
                                         var objectPath = Path.Combine(dotMCPath, "assets", "objects",item.Hash.Substring(0,2),item.Hash);
                                         if (!System.IO.File.Exists(objectPath))
                                         {
-                                            NativeLocalPairs.Add(new($"http://resources.download.minecraft.net/{item.Hash.Substring(0, 2)}/{item.Hash}", objectPath));
+                                            var native = SourceReplacer.Replace($"http://resources.download.minecraft.net/{item.Hash.Substring(0, 2)}/{item.Hash}", Sources);
+                                            var nlp = new NativeLocalPair(native, objectPath);
+                                            NativeLocalPairs.Add(nlp);
                                             TotalSize += item.Size;
                                             TotalCount ++;
                                         }
@@ -153,7 +165,7 @@ namespace MEFL.CLAddIn.Downloaders
                                     var local = string.Empty;
                                     if (item.Downloads.Artifact != null)
                                     {
-                                        native = item.Downloads.Artifact.Url;
+                                        native = SourceReplacer.Replace(item.Downloads.Artifact.Url,Sources);
                                         local = Path.Combine(dotMCPath, "libraries", item.Downloads.Artifact.Path.Replace("/", "\\"));
                                     }
                                     if(item.Downloads.Classifiers!=null)
@@ -165,6 +177,7 @@ namespace MEFL.CLAddIn.Downloaders
                                             var classlocal = Path.Combine(dotMCPath, "libraries", classifier.Item.Path.Replace("/", "\\"));
                                             if (!System.IO.File.Exists(classlocal))
                                             {
+                                                classnative = SourceReplacer.Replace(classnative,Sources);
                                                 NativeLocalPairs.Add(new(classnative, classlocal));
                                                 TotalSize += classifier.Item.Size;
                                                 TotalCount++;
@@ -175,6 +188,7 @@ namespace MEFL.CLAddIn.Downloaders
                                     {
                                         if (!System.IO.File.Exists(local))
                                         {
+                                            native = SourceReplacer.Replace(native,Sources);
                                             NativeLocalPairs.Add(new(native, local));
                                             TotalSize += item.Downloads.Artifact.Size;
                                             TotalCount++;
@@ -187,6 +201,12 @@ namespace MEFL.CLAddIn.Downloaders
                     }
                 }
                 State = DownloadProgressState.Finished;
+                }
+                catch (Exception ex)
+                {
+
+                }
+
             }).Start();
             base.Start();
         }

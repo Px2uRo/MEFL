@@ -101,8 +101,11 @@ namespace MEFL.APIData
         private static ObservableCollection<FileInfo> _SearchedJavas = new ObservableCollection<FileInfo>();
         private static Contract.MEFLDownloader _selectedDownloader;
         internal static Contract.MEFLDownloader SelectedDownloader { get => _selectedDownloader; set {
-                RegManager.Write("Downloader",JsonConvert.SerializeObject(new DownloaderConfig(value.FileName,value.Name)));
-                _selectedDownloader= value;
+                if (value != null)
+                {
+                    RegManager.Write("Downloader", JsonConvert.SerializeObject(new DownloaderConfig(value.FileName, value.Name)));
+                }
+                _selectedDownloader = value;
             } 
         }
         public static DownloaderCollection Downloaders = new();

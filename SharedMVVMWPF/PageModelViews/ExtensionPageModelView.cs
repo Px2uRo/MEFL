@@ -46,6 +46,15 @@ namespace MEFL.PageModelViews
                         }
                     }
                 }
+
+                //var reg = RegManager.Read("Sources")
+                foreach (var sources in APIModel.DownloadSources)
+                {
+                    if (sources.Value.Selected == null)
+                    {
+                        sources.Value.Selected = sources.Value[0];
+                    }
+                }
                 #endregion
                 res.Children.Add(element);
             }

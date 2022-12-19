@@ -2,7 +2,6 @@
 using MEFL.Arguments;
 using MEFL.CLAddIn;
 using MEFL.CLAddIn.Downloaders;
-using MEFL.CLAddIn.DownloadSources;
 using MEFL.CLAddIn.Pages;
 using MEFL.CLAddIn.WebVersion;
 using MEFL.Contract;
@@ -85,7 +84,11 @@ namespace MEFL.CLAddIn.Export
 
         public DownloadSource[] GetDownloadSources(SettingArgs args)
         {
-            var lst = new List<DownloadSource>() {new BAVMSource(),new BAAsetSource(),new BALibSource(),new BAJSONAssIndSource()};
+            var lst = new List<DownloadSource>() { 
+                new() { ELItem="${version_manifest}",RuleSourceName = "BMCLAPI",Uri= "https://bmclapi2.bangbang93.com/mc/game/version_manifest.json" },
+                new() { ELItem = "${json_&_AssIndex}", RuleSourceName = "BMCLAPI", Uri = "https://bmclapi2.bangbang93.com" },
+                new() { ELItem = "${assets}", RuleSourceName = "BMCLAPI", Uri = "https://bmclapi2.bangbang93.com/assets" },
+                new() { ELItem = "${libraries}", RuleSourceName = "BMCLAPI", Uri = "https://bmclapi2.bangbang93.com/maven" }};
             return lst.ToArray();
         }
 
