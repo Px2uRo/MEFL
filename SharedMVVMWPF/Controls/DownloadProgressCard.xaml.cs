@@ -5,6 +5,7 @@ using MEFL.PageModelViews;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,7 +30,29 @@ namespace MEFL.Controls
         public DownloadProgressCard()
         {
             InitializeComponent();
+            LogLB.ItemsSource = new List<string>();
+            //var source = DownloadProgress;
+            //if (source != null)
+            //{
+                //source.OnLogWriteLine += Source_OnLogWriteLine;
+                //source.OnLogClear += Source_OnLogClear;
+            //}
+
         }
+
+        private void Source_OnLogClear(object? sender, EventArgs e)
+        {
+            //var lb = new ListBox();
+            //lb.ItemsSource = new List<string>();
+            //lb.Items.Clear();
+            LogLB.Items.Clear();
+        }
+
+        private void Source_OnLogWriteLine(object? sender, string e)
+        {
+            LogLB.Items.Add(e);
+        }
+
         private void PauseBtn(object sender, RoutedEventArgs e)
         {
             if (Paused)

@@ -54,6 +54,16 @@ namespace MEFL.Contract
         {
             Dispose();
         }
+        public event EventHandler<string> OnLogWriteLine;
+        public void LogWriteLine(string content) 
+        { 
+            OnLogWriteLine?.Invoke(this, content);
+        }
+        public event EventHandler OnLogClear;
+        public void LogClear()
+        {
+            OnLogClear?.Invoke(this,EventArgs.Empty);
+        }
         #endregion
         public List<NativeLocalPair> NativeLocalPairs;
 

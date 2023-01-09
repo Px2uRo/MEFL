@@ -103,6 +103,7 @@ namespace MEFL.CLAddIn.Downloaders
         public event EventHandler OnDownloadAllCompleted;
         public event EventHandler<DownloadFileProgressArgument> OnProgressUpdated;
         public event EventHandler<DownloadFile> OnDownloadFailed;
+        public event EventHandler<long> OnBytesAdd;
 
         private ConcurrentQueue<DownloadFile> _readyQueue;
         private ConcurrentQueue<DownloadFile> _completedQueue;
@@ -119,11 +120,17 @@ namespace MEFL.CLAddIn.Downloaders
             {
                 var newFile = new DownloadFile(item);
                 newFile.Source.LoaclPath = newFile.Source.LoaclPath.Replace("${请Ctrl+H替换}", _targetDir);
+                newFile.OnBytesAdd += NewFile_OnBytesAdd;
                 newFile.OnTaskCompleted += NewFile_OnTaskCompleted;
                 _readyQueue.Enqueue(newFile);
             }
             _totalCount = _readyQueue.Count;
             _completedQueue = new ConcurrentQueue<DownloadFile>();
+        }
+
+        private void NewFile_OnBytesAdd(object? sender, long e)
+        {
+            OnBytesAdd?.Invoke(this, e);
         }
 
         public void StartDownload()
@@ -167,6 +174,7 @@ namespace MEFL.CLAddIn.Downloaders
         public string ErrorInfo;
 
         public MEFL.Contract.NativeLocalPair Source;
+        public event EventHandler<long> OnBytesAdd;
 
         public event EventHandler OnTaskCompleted;
 
@@ -199,7 +207,7 @@ namespace MEFL.CLAddIn.Downloaders
                         FileSystemHelper.CreateFolder(parentRoot);
                         using (FileStream fs = new FileStream(Source.LoaclPath, FileMode.Create))
                         {
-
+                            long lastLeng = 0;
                             var cancelToken = new CancellationTokenSource();
                             Task.Run(() =>
                             {
@@ -213,7 +221,7 @@ namespace MEFL.CLAddIn.Downloaders
                             });
                             stream.CopyTo(fs);
                             cancelToken.Cancel();
-
+                            OnBytesAdd?.Invoke(this,fs.Length-lastLeng);
                         }
                     }
 
@@ -390,8 +398,14 @@ namespace MEFL.CLAddIn.Downloaders
                 POOL.OnProgressUpdated += POOL_OnProgressUpdated;
                 POOL.OnDownloadFailed += POOL_OnDownloadFailed;
                 POOL.OnDownloadAllCompleted += POOL_OnDownloadAllCompleted;
+                POOL.OnBytesAdd += POOL_OnBytesAdd;
                 POOL.StartDownload();
             }).Start();
+        }
+
+        private void POOL_OnBytesAdd(object? sender, long e)
+        {
+            DownloadedSize = DownloadedSize + e;
         }
 
         private void POOL_OnDownloadAllCompleted(object? sender, EventArgs e)
@@ -401,8 +415,7 @@ namespace MEFL.CLAddIn.Downloaders
 
         private void POOL_OnDownloadFailed(object? sender, DownloadFile e)
         {
-            State = DownloadProgressState.Failed;
-            ErrorInfo= e.ErrorInfo;
+            LogWriteLine(e.ErrorInfo);
         }
 
         private void POOL_OnProgressUpdated(object? sender, DownloadFileProgressArgument e)
