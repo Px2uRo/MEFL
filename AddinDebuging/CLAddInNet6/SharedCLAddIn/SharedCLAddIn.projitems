@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AccountsManagement\Legacy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AccountsManagement\Microsoft.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)AccountsManagement\Model.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Downloaders\FanDown.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Downloaders\NormalDownloader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Downloaders\SourceReplacer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Downloaders\CLWebFile.cs" />
