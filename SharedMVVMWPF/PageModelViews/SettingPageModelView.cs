@@ -88,6 +88,7 @@ namespace MEFL.PageModelViews
     }
     public class SettingPageModelView: PageModelViewBase
     {
+        public DownloadSourceCollection DownSources => APIModel.DownloadSources;
         public string TempFolderPath
         {
             get { return APIModel.SettingConfig.TempFolderPath; }

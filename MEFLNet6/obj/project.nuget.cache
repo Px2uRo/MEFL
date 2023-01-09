@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "I5fPDLSYgI3EnRw6m0X1ZvX8EAhiLOSBD+BbDem+8/rzNP/XgikW/Z7NDBogL11sbJbLfG50TOreL4FVhFiQaQ==",
+  "dgSpecHash": "KaU4dMgIND89xXPmhh9a8GJI9IRsN2yVkcoLxIgXuhI1zkG1ntw2roEF8uE1tq1bo2q7T5edKxVsSIlO+7idPQ==",
   "success": true,
   "projectFilePath": "I:\\Xiong's\\MEFLCollection\\MEFLNet6\\MEFLNet6.csproj",
   "expectedPackageFiles": [
@@ -31,7 +31,7 @@
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
-    "C:\\Users\\Lenovo\\.nuget\\packages\\corelaunchingnet6\\0.0.0\\corelaunchingnet6.0.0.0.nupkg.sha512"
+    "C:\\Users\\Lenovo\\.nuget\\packages\\corelaunchingnet6\\1.0.0\\corelaunchingnet6.1.0.0.nupkg.sha512"
   ],
   "logs": []
 }

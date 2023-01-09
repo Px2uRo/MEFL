@@ -1,26 +1,36 @@
 ﻿using MEFL.Contract;
+using MEFL.PageModelViews;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 
 namespace MEFL.APIData
 {
-    internal class DSList: ObservableCollection<DownloadSource>
+    public class DSList: ObservableCollection<DownloadSource>
     {
-        public DownloadSource Selected { get; set; }
+        private DownloadSource _selected;
+        public DownloadSource Selected
+        {
+            get => _selected; set
+            {
+                _selected = value;
+                OnPropertyChanged(new("Selected"));
+            }
+        }
         protected override void RemoveItem(int index)
         {
             this[index].Dispose();
             base.RemoveItem(index);
         }
     }
-    internal class DownloadSourceCollection:Dictionary<string,DSList>
+    public class DownloadSourceCollection:Dictionary<string,DSList>
     {
         private int _ChangedCount;
 
         public int ChangedCount
         {
-            get { return _ChangedCount; }
+            get {return _ChangedCount; }
         }
 
         public DownloadSource[] Selected
@@ -37,6 +47,7 @@ namespace MEFL.APIData
         }
         public void AddItem(DownloadSource item)
         {
+            SettingPageModel.ModelView.Invoke("DownSources");
             if (!this.ContainsKey(item.ELItem))
             {
                 this.Add(item.ELItem, new DSList());
@@ -46,6 +57,7 @@ namespace MEFL.APIData
 
         public void RemoveItem(DownloadSource item)
         {
+            SettingPageModel.ModelView.Invoke("DownSources");
             _ChangedCount = 0;
             this[item.ELItem].Remove(item);
             if (this[item.ELItem].Count == 0)

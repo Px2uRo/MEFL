@@ -11,9 +11,9 @@ namespace MEFL.CLAddIn.Downloaders
         {
             var res = string.Empty;
             res = Native.Replace("http://launchermeta.mojang.com/mc/game/version_manifest.json", "${version_manifest}");
-            res = res.Replace("https://piston-meta.mojang.com", "${json_&_AssIndex}");
-            res = res.Replace("https://launchermeta.mojang.com/", "${json_&_AssIndex}");
-            res = res.Replace("https://launcher.mojang.com/", "${json_&_AssIndex}");
+            res = res.Replace("https://piston-meta.mojang.com", "${json}");
+            res = res.Replace("https://launchermeta.mojang.com/", "${AssIndex}");
+            res = res.Replace("https://launcher.mojang.com/", "${AssIndex}");
             res = res.Replace("http://resources.download.minecraft.net", "${assets}");
             res = res.Replace("https://libraries.minecraft.net/", "${libraries}");
             for (int i = 0; i < sources.Length; i++)

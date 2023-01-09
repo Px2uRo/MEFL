@@ -256,6 +256,55 @@
                     <Setter Property="Background" Value="{DynamicResource SYTLE_Standard_Background}"/>
                     <Setter Property="Margin" Value="0,0,0,0"/>
                 </Style>
+                <Style TargetType="c:MyItemsCard" x:Key="MyDS">
+                    <Setter Property="ItemContainerStyle">
+                        <Setter.Value>
+                            <Style TargetType="ListBoxItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="ListBoxItem">
+                                            <Grid Height="20" Margin="0,0,0,5">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="140"/>
+                                                    <ColumnDefinition Width="auto"/>
+                                                    <ColumnDefinition Width="auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <Rectangle Name="Rect" Opacity="0" Fill="{DynamicResource SYTLE_Standard_ColorBrush}" Grid.ColumnSpan="3"/>
+                                                <ContentPresenter Content="{Binding Key}" />
+                                                <ComboBox ItemsSource="{Binding Value}" Grid.Column="1" Loaded="CBLoaded" SelectionChanged="SelectionChanged"/>
+                                                <ContentPresenter Content="{Binding Value.Selected.Uri}" Grid.Column="2"/>
+                                                <Grid.Triggers>
+                                                    <EventTrigger RoutedEvent="MouseEnter">
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation From="0" To="0.3" Duration="0:0:0:0.2"
+                                                                     Storyboard.TargetName="Rect" Storyboard.TargetProperty="Opacity">
+                                                                </DoubleAnimation>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </EventTrigger>
+                                                    <EventTrigger RoutedEvent="MouseLeave">
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation From="0.3" To="0" Duration="0:0:0:0.2"
+                                                                     Storyboard.TargetName="Rect" Storyboard.TargetProperty="Opacity">
+                                                                </DoubleAnimation>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </EventTrigger>
+                                                </Grid.Triggers>
+                                            </Grid>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="BorderBrush" Value="{DynamicResource SYTLE_Standard_ColorBrush}"/>
+                    <Setter Property="Background" Value="{DynamicResource SYTLE_Standard_Background}"/>
+                    <Setter Property="Margin" Value="0,0,0,0"/>
+                </Style>
+
             </StackPanel.Resources>
             <c:MyItemsCard Name="MyC" ItemsSource="{Binding Downloaders}" Style="{DynamicResource MyS}">
                 <c:MyItemsCard.Title>
@@ -265,9 +314,7 @@
                     </TextBlock>
                 </c:MyItemsCard.Title>
             </c:MyItemsCard>
-            <c:MyItemsCard Title="管理下载源">
-                
-            </c:MyItemsCard>
+            <c:MyItemsCard IsSwaped="True" IsAbleToSwap="True" Title="管理下载源" ItemsSource="{Binding DownSources}" Style="{DynamicResource MyDS}"/>
         </StackPanel>
     </Grid>
 </c:MyPageBase>

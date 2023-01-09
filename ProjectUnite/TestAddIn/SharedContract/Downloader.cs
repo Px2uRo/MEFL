@@ -55,6 +55,8 @@ namespace MEFL.Contract
             Dispose();
         }
         #endregion
+        public List<NativeLocalPair> NativeLocalPairs;
+
         private string _ErrorInfo;
 
         public string ErrorInfo
@@ -63,8 +65,6 @@ namespace MEFL.Contract
             set { _ErrorInfo = value; ChangeProperty(nameof(ErrorInfo)); }
         }
 
-
-        public List<NativeLocalPair> NativeLocalPairs;
         private string _currectFile;
 
         public string CurrectFile
@@ -91,31 +91,31 @@ namespace MEFL.Contract
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private int _totalCount;
+        private long _totalCount;
 
-        public int TotalCount
+        public long TotalCount
         {
             get { return _totalCount; }
             set { _totalCount = value; ChangeProperty(nameof(TotalCount)); }
         }
 
-        private int _downloadedItems;
+        private long _downloadedItems;
 
-        public int DownloadedItems
+        public long DownloadedItems
         {
             get { return _downloadedItems; }
             set { _downloadedItems = value; ChangeProperty(nameof(DownloadedItems)); }
         }
-        private int _downloadedSize;
+        private long _downloadedSize;
 
-        public int DownloadedSize
+        public long DownloadedSize
         {
             get { return _downloadedSize; }
             set { _downloadedSize = value; ChangeProperty(nameof(DownloadedSize)); }
         }
-        private int _totalSize;
+        private long _totalSize;
 
-        public int TotalSize
+        public long TotalSize
         {
             get { return _totalSize; }
             set { _totalSize = value; ChangeProperty(nameof(TotalSize)); }

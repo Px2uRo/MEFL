@@ -45,4 +45,5 @@ namespace MEFL.CLAddIn.Downloaders
             return new CLDownloadProgress(NativeLocalPairs, dotMCFolder);
         }
     }
+
 }

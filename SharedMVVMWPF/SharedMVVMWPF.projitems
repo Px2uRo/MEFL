@@ -73,6 +73,9 @@
       <SubType>Code</SubType>
       <DependentUpon>GameSettingPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\ManageDownloadSources.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)SpecialPages\ManageProcessesPage.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>ManageProcessesPage.xaml</DependentUpon>
@@ -186,6 +189,9 @@
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)SpecialPages\ManageDownloadSources.xaml">
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)SpecialPages\ManageProcessesPage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>

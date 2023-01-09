@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using MEFL.APIData;
 using MEFL.Contract;
+using System.Linq;
 
 namespace MEFL.Pages
 {
@@ -36,6 +37,16 @@ namespace MEFL.Pages
             (this.Resources["SPMV"] as SettingPageModelView).Invoke("SelectedDownloaderString");
         }
 
+        private void CBLoaded(object sender, RoutedEventArgs e)
+        {
+            DSList data = (sender as ComboBox).ItemsSource as DSList;
+            (sender as ComboBox).SelectedIndex = data.IndexOf(data.Selected);
+        }
+        private void SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DSList data = (sender as ComboBox).ItemsSource as DSList;
+            data.Selected = data[(sender as ComboBox).SelectedIndex];
+        }
         private void ChangePageContentButton_Checked(object sender, RoutedEventArgs e)
         {
             var btn = sender as ChangePageContentButton;

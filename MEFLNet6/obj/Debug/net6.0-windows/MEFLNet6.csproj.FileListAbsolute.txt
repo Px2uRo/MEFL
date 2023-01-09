@@ -69,3 +69,5 @@ I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\DownloadingProgressP
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\DownloadProgressCard.g.cs
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\DownloadProgressCard.baml
 I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\MEFL.Contract.pdb
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\ManageDownloadSources.g.cs
+I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\ManageDownloadSources.baml

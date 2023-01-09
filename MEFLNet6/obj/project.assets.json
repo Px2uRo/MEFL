@@ -395,7 +395,7 @@
           }
         }
       },
-      "CoreLaunchingNet6/0.0.0": {
+      "CoreLaunchingNet6/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
@@ -1833,7 +1833,7 @@
         "system.threading.tasks.nuspec"
       ]
     },
-    "CoreLaunchingNet6/0.0.0": {
+    "CoreLaunchingNet6/1.0.0": {
       "type": "project",
       "path": "../../CoreLaunching/CoreLaunchingNet6/CoreLaunchingNet6.csproj",
       "msbuildProject": "../../CoreLaunching/CoreLaunchingNet6/CoreLaunchingNet6.csproj"
@@ -1846,7 +1846,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
-      "CoreLaunchingNet6 >= 0.0.0",
+      "CoreLaunchingNet6 >= 1.0.0",
       "MEFL.Contract >= 0.0.5.41",
       "MEFL.Controls >= 0.0.6.3",
       "Newtonsoft.Json >= 13.0.1",
