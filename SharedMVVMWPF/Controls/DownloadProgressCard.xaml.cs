@@ -4,6 +4,7 @@ using MEFL.Contract;
 using MEFL.PageModelViews;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -29,28 +30,36 @@ namespace MEFL.Controls
         bool Paused = false;
         public DownloadProgressCard()
         {
+            this.DataContextChanged += DownloadProgressCard_DataContextChanged;
             InitializeComponent();
-            LogLB.ItemsSource = new List<string>();
-            //var source = DownloadProgress;
-            //if (source != null)
-            //{
-                //source.OnLogWriteLine += Source_OnLogWriteLine;
-                //source.OnLogClear += Source_OnLogClear;
-            //}
+            LogLB.ItemsSource = new ObservableCollection<string>();
 
+        }
+
+        private void DownloadProgressCard_DataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var source = this.DataContext as DownloadProgress;
+            if (source != null)
+            {
+                source.OnLogWriteLine += Source_OnLogWriteLine;
+                source.OnLogClear += Source_OnLogClear;
+            }
         }
 
         private void Source_OnLogClear(object? sender, EventArgs e)
         {
-            //var lb = new ListBox();
-            //lb.ItemsSource = new List<string>();
-            //lb.Items.Clear();
-            LogLB.Items.Clear();
+            Dispatcher.Invoke(() =>
+            {
+                (LogLB.ItemsSource as ObservableCollection<string>).Clear();
+            });
         }
 
         private void Source_OnLogWriteLine(object? sender, string e)
         {
-            LogLB.Items.Add(e);
+            Dispatcher.Invoke(() =>
+            {
+                (LogLB.ItemsSource as ObservableCollection<string>).Add(e);
+            });
         }
 
         private void PauseBtn(object sender, RoutedEventArgs e)

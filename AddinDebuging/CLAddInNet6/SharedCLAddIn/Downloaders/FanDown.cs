@@ -121,11 +121,17 @@ namespace MEFL.CLAddIn.Downloaders
                 var newFile = new DownloadFile(item);
                 newFile.Source.LoaclPath = newFile.Source.LoaclPath.Replace("${请Ctrl+H替换}", _targetDir);
                 newFile.OnBytesAdd += NewFile_OnBytesAdd;
+                newFile.OnDownloadFailed += NewFile_OnDownloadFailed;
                 newFile.OnTaskCompleted += NewFile_OnTaskCompleted;
                 _readyQueue.Enqueue(newFile);
             }
             _totalCount = _readyQueue.Count;
             _completedQueue = new ConcurrentQueue<DownloadFile>();
+        }
+
+        private void NewFile_OnDownloadFailed(object? sender, string e)
+        {
+            OnDownloadFailed?.Invoke(this,(DownloadFile)sender);
         }
 
         private void NewFile_OnBytesAdd(object? sender, long e)
@@ -175,6 +181,7 @@ namespace MEFL.CLAddIn.Downloaders
 
         public MEFL.Contract.NativeLocalPair Source;
         public event EventHandler<long> OnBytesAdd;
+        public event EventHandler<string> OnDownloadFailed;
 
         public event EventHandler OnTaskCompleted;
 
@@ -207,21 +214,24 @@ namespace MEFL.CLAddIn.Downloaders
                         FileSystemHelper.CreateFolder(parentRoot);
                         using (FileStream fs = new FileStream(Source.LoaclPath, FileMode.Create))
                         {
-                            long lastLeng = 0;
                             var cancelToken = new CancellationTokenSource();
                             Task.Run(() =>
                             {
+                                long lastLeng = 0;
                                 while (cancelToken.IsCancellationRequested == false)
                                 {
                                     Thread.Sleep(2500);
-
                                     if (cancelToken.IsCancellationRequested == false && fs.CanWrite)
-                                        Debug.WriteLine($"{Source.NativeUrl} {fs.Length / 1024}");
+                                    {
+#if DEBUG
+                                        Debug.WriteLine($"{Source.NativeUrl} { fs.Length/ 1024}");
+#endif
+                                        OnBytesAdd?.Invoke(this, fs.Length - lastLeng);
+                                    }
                                 }
                             });
                             stream.CopyTo(fs);
                             cancelToken.Cancel();
-                            OnBytesAdd?.Invoke(this,fs.Length-lastLeng);
                         }
                     }
 
@@ -235,6 +245,8 @@ namespace MEFL.CLAddIn.Downloaders
                     Debug.WriteLine($"下载失败{Source.NativeUrl}，{ex.Message}");
                     State = DownloadFileState.DownloadFailed;
                     ErrorInfo = ex.Message;
+                    OnDownloadFailed?.Invoke(this, ErrorInfo);
+                    OnTaskCompleted?.Invoke(this, EventArgs.Empty);
                 }
 
             });
@@ -415,7 +427,8 @@ namespace MEFL.CLAddIn.Downloaders
 
         private void POOL_OnDownloadFailed(object? sender, DownloadFile e)
         {
-            LogWriteLine(e.ErrorInfo);
+            DownloadedItems++;
+            LogWriteLine($"{Path.GetFileName(e.Source.NativeUrl)}:{e.ErrorInfo}");
         }
 
         private void POOL_OnProgressUpdated(object? sender, DownloadFileProgressArgument e)
