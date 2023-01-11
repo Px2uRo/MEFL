@@ -275,12 +275,12 @@ namespace MEFL.CLAddIn.Downloaders
 
         public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string dotMCFolder)
         {
-            return new FandownProgress(NativeUrl,LoaclPath,dotMCFolder);
+            return new FandownProgress(NativeUrl,LoaclPath,dotMCFolder,sources);
         }
 
         public override DownloadProgress CreateProgress(List<NativeLocalPair> NativeLocalPairs, DownloadSource[] sources, string dotMCFolder)
         {
-            return new FandownProgress(NativeLocalPairs,dotMCFolder);
+            return new FandownProgress(NativeLocalPairs,dotMCFolder,sources);
         }
     }
 
@@ -292,9 +292,11 @@ namespace MEFL.CLAddIn.Downloaders
         string dotMCPath;
         string versionPath;
         string GameJarPath;
+        DownloadSource[] _sources;
         //Directory.CreateDirectory(System.IO.Path.Combine(fp, "versions", NameBox.Text));
-        public FandownProgress(string nativeUrl, string loaclPath, string dotMCFolder)
+        public FandownProgress(string nativeUrl, string loaclPath, string dotMCFolder, DownloadSource[] sources)
         {
+            _sources= sources;
             dotMCPath = dotMCFolder;
             CurrectFile = Path.GetFileName(loaclPath);
             versionPath = Path.Combine(dotMCFolder, "versions", Path.GetFileNameWithoutExtension(CurrectFile));
@@ -303,8 +305,9 @@ namespace MEFL.CLAddIn.Downloaders
         }
 
 
-        public FandownProgress(List<NativeLocalPair> nativeLocalPairs, string dotMCFolder)
+        public FandownProgress(List<NativeLocalPair> nativeLocalPairs, string dotMCFolder, DownloadSource[] sources)
         {
+            _sources = sources;
             this.NativeLocalPairs = nativeLocalPairs;
         }
         bool paused;
@@ -400,6 +403,10 @@ namespace MEFL.CLAddIn.Downloaders
                                         TotalSize += item.Downloads.Artifact.Size;
                                         TotalCount++;
                                     }
+                                }
+                                foreach (var my in this.NativeLocalPairs)
+                                {
+                                    my.NativeUrl = SourceReplacer.Replace(my.NativeUrl, _sources);
                                 }
                             }
                         }
