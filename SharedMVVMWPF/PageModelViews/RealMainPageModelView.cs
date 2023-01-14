@@ -144,7 +144,7 @@ namespace MEFL.PageModelViews
                         catch (Exception ex)
                         {
                             Debugger.Logger(ex.Message);
-                            RegManager.Write("CurretGame", String.Empty);
+                            WindowsRegManager.Write("CurretGame", String.Empty);
                         }
                     }
                     else if(parameter == "Force")
@@ -175,7 +175,7 @@ namespace MEFL.PageModelViews
                         catch (Exception ex)
                         {
                             Debugger.Logger(ex.Message);
-                            RegManager.Write("CurretGame", String.Empty);
+                            WindowsRegManager.Write("CurretGame", String.Empty);
                         }
                     }
                     Invoke(nameof(GameInfoConfigs));

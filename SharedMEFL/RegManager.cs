@@ -5,77 +5,88 @@ using System.Text;
 using System.IO;
 using System.Diagnostics;
 using System.Windows;
-#if WINDOWS
+
 using Microsoft.Win32;
-#endif
+using MEFL.RegManagers;
+using System.Windows.Input;
 
 namespace MEFL
 {
-    public static class RegManager
+    public class WindowsRegManager : BaseRegManager
     {
-        static RegManager()
-        {
-            rsa = new RSACryptoServiceProvider();
-#if WINDOWS
-            WinRegKey = Registry.CurrentUser.CreateSubKey("Software").CreateSubKey("MEFL");
-#endif
-        }
-        private static RSACryptoServiceProvider rsa { get; set; }
-#if WINDOWS
-        private static RegistryKey WinRegKey { get; set; }
-        public static void Close()
-        {
-            WinRegKey.Close();
-            WinRegKey.Dispose();
-            WinRegKey = null;
-        }
+        #region const
 
-#endif
-        public static void SecurityWrite(string Key, string Value)
+        private const string SOFTEWARE = "Software";
+
+        #endregion
+
+        #region ctors
+        public WindowsRegManager()
         {
-            //todo Security
-            Write(Key, Value);
-        }
-        public static object SecurityRead(string Key)
-        {
-            //todo Security
-            return Read(Key);
-        }
-        public static void Write(string Key, string Value)
-        {
-#if WINDOWS
-            Write(Key, Value, false);
-#endif
-        }
-        public static void Write(string Key, string Value,bool ForceWrite)
-        {
-#if WINDOWS
-            if (App.Current.Windows.Count != 0)
+            using (var key = Registry.CurrentUser.CreateSubKey(SOFTEWARE))
             {
-                WinRegKey.SetValue(Key, Value);
-                //todo i18N;
-                Debugger.Logger($"写入了注册表，键：{Key}，值：{Value}");
+                using (var mefl = key.CreateSubKey("MEFL", true))
+                {
+
+                }
             }
-            else if(ForceWrite == true)
-            {
-                WinRegKey.SetValue(Key, Value);
-                //todo i18N;
-                Debugger.Logger($"写入了注册表，键：{Key}，值：{Value}");
-            }
-#endif
         }
-        public static string Read(string Key)
+        #endregion
+
+        #region methods
+
+        public override void Write(string key, string value, bool forceWrite)
         {
-#if WINDOWS
-            if (WinRegKey.GetValue(Key) == null||WinRegKey.GetValue(Key)==string.Empty)
+            var encodeValue = _decryption.Encrypt(value);
+
+            using (var software = Registry.CurrentUser.CreateSubKey(SOFTEWARE))
             {
-                WinRegKey.SetValue(Key, string.Empty);
+                using (var mefl = software.CreateSubKey("MEFL", true))
+                {
+                    mefl.SetValue(key, encodeValue, RegistryValueKind.String);
+                }
             }
-            var res = WinRegKey.GetValue(Key).ToString();
-            //todo i18N;
-            Debugger.Logger($"读取了注册表，键：{Key}，值：{res}");
-            return res;
-#endif
+
+            Debugger.Logger($"写入了注册表，键：{key}，值：{value}");
+
+            //if (App.Current.Windows.Count != 0)
+            //{
+            //     _winRegKey.SetValue(key, value);
+            //    //todo i18N;
+            //    Debugger.Logger($"写入了注册表，键：{key}，值：{value}");
+            //}
+            //else if (forceWrite == true)
+            //{
+            //    _winRegKey.SetValue(key, value);
+            //    //todo i18N;
+            //    Debugger.Logger($"写入了注册表，键：{key}，值：{value}");
+            //}
         }
+        public override string Read(string key)
+        {
+            var result = string.Empty;
+            using (var software = Registry.CurrentUser.CreateSubKey(SOFTEWARE))
+            {
+                using (var mefl = software.CreateSubKey("MEFL", true))
+                {
+                    result = mefl.GetValue(key) as string;
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(result))
+            {
+                result = null;
+                Debugger.Logger($"读取了注册表，键：{key}，值：null");
+            }
+            else
+            {
+                Debugger.Logger($"读取了注册表，键：{key}，值：{result}");
+            }
+
+            return result;
+
+        }
+        #endregion
+
     }
 }

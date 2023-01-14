@@ -12,9 +12,9 @@ WPF;HOSTING;DEBUG;NET;NET6_0;NETCOREAPP
 D:\Code\meflcollection\SharedMVVMWPF\App.xaml
 272047163001
 1218171594
-47-663467738
+50-1235921535
 199-1437788715
 D:\Code\meflcollection\SharedMVVMWPF\Controls\DownloadProgressCard.xaml;D:\Code\meflcollection\SharedMVVMWPF\Controls\MyExtensionCard.xaml;D:\Code\meflcollection\SharedMVVMWPF\I18N\en_US.xaml;D:\Code\meflcollection\SharedMVVMWPF\Generl.xaml;D:\Code\meflcollection\SharedMVVMWPF\I18N\en_UK.xaml;D:\Code\meflcollection\SharedMVVMWPF\I18N\zh_HK.xaml;D:\Code\meflcollection\SharedMVVMWPF\I18N\zh_TW.xaml;D:\Code\meflcollection\SharedMVVMWPF\I18N\zh_SG.xaml;D:\Code\meflcollection\SharedMVVMWPF\I18N\zh_yue_CN.xaml;D:\Code\meflcollection\SharedMVVMWPF\I18N\zh_yue_HK.xaml;D:\Code\meflcollection\SharedMVVMWPF\I18N\zh_MO.xaml;D:\Code\meflcollection\SharedMVVMWPF\I18N\zh_CN.xaml;D:\Code\meflcollection\SharedMVVMWPF\MainWindow.xaml;D:\Code\meflcollection\SharedMVVMWPF\Pages\DownloadPage.xaml;D:\Code\meflcollection\SharedMVVMWPF\Pages\ExtensionPage.xaml;D:\Code\meflcollection\SharedMVVMWPF\Pages\RealMainPage.xaml;D:\Code\meflcollection\SharedMVVMWPF\Pages\SettingPage.xaml;D:\Code\meflcollection\SharedMVVMWPF\Pages\UserManagePage.xaml;D:\Code\meflcollection\SharedMVVMWPF\SpecialPages\AddAccountPage.xaml;D:\Code\meflcollection\SharedMVVMWPF\SpecialPages\DownloadingProgressPage.xaml;D:\Code\meflcollection\SharedMVVMWPF\SpecialPages\GameSettingPage.xaml;D:\Code\meflcollection\SharedMVVMWPF\SpecialPages\AddNewAccount.xaml;D:\Code\meflcollection\SharedMVVMWPF\SpecialPages\ManageDownloadSources.xaml;D:\Code\meflcollection\SharedMVVMWPF\SpecialPages\ManageProcessesPage.xaml;D:\Code\meflcollection\SharedMVVMWPF\SpecialPages\PickUpAFolder.xaml;D:\Code\meflcollection\SharedMVVMWPF\SpecialPages\RenameFolderPage.xaml;D:\Code\meflcollection\SharedMVVMWPF\Themes\Generic.xaml;
 
-True
+False
 

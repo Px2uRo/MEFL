@@ -28,17 +28,20 @@ namespace MEFL.APIData
 
         internal static string SelectedAccountUUID
         {
-            get => _SelectedAccountUUID; set { 
+            get => _SelectedAccountUUID; set
+            {
                 _SelectedAccountUUID = value;
-                RegManager.Write("PlayerUuid",value);
+                WindowsRegManager.Write("PlayerUuid", value);
             }
         }
         internal static AccountBase SelectedAccount
         {
-            get {
+            get
+            {
                 return _SelectedAccount;
             }
-            set {
+            set
+            {
                 if (value == null)
                 {
                     _SelectedAccount = null;
@@ -70,13 +73,17 @@ namespace MEFL.APIData
         {
             get { return _SelectedFolderIndex; }
             set
-            {       _SelectedFolderIndex = value;
-                    RegManager.Write("SelectedFolderIndex", value.ToString(),true);
+            {
+                _SelectedFolderIndex = value;
+                WindowsRegManager.Write("SelectedFolderIndex", value.ToString(), true);
             }
         }
         internal static Arguments.SettingArgs SettingArgs { get; set; }
-        internal static Contract.GameInfoBase CurretGame { get => SettingArgs.CurretGame; set { 
-                if(value == null)
+        internal static Contract.GameInfoBase CurretGame
+        {
+            get => SettingArgs.CurretGame; set
+            {
+                if (value == null)
                 {
                     SettingConfig.SelectedGame = string.Empty;
                     SettingArgs.CurretGame = null;
@@ -87,12 +94,12 @@ namespace MEFL.APIData
                     SettingArgs.CurretGame = value;
                 }
                 (App.Current.Resources["RMPMV"] as RealMainPageModelView).Invoke("CurretGame");
-            } 
+            }
         }
         internal static GameInfoCollection GameInfoConfigs { get; set; }
-        internal static ObservableCollection<MEFLFolderInfo> MyFolders 
+        internal static ObservableCollection<MEFLFolderInfo> MyFolders
         {
-            get;set;
+            get; set;
         }
         private static FileInfo[] tmp1;
 
@@ -100,13 +107,16 @@ namespace MEFL.APIData
 
         private static ObservableCollection<FileInfo> _SearchedJavas = new ObservableCollection<FileInfo>();
         private static Contract.MEFLDownloader _selectedDownloader;
-        internal static Contract.MEFLDownloader SelectedDownloader { get => _selectedDownloader; set {
+        internal static Contract.MEFLDownloader SelectedDownloader
+        {
+            get => _selectedDownloader; set
+            {
                 if (value != null)
                 {
-                    RegManager.Write("Downloader", JsonConvert.SerializeObject(new DownloaderConfig(value.FileName, value.Name)));
+                    WindowsRegManager.Write("Downloader", JsonConvert.SerializeObject(new DownloaderConfig(value.FileName, value.Name)));
                 }
                 _selectedDownloader = value;
-            } 
+            }
         }
         public static DownloaderCollection Downloaders = new();
         public static DownloadSourceCollection DownloadSources = new();
@@ -115,7 +125,7 @@ namespace MEFL.APIData
         {
             _SearchedJavas = new ObservableCollection<FileInfo>();
             SearchJavaThreadIsOK = false;
-            Thread t = new Thread(() => 
+            Thread t = new Thread(() =>
             {
                 DirectoryInfo[] tmp2;
                 var Folders = new ObservableCollection<DirectoryInfo>();
@@ -175,25 +185,29 @@ namespace MEFL.APIData
             #region RegFolders
             try
             {
-                var regKey = Newtonsoft.Json.JsonConvert.DeserializeObject<ObservableCollection<MEFLFolderInfo>>(RegManager.Read("Folders"));
-                if (Directory.Exists(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft")) == false)
+                var regKey = JsonConvert.DeserializeObject<ObservableCollection<MEFLFolderInfo>>(WindowsRegManager.Read("Folders"));
+                if (Directory.Exists(Path.Combine(Environment.CurrentDirectory, ".minecraft")) == false)
                 {
-                    Directory.CreateDirectory(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"));
+                    Directory.CreateDirectory(Path.Combine(Environment.CurrentDirectory, ".minecraft"));
+                }
+                if (regKey == null)
+                {
+                    
                 }
                 if (regKey.Count == 0)
                 {
-                    regKey.Add(new MEFLFolderInfo(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"), "本地文件夹"));
+                    regKey.Add(new MEFLFolderInfo(Path.Combine(Environment.CurrentDirectory, ".minecraft"), "本地文件夹"));
                 }
-                else if (regKey[0].Path != System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"))
+                else if (regKey[0].Path != Path.Combine(Environment.CurrentDirectory, ".minecraft"))
                 {
-                    regKey.Add(new MEFLFolderInfo(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"), "本地文件夹"));
+                    regKey.Add(new MEFLFolderInfo(Path.Combine(Environment.CurrentDirectory, ".minecraft"), "本地文件夹"));
                     SelectedFolderIndex = 0;
                 }
-                RegManager.Write("Folders", JsonConvert.SerializeObject(regKey), true);
+                WindowsRegManager.Write("Folders", JsonConvert.SerializeObject(regKey), true);
                 MyFolders = regKey;
                 try
                 {
-                    SelectedFolderIndex = Convert.ToInt32(RegManager.Read("SelectedFolderIndex"));
+                    SelectedFolderIndex = Convert.ToInt32(WindowsRegManager.Read("SelectedFolderIndex"));
                     GameInfoConfigs = MyFolders[SelectedFolderIndex].Games;
                 }
                 catch (Exception ex)
@@ -210,7 +224,7 @@ namespace MEFL.APIData
                 MyFolders.Add(new MEFLFolderInfo(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"), "本地文件夹"));
                 GameInfoConfigs = MyFolders[SelectedFolderIndex].Games;
                 Debugger.Logger(ex.Message);
-                RegManager.Write("Folders", JsonConvert.SerializeObject(new ObservableCollection<MEFLFolderInfo>() { new MEFLFolderInfo(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"), "本地文件夹") }), true);
+                WindowsRegManager.Write("Folders", JsonConvert.SerializeObject(new ObservableCollection<MEFLFolderInfo>() { new MEFLFolderInfo(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"), "本地文件夹") }), true);
             }
             #endregion
             AccountConfigs = new();
@@ -223,12 +237,12 @@ namespace MEFL.APIData
             #region RegSelectedFolderIndex
             try
             {
-                SelectedFolderIndex = Convert.ToUInt16(RegManager.Read("SelectedFolderIndex"));
+                SelectedFolderIndex = Convert.ToUInt16(WindowsRegManager.Read("SelectedFolderIndex"));
             }
             catch (Exception ex)
             {
                 Debugger.Logger(ex.Message);
-                RegManager.Write("SelectedFolderIndex", 0.ToString());
+                WindowsRegManager.Write("SelectedFolderIndex", 0.ToString());
             }
             #endregion
             #region GameConfigs
@@ -244,7 +258,7 @@ namespace MEFL.APIData
             Javas = new ObservableCollection<FileInfo>();
             try
             {
-                foreach (var item in JsonConvert.DeserializeObject<string[]>(RegManager.Read("RecordedJavas")))
+                foreach (var item in JsonConvert.DeserializeObject<string[]>(WindowsRegManager.Read("RecordedJavas")))
                 {
                     Javas.Add(new FileInfo(item));
                 }
@@ -258,24 +272,24 @@ namespace MEFL.APIData
                     value.Add(item.FullName);
                 }
                 var str = JsonConvert.SerializeObject(value);
-                RegManager.Write("RecordedJavas", str,true);
+                WindowsRegManager.Write("RecordedJavas", str, true);
             }
             try
             {
-                SettingArgs.SelectedJava = new FileInfo(RegManager.Read("SelectedJava"));
+                SettingArgs.SelectedJava = new FileInfo(WindowsRegManager.Read("SelectedJava"));
             }
             catch (Exception ex)
             {
                 if (Javas.Count > 0)
                 {
                     SettingArgs.SelectedJava = Javas[0];
-                    RegManager.Write("SelectedJava", SettingArgs.SelectedJava.FullName, true);
+                    WindowsRegManager.Write("SelectedJava", SettingArgs.SelectedJava.FullName, true);
                 }
             }
             #endregion
             #endregion
-            _SelectedAccountUUID = RegManager.Read("PlayerUuid");
-            if (Directory.Exists(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"))!=true)
+            _SelectedAccountUUID = WindowsRegManager.Read("PlayerUuid");
+            if (Directory.Exists(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft")) != true)
             {
                 Directory.CreateDirectory(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"));
             }

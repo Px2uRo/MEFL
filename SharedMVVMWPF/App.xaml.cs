@@ -33,7 +33,7 @@ namespace MEFL
 
         protected override void OnExit(ExitEventArgs e)
         {
-            RegManager.Close();
+            WindowsRegManager.Close();
             Debugger.Logger(this.Resources["I18N_String_App_OnExit"] as String);
             base.OnExit(e);
             Process.GetCurrentProcess().Kill();

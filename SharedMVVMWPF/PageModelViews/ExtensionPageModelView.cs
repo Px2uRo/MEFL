@@ -35,7 +35,7 @@ namespace MEFL.PageModelViews
                 element.DataContext = new HostingModelView(item);
                 #region 加载好之后才能做的事情
                 //todo 这里能做一些等插件加载好之后才能做的事情
-                var reg = JsonConvert.DeserializeObject<DownloaderConfig>(RegManager.Read("Downloader"));
+                var reg = JsonConvert.DeserializeObject<DownloaderConfig>(WindowsRegManager.Read("Downloader"));
                 if (reg != null)
                 {
                     foreach (var down in APIModel.Downloaders)

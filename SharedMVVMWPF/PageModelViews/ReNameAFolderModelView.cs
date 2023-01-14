@@ -81,7 +81,7 @@ namespace MEFL.PageModelViews
             {
                 item.Show(From);
             }
-            RegManager.Write("Folders", JsonConvert.SerializeObject(APIData.APIModel.MyFolders));
+            WindowsRegManager.Write("Folders", JsonConvert.SerializeObject(APIData.APIModel.MyFolders));
         }
     }
 }

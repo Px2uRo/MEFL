@@ -6,13 +6,15 @@
     <SharedGUID>a979137b-21df-4076-aacc-eb503c3f6a1e</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>SharedMEFL</Import_RootNamespace>
+    <Import_RootNamespace>MEFL</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)APIData\APIModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)APIData\SettingConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configs\DownloaderConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Debugger.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Decryptions\BaseDecryption.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Decryptions\EmptyDecryption.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DownloaderCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DownloadSourceCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FastLoadJson.cs" />
@@ -21,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Hosting.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Refresher.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RegManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RegManagers\BaseRegManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="$(MSBuildThisFileDirectory)realsetypelogo.png" />
