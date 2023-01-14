@@ -17,10 +17,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MEFL.Contract", "..\..\Proj
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedContract", "..\..\ProjectUnite\TestAddIn\SharedContract\SharedContract.shproj", "{15B3E578-1681-42A1-88D8-D9E48EE6CF97}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OctaneForMEFL", "OctaneForMEFL\OctaneForMEFL.csproj", "{F4E0B8A2-E41A-4E52-BEAE-17E71112B85D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OctaneDownloader", "OctaneDownloader\OctaneDownloader.csproj", "{8F8C8D86-0D81-4A16-A1FD-ADB9C0D746D6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,14 +35,6 @@ Global
 		{3EA97DBE-9E8C-4D4B-B1E2-DA00C08F8337}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EA97DBE-9E8C-4D4B-B1E2-DA00C08F8337}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EA97DBE-9E8C-4D4B-B1E2-DA00C08F8337}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F4E0B8A2-E41A-4E52-BEAE-17E71112B85D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F4E0B8A2-E41A-4E52-BEAE-17E71112B85D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F4E0B8A2-E41A-4E52-BEAE-17E71112B85D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F4E0B8A2-E41A-4E52-BEAE-17E71112B85D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8F8C8D86-0D81-4A16-A1FD-ADB9C0D746D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8F8C8D86-0D81-4A16-A1FD-ADB9C0D746D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8F8C8D86-0D81-4A16-A1FD-ADB9C0D746D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8F8C8D86-0D81-4A16-A1FD-ADB9C0D746D6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

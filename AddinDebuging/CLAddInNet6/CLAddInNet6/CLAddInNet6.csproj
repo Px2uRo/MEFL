@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\CoreLaunching\CoreLaunchingNet6\CoreLaunchingNet6.csproj" />
     <ProjectReference Include="..\..\..\ProjectUnite\TestAddIn\MEFL.Contract\MEFL.Contract.csproj" />
   </ItemGroup>
 
