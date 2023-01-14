@@ -14,6 +14,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)AccountsManagement\Model.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Downloaders\FanDown.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Downloaders\NormalDownloader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Downloaders\SolveDupNamePage.xaml.cs">
+      <DependentUpon>SolveDupNamePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Downloaders\SourceReplacer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Downloaders\CLWebFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Export.cs" />
@@ -46,12 +49,13 @@
       <DependentUpon>MEFLRealseTypeSetting.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)RegManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)SharedCLAddIn\Downloaders\SolveDupNamePage.xaml.cs">
-      <DependentUpon>SolveDupNamePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)WebVersion\Generic.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Downloaders\SolveDupNamePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Pages\AddALegacyAccount.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
       <SubType>Designer</SubType>
@@ -77,10 +81,6 @@
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Pages\MEFLRealseTypeSetting.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)SharedCLAddIn\Downloaders\SolveDupNamePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

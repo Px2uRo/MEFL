@@ -55,7 +55,7 @@ namespace MEFL.SpecialPages {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/MEFL;V1.0.0.0;component/specialpages/renamefolderpage.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/MEFL;component/specialpages/renamefolderpage.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\SharedMVVMWPF\SpecialPages\RenameFolderPage.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

@@ -131,7 +131,7 @@ namespace MEFL.PageModelViews
                 try
                 {
                     APIData.APIModel.SettingArgs.SelectedJava = Javas[value];
-                    WindowsRegManager.Write("SelectedJava", Javas[value].FullName);
+                    RegManager.Write("SelectedJava", Javas[value].FullName);
                 }
                 catch (Exception ex)
                 {

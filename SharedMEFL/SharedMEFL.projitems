@@ -23,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Hosting.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Refresher.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RegManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RegManagers\WindowsRegManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RegManagers\BaseRegManager.cs" />
   </ItemGroup>
   <ItemGroup>

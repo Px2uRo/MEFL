@@ -7,6 +7,7 @@ namespace MEFL.RegManagers
     public abstract class BaseRegManager
     {
 
+
         ///<summary>当前注册管理器的加解密工具</summary>
         protected Decryptions.BaseDecryption _decryption;
 

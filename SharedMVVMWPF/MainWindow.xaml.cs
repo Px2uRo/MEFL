@@ -70,7 +70,8 @@ namespace MEFL
                         StrokeThickness = 1.0,
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center
-                    }
+                    },
+                    ToolTip = "查看插件"
                 });
             (App.Current.Resources["ChangePageButtons"] as StackPanel).Children.Add(
                 new ChangePageButton
@@ -88,7 +89,8 @@ namespace MEFL
                         StrokeThickness = 1.0,
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center
-                    }
+                    },
+                    ToolTip = "设置"
                 });
             (App.Current.Resources["ChangePageButtons"] as StackPanel).Children.Add(
                 new ChangePageButton
@@ -106,7 +108,8 @@ namespace MEFL
                         StrokeThickness = 1.0,
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center
-                    }
+                    },
+                    ToolTip = "用户管理"
                 });
             (App.Current.Resources["ChangePageButtons"] as StackPanel).Children.Add(
                 new ChangePageButton
@@ -124,45 +127,51 @@ namespace MEFL
                         StrokeThickness = 1.0,
                         HorizontalAlignment = HorizontalAlignment.Center,
                         VerticalAlignment = VerticalAlignment.Center
-                    }
+                    },
+                    ToolTip = "下载"
                 });
             (App.Current.Resources["ChangePageButtons"] as StackPanel).Children.Add(
                 new ChangePageButton
-    {
-        Width = 0,
-        Tag = "ProcessesManagePage",
-        Margin = new Thickness(0, 5, 0, 0),
-        Content = new System.Windows.Shapes.Path()
-        {
-            Height = 23,
-            Width = 23,
-            Stretch = Stretch.Fill,
-            Data = new PathGeometry() { Figures = PathFigureCollection.Parse("M29.5001 0.500053 58.5001 0.500053 58.5001 30.5001 29.5001 30.5001 29.5001 0.500053ZM37.3407 3.94282 37.3407 8.56539 32.8722 8.56539 32.8722 12.9949 37.3407 12.9949 37.3407 17.6175 41.6226 17.6175 41.6226 12.9949 46.0911 12.9949 46.0911 8.56539 41.6226 8.56539 41.6226 3.94282 37.3407 3.94282ZM48.2649 14.2295C47.1414 14.2295 46.2306 15.1717 46.2306 16.3339 46.2306 17.4961 47.1414 18.4382 48.2649 18.4382 49.3883 18.4382 50.2991 17.4961 50.2991 16.3339 50.2991 15.1717 49.3883 14.2295 48.2649 14.2295ZM52.4383 18.2504C51.3148 18.2504 50.4041 19.1926 50.4041 20.3548 50.4041 21.517 51.3148 22.4591 52.4383 22.4591 53.5617 22.4591 54.4725 21.517 54.4725 20.3548 54.4725 19.1926 53.5617 18.2504 52.4383 18.2504ZM43.8615 18.2504C42.738 18.2504 41.8273 19.1926 41.8273 20.3548 41.8273 21.517 42.738 22.4591 43.8615 22.4591 44.9849 22.4591 45.8957 21.517 45.8957 20.3548 45.8957 19.1926 44.9849 18.2504 43.8615 18.2504ZM48.2649 22.85C47.1414 22.85 46.2306 23.7921 46.2306 24.9543 46.2306 26.1165 47.1414 27.0587 48.2649 27.0587 49.3883 27.0587 50.2991 26.1165 50.2991 24.9543 50.2991 23.7921 49.3883 22.85 48.2649 22.85Z") },
-            Stroke = new SolidColorBrush(Colors.Black),
-            StrokeThickness = 1.0,
-            HorizontalAlignment = HorizontalAlignment.Center,
-            VerticalAlignment = VerticalAlignment.Center
-        }
-    });
+                {
+                    Width = 0,
+                    Tag = "ProcessesManagePage",
+                    Margin = new Thickness(0, 5, 0, 0),
+                    Content = new System.Windows.Shapes.Path()
+                    {
+                        Height = 23,
+                        Width = 23,
+                        Stretch = Stretch.Fill,
+                        Data = new PathGeometry() { Figures = PathFigureCollection.Parse("M29.5001 0.500053 58.5001 0.500053 58.5001 30.5001 29.5001 30.5001 29.5001 0.500053ZM37.3407 3.94282 37.3407 8.56539 32.8722 8.56539 32.8722 12.9949 37.3407 12.9949 37.3407 17.6175 41.6226 17.6175 41.6226 12.9949 46.0911 12.9949 46.0911 8.56539 41.6226 8.56539 41.6226 3.94282 37.3407 3.94282ZM48.2649 14.2295C47.1414 14.2295 46.2306 15.1717 46.2306 16.3339 46.2306 17.4961 47.1414 18.4382 48.2649 18.4382 49.3883 18.4382 50.2991 17.4961 50.2991 16.3339 50.2991 15.1717 49.3883 14.2295 48.2649 14.2295ZM52.4383 18.2504C51.3148 18.2504 50.4041 19.1926 50.4041 20.3548 50.4041 21.517 51.3148 22.4591 52.4383 22.4591 53.5617 22.4591 54.4725 21.517 54.4725 20.3548 54.4725 19.1926 53.5617 18.2504 52.4383 18.2504ZM43.8615 18.2504C42.738 18.2504 41.8273 19.1926 41.8273 20.3548 41.8273 21.517 42.738 22.4591 43.8615 22.4591 44.9849 22.4591 45.8957 21.517 45.8957 20.3548 45.8957 19.1926 44.9849 18.2504 43.8615 18.2504ZM48.2649 22.85C47.1414 22.85 46.2306 23.7921 46.2306 24.9543 46.2306 26.1165 47.1414 27.0587 48.2649 27.0587 49.3883 27.0587 50.2991 26.1165 50.2991 24.9543 50.2991 23.7921 49.3883 22.85 48.2649 22.85Z") },
+                        Stroke = new SolidColorBrush(Colors.Black),
+                        StrokeThickness = 1.0,
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center
+                    },
+                    ToolTip = "进程管理",
+                });
             (App.Current.Resources["ChangePageButtons"] as StackPanel).Children.Add(
-    new ChangePageButton
-    {
-        Width = 0,
-        Tag = "DownloadingProgressPage",
-        Margin = new Thickness(0, 5, 0, 0),
-        Content = new System.Windows.Shapes.Path()
-        {
-            Height = 23,
-            Width = 18,
-            Stretch = Stretch.Fill,
-            Data = new PathGeometry() { Figures = PathFigureCollection.Parse(
-                "M0.500053 26.6054 12.279 26.6054 24.5001 26.6054 24.5001 29.5001 0.500053 29.5001ZM11.0708 0.500053 13.9293 0.500053 13.9293 21.2424 21.7178 13.3552 23.739 15.4021 12.6758 26.6053 12.4774 26.4044 12.279 26.6054 1.21586 15.4021 3.23709 13.3552 11.0708 21.2881Z") },
-            Stroke = new SolidColorBrush(Colors.Black),
-            StrokeThickness = 1.0,
-            HorizontalAlignment = HorizontalAlignment.Center,
-            VerticalAlignment = VerticalAlignment.Center
-        }
-    });
+                new ChangePageButton
+                {
+                    Width = 0,
+                    Tag = "DownloadingProgressPage",
+                    Margin = new Thickness(0, 5, 0, 0),
+                    Content = new System.Windows.Shapes.Path()
+                    {
+                        Height = 23,
+                        Width = 18,
+                        Stretch = Stretch.Fill,
+                        Data = new PathGeometry()
+                        {
+                            Figures = PathFigureCollection.Parse(
+                            "M0.500053 26.6054 12.279 26.6054 24.5001 26.6054 24.5001 29.5001 0.500053 29.5001ZM11.0708 0.500053 13.9293 0.500053 13.9293 21.2424 21.7178 13.3552 23.739 15.4021 12.6758 26.6053 12.4774 26.4044 12.279 26.6054 1.21586 15.4021 3.23709 13.3552 11.0708 21.2881Z")
+                        },
+                        Stroke = new SolidColorBrush(Colors.Black),
+                        StrokeThickness = 1.0,
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        VerticalAlignment = VerticalAlignment.Center
+                    },
+                    ToolTip = "下载进度"
+                });
             #endregion
             if (true)
             {
@@ -184,7 +193,7 @@ namespace MEFL
                 {
                     if (WindowState == WindowState.Normal)
                     {
-                        WindowState=WindowState.Maximized;
+                        WindowState = WindowState.Maximized;
                     }
                     else
                     {
@@ -196,9 +205,9 @@ namespace MEFL
                     Close();
                     App.Current.Shutdown();
                 }
-                else if (a.Tag != null&&a.Tag is String)
+                else if (a.Tag != null && a.Tag is String)
                 {
-                    
+
                 }
             }
             else
@@ -226,7 +235,7 @@ namespace MEFL
         private void MinWindowButton_MouseEnter(object sender, MouseEventArgs e)
         {
             _dbani.From = 0;
-            if((sender as Border).Name == "CloseWindowsButton")
+            if ((sender as Border).Name == "CloseWindowsButton")
             {
                 _dbani.To = 1;
             }
@@ -234,7 +243,7 @@ namespace MEFL
             {
                 _dbani.To = 0.2;
             }
-            (sender as Border).BeginAnimation(OpacityProperty,_dbani);
+            (sender as Border).BeginAnimation(OpacityProperty, _dbani);
         }
 
         private void MinWindowButton_MouseLeave(object sender, MouseEventArgs e)
@@ -248,7 +257,7 @@ namespace MEFL
             {
                 _dbani.From = 0.2;
             }
-            (sender as Border).BeginAnimation(OpacityProperty,_dbani);
+            (sender as Border).BeginAnimation(OpacityProperty, _dbani);
         }
 
         private void Grid_MouseMove(object sender, MouseEventArgs e)

@@ -459,14 +459,19 @@ namespace MEFL.CLAddIn.CLDownding
 
         public override object Icon => "CLAddIn";
 
-        public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string dotMCFolder)
+        public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, IEnumerable< DownloadSource> sources, string dotMCFolder)
         {
-            return new CLAddInDownloadingProgress(NativeUrl, LoaclPath, dotMCFolder,sources);
+            return new CLAddInDownloadingProgress(NativeUrl, LoaclPath, dotMCFolder,new List<DownloadSource>( sources).ToArray());
         }
 
-        public override DownloadProgress CreateProgress(List<NativeLocalPair> NativeLocalPairs, DownloadSource[] sources, string dotMCFolder)
+        public override DownloadProgress CreateProgress(NativeLocalPair nativeLocalPair, IEnumerable<DownloadSource> sources, string dotMCFolder)
         {
-            return new CLAddInDownloadingProgress(NativeLocalPairs, dotMCFolder);
+            return CreateProgress(new[] { nativeLocalPair }, sources, dotMCFolder );
+        }
+
+        public override DownloadProgress CreateProgress(IEnumerable<NativeLocalPair> NativeLocalPairs, IEnumerable< DownloadSource> sources, string dotMCFolder)
+        {
+            return new CLAddInDownloadingProgress(new List<NativeLocalPair>( NativeLocalPairs), dotMCFolder);
         }
     }
 

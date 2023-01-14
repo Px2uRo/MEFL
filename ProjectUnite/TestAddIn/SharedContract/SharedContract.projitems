@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AssemblyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Downloader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DownloadRule.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\FileSystemHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IAccountPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IDownload.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFL.Arguments\LangID.cs" />
@@ -32,6 +33,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\LauncherWebVersionInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\MEFLErrorType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFL\OtherArgumentTemplateBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PackageManifestContent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Web\DownloadFile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="$(MSBuildThisFileDirectory)themes\generic.xaml">

@@ -14,7 +14,7 @@ using Newtonsoft.Json;
 
 namespace MEFL.PageModelViews
 {
-    public class ExtensionPageModelView:PageModelViewBase
+    public class ExtensionPageModelView : PageModelViewBase
     {
 
         public ObservableCollection<Hosting> Hostings
@@ -31,11 +31,15 @@ namespace MEFL.PageModelViews
             res.Children.Clear();
             foreach (var item in (value as ObservableCollection<Hosting>))
             {
-                var element = new MyExtensionCard() { Margin=new System.Windows.Thickness(0,0,0,15)};
+                var element = new MyExtensionCard() { Margin = new System.Windows.Thickness(0, 0, 0, 15) };
                 element.DataContext = new HostingModelView(item);
-                #region 加载好之后才能做的事情
+
+
                 //todo 这里能做一些等插件加载好之后才能做的事情
-                var reg = JsonConvert.DeserializeObject<DownloaderConfig>(WindowsRegManager.Read("Downloader"));
+
+                var downloaderRegContent = RegManager.Read("Downloader");
+
+                var reg = JsonConvert.DeserializeObject<DownloaderConfig>(downloaderRegContent);
                 if (reg != null)
                 {
                     foreach (var down in APIModel.Downloaders)
@@ -55,7 +59,7 @@ namespace MEFL.PageModelViews
                         sources.Value.Selected = sources.Value[0];
                     }
                 }
-                #endregion
+
                 res.Children.Add(element);
             }
             return res;
