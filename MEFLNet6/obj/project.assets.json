@@ -2,6 +2,19 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
+      "CoreLaunchingNet6/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "13.0.1",
+          "System.IO.Compression.ZipFile": "4.3.0"
+        },
+        "compile": {
+          "lib/net6.0/CoreLaunchingNet6.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/CoreLaunchingNet6.dll": {}
+        }
+      },
       "MEFL.Controls/0.0.6.3": {
         "type": "package",
         "compile": {
@@ -395,25 +408,12 @@
           }
         }
       },
-      "CoreLaunchingNet6/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "Newtonsoft.Json": "13.0.1",
-          "System.IO.Compression.ZipFile": "4.3.0"
-        },
-        "compile": {
-          "bin/placeholder/CoreLaunchingNet6.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/CoreLaunchingNet6.dll": {}
-        }
-      },
       "MEFL.Contract/0.0.5.41": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "MEFL.Controls": "0.0.4.18",
+          "CoreLaunchingNet6": "1.0.0",
+          "MEFL.Controls": "0.0.6.3",
           "Newtonsoft.Json": "13.0.1"
         },
         "compile": {
@@ -429,6 +429,18 @@
     }
   },
   "libraries": {
+    "CoreLaunchingNet6/1.0.0": {
+      "sha512": "g30wqIWNRqU+t038FlDPGjFxmozp9OTJNdAP7+Bs5YYJXdTN5EZzBy7jhA/iyWSY65KbK0PdquUALz62E0e1/g==",
+      "type": "package",
+      "path": "corelaunchingnet6/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        "NuIcon.png",
+        "corelaunchingnet6.1.0.0.nupkg.sha512",
+        "corelaunchingnet6.nuspec",
+        "lib/net6.0/CoreLaunchingNet6.dll"
+      ]
+    },
     "MEFL.Controls/0.0.6.3": {
       "sha512": "r9efVznmqtFilUg2ge3uJs4Cs1/fSryk0WJ+ZwyExliGAGhnEUg+ptz90r20DzApIjkLlh+PkISDAB4DB66YZA==",
       "type": "package",
@@ -1833,11 +1845,6 @@
         "system.threading.tasks.nuspec"
       ]
     },
-    "CoreLaunchingNet6/1.0.0": {
-      "type": "project",
-      "path": "../../CoreLaunching/CoreLaunchingNet6/CoreLaunchingNet6.csproj",
-      "msbuildProject": "../../CoreLaunching/CoreLaunchingNet6/CoreLaunchingNet6.csproj"
-    },
     "MEFL.Contract/0.0.5.41": {
       "type": "project",
       "path": "../ProjectUnite/TestAddIn/MEFL.Contract/MEFL.Contract.csproj",
@@ -1854,23 +1861,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Lenovo\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "C:\\Users\\WIN10\\.nuget\\packages\\": {},
+    "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "I:\\Xiong's\\MEFLCollection\\MEFLNet6\\MEFLNet6.csproj",
+      "projectUniqueName": "D:\\Code\\meflcollection\\MEFLNet6\\MEFLNet6.csproj",
       "projectName": "MEFL",
-      "projectPath": "I:\\Xiong's\\MEFLCollection\\MEFLNet6\\MEFLNet6.csproj",
-      "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-      "outputPath": "I:\\Xiong's\\MEFLCollection\\MEFLNet6\\obj\\",
+      "projectPath": "D:\\Code\\meflcollection\\MEFLNet6\\MEFLNet6.csproj",
+      "packagesPath": "C:\\Users\\WIN10\\.nuget\\packages\\",
+      "outputPath": "D:\\Code\\meflcollection\\MEFLNet6\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\WIN10\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -1880,19 +1887,15 @@
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "C:\\Program Files\\dotnet\\library-packs": {},
-        "D:\\MyNupkgs": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://nuget.cdn.azure.cn/v3/index.json": {}
+        "D:\\localnuget": {},
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "I:\\Xiong's\\CoreLaunching\\CoreLaunchingNet6\\CoreLaunchingNet6.csproj": {
-              "projectPath": "I:\\Xiong's\\CoreLaunching\\CoreLaunchingNet6\\CoreLaunchingNet6.csproj"
-            },
-            "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj": {
-              "projectPath": "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj"
+            "D:\\Code\\meflcollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj": {
+              "projectPath": "D:\\Code\\meflcollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj"
             }
           }
         }
@@ -1907,6 +1910,10 @@
       "net6.0-windows7.0": {
         "targetAlias": "net6.0-windows",
         "dependencies": {
+          "CoreLaunchingNet6": {
+            "target": "Package",
+            "version": "[1.0.0, )"
+          },
           "MEFL.Controls": {
             "target": "Package",
             "version": "[0.0.6.3, )"
@@ -1939,7 +1946,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
       }
     }
   }

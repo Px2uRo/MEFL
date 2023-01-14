@@ -5,10 +5,6 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CLAddInNet6", "CLAddInNet6\CLAddInNet6.csproj", "{9DF8DD53-85EE-4FFF-BC0E-6EAB6BCEC9EB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreLaunchingNet6", "..\..\..\CoreLaunching\CoreLaunchingNet6\CoreLaunchingNet6.csproj", "{20B4625C-48E0-410A-BDDF-950A8676DA1A}"
-EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedCore", "..\..\..\CoreLaunching\SharedCore\SharedCore.shproj", "{E2A9F52B-6053-4004-9D43-AA972D0DA2CF}"
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedWPF", "..\..\SharedMVVMWPF\SharedWPF.shproj", "{A76E17ED-57BF-45E9-B5E8-9A16C228FB70}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedMEFL", "..\..\SharedMEFL\SharedMEFL.shproj", "{A979137B-21DF-4076-AACC-EB503C3F6A1E}"
@@ -21,9 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MEFL.Contract", "..\..\Proj
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedContract", "..\..\ProjectUnite\TestAddIn\SharedContract\SharedContract.shproj", "{15B3E578-1681-42A1-88D8-D9E48EE6CF97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctaneForMEFL", "OctaneForMEFL\OctaneForMEFL.csproj", "{F4E0B8A2-E41A-4E52-BEAE-17E71112B85D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OctaneForMEFL", "OctaneForMEFL\OctaneForMEFL.csproj", "{F4E0B8A2-E41A-4E52-BEAE-17E71112B85D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OctaneDownloader", "OctaneDownloader\OctaneDownloader.csproj", "{8F8C8D86-0D81-4A16-A1FD-ADB9C0D746D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OctaneDownloader", "OctaneDownloader\OctaneDownloader.csproj", "{8F8C8D86-0D81-4A16-A1FD-ADB9C0D746D6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +31,6 @@ Global
 		{9DF8DD53-85EE-4FFF-BC0E-6EAB6BCEC9EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DF8DD53-85EE-4FFF-BC0E-6EAB6BCEC9EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DF8DD53-85EE-4FFF-BC0E-6EAB6BCEC9EB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{20B4625C-48E0-410A-BDDF-950A8676DA1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{20B4625C-48E0-410A-BDDF-950A8676DA1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{20B4625C-48E0-410A-BDDF-950A8676DA1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{20B4625C-48E0-410A-BDDF-950A8676DA1A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0A4E8C50-1BB7-425F-96E7-F63ADFB1C34A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0A4E8C50-1BB7-425F-96E7-F63ADFB1C34A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A4E8C50-1BB7-425F-96E7-F63ADFB1C34A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -67,12 +59,10 @@ Global
 		..\..\SharedMVVMWPF\SharedMVVMWPF.projitems*{0a4e8c50-1bb7-425f-96e7-f63adfb1c34a}*SharedItemsImports = 5
 		..\..\SharedSources\SharedSources.projitems*{0a4e8c50-1bb7-425f-96e7-f63adfb1c34a}*SharedItemsImports = 5
 		..\..\ProjectUnite\TestAddIn\SharedContract\SharedContract.projitems*{15b3e578-1681-42a1-88d8-d9e48ee6cf97}*SharedItemsImports = 13
-		..\..\..\CoreLaunching\SharedCore\SharedCore.projitems*{20b4625c-48e0-410a-bddf-950a8676da1a}*SharedItemsImports = 5
 		..\..\ProjectUnite\TestAddIn\SharedContract\SharedContract.projitems*{3ea97dbe-9e8c-4d4b-b1e2-da00c08f8337}*SharedItemsImports = 5
 		SharedCLAddIn\SharedCLAddIn.projitems*{9df8dd53-85ee-4fff-bc0e-6eab6bcec9eb}*SharedItemsImports = 5
 		..\..\SharedMVVMWPF\SharedMVVMWPF.projitems*{a76e17ed-57bf-45e9-b5e8-9a16c228fb70}*SharedItemsImports = 13
 		..\..\SharedMEFL\SharedMEFL.projitems*{a979137b-21df-4076-aacc-eb503c3f6a1e}*SharedItemsImports = 13
-		..\..\..\CoreLaunching\SharedCore\SharedCore.projitems*{e2a9f52b-6053-4004-9d43-aa972d0da2cf}*SharedItemsImports = 13
 		SharedCLAddIn\SharedCLAddIn.projitems*{fb473f32-00db-4ce3-bbba-c88716c07ada}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

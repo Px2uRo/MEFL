@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj": {}
+    "D:\\Code\\meflcollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj": {}
   },
   "projects": {
-    "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj": {
+    "D:\\Code\\meflcollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj": {
       "version": "0.0.5.41",
       "restore": {
-        "projectUniqueName": "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj",
+        "projectUniqueName": "D:\\Code\\meflcollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj",
         "projectName": "MEFL.Contract",
-        "projectPath": "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj",
-        "packagesPath": "C:\\Users\\Lenovo\\.nuget\\packages\\",
-        "outputPath": "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\obj\\",
+        "projectPath": "D:\\Code\\meflcollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj",
+        "packagesPath": "C:\\Users\\WIN10\\.nuget\\packages\\",
+        "outputPath": "D:\\Code\\meflcollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\WIN10\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -27,9 +27,8 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "D:\\MyNupkgs": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://nuget.cdn.azure.cn/v3/index.json": {}
+          "D:\\localnuget": {},
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0-windows7.0": {
@@ -47,9 +46,13 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "dependencies": {
+            "CoreLaunchingNet6": {
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
             "MEFL.Controls": {
               "target": "Package",
-              "version": "[0.0.4.18, )"
+              "version": "[0.0.6.3, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",
@@ -75,7 +78,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -18,19 +18,28 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Controls\**" />
+    <Compile Remove="Pages\**" />
+    <Compile Remove="SpecialPages\**" />
+    <EmbeddedResource Remove="Controls\**" />
+    <EmbeddedResource Remove="Pages\**" />
+    <EmbeddedResource Remove="SpecialPages\**" />
+    <None Remove="Controls\**" />
+    <None Remove="Pages\**" />
+    <None Remove="SpecialPages\**" />
+    <Page Remove="Controls\**" />
+    <Page Remove="Pages\**" />
+    <Page Remove="SpecialPages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CoreLaunchingNet6" Version="1.0.0" />
     <PackageReference Include="MEFL.Controls" Version="0.0.6.3" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controls\" />
-    <Folder Include="Pages\" />
-    <Folder Include="SpecialPages\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\CoreLaunching\CoreLaunchingNet6\CoreLaunchingNet6.csproj" />
     <ProjectReference Include="..\ProjectUnite\TestAddIn\MEFL.Contract\MEFL.Contract.csproj" />
   </ItemGroup>
 
