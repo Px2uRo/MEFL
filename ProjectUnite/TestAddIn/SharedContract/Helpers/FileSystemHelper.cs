@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MEFL.Contrat.Helpers
+namespace MEFL.Contract.Helpers
 {
     public static class FileSystemHelper
     {

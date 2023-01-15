@@ -53,7 +53,7 @@ namespace MEFL.CLAddIn.CLDownding
                 try
                 {
                     var Key = NativeLocalPairs[0].NativeUrl;
-                    var Value = NativeLocalPairs[0].LoaclPath;
+                    var Value = NativeLocalPairs[0].LocalPath;
                     while (!Decided)
                     {
                         NativeLocalPairs.Clear();
@@ -157,7 +157,7 @@ namespace MEFL.CLAddIn.CLDownding
                     }
                     for (int i = 0; i < NativeLocalPairs.Count; i++)
                     {
-                        webFiles.Add(new(NativeLocalPairs[i].NativeUrl, NativeLocalPairs[i].LoaclPath));
+                        webFiles.Add(new(NativeLocalPairs[i].NativeUrl, NativeLocalPairs[i].LocalPath));
                     }
                     for (int i = 0; i < 64; i++)
                     {

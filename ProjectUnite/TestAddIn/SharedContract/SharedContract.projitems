@@ -6,7 +6,7 @@
     <SharedGUID>15b3e578-1681-42a1-88d8-d9e48ee6cf97</SharedGUID>
   </PropertyGroup>
   <PropertyGroup Label="Configuration">
-    <Import_RootNamespace>SharedContract</Import_RootNamespace>
+    <Import_RootNamespace>MEFL.Contract</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AssemblyInfo.cs" />
@@ -33,8 +33,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\LauncherWebVersionInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\MEFLErrorType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFL\OtherArgumentTemplateBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ManifestStruct.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NativeLocalPair.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PackageManifestContent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Web\DownloadFile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Web\DownloadFilePool.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Web\DownloadFileProgressArgument.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Web\DownloadFileState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Web\ManifestFile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="$(MSBuildThisFileDirectory)themes\generic.xaml">

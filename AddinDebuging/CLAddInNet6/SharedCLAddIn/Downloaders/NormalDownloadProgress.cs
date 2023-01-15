@@ -84,7 +84,7 @@ namespace MEFL.CLAddIn.Downloaders
                         }
                     }
                     var Key = NativeLocalPairs[i].NativeUrl;
-                    var Value = NativeLocalPairs[i].LoaclPath;
+                    var Value = NativeLocalPairs[i].LocalPath;
                     bools.Add(false);
                     CurrectFile = System.IO.Path.GetFileName(Key);
                     webClient = new();
@@ -303,7 +303,7 @@ namespace MEFL.CLAddIn.Downloaders
                         }
                     }
                     var Key = NativeLocalPairs[i].NativeUrl;
-                    var Value = NativeLocalPairs[i].LoaclPath;
+                    var Value = NativeLocalPairs[i].LocalPath;
                     bools.Add(false);
                     CurrectFile = System.IO.Path.GetFileName(Key);
                     webClient = new();

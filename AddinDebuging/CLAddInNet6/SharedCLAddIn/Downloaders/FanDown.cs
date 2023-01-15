@@ -12,249 +12,21 @@ using System.Threading;
 using CoreLaunching;
 using CoreLaunching.JsonTemplates;
 using Newtonsoft.Json;
-using MEFL.Contrat.Helpers;
+using MEFL.Contract.Helpers;
+using MEFL.Contract.Web;
 
 namespace MEFL.CLAddIn.Downloaders
 {
     #region ThankstoFanbal
 
-    public enum DownloadFileState
-    {
-        ///<summary>完全没有进入下载。</summary>
-        Ready,
-
-        ///<summary>下载中</summary>
-        Downloading,
-
-        ///<summary>超时。</summary>
-        DownloadOutTime,
-
-        ///<summary>下载失败。</summary>
-        DownloadFailed,
-
-        ///<summary>下载成功。</summary>
-        DownloadSucessed,
-
-        ///<summary>下载虽然成功，但是本地文件找不到了。可能被删掉了。</summary>
-        DownloadSuceessedButLocalFileMissed,
-    }
-
-    class DownloadFileProgressArgument : EventArgs
-    {
-        public readonly int TotalFileCount;
-        public readonly int CompletedFileCount;
-
-        public DownloadFileProgressArgument(int totalFileCount, int completedFileCount)
-        {
-            TotalFileCount = totalFileCount;
-            CompletedFileCount = completedFileCount;
-        }
-
-        public override string ToString()
-        {
-            return $"{CompletedFileCount}/{TotalFileCount}";
-        }
-    }
-
-    internal class DownloadFilePool
-    {
-        ///<summary>最大线程数。</summary>
-        public int MAX_THREAD_COUNT = 64;
-
-
-        public event EventHandler OnDownloadAllCompleted;
-        public event EventHandler<DownloadFileProgressArgument> OnProgressUpdated;
-        public event EventHandler<DownloadFile> OnDownloadFailed;
-        public event EventHandler<long> OnBytesAdd;
-
-        private ConcurrentQueue<DownloadFile> _readyQueue;
-        private ConcurrentQueue<DownloadFile> _completedQueue;
-        private string _targetDir;
-        private int _totalCount;
-
-        public DownloadFilePool(IEnumerable<NativeLocalPair> pairs)
-        {
-
-            _targetDir = AppDomain.CurrentDomain.BaseDirectory;
-
-            _readyQueue = new ConcurrentQueue<DownloadFile>();
-            foreach (var item in pairs)
-            {
-                var newFile = new DownloadFile(item);
-                newFile.Source.LoaclPath = newFile.Source.LoaclPath.Replace("${请Ctrl+H替换}", _targetDir);
-                newFile.OnBytesAdd += NewFile_OnBytesAdd;
-                newFile.OnDownloadFailed += NewFile_OnDownloadFailed;
-                newFile.OnTaskCompleted += NewFile_OnTaskCompleted;
-                _readyQueue.Enqueue(newFile);
-            }
-            _totalCount = _readyQueue.Count;
-            _completedQueue = new ConcurrentQueue<DownloadFile>();
-        }
-
-        private void NewFile_OnDownloadFailed(object? sender, string e)
-        {
-            OnDownloadFailed?.Invoke(this, (DownloadFile)sender);
-        }
-
-        private void NewFile_OnBytesAdd(object? sender, long e)
-        {
-            OnBytesAdd?.Invoke(this, e);
-        }
-
-        public void StartDownload()
-        {
-            for (int i = 0; i < MAX_THREAD_COUNT; i++)
-            {
-                ContinueDownload();
-            }
-        }
-
-
-        private void NewFile_OnTaskCompleted(object? sender, EventArgs e)
-        {
-            _completedQueue.Enqueue((DownloadFile)sender);
-            if (((DownloadFile)sender).State == DownloadFileState.DownloadFailed)
-            {
-                OnDownloadFailed?.Invoke(this, (DownloadFile)sender);
-            }
-            ContinueDownload();
-            OnProgressUpdated?.Invoke(this, new DownloadFileProgressArgument(_totalCount, _completedQueue.Count));
-        }
-
-        private void ContinueDownload()
-        {
-            if (_completedQueue.Count == _totalCount) OnDownloadAllCompleted?.Invoke(this, EventArgs.Empty);
-            if (_readyQueue.TryDequeue(out var unreadyFile))
-            {
-                unreadyFile.Download();
-            }
-        }
-
-
-    }
-
-    internal class DownloadFile
-    {
-        private CancellationTokenSource _cancelSource;
-
-        public DownloadFileState State;
-
-        public string ErrorInfo;
-
-        public MEFL.Contract.NativeLocalPair Source;
-        public event EventHandler<long> OnBytesAdd;
-        public event EventHandler<string> OnDownloadFailed;
-
-        public event EventHandler OnTaskCompleted;
-
-        public DownloadFile(MEFL.Contract.NativeLocalPair source)
-        {
-            _cancelSource = new CancellationTokenSource();
-            Source = source;
-            State = DownloadFileState.Ready;
-        }
-
-        public async void Download()
-        {
-            var task = new Task(() =>
-            {
-                State = DownloadFileState.Downloading;
-                try
-                {
-                    var httpRequest = WebRequest.Create(Source.NativeUrl);
-                    httpRequest.Method = "GET";
-                    httpRequest.ContentType = "application/x-www-form-urlencoded";
-
-                    httpRequest.Timeout = 30000; // 半分钟。
-
-                    var httpResponse = httpRequest.GetResponse();
-
-
-                    using (var stream = httpResponse.GetResponseStream())
-                    {
-                        var parentRoot = Path.GetDirectoryName(Source.LoaclPath);
-                        FileSystemHelper.CreateFolder(parentRoot);
-                        using (FileStream fs = new FileStream(Source.LoaclPath, FileMode.Create))
-                        {
-                            var cancelToken = new CancellationTokenSource();
-                            Task.Run(() =>
-                            {
-                                long lastLeng = 0;
-                                while (cancelToken.IsCancellationRequested == false)
-                                {
-                                    Thread.Sleep(2500);
-                                    if (cancelToken.IsCancellationRequested == false && fs.CanWrite)
-                                    {
-#if DEBUG
-                                        Debug.WriteLine($"{Source.NativeUrl} {fs.Length / 1024}");
-#endif
-                                        OnBytesAdd?.Invoke(this, fs.Length - lastLeng);
-                                    }
-                                }
-                            });
-                            stream.CopyTo(fs);
-                            cancelToken.Cancel();
-                        }
-                    }
-
-                    State = DownloadFileState.DownloadSucessed;
-                    OnTaskCompleted?.Invoke(this, EventArgs.Empty);
-
-                }
-                catch (Exception ex)
-                {
-
-                    Debug.WriteLine($"下载失败{Source.NativeUrl}，{ex.Message}");
-                    State = DownloadFileState.DownloadFailed;
-                    ErrorInfo = ex.Message;
-                    OnDownloadFailed?.Invoke(this, ErrorInfo);
-                    OnTaskCompleted?.Invoke(this, EventArgs.Empty);
-                }
-
-            });
-            task.Start();
-
-        }
-
-        public override string ToString()
-        {
-            return $"remote uri: {Source.NativeUrl}, local uri: {Source.LoaclPath}";
-        }
-
-    }
 
     #endregion
 
-    ///<summary>来自fanbal的下载器。</summary>
-    internal class Fandown : MEFLDownloader
-    {
-        public override string Name => "FanDown";
 
-        public override string Description => "多线程并发下载器";
-
-        public override Version Version => new(1, 0, 0);
-
-        public override object Icon => "FanDown";
-
-        public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, IEnumerable<DownloadSource> sources, string dotMCFolder)
-        {
-            return new FandownProgress(NativeUrl, LoaclPath, dotMCFolder, sources);
-        }
-
-        public override DownloadProgress CreateProgress(IEnumerable<NativeLocalPair> NativeLocalPairs, IEnumerable<DownloadSource> sources, string dotMCFolder)
-        {
-            return new FandownProgress(NativeLocalPairs, dotMCFolder, sources);
-        }
-
-        public override DownloadProgress CreateProgress(NativeLocalPair nativeLocalPair, IEnumerable<DownloadSource> sources, string dotMCFolder)
-        {
-            return new FandownProgress(new[] { nativeLocalPair }, dotMCFolder, sources);
-        }
-    }
 
     public class FandownProgress : DownloadProgress
     {
-        private DownloadFilePool _pool;
+        private MEFL.Contract.Web.DownloadFilePool _pool;
         private string _dotMCPath;
         private string _versionPath;
         private string _gameJarPath;
@@ -263,51 +35,75 @@ namespace MEFL.CLAddIn.Downloaders
         private bool _paused;
         private bool _decided;
 
+        private ManifestFile _manifestFile; // 最开始的远端配置结构。
+
+
         //Directory.CreateDirectory(System.IO.Path.Combine(fp, "versions", NameBox.Text));
-        public FandownProgress(string nativeUrl, string loaclPath, string dotMCFolder, IEnumerable<DownloadSource> sources)
+        public FandownProgress(ManifestFile manifestFile, string dotMCFolder, IEnumerable<DownloadSource> sources)
         {
-            _sources = new List<DownloadSource>(sources);
-            _dotMCPath = dotMCFolder;
-            CurrectFile = Path.GetFileName(loaclPath);
-            _versionPath = Path.Combine(dotMCFolder, "versions", Path.GetFileNameWithoutExtension(CurrectFile));
-            _gameJarPath = Path.Combine(_versionPath, $"{Path.GetFileNameWithoutExtension(CurrectFile)}.jar");
-            NativeLocalPairs = new() { new(nativeUrl, loaclPath) };
+            _manifestFile = manifestFile;
+            _manifestFile.OnTaskCompleted += _manifestFile_OnTaskCompleted;
+
+            //_sources = new List<DownloadSource>(sources);
+            //_dotMCPath = dotMCFolder;
+            //_versionPath = Path.Combine(dotMCFolder, "versions", Path.GetFileNameWithoutExtension(CurrectFile));
+            //_gameJarPath = Path.Combine(_versionPath, $"{Path.GetFileNameWithoutExtension(CurrectFile)}.jar");
         }
 
-
-        public FandownProgress(IEnumerable<NativeLocalPair> nativeLocalPairs, string dotMCFolder, IEnumerable<DownloadSource> sources)
+        private void _manifestFile_OnTaskCompleted(object? sender, EventArgs e)
         {
-            if (sources != null)
-                _sources = new List<DownloadSource>(sources);
-
-            NativeLocalPairs = new List<NativeLocalPair>(nativeLocalPairs);
+            DownloadItems();
         }
-
 
         public override void Start()
         {
-            base.Start();
-            _paused = false;
-            new Task(() =>
+            if (_manifestFile.State == DownloadFileState.Ready)
             {
-                try
-                {
-                    TaskFunction();
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                }
-                
-            }).Start();
+                _manifestFile.Download();
+            }
+            else
+            {
+                DownloadItems();
+            }
         }
 
+        ///<summary>下载多项。</summary>
+        private void DownloadItems()
+        {
+            _pool = new DownloadFilePool(_manifestFile.NativeLocalPairs);
+
+            _pool.OnProgressUpdated += _pool_OnProgressUpdated;
+            _pool.OnDownloadFailed += _pool_OnDownloadFailed;
+            _pool.OnDownloadAllCompleted += _pool_OnDownloadAllCompleted;
+            _pool.OnBytesAdd += _pool_OnBytesAdd;
+            _pool.StartDownload();
+        }
+
+        private void _pool_OnBytesAdd(object? sender, long e)
+        {
+            Console.WriteLine($"OnBytesAdd {e}");
+        }
+
+        private void _pool_OnDownloadAllCompleted(object? sender, EventArgs e)
+        {
+            Console.WriteLine($"OnDownloadAllCompleted {e}");
+        }
+
+        private void _pool_OnDownloadFailed(object? sender, DownloadFile e)
+        {
+            Console.WriteLine($"_pool_OnDownloadFailed {e}");
+        }
+
+        private void _pool_OnProgressUpdated(object? sender, DownloadFileProgressArgument e)
+        {
+            Console.WriteLine($"OnProgressUpdated {e}");
+        }
 
         private void TaskFunction()
         {
             while (!_decided)
             {
-                var Value = NativeLocalPairs[0].LoaclPath;
+                var Value = NativeLocalPairs[0].LocalPath;
                 Directory.CreateDirectory(Value.Replace(Path.GetFileName(Value), string.Empty));
 
                 if (NativeLocalPairs.Count > 1)
@@ -317,7 +113,7 @@ namespace MEFL.CLAddIn.Downloaders
                 }
 
                 new WebClient().DownloadFile(NativeLocalPairs[0].NativeUrl, Value);
-               
+
                 NativeLocalPairs.Clear();
                 if (Value.EndsWith(".json"))
                 {
@@ -408,7 +204,7 @@ namespace MEFL.CLAddIn.Downloaders
                 }
                 _decided = true;
             }
-            _pool = new DownloadFilePool(NativeLocalPairs);
+            _pool = new MEFL.Contract.Web.DownloadFilePool(NativeLocalPairs);
             _pool.OnProgressUpdated += POOL_OnProgressUpdated;
             _pool.OnDownloadFailed += POOL_OnDownloadFailed;
             _pool.OnDownloadAllCompleted += POOL_OnDownloadAllCompleted;
@@ -426,13 +222,13 @@ namespace MEFL.CLAddIn.Downloaders
             State = DownloadProgressState.Finished;
         }
 
-        private void POOL_OnDownloadFailed(object? sender, DownloadFile e)
+        private void POOL_OnDownloadFailed(object? sender, MEFL.Contract.Web.DownloadFile e)
         {
             DownloadedItems++;
             LogWriteLine($"{Path.GetFileName(e.Source.NativeUrl)}:{e.ErrorInfo}");
         }
 
-        private void POOL_OnProgressUpdated(object? sender, DownloadFileProgressArgument e)
+        private void POOL_OnProgressUpdated(object? sender, MEFL.Contract.Web.DownloadFileProgressArgument e)
         {
             DownloadedItems = e.CompletedFileCount;
         }

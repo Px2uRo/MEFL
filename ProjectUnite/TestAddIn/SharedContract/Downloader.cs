@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Diagnostics;
 using System.IO;
 using System.Threading;
-using MEFL.Contrat.Helpers;
+using MEFL.Contract.Helpers;
 
 namespace MEFL.Contract
 {
@@ -40,6 +40,7 @@ namespace MEFL.Contract
 
 
     ///<summary>文件的清单。</summary>
+    [Obsolete("没什么屁用", true)]
     public class PackageManifest
     {
         public event EventHandler<double> OnDownloadProgressChanged;
@@ -139,17 +140,7 @@ namespace MEFL.Contract
 
     }
 
-    public class NativeLocalPair
-    {
-        public string NativeUrl { get; set; }
-        public string LoaclPath { get; set; }
-
-        public NativeLocalPair(string nativeUrl, string loaclPath)
-        {
-            NativeUrl = nativeUrl;
-            LoaclPath = loaclPath;
-        }
-    }
+   
     public abstract class DownloadProgress : MEFLClass, INotifyPropertyChanged
     {
         #region events
