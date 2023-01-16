@@ -104,7 +104,6 @@
           "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "D:\\Code\\BlogTest\\mefcoll\\AddinDebuging\\CLAddInNet6\\NuGet.Config",
           "C:\\Users\\lby\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
@@ -114,9 +113,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "D:\\Code\\BlogTest\\mefcoll\\AddinDebuging\\CLAddInNet6\\packages": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://dotnet.myget.org/F/dotnet-core/api/v3/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0-windows7.0": {
