@@ -12,6 +12,7 @@
 
 
   <ItemGroup>
+    <PackageReference Include="CoreLaunchingNet6" Version="1.0.0" />
     <PackageReference Include="MEFL.Controls" Version="0.0.6.3" />
     <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />
   </ItemGroup>

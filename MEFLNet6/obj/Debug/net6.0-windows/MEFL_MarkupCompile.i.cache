@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\Code\meflcollection\MEFLNet6\obj\Debug\net6.0-windows\
+D:\Code\BlogTest\mefcoll\MEFLNet6\obj\Debug\net6.0-windows\
 MEFL
 none
 false
 WPF;HOSTING;DEBUG;NET;NET6_0;NETCOREAPP
-D:\Code\meflcollection\SharedMVVMWPF\App.xaml
-272047163001
-1218171594
-51-122183354
-199-1437788715
-D:\Code\meflcollection\SharedMVVMWPF\Controls\DownloadProgressCard.xaml;D:\Code\meflcollection\SharedMVVMWPF\Controls\MyExtensionCard.xaml;D:\Code\meflcollection\SharedMVVMWPF\I18N\en_US.xaml;D:\Code\meflcollection\SharedMVVMWPF\Generl.xaml;D:\Code\meflcollection\SharedMVVMWPF\I18N\en_UK.xaml;D:\Code\meflcollection\SharedMVVMWPF\I18N\zh_HK.xaml;D:\Code\meflcollection\SharedMVVMWPF\I18N\zh_TW.xaml;D:\Code\meflcollection\SharedMVVMWPF\I18N\zh_SG.xaml;D:\Code\meflcollection\SharedMVVMWPF\I18N\zh_yue_CN.xaml;D:\Code\meflcollection\SharedMVVMWPF\I18N\zh_yue_HK.xaml;D:\Code\meflcollection\SharedMVVMWPF\I18N\zh_MO.xaml;D:\Code\meflcollection\SharedMVVMWPF\I18N\zh_CN.xaml;D:\Code\meflcollection\SharedMVVMWPF\MainWindow.xaml;D:\Code\meflcollection\SharedMVVMWPF\Pages\DownloadPage.xaml;D:\Code\meflcollection\SharedMVVMWPF\Pages\ExtensionPage.xaml;D:\Code\meflcollection\SharedMVVMWPF\Pages\RealMainPage.xaml;D:\Code\meflcollection\SharedMVVMWPF\Pages\SettingPage.xaml;D:\Code\meflcollection\SharedMVVMWPF\Pages\UserManagePage.xaml;D:\Code\meflcollection\SharedMVVMWPF\SpecialPages\AddAccountPage.xaml;D:\Code\meflcollection\SharedMVVMWPF\SpecialPages\DownloadingProgressPage.xaml;D:\Code\meflcollection\SharedMVVMWPF\SpecialPages\GameSettingPage.xaml;D:\Code\meflcollection\SharedMVVMWPF\SpecialPages\AddNewAccount.xaml;D:\Code\meflcollection\SharedMVVMWPF\SpecialPages\ManageDownloadSources.xaml;D:\Code\meflcollection\SharedMVVMWPF\SpecialPages\ManageProcessesPage.xaml;D:\Code\meflcollection\SharedMVVMWPF\SpecialPages\PickUpAFolder.xaml;D:\Code\meflcollection\SharedMVVMWPF\SpecialPages\RenameFolderPage.xaml;D:\Code\meflcollection\SharedMVVMWPF\Themes\Generic.xaml;
+D:\Code\BlogTest\mefcoll\SharedMVVMWPF\App.xaml
+27-167867125
+1-1854737270
+51873452040
+199-245400642
+D:\Code\BlogTest\mefcoll\SharedMVVMWPF\Controls\DownloadProgressCard.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\Controls\MyExtensionCard.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\I18N\en_US.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\Generl.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\I18N\en_UK.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\I18N\zh_HK.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\I18N\zh_TW.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\I18N\zh_SG.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\I18N\zh_yue_CN.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\I18N\zh_yue_HK.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\I18N\zh_MO.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\I18N\zh_CN.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\MainWindow.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\Pages\DownloadPage.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\Pages\ExtensionPage.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\Pages\RealMainPage.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\Pages\SettingPage.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\Pages\UserManagePage.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\SpecialPages\AddAccountPage.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\SpecialPages\DownloadingProgressPage.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\SpecialPages\GameSettingPage.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\SpecialPages\AddNewAccount.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\SpecialPages\ManageDownloadSources.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\SpecialPages\ManageProcessesPage.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\SpecialPages\PickUpAFolder.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\SpecialPages\RenameFolderPage.xaml;D:\Code\BlogTest\mefcoll\SharedMVVMWPF\Themes\Generic.xaml;
 
 True
 

@@ -1,23 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Code\\meflcollection\\MEFLNet6\\MEFLNet6.csproj": {}
+    "D:\\Code\\BlogTest\\mefcoll\\MEFLNet6\\MEFLNet6.csproj": {}
   },
   "projects": {
-    "D:\\Code\\meflcollection\\MEFLNet6\\MEFLNet6.csproj": {
+    "D:\\Code\\BlogTest\\mefcoll\\MEFLNet6\\MEFLNet6.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Code\\meflcollection\\MEFLNet6\\MEFLNet6.csproj",
+        "projectUniqueName": "D:\\Code\\BlogTest\\mefcoll\\MEFLNet6\\MEFLNet6.csproj",
         "projectName": "MEFL",
-        "projectPath": "D:\\Code\\meflcollection\\MEFLNet6\\MEFLNet6.csproj",
-        "packagesPath": "C:\\Users\\WIN10\\.nuget\\packages\\",
-        "outputPath": "D:\\Code\\meflcollection\\MEFLNet6\\obj\\",
+        "projectPath": "D:\\Code\\BlogTest\\mefcoll\\MEFLNet6\\MEFLNet6.csproj",
+        "packagesPath": "C:\\Users\\lby\\.nuget\\packages\\",
+        "outputPath": "D:\\Code\\BlogTest\\mefcoll\\MEFLNet6\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\WIN10\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "D:\\Code\\BlogTest\\mefcoll\\AddinDebuging\\CLAddInNet6\\NuGet.Config",
+          "C:\\Users\\lby\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,16 +27,16 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "D:\\localnuget": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "D:\\Code\\BlogTest\\mefcoll\\AddinDebuging\\CLAddInNet6\\packages": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://dotnet.myget.org/F/dotnet-core/api/v3/index.json": {}
         },
         "frameworks": {
           "net6.0-windows7.0": {
             "targetAlias": "net6.0-windows",
             "projectReferences": {
-              "D:\\Code\\meflcollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj": {
-                "projectPath": "D:\\Code\\meflcollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj"
+              "D:\\Code\\BlogTest\\mefcoll\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj": {
+                "projectPath": "D:\\Code\\BlogTest\\mefcoll\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj"
               }
             }
           }
@@ -86,24 +87,25 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Code\\meflcollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj": {
+    "D:\\Code\\BlogTest\\mefcoll\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj": {
       "version": "0.0.5.41",
       "restore": {
-        "projectUniqueName": "D:\\Code\\meflcollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj",
+        "projectUniqueName": "D:\\Code\\BlogTest\\mefcoll\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj",
         "projectName": "MEFL.Contract",
-        "projectPath": "D:\\Code\\meflcollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj",
-        "packagesPath": "C:\\Users\\WIN10\\.nuget\\packages\\",
-        "outputPath": "D:\\Code\\meflcollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\obj\\",
+        "projectPath": "D:\\Code\\BlogTest\\mefcoll\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj",
+        "packagesPath": "C:\\Users\\lby\\.nuget\\packages\\",
+        "outputPath": "D:\\Code\\BlogTest\\mefcoll\\ProjectUnite\\TestAddIn\\MEFL.Contract\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\WIN10\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "D:\\Code\\BlogTest\\mefcoll\\AddinDebuging\\CLAddInNet6\\NuGet.Config",
+          "C:\\Users\\lby\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -112,9 +114,9 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
-          "D:\\localnuget": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "D:\\Code\\BlogTest\\mefcoll\\AddinDebuging\\CLAddInNet6\\packages": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://dotnet.myget.org/F/dotnet-core/api/v3/index.json": {}
         },
         "frameworks": {
           "net6.0-windows7.0": {
@@ -164,7 +166,7 @@
               "privateAssets": "none"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
         }
       }
     }
