@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
-using MEFL.Contract.Properties;
 using System.Net;
 using System.Threading.Tasks;
 using System.Diagnostics;

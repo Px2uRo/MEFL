@@ -1,3 +1,0 @@
-﻿[20:29:17][MEFL]程序启动了，参数
-[20:29:18][MEFL]读取了注册表，键：Downloader，值：null
-[20:29:18][MEFL]写入了注册表，键：SelectedFolderIndex，值：0

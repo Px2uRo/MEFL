@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\MEFL.Contract\MEFL.Contract.csproj" />
     <ProjectReference Include="..\CLAddInNet6\CLAddInNet6.csproj" />
   </ItemGroup>
 
