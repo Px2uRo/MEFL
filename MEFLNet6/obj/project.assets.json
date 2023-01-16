@@ -407,24 +407,6 @@
             "related": ".xml"
           }
         }
-      },
-      "MEFL.Contract/0.0.5.41": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "CoreLaunchingNet6": "1.0.0",
-          "MEFL.Controls": "0.0.6.3",
-          "Newtonsoft.Json": "13.0.1"
-        },
-        "compile": {
-          "bin/placeholder/MEFL.Contract.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/MEFL.Contract.dll": {}
-        },
-        "frameworkReferences": [
-          "Microsoft.WindowsDesktop.App.WPF"
-        ]
       }
     }
   },
@@ -1846,17 +1828,11 @@
         "system.threading.tasks.4.3.0.nupkg.sha512",
         "system.threading.tasks.nuspec"
       ]
-    },
-    "MEFL.Contract/0.0.5.41": {
-      "type": "project",
-      "path": "../ProjectUnite/TestAddIn/MEFL.Contract/MEFL.Contract.csproj",
-      "msbuildProject": "../ProjectUnite/TestAddIn/MEFL.Contract/MEFL.Contract.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
       "CoreLaunchingNet6 >= 1.0.0",
-      "MEFL.Contract >= 0.0.5.41",
       "MEFL.Controls >= 0.0.6.3",
       "Newtonsoft.Json >= 13.0.1",
       "System.ComponentModel.Composition >= 6.0.0"
@@ -1896,11 +1872,7 @@
       "frameworks": {
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
-          "projectReferences": {
-            "D:\\Code\\BlogTest\\mefcoll\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj": {
-              "projectPath": "D:\\Code\\BlogTest\\mefcoll\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

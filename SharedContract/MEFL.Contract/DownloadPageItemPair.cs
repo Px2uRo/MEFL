@@ -1,0 +1,64 @@
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+
+namespace MEFL.Contract;
+
+public class LauncherWebVersionInfoList: ObservableCollection<LauncherWebVersionInfo>
+{
+	public virtual new void RemoveItem(int index)
+	{
+		this[index].Dispose();
+		base.RemoveItem(index);	
+	}
+	public string VersionMajor;
+	public LauncherWebVersionInfoList(string versionMajor)
+	{
+		VersionMajor = versionMajor;
+	}
+
+	public override string ToString()
+	{
+		return VersionMajor;
+	}
+}
+
+public class DownloadPageItemPair:MEFLClass
+{
+	protected override void Dispose(bool disposing)
+	{
+		for (int i = 0; i < Contents.Count;)
+		{
+			Contents[i].Clear();
+			Contents.RemoveAt(i);
+		}
+		base.Dispose(disposing);
+	}
+	public bool HasError { get; set; }
+	public bool IsRefreshing { get; set; }
+	public delegate void RefreshEvent(object sender, string tmpFolderPath);
+
+	public string Title { get; private set; }
+
+	public string Tag { get; set; }
+	public string ErrorDescription;
+
+    public List<LauncherWebVersionInfoList> Contents { get; set; }
+
+    public event RefreshEvent? ListRefreshEvent;
+    public void RefreshList(string tmpFolderPath)
+    {
+        ListRefreshEvent?.Invoke(this, tmpFolderPath);
+    }
+    public event RefreshEvent? WebRefreshEvent;
+    public void WebRefresh(string tmpFolderPath)
+    {
+        WebRefreshEvent?.Invoke(this, tmpFolderPath);
+    }
+
+    public DownloadPageItemPair(string title, List<LauncherWebVersionInfoList> contents, string tag)
+	{
+		Title = title;
+		Contents = contents;
+		Tag = tag;
+	}
+}

@@ -18,15 +18,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="bin\**" />
     <Compile Remove="Controls\**" />
     <Compile Remove="Pages\**" />
     <Compile Remove="SpecialPages\**" />
+    <EmbeddedResource Remove="bin\**" />
     <EmbeddedResource Remove="Controls\**" />
     <EmbeddedResource Remove="Pages\**" />
     <EmbeddedResource Remove="SpecialPages\**" />
+    <None Remove="bin\**" />
     <None Remove="Controls\**" />
     <None Remove="Pages\**" />
     <None Remove="SpecialPages\**" />
+    <Page Remove="bin\**" />
     <Page Remove="Controls\**" />
     <Page Remove="Pages\**" />
     <Page Remove="SpecialPages\**" />
@@ -39,13 +43,7 @@
     <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ProjectUnite\TestAddIn\MEFL.Contract\MEFL.Contract.csproj" />
-  </ItemGroup>
-
   <Import Project="..\SharedMVVMWPF\SharedMVVMWPF.projitems" Label="Shared" />
-
-  <Import Project="..\SharedSources\SharedSources.projitems" Label="Shared" />
 
   <Import Project="..\SharedMEFL\SharedMEFL.projitems" Label="Shared" />
 

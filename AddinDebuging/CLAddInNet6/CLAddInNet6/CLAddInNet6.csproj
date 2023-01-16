@@ -17,10 +17,6 @@
     <PackageReference Include="System.ComponentModel.Composition" Version="6.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\ProjectUnite\TestAddIn\MEFL.Contract\MEFL.Contract.csproj" />
-  </ItemGroup>
-
   <Import Project="..\SharedCLAddIn\SharedCLAddIn.projitems" Label="Shared" />
 
 </Project>
