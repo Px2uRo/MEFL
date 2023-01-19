@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MEFL.Core.Helpers
 {
-    public static class FileSystemHelper
+    public static class FileHelper
     {
         #region 打开文件夹
         /// <summary>通过一定可以构建出指定文件夹</summary>
