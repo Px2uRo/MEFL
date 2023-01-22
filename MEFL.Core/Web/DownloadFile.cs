@@ -18,20 +18,14 @@ namespace MEFL.Core.Web
     ///<summary>文件下载状态。</summary>
     public enum DownloadFileState
     {
-        ///<summary>闲置状态。</summary>
+        ///<summary>文件下载任务处于闲置状态。</summary>
         Idle,
 
-        ///<summary>被人工手动取消了。</summary>
+        ///<summary>文件下载任务被取消了。</summary>
         Canceled,
-
-        ///<summary>被暂停了，该状态暂时无效。</summary>
-        Paused,
 
         ///<summary>下载中。</summary>
         Downloading,
-
-        ///<summary>超时。</summary>
-        DownloadOutTime,
 
         ///<summary>下载失败。</summary>
         DownloadFailed,
@@ -39,10 +33,9 @@ namespace MEFL.Core.Web
         ///<summary>下载成功。</summary>
         DownloadSucessed,
 
-        ///<summary>下载虽然成功，但是本地文件找不到了。可能被删掉了。</summary>
-        DownloadSuceessedButLocalFileMissed,
     }
 
+    ///<summary>文件下载模块，一个实例对应一个下载任务。</summary>
     [Serializable]
     public sealed class DownloadFile
     {
@@ -65,22 +58,29 @@ namespace MEFL.Core.Web
         #endregion
 
         #region props
+
+        ///<summary>下载状态。</summary>
         public DownloadFileState State
         {
-            get; set;
-        }
-        public string ErrorInfo
-        {
-            get; set;
-        }
-        public DownloadURI Source
-        {
-            get; set;
+            get; private set;
         }
 
+        ///<summary>错误信息。</summary>
+        public string ErrorInfo
+        {
+            get; private set;
+        }
+
+        ///<summary>文件下载和本地存放的来源。</summary>
+        public DownloadURI Source
+        {
+            get; private set;
+        }
+
+        ///<summary>文件长度。</summary>
         public long ContentLength
         {
-            get; set;
+            get; private set;
         }
 
         ///<summary>下载计数器。</summary>
@@ -91,13 +91,7 @@ namespace MEFL.Core.Web
 
         ///<summary>文件长度是否正确。</summary>
         [JsonIgnore]
-        public bool IsFileLengthCorrect
-        {
-            get
-            {
-                return ContentLength == _tempDownloadingLengthForPausedLength;
-            }
-        }
+        public bool IsFileLengthCorrect => ContentLength == _tempDownloadingLengthForPausedLength;
 
         #endregion
 
@@ -115,7 +109,7 @@ namespace MEFL.Core.Web
 
         #region methods
 
-        ///<summary>下载。</summary>
+        ///<summary>下载任务。</summary>
         public async void Download(bool isAsync = true, bool isContinue = false)
         {
             State = DownloadFileState.Downloading;
@@ -128,7 +122,12 @@ namespace MEFL.Core.Web
                     httpRequest.Method = "GET";
                     httpRequest.ContentType = "application/x-www-form-urlencoded";
 
-                    if (isContinue) httpRequest.Headers.Add("Range", $"{_tempDownloadingLengthForPausedLength}-");
+                    // 设置断点续传的信息。
+                    if (isContinue)
+                    {
+                        httpRequest.Headers.Add("Range", $"{_tempDownloadingLengthForPausedLength}-");
+                    }
+
                     httpRequest.Timeout = 30000; // 半分钟。
                     var httpResponse = httpRequest.GetResponse();
 
@@ -192,7 +191,8 @@ namespace MEFL.Core.Web
         ///<summary>将文本内容进行序列化。</summary>
         public T ToObject<T>()
         {
-            if (File.Exists(Source.LocalPath)) return default(T);
+            if (File.Exists(Source.LocalPath))
+                return default(T);
 
             using var fileStream = new FileStream(Source.LocalPath, FileMode.Create);
             var obj = JsonSerializer.Deserialize<T>(fileStream);
@@ -239,7 +239,7 @@ namespace MEFL.Core.Web
         #region overrides
         public override string ToString()
         {
-            return $"remote uri: {Source.RemoteUri}, local uri: {Source.LocalPath}";
+            return $"[DownloadFile] remote uri: {Source.RemoteUri}, local uri: {Source.LocalPath}, content len: {ContentLength}";
         }
         #endregion
 
@@ -265,8 +265,10 @@ namespace MEFL.Core.Web
             foreach (var file in Directory.GetFiles(path, "*.cache"))
             {
                 var downloadFile = LoadTempCache(file);
-                if (downloadFile != null) validList.Add(downloadFile);
-                else invalidList.Add(file);
+                if (downloadFile != null)
+                    validList.Add(downloadFile);
+                else
+                    invalidList.Add(file);
             }
             invalidPaths = invalidList.ToArray();
             return validList.ToArray();

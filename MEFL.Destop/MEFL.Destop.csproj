@@ -8,10 +8,22 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Views\" />
-    <Folder Include="ViewModels\" />
-    <Folder Include="Models\" />
-    <Folder Include="Utils\" />
+    <Compile Remove="Models\**" />
+    <Compile Remove="Utils\**" />
+    <Compile Remove="ViewModels\**" />
+    <Compile Remove="Views\**" />
+    <EmbeddedResource Remove="Models\**" />
+    <EmbeddedResource Remove="Utils\**" />
+    <EmbeddedResource Remove="ViewModels\**" />
+    <EmbeddedResource Remove="Views\**" />
+    <None Remove="Models\**" />
+    <None Remove="Utils\**" />
+    <None Remove="ViewModels\**" />
+    <None Remove="Views\**" />
+    <Page Remove="Models\**" />
+    <Page Remove="Utils\**" />
+    <Page Remove="ViewModels\**" />
+    <Page Remove="Views\**" />
   </ItemGroup>
 
 </Project>
