@@ -11,7 +11,7 @@ public static class AssetIndexHelper
 {
     public static string CreateRemoteURI(string hash)
     {
-        return $"http://resource.download.minecraft.net/{hash.Substring(0, 2)}/{hash}";
+        return $"https://resources.download.minecraft.net/{hash.Substring(0, 2)}/{hash}";
     }
 
     ///<summary>minecraftRootDir一般是指 .minecraft 文件夹。该方法用于在 资源索引文件中创建指定文件。</summary>
