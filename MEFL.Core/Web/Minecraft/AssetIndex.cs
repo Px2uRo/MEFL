@@ -38,8 +38,8 @@ public class AssetIndex
         var assetIndex = new AssetIndex(minecraftRootDir);
         var localPath = Path.Combine(minecraftRootDir, FileName);
         var file = new DownloadFile(new DownloadURI(assetIndexURI, localPath));
-        file.Download(isAsync: false, isContinue: false);
-
+        file.Download(isContinue: false);
+        file.WaitDownload();
         assetIndex.Load(localPath);
 
         return assetIndex;

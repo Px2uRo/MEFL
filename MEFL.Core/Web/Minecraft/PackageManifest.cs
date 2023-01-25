@@ -26,7 +26,7 @@ public class PackageManifest
         _items = new List<DownloadURI>();
     }
 
-    public void Load(DownloadFile file)
+    private void Load(DownloadFile file)
     {
         var package = file.ToObject<PackageRoot>();
         AssetIndexUri = package.assetIndex.url;
@@ -92,14 +92,20 @@ public class PackageManifest
         return hasWindowsOS;
     }
 
+    public AssetIndex DownloadAssetIndex()
+    {
+        return AssetIndex.Download(AssetIndexUri, _minecraftRootDir);
+    }
+
 
     public static PackageManifest Download(string manifestUri, string minecraftRootDir)
     {
         var manifest = new PackageManifest(minecraftRootDir);
         var localPath = Path.Combine(minecraftRootDir, FileName);
         var file = new DownloadFile(new DownloadURI(manifestUri, localPath));
-        file.Download(isAsync: false, isContinue: false);
-
+        var task = file.Download(isContinue: false);
+        file.Download(isContinue: false);
+        file.WaitDownload();
         manifest.Load(file);
 
         return manifest;

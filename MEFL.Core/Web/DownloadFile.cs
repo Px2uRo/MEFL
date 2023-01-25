@@ -110,7 +110,7 @@ namespace MEFL.Core.Web
         #region methods
 
         ///<summary>下载任务。</summary>
-        public async void Download(bool isAsync = true, bool isContinue = false)
+        public Task Download(bool isContinue = false)
         {
             State = DownloadFileState.Downloading;
             DownloadCounter++;
@@ -181,20 +181,27 @@ namespace MEFL.Core.Web
 
             });
 
-            if (isAsync == false)
-                task.RunSynchronously();
-            else
-                task.Start();
+            task.Start();
 
+
+            return task;
+        }
+
+        public void WaitDownload()
+        {
+            while (State == DownloadFileState.Downloading)
+            {
+                Thread.Sleep(250);
+            }
         }
 
         ///<summary>将文本内容进行序列化。</summary>
         public T ToObject<T>()
         {
-            if (File.Exists(Source.LocalPath))
+            if (File.Exists(Source.LocalPath) == false)
                 return default(T);
 
-            using var fileStream = new FileStream(Source.LocalPath, FileMode.Create);
+            using var fileStream = new FileStream(Source.LocalPath, FileMode.Open);
             var obj = JsonSerializer.Deserialize<T>(fileStream);
             return obj;
         }
