@@ -47,7 +47,7 @@ public static class AssetIndexHelper
         foreach (var obj in objs.EnumerateObject())
         {
             var hash = obj.Value.GetProperty("hash").GetString();
-            var uri = new DownloadURI(CreateRemoteURI(hash), CreateLocalPath(minecraftRootDir, obj.Name));
+            var uri = new DownloadURI(CreateRemoteURI(hash), CreateLocalPath(minecraftRootDir, $"{hash.Substring(0, 2)}\\{hash}"));
             list.Add(uri);
 
         }

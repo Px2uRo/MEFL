@@ -1,5 +1,5 @@
-﻿using MEFL.Core.Web.Minecraft;
-using MEFL.MinecraftPackage;
+﻿using MEFL.Core.Web;
+using MEFL.Core.Web.Minecraft;
 
 namespace MEFL.ConsoleTest;
 
@@ -11,15 +11,11 @@ internal class Program
         var mcdir = Environment.CurrentDirectory;
         var manifest =  PackageManifest.Download(uri, mcdir);
         var assetIndex = manifest.DownloadAssetIndex();
-        foreach (var item in manifest.Items)
-        {
-            Console.WriteLine(item);
-        }
 
-        foreach (var item in assetIndex.Items)
-        {
-            Console.WriteLine(item);
-        }
+        List<DownloadURI> urls = new List<DownloadURI>();
+        urls.AddRange(manifest.Items);
+        urls.AddRange(assetIndex.Items);
+        new DownloadQueue(urls.ToArray()) . Download();
         Console.ReadKey();
     }
 }
