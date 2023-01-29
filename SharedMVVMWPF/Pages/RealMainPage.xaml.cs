@@ -117,8 +117,8 @@ namespace MEFL.Pages
                     Dispatcher.Invoke(() =>
                     {
                         ManageProcessesPageModel.ModelView.RunningGames.Add((DataContext as RealMainPageModelView).ProcessModelView.GetProcess);
-                        ManageProcessesPageModel.ModelView.ContentGrid.Children.Add((DataContext as RealMainPageModelView).ProcessModelView.Game.GetManageProcessPage(ManageProcessesPageModel.ModelView.RunningGames[ManageProcessesPageModel.ModelView.RunningGames.Count - 1], APIModel.SettingArgs));
                         ManageProcessesPageModel.ModelView.RunningGames[ManageProcessesPageModel.ModelView.RunningGames.Count - 1].Start();
+                        ManageProcessesPageModel.ModelView.ContentGrid.Children.Add((DataContext as RealMainPageModelView).ProcessModelView.Game.GetManageProcessPage(ManageProcessesPageModel.ModelView.RunningGames[ManageProcessesPageModel.ModelView.RunningGames.Count - 1], APIModel.SettingArgs));
                         MyPageBase From = null;
                         foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
                         {
@@ -386,6 +386,9 @@ namespace MEFL.Pages
                         {
                             Progress = 100;
                             GetProcess = p;
+                            p.StartInfo.RedirectStandardError= true;
+                            p.StartInfo.RedirectStandardOutput= true;
+                            p.EnableRaisingEvents= true;
                             Succeed = true;
                         }
                         else

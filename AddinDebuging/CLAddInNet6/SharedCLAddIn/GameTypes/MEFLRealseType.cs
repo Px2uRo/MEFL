@@ -24,7 +24,7 @@ namespace MEFL.CLAddIn.GameTypes
         public override List<string> ItemsNeedsToExtract => _ItemsNeedsToExtract;
         public override FrameworkElement GetManageProcessPage(Process process, SettingArgs args)
         {
-            var res = new Pages.MEFLRealseTypeManage(process);
+            var res = new Pages.MEFLRealseTypeManage(process,this);
             return res;
         }
         protected override void Dispose(bool disposing)
