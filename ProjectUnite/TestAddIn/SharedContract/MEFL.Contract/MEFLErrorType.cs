@@ -122,14 +122,6 @@ public class MEFLErrorType : GameInfoBase
 		}
 	}
 
-	public override string AssetsRoot
-	{
-		get
-		{
-			throw new NotImplementedException();
-		}
-	}
-
 	public override string AssetsIndexName
 	{
 		get
@@ -140,7 +132,7 @@ public class MEFLErrorType : GameInfoBase
 
 	public override string VersionType => "Error";
 
-	public override List<LauncherWebFileInfo> FileNeedsToDownload
+	public override List<JsonFileInfo> FileNeedsToDownload
 	{
 		get
 		{
@@ -152,7 +144,7 @@ public class MEFLErrorType : GameInfoBase
 		}
 	}
 
-	public override List<LauncherWebFileInfo> NativeFilesNeedToDepackage
+	public override List<JsonFileInfo> NativeFilesNeedToDepackage
 	{
 		get
 		{

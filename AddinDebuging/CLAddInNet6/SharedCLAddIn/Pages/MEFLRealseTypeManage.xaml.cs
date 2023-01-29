@@ -35,7 +35,7 @@ namespace MEFL.CLAddIn.Pages
             ContentTB.Text = $"[{DateTime.Now}] 等待窗口加载";
             P.Exited += P_Exited;
             P.OutputDataReceived += P_OutputDataReceived;
-            P.BeginOutputReadLine();
+                P.BeginOutputReadLine();
         }
 
         private void P_OutputDataReceived(object sender, DataReceivedEventArgs e)
@@ -48,8 +48,6 @@ namespace MEFL.CLAddIn.Pages
 
         private void P_Exited(object? sender, EventArgs e)
         {
-            
-            _t.Stop();
             var lnk = sender as Process;
             var msg = lnk.StandardError.ReadToEnd();
             if (lnk.ExitCode== 0)
@@ -65,7 +63,7 @@ namespace MEFL.CLAddIn.Pages
                 var help = CrashParser.Parse(msg, "zh_CN");
                 Dispatcher.Invoke(() =>
                 {
-                    ContentTB.Text = $"\n[{DateTime.Now}]\n游戏崩溃了\n{msg}\n分析：\n{help}";
+                    ContentTB.Text += $"\n[{DateTime.Now}]游戏崩溃了 代码{lnk.ExitCode}\n{msg}\n分析：\n{help}";
                 });
             }
             else
@@ -74,7 +72,7 @@ namespace MEFL.CLAddIn.Pages
                 var help = CrashParser.Parse(msg, "zh_CN");
                 Dispatcher.Invoke(() =>
                 {
-                    ContentTB.Text = $"\n[{DateTime.Now}]\n游戏崩溃了\n{msg}\n分析：\n{help}";
+                    ContentTB.Text += $"\n[{DateTime.Now}]游戏崩溃了 代码{lnk.ExitCode}\n{msg}\n分析：\n{help}";
                 });
             }
         }

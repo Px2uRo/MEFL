@@ -84,16 +84,6 @@ namespace MEFL.CLAddIn.GameTypes
                     }
                     res = System.IO.Path.Combine(dotMinecraftPath, "natives");
                 }
-                foreach (var item in _Root.Libraries)
-                {
-                    if (item.Downloads.Classifiers != null)
-                    {
-                        if (item.Downloads.Artifact.Path != null)
-                        {
-                            _ItemsNeedsToExtract.Add(io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")));
-                        }
-                    }
-                }
                 return res;
             }
             set
@@ -188,18 +178,50 @@ namespace MEFL.CLAddIn.GameTypes
                 var res = new List<string>();
                 foreach (var item in _Root.Libraries)
                 {
-                    if (item.Downloads.Artifact.Path != null)
+                    if (item.Downloads != null)
                     {
-                        res.Add(io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")));
-                        if (io.File.Exists(io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\"))) == false)
+                        if (item.Downloads.Artifact != null)
                         {
-                            FileNeedsToDownload.Add(new LauncherWebFileInfo() { Url=item.Downloads.Artifact.Url,size=Convert.ToInt32(item.Downloads.Artifact.Size),localpath= io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")) ,sha1=item.Downloads.Artifact.Sha1});
+                            if (item.Downloads.Artifact.Path != null)
+                            {
+                                res.Add(io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")));
+                                if (io.File.Exists(io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\"))) == false)
+                                {
+                                    FileNeedsToDownload.Add(new JsonFileInfo() { Url = item.Downloads.Artifact.Url, size = Convert.ToInt32(item.Downloads.Artifact.Size), localpath = io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")), sha1 = item.Downloads.Artifact.Sha1 });
+                                }
+                            }
+                            else
+                            {
+
+                            }
+                        }
+                    }
+                }
+                foreach (var item in _Root.Libraries)
+                {
+                    if (item.Natives.Count != 0)
+                    {
+                        foreach (var file in item.Downloads.Classifiers)
+                        {
+                            var todo = new JsonFileInfo()
+                            {
+                                Url = file.Item.Url,
+                                size = Convert.ToInt32(
+                                file.Item.Size),
+                                localpath = io.Path.Combine(dotMinecraftPath, "libraries", file.Item.Path.Replace(@"/", "\\")),
+                                sha1 = file.Item.Sha1
+                            };
+                            NativeFilesNeedToDepackage.Add(todo);
+                            if (!io.File.Exists(todo.localpath))
+                            {
+                                FileNeedsToDownload.Add(todo);
+                            }
                         }
                     }
                 }
                 if (io.File.Exists(GameJarPath) != true)
                 {
-                    FileNeedsToDownload.Add(new LauncherWebFileInfo() { Url=_Root.Downloads.Client.Url,sha1=_Root.Downloads.Client.Sha1,size=System.Convert.ToInt32(_Root.Downloads.Client.Size),localpath=GameJarPath });
+                    FileNeedsToDownload.Add(new JsonFileInfo() { Url=_Root.Downloads.Client.Url,sha1=_Root.Downloads.Client.Sha1,size=System.Convert.ToInt32(_Root.Downloads.Client.Size),localpath=GameJarPath });
                 }
                 return res;
             } 
@@ -207,53 +229,56 @@ namespace MEFL.CLAddIn.GameTypes
 
         public override string MainClassName => _Root.MainClass;
 
-        public override string AssetsRoot { get 
-            {
-                var AssetsJson = io.Path.Combine(dotMinecraftPath, "AssetsJsons", $"{_Root.AssetIndex.Id}.json");
-                if (!Directory.Exists(io.Path.Combine(dotMinecraftPath,"AssetsJsons")))
-                {
-                    Directory.CreateDirectory(io.Path.Combine(dotMinecraftPath, "AssetsJsons"));
-                }
-                Stream strm;
-                if (!io.File.Exists(AssetsJson))
-                {
-                    var websrm = HttpWebRequest.Create(_Root.AssetIndex.Url).GetResponse().GetResponseStream();
-                    StreamReader sr = new StreamReader(websrm);
-                    FileStream fs = new FileStream(AssetsJson, FileMode.CreateNew);
-                    byte[] bArr = new byte[1024];
-                    int size = websrm.Read(bArr, 0, (int)bArr.Length);
-                    while (size > 0)
-                    {
-                        fs.Write(bArr, 0, size);
-                        size = websrm.Read(bArr, 0, (int)bArr.Length);
-                    }
-                    fs.Close();
-                    sr.Close();
-                    websrm.Close();
-                }
-                var AssetsJOb = JsonConvert.DeserializeObject<CoreLaunching.JsonTemplates.AssetsObject>(io.File.ReadAllText(AssetsJson));
-                foreach (var item in AssetsJOb.Objects)
-                {
-                    var tst = io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0,2)}");
-                    if (!Directory.Exists(io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0,2)}")))
-                    {
-                        Directory.CreateDirectory(io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}"));
-                    }
-                    if (!io.File.Exists(io.Path.Combine(dotMinecraftPath, "assets\\objects",$"{item.Hash.Substring(0,2)}\\{item.Hash}")))
-                    {
-                        FileNeedsToDownload.Add(new LauncherWebFileInfo() { localpath= io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}\\{item.Hash}"),Url=$"http://resources.download.minecraft.net/{item.Hash.Substring(0, 2)}/{item.Hash}"});
-                    }
-                }
-                return io.Path.Combine(dotMinecraftPath, "assets");
-            } 
-        }
+        //public override string AssetsRoot
+        //{
+        //    get
+        //    {
+        //        var AssetsJson = io.Path.Combine(dotMinecraftPath, "AssetsJsons", $"{_Root.AssetIndex.Id}.json");
+        //        if (!Directory.Exists(io.Path.Combine(dotMinecraftPath, "AssetsJsons")))
+        //        {
+        //            Directory.CreateDirectory(io.Path.Combine(dotMinecraftPath, "AssetsJsons"));
+        //        }
+        //        Stream strm;
+        //        if (!io.File.Exists(AssetsJson))
+        //        {
+        //            var websrm = HttpWebRequest.Create(_Root.AssetIndex.Url).GetResponse().GetResponseStream();
+        //            StreamReader sr = new StreamReader(websrm);
+        //            FileStream fs = new FileStream(AssetsJson, FileMode.CreateNew);
+        //            byte[] bArr = new byte[1024];
+        //            int size = websrm.Read(bArr, 0, (int)bArr.Length);
+        //            while (size > 0)
+        //            {
+        //                fs.Write(bArr, 0, size);
+        //                size = websrm.Read(bArr, 0, (int)bArr.Length);
+        //            }
+        //            fs.Close();
+        //            sr.Close();
+        //            websrm.Close();
+        //        }
+        //        var AssetsJOb = JsonConvert.DeserializeObject<CoreLaunching.JsonTemplates.AssetsObject>(io.File.ReadAllText(AssetsJson));
+        //        foreach (var item in AssetsJOb.Objects)
+        //        {
+        //            var tst = io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}");
+        //            if (!Directory.Exists(io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}")))
+        //            {
+        //                Directory.CreateDirectory(io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}"));
+        //            }
+        //            if (!io.File.Exists(io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}\\{item.Hash}")))
+        //            {
+        //                FileNeedsToDownload.Add(new JsonFileInfo() { localpath = io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}\\{item.Hash}"), Url = $"http://resources.download.minecraft.net/{item.Hash.Substring(0, 2)}/{item.Hash}" });
+        //            }
+        //        }
+        //        return io.Path.Combine(dotMinecraftPath, "assets");
+        //    }
+        //}
 
         public override string AssetsIndexName => _Root.AssetIndex.Id;
 
         public override string VersionType => _Root.Type;
 
-        public override List<LauncherWebFileInfo> FileNeedsToDownload { get; set ; }
-        public override List<LauncherWebFileInfo> NativeFilesNeedToDepackage { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override List<JsonFileInfo> FileNeedsToDownload { get; set ; }
+        public override List<JsonFileInfo> NativeFilesNeedToDepackage { get ; set ; }
+
         public override void Delete()
         {
             Dispose();
@@ -261,12 +286,13 @@ namespace MEFL.CLAddIn.GameTypes
 
         public override void Refresh()
         {
-            FileNeedsToDownload= new List<LauncherWebFileInfo>();
+            FileNeedsToDownload= new List<JsonFileInfo>();
+            NativeFilesNeedToDepackage= new List<JsonFileInfo>();
         }
 
         public MEFLRealseType(string JsonPath)
         {
-            FileNeedsToDownload = new List<LauncherWebFileInfo>();
+            FileNeedsToDownload = new List<JsonFileInfo>();
             string otherArgsPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(JsonPath), "MEFLOtherArguments.json");
             _MSOAT =new MEFLStandardOtherArgumentTemplate(otherArgsPath);
             otherArgsPath = string.Empty;

@@ -340,7 +340,8 @@ namespace MEFL.Pages
                 {"${auth_player_name}",$"\"{APIData.APIModel.SelectedAccount.UserName}\""},
                 {"${version_name}",$"\"{Game.Version}\""},
                 {"${game_directory}",$"\"{Game.GameFolder}\""},
-                {"${assets_root}",$"\"{Game.AssetsRoot}\""},
+                {"${assets_root}",$"\"{Game.dotMinecraftPath}\\assets\""},
+                {"${game_assets}",$"\"{Game.dotMinecraftPath}\\assets\\virtual\\legacy\""},
                 {"${assets_index_name}",$"{Game.AssetsIndexName}"},
                 {"${auth_uuid}",$"{APIData.APIModel.SelectedAccount.Uuid}" },
                 {"${auth_access_token}",$"{APIModel.SelectedAccount.AccessToken}"},
@@ -382,16 +383,7 @@ namespace MEFL.Pages
                         }
                         #endregion
                         #region Download
-                        if (TotalSize == 0.0)
-                        {
-                            Progress = 100;
-                            GetProcess = p;
-                            p.StartInfo.RedirectStandardError= true;
-                            p.StartInfo.RedirectStandardOutput= true;
-                            p.EnableRaisingEvents= true;
-                            Succeed = true;
-                        }
-                        else
+                        if (TotalSize != 0.0)
                         {
                             Debug.WriteLine(TotalItems);
                             foreach (var item in Game.FileNeedsToDownload)
@@ -411,6 +403,29 @@ namespace MEFL.Pages
                                     return;
                                 }
                             }
+                        }
+                        #endregion
+                        #region 解压Native
+                        foreach (var item in Game.NativeFilesNeedToDepackage)
+                        {
+                            try
+                            {
+                                CoreLaunching.ZipFile.Export(item.localpath, Game.NativeLibrariesPath, true);
+                            }
+                            catch (Exception ex)
+                            {
+                                throw new Exception(ex.InnerException.Message);
+                            }
+                        }
+                        if (TotalSize-DownloadedSize == 0.0)
+                        {
+                            Progress = 100;
+                            p.StartInfo.RedirectStandardError = true;
+                            p.StartInfo.RedirectStandardOutput = true;
+                            p.EnableRaisingEvents = true;
+                            GetProcess = p;
+                            Succeed = true;
+                            return;
                         }
                         #endregion
                         #endregion

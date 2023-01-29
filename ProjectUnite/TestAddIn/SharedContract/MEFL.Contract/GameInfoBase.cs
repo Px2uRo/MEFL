@@ -19,15 +19,13 @@ public abstract class GameInfoBase : MEFLClass
 
     public abstract List<string> ItemsNeedsToExtract { get; }
 
-	public abstract List<LauncherWebFileInfo> FileNeedsToDownload { get; set; }
+	public abstract List<JsonFileInfo> FileNeedsToDownload { get; set; }
 
-	public abstract List<LauncherWebFileInfo> NativeFilesNeedToDepackage { get; set; }
+	public abstract List<JsonFileInfo> NativeFilesNeedToDepackage { get; set; }
 
 	public string dotMinecraftPath => Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(GameJsonPath)));
 
 	public abstract string HeapDumpPath { get; }
-
-	public abstract string AssetsRoot { get; }
 
 	public abstract string AssetsIndexName { get; }
 

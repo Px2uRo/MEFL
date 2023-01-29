@@ -7,7 +7,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <c:MyCard Name="ThisCard">
-            <TextBlock Name="ContentTB"/>
+            <TextBlock Name="ContentTB" TextWrapping="Wrap"/>
         </c:MyCard>
     </Grid>
 </UserControl>

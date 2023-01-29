@@ -1,6 +1,6 @@
 namespace MEFL.Contract;
 
-public class LauncherWebFileInfo
+public class JsonFileInfo
 {
 	public string Url { get; set; }
 
