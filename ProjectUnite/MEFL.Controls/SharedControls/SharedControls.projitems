@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)AssemblyInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ControlModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ChangePageContentButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Class1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\MyLoadingAnimation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\MyItemsCardItem.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\FindControl.cs" />

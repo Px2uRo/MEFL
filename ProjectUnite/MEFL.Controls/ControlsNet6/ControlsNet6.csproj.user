@@ -3,4 +3,14 @@
   <PropertyGroup>
     <_LastSelectedProfileId>I:\Xiong%27s\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\Properties\PublishProfiles\FolderProfile.pubxml</_LastSelectedProfileId>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Update="MyMessageBox.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="MyMessageBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
 </Project>

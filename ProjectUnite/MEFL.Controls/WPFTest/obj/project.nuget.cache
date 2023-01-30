@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "2gjRRI3yBYMq83jQKiUwvo8zRaR0tIxyn0ONLN0fVX4MjHmAqG0GUp4U85M0dlhqcxt7lz8jDuftZyLQJlSjZg==",
+  "dgSpecHash": "ZfWf1VZ9NDf3p7sipKnvB1Tp6/OfbY8/oSp0NvYy2nyolQyWyNA0GJCvzX2PAjEI2wipDpWW4gmVCqNlFTCRQA==",
   "success": true,
   "projectFilePath": "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\MEFL.Controls\\WPFTest\\WPFTest.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Lenovo\\.nuget\\packages\\mefl.controls\\0.0.6.3\\mefl.controls.0.0.6.3.nupkg.sha512"
+    "C:\\Users\\Lenovo\\.nuget\\packages\\mefl.controls\\0.0.7\\mefl.controls.0.0.7.nupkg.sha512"
   ],
   "logs": []
 }

@@ -1,4 +1,4 @@
-﻿<c:MyWindow x:Class="WPFTest.MainWindow"
+﻿<Window x:Class="WPFTest.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -8,10 +8,10 @@
         xmlns:h="https://handyorg.github.io/handycontrol"
         Title="MainWindow" Height="450" Width="800"
         xmlns:sys="clr-namespace:System;assembly=mscorlib" DataContext="{DynamicResource mv}" 
-        xmlns:c="clr-namespace:MEFL.Controls;assembly=MEFL.Controls" Topmost="True"
+        xmlns:c="clr-namespace:MEFL.Controls;assembly=MEFL.Controls" 
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
-    
+
     <Grid>
-        <c:MyCard IsAbleToSwap="True"/>
+        <c:MyButton VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="Black" Click="MyButton_Click_1"/>
     </Grid>
-</c:MyWindow>
+</Window>

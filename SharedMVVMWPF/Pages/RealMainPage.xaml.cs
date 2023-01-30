@@ -10,6 +10,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace MEFL.Pages
@@ -107,7 +108,19 @@ namespace MEFL.Pages
                 _dnani.From = 80;
                 _dnani.To = 0;
                 StatuStackPanel.BeginAnimation(HeightProperty, _dnani);
-                MessageBox.Show((sender as ProcessModelView).ErrorInfo, e.PropertyName);
+                    var MyMBx = MyMessageBox.Show((sender as ProcessModelView).ErrorInfo, e.PropertyName);
+                    App.Current.Dispatcher.Invoke(() => {
+                        var obj = App.Current.MainWindow.Content as Grid;
+                        obj.Children.Add(mengb);
+                    });
+                    while (!MyMBx.Result.HasValue)
+                    {
+                        
+                    }
+                    App.Current.Dispatcher.Invoke(() => {
+                        var obj = App.Current.MainWindow.Content as Grid;
+                        obj.Children.Remove(mengb);
+                    });
                 });
             }
             else if (e.PropertyName == "Succeed")
@@ -134,6 +147,10 @@ namespace MEFL.Pages
                         CancelButton_Click(sender,new RoutedEventArgs());
                     });
                 }
+            }
+            else if (e.PropertyName == "Canceled")
+            {
+                CancelButton_Click(null,new RoutedEventArgs());
             }
         }
 
@@ -178,6 +195,8 @@ namespace MEFL.Pages
                 }
             }
         }
+
+        Grid mengb = new Grid() { Background = new SolidColorBrush(Colors.Transparent) };
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
@@ -241,6 +260,13 @@ namespace MEFL.Pages
             set { _Failed = value; Invoke(nameof(Failed)); }
         }
 
+        private bool _Canceled = false;
+        public bool Canceled
+        {
+            get { return _Canceled; }
+            set { _Canceled = value; Invoke(nameof(Canceled)); }
+        }
+
         private Process _Content;
 
         public Process GetProcess
@@ -249,6 +275,8 @@ namespace MEFL.Pages
             set { _Content = value; }
         }
         Thread t;
+
+        Grid mengb = new Grid() { Background = new SolidColorBrush(Colors.Transparent) };
         public void BuildProcess()
         {
                 t = new Thread(() => {
@@ -272,8 +300,21 @@ namespace MEFL.Pages
                         }
                         else
                         {
-                            ErrorInfo = $"不合适的 JAVA\n需要的Java版本\n{Game.JavaMajorVersion}\n当前选择的Java\n{APIModel.SettingArgs.SelectedJava.FullName}\n版本为{FileVersionInfo.GetVersionInfo(APIModel.SettingArgs.SelectedJava.FullName).FileMajorPart}";
-                            Failed = true;
+                            var msg = $"不合适的 JAVA\n需要的Java版本\n{Game.JavaMajorVersion}\n当前选择的Java\n{APIModel.SettingArgs.SelectedJava.FullName}\n版本为{FileVersionInfo.GetVersionInfo(APIModel.SettingArgs.SelectedJava.FullName).FileMajorPart}";
+                            var MyMBx = MyMessageBox.Show(msg,"Java 不对劲!");
+                            App.Current.Dispatcher.Invoke(() => {
+                                var obj = App.Current.MainWindow.Content as Grid;
+                                obj.Children.Add(mengb);
+                            });
+                            while(!MyMBx.Result.HasValue) 
+                            { 
+                                
+                            }
+                            App.Current.Dispatcher.Invoke(() => {
+                                var obj = App.Current.MainWindow.Content as Grid;
+                                obj.Children.Remove(mengb);
+                            });
+                            Canceled = true;
                             return;
                         }
                         Progress = 1;
@@ -352,6 +393,7 @@ namespace MEFL.Pages
                 {"${Dos.name}","Windows 10"},
                 {"${Dos.version}","10.0"},
                 {"${natives_directory}",$"\"{Game.NativeLibrariesPath}\""},
+                {"${user_properties}","{}" },
                 {"${Dminecraft.client.jar}",Game.GameJarPath }
             };
                             foreach (var item in dic)
@@ -419,11 +461,13 @@ namespace MEFL.Pages
                         }
                         if (TotalSize-DownloadedSize == 0.0)
                         {
+
                             Progress = 100;
                             p.StartInfo.RedirectStandardError = true;
                             p.StartInfo.RedirectStandardOutput = true;
                             p.EnableRaisingEvents = true;
                             GetProcess = p;
+                            var args = $"\"{p.StartInfo.FileName}\" {p.StartInfo.Arguments}";
                             Succeed = true;
                             return;
                         }

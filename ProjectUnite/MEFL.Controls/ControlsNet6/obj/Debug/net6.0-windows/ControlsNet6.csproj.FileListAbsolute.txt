@@ -18,3 +18,5 @@ I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6
 D:\MyNupkgs\MEFL.Controls\Debug\net6.0-windows\MEFL.Controls.deps.json
 D:\MyNupkgs\MEFL.Controls\Debug\net6.0-windows\MEFL.Controls.dll
 D:\MyNupkgs\MEFL.Controls\Debug\net6.0-windows\MEFL.Controls.pdb
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6.0-windows\MyMessageBox.g.cs
+I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6.0-windows\MyMessageBox.baml

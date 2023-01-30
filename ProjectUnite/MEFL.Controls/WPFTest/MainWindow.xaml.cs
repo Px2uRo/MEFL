@@ -16,19 +16,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using MEFL.Controls;
+using System.Threading;
+using System.Diagnostics;
+using System.Windows.Threading;
 
 namespace WPFTest
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : MyWindow
+    public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
-        }
 
+        }
         private void MyComboBox_Initialized(object sender, EventArgs e)
         {
 
@@ -42,6 +46,14 @@ namespace WPFTest
         private void MyItemsCard_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             MessageBox.Show("Changed");
+        }
+
+        private void MyButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            for (int i = 0; i < 30; i++)
+            {
+                var mb = MyMessageBox.Show("asa");
+            }
         }
     }
 

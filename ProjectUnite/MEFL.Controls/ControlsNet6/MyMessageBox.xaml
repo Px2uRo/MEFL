@@ -1,0 +1,26 @@
+﻿<Window x:Class="MEFL.Controls.MyMessageBox"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MEFL.Controls"
+        mc:Ignorable="d"
+        Title="MyMessageBox" Width="400" Height="250" 
+        MinWidth="400" MinHeight="250" 
+        MaxWidth="400" MaxHeight="250"
+        Topmost="True">
+    <Grid>
+        <ScrollViewer Margin="3" Height="185" VerticalAlignment="Top">
+            <Grid>
+                <TextBlock Name="MyTB" TextWrapping="Wrap"/>
+                <StackPanel Name="MyCheckBoxs" VerticalAlignment="Bottom"/>
+
+            </Grid>
+        </ScrollViewer>
+        <StackPanel Height="35" Orientation="Horizontal" Name="MyButtons" VerticalAlignment="Bottom" Margin="0,0,30,0" HorizontalAlignment="Right">
+            <local:MyButton Width="60" Height="25" Margin="3" BorderBrush="Black" BorderThickness="1" x:Name="R3"/>
+            <local:MyButton Width="60" Height="25" Margin="3" BorderBrush="Black" BorderThickness="1" x:Name="R2"/>
+            <local:MyButton Width="60" Height="25" Margin="3" BorderBrush="Black" BorderThickness="1" x:Name="R1"/>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
-      "MEFL.Controls/0.0.6.3": {
+      "MEFL.Controls/0.0.7": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "compile": {
@@ -18,7 +18,7 @@
     }
   },
   "libraries": {
-    "MEFL.Controls/0.0.6.3": {
+    "MEFL.Controls/0.0.7": {
       "type": "project",
       "path": "../ControlsNet6/ControlsNet6.csproj",
       "msbuildProject": "../ControlsNet6/ControlsNet6.csproj"
@@ -26,7 +26,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0-windows7.0": [
-      "MEFL.Controls >= 0.0.6.3"
+      "MEFL.Controls >= 0.0.7"
     ]
   },
   "packageFolders": {
@@ -98,7 +98,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.400\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

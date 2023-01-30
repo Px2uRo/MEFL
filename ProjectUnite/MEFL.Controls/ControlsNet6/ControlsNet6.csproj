@@ -9,7 +9,7 @@
     <SupportedOSPlatformVersion>7.0</SupportedOSPlatformVersion>
     <BaseOutputPath>D:\MyNupkgs\MEFL.Controls</BaseOutputPath>
     <FileVersion></FileVersion>
-    <Version>0.0.6.3</Version>
+    <Version>0.0.7.0</Version>
     <PackageIcon>MEFL.Controls_NuGet_Logo.png</PackageIcon>
   </PropertyGroup>
 
