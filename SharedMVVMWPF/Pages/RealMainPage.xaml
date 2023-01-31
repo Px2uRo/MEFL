@@ -121,8 +121,6 @@
             <c:MyButton Click="MyButton_Click" Margin="3,0,3,0" Width="220" Grid.Row="2" Height="30">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Text="{DynamicResource I18N_String_MainPage_CurretGame}"/>
-                    <TextBlock Text="{Binding CurretGame.Name}"/>
-                    <TextBlock Text="{DynamicResource I18N_String_MainPage_ClickHereToChange}"/>
                 </StackPanel>
             </c:MyButton>
             <c:MyButton Margin="3,0,3,0" Command="{Binding GameSettingCommand}" 

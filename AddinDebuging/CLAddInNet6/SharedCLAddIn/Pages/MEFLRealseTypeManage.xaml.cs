@@ -68,12 +68,19 @@ namespace MEFL.CLAddIn.Pages
             }
             else
             {
-                msg = lnk.StandardOutput.ReadToEnd();
-                var help = CrashParser.Parse(msg, "zh_CN");
-                Dispatcher.Invoke(() =>
+                try
                 {
-                    ContentTB.Text += $"\n[{DateTime.Now}]游戏崩溃了 代码{lnk.ExitCode}\n{msg}\n分析：\n{help}";
-                });
+                    msg = lnk.StandardOutput.ReadToEnd();
+                    var help = CrashParser.Parse(msg, "zh_CN");
+                    Dispatcher.Invoke(() =>
+                    {
+                        ContentTB.Text += $"\n[{DateTime.Now}]游戏崩溃了 代码{lnk.ExitCode}\n{msg}\n分析：\n{help}";
+                    });
+                }
+                catch (Exception ex)
+                {
+
+                }
             }
         }
     }

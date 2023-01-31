@@ -53,6 +53,7 @@ public abstract class GameInfoBase : MEFLClass
 
 	public abstract ImageSource IconSource { get; }
 
+	public string LibrariesPath => Path.Combine(dotMinecraftPath,"libraries");
 	public abstract string NativeLibrariesPath { get; set; }
 
 	public abstract string GameArgs { get; }

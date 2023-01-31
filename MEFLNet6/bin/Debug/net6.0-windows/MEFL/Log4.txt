@@ -1,12 +1,10 @@
-﻿[10:27:13][MEFL]程序启动了，参数
-[10:27:14][MEFL]写入了注册表，键：PlayerUuid，值：6e9ec642-89aa-477d-bbd5-c856633f11a3
-[10:27:14][MEFL]读取了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanDown"}
-[10:27:14][MEFL]写入了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanDown"}
-[10:27:14][MEFL]读取了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanDown"}
-[10:27:14][MEFL]写入了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanDown"}
-[10:27:14][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[10:27:14][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[10:27:14][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[10:27:44][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[10:28:45][MEFL]写入了注册表，键：SelectedJava，值：C:\Program Files\Microsoft\jdk-17.0.1.12-hotspot\bin\javaw.exe
-[10:38:39][MEFL]程序退出了
+﻿[5:20:58][MEFL]程序启动了，参数
+[5:20:58][MEFL]写入了注册表，键：PlayerUuid，值：6e9ec642-89aa-477d-bbd5-c856633f11a3
+[5:20:58][MEFL]读取了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanDown"}
+[5:20:58][MEFL]写入了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanDown"}
+[5:20:58][MEFL]读取了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanDown"}
+[5:20:59][MEFL]写入了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanDown"}
+[5:20:59][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[5:20:59][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[5:20:59][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[5:22:38][MEFL]程序退出了

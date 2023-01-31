@@ -29,8 +29,7 @@
     <sys:String x:Key="I18N_String_AddIns">插件</sys:String>
     <sys:String x:Key="I18N_String_GetMore">获取更多</sys:String>
     <sys:String x:Key="I18N_String_Insider">预览</sys:String>
-    <sys:String x:Key="I18N_String_MainPage_CurretGame">当前游戏：</sys:String>
-    <sys:String x:Key="I18N_String_MainPage_ClickHereToChange">点此更改</sys:String>
+    <sys:String x:Key="I18N_String_MainPage_CurretGame">版本列表</sys:String>
     <sys:String x:Key="I18N_String_MainPage_GameSeting">游戏设置</sys:String>
     <sys:String x:Key="I18N_String_MainPage_SelectFolder">选择文件夹</sys:String>
     <sys:String x:Key="I18N_String_MainPage_Root">根目录</sys:String>

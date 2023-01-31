@@ -366,7 +366,9 @@ namespace MEFL.Pages
                 {"${launcher_version}","0.1" },
                 {"${Dos.name}","Windows 10"},
                 {"${Dos.version}","10.0"},
+                {"${library_directory}",$"\"{Game.LibrariesPath}\"" },
                 {"${natives_directory}",$"\"{Game.NativeLibrariesPath}\""},
+                {"${classpath_separator}",string.Empty},
                 {"${user_properties}","{}" },
                 {"${Dminecraft.client.jar}",Game.GameJarPath }
             };
@@ -441,7 +443,9 @@ namespace MEFL.Pages
                             p.StartInfo.RedirectStandardOutput = true;
                             p.EnableRaisingEvents = true;
                             GetProcess = p;
+#if DEBUG
                             var args = $"\"{p.StartInfo.FileName}\" {p.StartInfo.Arguments}";
+#endif
                             Succeed = true;
                             return;
                         }
