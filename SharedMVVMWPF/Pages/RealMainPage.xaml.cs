@@ -108,19 +108,7 @@ namespace MEFL.Pages
                 _dnani.From = 80;
                 _dnani.To = 0;
                 StatuStackPanel.BeginAnimation(HeightProperty, _dnani);
-                    var MyMBx = MyMessageBox.Show((sender as ProcessModelView).ErrorInfo, e.PropertyName);
-                    App.Current.Dispatcher.Invoke(() => {
-                        var obj = App.Current.MainWindow.Content as Grid;
-                        obj.Children.Add(mengb);
-                    });
-                    while (!MyMBx.Result.HasValue)
-                    {
-                        
-                    }
-                    App.Current.Dispatcher.Invoke(() => {
-                        var obj = App.Current.MainWindow.Content as Grid;
-                        obj.Children.Remove(mengb);
-                    });
+                var MyMBx = MyMessageBox.Show((sender as ProcessModelView).ErrorInfo, e.PropertyName);
                 });
             }
             else if (e.PropertyName == "Succeed")
@@ -195,8 +183,6 @@ namespace MEFL.Pages
                 }
             }
         }
-
-        Grid mengb = new Grid() { Background = new SolidColorBrush(Colors.Transparent) };
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)
         {
@@ -276,7 +262,6 @@ namespace MEFL.Pages
         }
         Thread t;
 
-        Grid mengb = new Grid() { Background = new SolidColorBrush(Colors.Transparent) };
         public void BuildProcess()
         {
                 t = new Thread(() => {
@@ -301,19 +286,8 @@ namespace MEFL.Pages
                         else
                         {
                             var msg = $"不合适的 JAVA\n需要的Java版本\n{Game.JavaMajorVersion}\n当前选择的Java\n{APIModel.SettingArgs.SelectedJava.FullName}\n版本为{FileVersionInfo.GetVersionInfo(APIModel.SettingArgs.SelectedJava.FullName).FileMajorPart}";
-                            var MyMBx = MyMessageBox.Show(msg,"Java 不对劲!");
-                            App.Current.Dispatcher.Invoke(() => {
-                                var obj = App.Current.MainWindow.Content as Grid;
-                                obj.Children.Add(mengb);
-                            });
-                            while(!MyMBx.Result.HasValue) 
-                            { 
-                                
-                            }
-                            App.Current.Dispatcher.Invoke(() => {
-                                var obj = App.Current.MainWindow.Content as Grid;
-                                obj.Children.Remove(mengb);
-                            });
+                            var MyMBx = MyMessageBox.Show(msg, "Java 不对劲!", MessageBoxButton.OK, new MyCheckBoxInput[1] { new("你明白了没有自动选择功能而且不勾没关系", false, Colors.Red) });
+                            
                             Canceled = true;
                             return;
                         }

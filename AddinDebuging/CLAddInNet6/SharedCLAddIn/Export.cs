@@ -1,8 +1,10 @@
 ﻿using CLAddInNet6;
+using CoreLaunching.JsonTemplates;
 using MEFL.Arguments;
 using MEFL.CLAddIn;
 using MEFL.CLAddIn.CLDownding;
 using MEFL.CLAddIn.Downloaders;
+using MEFL.CLAddIn.GameTypes;
 using MEFL.CLAddIn.Pages;
 using MEFL.CLAddIn.WebVersion;
 using MEFL.Contract;
@@ -241,7 +243,21 @@ namespace MEFL.CLAddIn.Export
         {
             if (type == "release")
             {
-                return new GameTypes.MEFLRealseType(JsonPath);
+                try
+                {
+                    var _Root = JsonConvert.DeserializeObject<Root>(System.IO.File.ReadAllText(JsonPath));
+                    if (_Root.MainClass.Contains("mods"))
+                    {
+                        return new MEFLRealseType(JsonPath,true);
+                    }
+                    else{
+                        return new MEFLRealseType(JsonPath,false);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return new MEFLErrorType(ex.Message,JsonPath);
+                }
             }
             else return null;
         }

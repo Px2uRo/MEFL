@@ -1,4 +1,5 @@
-﻿using CoreLaunching.JsonTemplates;
+﻿using CLAddInNet6.Properties;
+using CoreLaunching.JsonTemplates;
 using MEFL.Arguments;
 using MEFL.Contract;
 using Newtonsoft.Json;
@@ -55,17 +56,38 @@ namespace MEFL.CLAddIn.GameTypes
                 }
                 else
                 {
-                    return _Root.Id;
+                    if (_MayBePcl2)
+                    {
+                        return $"可能是 PCL2 的组合安装版本: {_Root.Id}";
+                    }
+                    else
+                    {
+                        return _Root.Id;
+                    }
                 }
             }
             set => _MSOAT.Description = value;
         }
+        static Stream pcl2stream = new MemoryStream(Resources.PCL2_Forge);
         public override string Version { get => _Root.Id; set => _Root.Id = value; }
         static BitmapImage Icon = new BitmapImage(new Uri("pack://application:,,,/RealseTypeLogo.png", UriKind.Absolute));
+        static ImageSource pcl2 = null;
         public override ImageSource IconSource {
             get
             {
-                return Icon;
+                if (_MayBePcl2)
+                {
+                    if (pcl2 == null)
+                    {
+                        var decoder = new PngBitmapDecoder(pcl2stream, BitmapCreateOptions.None, BitmapCacheOption.Default);
+                        pcl2 = decoder.Frames[0];
+                    }
+                    return pcl2;
+                }
+                else
+                {
+                    return Icon;
+                }
             }
         }
 
@@ -175,6 +197,41 @@ namespace MEFL.CLAddIn.GameTypes
 
         public override List<string> ClassPaths { get 
             {
+                var AssetsJson = io.Path.Combine(dotMinecraftPath, "AssetsJsons", $"{_Root.AssetIndex.Id}.json");
+                if (!Directory.Exists(io.Path.Combine(dotMinecraftPath, "AssetsJsons")))
+                {
+                    Directory.CreateDirectory(io.Path.Combine(dotMinecraftPath, "AssetsJsons"));
+                }
+                Stream strm;
+                if (!io.File.Exists(AssetsJson))
+                {
+                    var websrm = HttpWebRequest.Create(_Root.AssetIndex.Url).GetResponse().GetResponseStream();
+                    StreamReader sr = new StreamReader(websrm);
+                    FileStream fs = new FileStream(AssetsJson, FileMode.CreateNew);
+                    byte[] bArr = new byte[1024];
+                    int size = websrm.Read(bArr, 0, (int)bArr.Length);
+                    while (size > 0)
+                    {
+                        fs.Write(bArr, 0, size);
+                        size = websrm.Read(bArr, 0, (int)bArr.Length);
+                    }
+                    fs.Close();
+                    sr.Close();
+                    websrm.Close();
+                }
+                var AssetsJOb = JsonConvert.DeserializeObject<CoreLaunching.JsonTemplates.AssetsObject>(io.File.ReadAllText(AssetsJson));
+                foreach (var item in AssetsJOb.Objects)
+                {
+                    var tst = io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}");
+                    if (!Directory.Exists(io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}")))
+                    {
+                        Directory.CreateDirectory(io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}"));
+                    }
+                    if (!io.File.Exists(io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}\\{item.Hash}")))
+                    {
+                        FileNeedsToDownload.Add(new JsonFileInfo() { localpath = io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}\\{item.Hash}"), Url = $"http://resources.download.minecraft.net/{item.Hash.Substring(0, 2)}/{item.Hash}" });
+                    }
+                }
                 var res = new List<string>();
                 foreach (var item in _Root.Libraries)
                 {
@@ -189,10 +246,6 @@ namespace MEFL.CLAddIn.GameTypes
                                 {
                                     FileNeedsToDownload.Add(new JsonFileInfo() { Url = item.Downloads.Artifact.Url, size = Convert.ToInt32(item.Downloads.Artifact.Size), localpath = io.Path.Combine(dotMinecraftPath, "libraries", item.Downloads.Artifact.Path.Replace(@"/", "\\")), sha1 = item.Downloads.Artifact.Sha1 });
                                 }
-                            }
-                            else
-                            {
-
                             }
                         }
                     }
@@ -229,52 +282,13 @@ namespace MEFL.CLAddIn.GameTypes
 
         public override string MainClassName => _Root.MainClass;
 
-        //public override string AssetsRoot
-        //{
-        //    get
-        //    {
-        //        var AssetsJson = io.Path.Combine(dotMinecraftPath, "AssetsJsons", $"{_Root.AssetIndex.Id}.json");
-        //        if (!Directory.Exists(io.Path.Combine(dotMinecraftPath, "AssetsJsons")))
-        //        {
-        //            Directory.CreateDirectory(io.Path.Combine(dotMinecraftPath, "AssetsJsons"));
-        //        }
-        //        Stream strm;
-        //        if (!io.File.Exists(AssetsJson))
-        //        {
-        //            var websrm = HttpWebRequest.Create(_Root.AssetIndex.Url).GetResponse().GetResponseStream();
-        //            StreamReader sr = new StreamReader(websrm);
-        //            FileStream fs = new FileStream(AssetsJson, FileMode.CreateNew);
-        //            byte[] bArr = new byte[1024];
-        //            int size = websrm.Read(bArr, 0, (int)bArr.Length);
-        //            while (size > 0)
-        //            {
-        //                fs.Write(bArr, 0, size);
-        //                size = websrm.Read(bArr, 0, (int)bArr.Length);
-        //            }
-        //            fs.Close();
-        //            sr.Close();
-        //            websrm.Close();
-        //        }
-        //        var AssetsJOb = JsonConvert.DeserializeObject<CoreLaunching.JsonTemplates.AssetsObject>(io.File.ReadAllText(AssetsJson));
-        //        foreach (var item in AssetsJOb.Objects)
-        //        {
-        //            var tst = io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}");
-        //            if (!Directory.Exists(io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}")))
-        //            {
-        //                Directory.CreateDirectory(io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}"));
-        //            }
-        //            if (!io.File.Exists(io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}\\{item.Hash}")))
-        //            {
-        //                FileNeedsToDownload.Add(new JsonFileInfo() { localpath = io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}\\{item.Hash}"), Url = $"http://resources.download.minecraft.net/{item.Hash.Substring(0, 2)}/{item.Hash}" });
-        //            }
-        //        }
-        //        return io.Path.Combine(dotMinecraftPath, "assets");
-        //    }
-        //}
+        
 
         public override string AssetsIndexName => _Root.AssetIndex.Id;
 
         public override string VersionType => _Root.Type;
+
+        private readonly bool _MayBePcl2;
 
         public override List<JsonFileInfo> FileNeedsToDownload { get; set ; }
         public override List<JsonFileInfo> NativeFilesNeedToDepackage { get ; set ; }
@@ -290,8 +304,9 @@ namespace MEFL.CLAddIn.GameTypes
             NativeFilesNeedToDepackage= new List<JsonFileInfo>();
         }
 
-        public MEFLRealseType(string JsonPath)
+        public MEFLRealseType(string JsonPath,bool maybePCL2)
         {
+            _MayBePcl2 = maybePCL2;
             FileNeedsToDownload = new List<JsonFileInfo>();
             string otherArgsPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(JsonPath), "MEFLOtherArguments.json");
             _MSOAT =new MEFLStandardOtherArgumentTemplate(otherArgsPath);
@@ -305,6 +320,7 @@ namespace MEFL.CLAddIn.GameTypes
             {
 
             }
+
         }
     }
     public class MEFLStandardOtherArgumentTemplate : OtherArgumentTemplateBase

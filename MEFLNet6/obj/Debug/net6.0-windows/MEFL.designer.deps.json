@@ -6,11 +6,11 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v6.0": {
-      "MEFL.Controls/0.0.7": {
+      "MEFL.Controls/0.0.7.1": {
         "runtime": {
           "lib/net6.0-windows7.0/MEFL.Controls.dll": {
-            "assemblyVersion": "0.0.7.0",
-            "fileVersion": "0.0.7.0"
+            "assemblyVersion": "0.0.7.1",
+            "fileVersion": "0.0.7.1"
           }
         }
       },
@@ -255,12 +255,12 @@
     }
   },
   "libraries": {
-    "MEFL.Controls/0.0.7": {
+    "MEFL.Controls/0.0.7.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-UR+kE2VORSk1f8AWfnfdRl4CLSNt3TQlAm8zzucgt8kEfPTdmZ9gsmX1B3MHVvwHYXYjBdcQ4BnbQSapH+nlvg==",
-      "path": "mefl.controls/0.0.7",
-      "hashPath": "mefl.controls.0.0.7.nupkg.sha512"
+      "sha512": "sha512-BJiDdZB2Cp1ytAVjkvTEtJLrXWwA5eFArQdKr7fNMoYJs8BkPmfxbyczC/JADhXVGeQDsqKxEG/VSO2SEP0itA==",
+      "path": "mefl.controls/0.0.7.1",
+      "hashPath": "mefl.controls.0.0.7.1.nupkg.sha512"
     },
     "Microsoft.NETCore.Platforms/1.1.0": {
       "type": "package",

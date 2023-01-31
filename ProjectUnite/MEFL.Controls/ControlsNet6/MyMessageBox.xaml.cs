@@ -165,27 +165,27 @@ namespace MEFL.Controls
         }
 
         //MessageBox.Show(message,title,Button,icon,,,)
-        public static MyMessageBox Show(string message)
+        public static MyMessageResult Show(string message)
         {
             return Show(message, string.Empty,MessageBoxButton.OK);
         }
-        public static MyMessageBox Show(string message,string title)
+        public static MyMessageResult Show(string message,string title)
         {
             return Show(message, title, MessageBoxButton.OK);
         }
-        public static MyMessageBox Show(string message, string title, MessageBoxButton button)
+        public static MyMessageResult Show(string message, string title, MessageBoxButton button)
         {
             return Show(message, title, button, new MyCheckBoxInput[0]);
         }
-        public static MyMessageBox Show(string message,string title,MessageBoxButton button, MyCheckBoxInput[] checkBoxs)
+        public static MyMessageResult Show(string message,string title,MessageBoxButton button, MyCheckBoxInput[] checkBoxs)
         {
             MyMessageBox mb = null;
             Application.Current.Dispatcher.Invoke(() =>
             {
                 mb = new MyMessageBox(message, title, button, checkBoxs);
-                mb.Show();
+                mb.ShowDialog();
             });
-            return mb;
+            return mb.Result;
         }
     }
 }

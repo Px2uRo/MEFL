@@ -50,10 +50,7 @@ namespace WPFTest
 
         private void MyButton_Click_1(object sender, RoutedEventArgs e)
         {
-            for (int i = 0; i < 30; i++)
-            {
-                var mb = MyMessageBox.Show("asa");
-            }
+            var mb = MyMessageBox.Show("asa");
         }
     }
 
