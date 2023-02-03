@@ -87,12 +87,17 @@ namespace MEFL.CLAddIn.Export
 
         public DownloadSource[] GetDownloadSources(SettingArgs args)
         {
-            var lst = new List<DownloadSource>() { 
+            var lst = new List<DownloadSource>() {
                 new() { ELItem="${version_manifest}",RuleSourceName = "BMCLAPI",Uri= "https://bmclapi2.bangbang93.com/mc/game/version_manifest.json" },
                 new() { ELItem = "${json}", RuleSourceName = "BMCLAPI", Uri = "https://bmclapi2.bangbang93.com" },
                 new() { ELItem = "${AssIndex}", RuleSourceName = "BMCLAPI", Uri = "https://bmclapi2.bangbang93.com" },
                 new() { ELItem = "${assets}", RuleSourceName = "BMCLAPI", Uri = "https://bmclapi2.bangbang93.com/assets" },
                 new() { ELItem = "${libraries}", RuleSourceName = "BMCLAPI", Uri = "https://bmclapi2.bangbang93.com/maven" },
+                new() { ELItem="${version_manifest}",RuleSourceName = "MCBBS",Uri= "https://download.mcbbs.net/" },
+                new() { ELItem = "${json}", RuleSourceName = "MCBBS", Uri = "https://download.mcbbs.net/" },
+                new() { ELItem = "${AssIndex}", RuleSourceName = "MCBBS", Uri = "https://download.mcbbs.net/" },
+                new() { ELItem = "${assets}", RuleSourceName = "MCBBS", Uri = "https://download.mcbbs.net/assets" },
+                new() { ELItem = "${libraries}", RuleSourceName = "MCBBS", Uri = "https://download.mcbbs.net/maven" },
                 new() { ELItem="${version_manifest}",RuleSourceName = "Mojang",Uri= "http://launchermeta.mojang.com/mc/game/version_manifest.json" },
                 new() { ELItem = "${json}", RuleSourceName = "Mojang", Uri = "https://launchermeta.mojang.com/" },
                 new() { ELItem = "${AssIndex}", RuleSourceName = "Mojang", Uri = "https://launcher.mojang.com/" },
@@ -237,29 +242,33 @@ namespace MEFL.CLAddIn.Export
 
     public class Games : ILuncherGameType
     {
-        public string[] SupportedType { get => new[] { "release" } ;set { } }
+        public string[] SupportedType => new[] { "release" , "snapshot" };
 
         public GameInfoBase Parse(string type ,string JsonPath)
         {
-            if (type == "release")
+            try
             {
-                try
+                if (type == "release")
                 {
                     var _Root = JsonConvert.DeserializeObject<Root>(System.IO.File.ReadAllText(JsonPath));
-                    if (_Root.MainClass.Contains("mods"))
+                    if (_Root.MainClass== "cpw.mods.bootstraplauncher.BootstrapLauncher")
                     {
-                        return new MEFLRealseType(JsonPath,true);
+                        return new CLGameType(JsonPath, true);
                     }
-                    else{
-                        return new MEFLRealseType(JsonPath,false);
+                    else
+                    {
+                        return new CLGameType(JsonPath, false);
                     }
                 }
-                catch (Exception ex)
+                else
                 {
-                    return new MEFLErrorType(ex.Message,JsonPath);
+                    return new CLGameType(JsonPath, false);
                 }
             }
-            else return null;
+            catch (Exception ex)
+            {
+                return new MEFLErrorType(ex.Message, JsonPath);
+            }
         }
     }
 

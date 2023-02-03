@@ -394,10 +394,10 @@ namespace MEFL.PageModelViews
             List<string> recorded = new List<string>();
             foreach (var item in APIModel.GameInfoConfigs)
             {
-                if (recorded.Contains(item.VersionType) != true)
+                if (recorded.Contains(item.GameTypeFriendlyName) != true)
                 {
-                    cards.Add(new Controls.MyItemsCard() { IsAbleToSwap = true, Title = item.VersionType, Margin = VarMargin, BorderThickness = VarBorderThickness, BorderBrush = VarBorderBrush, CornerRadius = VarConrnerRadius });
-                    recorded.Add(item.VersionType);
+                    cards.Add(new Controls.MyItemsCard() { IsAbleToSwap = true, Title = item.GameTypeFriendlyName, Margin = VarMargin, BorderThickness = VarBorderThickness, BorderBrush = VarBorderBrush, CornerRadius = VarConrnerRadius });
+                    recorded.Add(item.GameTypeFriendlyName);
                 }
             }
             #endregion
@@ -413,7 +413,7 @@ namespace MEFL.PageModelViews
                 var cardItemSources = new ObservableCollection<Contract.GameInfoBase>();
                 foreach (var item in APIModel.GameInfoConfigs)
                 {
-                    if (item.VersionType == cards[i].Title.ToString())
+                    if (item.GameTypeFriendlyName == cards[i].Title.ToString())
                     {
                         cardItemSources.Add(item);
                     }

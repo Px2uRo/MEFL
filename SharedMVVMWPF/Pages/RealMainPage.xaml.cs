@@ -33,7 +33,11 @@ namespace MEFL.Pages
         }
         private void DeleteItem(object sender, RoutedEventArgs e)
         {
-            ((sender as FrameworkElement).DataContext as GameInfoBase).Delete();
+            var res =((sender as FrameworkElement).DataContext as GameInfoBase).Delete();
+            if(res == DeleteResult.Canceled)
+            {
+                return;
+            }
             (this.DataContext as RealMainPageModelView).GameInfoConfigs.Remove((sender as FrameworkElement).DataContext as GameInfoBase);
             (this.DataContext as RealMainPageModelView).Invoke("GameInfoConfigs");
         }

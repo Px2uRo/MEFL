@@ -207,7 +207,7 @@
           "dependencies": {
             "MEFL.Controls": {
               "target": "Package",
-              "version": "[0.0.4.18, )"
+              "version": "[0.0.7.1, )"
             },
             "Newtonsoft.Json": {
               "target": "Package",

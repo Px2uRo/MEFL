@@ -107,10 +107,7 @@ namespace MEFL
                                                 {
                                                     if (Hst.Permissions.UseGameManageAPI)
                                                     {
-                                                        foreach (var type in Hst.LuncherGameType.SupportedType)
-                                                        {
-                                                            MyFolders[SelectedFolderIndex].Games.Add(Hst.LuncherGameType.Parse(jOb["type"].ToString(), SubJson));
-                                                        }
+                                                        MyFolders[SelectedFolderIndex].Games.Add(Hst.LuncherGameType.Parse(jOb["type"].ToString(), SubJson));
                                                     }
                                                 }
                                             }

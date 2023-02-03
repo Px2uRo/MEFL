@@ -74,7 +74,13 @@ public abstract class GameInfoBase : MEFLClass
 
 	public abstract void Refresh();
 
-	public abstract void Delete();
+	public abstract DeleteResult Delete();
 
 	public abstract FrameworkElement GetManageProcessPage(Process process, SettingArgs args);
+}
+
+public enum DeleteResult 
+{ 
+	OK,
+	Canceled
 }

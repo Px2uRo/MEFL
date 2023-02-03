@@ -69,5 +69,15 @@ namespace CLAddInNet6.Properties {
                 return ((byte[])(obj));
             }
         }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] Snapshot {
+            get {
+                object obj = ResourceManager.GetObject("Snapshot", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
     }
 }

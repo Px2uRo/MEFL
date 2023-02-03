@@ -143,7 +143,10 @@ namespace MEFL.PageModelViews
 
         public void Execute(object? parameter)
         {
-            (GenerlSettingGameModel.Game).Delete();
+            if ((GenerlSettingGameModel.Game).Delete() == DeleteResult.Canceled)
+            {
+                return;
+            }
             (App.Current.Resources["RMPMV"] as RealMainPageModelView).GameInfoConfigs.Remove((GenerlSettingGameModel.Game));
             (App.Current.Resources["RMPMV"] as RealMainPageModelView).Invoke("GameInfoConfigs");
             GenerlSettingGameModel.Game.Dispose();

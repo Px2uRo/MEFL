@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using MEFL.Arguments;
 #if NET6_0
 using MEFL.Contract.Properties;
+using MEFL.Controls;
 #elif NET4_0
 using ContractNetFw4.Properties;
 #endif
@@ -174,9 +175,19 @@ public class MEFLErrorType : GameInfoBase
 		
 	}
 
-	public override void Delete()
+	public override DeleteResult Delete()
 	{
-	}
+		var mb = MyMessageBox.Show("确定要删除吗？","警告",MessageBoxButton.YesNo);
+		//todo IO 操作
+		if (mb.Result == MessageBoxResult.Yes)
+		{
+			return DeleteResult.OK;
+        }
+		else
+		{
+			return DeleteResult.Canceled;
+		}
+    }
 
 	public override void Refresh()
 	{

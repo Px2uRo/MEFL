@@ -413,7 +413,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "MEFL.Controls": "0.0.4.18",
+          "MEFL.Controls": "0.0.7.1",
           "Newtonsoft.Json": "13.0.1"
         },
         "compile": {

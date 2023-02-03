@@ -2,6 +2,7 @@
 using CoreLaunching.JsonTemplates;
 using MEFL.Arguments;
 using MEFL.Contract;
+using MEFL.Controls;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -19,7 +20,7 @@ using io = System.IO;
 
 namespace MEFL.CLAddIn.GameTypes
 {
-    public class MEFLRealseType : MEFL.Contract.GameInfoBase
+    public class CLGameType : MEFL.Contract.GameInfoBase
     {
         private List<String> _ItemsNeedsToExtract = new List<string>();
         public override List<string> ItemsNeedsToExtract => _ItemsNeedsToExtract;
@@ -46,7 +47,21 @@ namespace MEFL.CLAddIn.GameTypes
         private static FrameworkElement _settingPage = new Pages.MEFLRealseTypeSetting();
         private MEFLStandardOtherArgumentTemplate _MSOAT { get; set; }
         private CoreLaunching.JsonTemplates.Root _Root { get; set; }
-        public override string GameTypeFriendlyName { get => "发布"; set => throw new NotImplementedException(); }
+        public override string GameTypeFriendlyName
+        {
+            get
+            {
+                if (_MayBePcl2)
+                {
+                    return "PCL2整合";
+                }
+                else
+                {
+                    return _Root.Type;
+                }
+            }
+            set { }
+        }
         public override string Description
         {
             get {
@@ -69,9 +84,11 @@ namespace MEFL.CLAddIn.GameTypes
             set => _MSOAT.Description = value;
         }
         static Stream pcl2stream = new MemoryStream(Resources.PCL2_Forge);
+        static Stream snapshotStream = new MemoryStream(Resources.Snapshot);
         public override string Version { get => _Root.Id; set => _Root.Id = value; }
         static BitmapImage Icon = new BitmapImage(new Uri("pack://application:,,,/RealseTypeLogo.png", UriKind.Absolute));
         static ImageSource pcl2 = null;
+        static ImageSource snapshot = null;
         public override ImageSource IconSource {
             get
             {
@@ -83,6 +100,15 @@ namespace MEFL.CLAddIn.GameTypes
                         pcl2 = decoder.Frames[0];
                     }
                     return pcl2;
+                }
+                else if (VersionType=="snapshot")
+                {
+                    if (snapshot == null)
+                    {
+                        var decoder = new PngBitmapDecoder(snapshotStream, BitmapCreateOptions.None, BitmapCacheOption.Default);
+                        snapshot = decoder.Frames[0];
+                    }
+                    return snapshot;
                 }
                 else
                 {
@@ -243,8 +269,6 @@ namespace MEFL.CLAddIn.GameTypes
                 var res = new List<string>();
                 foreach (var item in _Root.Libraries)
                 {
-                    if (item.Downloads != null)
-                    {
                         if (item.Downloads.Artifact != null)
                         {
                             if (item.Downloads.Artifact.Path != null)
@@ -256,7 +280,6 @@ namespace MEFL.CLAddIn.GameTypes
                                 }
                             }
                         }
-                    }
                 }
                 foreach (var item in _Root.Libraries)
                 {
@@ -294,16 +317,29 @@ namespace MEFL.CLAddIn.GameTypes
 
         public override string AssetsIndexName => _Root.AssetIndex.Id;
 
-        public override string VersionType => _Root.Type;
+        public override string VersionType { get 
+            {
+                return _Root.Type;
+            } 
+        }
 
         private readonly bool _MayBePcl2;
 
         public override List<JsonFileInfo> FileNeedsToDownload { get; set ; }
         public override List<JsonFileInfo> NativeFilesNeedToDepackage { get ; set ; }
 
-        public override void Delete()
+        public override DeleteResult Delete()
         {
-            Dispose();
+            var mb = MyMessageBox.Show("确定要删除吗？", "警告", MessageBoxButton.YesNo);
+            //todo IO 操作
+            if (mb.Result == MessageBoxResult.Yes)
+            {
+                return DeleteResult.OK;
+            }
+            else
+            {
+                return DeleteResult.Canceled;
+            }
         }
 
         public override void Refresh()
@@ -312,7 +348,7 @@ namespace MEFL.CLAddIn.GameTypes
             NativeFilesNeedToDepackage= new List<JsonFileInfo>();
         }
 
-        public MEFLRealseType(string JsonPath,bool maybePCL2)
+        public CLGameType(string JsonPath,bool maybePCL2)
         {
             _MayBePcl2 = maybePCL2;
             FileNeedsToDownload = new List<JsonFileInfo>();
