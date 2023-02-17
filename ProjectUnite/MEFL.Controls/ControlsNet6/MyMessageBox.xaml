@@ -4,17 +4,16 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MEFL.Controls"
-        mc:Ignorable="d"
+        mc:Ignorable="d" WindowStyle="SingleBorderWindow"
         Title="MyMessageBox" Width="400" Height="250" 
         MinWidth="400" MinHeight="250" 
         MaxWidth="400" MaxHeight="250"
         Topmost="True">
     <Grid>
         <ScrollViewer Margin="3" Height="185" VerticalAlignment="Top">
-            <Grid>
+            <Grid Margin="20">
                 <TextBlock Name="MyTB" TextWrapping="Wrap"/>
                 <StackPanel Name="MyCheckBoxs" VerticalAlignment="Bottom"/>
-
             </Grid>
         </ScrollViewer>
         <StackPanel Height="35" Orientation="Horizontal" Name="MyButtons" VerticalAlignment="Bottom" Margin="0,0,30,0" HorizontalAlignment="Right">

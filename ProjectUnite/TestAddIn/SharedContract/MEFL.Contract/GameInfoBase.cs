@@ -1,16 +1,31 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+#if NET4_0
+#else
+using System.Runtime.CompilerServices;
+#endif
 using System.Windows;
 using System.Windows.Media;
 using MEFL.Arguments;
 
 namespace MEFL.Contract;
 
-public abstract class GameInfoBase : MEFLClass
+public abstract class GameInfoBase : MEFLClass,INotifyPropertyChanged
 {
+    public event PropertyChangedEventHandler? PropertyChanged;
+#if NET4_0
+
+#else
+	private void PropChanged([CallerMemberName] string prop = "")
+	{
+		PropertyChanged?.Invoke(this,new(prop));
+	}	
+#endif
+
 	public override string ToString()
 	{
 		return $"{Version} {VersionType}";
@@ -70,7 +85,7 @@ public abstract class GameInfoBase : MEFLClass
 
 	public string RootFolder => Path.GetDirectoryName(GameJsonPath);
 
-	public abstract FrameworkElement SettingsPage { get; }
+	public abstract IGameSettingPage SettingsPage { get; }
 
 	public abstract void Refresh();
 

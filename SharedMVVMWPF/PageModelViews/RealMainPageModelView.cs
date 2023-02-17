@@ -217,23 +217,26 @@ namespace MEFL.PageModelViews
                 return;
             }
             bool yes = false;
-            GenerlSettingGameModel.ModelView.Game = APIModel.CurretGame;
+            //GenerlSettingGameModel.ModelView.Game = APIModel.CurretGame;
             if (FindControl.FromTag("SettingGamePage", (App.Current.Resources["MainPage"] as Grid)).Length == 0)
             {
                 yes = true;
             }
+            if (APIModel.CurretGame.SettingsPage is not FrameworkElement)
+            {
+                MyMessageBox.Show("添加用户页面不是 FrameworkElement，请联系开发者");
+                return;
+            }
             if (yes)
             {
-                GenerlSettingGameModel.UI = new SpecialPages.GameSettingPage()
+                var newPage = new SpecialPages.GameSettingPage()
                 {
                     Tag = "SettingGamePage",
                     Visibility = Visibility.Hidden,
                     Content = APIModel.CurretGame.SettingsPage,
-                    DataContext = GenerlSettingGameModel.ModelView
                 };
-                (App.Current.Resources["MainPage"] as Grid).Children.Add(GenerlSettingGameModel.UI);
+                (App.Current.Resources["MainPage"] as Grid).Children.Add(newPage);
             }
-            GenerlSettingGameModel.UI.Content = APIModel.CurretGame.SettingsPage;
             MyPageBase From = null;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
             {
@@ -244,9 +247,40 @@ namespace MEFL.PageModelViews
             }
             foreach (MyPageBase item in FindControl.FromTag("SettingGamePage", (App.Current.Resources["MainPage"] as Grid)))
             {
+                item.Content = APIModel.CurretGame.SettingsPage;
+                #region Events
+                APIModel.CurretGame.SettingsPage.OnPageBack -= SettingsPage_OnPageBack;
+                APIModel.CurretGame.SettingsPage.OnRemoved -= SettingsPage_OnRemoved;
+                APIModel.CurretGame.SettingsPage.OnSelected -= SettingsPage_OnSelected;
+                APIModel.CurretGame.SettingsPage.OnListUpdate -= SettingsPage_OnListUpdate;
+                APIModel.CurretGame.SettingsPage.OnPageBack += SettingsPage_OnPageBack;
+                APIModel.CurretGame.SettingsPage.OnRemoved += SettingsPage_OnRemoved;
+                APIModel.CurretGame.SettingsPage.OnSelected += SettingsPage_OnSelected;
+                APIModel.CurretGame.SettingsPage.OnListUpdate += SettingsPage_OnListUpdate;
+                #endregion
                 item.Show(From);
             }
 
+        }
+
+        private void SettingsPage_OnListUpdate(object? sender, EventArgs e)
+        {
+            
+        }
+
+        private void SettingsPage_OnSelected(object? sender, EventArgs e)
+        {
+            
+        }
+
+        private void SettingsPage_OnRemoved(object? sender, EventArgs e)
+        {
+            
+        }
+
+        private void SettingsPage_OnPageBack(object? sender, EventArgs e)
+        {
+            
         }
     }
     public class RefreshFolderInfoCommand : ICommand

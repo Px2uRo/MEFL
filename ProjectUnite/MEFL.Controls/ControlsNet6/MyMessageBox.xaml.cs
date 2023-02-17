@@ -48,6 +48,7 @@ namespace MEFL.Controls
     {
         public MyMessageResult Result = new();
         private MessageBoxButton _but;
+        private bool _actLike = false;
 
         protected override void OnClosed(EventArgs e)
         {
@@ -56,15 +57,16 @@ namespace MEFL.Controls
             GC.SuppressFinalize(this);
         }
 
-        public MyMessageBox(string message,string title, MessageBoxButton button,MyCheckBoxInput[] checkBoxs)
+        public MyMessageBox(string message,string title, MessageBoxButton button,MyCheckBoxInput[] checkBoxs,bool actsLikeRadioButtons)
         {
+            _actLike=actsLikeRadioButtons;
             InitializeComponent();
             _but= button;
             this.MyTB.Text= message;
             this.Title=title;
             if (button == MessageBoxButton.OK)
             {
-                R1.Content = "好。";
+                R1.Content = new TextBlock { Foreground = new SolidColorBrush(Colors.Green) ,Text="好"};
                 R1.BorderBrush = new SolidColorBrush(Colors.Green);
                 R1.Click += R1_Click;
                 MyButtons.Children.Remove(R2);
@@ -72,31 +74,31 @@ namespace MEFL.Controls
             }
             else if (button == MessageBoxButton.OKCancel)
             {
-                R1.Content = "取消。";
+                R1.Content = new TextBlock { Text = "取消", Foreground = new SolidColorBrush(Colors.Red) };
                 R1.Click += R1_Click;
                 R1.BorderBrush = new SolidColorBrush(Colors.Red);
-                R2.Content = "好。";
+                R2.Content = new TextBlock { Foreground = new SolidColorBrush(Colors.Green), Text = "好" };
                 R2.BorderBrush = new SolidColorBrush(Colors.Green);
                 R2.Click += R2_Click;
                 MyButtons.Children.Remove(R3);
             }
             else if(button == MessageBoxButton.YesNoCancel)
             {
-                R1.Content = "取消";
-                R1.BorderBrush = new SolidColorBrush(Colors.Red);
+                R1.Content = new TextBlock { Text = "取消" };
                 R1.Click += R1_Click;
-                R2.Content = "不。";
-                R2.Click += R2_Click; 
-                R3.Content = "好。";
+                R2.Content = new TextBlock { Foreground = new SolidColorBrush(Colors.Red), Text = "不" };
+                R2.BorderBrush = new SolidColorBrush(Colors.Red);
+                R2.Click += R2_Click;
+                R3.Content = new TextBlock { Foreground = new SolidColorBrush(Colors.Green), Text = "好" };
                 R3.BorderBrush = new SolidColorBrush(Colors.Green);
                 R3.Click += R3_Click;
             }
             else if (button == MessageBoxButton.YesNo)
             {
-                R1.Content = "不。";
+                R1.Content = new TextBlock { Foreground = new SolidColorBrush(Colors.Red), Text = "不" };
                 R1.Click += R1_Click;
                 R1.BorderBrush = new SolidColorBrush(Colors.Red);
-                R2.Content = "好。";
+                R2.Content = new TextBlock { Foreground = new SolidColorBrush(Colors.Green), Text = "好" };
                 R2.BorderBrush = new SolidColorBrush(Colors.Green);
                 R2.Click += R2_Click;
                 MyButtons.Children.Remove(R3);
@@ -122,6 +124,17 @@ namespace MEFL.Controls
         private void Element_Checked(object sender, RoutedEventArgs e)
         {
             int index = (int)((sender as CheckBox).Tag);
+            if (_actLike)
+            {
+                var parent = (sender as CheckBox).Parent as StackPanel;
+                foreach (CheckBox item in parent.Children)
+                {
+                    item.IsChecked = false;
+                }
+                (sender as CheckBox).Checked -= Element_Checked;
+                (sender as CheckBox).IsChecked = true;
+                (sender as CheckBox).Checked += Element_Checked;
+            }
             Result.CheckBox[index] = true;
         }
 
@@ -167,25 +180,30 @@ namespace MEFL.Controls
         //MessageBox.Show(message,title,Button,icon,,,)
         public static MyMessageResult Show(string message)
         {
-            return Show(message, string.Empty,MessageBoxButton.OK);
+            return Show(message, string.Empty, MessageBoxButton.OK, new MyCheckBoxInput[0], false);
         }
         public static MyMessageResult Show(string message,string title)
         {
-            return Show(message, title, MessageBoxButton.OK);
+            return Show(message, title, MessageBoxButton.OK, new MyCheckBoxInput[0], false);
         }
         public static MyMessageResult Show(string message, string title, MessageBoxButton button)
         {
-            return Show(message, title, button, new MyCheckBoxInput[0]);
+            return Show(message, title, button, new MyCheckBoxInput[0],false);
         }
-        public static MyMessageResult Show(string message,string title,MessageBoxButton button, MyCheckBoxInput[] checkBoxs)
+        public static MyMessageResult Show(string message,string title,MessageBoxButton button, MyCheckBoxInput[] checkBoxs,bool actsLikeRadioButtons)
         {
             MyMessageBox mb = null;
             Application.Current.Dispatcher.Invoke(() =>
             {
-                mb = new MyMessageBox(message, title, button, checkBoxs);
+                mb = new MyMessageBox(message, title, button, checkBoxs,actsLikeRadioButtons);
                 mb.ShowDialog();
             });
             return mb.Result;
+        }
+
+        public static MyMessageResult Show(string message, string title, MessageBoxButton button, MyCheckBoxInput[] checkBoxs)
+        {
+            return Show(message, title, button, checkBoxs, false);
         }
     }
 }

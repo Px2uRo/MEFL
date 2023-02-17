@@ -52,6 +52,7 @@ namespace MEFL.PageModelViews
                             {
                                 FileVersionInfo fi = FileVersionInfo.GetVersionInfo(item.FullName);
                                 resitem = $"VER:{fi.ProductMajorPart}，{item.FullName}";
+                                GC.SuppressFinalize(fi);
                                 fi = null;
                             }
                             catch (Exception ex)

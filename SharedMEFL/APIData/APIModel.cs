@@ -104,6 +104,7 @@ namespace MEFL.APIData
                 if (value != null)
                 {
                     RegManager.Write("Downloader", JsonConvert.SerializeObject(new DownloaderConfig(value.FileName, value.Name)));
+                    Contract.Advanced.SetSelectedDownloader(value);
                 }
                 _selectedDownloader = value;
             } 

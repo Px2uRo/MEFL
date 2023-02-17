@@ -1,6 +1,7 @@
 ﻿using CLAddInNet6.Properties;
 using CoreLaunching.JsonTemplates;
 using MEFL.Arguments;
+using MEFL.CLAddIn.Pages;
 using MEFL.Contract;
 using MEFL.Controls;
 using Newtonsoft.Json;
@@ -22,6 +23,7 @@ namespace MEFL.CLAddIn.GameTypes
 {
     public class CLGameType : MEFL.Contract.GameInfoBase
     {
+        internal bool startWithDebug => _MSOAT.StartInDebugMode;
         private List<String> _ItemsNeedsToExtract = new List<string>();
         public override List<string> ItemsNeedsToExtract => _ItemsNeedsToExtract;
         public override FrameworkElement GetManageProcessPage(Process process, SettingArgs args)
@@ -44,16 +46,16 @@ namespace MEFL.CLAddIn.GameTypes
             }
             base.Dispose(disposing);
         }
-        private static FrameworkElement _settingPage = new Pages.MEFLRealseTypeSetting();
-        private MEFLStandardOtherArgumentTemplate _MSOAT { get; set; }
+        private static MEFLRealseTypeSetting _settingPage = new Pages.MEFLRealseTypeSetting();
+        private MEFLOtherArgs _MSOAT { get; set; }
         private CoreLaunching.JsonTemplates.Root _Root { get; set; }
         public override string GameTypeFriendlyName
         {
             get
             {
-                if (_MayBePcl2)
+                if (_maybeForge)
                 {
-                    return "PCL2整合";
+                    return "Forge";
                 }
                 else
                 {
@@ -71,9 +73,9 @@ namespace MEFL.CLAddIn.GameTypes
                 }
                 else
                 {
-                    if (_MayBePcl2)
+                    if (_maybeForge)
                     {
-                        return $"可能是 PCL2 的组合安装版本: {_Root.Id}";
+                        return $"Forge: {_Root.Id}";
                     }
                     else
                     {
@@ -83,23 +85,23 @@ namespace MEFL.CLAddIn.GameTypes
             }
             set => _MSOAT.Description = value;
         }
-        static Stream pcl2stream = new MemoryStream(Resources.PCL2_Forge);
+        static Stream forgeStream = new MemoryStream(Resources.MaybeForge);
         static Stream snapshotStream = new MemoryStream(Resources.Snapshot);
         public override string Version { get => _Root.Id; set => _Root.Id = value; }
         static BitmapImage Icon = new BitmapImage(new Uri("pack://application:,,,/RealseTypeLogo.png", UriKind.Absolute));
-        static ImageSource pcl2 = null;
+        static ImageSource forge = null;
         static ImageSource snapshot = null;
         public override ImageSource IconSource {
             get
             {
-                if (_MayBePcl2)
+                if (_maybeForge)
                 {
-                    if (pcl2 == null)
+                    if (forge == null)
                     {
-                        var decoder = new PngBitmapDecoder(pcl2stream, BitmapCreateOptions.None, BitmapCacheOption.Default);
-                        pcl2 = decoder.Frames[0];
+                        var decoder = new PngBitmapDecoder(forgeStream, BitmapCreateOptions.None, BitmapCacheOption.Default);
+                        forge = decoder.Frames[0];
                     }
-                    return pcl2;
+                    return forge;
                 }
                 else if (VersionType=="snapshot")
                 {
@@ -168,7 +170,7 @@ namespace MEFL.CLAddIn.GameTypes
                     for (int i = 0; i < _Root.Arguments.Jvm.Count; i++)
                     {
                         var item = _Root.Arguments.Jvm[i];
-                        if (_MayBePcl2)
+                        if (_maybeForge)
                         {
                             if (item == "-p")
                             {
@@ -220,7 +222,12 @@ namespace MEFL.CLAddIn.GameTypes
 
         public override string GameFolder { get => dotMinecraftPath; set => throw new NotImplementedException(); }
 
-        public override FrameworkElement SettingsPage => _settingPage;
+        public override IGameSettingPage SettingsPage {get {
+                _settingPage.DataContext = this;
+                _settingPage.SetShowModCard(_maybeForge);
+                return _settingPage;
+            }
+        }
 
         public override string GameJarPath => GameJsonPath.Replace(".json", ".jar");
 
@@ -323,7 +330,7 @@ namespace MEFL.CLAddIn.GameTypes
             } 
         }
 
-        private readonly bool _MayBePcl2;
+        private readonly bool _maybeForge;
 
         public override List<JsonFileInfo> FileNeedsToDownload { get; set ; }
         public override List<JsonFileInfo> NativeFilesNeedToDepackage { get ; set ; }
@@ -350,10 +357,10 @@ namespace MEFL.CLAddIn.GameTypes
 
         public CLGameType(string JsonPath,bool maybePCL2)
         {
-            _MayBePcl2 = maybePCL2;
+            _maybeForge = maybePCL2;
             FileNeedsToDownload = new List<JsonFileInfo>();
             string otherArgsPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(JsonPath), "MEFLOtherArguments.json");
-            _MSOAT =new MEFLStandardOtherArgumentTemplate(otherArgsPath);
+            _MSOAT =new MEFLOtherArgs(otherArgsPath);
             otherArgsPath = string.Empty;
             GameJsonPath=JsonPath;
             try
@@ -367,13 +374,11 @@ namespace MEFL.CLAddIn.GameTypes
 
         }
     }
-    public class MEFLStandardOtherArgumentTemplate : OtherArgumentTemplateBase
+    public class MEFLOtherArgs : GameotherArgs
     {
         #region Privates
         [JsonIgnore]
         private string _JsonPath { get; set; }
-        [JsonIgnore]
-        private bool _IsFavorite { get; set; }
         [JsonIgnore]
         private string _Description { get; set; }
         [JsonIgnore]
@@ -386,12 +391,13 @@ namespace MEFL.CLAddIn.GameTypes
         private string _CustomIconPath { get; set; }
         #endregion
         #region Props
-        public override bool IsFavorite { get => _IsFavorite; set { _IsFavorite = value; ChangeProperty(); } }
         public override string Description { get => _Description; set { _Description = value; ChangeProperty(); } }
         public override string OtherJVMArguments { get => _OtherJVMArguments; set { _OtherJVMArguments = value; ChangeProperty(); } }
         public override string OtherGameArguments { get => _OtherGameArguments; set { _OtherGameArguments = value; ChangeProperty(); } }
         public override string NativeLibrariesPath { get => _NativeLibrariesPath; set { _NativeLibrariesPath = value; ChangeProperty(); } }
         public override string CustomIconPath { get => _CustomIconPath; set { _CustomIconPath = value; ChangeProperty(); } }
+        public override bool StartInDebugMode { get ; set ; }
+
         public override void ChangeProperty()
         {
             try
@@ -409,7 +415,7 @@ namespace MEFL.CLAddIn.GameTypes
         }
         #endregion
 
-        public MEFLStandardOtherArgumentTemplate(string JsonPath)
+        public MEFLOtherArgs(string JsonPath)
         {
             _JsonPath = JsonPath;
             try
@@ -418,17 +424,21 @@ namespace MEFL.CLAddIn.GameTypes
                 {
                     System.IO.File.Create(_JsonPath).Close();
                 }
-                var root = JsonConvert.DeserializeObject<MEFLStandardOtherArgumentTemplate>(System.IO.File.ReadAllText(JsonPath));
-                if (root != null)
+                var args = JsonConvert.DeserializeObject<MEFLOtherArgs>(System.IO.File.ReadAllText(JsonPath));
+                if (args != null)
                 {
-                    Description = root.Description;
-                    IsFavorite = root.IsFavorite;
-                    OtherJVMArguments = root.OtherJVMArguments;
-                    OtherGameArguments = root.OtherGameArguments;
-                    NativeLibrariesPath = root.NativeLibrariesPath;
-                    CustomIconPath = root.CustomIconPath;
+                    Description = args.Description;
+                    OtherJVMArguments = args.OtherJVMArguments;
+                    OtherGameArguments = args.OtherGameArguments;
+                    NativeLibrariesPath = args.NativeLibrariesPath;
+                    CustomIconPath = args.CustomIconPath;
                 }
-                root = null;
+                else
+                {
+                    StartInDebugMode = false;
+                }
+                GC.SuppressFinalize(args);
+                args = null;
             }
             catch (Exception)
             {

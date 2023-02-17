@@ -63,9 +63,9 @@ namespace CLAddInNet6.Properties {
         /// <summary>
         ///   查找 System.Byte[] 类型的本地化资源。
         /// </summary>
-        internal static byte[] PCL2_Forge {
+        internal static byte[] MaybeForge {
             get {
-                object obj = ResourceManager.GetObject("PCL2 Forge", resourceCulture);
+                object obj = ResourceManager.GetObject("MaybeForge", resourceCulture);
                 return ((byte[])(obj));
             }
         }

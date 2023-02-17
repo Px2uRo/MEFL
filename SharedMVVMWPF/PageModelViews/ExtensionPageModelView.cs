@@ -11,6 +11,8 @@ using MEFL.Controls;
 using System.Windows;
 using MEFL.Configs;
 using Newtonsoft.Json;
+using System.Linq;
+using System.Reflection;
 
 namespace MEFL.PageModelViews
 {
@@ -55,6 +57,7 @@ namespace MEFL.PageModelViews
                         sources.Value.Selected = sources.Value[0];
                     }
                 }
+
                 #endregion
                 res.Children.Add(element);
             }

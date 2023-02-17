@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -49,21 +50,20 @@ namespace MEFL.Pages
         private void ItemSetting(object sender, RoutedEventArgs e)
         {
             bool yes =false;
-            GenerlSettingGameModel.ModelView.Game = (sender as FrameworkElement).DataContext as GameInfoBase;
+            //GenerlSettingGameModel.ModelView.Game = (sender as FrameworkElement).DataContext as GameInfoBase;
             if(FindControl.FromTag("SettingGamePage", (App.Current.Resources["MainPage"] as Grid)).Length == 0)
             {
                 yes = true;
             }
             if (yes)
             {
-                GenerlSettingGameModel.UI = new SpecialPages.GameSettingPage()
+                var newPage = new SpecialPages.GameSettingPage()
                 {
                     Tag = "SettingGamePage",
                     Visibility = Visibility.Hidden,
-                    Content = ((sender as FrameworkElement).DataContext as GameInfoBase).SettingsPage,
-                    DataContext = GenerlSettingGameModel.ModelView
+                    Content = ((sender as FrameworkElement).DataContext as GameInfoBase).SettingsPage
                 };
-                (App.Current.Resources["MainPage"] as Grid).Children.Add(GenerlSettingGameModel.UI);
+                (App.Current.Resources["MainPage"] as Grid).Children.Add(newPage);
             }
             MyPageBase From = null;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
@@ -75,8 +75,39 @@ namespace MEFL.Pages
             }
             foreach (MyPageBase item in FindControl.FromTag("SettingGamePage", (App.Current.Resources["MainPage"] as Grid)))
             {
+                item.Content = ((sender as FrameworkElement).DataContext as GameInfoBase).SettingsPage;
+                #region Events
+                APIModel.CurretGame.SettingsPage.OnPageBack -= SettingsPage_OnPageBack;
+                APIModel.CurretGame.SettingsPage.OnRemoved -= SettingsPage_OnRemoved;
+                APIModel.CurretGame.SettingsPage.OnSelected -= SettingsPage_OnSelected;
+                APIModel.CurretGame.SettingsPage.OnListUpdate -= SettingsPage_OnListUpdate;
+                APIModel.CurretGame.SettingsPage.OnPageBack += SettingsPage_OnPageBack;
+                APIModel.CurretGame.SettingsPage.OnRemoved += SettingsPage_OnRemoved;
+                APIModel.CurretGame.SettingsPage.OnSelected += SettingsPage_OnSelected;
+                APIModel.CurretGame.SettingsPage.OnListUpdate += SettingsPage_OnListUpdate;
+                #endregion
                 item.Show(From);
             }
+        }
+
+        private void SettingsPage_OnListUpdate(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SettingsPage_OnSelected(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SettingsPage_OnRemoved(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void SettingsPage_OnPageBack(object? sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void RealMainPageModelView_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -290,10 +321,38 @@ namespace MEFL.Pages
                         else
                         {
                             var msg = $"不合适的 JAVA\n需要的Java版本\n{Game.JavaMajorVersion}\n当前选择的Java\n{APIModel.SettingArgs.SelectedJava.FullName}\n版本为{FileVersionInfo.GetVersionInfo(APIModel.SettingArgs.SelectedJava.FullName).FileMajorPart}";
-                            var MyMBx = MyMessageBox.Show(msg, "Java 不对劲!", MessageBoxButton.OK, new MyCheckBoxInput[1] { new("你明白了没有自动选择功能而且不勾没关系", false, Colors.Red) });
-                            
-                            Canceled = true;
-                            return;
+                            var MyMBx = MyMessageBox.Show(msg, "Java 不对劲!", 
+                                MessageBoxButton.OKCancel, new MyCheckBoxInput[2] 
+                                { new("让 MEFL 帮助选择 Java", true, Colors.Green)
+                                ,new ("强制使用该 Java",false,Colors.Black) },true);
+                            if (MyMBx.Result == MessageBoxResult.Cancel) {
+                                Canceled = true;
+                                return;
+                            }
+                            else
+                            {
+                                if (MyMBx.CheckBox[0] ==true)
+                                {
+                                    IList<FileInfo> linq = APIModel.Javas.Where(x => FileVersionInfo.GetVersionInfo(x.FullName).FileMajorPart == Game.JavaMajorVersion).ToList();
+                                    if(linq.Count()== 0)
+                                    {
+                                        
+                                        MyMessageBox.Show($"你还没装这个版本（版本号：{Game.JavaMajorVersion}）的 Java，给Issues反应大拇指来催更【自动安装】吧。");
+                                        Canceled = true;
+                                        return;
+                                    }
+                                    i.FileName = linq[0].FullName;
+                                }
+                                else if (MyMBx.CheckBox[1] == true)
+                                {
+                                    i.FileName = APIModel.SettingArgs.SelectedJava.FullName;
+                                }
+                                else
+                                {
+                                    Canceled = true;
+                                    return;
+                                }
+                            }
                         }
                         Progress = 1;
                         #endregion

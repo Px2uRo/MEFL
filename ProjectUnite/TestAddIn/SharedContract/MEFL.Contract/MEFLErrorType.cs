@@ -58,12 +58,11 @@ public class MEFLErrorType : GameInfoBase
 	public override string GameFolder { get; set; }
 
 	static TextBlock Text = new();
-	public override FrameworkElement SettingsPage
+	public override IGameSettingPage SettingsPage
 	{
 		get
 		{
-			Text.Text = Description;
-			return Text;
+			return null;
 		}
 	}
 

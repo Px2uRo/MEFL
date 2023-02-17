@@ -93,7 +93,7 @@ namespace MEFL.SpecialPages
             };
             if(!(content is FrameworkElement))
             {
-                MessageBox.Show("添加用户页面不是 FrameworkElement，请联系开发者");
+                MyMessageBox.Show("添加用户页面不是 FrameworkElement，请联系开发者");
                 return;
             }
             content.OnAccountAdd -= Item_OnAccountAdded;

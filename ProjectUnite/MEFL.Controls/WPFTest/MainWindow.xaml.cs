@@ -50,7 +50,14 @@ namespace WPFTest
 
         private void MyButton_Click_1(object sender, RoutedEventArgs e)
         {
-            var mb = MyMessageBox.Show("asa","",MessageBoxButton.YesNo);
+            var mb = MyMessageBox.Show("asa\nhehhesiohhiuo\nasdiubigbus", "", MessageBoxButton.YesNo, new MyCheckBoxInput[2] { new ("aaa",false,Colors.Violet), new("bbb", false, Colors.Violet) },true);
+            string str = "";
+            foreach (var item in mb.CheckBox)
+            {
+                str += item.ToString();
+                str+= "\n";
+            }
+            MessageBox.Show(str);
         }
     }
 
