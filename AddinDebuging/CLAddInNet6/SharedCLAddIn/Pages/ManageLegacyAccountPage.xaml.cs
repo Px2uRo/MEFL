@@ -1,4 +1,5 @@
-﻿using MEFL.Contract;
+﻿using MEFL.CLAddIn.AccountsManagement;
+using MEFL.Contract;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -54,6 +55,7 @@ namespace MEFL.CLAddIn.Pages
 
         private void MyButton_Click_3(object sender, RoutedEventArgs e)
         {
+            Model.LegacyAccounts.RemoveOne(this.DataContext as MEFLLegacyAccount);
             OnAccountDeleted.Invoke(this, this.DataContext as AccountBase);
         }
     }

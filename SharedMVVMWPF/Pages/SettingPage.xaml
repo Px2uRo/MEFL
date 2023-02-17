@@ -103,6 +103,15 @@
                     </Grid>
                 </Grid>
             </c:MyCard>
+            <c:MyCard Title="内存分配">
+                <StackPanel>
+                    <TextBlock Text="这个地方做的比较潦草，请见谅"/>
+                    <StackPanel Orientation="Horizontal" Margin="3,0,0,0">
+                        <TextBlock Text="最大：(MegaBytes)"/>
+                        <TextBox Text="{Binding MaxMemory}" Width="36"/>
+                    </StackPanel>
+                </StackPanel>
+            </c:MyCard>
         </StackPanel>
         <StackPanel Tag="Info">
             <c:MyCard Title="关于 MEFL">

@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Reflection;
@@ -5,9 +6,11 @@ using System.Reflection;
 namespace MEFL.Contract{
     public abstract class MEFLClass : IDisposable
     {
+        [JsonIgnore]
         public bool Disposed { get; set; }
+        [JsonIgnore]
         public string FileName => Path.GetFileName(Assembly.GetAssembly(GetType()).Location);
-
+        [JsonIgnore]
         public string AddInGuid => Assembly.GetAssembly(GetType()).ManifestModule.ModuleVersionId.ToString();
 
         protected virtual void Dispose(bool disposing)
@@ -16,11 +19,8 @@ namespace MEFL.Contract{
             {
                 if (disposing)
                 {
-                    // TODO: 释放托管状态(托管对象)
-                }
 
-                // TODO: 释放未托管的资源(未托管的对象)并重写终结器
-                // TODO: 将大型字段设置为 null
+                }
                 Disposed = true;
             }
         }
@@ -34,7 +34,6 @@ namespace MEFL.Contract{
 
         public void Dispose()
         {
-            // 不要更改此代码。请将清理代码放入“Dispose(bool disposing)”方法中
             Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }

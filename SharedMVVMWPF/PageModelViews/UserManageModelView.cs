@@ -166,13 +166,6 @@ namespace MEFL.PageModelViews
             {
                 item.Show(From);
             }
-            for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
-            {
-                if ((App.Current.Resources["MainPage"] as Grid).Children[i] == From)
-                {
-                    (App.Current.Resources["MainPage"] as Grid).Children.RemoveAt(i);
-                }
-            }
             UserManageModel.ModelView.Invoke("SelectedAccount");
             UserManageModel.ModelView.Invoke("Accounts");
         }
@@ -229,13 +222,7 @@ namespace MEFL.PageModelViews
             {
                 item.Show(From);
             }
-            for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
-            {
-                if ((App.Current.Resources["MainPage"] as Grid).Children[i] == From)
-                {
-                    (App.Current.Resources["MainPage"] as Grid).Children.RemoveAt(i);
-                }
-            }
+
             account.Dispose();
         }
 

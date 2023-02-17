@@ -23,16 +23,12 @@
                     <TextBox Background="Transparent" BorderBrush="Transparent" Name="DescriptionBox" Text="{Binding Description,Mode=OneWay}" FontSize="20" Grid.Column="1" Grid.Row="1"/>
                 </Grid>
                 <StackPanel Orientation="Horizontal">
-                    <c:MyButton Content="选中" Margin="0,0,5,0" />
-                    <c:MyButton Content="应用" Margin="0,0,5,0" Click="MyButton_Click" />
-                    <c:MyButton Content="删除" Margin="0,0,5,0" BorderBrush="Red" />
+                    <c:MyButton Content="选中" Margin="0,0,5,0" Click="Selected_Click"/>
+                    <c:MyButton Content="应用" Margin="0,0,5,0" Click="Apply_Click" />
+                    <c:MyButton Content="删除" Margin="0,0,5,0" BorderBrush="Red" Click="Delete_Click"/>
                 </StackPanel>
             </StackPanel>
         </c:MyCard>
-        <c:MyCard Title="快速打开文件夹" IsAbleToSwap="True" IsSwaped="True">
-            <StackPanel Orientation="Horizontal">
-                <c:MyButton Content="游戏版本" Margin="0,0,5,0" />
-            </StackPanel>
-        </c:MyCard>
+        
     </StackPanel>
 </UserControl>

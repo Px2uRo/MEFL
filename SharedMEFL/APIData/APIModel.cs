@@ -109,6 +109,18 @@ namespace MEFL.APIData
                 _selectedDownloader = value;
             } 
         }
+        private static int _maxMemory = 512;
+        public static int MaxMemory { get
+            { 
+                return _maxMemory;
+            } 
+            set
+            {
+                _maxMemory = value;
+                RegManager.Write("MaxMemory",_maxMemory.ToString());
+            } 
+        }
+
         public static DownloaderCollection Downloaders = new();
         public static DownloadSourceCollection DownloadSources = new();
 
@@ -279,6 +291,14 @@ namespace MEFL.APIData
             if (Directory.Exists(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"))!=true)
             {
                 Directory.CreateDirectory(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"));
+            }
+            try
+            {
+                _maxMemory = Convert.ToInt32(RegManager.Read("MaxMemory"));
+            }
+            catch (Exception ex)
+            {
+
             }
 #if DEBUG
 

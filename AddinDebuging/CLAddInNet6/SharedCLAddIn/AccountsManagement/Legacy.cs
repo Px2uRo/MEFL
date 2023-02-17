@@ -1,4 +1,7 @@
-﻿using MEFL.Contract;
+﻿using MEFL.CLAddIn.Export;
+using MEFL.CLAddIn.Pages;
+using MEFL.Contract;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -36,6 +39,18 @@ namespace MEFL.CLAddIn.AccountsManagement
                 //todo HandleException
             }
             return res;
+        }
+
+        public static void AddOne(MEFLLegacyAccount account)
+        {
+            Model.LegacyAccounts.Add(account);
+            RegManager.Write("LegacyAccounts", JsonConvert.SerializeObject(Model.LegacyAccounts));
+        }
+
+        internal void RemoveOne(MEFLLegacyAccount account)
+        {
+            Model.LegacyAccounts.Remove(account);
+            RegManager.Write("LegacyAccounts", JsonConvert.SerializeObject(Model.LegacyAccounts));
         }
     }
 }

@@ -18,6 +18,7 @@ using Newtonsoft.Json;
 using System.Linq;
 using MEFL.Pages;
 using System.Reflection.Metadata;
+using MEFL.EventsMethod;
 
 namespace MEFL.PageModelViews
 {
@@ -249,38 +250,18 @@ namespace MEFL.PageModelViews
             {
                 item.Content = APIModel.CurretGame.SettingsPage;
                 #region Events
-                APIModel.CurretGame.SettingsPage.OnPageBack -= SettingsPage_OnPageBack;
-                APIModel.CurretGame.SettingsPage.OnRemoved -= SettingsPage_OnRemoved;
-                APIModel.CurretGame.SettingsPage.OnSelected -= SettingsPage_OnSelected;
-                APIModel.CurretGame.SettingsPage.OnListUpdate -= SettingsPage_OnListUpdate;
-                APIModel.CurretGame.SettingsPage.OnPageBack += SettingsPage_OnPageBack;
-                APIModel.CurretGame.SettingsPage.OnRemoved += SettingsPage_OnRemoved;
-                APIModel.CurretGame.SettingsPage.OnSelected += SettingsPage_OnSelected;
-                APIModel.CurretGame.SettingsPage.OnListUpdate += SettingsPage_OnListUpdate;
+                APIModel.CurretGame.SettingsPage.OnPageBack -= EventToolkit.SettingsPage_OnPageBack;
+                APIModel.CurretGame.SettingsPage.OnRemoved -= EventToolkit.SettingsPage_OnRemoved;
+                APIModel.CurretGame.SettingsPage.OnSelected -= EventToolkit.SettingsPage_OnSelected;
+                APIModel.CurretGame.SettingsPage.OnListUpdate -= EventToolkit.SettingsPage_OnListUpdate;
+                APIModel.CurretGame.SettingsPage.OnPageBack += EventToolkit.SettingsPage_OnPageBack;
+                APIModel.CurretGame.SettingsPage.OnRemoved += EventToolkit.SettingsPage_OnRemoved;
+                APIModel.CurretGame.SettingsPage.OnSelected += EventToolkit.SettingsPage_OnSelected;
+                APIModel.CurretGame.SettingsPage.OnListUpdate += EventToolkit.SettingsPage_OnListUpdate;
                 #endregion
                 item.Show(From);
             }
 
-        }
-
-        private void SettingsPage_OnListUpdate(object? sender, EventArgs e)
-        {
-            
-        }
-
-        private void SettingsPage_OnSelected(object? sender, EventArgs e)
-        {
-            
-        }
-
-        private void SettingsPage_OnRemoved(object? sender, EventArgs e)
-        {
-            
-        }
-
-        private void SettingsPage_OnPageBack(object? sender, EventArgs e)
-        {
-            
         }
     }
     public class RefreshFolderInfoCommand : ICommand

@@ -7,9 +7,9 @@ namespace MEFL.Contract
 {
     public interface IGameSettingPage
     {
-        event EventHandler<EventArgs> OnSelected;
-        event EventHandler<EventArgs> OnRemoved;
-        event EventHandler<EventArgs> OnPageBack;
-        event EventHandler<EventArgs> OnListUpdate;
+        event EventHandler<GameInfoBase> OnSelected;
+        event EventHandler<GameInfoBase> OnRemoved;
+        event EventHandler<GameInfoBase> OnPageBack;
+        event EventHandler<GameInfoBase> OnListUpdate;
     }
 }

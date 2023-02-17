@@ -42,7 +42,7 @@ namespace MEFL.CLAddIn
     public class MEFLLegacyAccount : MEFL.Contract.AccountBase,INotifyPropertyChanged
     {
         public static ManageALegacyAccountPage page = new ManageALegacyAccountPage();
-
+        [JsonIgnore]
         public override bool Selected { get => base.Selected;
             set {
                 _Avator.Width = 200;

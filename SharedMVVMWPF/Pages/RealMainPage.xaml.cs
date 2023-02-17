@@ -1,6 +1,7 @@
 ﻿using MEFL.APIData;
 using MEFL.Contract;
 using MEFL.Controls;
+using MEFL.EventsMethod;
 using MEFL.PageModelViews;
 using System;
 using System.Collections.Generic;
@@ -77,39 +78,18 @@ namespace MEFL.Pages
             {
                 item.Content = ((sender as FrameworkElement).DataContext as GameInfoBase).SettingsPage;
                 #region Events
-                APIModel.CurretGame.SettingsPage.OnPageBack -= SettingsPage_OnPageBack;
-                APIModel.CurretGame.SettingsPage.OnRemoved -= SettingsPage_OnRemoved;
-                APIModel.CurretGame.SettingsPage.OnSelected -= SettingsPage_OnSelected;
-                APIModel.CurretGame.SettingsPage.OnListUpdate -= SettingsPage_OnListUpdate;
-                APIModel.CurretGame.SettingsPage.OnPageBack += SettingsPage_OnPageBack;
-                APIModel.CurretGame.SettingsPage.OnRemoved += SettingsPage_OnRemoved;
-                APIModel.CurretGame.SettingsPage.OnSelected += SettingsPage_OnSelected;
-                APIModel.CurretGame.SettingsPage.OnListUpdate += SettingsPage_OnListUpdate;
+                ((sender as FrameworkElement).DataContext as GameInfoBase).SettingsPage.OnPageBack -= EventToolkit.SettingsPage_OnPageBack;
+                ((sender as FrameworkElement).DataContext as GameInfoBase).SettingsPage.OnRemoved -= EventToolkit.SettingsPage_OnRemoved;
+                ((sender as FrameworkElement).DataContext as GameInfoBase).SettingsPage.OnSelected -= EventToolkit.SettingsPage_OnSelected;
+                ((sender as FrameworkElement).DataContext as GameInfoBase).SettingsPage.OnListUpdate -= EventToolkit.SettingsPage_OnListUpdate;
+                ((sender as FrameworkElement).DataContext as GameInfoBase).SettingsPage.OnPageBack += EventToolkit.SettingsPage_OnPageBack;
+                ((sender as FrameworkElement).DataContext as GameInfoBase).SettingsPage.OnRemoved += EventToolkit.SettingsPage_OnRemoved;
+                ((sender as FrameworkElement).DataContext as GameInfoBase).SettingsPage.OnSelected += EventToolkit.SettingsPage_OnSelected;
+                ((sender as FrameworkElement).DataContext as GameInfoBase).SettingsPage.OnListUpdate += EventToolkit.SettingsPage_OnListUpdate;
                 #endregion
                 item.Show(From);
             }
         }
-
-        private void SettingsPage_OnListUpdate(object? sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void SettingsPage_OnSelected(object? sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void SettingsPage_OnRemoved(object? sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
-        private void SettingsPage_OnPageBack(object? sender, EventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
         private void RealMainPageModelView_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "ProcessModelView")
@@ -392,7 +372,7 @@ namespace MEFL.Pages
                             var mems = string.Empty;
                             if (Game.GameMaxMem == null || Game.GameMinMem == null || Game.GameMaxMem == 0)
                             {
-                                mems = " -Xmn256m -Xmx1256m";
+                                mems = $" -Xmx{APIModel.MaxMemory}m";
                             }
                             else
                             {

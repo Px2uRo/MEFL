@@ -48,7 +48,9 @@ public partial class AddALegacyAccountPage : UserControl, IAddAccountPage
     {
         if (Guid.TryParse(GuidBox.Text,out var res))
         {
-            OnAccountAdd.Invoke(this,new MEFLLegacyAccount(UserNameBox.Text, Guid.Parse(GuidBox.Text)));
+            var one = new MEFLLegacyAccount(UserNameBox.Text, Guid.Parse(GuidBox.Text));
+            OnAccountAdd.Invoke(this,one);
+            AccountsManagement.LegacyList.AddOne(one);
         }
         else
         {

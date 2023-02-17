@@ -89,6 +89,24 @@ namespace MEFL.PageModelViews
     }
     public class SettingPageModelView: PageModelViewBase
     {
+        public string MaxMemory
+        {
+            get
+            {
+                return APIModel.MaxMemory.ToString();
+            }
+            set
+            {
+                try
+                {
+                    APIData.APIModel.MaxMemory = Convert.ToInt32(value);
+                }
+                catch (Exception ex)
+                {
+                }
+                Invoke(nameof(MaxMemory));
+            }
+        }
         public DownloadSourceCollection DownSources => APIModel.DownloadSources;
         public string TempFolderPath
         {
