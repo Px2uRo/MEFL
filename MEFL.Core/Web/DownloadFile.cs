@@ -35,9 +35,15 @@ namespace MEFL.Core.Web
 
     }
 
+    public struct ContentRange
+    {
+        public long Offset;
+        public long Length;
+    }
+
     ///<summary>文件下载模块，一个实例对应一个下载任务。</summary>
     [Serializable]
-    public sealed class DownloadFile
+    public class DownloadFile
     {
         #region events
 
@@ -54,6 +60,9 @@ namespace MEFL.Core.Web
 
         ///<summary>文件当前下载的长度位置，如果要实现恢复下载，可以从此处进行设置。是临时数据。</summary>
         private long _tempDownloadingLengthForPausedLength;
+
+        ///<summary>下载缓存。</summary>
+        private byte[] _buffer;
 
         #endregion
 
@@ -109,8 +118,90 @@ namespace MEFL.Core.Web
 
         #region methods
 
+        public async Task Download(bool isContinue = false)
+        {
+            try
+            {
+                var httpRequest = WebRequest.Create(Source.RemoteUri);
+                httpRequest.Method = "GET";
+                httpRequest.ContentType = "application/x-www-form-urlencoded";
+
+                httpRequest.Timeout = 30000; // 半分钟。
+                var httpResponse = httpRequest.GetResponse();
+
+                ContentLength = httpResponse.ContentLength;
+                
+                if(ContentLength > 1024 * 1024)
+                {
+                    await DownloadCombineParts(ContentLength);
+                }
+                else
+                {
+                    await DownloadSingle(false);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        ///<summary>下载切片。</summary>
+        public async Task DownloadCombineParts(long contentLength)
+        {
+            await DownloadCombineParts(contentLength, 1024 * 1024); // 1MB区域
+        }
+
+        ///<summary>下载多项。</summary>
+        private async Task DownloadCombineParts(long contentLength, long partSize)
+        {
+
+            var task = new Task(() =>
+            {
+                State = DownloadFileState.Downloading;
+                var buffer = new byte[contentLength];
+                var partCount = contentLength / partSize + contentLength % partSize == 0 ? 0 : 1; // 是否为整除，如果不是整除则补上余数段。
+                var hasRest = contentLength % partSize != 0;
+
+                var parts = new byte[partSize];
+                var ranges = new ContentRange[partCount];
+                for (int i = 0; i < partSize; i++) { ranges[i] = new ContentRange() { Offset = i * partSize, Length = partSize }; }
+                if (hasRest) ranges[partSize - 1].Length = contentLength - partCount * partSize + 1;
+
+                var po = new ParallelOptions();
+                po.CancellationToken = _cancelSource.Token;
+                try
+                {
+                    Parallel.ForEach(ranges, po, r => DownloadToBuffer(buffer, r.Offset, r.Length));
+                    State = DownloadFileState.DownloadSucessed;
+                    OnTaskCompleted?.Invoke(this, EventArgs.Empty);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"下载失败{Source.RemoteUri}，{ex.Message}");
+                    State = DownloadFileState.DownloadFailed;
+                    ErrorInfo = ex.Message;
+                    OnDownloadFailed?.Invoke(this, ErrorInfo);
+                    OnTaskCompleted?.Invoke(this, EventArgs.Empty);
+                }
+
+                File.WriteAllBytes(Source.LocalPath, buffer);
+            });
+            task.Start();
+            await task;
+
+        }
+
+        ///<summary>下载到缓存。</summary>
+        private void DownloadToBuffer(byte[] buffer, long rangeStart, long rangeLen)
+        {
+            HttpHelper.GetContentByPart(buffer, Source.RemoteUri, rangeStart, rangeStart + rangeLen - 1);
+        }
+
         ///<summary>下载任务。</summary>
-        public Task Download(bool isContinue = false)
+        public Task DownloadSingle(bool isContinue = false)
         {
             State = DownloadFileState.Downloading;
             DownloadCounter++;
