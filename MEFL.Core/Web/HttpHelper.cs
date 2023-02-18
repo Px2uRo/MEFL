@@ -20,22 +20,49 @@ public static class HttpHelper
     ///<summary>断点续传。</summary>
     public static void GetContentByPart(byte[] buffer, string url, long startPoint, long endPoint)
     {
-        var httpRequest = WebRequest.Create(url);
+        var httpRequest = WebRequest.Create(url) as HttpWebRequest;
         httpRequest.Method = "GET";
         httpRequest.ContentType = "application/x-www-form-urlencoded";
-        httpRequest.Headers.Add("Range", $"{startPoint}-{endPoint}");
+        //httpRequest.Headers.Add("Range", $"bytes={startPoint}-{endPoint}");
+        httpRequest.AddRange(startPoint, endPoint);
         httpRequest.Timeout = 30000; // 半分钟。
 
         using (var httpResponse = httpRequest.GetResponse())
         {
             using (var stream = httpResponse.GetResponseStream())
             {
-                stream.Read(buffer, (int)startPoint, (int)(endPoint - startPoint + 1));
+                using (var ms = new MemoryStream())
+                {
+                    stream.CopyTo(ms);
+                    var temp = ms.ToArray();
+                    //stream.Read(buffer, (int)startPoint, (int)(endPoint - startPoint + 1));
+                    //stream.Read(temp, 0, (int)(endPoint - startPoint + 1));
+                    Console.WriteLine($"{startPoint}-{endPoint}");
+                    Console.WriteLine(GetBufferInfo(temp));
+
+                    Buffer.BlockCopy(temp, 0, buffer, (int)startPoint, temp.Length);
+                }
             }
-
         }
-
     }
+
+    ///<summary></summary>
+    public static string GetBufferInfo(byte[] bytes, int offset = 0)
+    {
+        var sb = new StringBuilder();
+        var c = 0;
+        for (int i = 0; i < 10; i++)
+        {
+            for (int j = 0; j < 16; j++)
+            {
+                sb.Append($"{bytes[c + offset]} ");
+                c++;
+            }
+            sb.AppendLine();
+        }
+        return sb.ToString();
+    }
+
 
 
     ///<summary>获得资源的长度。</summary>

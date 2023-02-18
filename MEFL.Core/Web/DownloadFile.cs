@@ -45,6 +45,12 @@ namespace MEFL.Core.Web
     [Serializable]
     public class DownloadFile
     {
+        #region const
+
+        private const int MaxRange = 1024 * 1024;
+
+        #endregion
+
         #region events
 
         public event EventHandler<long> OnBytesAdd;
@@ -130,8 +136,8 @@ namespace MEFL.Core.Web
                 var httpResponse = httpRequest.GetResponse();
 
                 ContentLength = httpResponse.ContentLength;
-                
-                if(ContentLength > 1024 * 1024)
+
+                if (ContentLength > MaxRange)
                 {
                     await DownloadCombineParts(ContentLength);
                 }
@@ -151,7 +157,7 @@ namespace MEFL.Core.Web
         ///<summary>下载切片。</summary>
         public async Task DownloadCombineParts(long contentLength)
         {
-            await DownloadCombineParts(contentLength, 1024 * 1024); // 1MB区域
+            await DownloadCombineParts(contentLength, MaxRange); // 1MB区域
         }
 
         ///<summary>下载多项。</summary>
@@ -162,19 +168,23 @@ namespace MEFL.Core.Web
             {
                 State = DownloadFileState.Downloading;
                 var buffer = new byte[contentLength];
-                var partCount = contentLength / partSize + contentLength % partSize == 0 ? 0 : 1; // 是否为整除，如果不是整除则补上余数段。
+                var partCount = contentLength / partSize; // 是否为整除，如果不是整除则补上余数段。
+                partCount += contentLength % partSize == 0 ? 0 : 1;
                 var hasRest = contentLength % partSize != 0;
 
-                var parts = new byte[partSize];
                 var ranges = new ContentRange[partCount];
                 for (int i = 0; i < partCount; i++) { ranges[i] = new ContentRange() { Offset = i * partSize, Length = partSize }; }
-                if (hasRest) ranges[partCount - 1].Length = contentLength - partCount * partSize + 1;
+                if (hasRest) ranges[partCount - 1].Length = contentLength - (partCount - 1) * partSize;
 
                 var po = new ParallelOptions();
                 po.CancellationToken = _cancelSource.Token;
                 try
                 {
-                    Parallel.ForEach(ranges, po, r => DownloadToBuffer(buffer, r.Offset, r.Length));
+                    foreach (var r in ranges)
+                    {
+                        DownloadToBuffer(buffer, r.Offset, r.Length);
+                    }
+                    //Parallel.ForEach(ranges, po, r => DownloadToBuffer(buffer, r.Offset, r.Length));
                     State = DownloadFileState.DownloadSucessed;
                     OnTaskCompleted?.Invoke(this, EventArgs.Empty);
                 }
@@ -187,7 +197,15 @@ namespace MEFL.Core.Web
                     OnTaskCompleted?.Invoke(this, EventArgs.Empty);
                 }
 
-                File.WriteAllBytes(Source.LocalPath, buffer);
+                Console.WriteLine(HttpHelper.GetBufferInfo(buffer, (int)ranges.Last().Offset));
+
+                using (var fs = new FileStream(Source.LocalPath, FileMode.Create))
+                {
+                    fs.Write(buffer);
+                }
+
+                var nbuffer = File.ReadAllBytes(Source.LocalPath);
+                Console.WriteLine(HttpHelper.GetBufferInfo(nbuffer, (int)ranges.Last().Offset));
             });
             task.Start();
             await task;
@@ -209,10 +227,10 @@ namespace MEFL.Core.Web
             {
                 try
                 {
-                    var httpRequest = WebRequest.Create(Source.RemoteUri);
+                    var httpRequest = WebRequest.Create(Source.RemoteUri) as HttpWebRequest;
                     httpRequest.Method = "GET";
                     httpRequest.ContentType = "application/x-www-form-urlencoded";
-
+                    httpRequest.AddRange(0);
                     // 设置断点续传的信息。
                     if (isContinue)
                     {
@@ -375,8 +393,8 @@ namespace MEFL.Core.Web
 #if DEBUG
         public static DownloadFile LoadTest()
         {
-            var targetPath = Path.Combine(Environment.CurrentDirectory, "client.jar");
-            return new DownloadFile(new DownloadURI("https://piston-data.mojang.com/v1/objects/977727ec9ab8b4631e5c12839f064092f17663f8/client.jar", targetPath));
+            var targetPath = Path.Combine(Environment.CurrentDirectory, "test.exe");
+            return new DownloadFile(new DownloadURI("https://download.visualstudio.microsoft.com/download/pr/dcf6b6e2-824d-4cae-9f05-1b81b4ccbace/dd620dd4b95bb3534d0ebf53babc968b/dotnet-sdk-7.0.200-win-x64.exe", targetPath));
         }
 #endif
 
