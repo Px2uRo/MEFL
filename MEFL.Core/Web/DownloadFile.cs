@@ -167,8 +167,8 @@ namespace MEFL.Core.Web
 
                 var parts = new byte[partSize];
                 var ranges = new ContentRange[partCount];
-                for (int i = 0; i < partSize; i++) { ranges[i] = new ContentRange() { Offset = i * partSize, Length = partSize }; }
-                if (hasRest) ranges[partSize - 1].Length = contentLength - partCount * partSize + 1;
+                for (int i = 0; i < partCount; i++) { ranges[i] = new ContentRange() { Offset = i * partSize, Length = partSize }; }
+                if (hasRest) ranges[partCount - 1].Length = contentLength - partCount * partSize + 1;
 
                 var po = new ParallelOptions();
                 po.CancellationToken = _cancelSource.Token;
