@@ -180,11 +180,11 @@ namespace MEFL.Core.Web
                 po.CancellationToken = _cancelSource.Token;
                 try
                 {
-                    foreach (var r in ranges)
-                    {
-                        DownloadToBuffer(buffer, r.Offset, r.Length);
-                    }
-                    //Parallel.ForEach(ranges, po, r => DownloadToBuffer(buffer, r.Offset, r.Length));
+                    //foreach (var r in ranges)
+                    //{
+                    //    DownloadToBuffer(buffer, r.Offset, r.Length);
+                    //}
+                    Parallel.ForEach(ranges, po, r => DownloadToBuffer(buffer, r.Offset, r.Length));
                     State = DownloadFileState.DownloadSucessed;
                     OnTaskCompleted?.Invoke(this, EventArgs.Empty);
                 }
