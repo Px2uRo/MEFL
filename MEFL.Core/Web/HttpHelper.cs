@@ -41,9 +41,12 @@ public static class HttpHelper
                     Console.WriteLine(GetBufferInfo(temp));
 
                     Buffer.BlockCopy(temp, 0, buffer, (int)startPoint, temp.Length);
+                    //GC.SuppressFinalize(temp);
+                    //temp = null;
                 }
             }
         }
+        GC.Collect();
     }
 
     ///<summary></summary>

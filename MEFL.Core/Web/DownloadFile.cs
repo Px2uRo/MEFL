@@ -206,6 +206,8 @@ namespace MEFL.Core.Web
 
                 var nbuffer = File.ReadAllBytes(Source.LocalPath);
                 Console.WriteLine(HttpHelper.GetBufferInfo(nbuffer, (int)ranges.Last().Offset));
+                Task.Delay(1000).ContinueWith((o) => { GC.Collect(); });
+
             });
             task.Start();
             await task;

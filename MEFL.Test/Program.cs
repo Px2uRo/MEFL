@@ -16,10 +16,8 @@ internal class Program
         Console.WriteLine($"耗时：{DateTime.Now - startTime}");
         //downloadfile.SaveTempCache(Environment.CurrentDirectory);
 
+ 
         Console.ReadLine();
-
-
-
     }
 
     private static void Downloadfile_OnTaskCompleted(object? sender, EventArgs e)
