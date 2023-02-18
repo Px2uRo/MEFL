@@ -41,6 +41,7 @@ namespace MEFL.Core.Web
         public long Length;
     }
 
+
     ///<summary>文件下载模块，一个实例对应一个下载任务。</summary>
     [Serializable]
     public class DownloadFile
@@ -126,6 +127,7 @@ namespace MEFL.Core.Web
 
         public async Task Download(bool isContinue = false)
         {
+            State = DownloadFileState.Downloading;
             try
             {
                 var httpRequest = WebRequest.Create(Source.RemoteUri);
@@ -198,7 +200,8 @@ namespace MEFL.Core.Web
                 }
 
                 Console.WriteLine(HttpHelper.GetBufferInfo(buffer, (int)ranges.Last().Offset));
-
+                var parentRoot = Path.GetDirectoryName(Source.LocalPath);
+                Helpers.FileHelper.CreateFolder(parentRoot);
                 using (var fs = new FileStream(Source.LocalPath, FileMode.Create))
                 {
                     fs.Write(buffer);
@@ -207,6 +210,7 @@ namespace MEFL.Core.Web
                 var nbuffer = File.ReadAllBytes(Source.LocalPath);
                 Console.WriteLine(HttpHelper.GetBufferInfo(nbuffer, (int)ranges.Last().Offset));
                 Task.Delay(1000).ContinueWith((o) => { GC.Collect(); });
+
 
             });
             task.Start();
