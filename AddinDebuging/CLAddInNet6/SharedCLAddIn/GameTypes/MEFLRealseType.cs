@@ -219,8 +219,27 @@ namespace MEFL.CLAddIn.GameTypes
                 }
             }
         }
-
-        public override string GameFolder { get => dotMinecraftPath; set => throw new NotImplementedException(); }
+        public GamePathType GamePathType { get => _MSOAT.GamePathType;set { _MSOAT.GamePathType = value; } }
+        public override string GameFolder { get {
+                if (GamePathType == GamePathType.Versions)
+                {
+                    var path = $"{dotMinecraftPath}\\versions\\{Version}";
+                    if (!Directory.Exists(path))
+                    {
+                        Directory.CreateDirectory(path);
+                    }
+                    return path;
+                }
+                else if (GamePathType==GamePathType.Custom)
+                {
+                    return _MSOAT.CustomDotMCPath;
+                }
+                else
+                {
+                    return dotMinecraftPath;
+                }
+            } set {  }
+        }
 
         public override IGameSettingPage SettingsPage {get {
                 _settingPage.DataContext = this;
@@ -355,9 +374,9 @@ namespace MEFL.CLAddIn.GameTypes
             NativeFilesNeedToDepackage= new List<JsonFileInfo>();
         }
 
-        public CLGameType(string JsonPath,bool maybePCL2)
+        public CLGameType(string JsonPath,bool maybeForge)
         {
-            _maybeForge = maybePCL2;
+            _maybeForge = maybeForge;
             FileNeedsToDownload = new List<JsonFileInfo>();
             string otherArgsPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(JsonPath), "MEFLOtherArguments.json");
             _MSOAT =new MEFLOtherArgs(otherArgsPath);
@@ -371,24 +390,19 @@ namespace MEFL.CLAddIn.GameTypes
             {
 
             }
-
         }
     }
     public class MEFLOtherArgs : GameotherArgs
     {
         #region Privates
-        [JsonIgnore]
         private string _JsonPath { get; set; }
-        [JsonIgnore]
         private string _Description { get; set; }
-        [JsonIgnore]
         private string _OtherJVMArguments { get; set; }
-        [JsonIgnore]
         private string _OtherGameArguments { get; set; }
-        [JsonIgnore]
         private string _NativeLibrariesPath { get; set; }
-        [JsonIgnore]
         private string _CustomIconPath { get; set; }
+        private string _customDotMCPath { get; set; }
+        private GamePathType _gamePathType = GamePathType.DotMCPath;
         #endregion
         #region Props
         public override string Description { get => _Description; set { _Description = value; ChangeProperty(); } }
@@ -397,6 +411,10 @@ namespace MEFL.CLAddIn.GameTypes
         public override string NativeLibrariesPath { get => _NativeLibrariesPath; set { _NativeLibrariesPath = value; ChangeProperty(); } }
         public override string CustomIconPath { get => _CustomIconPath; set { _CustomIconPath = value; ChangeProperty(); } }
         public override bool StartInDebugMode { get ; set ; }
+        public override string CustomDotMCPath { get => _customDotMCPath; set { _customDotMCPath = value;ChangeProperty(); } }
+
+        public override GamePathType GamePathType { get => _gamePathType; set {
+                _gamePathType=value;ChangeProperty(); } }
 
         public override void ChangeProperty()
         {
@@ -414,7 +432,6 @@ namespace MEFL.CLAddIn.GameTypes
             }
         }
         #endregion
-
         public MEFLOtherArgs(string JsonPath)
         {
             _JsonPath = JsonPath;
@@ -432,6 +449,7 @@ namespace MEFL.CLAddIn.GameTypes
                     OtherGameArguments = args.OtherGameArguments;
                     NativeLibrariesPath = args.NativeLibrariesPath;
                     CustomIconPath = args.CustomIconPath;
+                    GamePathType=args.GamePathType;
                 }
                 else
                 {

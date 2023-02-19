@@ -469,18 +469,10 @@ namespace MEFL.Pages
                         #region 解压Native
                         foreach (var item in Game.NativeFilesNeedToDepackage)
                         {
-                            try
-                            {
-                                CoreLaunching.ZipFile.Export(item.localpath, Game.NativeLibrariesPath, true);
-                            }
-                            catch (Exception ex)
-                            {
-                                throw new Exception(ex.InnerException.Message);
-                            }
+                            CoreLaunching.ZipFile.Export(item.localpath, Game.NativeLibrariesPath);
                         }
                         if (TotalSize-DownloadedSize == 0.0)
                         {
-
                             Progress = 100;
                             p.StartInfo.RedirectStandardError = true;
                             p.StartInfo.RedirectStandardOutput = true;

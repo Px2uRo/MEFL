@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d"
+             mc:Ignorable="d" DataContextChanged="Data_Changed"
              xmlns:c="clr-namespace:MEFL.Controls;assembly=MEFL.Controls"
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
@@ -29,6 +29,26 @@
                 </StackPanel>
             </StackPanel>
         </c:MyCard>
-        
+        <c:MyCard Title="存档与mod位置">
+            <StackPanel>
+                <RadioButton Content="使用 .minecraft 文件夹" Name="Radio1" Checked="Radio_Checked"/>
+                <RadioButton Content="使用 versions\x.x.x 文件夹" Name="Radio2" Checked="Radio_Checked"/>
+                <RadioButton Content="使用下面的自定义文件夹" Name="Radio3" Checked="Radio_Checked"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="110" />
+                    </Grid.ColumnDefinitions>
+                    <TextBox Name="CustomTB" Height="25" IsEnabled="False" Text="{Binding CustomDotMCPath}"/>
+                    <c:MyButton Content="浏览(还没做完)" IsEnabled="False" Grid.Column="1" HorizontalAlignment="Right" Width="100" Height="30" Margin="0,0,5,5"/>
+                </Grid>
+            </StackPanel>
+        </c:MyCard>
+        <c:MyCard Title="存档管理">
+            
+        </c:MyCard>
+        <c:MyCard Title="mod 管理">
+            
+        </c:MyCard>
     </StackPanel>
 </UserControl>

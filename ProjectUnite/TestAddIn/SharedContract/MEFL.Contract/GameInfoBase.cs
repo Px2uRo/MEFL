@@ -20,7 +20,7 @@ public abstract class GameInfoBase : MEFLClass,INotifyPropertyChanged
 #if NET4_0
 
 #else
-	private void PropChanged([CallerMemberName] string prop = "")
+	public void PropChanged([CallerMemberName] string prop = "")
 	{
 		PropertyChanged?.Invoke(this,new(prop));
 	}	
