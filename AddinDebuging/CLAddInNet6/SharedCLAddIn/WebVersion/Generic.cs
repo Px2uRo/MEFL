@@ -15,11 +15,11 @@ namespace MEFL.CLAddIn.WebVersion
             if (!Directory.Exists( Path.Combine(dotMCFolder, "versions", SubFolderString)))
             {
                 Directory.CreateDirectory(Path.Combine(dotMCFolder, "versions", SubFolderString));
-                return new(false, null, downloader.CreateProgress(Url, Path.Combine(dotMCFolder, "versions", SubFolderString,$"{SubFolderString}.json"), sources,dotMCFolder));
+                return new(false, null, downloader.InstallMinecraft(Url,dotMCFolder,sources,null));
             }
             else
             {
-                return new(true, new SolveDupNamePage(Url,dotMCFolder,SubFolderString), downloader.CreateProgress(Url, dotMCFolder, sources,dotMCFolder));
+                return new(true, new SolveDupNamePage(Url,dotMCFolder,SubFolderString,downloader,sources), null);
             }
         }
     }

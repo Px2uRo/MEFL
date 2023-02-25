@@ -48,6 +48,7 @@ public class LauncherProgressResult : MEFLClass
 	public DownloadProgress Progress
 	{
 		get { return _progress; }
+		set { _progress = value; }
 	}
 
 	public LauncherProgressResult(bool hasError,UserControl page,DownloadProgress progress)

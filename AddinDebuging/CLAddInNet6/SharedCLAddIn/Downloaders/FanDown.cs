@@ -1,4 +1,4 @@
-﻿using MEFL.Contract;
+﻿/*using MEFL.Contract;
 using System;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
@@ -119,7 +119,7 @@ namespace MEFL.CLAddIn.Downloaders
             foreach (var item in pairs)
             {
                 var newFile = new DownloadFile(item);
-                newFile.Source.LoaclPath = newFile.Source.LoaclPath.Replace("${请Ctrl+H替换}", _targetDir);
+                newFile.Source.LocalPath = newFile.Source.LocalPath.Replace("${请Ctrl+H替换}", _targetDir);
                 newFile.OnBytesAdd += NewFile_OnBytesAdd;
                 newFile.OnDownloadFailed += NewFile_OnDownloadFailed;
                 newFile.OnTaskCompleted += NewFile_OnTaskCompleted;
@@ -210,9 +210,9 @@ namespace MEFL.CLAddIn.Downloaders
 
                     using (var stream = httpResponse.GetResponseStream())
                     {
-                        var parentRoot = Path.GetDirectoryName(Source.LoaclPath);
+                        var parentRoot = Path.GetDirectoryName(Source.LocalPath);
                         FileSystemHelper.CreateFolder(parentRoot);
-                        using (FileStream fs = new FileStream(Source.LoaclPath, FileMode.Create))
+                        using (FileStream fs = new FileStream(Source.LocalPath, FileMode.Create))
                         {
                             var cancelToken = new CancellationTokenSource();
                             Task.Run(() =>
@@ -256,7 +256,7 @@ namespace MEFL.CLAddIn.Downloaders
 
         public override string ToString()
         {
-            return $"remote uri: {Source.NativeUrl}, local uri: {Source.LoaclPath}";
+            return $"remote uri: {Source.NativeUrl}, local uri: {Source.LocalPath}";
         }
 
     }
@@ -298,9 +298,9 @@ namespace MEFL.CLAddIn.Downloaders
         {
             _sources= sources;
             dotMCPath = dotMCFolder;
-            CurrectFile = Path.GetFileName(loaclPath);
-            versionPath = Path.Combine(dotMCFolder, "versions", Path.GetFileNameWithoutExtension(CurrectFile));
-            GameJarPath = Path.Combine(versionPath, $"{Path.GetFileNameWithoutExtension(CurrectFile)}.jar");
+            CurrectProgress = Path.GetFileName(loaclPath);
+            versionPath = Path.Combine(dotMCFolder, "versions", Path.GetFileNameWithoutExtension(CurrectProgress));
+            GameJarPath = Path.Combine(versionPath, $"{Path.GetFileNameWithoutExtension(CurrectProgress)}.jar");
             this.NativeLocalPairs = new() { new(nativeUrl, loaclPath) };
         }
 
@@ -320,7 +320,7 @@ namespace MEFL.CLAddIn.Downloaders
             new Thread(() => {
                 while (!Decided)
                 {
-                    var Value = NativeLocalPairs[0].LoaclPath;
+                    var Value = NativeLocalPairs[0].LocalPath;
                     Directory.CreateDirectory(Value.Replace(Path.GetFileName(Value),string.Empty));
                     new WebClient().DownloadFile(NativeLocalPairs[0].NativeUrl,Value);
                     NativeLocalPairs.Clear();
@@ -331,7 +331,7 @@ namespace MEFL.CLAddIn.Downloaders
                         {
                             NativeLocalPairs.Add(new(root.Downloads.Client.Url, Path.Combine(versionPath, GameJarPath)));
                             TotalSize += root.Downloads.Client.Size;
-                            CurrectFile = "判断缺失的文件中";
+                            CurrectProgress = "判断缺失的文件中";
                             if (!Directory.Exists(Path.Combine(dotMCPath, "assets", "indexs")))
                             {
                                 Directory.CreateDirectory(Path.Combine(dotMCPath, "assets", "indexs"));
@@ -444,3 +444,4 @@ namespace MEFL.CLAddIn.Downloaders
         }
     }
 }
+*/

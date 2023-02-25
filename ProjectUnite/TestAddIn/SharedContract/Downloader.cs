@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
+using System.Collections.ObjectModel;
 
 namespace MEFL.Contract
 {
@@ -12,19 +13,79 @@ namespace MEFL.Contract
         public abstract string Description { get; }
         public abstract Version Version { get; }
         public abstract object Icon { get; }
-        public abstract DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources,string dotMCFolder);
-        public abstract DownloadProgress CreateProgress(List<NativeLocalPair> NativeLocalPairs, DownloadSource[] sources, string dotMCFolder);
+        public virtual DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string dotMCFolder) 
+        { 
+            throw new NotImplementedException();
+        }
+        public virtual DownloadProgress CreateProgress(NativeLocalPairsManager NativeLocalPairs, DownloadSource[] sources, string dotMCFolder) 
+        { 
+            throw new NotImplementedException();
+        }
+        public virtual DownloadProgress InstallMinecraft(string jsonSource,  string dotMCFolder, DownloadSource[] sources,object? parama)
+        {
+            throw new NotImplementedException();
+        }
     }
     public class NativeLocalPair
     {
+        public event EventHandler<long> ProgressChanged;
+        public event EventHandler<bool> IsOverChanged;
         public string NativeUrl;
-        public string LoaclPath;
+        public string LocalPath;
+        private bool _isOver;
 
-        public NativeLocalPair(string nativeUrl, string loaclPath)
+        public bool IsOver
+        {
+            get { return _isOver; }
+            set {
+                IsOverChanged?.Invoke(this,value);
+                _isOver = value; 
+            }
+        }
+
+        public long Length;
+        private long lastLen = 0;
+        private long downloaded = 0;
+        public long Downloaded { get => downloaded; set 
+            { 
+                downloaded= value;
+                ProgressChanged?.Invoke(this,downloaded-lastLen);
+                lastLen= value;
+            } 
+        }
+
+        public NativeLocalPair(string nativeUrl, string localPath,long length)
         {
             NativeUrl = nativeUrl;
-            LoaclPath = loaclPath;
+            LocalPath = localPath;
+            Length = length;
+            IsOver = false;
         }
+    }
+    public class NativeLocalPairsManager : ObservableCollection<NativeLocalPair> 
+    {
+        public event EventHandler<NativeLocalPair> OnItemAdded;
+
+        protected override void InsertItem(int index, NativeLocalPair item)
+        {
+            item.IsOverChanged += Item_IsOverChanged;
+            item.ProgressChanged += Item_ProgressChanged;
+            OnItemAdded?.Invoke(this,item);
+            base.InsertItem(index, item);
+        }
+
+        private void Item_ProgressChanged(object? sender, long e)
+        {
+            ProgressChanged?.Invoke(this,e);
+        }
+
+        private void Item_IsOverChanged(object? sender, bool e)
+        {
+            IsOverChanged?.Invoke(this,e);
+        }
+
+        public event EventHandler<bool>? IsOverChanged;
+        public event EventHandler<long>? ProgressChanged;
     }
     public abstract class DownloadProgress:MEFLClass,INotifyPropertyChanged
     {
@@ -65,7 +126,7 @@ namespace MEFL.Contract
             OnLogClear?.Invoke(this,EventArgs.Empty);
         }
         #endregion
-        public List<NativeLocalPair> NativeLocalPairs;
+        public NativeLocalPairsManager TaskItems;
 
         private string _ErrorInfo;
 
@@ -77,10 +138,11 @@ namespace MEFL.Contract
 
         private string _currectFile;
 
-        public string CurrectFile
+        public string CurrectProgress
+
         {
             get { return _currectFile; }
-            set { _currectFile = value; ChangeProperty(nameof(CurrectFile)); }
+            set { _currectFile = value; ChangeProperty(nameof(CurrectProgress)); }
         }
 
 
@@ -103,37 +165,54 @@ namespace MEFL.Contract
 
         private long _totalCount;
 
-        public long TotalCount
-        {
-            get { return _totalCount; }
-            set { _totalCount = value; ChangeProperty(nameof(TotalCount)); }
-        }
+        public long TotalCount => _totalCount;
 
         private long _downloadedItems;
 
-        public long DownloadedItems
-        {
-            get { return _downloadedItems; }
-            set { _downloadedItems = value; ChangeProperty(nameof(DownloadedItems)); }
-        }
+        public long DownloadedItems=> _downloadedItems;
         private long _downloadedSize;
 
-        public long DownloadedSize
-        {
-            get { return _downloadedSize; }
-            set { _downloadedSize = value; ChangeProperty(nameof(DownloadedSize)); }
-        }
+        public long DownloadedSize => _downloadedItems;
         private long _totalSize;
 
-        public long TotalSize
-        {
-            get { return _totalSize; }
-            set { _totalSize = value; ChangeProperty(nameof(TotalSize)); }
-        }
+        public long TotalSize => _totalCount;
 
         public DownloadProgress()
         {
+            TaskItems = new();
+            TaskItems.OnItemAdded += TaskItems_OnItemAdded;
+            TaskItems.IsOverChanged += TaskItems_IsOverChanged;
+            TaskItems.ProgressChanged += TaskItems_ProgressChanged;
             State = DownloadProgressState.Canceled;
+        }
+
+        public DownloadProgress(NativeLocalPairsManager items)
+        {
+            TaskItems = items;
+            TaskItems.OnItemAdded += TaskItems_OnItemAdded;
+            TaskItems.IsOverChanged += TaskItems_IsOverChanged;
+            TaskItems.ProgressChanged += TaskItems_ProgressChanged;
+            State = DownloadProgressState.Canceled;
+        }
+
+        private void TaskItems_ProgressChanged(object? sender, long e)
+        {
+            _downloadedSize += e;
+            PropertyChanged.Invoke(this, new(nameof(DownloadedSize)));
+        }
+
+        private void TaskItems_IsOverChanged(object? sender, bool e)
+        {
+            _downloadedItems++;
+            PropertyChanged.Invoke(this, new(nameof(DownloadedItems)));
+        }
+
+        private void TaskItems_OnItemAdded(object? sender, NativeLocalPair e)
+        {
+            _totalSize += e.Length;
+            _totalCount++;
+            PropertyChanged.Invoke(this,new(nameof(TotalSize)));
+            PropertyChanged.Invoke(this, new(nameof(TotalCount)));
         }
     }
 

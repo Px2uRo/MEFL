@@ -1,26 +1,45 @@
-﻿using MEFL.Contract;
+﻿using CoreLaunching.JsonTemplates;
+using MEFL.Contract;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace MEFL.CLAddIn.Downloaders
 {
     internal static class SourceReplacer
     {
-        internal static string Replace(string Native, DownloadSource[] sources)
+        internal static string Replace(string native, DownloadSource[] sources)
         {
-            var res = string.Empty;
-            res = Native.Replace("http://launchermeta.mojang.com/mc/game/version_manifest.json", "${version_manifest}");
-            res = res.Replace("https://piston-meta.mojang.com", "${json}");
-            res = res.Replace("https://launchermeta.mojang.com/", "${AssIndex}");
-            res = res.Replace("https://launcher.mojang.com/", "${AssIndex}");
-            res = res.Replace("http://resources.download.minecraft.net", "${assets}");
-            res = res.Replace("https://libraries.minecraft.net/", "${libraries}");
+            native = native.Replace("http://launchermeta.mojang.com/mc/game/version_manifest.json", "${version_manifest}");
+            native = native.Replace("https://piston-meta.mojang.com", "${json}");
+            native = native.Replace("https://launchermeta.mojang.com/", "${AssIndex}");
+            native = native.Replace("https://launcher.mojang.com/", "${AssIndex}");
+            native = native.Replace("http://resources.download.minecraft.net", "${assets}");
+            native = native.Replace("https://libraries.minecraft.net/", "${libraries}");
             for (int i = 0; i < sources.Length; i++)
             {
-                res = res.Replace(oldValue:sources[i].ELItem, sources[i].Uri);
+                native = native.Replace(oldValue:sources[i].ELItem, sources[i].Uri);
             }
-            return res;
+            return native;
+        }
+
+        internal static string[] ReplaceMany(string[] natives, DownloadSource[] sources) 
+        {
+            for (int i = 0; i < natives.Count(); i++)
+            {
+                natives[i] = natives[i].Replace("http://launchermeta.mojang.com/mc/game/version_manifest.json", "${version_manifest}");
+                natives[i] = natives[i].Replace("https://piston-meta.mojang.com", "${json}");
+                natives[i] = natives[i].Replace("https://launchermeta.mojang.com/", "${AssIndex}");
+                natives[i] = natives[i].Replace("https://launcher.mojang.com/", "${AssIndex}");
+                natives[i] = natives[i].Replace("http://resources.download.minecraft.net", "${assets}");
+                natives[i] = natives[i].Replace("https://libraries.minecraft.net/", "${libraries}");
+                for (int j = 0; j < sources.Length; j++)
+                {
+                    natives[j] = natives[j].Replace(oldValue: sources[j].ELItem, sources[j].Uri);
+                }
+            }
+            return natives;
         }
     }
 }

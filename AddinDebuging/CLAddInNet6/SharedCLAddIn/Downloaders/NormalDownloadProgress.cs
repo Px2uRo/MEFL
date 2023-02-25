@@ -15,7 +15,7 @@ using CoreLaunching;
 
 namespace MEFL.CLAddIn.Downloaders
 {
-    public class NormalDownloadProgress : DownloadProgress
+    /*public class NormalDownloadProgress : DownloadProgress
     {
         DownloadSource[] Sources;
         List<bool> bools = new();
@@ -84,7 +84,7 @@ namespace MEFL.CLAddIn.Downloaders
                         }
                     }
                     var Key = NativeLocalPairs[i].NativeUrl;
-                    var Value = NativeLocalPairs[i].LoaclPath;
+                    var Value = NativeLocalPairs[i].LocalPath;
                     bools.Add(false);
                     CurrectFile = System.IO.Path.GetFileName(Key);
                     webClient = new();
@@ -151,7 +151,7 @@ namespace MEFL.CLAddIn.Downloaders
                                         var objectPath = Path.Combine(dotMCPath, "assets", "objects",item.Hash.Substring(0,2),item.Hash);
                                         if (!System.IO.File.Exists(objectPath))
                                         {
-                                            var native = SourceReplacer.Replace($"http://resources.download.minecraft.net/{item.Hash.Substring(0, 2)}/{item.Hash}", Sources);
+                                            var native = SourceReplacer.Replace($"http://resources.download.minecraft.net/{item.Hash[..2]}/{item.Hash}", Sources);
                                             var nlp = new NativeLocalPair(native, objectPath);
                                             NativeLocalPairs.Add(nlp);
                                             TotalSize += item.Size;
@@ -238,9 +238,9 @@ namespace MEFL.CLAddIn.Downloaders
             State = DownloadProgressState.RetryingOrContiuning;
             paused = false;
         }
-    }
+    }*/
 
-    public class CLDownloadProgress : DownloadProgress
+    /*public class CLDownloadProgress : DownloadProgress
     {
         List<bool> bools = new();
         Downloader webClient;
@@ -303,7 +303,7 @@ namespace MEFL.CLAddIn.Downloaders
                         }
                     }
                     var Key = NativeLocalPairs[i].NativeUrl;
-                    var Value = NativeLocalPairs[i].LoaclPath;
+                    var Value = NativeLocalPairs[i].LocalPath;
                     bools.Add(false);
                     CurrectFile = System.IO.Path.GetFileName(Key);
                     webClient = new();
@@ -445,6 +445,6 @@ namespace MEFL.CLAddIn.Downloaders
             State = DownloadProgressState.RetryingOrContiuning;
             paused = false;
         }
-    }
+    }*/
 
 }

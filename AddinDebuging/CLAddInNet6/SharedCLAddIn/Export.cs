@@ -2,7 +2,6 @@
 using CoreLaunching.JsonTemplates;
 using MEFL.Arguments;
 using MEFL.CLAddIn;
-using MEFL.CLAddIn.CLDownding;
 using MEFL.CLAddIn.Downloaders;
 using MEFL.CLAddIn.GameTypes;
 using MEFL.CLAddIn.Pages;
@@ -82,7 +81,7 @@ namespace MEFL.CLAddIn.Export
         static WebRequest req;
         public MEFLDownloader[] GetDownloaders(SettingArgs args)
         {
-            return new MEFLDownloader[] {};
+            return new MEFLDownloader[] {new FanCLD()};
         }
 
         public DownloadSource[] GetDownloadSources(SettingArgs args)

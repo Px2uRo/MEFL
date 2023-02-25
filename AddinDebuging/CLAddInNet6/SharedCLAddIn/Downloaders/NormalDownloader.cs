@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MEFL.CLAddIn.Downloaders
 {
-    public class NormalDownloader : MEFLDownloader
+    /*public class NormalDownloader : MEFLDownloader
     {
         public override string Name => "WebClientC#";
 
@@ -24,8 +24,8 @@ namespace MEFL.CLAddIn.Downloaders
         {
             return new NormalDownloadProgress(NativeLocalPairs, dotMCFolder,sources);
         }
-    }
-    public class CLDownloader : MEFLDownloader
+    }*/
+    /*public class CLDownloader : MEFLDownloader
     {
         public override string Name => "CoreLaunchingDownloader";
 
@@ -44,6 +44,6 @@ namespace MEFL.CLAddIn.Downloaders
         {
             return new CLDownloadProgress(NativeLocalPairs, dotMCFolder);
         }
-    }
+    }*/
 
 }

@@ -1,9 +1,12 @@
-﻿[10:22:28][MEFL]程序启动了，参数
-[10:22:29][MEFL]写入了注册表，键：PlayerUuid，值：6f58b606-8b8b-4847-a667-f614333b16d5
-[10:22:29][MEFL]读取了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanDown"}
-[10:22:29][MEFL]写入了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanDown"}
-[10:22:29][MEFL]读取了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanDown"}
-[10:22:29][MEFL]写入了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanDown"}
-[10:22:29][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[10:22:29][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[10:22:29][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+﻿[14:09:10][MEFL]程序启动了，参数
+[14:09:11][MEFL]写入了注册表，键：PlayerUuid，值：6f58b606-8b8b-4847-a667-f614333b16d5
+[14:09:11][MEFL]读取了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanCLD"}
+[14:09:11][MEFL]写入了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanCLD"}
+[14:09:11][MEFL]读取了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanCLD"}
+[14:09:11][MEFL]写入了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanCLD"}
+[14:09:11][MEFL]刷新时发现未知错误 The type initializer for 'MEFL.Contract.MEFLErrorType' threw an exception. at MEFL.Contract
+[14:09:11][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[14:09:11][MEFL]刷新时发现未知错误 The type initializer for 'MEFL.Contract.MEFLErrorType' threw an exception. at MEFL.Contract
+[14:09:11][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[14:09:11][MEFL]刷新时发现未知错误 The type initializer for 'MEFL.Contract.MEFLErrorType' threw an exception. at MEFL.Contract
+[14:09:11][MEFL]写入了注册表，键：SelectedFolderIndex，值：0

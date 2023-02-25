@@ -1,4 +1,5 @@
-﻿using MEFL.Controls;
+﻿using MEFL.Contract;
+using MEFL.Controls;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,10 +25,14 @@ namespace MEFL.CLAddIn
     {
         string fp;
         string _native;
-        public SolveDupNamePage(string native,string FolderPath,string Id)
+        MEFLDownloader _downloader;
+        DownloadSource[] _sources;
+        public SolveDupNamePage(string native,string FolderPath,string Id,MEFLDownloader downloader, DownloadSource[] sources)
         {
             fp = FolderPath;
             _native = native;
+            _sources= sources;
+            _downloader = downloader;
             InitializeComponent();
             NameBox.TextChanged += NameBox_TextChanged;
             NameBox.Text = Id;
@@ -52,11 +57,11 @@ namespace MEFL.CLAddIn
                 InfoBox.Text = String.Empty;
             }
         }
-
+            
         private void Button_Cliked(object sender,RoutedEventArgs e)
         {
-            (this.DataContext as Contract.LauncherProgressResult).Progress.NativeLocalPairs.Clear();
-            (this.DataContext as Contract.LauncherProgressResult).Progress.NativeLocalPairs.Add(new(_native, System.IO.Path.Combine(fp, "versions", NameBox.Text, $"{NameBox.Text}.json")));
+            (this.DataContext as Contract.LauncherProgressResult).Progress = _downloader.InstallMinecraft(_native,fp,_sources,null);
+            _downloader = null;
             (this.DataContext as Contract.LauncherProgressResult).NowDownload();
         }
     }

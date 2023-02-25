@@ -1,4 +1,4 @@
-﻿using CoreLaunching.JsonTemplates;
+﻿/*using CoreLaunching.JsonTemplates;
 using MEFL.CLAddIn.Downloaders;
 using MEFL.Contract;
 using Newtonsoft.Json;
@@ -53,7 +53,7 @@ namespace MEFL.CLAddIn.CLDownding
                 try
                 {
                     var Key = NativeLocalPairs[0].NativeUrl;
-                    var Value = NativeLocalPairs[0].LoaclPath;
+                    var Value = NativeLocalPairs[0].LocalPath;
                     while (!Decided)
                     {
                         NativeLocalPairs.Clear();
@@ -68,7 +68,7 @@ namespace MEFL.CLAddIn.CLDownding
                                     GameJarPath = Path.Combine(versionPath, $"{Path.GetFileNameWithoutExtension(Value)}\\{Path.GetFileNameWithoutExtension(Value)}.jar");
                                     NativeLocalPairs.Add(new(SourceReplacer.Replace(root.Downloads.Client.Url, Sources), GameJarPath));
                                     TotalSize += root.Downloads.Client.Size;
-                                    CurrectFile = "判断缺失的文件中";
+                                    CurrectProgress = "判断缺失的文件中";
                                     if (!Directory.Exists(Path.Combine(dotMCPath, "assets", "indexs")))
                                     {
                                         Directory.CreateDirectory(Path.Combine(dotMCPath, "assets", "indexs"));
@@ -157,7 +157,7 @@ namespace MEFL.CLAddIn.CLDownding
                     }
                     for (int i = 0; i < NativeLocalPairs.Count; i++)
                     {
-                        webFiles.Add(new(NativeLocalPairs[i].NativeUrl, NativeLocalPairs[i].LoaclPath));
+                        webFiles.Add(new(NativeLocalPairs[i].NativeUrl, NativeLocalPairs[i].LocalPath));
                     }
                     for (int i = 0; i < 64; i++)
                     {
@@ -198,9 +198,9 @@ namespace MEFL.CLAddIn.CLDownding
         public CLAddInDownloadingProgress(string nativeUrl, string loaclPath, string dotMCFolder, DownloadSource[] sources)
         {
             dotMCPath = dotMCFolder;
-            CurrectFile = Path.GetFileName(loaclPath);
-            versionPath = Path.Combine(dotMCFolder, "versions", Path.GetFileNameWithoutExtension(CurrectFile));
-            GameJarPath = Path.Combine(versionPath, $"{Path.GetFileNameWithoutExtension(CurrectFile)}.jar");
+            CurrectProgress = Path.GetFileName(loaclPath);
+            versionPath = Path.Combine(dotMCFolder, "versions", Path.GetFileNameWithoutExtension(CurrectProgress));
+            GameJarPath = Path.Combine(versionPath, $"{Path.GetFileNameWithoutExtension(CurrectProgress)}.jar");
             Sources = sources;
             nativeUrl = SourceReplacer.Replace(nativeUrl, sources);
             this.NativeLocalPairs = new() { new(nativeUrl, loaclPath) };
@@ -471,3 +471,4 @@ namespace MEFL.CLAddIn.CLDownding
     }
 
 }
+*/
