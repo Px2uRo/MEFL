@@ -17,6 +17,10 @@ namespace MEFL.CLAddIn.Downloaders
             native = native.Replace("https://launcher.mojang.com/", "${AssIndex}");
             native = native.Replace("http://resources.download.minecraft.net", "${assets}");
             native = native.Replace("https://libraries.minecraft.net/", "${libraries}");
+            for (int i = 0; i < sources.Length; i++)
+            {
+                native= native.Replace(oldValue: sources[i].ELItem, sources[i].Uri);
+            }
             return native;
         }
 
@@ -32,7 +36,7 @@ namespace MEFL.CLAddIn.Downloaders
                 natives[i] = natives[i].Replace("https://libraries.minecraft.net/", "${libraries}");
                 for (int j = 0; j < sources.Length; j++)
                 {
-                    natives[j] = natives[j].Replace(oldValue: sources[j].ELItem, sources[j].Uri);
+                    natives[i] = natives[i].Replace(oldValue: sources[i].ELItem, sources[j].Uri);
                 }
             }
             return natives;

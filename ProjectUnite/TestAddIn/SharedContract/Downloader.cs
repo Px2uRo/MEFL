@@ -61,6 +61,11 @@ namespace MEFL.Contract
             Length = length;
             IsOver = false;
         }
+
+        public override string ToString()
+        {
+            return NativeUrl;
+        }
     }
     public class NativeLocalPairsManager : ObservableCollection<NativeLocalPair> 
     {
@@ -164,17 +169,15 @@ namespace MEFL.Contract
         public event PropertyChangedEventHandler PropertyChanged;
 
         private long _totalCount;
-
         public long TotalCount => _totalCount;
 
         private long _downloadedItems;
-
         public long DownloadedItems=> _downloadedItems;
+
         private long _downloadedSize;
+        public long DownloadedSize => _downloadedSize;
 
-        public long DownloadedSize => _downloadedItems;
         private long _totalSize;
-
         public long TotalSize => _totalSize;
 
         public DownloadProgress()

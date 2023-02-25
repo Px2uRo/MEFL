@@ -98,6 +98,7 @@ namespace MEFL.CLAddIn.Downloaders
                             var webstring = webc.DownloadString(nativeUrl);
                             var versionRoot = JsonConvert.DeserializeObject<Root>(webstring);
                             var jsonPath = _pathWithVersion + $"{_version}.json";
+                            Directory.CreateDirectory(Path.GetDirectoryName(jsonPath));
                             File.WriteAllText(jsonPath, webstring);
                             for (int i = 0; i < sources.Length; i++)
                             {
@@ -117,12 +118,14 @@ namespace MEFL.CLAddIn.Downloaders
                                 assetIndexNative = SourceReplacer.Replace(assetIndexNative, sources);
                                 var assetWebString = webc.DownloadString(assetIndexNative);
                                 assetRoot = JsonConvert.DeserializeObject<AssetsObject>(assetWebString);
+                                Directory.CreateDirectory(Path.GetDirectoryName(assetIndexLocal));
                                 File.WriteAllText(assetIndexLocal, assetWebString);
                             }
                             else
                             {
                                 assetRoot = JsonConvert.DeserializeObject<AssetsObject>(File.ReadAllText(assetIndexLocal));
                             }
+                            Directory.CreateDirectory(Path.Combine(dotMCFolder, $"assets\\objects\\"));
                             foreach (var item in assetRoot.Objects)
                             {
                                 var localp = Path.Combine(dotMCFolder, $"assets\\objects\\{item.Hash[..2]}\\{item.Hash}");
@@ -134,6 +137,7 @@ namespace MEFL.CLAddIn.Downloaders
                             }
                             #endregion
                             #region Lib
+                            Path.Combine(dotMCFolder, "libraries");
                             foreach (var item in versionRoot.Libraries)
                             {
                                 var native = string.Empty;
@@ -167,6 +171,18 @@ namespace MEFL.CLAddIn.Downloaders
                                 }
                             }
                             #endregion
+                            #region Download
+                            List<DownloadURI> urls = new List<DownloadURI>();
+                            for (int i = 0; i < TaskItems.Count; i++)
+                            {
+                                TaskItems[i].NativeUrl = SourceReplacer.Replace(TaskItems[i].NativeUrl, sources);
+                                urls.Add(new(TaskItems[i].NativeUrl, TaskItems[i].LocalPath));
+                            }
+                            var queue = new DownloadQueue(urls.ToArray());
+                            queue.ItemsUpdated += Queue_ItemsUpdated;
+                            queue.ItemFailed += Queue_ItemFailed;
+                            queue.Download();
+                            #endregion
                         }
                     }
                     catch (Exception ex)
@@ -176,18 +192,13 @@ namespace MEFL.CLAddIn.Downloaders
                     }
                 }
                 #endregion
-                #region Download
-                List<DownloadURI> urls = new List<DownloadURI>();
-                for (int i = 0; i < TaskItems.Count; i++)
-                {
-                    TaskItems[i].NativeUrl = SourceReplacer.Replace(TaskItems[i].NativeUrl, sources);
-                }
-                var queue = new DownloadQueue(urls.ToArray());
-                queue.ItemsUpdated += Queue_ItemsUpdated;
-                queue.Download();
-                #endregion
             }).Start();
             base.Start();
+        }
+
+        private void Queue_ItemFailed(object? sender, string e)
+        {
+            LogWriteLine($"下载失败：{e}");
         }
 
         private void Queue_ItemsUpdated(object? sender, DownloadFile e)
