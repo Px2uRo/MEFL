@@ -84,7 +84,7 @@ namespace MEFL.CLAddIn.Downloaders
 
         public override void Start()
         {
-            new Thread(() => 
+            new Thread( () => 
             {
                 nativeUrl = SourceReplacer.Replace(nativeUrl, sources);
                 #region Parse
@@ -99,20 +99,38 @@ namespace MEFL.CLAddIn.Downloaders
                             var versionRoot = JsonConvert.DeserializeObject<Root>(webstring);
                             var jsonPath = _pathWithVersion + $"{_version}.json";
                             File.WriteAllText(jsonPath, webstring);
-                            TaskItems.Add(new(versionRoot.Downloads.Client.Url, _pathWithVersion + $"{_version}.jar", versionRoot.Downloads.Client.Size));
+                            for (int i = 0; i < sources.Length; i++)
+                            {
+                                if(sources[i].ELItem == "${versions_api}")
+                                {
+                                    TaskItems.Add(new(sources[i].GetUri(versionRoot.Id), _pathWithVersion + $"{_version}.jar", versionRoot.Downloads.Client.Size));
+                                    break;
+                                }
+                            }
                             #endregion
                             #region Assets
-                            var assetIndexNative = versionRoot.AssetIndex.Url;
-                            assetIndexNative = SourceReplacer.Replace(assetIndexNative, sources);
                             var assetIndexLocal = Path.Combine(dotMCFolder, $"assets\\indexes\\{versionRoot.AssetIndex.Id}.json");
-                            var assetWebString = webc.DownloadString(assetIndexNative);
-                            var assetRoot = JsonConvert.DeserializeObject<AssetsObject>(assetWebString);
-                            File.WriteAllText(assetIndexLocal, assetWebString);
+                            AssetsObject assetRoot = null;
+                            if (!File.Exists(assetIndexLocal))
+                            {
+                                var assetIndexNative = versionRoot.AssetIndex.Url;
+                                assetIndexNative = SourceReplacer.Replace(assetIndexNative, sources);
+                                var assetWebString = webc.DownloadString(assetIndexNative);
+                                assetRoot = JsonConvert.DeserializeObject<AssetsObject>(assetWebString);
+                                File.WriteAllText(assetIndexLocal, assetWebString);
+                            }
+                            else
+                            {
+                                assetRoot = JsonConvert.DeserializeObject<AssetsObject>(File.ReadAllText(assetIndexLocal));
+                            }
                             foreach (var item in assetRoot.Objects)
                             {
-                                var native = $"http://resources.download.minecraft.net/{item.Hash[..2]}/{item.Hash}";
-                                var localp = Path.Combine(dotMCFolder, "assets\\objects\\{item.Hash[..2]}\\{item.Hash}");
-                                TaskItems.Add(new(native, localp, item.Size));
+                                var localp = Path.Combine(dotMCFolder, $"assets\\objects\\{item.Hash[..2]}\\{item.Hash}");
+                                if (!File.Exists(localp))
+                                {
+                                    var native = $"http://resources.download.minecraft.net/{item.Hash[..2]}/{item.Hash}";
+                                    TaskItems.Add(new(native, localp, item.Size));
+                                }
                             }
                             #endregion
                             #region Lib
@@ -153,7 +171,7 @@ namespace MEFL.CLAddIn.Downloaders
                     }
                     catch (Exception ex)
                     {
-                        LogWriteLine(ex.Message);
+                        ErrorInfo = ex.Message;
                         State = DownloadProgressState.Failed; return;
                     }
                 }
@@ -177,6 +195,7 @@ namespace MEFL.CLAddIn.Downloaders
             var ti = TaskItems.Where(x => x.NativeUrl == e.Source.RemoteUri).ToArray()[0];
             ti.IsOver = true;
             ti.Downloaded = ti.Length;
+            LogWriteLine($"{Path.GetFileName(ti.NativeUrl)}下载完成");
         }
     }
 }

@@ -106,7 +106,7 @@ namespace MEFL.Controls
                 else if (source.State == DownloadProgressState.Failed)
                 {
                     Dispatcher.Invoke(() => {
-                        this.Content = source.ErrorInfo;
+                        this.Content = new TextBlock() { Text= source.ErrorInfo ,TextWrapping=TextWrapping.Wrap};
                     });
                 }
                 else if (source.State == DownloadProgressState.Canceled)
@@ -138,7 +138,7 @@ namespace MEFL.Controls
                     FileNums.Text = $"{source.DownloadedItems}/{source.TotalCount}";
                 });
             }
-            else if (e.PropertyName == nameof(source.DownloadedSize))
+            else if (e.PropertyName == nameof(source.DownloadedSize)|| e.PropertyName == nameof(source.TotalSize))
             {
                 Dispatcher.Invoke(() =>
                 {
@@ -166,6 +166,12 @@ namespace MEFL.Controls
                     }
                     Percents.Text = str + "%";
                     PB.Value=((double)source.DownloadedSize/(double)source.TotalSize)*100;
+                });
+            }
+            else if (e.PropertyName == nameof(source.ErrorInfo))
+            {
+                Dispatcher.Invoke(() => {
+                    this.Content = new TextBlock() { Text = source.ErrorInfo, TextWrapping = TextWrapping.Wrap };
                 });
             }
         }

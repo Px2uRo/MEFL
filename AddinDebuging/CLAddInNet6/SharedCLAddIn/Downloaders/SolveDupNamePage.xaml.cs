@@ -60,6 +60,15 @@ namespace MEFL.CLAddIn
             
         private void Button_Cliked(object sender,RoutedEventArgs e)
         {
+            var vp = System.IO.Path.Combine(fp, "versions", NameBox.Text);
+            if (Directory.Exists(vp))
+            {
+                MyMessageBox.Show("想卡BUG？但是文件夹已存在");
+            }
+            else
+            {
+                Directory.CreateDirectory(vp);
+            }
             (this.DataContext as Contract.LauncherProgressResult).Progress = _downloader.InstallMinecraft(_native,fp,_sources,null);
             _downloader = null;
             (this.DataContext as Contract.LauncherProgressResult).NowDownload();

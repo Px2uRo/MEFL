@@ -1,6 +1,7 @@
 using MEFL.Arguments;
 using System;
 using System.ComponentModel;
+using System.Security.Policy;
 
 namespace MEFL.Contract
 {
@@ -8,6 +9,7 @@ namespace MEFL.Contract
     {
         public string ELItem { get; set; }
         public string RuleSourceName { get; set; }
+        public virtual string GetUri(string parama) => Uri;
         public string Uri { get; set; }
         public override string ToString()
         {

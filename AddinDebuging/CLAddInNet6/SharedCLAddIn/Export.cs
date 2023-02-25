@@ -87,18 +87,16 @@ namespace MEFL.CLAddIn.Export
         public DownloadSource[] GetDownloadSources(SettingArgs args)
         {
             var lst = new List<DownloadSource>() {
+                new Version_Api_Source(),
                 new() { ELItem="${version_manifest}",RuleSourceName = "BMCLAPI",Uri= "https://bmclapi2.bangbang93.com/mc/game/version_manifest.json" },
-                new() { ELItem = "${json}", RuleSourceName = "BMCLAPI", Uri = "https://bmclapi2.bangbang93.com" },
                 new() { ELItem = "${AssIndex}", RuleSourceName = "BMCLAPI", Uri = "https://bmclapi2.bangbang93.com" },
                 new() { ELItem = "${assets}", RuleSourceName = "BMCLAPI", Uri = "https://bmclapi2.bangbang93.com/assets" },
                 new() { ELItem = "${libraries}", RuleSourceName = "BMCLAPI", Uri = "https://bmclapi2.bangbang93.com/maven" },
                 new() { ELItem="${version_manifest}",RuleSourceName = "MCBBS",Uri= "https://download.mcbbs.net/" },
-                new() { ELItem = "${json}", RuleSourceName = "MCBBS", Uri = "https://download.mcbbs.net/" },
                 new() { ELItem = "${AssIndex}", RuleSourceName = "MCBBS", Uri = "https://download.mcbbs.net/" },
                 new() { ELItem = "${assets}", RuleSourceName = "MCBBS", Uri = "https://download.mcbbs.net/assets" },
                 new() { ELItem = "${libraries}", RuleSourceName = "MCBBS", Uri = "https://download.mcbbs.net/maven" },
                 new() { ELItem="${version_manifest}",RuleSourceName = "Mojang",Uri= "http://launchermeta.mojang.com/mc/game/version_manifest.json" },
-                new() { ELItem = "${json}", RuleSourceName = "Mojang", Uri = "https://launchermeta.mojang.com/" },
                 new() { ELItem = "${AssIndex}", RuleSourceName = "Mojang", Uri = "https://launcher.mojang.com/" },
                 new() { ELItem = "${assets}", RuleSourceName = "Mojang", Uri = "http://resources.download.minecraft.net" },
                 new() { ELItem = "${libraries}", RuleSourceName = "Mojang", Uri = "https://libraries.minecraft.net/" }};

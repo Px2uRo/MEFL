@@ -175,7 +175,7 @@ namespace MEFL.Contract
         public long DownloadedSize => _downloadedItems;
         private long _totalSize;
 
-        public long TotalSize => _totalCount;
+        public long TotalSize => _totalSize;
 
         public DownloadProgress()
         {
