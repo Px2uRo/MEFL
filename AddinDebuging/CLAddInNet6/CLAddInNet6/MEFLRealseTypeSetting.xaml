@@ -74,10 +74,10 @@
                 </Grid>
             </StackPanel>
         </c:MyCard>
-        <c:MyItemsCard Title="地图管理" Name="Modi_Save_Card" Style="{DynamicResource Map}" IsAbleToSwap="True">
+        <c:MyItemsCard Title="地图管理" Name="Modi_Save_Card" Style="{DynamicResource Map}">
             <c:MyItemsCard.Template>
                 <ControlTemplate TargetType="{x:Type c:MyItemsCard}">
-                    <c:MyCard Title="{TemplateBinding Title}" IsAbleToSwap="{TemplateBinding IsAbleToSwap}">
+                    <c:MyCard Title="{TemplateBinding Title}">
                         <StackPanel>
                             <ItemsPresenter/>
                             <c:MyButton Content="浏览" Click="OpenSavesFolder" HorizontalAlignment="Right"/>
@@ -89,5 +89,8 @@
         <c:MyItemsCard Title="mod 管理" Name="Modi_Mod_Card">
             
         </c:MyItemsCard>
+        <c:MyCard Title="高级选项">
+            <c:MyButton Content="补全文件" Click="RepairFiles"/>
+        </c:MyCard>
     </StackPanel>
 </UserControl>

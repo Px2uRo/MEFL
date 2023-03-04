@@ -152,7 +152,8 @@ namespace MEFL.CLAddIn.Pages
                     {
                         CLMapInfo target = _mapInfos.Where(x => x.Name == e.Name).ToArray()[0];
                         _mapInfos.Remove(target);
-                    Modi_Save_Card.Title = $"地图个数：{_mapInfos.Count}";
+                        Modi_Save_Card.Title = $"地图个数：{_mapInfos.Count}";
+
                     }
                 });
             
@@ -167,6 +168,7 @@ namespace MEFL.CLAddIn.Pages
                         CLMapInfo target = new CLMapInfo(e.FullPath);
                         _mapInfos.Add(target);
                         Modi_Save_Card.Title = $"地图个数：{_mapInfos.Count}";
+
                     }
                 });
         }
@@ -214,6 +216,11 @@ namespace MEFL.CLAddIn.Pages
         {
             var data = this.DataContext as CLGameType;
             Process.Start("explorer.exe",Path.Combine(data.GameFolder,"saves"));
+        }
+
+        private void RepairFiles(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

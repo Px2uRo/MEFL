@@ -23,14 +23,13 @@ namespace MEFL.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MyCard), new FrameworkPropertyMetadata(typeof(MyCard)));
         }
-
         protected override Size ArrangeOverride(Size arrangeBounds)
         {
-            if (OriginalHeight==0.0)
-            {
-                OriginalHeight = base.ArrangeOverride(arrangeBounds).Height;
-            }
             return base.ArrangeOverride(arrangeBounds);
+        }
+        protected override Size MeasureOverride(Size constraint)
+        {
+            return base.MeasureOverride(constraint);
         }
         protected override void OnVisualChildrenChanged(DependencyObject visualAdded, DependencyObject visualRemoved)
         {

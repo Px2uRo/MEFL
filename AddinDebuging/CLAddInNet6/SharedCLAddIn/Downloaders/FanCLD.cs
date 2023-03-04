@@ -64,7 +64,7 @@ namespace MEFL.CLAddIn.Downloaders
             this.sources = sources;
             if (args == null)
             {
-                this._version = Path.GetFileNameWithoutExtension(jsonSource);
+                _version = Path.GetFileNameWithoutExtension(jsonSource);
             }
             else
             {
