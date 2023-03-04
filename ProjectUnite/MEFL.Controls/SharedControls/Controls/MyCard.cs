@@ -32,7 +32,10 @@ namespace MEFL.Controls
             }
             return base.ArrangeOverride(arrangeBounds);
         }
-
+        protected override void OnVisualChildrenChanged(DependencyObject visualAdded, DependencyObject visualRemoved)
+        {
+            base.OnVisualChildrenChanged(visualAdded, visualRemoved);
+        }
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();

@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CoreLaunching;
+using CoreLaunching.Parser;
 
 namespace MEFL.CLAddIn.Pages
 {

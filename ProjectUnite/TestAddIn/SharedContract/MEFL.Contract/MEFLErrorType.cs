@@ -29,19 +29,23 @@ public class MEFLErrorType : GameInfoBase
 
 	public override string GameJsonPath { get; set; }
 
-	public override string GameTypeFriendlyName { get; set; }
+	public override string GameTypeFriendlyName { get => "´íÎó"; set { } }
 
 	public override string Description { get; set; }
 
 	public override string Version { get; set; }
-
+ 	static BitmapImage _image = null;
 	public override ImageSource IconSource { get 
 		{
-			BitmapImage Image = new();
-			Image.BeginInit();
-			Image.StreamSource = stream;
-            Image.EndInit();
-			return Image;
+			if(stream==null)
+			{
+                stream = new MemoryStream(Resources.Error);
+				_image = new();
+                _image.BeginInit();
+                _image.StreamSource = stream;
+                _image.EndInit();
+            }
+			return _image;
 		} 
 	}
 
@@ -193,13 +197,9 @@ public class MEFLErrorType : GameInfoBase
 		throw new NotImplementedException();
 	}
 
-	static MEFLErrorType()
-	{
-        stream = new MemoryStream(Resources.Error);
-    }
 	public MEFLErrorType(string ErrorDescription, string JsonPath)
-	{
-		Description = ErrorDescription;
+    {
+        Description = ErrorDescription;
 		GameJsonPath = JsonPath;
 	}
 }

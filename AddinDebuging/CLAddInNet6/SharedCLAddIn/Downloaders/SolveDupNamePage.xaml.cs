@@ -63,15 +63,15 @@ namespace MEFL.CLAddIn
             var vp = System.IO.Path.Combine(fp, "versions", NameBox.Text);
             if (Directory.Exists(vp))
             {
-                MyMessageBox.Show("想卡BUG？但是文件夹已存在");
+                MyMessageBox.Show("想卡BUG吗？但是文件夹已存在");
             }
             else
             {
                 Directory.CreateDirectory(vp);
             }
-            (this.DataContext as Contract.LauncherProgressResult).Progress = _downloader.InstallMinecraft(_native,fp,_sources,null);
+            (this.DataContext as Contract.InstallProgressInput).Progress = _downloader.InstallMinecraft(_native,fp,_sources,new(NameBox.Text,"",""));
             _downloader = null;
-            (this.DataContext as Contract.LauncherProgressResult).NowDownload();
+            (this.DataContext as Contract.InstallProgressInput).NowDownload();
         }
     }
 }

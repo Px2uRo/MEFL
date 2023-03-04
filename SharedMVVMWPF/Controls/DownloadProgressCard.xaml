@@ -14,7 +14,7 @@
                 <TextBlock Text="  "/>
                 <TextBlock Name="Percents"/>
                 <TextBlock Text="  "/>
-                <TextBlock Text="{Binding CurrectFile}"/>
+                <TextBlock Text="{Binding CurrectProgress}"/>
             </StackPanel>
         </Grid>
     </c:MyCard.Title>

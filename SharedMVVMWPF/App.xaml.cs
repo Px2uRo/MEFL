@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.Serialization;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -15,7 +16,8 @@ namespace MEFL
     public partial class App : Application
     {
         protected override void OnStartup(StartupEventArgs e)
-        {            
+        {
+            ThreadPool.SetMinThreads(64, 64);
             string str = String.Empty;
             foreach (var item in e.Args)
             {

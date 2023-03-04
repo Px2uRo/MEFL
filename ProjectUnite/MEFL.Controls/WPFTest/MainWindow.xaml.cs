@@ -28,10 +28,11 @@ namespace WPFTest
     /// </summary>
     public partial class MainWindow : Window
     {
+        StackPanel stack = new StackPanel();
         public MainWindow()
         {
             InitializeComponent();
-
+            MyCaard.Content = stack;
         }
         private void MyComboBox_Initialized(object sender, EventArgs e)
         {
@@ -50,14 +51,7 @@ namespace WPFTest
 
         private void MyButton_Click_1(object sender, RoutedEventArgs e)
         {
-            var mb = MyMessageBox.Show("asa\nhehhesiohhiuo\nasdiubigbus", "", MessageBoxButton.YesNo, new MyCheckBoxInput[2] { new ("aaa",false,Colors.Violet), new("bbb", false, Colors.Violet) },true);
-            string str = "";
-            foreach (var item in mb.CheckBox)
-            {
-                str += item.ToString();
-                str+= "\n";
-            }
-            MessageBox.Show(str);
+            stack.Children.Add(new TextBlock() { Text="111"});
         }
     }
 

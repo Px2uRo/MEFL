@@ -45,18 +45,32 @@ namespace MEFL.CLAddIn.Downloaders
 
     }
 
-    internal class Version_Api_Source:DownloadSource
+    internal class BMCLAPI_Version_Api_Source : DownloadSource
     {
         public override string GetUri(string parama)
         {
             return $"https://bmclapi2.bangbang93.com/version/{parama}/client";
         }
 
-        public Version_Api_Source()
+        public BMCLAPI_Version_Api_Source()
         {
             ELItem = "${versions_api}";
-            RuleSourceName= "BMCLAPI";
+            RuleSourceName = "BMCLAPI";
             Uri = "https://bmclapi2.bangbang93.com/version/${version}/${category}";
+        }
+    }
+    internal class MCBBS_Version_Api_Source : DownloadSource
+    {
+        public override string GetUri(string parama)
+        {
+            return $"https://download.mcbbs.net/version/{parama}/client";
+        }
+
+        public MCBBS_Version_Api_Source()
+        {
+            ELItem = "${versions_api}";
+            RuleSourceName = "MCBBS";
+            Uri = "https://download.mcbbs.net/version/${version}/${category}";
         }
     }
 }

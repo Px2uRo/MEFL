@@ -19,7 +19,7 @@ namespace MEFL
         public string Path { get; set; }
         JObject jOb2 = new JObject();
         int symbol;
-        public void SetToFavorite(GameInfoBase Target)
+        public void SetToFavorite(GameInfoBase target)
         {
             symbol = Favorites.Count;
             jOb2 = new JObject();
@@ -41,9 +41,9 @@ namespace MEFL
             }
             for (int i = 0; i < Favorites.Count; i++)
             {
-                if (Target.GameJsonPath.ToString() == Favorites[i].ToString())
+                if (target.GameJsonPath.ToString() == Favorites[i].ToString())
                 {
-                    Favorites.Remove(Target.GameJsonPath);
+                    Favorites.Remove(target.GameJsonPath);
                     if(Favorites.Count == 0)
                     {
                         symbol = -1;
@@ -51,12 +51,12 @@ namespace MEFL
                 }
                 else
                 {
-                    Favorites.Add(Target.GameJsonPath);
+                    Favorites.Add(target.GameJsonPath);
                 }
             }
             if (symbol == 0)
             {
-                Favorites.Add(Target.GameJsonPath);
+                Favorites.Add(target.GameJsonPath);
             }
             File.WriteAllText(_configPath, JsonConvert.SerializeObject(new JObject() { new JProperty("Favorites", JsonConvert.SerializeObject(Favorites)) }));
             jOb2 = null;

@@ -2,6 +2,7 @@
 using CoreLaunching;
 using CoreLaunching.Down.Web;
 using CoreLaunching.JsonTemplates;
+using MEFL.Arguments;
 using MEFL.Contract;
 using Newtonsoft.Json;
 using System;
@@ -26,18 +27,18 @@ namespace MEFL.CLAddIn.Downloaders
 
         public override object Icon => "Fanbal.png";
 
-        public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string dotMCFolder)
+        public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources)
         {
-            return new CLDProgre(NativeUrl, LoaclPath, dotMCFolder, sources);
+            return new CLDProgre(NativeUrl, LoaclPath, sources);
         }
 
-        public override DownloadProgress CreateProgress(NativeLocalPairsManager NativeLocalPairs, DownloadSource[] sources, string dotMCFolder)
+        public override DownloadProgress CreateProgress(NativeLocalPairsList NativeLocalPairs, DownloadSource[] sources)
         {
-            return new CLDProgre(NativeLocalPairs, dotMCFolder, sources);
+            return new CLDProgre(NativeLocalPairs, sources);
         }
-        public override DownloadProgress InstallMinecraft(string jsonSource, string dotMCFolder, DownloadSource[] sources, object? parama)
+        public override DownloadProgress InstallMinecraft(string jsonSource, string dotMCFolder, DownloadSource[] sources, InstallArguments args)
         {
-            return new CLDProgre(jsonSource, dotMCFolder, sources, parama);
+            return new CLDProgre(jsonSource, dotMCFolder, sources, args);
         }
     }
 
@@ -51,34 +52,32 @@ namespace MEFL.CLAddIn.Downloaders
         private string _version = "";
         private string _pathWithVersion = "";
 
-        public CLDProgre(NativeLocalPairsManager manager, string dotMCFolder, DownloadSource[] sources):base(manager)
+        public CLDProgre(NativeLocalPairsList items, DownloadSource[] sources):base(items)
         {
             this.dotMCFolder = dotMCFolder;
             this.sources = sources;
         }
-        public CLDProgre(string jsonSource, string dotMCFolder, DownloadSource[] sources, object? parama):base()
+        public CLDProgre(string jsonSource, string dotMCFolder, DownloadSource[] sources, InstallArguments args):base(args)
         {
             this.nativeUrl = jsonSource;
             this.dotMCFolder = dotMCFolder;
             this.sources = sources;
-            if (parama == null)
+            if (args == null)
             {
                 this._version = Path.GetFileNameWithoutExtension(jsonSource);
-                _pathWithVersion = Path.Combine(dotMCFolder, $"versions\\{_version}\\");
-                //this.NativeLocalPairs.Add(new(jsonSource, _pathWithVersion +$"{_version}.json"));
-                _install = true;
             }
             else
             {
-                _install = true;
+                _version = args.VersionName;
             }
+            _pathWithVersion = Path.Combine(dotMCFolder, $"versions\\{_version}\\");
+            _install = true;
         }
 
-        public CLDProgre(string nativeUrl, string loaclPath, string dotMCFolder, DownloadSource[] sources):base()
+        public CLDProgre(string nativeUrl, string loaclPath, DownloadSource[] sources):base()
         {
             this.nativeUrl = nativeUrl;
             this.localPath = loaclPath;
-            this.dotMCFolder = dotMCFolder;
             this.sources = sources;
         }
 
@@ -95,6 +94,7 @@ namespace MEFL.CLAddIn.Downloaders
                         using (var webc = new WebClient())
                         {
                             #region Json&jar
+                            CurrectProgress = "解析中";
                             var webstring = webc.DownloadString(nativeUrl);
                             var versionRoot = JsonConvert.DeserializeObject<Root>(webstring);
                             var jsonPath = _pathWithVersion + $"{_version}.json";
@@ -178,6 +178,7 @@ namespace MEFL.CLAddIn.Downloaders
                                 TaskItems[i].NativeUrl = SourceReplacer.Replace(TaskItems[i].NativeUrl, sources);
                                 urls.Add(new(TaskItems[i].NativeUrl, TaskItems[i].LocalPath));
                             }
+                            CurrectProgress = $"正在下载{Arguments.VersionName}";
                             var queue = new DownloadQueue(urls.ToArray());
                             queue.ItemsUpdated += Queue_ItemsUpdated;
                             queue.ItemFailed += Queue_ItemFailed;
@@ -198,7 +199,10 @@ namespace MEFL.CLAddIn.Downloaders
 
         private void Queue_ItemFailed(object? sender, string e)
         {
-            LogWriteLine($"下载失败：{e}");
+            var ti = TaskItems.Where(x => x.NativeUrl == (sender as DownloadFile).Source.RemoteUri).ToArray()[0];
+            LogWriteLine($"下载{Path.GetFileName(ti.LocalPath)}失败：{e}");
+            ti.IsOver = true;
+            ti.Downloaded = ti.Length;
         }
 
         private void Queue_ItemsUpdated(object? sender, DownloadFile e)
@@ -206,7 +210,6 @@ namespace MEFL.CLAddIn.Downloaders
             var ti = TaskItems.Where(x => x.NativeUrl == e.Source.RemoteUri).ToArray()[0];
             ti.IsOver = true;
             ti.Downloaded = ti.Length;
-            LogWriteLine($"{Path.GetFileName(ti.NativeUrl)}下载完成");
         }
     }
 }

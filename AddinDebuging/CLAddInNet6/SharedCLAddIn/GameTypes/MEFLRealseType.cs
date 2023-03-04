@@ -219,7 +219,7 @@ namespace MEFL.CLAddIn.GameTypes
                 }
             }
         }
-        public GamePathType GamePathType { get => _MSOAT.GamePathType;set { _MSOAT.GamePathType = value; } }
+        public GamePathType GamePathType { get => _MSOAT.GamePathType;set { _MSOAT.GamePathType = value; PropChanged(); } }
         public override string GameFolder { get {
                 if (GamePathType == GamePathType.Versions)
                 {

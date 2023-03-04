@@ -6,6 +6,36 @@
              mc:Ignorable="d" DataContextChanged="Data_Changed"
              xmlns:c="clr-namespace:MEFL.Controls;assembly=MEFL.Controls"
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style TargetType="c:MyItemsCard" x:Key="Map">
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="35" />
+                                            <ColumnDefinition Width="35" />
+                                        </Grid.ColumnDefinitions>
+                                        <c:MyItemsCardItem ToolTip="{Binding Name}" Title="{Binding Name}">
+                                            <c:MyItemsCardItem.Icon>
+                                                <Image Source="{Binding Image}"/>
+                                            </c:MyItemsCardItem.Icon>
+                                        </c:MyItemsCardItem>
+                                        <c:MyButton Grid.Column="1" Content="×" Width="30" Height="30"/>
+                                        <c:MyButton Grid.Column="2" Content="..." Width="30" Height="30"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <StackPanel>
         <c:MyCard Title="概览">
             <StackPanel>
@@ -33,7 +63,7 @@
             <StackPanel>
                 <RadioButton Content="使用 .minecraft 文件夹" Name="Radio1" Checked="Radio_Checked"/>
                 <RadioButton Content="使用 versions\x.x.x 文件夹" Name="Radio2" Checked="Radio_Checked"/>
-                <RadioButton Content="使用下面的自定义文件夹" Name="Radio3" Checked="Radio_Checked"/>
+                <RadioButton Content="使用下面的自定义文件夹" Name="Radio3" Checked="Radio_Checked" IsEnabled="False"/>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*" />
@@ -44,11 +74,20 @@
                 </Grid>
             </StackPanel>
         </c:MyCard>
-        <c:MyCard Title="存档管理">
+        <c:MyItemsCard Title="地图管理" Name="Modi_Save_Card" Style="{DynamicResource Map}" IsAbleToSwap="True">
+            <c:MyItemsCard.Template>
+                <ControlTemplate TargetType="{x:Type c:MyItemsCard}">
+                    <c:MyCard Title="{TemplateBinding Title}" IsAbleToSwap="{TemplateBinding IsAbleToSwap}">
+                        <StackPanel>
+                            <ItemsPresenter/>
+                            <c:MyButton Content="浏览" Click="OpenSavesFolder" HorizontalAlignment="Right"/>
+                        </StackPanel>
+                    </c:MyCard>
+                </ControlTemplate>
+            </c:MyItemsCard.Template>
+        </c:MyItemsCard>
+        <c:MyItemsCard Title="mod 管理" Name="Modi_Mod_Card">
             
-        </c:MyCard>
-        <c:MyCard Title="mod 管理">
-            
-        </c:MyCard>
+        </c:MyItemsCard>
     </StackPanel>
 </UserControl>

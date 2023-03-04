@@ -11,7 +11,8 @@
         xmlns:c="clr-namespace:MEFL.Controls;assembly=MEFL.Controls" 
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
-    <Grid>
+    <StackPanel>
+        <c:MyCard Title="Hello" BorderBrush="Black" BorderThickness="3" IsAbleToSwap="True" x:Name="MyCaard"/>
         <c:MyButton VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="Black" Click="MyButton_Click_1"/>
-    </Grid>
+    </StackPanel>
 </Window>

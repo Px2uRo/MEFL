@@ -4,24 +4,63 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Linq;
 using System.Collections.ObjectModel;
+using MEFL.Arguments;
 
 namespace MEFL.Contract
 {
+    /// <summary>
+    /// 申明 MEFL 下载器，作用是返回下载进程（DownloaderProgress）。下载过程在下载进程进行。
+    /// </summary>
     public abstract class MEFLDownloader:MEFLClass
     {
+        /// <summary>
+        /// 名称
+        /// </summary>
         public abstract string Name { get; }
+        /// <summary>
+        /// 描述
+        /// </summary>
         public abstract string Description { get; }
+        /// <summary>
+        /// 版本
+        /// </summary>
         public abstract Version Version { get; }
+        /// <summary>
+        /// 图标
+        /// </summary>
         public abstract object Icon { get; }
-        public virtual DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string dotMCFolder) 
+        /// <summary>
+        /// 创建单文件下载进程
+        /// </summary>
+        /// <param name="NativeUrl">源 Url</param>
+        /// <param name="LoaclPath">本地 Url</param>
+        /// <param name="sources">下载源</param>
+        /// <returns>下载进程</returns>
+        /// <exception cref="NotImplementedException">如果你没有重写就抛出这个异常</exception>
+        public virtual DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources) 
         { 
             throw new NotImplementedException();
         }
-        public virtual DownloadProgress CreateProgress(NativeLocalPairsManager NativeLocalPairs, DownloadSource[] sources, string dotMCFolder) 
+        /// <summary>
+        /// 创建多文件下载进程
+        /// </summary>
+        /// <param name="NativeLocalPairs">源文件列表</param>
+        /// <param name="sources">下载源</param>
+        /// <returns>下载进程</returns>
+        public virtual DownloadProgress CreateProgress(NativeLocalPairsList NativeLocalPairs, DownloadSource[] sources) 
         { 
             throw new NotImplementedException();
         }
-        public virtual DownloadProgress InstallMinecraft(string jsonSource,  string dotMCFolder, DownloadSource[] sources,object? parama)
+        /// <summary>
+        /// 安装游戏进程
+        /// </summary>
+        /// <param name="jsonSource"></param>
+        /// <param name="dotMCFolder"></param>
+        /// <param name="sources"></param>
+        /// <param name="args">参数</param>
+        /// <returns>下载进程</returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public virtual DownloadProgress InstallMinecraft(string jsonSource,  string dotMCFolder, DownloadSource[] sources,InstallArguments args)
         {
             throw new NotImplementedException();
         }
@@ -67,7 +106,7 @@ namespace MEFL.Contract
             return NativeUrl;
         }
     }
-    public class NativeLocalPairsManager : ObservableCollection<NativeLocalPair> 
+    public class NativeLocalPairsList : ObservableCollection<NativeLocalPair> 
     {
         public event EventHandler<NativeLocalPair> OnItemAdded;
 
@@ -131,7 +170,7 @@ namespace MEFL.Contract
             OnLogClear?.Invoke(this,EventArgs.Empty);
         }
         #endregion
-        public NativeLocalPairsManager TaskItems;
+        public NativeLocalPairsList TaskItems;
 
         private string _ErrorInfo;
 
@@ -180,6 +219,8 @@ namespace MEFL.Contract
         private long _totalSize;
         public long TotalSize => _totalSize;
 
+        public InstallArguments Arguments { get; }
+
         public DownloadProgress()
         {
             TaskItems = new();
@@ -189,13 +230,18 @@ namespace MEFL.Contract
             State = DownloadProgressState.Canceled;
         }
 
-        public DownloadProgress(NativeLocalPairsManager items)
+        public DownloadProgress(NativeLocalPairsList items)
         {
             TaskItems = items;
             TaskItems.OnItemAdded += TaskItems_OnItemAdded;
             TaskItems.IsOverChanged += TaskItems_IsOverChanged;
             TaskItems.ProgressChanged += TaskItems_ProgressChanged;
             State = DownloadProgressState.Canceled;
+        }
+
+        protected DownloadProgress(InstallArguments args):this()
+        {
+            Arguments = args;
         }
 
         private void TaskItems_ProgressChanged(object? sender, long e)

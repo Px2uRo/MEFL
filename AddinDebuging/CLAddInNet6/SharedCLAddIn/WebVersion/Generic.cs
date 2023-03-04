@@ -9,13 +9,13 @@ namespace MEFL.CLAddIn.WebVersion
 {
     public class GenericWebVersion : LauncherWebVersionInfo
     {
-        public override Contract.LauncherProgressResult Download(MEFLDownloader downloader, string dotMCFolder, SettingArgs args, DownloadSource[] sources)
+        public override Contract.InstallProgressInput Download(MEFLDownloader downloader, string dotMCFolder, SettingArgs args, DownloadSource[] sources)
         {
             var SubFolderString = Path.GetFileNameWithoutExtension(Url);
             if (!Directory.Exists( Path.Combine(dotMCFolder, "versions", SubFolderString)))
             {
                 Directory.CreateDirectory(Path.Combine(dotMCFolder, "versions", SubFolderString));
-                return new(false, null, downloader.InstallMinecraft(Url,dotMCFolder,sources,null));
+                return new(false, null, downloader.InstallMinecraft(Url,dotMCFolder,sources,new(SubFolderString,"","")));
             }
             else
             {

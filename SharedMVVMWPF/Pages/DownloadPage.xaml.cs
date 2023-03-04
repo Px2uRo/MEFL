@@ -154,7 +154,7 @@ namespace MEFL.Pages
             }
         }
 
-        private void Result_DownloadButtonClickEvent(LauncherProgressResult result)
+        private void Result_DownloadButtonClickEvent(InstallProgressInput result)
         {
             DownloadingProgressPageModel.ModelView.DownloadingProgresses.Add(result.Progress);
             WebListRefresher.CleanSovlePage();

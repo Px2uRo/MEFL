@@ -59,7 +59,11 @@ namespace MEFL
                         if (File.Exists(SubJson))
                         {
                             var jOb = FastLoadJson.Load(SubJson);
-                            if (jOb["type"] == null)
+                            if (jOb == null)
+                            {
+                                MyFolders[SelectedFolderIndex].Games.Add(new Contract.MEFLErrorType($"无法解析该版本，Json无效或损坏", SubJson));
+                            }
+                            else if (jOb["type"] == null)
                             {
                                 MyFolders[SelectedFolderIndex].Games.Add(new Contract.MEFLErrorType("不合法 Json", SubJson));
                             }
@@ -127,7 +131,14 @@ namespace MEFL
                         }
                         else
                         {
-                            MyFolders[SelectedFolderIndex].Games.Add(new Contract.MEFLErrorType("不存在Json", SubJson));
+                            try
+                            {
+                                MyFolders[SelectedFolderIndex].Games.Add(new Contract.MEFLErrorType("不存在Json", SubJson));
+                            }
+                            catch (Exception ex)
+                            {
+
+                            }
                         }
                         SubJson = null;
                     }
@@ -143,6 +154,10 @@ namespace MEFL
                     try
                     {
                         jOb2 = FastLoadJson.Load(mefljsonpath);
+                        if (jOb2 == null)
+                        {
+                            jOb2 = new JObject();
+                        }
                         if (jOb2["Favorites"] == null)
                         {
                             throw new Exception();
@@ -224,7 +239,7 @@ namespace MEFL
             {
                 GC.SuppressFinalize(SovlePage.Content);
                 SovlePage.Content = null;
-                (SovlePage.DataContext as Contract.LauncherProgressResult).Dispose();
+                (SovlePage.DataContext as Contract.InstallProgressInput).Dispose();
                 SovlePage.DataContext = null;
             }
         }

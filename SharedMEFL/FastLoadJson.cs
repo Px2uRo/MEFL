@@ -17,7 +17,7 @@ namespace MEFL
             }
             catch (Exception ex)
             {
-                return new JObject();
+                return null;
             }
         }
     }
