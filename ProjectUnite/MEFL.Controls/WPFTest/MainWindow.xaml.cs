@@ -32,7 +32,6 @@ namespace WPFTest
         public MainWindow()
         {
             InitializeComponent();
-            MyCaard.Content = stack;
         }
         private void MyComboBox_Initialized(object sender, EventArgs e)
         {
@@ -51,7 +50,7 @@ namespace WPFTest
 
         private void MyButton_Click_1(object sender, RoutedEventArgs e)
         {
-            stack.Children.Add(new TextBlock() { Text="111"});
+            MyCaard.OverrideOriginalHeight(100);
         }
     }
 

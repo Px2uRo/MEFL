@@ -12,7 +12,7 @@
     xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2">
 
     <StackPanel>
-        <c:MyCard Title="Hello" BorderBrush="Black" BorderThickness="3" IsAbleToSwap="True" x:Name="MyCaard"/>
+        <c:MyItemsCard Title="Hello" BorderBrush="Black" BorderThickness="3" x:Name="MyCaard" IsAbleToSwap="True"/>
         <c:MyButton VerticalAlignment="Center" HorizontalAlignment="Center" BorderBrush="Black" Click="MyButton_Click_1"/>
     </StackPanel>
 </Window>

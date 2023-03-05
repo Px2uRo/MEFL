@@ -25,7 +25,10 @@ namespace MEFL
                 DownloadingProgressPageModel.ModelView.ContentGrid.Children.RemoveAt(index);
             });
             base.RemoveItem(index);
+            if (this.Count == 0)
+            {
 
+            }
         }
     }
     public class DownloaderCollection : ObservableCollection<Contract.MEFLDownloader>

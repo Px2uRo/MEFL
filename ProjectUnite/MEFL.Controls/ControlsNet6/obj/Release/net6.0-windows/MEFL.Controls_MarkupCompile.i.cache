@@ -1,5 +1,5 @@
 ﻿MEFL.Controls
-0.0.7.1
+0.0.7.4
 
 library
 C#
@@ -16,5 +16,5 @@ TRACETRACE;WPF;RELEASE;NET;NET6_0;NETCOREAPP
 194-2004305220
 MyMessageBox.xaml;I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\SharedControls\Themes\Generic.xaml;
 
-False
+True
 

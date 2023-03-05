@@ -13,6 +13,7 @@ using MEFL.Configs;
 using Newtonsoft.Json;
 using System.Linq;
 using System.Reflection;
+using static MEFL.Contract.IManageAccountPage;
 
 namespace MEFL.PageModelViews
 {
@@ -57,7 +58,7 @@ namespace MEFL.PageModelViews
                         sources.Value.Selected = sources.Value[0];
                     }
                 }
-
+                Contract.Advanced.SetSelectedSources(APIModel.DownloadSources.Selected);
                 #endregion
                 res.Children.Add(element);
             }

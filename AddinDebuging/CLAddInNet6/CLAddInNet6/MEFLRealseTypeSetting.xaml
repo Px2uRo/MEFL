@@ -59,6 +59,9 @@
                 </StackPanel>
             </StackPanel>
         </c:MyCard>
+        <c:MyCard Title="其他选项">
+            <c:MyButton Content="补全文件" Click="RepairFiles"/>
+        </c:MyCard>
         <c:MyCard Title="存档与mod位置">
             <StackPanel>
                 <RadioButton Content="使用 .minecraft 文件夹" Name="Radio1" Checked="Radio_Checked"/>
@@ -74,10 +77,10 @@
                 </Grid>
             </StackPanel>
         </c:MyCard>
-        <c:MyItemsCard Title="地图管理" Name="Modi_Save_Card" Style="{DynamicResource Map}">
+        <c:MyItemsCard Title="地图管理" Name="Modi_Save_Card" Style="{DynamicResource Map}" IsAbleToSwap="True">
             <c:MyItemsCard.Template>
                 <ControlTemplate TargetType="{x:Type c:MyItemsCard}">
-                    <c:MyCard Title="{TemplateBinding Title}">
+                    <c:MyCard Title="{TemplateBinding Title}" x:Name="PART_MY_CARD" IsAbleToSwap="True">
                         <StackPanel>
                             <ItemsPresenter/>
                             <c:MyButton Content="浏览" Click="OpenSavesFolder" HorizontalAlignment="Right"/>
@@ -87,10 +90,7 @@
             </c:MyItemsCard.Template>
         </c:MyItemsCard>
         <c:MyItemsCard Title="mod 管理" Name="Modi_Mod_Card">
-            
+
         </c:MyItemsCard>
-        <c:MyCard Title="高级选项">
-            <c:MyButton Content="补全文件" Click="RepairFiles"/>
-        </c:MyCard>
     </StackPanel>
 </UserControl>

@@ -17,6 +17,7 @@ namespace MEFL
     {
         protected override void OnStartup(StartupEventArgs e)
         {
+            Contract.Advanced.OnDownloadProgressCreated += Advanced_OnDownloadProgressCreated;
             ThreadPool.SetMinThreads(64, 64);
             string str = String.Empty;
             foreach (var item in e.Args)
@@ -31,6 +32,12 @@ namespace MEFL
             (App.Current.Resources["Background"] as Grid).Children.Add(SettingPageModel.img);
 
             base.OnStartup(e);
+        }
+
+        private void Advanced_OnDownloadProgressCreated(object? sender, Contract.DownloadProgress e)
+        {
+            DownloadingProgressPageModel.ModelView.DownloadingProgresses.Add(e);
+            WebListRefresher.GoToDownloadProgressPage();
         }
 
         protected override void OnExit(ExitEventArgs e)

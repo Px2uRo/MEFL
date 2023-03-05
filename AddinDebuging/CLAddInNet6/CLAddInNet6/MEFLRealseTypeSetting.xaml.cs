@@ -152,11 +152,16 @@ namespace MEFL.CLAddIn.Pages
                     {
                         CLMapInfo target = _mapInfos.Where(x => x.Name == e.Name).ToArray()[0];
                         _mapInfos.Remove(target);
-                        Modi_Save_Card.Title = $"地图个数：{_mapInfos.Count}";
-
+                        var count = _mapInfos.Count;
+                        Modi_Save_Card.Title = $"地图个数：{count}";
+                        if (Modi_Save_Card.IsSwaped == false)
+                        {
+                            var tar = Modi_Save_Card.Template.FindName("PART_MY_CARD", Modi_Save_Card) as MyCard;
+                            tar.Height = Modi_Save_Card.Height = double.NaN;
+                        }
+                        Modi_Save_Card.OverrideOriginalHeight(count * 30 + 110);
                     }
                 });
-            
         }
 
         private void _mapWacther_Created(object sender, FileSystemEventArgs e)
@@ -167,8 +172,14 @@ namespace MEFL.CLAddIn.Pages
                     {
                         CLMapInfo target = new CLMapInfo(e.FullPath);
                         _mapInfos.Add(target);
-                        Modi_Save_Card.Title = $"地图个数：{_mapInfos.Count}";
-
+                        var count = _mapInfos.Count;
+                        Modi_Save_Card.Title = $"地图个数：{count}";
+                        if (Modi_Save_Card.IsSwaped == false)
+                        {
+                            var tar = Modi_Save_Card.Template.FindName("PART_MY_CARD", Modi_Save_Card) as MyCard;
+                            tar.Height = Modi_Save_Card.Height = double.NaN;
+                        }
+                        Modi_Save_Card.OverrideOriginalHeight(count * 30 + 110);
                     }
                 });
         }
@@ -220,7 +231,13 @@ namespace MEFL.CLAddIn.Pages
 
         private void RepairFiles(object sender, RoutedEventArgs e)
         {
-
+            var con = (DataContext as GameInfoBase);
+            var list = new NativeLocalPairsList();
+            foreach (var item in FileRepairer.GetDownloadURIs(con.GameJsonPath,con.dotMinecraftPath,Path.Combine(con.dotMinecraftPath,$"versions\\{con.Name}")))
+            {
+                list.Add(new NativeLocalPair(item.Native,item.Loacl,item.Length));
+            }
+            Contract.Advanced.AddProgress(Advanced.GetSelectedDownloader().CreateProgress(list, Advanced.GetSelectedSources())) ;
         }
     }
 }

@@ -8,6 +8,11 @@ namespace MEFL.Controls
 {
     public class MyItemsCard:ListBox
     {
+        public void OverrideOriginalHeight(double height)
+        {
+            var target = Template.FindName("PART_MY_CARD", this) as MyCard;
+            target.OriginalHeight = height;
+        }
         static MyItemsCard()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MyItemsCard), new FrameworkPropertyMetadata(typeof(MyItemsCard)));
@@ -76,6 +81,7 @@ namespace MEFL.Controls
         public static readonly DependencyProperty IsSwapedProperty =
             DependencyProperty.Register("IsSwaped", typeof(bool), typeof(MyItemsCard), new PropertyMetadata(false));
         #endregion
+
 
     }
 

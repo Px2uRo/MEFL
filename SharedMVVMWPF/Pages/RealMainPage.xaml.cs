@@ -51,7 +51,7 @@ namespace MEFL.Pages
         private void ItemSetting(object sender, RoutedEventArgs e)
         {
             bool yes =false;
-            //GenerlSettingGameModel.ModelView.Game = (sender as FrameworkElement).DataContext as GameInfoBase;
+            //GenerlSettingGameModel.ModelView._gameWatcher = (sender as FrameworkElement).DataContext as GameInfoBase;
             if(FindControl.FromTag("SettingGamePage", (App.Current.Resources["MainPage"] as Grid)).Length == 0)
             {
                 yes = true;

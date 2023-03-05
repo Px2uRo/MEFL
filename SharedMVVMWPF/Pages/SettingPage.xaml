@@ -323,7 +323,7 @@
                     </TextBlock>
                 </c:MyItemsCard.Title>
             </c:MyItemsCard>
-            <c:MyItemsCard IsSwaped="True" IsAbleToSwap="True" Title="管理下载源" ItemsSource="{Binding DownSources}" Style="{DynamicResource MyDS}"/>
+            <c:MyItemsCard Title="管理下载源" ItemsSource="{Binding DownSources}" Style="{DynamicResource MyDS}"/>
         </StackPanel>
     </Grid>
 </c:MyPageBase>

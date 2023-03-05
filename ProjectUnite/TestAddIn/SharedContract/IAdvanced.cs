@@ -20,7 +20,7 @@ namespace MEFL.Contract
             return selectedDownloader;
         }
         [Obsolete("别用，不要用，不是给你用的")]
-        public static EventHandler<DownloadProgress>? OnDownloadProgressCreated;
+        public static event EventHandler<DownloadProgress>? OnDownloadProgressCreated;
         public static void AddProgress(DownloadProgress downloadProgress)
         {
             OnDownloadProgressCreated?.Invoke(null,downloadProgress);

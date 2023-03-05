@@ -14,7 +14,7 @@ namespace MEFL.Controls
         #region 你是个屁的 Methods
         DoubleAnimation OpacityAni;
         DoubleAnimation dbani;
-        private double OriginalHeight;
+        public double OriginalHeight;
         private double Time { get; set; }
         private IEasingFunction Ease;
         private DoubleAnimation dbaniIcon;
@@ -23,18 +23,16 @@ namespace MEFL.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MyCard), new FrameworkPropertyMetadata(typeof(MyCard)));
         }
+
         protected override Size ArrangeOverride(Size arrangeBounds)
         {
+            if (OriginalHeight == 0.0)
+            {
+                OriginalHeight = base.ArrangeOverride(arrangeBounds).Height;
+            }
             return base.ArrangeOverride(arrangeBounds);
         }
-        protected override Size MeasureOverride(Size constraint)
-        {
-            return base.MeasureOverride(constraint);
-        }
-        protected override void OnVisualChildrenChanged(DependencyObject visualAdded, DependencyObject visualRemoved)
-        {
-            base.OnVisualChildrenChanged(visualAdded, visualRemoved);
-        }
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -108,7 +106,7 @@ namespace MEFL.Controls
         private void MyCard_MouseLeave(object sender, MouseEventArgs e)
         {
             OpacityAni = new DoubleAnimation();
-            OpacityAni.To =  0.8;
+            OpacityAni.To = 0.8;
             OpacityAni.From = 0.9;
             OpacityAni.EasingFunction = Ease;
             OpacityAni.Duration = new Duration(TimeSpan.FromSeconds(1));

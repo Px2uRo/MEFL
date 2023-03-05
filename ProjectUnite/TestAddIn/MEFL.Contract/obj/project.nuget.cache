@@ -1,10 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Kr1YXJgpDSMClcjXiN5uIc0fCwBYZivu1r/zBFukGfbOvB8vyEHVJPZCQ2cRpAutT5GALzUWDNViU/UpF/v5vA==",
+  "dgSpecHash": "dAUmalG+5a9Xn+3kvRFWtrdmemxERTLFMr563fmLNxPjfhTXcTd8xuGeGNTbfAqB2t1TWQ9AbDAAwr9diBKhLA==",
   "success": true,
   "projectFilePath": "I:\\Xiong's\\MEFLCollection\\ProjectUnite\\TestAddIn\\MEFL.Contract\\MEFL.Contract.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Lenovo\\.nuget\\packages\\mefl.controls\\0.0.7.1\\mefl.controls.0.0.7.1.nupkg.sha512",
+    "C:\\Users\\Lenovo\\.nuget\\packages\\mefl.controls\\0.0.7.4\\mefl.controls.0.0.7.4.nupkg.sha512",
     "C:\\Users\\Lenovo\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
   ],
   "logs": []

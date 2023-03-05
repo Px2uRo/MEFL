@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics.Contracts;
 
 namespace MEFL.APIData
 {
@@ -16,6 +17,7 @@ namespace MEFL.APIData
             {
                 _selected = value;
                 OnPropertyChanged(new("Selected"));
+                Contract.Advanced.SetSelectedSources(APIModel.DownloadSources.Selected);
             }
         }
         protected override void RemoveItem(int index)
@@ -67,6 +69,7 @@ namespace MEFL.APIData
                 _ChangedCount = _ChangedCount - 1;
             }
             GC.SuppressFinalize(item);
+            item.Dispose();
         }
     }
 }

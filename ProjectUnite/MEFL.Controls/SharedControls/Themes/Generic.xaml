@@ -363,9 +363,12 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type local:MyItemsCard}">
-                    <local:MyCard Title="{TemplateBinding Title}" 
+                    <local:MyCard x:Name="PART_MY_CARD" Title="{TemplateBinding Title}" 
                                   CornerRadius="{TemplateBinding CornerRadius}" 
-                                  BorderBrush="{TemplateBinding BorderBrush}" IsSwaped="{TemplateBinding IsSwaped}" IsAbleToSwap="{TemplateBinding IsAbleToSwap}" BorderThickness="{TemplateBinding BorderThickness}">
+                                  BorderBrush="{TemplateBinding BorderBrush}" 
+                                  IsSwaped="{TemplateBinding IsSwaped}" 
+                                  IsAbleToSwap="{TemplateBinding IsAbleToSwap}" 
+                                  BorderThickness="{TemplateBinding BorderThickness}">
                         <ItemsPresenter/>
                     </local:MyCard>
                 </ControlTemplate>

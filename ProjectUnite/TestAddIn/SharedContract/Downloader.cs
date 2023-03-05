@@ -204,7 +204,7 @@ namespace MEFL.Contract
             get { return _statu; }
             set { _statu = value; ChangeProperty(nameof(State)); }
         }
-
+        public NativeLocalPairsList Items { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
 
         private long _totalCount;

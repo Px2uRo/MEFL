@@ -19,6 +19,7 @@ using System.Linq;
 using MEFL.Pages;
 using System.Reflection.Metadata;
 using MEFL.EventsMethod;
+using System.IO;
 
 namespace MEFL.PageModelViews
 {
@@ -218,7 +219,7 @@ namespace MEFL.PageModelViews
                 return;
             }
             bool yes = false;
-            //GenerlSettingGameModel.ModelView.Game = APIModel.CurretGame;
+            //GenerlSettingGameModel.ModelView._gameWatcher = APIModel.CurretGame;
             if (FindControl.FromTag("SettingGamePage", (App.Current.Resources["MainPage"] as Grid)).Length == 0)
             {
                 yes = true;
@@ -360,15 +361,35 @@ namespace MEFL.PageModelViews
     public class IndexToUI : IValueConverter
     {
         #region 一堆字段而已
+        FileSystemWatcher _gameWatcher;
         Thickness VarMargin = new Thickness(0, 0, 0, 2);
         Thickness VarBorderThickness = new Thickness(5);
         Brush VarBorderBrush = App.Current.Resources["SYTLE_Standard_BorderBrush"] as SolidColorBrush;
         CornerRadius VarConrnerRadius = new CornerRadius(5);
-        StackPanel MyGamesSP = new StackPanel();
+        public StackPanel MyGamesSP = new StackPanel();
+        List<Controls.MyItemsCard> cards;
         #endregion
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+
+            #region Watcher而已
+            if (_gameWatcher != null)
+            {
+                _gameWatcher.Dispose();
+                _gameWatcher = null;
+            }
+            var path = Path.Combine(APIModel.MyFolders[APIModel.SelectedFolderIndex].Path,"versions");
+            _gameWatcher = new FileSystemWatcher(path);
+            _gameWatcher.IncludeSubdirectories = true;
+            _gameWatcher.NotifyFilter = NotifyFilters.FileName|NotifyFilters.DirectoryName;
+            _gameWatcher.Changed += _mapWacther_Changed;
+            _gameWatcher.Created += _mapWacther_Created;
+            _gameWatcher.Deleted += _mapWacther_Deleted;
+            _gameWatcher.Renamed += _mapWacther_Renamed;
+            _gameWatcher.EnableRaisingEvents = true;
+            #endregion
+
             foreach (var item in value as ObservableCollection<Contract.GameInfoBase>)
             {
                 item.Dispose();
@@ -376,7 +397,7 @@ namespace MEFL.PageModelViews
             MyGamesSP.Children.Clear();
 
             #region 收藏夹而已
-            List<Controls.MyItemsCard> cards = new List<Controls.MyItemsCard>();
+            cards = new List<Controls.MyItemsCard>();
             Controls.MyItemsCard favorcard = new Controls.MyItemsCard()
             {
                 IsAbleToSwap = true,
@@ -444,9 +465,43 @@ namespace MEFL.PageModelViews
             return MyGamesSP;
         }
 
+        private void _mapWacther_Renamed(object sender, RenamedEventArgs e)
+        {
+            
+        }
+
+        private void _mapWacther_Deleted(object sender, FileSystemEventArgs e)
+        {
+            var versionpath = Path.Combine(APIModel.MyFolders[APIModel.SelectedFolderIndex].Path, "versions");
+            if (Path.GetDirectoryName(e.FullPath) == versionpath)
+            {
+                //todo 移除版本
+            }
+        }
+
+        private void _mapWacther_Created(object sender, FileSystemEventArgs e)
+        {
+            var versionpath = Path.Combine(APIModel.MyFolders[APIModel.SelectedFolderIndex].Path, "versions",Path.GetFileNameWithoutExtension(e.FullPath));
+            var jsonpath = Path.GetDirectoryName(e.FullPath);
+            if (e.Name.EndsWith(".json")&&versionpath==jsonpath)
+            {
+                //todo 解析版本
+            }
+        }
+
+        private void _mapWacther_Changed(object sender, FileSystemEventArgs e)
+        {
+            
+        }
+
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
+        }
+
+        public IndexToUI()
+        {
+
         }
     }
 }
