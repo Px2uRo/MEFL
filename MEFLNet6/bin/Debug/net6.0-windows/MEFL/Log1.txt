@@ -1,9 +1,1 @@
-﻿[15:33:05][MEFL]程序启动了，参数
-[15:33:06][MEFL]写入了注册表，键：PlayerUuid，值：6f58b606-8b8b-4847-a667-f614333b16d5
-[15:33:06][MEFL]读取了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanCLD"}
-[15:33:06][MEFL]写入了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanCLD"}
-[15:33:06][MEFL]读取了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanCLD"}
-[15:33:06][MEFL]写入了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanCLD"}
-[15:33:06][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[15:33:06][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[15:33:07][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+﻿[0:00:47][MEFL]程序启动了，参数

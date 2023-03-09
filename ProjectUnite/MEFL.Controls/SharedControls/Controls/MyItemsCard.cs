@@ -8,10 +8,9 @@ namespace MEFL.Controls
 {
     public class MyItemsCard:ListBox
     {
-        public void OverrideOriginalHeight(double height)
+        public MyCard PART_MY_CARD=>
         {
-            var target = Template.FindName("PART_MY_CARD", this) as MyCard;
-            target.OriginalHeight = height;
+            Template.FindName("PART_MY_CARD", favorcard) as MyCard
         }
         static MyItemsCard()
         {

@@ -469,7 +469,17 @@ namespace MEFL.Pages
                         #region 解压Native
                         foreach (var item in Game.NativeFilesNeedToDepackage)
                         {
-                            CoreLaunching.ZipFile.Export(item.localpath, Game.NativeLibrariesPath);
+                            try
+                            {
+                                CoreLaunching.ZipFile.Export(item.localpath, Game.NativeLibrariesPath);
+                            }
+                            catch (Exception ex)
+                            {
+                                if (ex.GetType() == typeof(InvalidDataException))
+                                {
+                                    throw new Exception($"解压：{item.localpath}时发生错误，文件损坏");
+                                }
+                            }
                         }
                         if (TotalSize-DownloadedSize == 0.0)
                         {
@@ -499,6 +509,7 @@ namespace MEFL.Pages
 
         public void Cancel()
         {
+            GC.SuppressFinalize(t);
             t = null;
         }
 

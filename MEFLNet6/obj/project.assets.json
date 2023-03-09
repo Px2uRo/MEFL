@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net6.0-windows7.0": {
-      "MEFL.Controls/0.0.7.4": {
+      "MEFL.Controls/0.0.7.6": {
         "type": "package",
         "compile": {
           "lib/net6.0-windows7.0/MEFL.Controls.dll": {}
@@ -413,7 +413,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "MEFL.Controls": "0.0.7.4",
+          "MEFL.Controls": "0.0.7.6",
           "Newtonsoft.Json": "13.0.1"
         },
         "compile": {
@@ -429,15 +429,15 @@
     }
   },
   "libraries": {
-    "MEFL.Controls/0.0.7.4": {
-      "sha512": "sVQhDmO5QRxCiQuBoC2XlghZ7U5Z5X/NHaUoU0X+qsAzvdE3OkaRYbPuN9jb/ELaWE7oRKntDGjjpG5iJlFhvg==",
+    "MEFL.Controls/0.0.7.6": {
+      "sha512": "ipcEVakDnr96yK0YPf8AXcsBdfBzChm7kYnGmScTP3pyQKYO4fyrm/EHsLvoAFXPggJZ0FRD4hTOmiFxqMk79A==",
       "type": "package",
-      "path": "mefl.controls/0.0.7.4",
+      "path": "mefl.controls/0.0.7.6",
       "files": [
         ".nupkg.metadata",
         "MEFL.Controls_NuGet_Logo.png",
         "lib/net6.0-windows7.0/MEFL.Controls.dll",
-        "mefl.controls.0.0.7.4.nupkg.sha512",
+        "mefl.controls.0.0.7.6.nupkg.sha512",
         "mefl.controls.nuspec"
       ]
     },
@@ -1848,7 +1848,7 @@
     "net6.0-windows7.0": [
       "CoreLaunchingNet6 >= 1.0.0",
       "MEFL.Contract >= 0.0.5.41",
-      "MEFL.Controls >= 0.0.7.4",
+      "MEFL.Controls >= 0.0.7.6",
       "Newtonsoft.Json >= 13.0.1",
       "System.ComponentModel.Composition >= 6.0.0"
     ]
@@ -1909,7 +1909,7 @@
         "dependencies": {
           "MEFL.Controls": {
             "target": "Package",
-            "version": "[0.0.7.4, )"
+            "version": "[0.0.7.6, )"
           },
           "Newtonsoft.Json": {
             "target": "Package",

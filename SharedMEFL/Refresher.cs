@@ -17,7 +17,6 @@ namespace MEFL
 {
     public static class GameRefresher
     {
-        static List<String> Support = new List<string>();
         static Thread t;
         private static bool _Refreshing;
         public static bool Refreshing { get => _Refreshing; set { 
@@ -33,144 +32,12 @@ namespace MEFL
             {
                 return;
             }
-            Refreshing = true;
-            MyFolders[SelectedFolderIndex].Games.Clear();
-            Support.Clear();
-            MyFolders[SelectedFolderIndex].Favorites = new ObservableCollection<string>();
-            MyFolders[SelectedFolderIndex].Games = new GameInfoCollection();
-            t = new Thread(() =>
+            Refreshing = true; 
+            t = new Thread(async () =>
             {
                 try
                 {
-                    Refreshing = true;
-                    #region 加载游戏嘛
-                    var VersionPath = System.IO.Path.Combine(MyFolders[SelectedFolderIndex].Path, "versions");
-                    if (Directory.Exists(VersionPath) != true)
-                    {
-                        Directory.CreateDirectory(VersionPath);
-                    }
-                    string[] directories = Directory.GetDirectories(VersionPath);
-                    foreach (var item in directories)
-                    {
-                        var PrtDir = System.IO.Path.GetDirectoryName(item);
-                        var SubDirName = item.Replace(PrtDir + "\\", string.Empty);
-                        PrtDir = null;
-                        var SubJson = System.IO.Path.Combine(item, $"{SubDirName}.json");
-                        if (File.Exists(SubJson))
-                        {
-                            var jOb = FastLoadJson.Load(SubJson);
-                            if (jOb == null)
-                            {
-                                MyFolders[SelectedFolderIndex].Games.Add(new Contract.MEFLErrorType($"无法解析该版本，Json无效或损坏", SubJson));
-                            }
-                            else if (jOb["type"] == null)
-                            {
-                                MyFolders[SelectedFolderIndex].Games.Add(new Contract.MEFLErrorType("不合法 Json", SubJson));
-                            }
-                            else
-                            {
-                                foreach (var Hst in Hostings)
-                                {
-                                    if (Hst.IsOpen)
-                                    {
-                                        try
-                                        {
-                                            if (Hst.Permissions != null)
-                                            {
-                                                if (Hst.Permissions.UseGameManageAPI)
-                                                {
-                                                    try
-                                                    {
-                                                        foreach (var type in Hst.LuncherGameType.SupportedType)
-                                                        {
-                                                            Support.Add(type);
-                                                        }
-                                                    }
-                                                    catch (Exception ex)
-                                                    {
-
-                                                    }
-                                                }
-                                            }
-                                        }
-                                        catch (Exception ex)
-                                        {
-                                            Debugger.Logger($"未知错误 {ex.Message} at {Hst.FileName} at {ex.Message}");
-                                        }
-                                    }
-                                }
-                                if (Support.Contains(jOb["type"].ToString()))
-                                {
-                                    foreach (var Hst in Hostings)
-                                    {
-                                        if (Hst.IsOpen)
-                                        {
-                                            try
-                                            {
-                                                if (Hst.Permissions != null)
-                                                {
-                                                    if (Hst.Permissions.UseGameManageAPI)
-                                                    {
-                                                        MyFolders[SelectedFolderIndex].Games.Add(Hst.LuncherGameType.Parse(jOb["type"].ToString(), SubJson));
-                                                    }
-                                                }
-                                            }
-                                            catch (Exception ex)
-                                            {
-                                                MyFolders[SelectedFolderIndex].Games.Add(new Contract.MEFLErrorType($"从{Hst.FileName}中加载失败：{ex.Message}", SubJson));
-                                            }
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                    MyFolders[SelectedFolderIndex].Games.Add(new Contract.MEFLErrorType($"不支持 {jOb["type"].ToString()} 版本", SubJson));
-                                }
-                            }
-                            jOb = null;
-                        }
-                        else
-                        {
-                            try
-                            {
-                                MyFolders[SelectedFolderIndex].Games.Add(new Contract.MEFLErrorType("不存在Json", SubJson));
-                            }
-                            catch (Exception ex)
-                            {
-
-                            }
-                        }
-                        SubJson = null;
-                    }
-                    directories = null;
-                    #endregion
-                    #region 设置收藏夹嘛
-                    var mefljsonpath = System.IO.Path.Combine(MyFolders[SelectedFolderIndex].Path, ".mefl.json");
-                    if (File.Exists(mefljsonpath) != true)
-                    {
-                        File.Create(mefljsonpath).Close();
-                    }
-                    JObject jOb2 = new JObject();
-                    try
-                    {
-                        jOb2 = FastLoadJson.Load(mefljsonpath);
-                        if (jOb2 == null)
-                        {
-                            jOb2 = new JObject();
-                        }
-                        if (jOb2["Favorites"] == null)
-                        {
-                            throw new Exception();
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        jOb2.Add(new JProperty("Favorites", "[]"));
-                        File.WriteAllText(mefljsonpath, JsonConvert.SerializeObject(jOb2));
-                    }
-                    MyFolders[SelectedFolderIndex].Favorites = JsonConvert.DeserializeObject<ObservableCollection<String>>(jOb2["Favorites"].ToString());
-                    Refreshing = false;
-                    #endregion
+                    await GameLoader.LoadAll(MyFolders[SelectedFolderIndex]);
                     Refreshing = false;
                     App.Current.Dispatcher.Invoke(() =>
                     {

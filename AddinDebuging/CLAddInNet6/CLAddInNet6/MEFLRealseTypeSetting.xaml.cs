@@ -159,7 +159,7 @@ namespace MEFL.CLAddIn.Pages
                             var tar = Modi_Save_Card.Template.FindName("PART_MY_CARD", Modi_Save_Card) as MyCard;
                             tar.Height = Modi_Save_Card.Height = double.NaN;
                         }
-                        Modi_Save_Card.OverrideOriginalHeight(count * 30 + 110);
+                        Modi_Save_Card.PART_MY_CARD.OriginalHeight=(count * 30 + 110);
                     }
                 });
         }
@@ -179,7 +179,7 @@ namespace MEFL.CLAddIn.Pages
                             var tar = Modi_Save_Card.Template.FindName("PART_MY_CARD", Modi_Save_Card) as MyCard;
                             tar.Height = Modi_Save_Card.Height = double.NaN;
                         }
-                        Modi_Save_Card.OverrideOriginalHeight(count * 30 + 110);
+                        Modi_Save_Card.PART_MY_CARD.OriginalHeight = (count * 30 + 110);
                     }
                 });
         }

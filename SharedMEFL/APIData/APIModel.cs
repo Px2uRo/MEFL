@@ -121,6 +121,8 @@ namespace MEFL.APIData
             } 
         }
 
+        public static IndexToUI IndexToUI { get; internal set; }
+
         public static DownloaderCollection Downloaders = new();
         public static DownloadSourceCollection DownloadSources = new();
 

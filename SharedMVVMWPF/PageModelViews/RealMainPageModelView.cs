@@ -20,6 +20,7 @@ using MEFL.Pages;
 using System.Reflection.Metadata;
 using MEFL.EventsMethod;
 using System.IO;
+using CoreLaunching.JsonTemplates;
 
 namespace MEFL.PageModelViews
 {
@@ -360,16 +361,31 @@ namespace MEFL.PageModelViews
     }
     public class IndexToUI : IValueConverter
     {
+        #region cards
+        Controls.MyItemsCard favorcard = new Controls.MyItemsCard()
+        {
+            IsAbleToSwap = true,
+            Title = "Favorite",
+            Margin = VarMargin,
+            BorderThickness = VarBorderThickness,
+            BorderBrush = VarBorderBrush,
+            CornerRadius = VarConrnerRadius
+        };
+        #endregion
         #region 一堆字段而已
+        internal bool UpdateUI;
         FileSystemWatcher _gameWatcher;
-        Thickness VarMargin = new Thickness(0, 0, 0, 2);
-        Thickness VarBorderThickness = new Thickness(5);
-        Brush VarBorderBrush = App.Current.Resources["SYTLE_Standard_BorderBrush"] as SolidColorBrush;
-        CornerRadius VarConrnerRadius = new CornerRadius(5);
+        static Thickness VarMargin = new Thickness(0, 0, 0, 2);
+        static Thickness VarBorderThickness = new Thickness(5);
+        static Brush VarBorderBrush = App.Current.Resources["SYTLE_Standard_BorderBrush"] as SolidColorBrush;
+        static CornerRadius VarConrnerRadius = new CornerRadius(5);
         public StackPanel MyGamesSP = new StackPanel();
         List<Controls.MyItemsCard> cards;
-        #endregion
 
+        Queue<GameInfoBase> ReadyToBeRemoved = new();
+        Queue<string> _readyToBeAdded = new();
+        Queue<string> ReadyToBeRefreshed = new();
+        #endregion
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
 
@@ -398,15 +414,6 @@ namespace MEFL.PageModelViews
 
             #region 收藏夹而已
             cards = new List<Controls.MyItemsCard>();
-            Controls.MyItemsCard favorcard = new Controls.MyItemsCard()
-            {
-                IsAbleToSwap = true,
-                Title = "Favorite",
-                Margin = VarMargin,
-                BorderThickness = VarBorderThickness,
-                BorderBrush = VarBorderBrush,
-                CornerRadius = VarConrnerRadius
-            };
             ObservableCollection<Contract.GameInfoBase> favoritem = new ObservableCollection<Contract.GameInfoBase>();
             ObservableCollection<String> favorites = (App.Current.Resources["RMPMV"] as RealMainPageModelView).MyFolders[APIModel.SelectedFolderIndex].Favorites;
             foreach (var item in APIModel.GameInfoConfigs)
@@ -419,9 +426,9 @@ namespace MEFL.PageModelViews
                     }
                 }
             }
-            if (favoritem.Count > 0)
+            favorcard.ItemsSource = favoritem;
+            if(favoritem.Count!=0)
             {
-                favorcard.ItemsSource = favoritem;
                 cards.Add(favorcard);
             }
             #endregion
@@ -464,7 +471,28 @@ namespace MEFL.PageModelViews
             }
             return MyGamesSP;
         }
+        #region WatcherMethods
+        internal void DealWithNew()
+        {
+            while (_readyToBeAdded.Count > 0)
+            {
+                var tar = _readyToBeAdded.Dequeue();
+                
+            }
+        }
+        private void AddNew()
+        {
 
+        }
+        private void RemoveNew()
+        {
+
+        }
+        private void DeleteNew()
+        {
+
+        }
+        #endregion
         private void _mapWacther_Renamed(object sender, RenamedEventArgs e)
         {
             
@@ -479,13 +507,94 @@ namespace MEFL.PageModelViews
             }
         }
 
+
         private void _mapWacther_Created(object sender, FileSystemEventArgs e)
         {
             var versionpath = Path.Combine(APIModel.MyFolders[APIModel.SelectedFolderIndex].Path, "versions",Path.GetFileNameWithoutExtension(e.FullPath));
             var jsonpath = Path.GetDirectoryName(e.FullPath);
             if (e.Name.EndsWith(".json")&&versionpath==jsonpath)
             {
-                //todo 解析版本
+                GameInfoBase game = null;
+                var j= FastLoadJson.Load(e.FullPath);
+                if (j == null)
+                {
+                    game = new MEFLErrorType("无法读取该版本，文件损坏",jsonpath);
+                }
+                else
+                {
+                    List<String> support = new();
+                    foreach (var Hst in APIModel.Hostings)
+                    {
+                        if (Hst.IsOpen)
+                        {
+                            try
+                            {
+                                if (Hst.Permissions != null)
+                                {
+                                    if (Hst.Permissions.UseGameManageAPI)
+                                    {
+                                        try
+                                        {
+                                            foreach (var type in Hst.LuncherGameType.SupportedType)
+                                            {
+                                                support.Add(type);
+                                            }
+                                        }
+                                        catch (Exception ex)
+                                        {
+
+                                        }
+                                    }
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                Debugger.Logger($"未知错误 {ex.Message} at {Hst.FileName} at {ex.Message}");
+                            }
+                        }
+                    }
+                    if (support.Contains(j["type"].ToString()))
+                    {
+                        foreach (var Hst in APIModel.Hostings)
+                        {
+                            if (Hst.IsOpen)
+                            {
+                                try
+                                {
+                                    if (Hst.Permissions != null)
+                                    {
+                                        if (Hst.Permissions.UseGameManageAPI)
+                                        {
+                                            game = (Hst.LuncherGameType.Parse(j["type"].ToString(), e.Name));
+                                        }
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    game = (new Contract.MEFLErrorType($"从{Hst.FileName}中加载失败：{ex.Message}", e.Name));
+                                }
+                            }
+                        }
+                    }
+                    else
+                    {
+                        game = (new Contract.MEFLErrorType($"不支持 {j["type"].ToString()} 版本", e.Name));
+                    }
+                }
+                var linql = cards.Where((x)=>x.Title==game.GameTypeFriendlyName).ToArray();
+                if (linql.Length > 0)
+                {
+
+                }
+                else
+                {
+                    var newCard = new Controls.MyItemsCard() { IsAbleToSwap = true, Title = game.GameTypeFriendlyName, Margin = VarMargin, BorderThickness = VarBorderThickness, BorderBrush = VarBorderBrush, CornerRadius = VarConrnerRadius };
+                    var cardItemSources = new ObservableCollection<Contract.GameInfoBase>();
+                    cardItemSources.Add(game);
+                    newCard.ItemsSource = cardItemSources;
+                    //newCard.OverrideOriginalHeight();
+                    MyGamesSP.Children.Add(newCard);
+                }
             }
         }
 
@@ -501,7 +610,7 @@ namespace MEFL.PageModelViews
 
         public IndexToUI()
         {
-
+            APIModel.IndexToUI = this;
         }
     }
 }
