@@ -182,6 +182,7 @@ namespace MEFL
         private void Btn_MouseDown(object sender, MouseButtonEventArgs e)
         {
             APIModel.IndexToUI.UpdateUI = false;
+            (App.Current.Resources["RMPMV"] as RealMainPageModelView).ChangeGameVisblity = Visibility.Hidden;
         }
 
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
@@ -280,7 +281,8 @@ namespace MEFL
 
         private void ReturnToRealPage(object sender, MouseButtonEventArgs e)
         {
-            //APIModel.IndexToUI.UpdateUI = true;
+            APIModel.IndexToUI.UpdateUI = false;
+            (App.Current.Resources["RMPMV"] as RealMainPageModelView).ChangeGameVisblity=Visibility.Hidden;
         }
     }
 }

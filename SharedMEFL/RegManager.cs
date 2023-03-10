@@ -50,13 +50,13 @@ namespace MEFL
         public static void Write(string Key, string Value,bool ForceWrite)
         {
 #if WINDOWS
-            if (App.Current.Windows.Count != 0)
+            if(ForceWrite == true)
             {
                 WinRegKey.SetValue(Key, Value);
                 //todo i18N;
                 Debugger.Logger($"写入了注册表，键：{Key}，值：{Value}");
             }
-            else if(ForceWrite == true)
+            else if (App.Current.Windows.Count != 0)
             {
                 WinRegKey.SetValue(Key, Value);
                 //todo i18N;

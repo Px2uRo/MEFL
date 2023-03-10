@@ -26,9 +26,9 @@ namespace MEFL
             }
             Debugger.Logger(string.Format((this.Resources["I18N_String_App_OnStartUp"] as String),str));
 
-            //this.DispatcherUnhandledException += App_DispatcherUnhandledException;
-            //TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
-            //AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
+            this.DispatcherUnhandledException += App_DispatcherUnhandledException;
+            TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
             (App.Current.Resources["Background"] as Grid).Children.Add(SettingPageModel.img);
 
             base.OnStartup(e);

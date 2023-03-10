@@ -129,7 +129,7 @@
         </Grid>
     </c:MyPageBase.SideBar>
     <Grid>
-        <Border x:Name="ChangeGameBorder" Visibility="Hidden">
+        <Border x:Name="ChangeGameBorder" Visibility="{Binding ChangeGameVisblity}">
             <StackPanel>
                 <Grid Height="30" Margin="0,0,0,5">
                     <Grid.ColumnDefinitions>

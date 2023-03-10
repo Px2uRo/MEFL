@@ -1,9 +1,4 @@
-﻿[13:58:55][MEFL]程序启动了，参数
-[13:58:55][MEFL]写入了注册表，键：PlayerUuid，值：6f58b606-8b8b-4847-a667-f614333b16d5
-[13:58:55][MEFL]读取了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanCLD"}
-[13:58:55][MEFL]写入了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanCLD"}
-[13:58:55][MEFL]读取了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanCLD"}
-[13:58:55][MEFL]写入了注册表，键：Downloader，值：{"FileName":"CLAddIn.dll","DownloaderName":"FanCLD"}
-[13:58:56][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[13:58:56][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[13:58:57][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+﻿[23:17:56][MEFL]程序启动了，参数
+[23:17:56][MEFL]读取了注册表，键：Downloader，值：
+[23:17:56][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[23:18:00][ERROR]Object reference not set to an instance of an object.

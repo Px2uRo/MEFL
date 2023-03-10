@@ -29,6 +29,14 @@ namespace MEFL.PageModelViews
     /// </summary>
     public class RealMainPageModelView:PageModelViewBase
     {
+        private Visibility _changeGameVisblity = Visibility.Hidden;
+
+        public Visibility ChangeGameVisblity
+        {
+            get { return _changeGameVisblity; }
+            set { _changeGameVisblity = value; Invoke(nameof(ChangeGameVisblity)); }
+        }
+
         private Pages.ProcessModelView _ProcessModelView;
         public Pages.ProcessModelView ProcessModelView { get => _ProcessModelView; set { _ProcessModelView = value; Invoke(nameof(ProcessModelView)); } }
         public Contract.GameInfoBase CurretGame
@@ -376,7 +384,17 @@ namespace MEFL.PageModelViews
         {
             Height = 0,
             IsAbleToSwap = true,
-            Title = "Favorite",
+            Title = "NEW",
+            Margin = VarMargin,
+            BorderThickness = VarBorderThickness,
+            BorderBrush = VarBorderBrush,
+            CornerRadius = VarConrnerRadius,
+            ItemsSource=new ObservableCollection<GameInfoBase>()
+        };
+        Controls.MyCard Note = new Controls.MyCard()
+        {
+            Height = 0,
+            Title = "提示",
             Margin = VarMargin,
             BorderThickness = VarBorderThickness,
             BorderBrush = VarBorderBrush,
@@ -385,6 +403,7 @@ namespace MEFL.PageModelViews
         #endregion
         #region 一堆字段而已
         internal bool UpdateUI = false;
+
         FileSystemWatcher _gameWatcher;
         static Thickness VarMargin = new Thickness(0, 0, 0, 2);
         static Thickness VarBorderThickness = new Thickness(5);
@@ -397,7 +416,6 @@ namespace MEFL.PageModelViews
 
         Queue<GameInfoBase> ReadyToBeRemoved = new();
         Queue<string> _readyToBeAdded = new();
-        Queue<string> ReadyToBeRefreshed = new();
         #endregion
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
@@ -409,14 +427,15 @@ namespace MEFL.PageModelViews
                 _gameWatcher = null;
             }
             var path = Path.Combine(APIModel.MyFolders[APIModel.SelectedFolderIndex].Path,"versions");
-            _gameWatcher = new FileSystemWatcher(path);
-            _gameWatcher.IncludeSubdirectories = true;
-            _gameWatcher.NotifyFilter = NotifyFilters.FileName|NotifyFilters.DirectoryName;
-            _gameWatcher.Changed += _mapWacther_Changed;
-            _gameWatcher.Created += _mapWacther_Created;
-            _gameWatcher.Deleted += _mapWacther_Deleted;
-            _gameWatcher.Renamed += _mapWacther_Renamed;
-            _gameWatcher.EnableRaisingEvents = true;
+            if (Directory.Exists(path))
+            {
+                _gameWatcher = new FileSystemWatcher(path);
+                _gameWatcher.IncludeSubdirectories = true;
+                _gameWatcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.DirectoryName;
+                _gameWatcher.Created += _mapWacther_Created;
+                _gameWatcher.Deleted += _mapWacther_Deleted;
+                _gameWatcher.EnableRaisingEvents = true;
+            }
             #endregion
 
             foreach (var item in value as ObservableCollection<Contract.GameInfoBase>)
@@ -444,8 +463,10 @@ namespace MEFL.PageModelViews
             {
                 favorcard.Height = double.NaN;
             }
-            cards.Add(favorcard);
-            
+            newCard.Height = 0;
+            (newCard.ItemsSource as ObservableCollection<GameInfoBase>).Clear();
+            MyGamesSP.Children.Add(newCard);
+            MyGamesSP.Children.Add(favorcard);
             #endregion
 
             #region 确定有多少卡片而已
@@ -484,6 +505,12 @@ namespace MEFL.PageModelViews
             {
                 MyGamesSP.Children.Add(item);
             }
+            if(cards.Count==0)
+            {
+                Note.Height = double.NaN;
+                Note.Content= "没有下载的版本\n请自行下载或导入";
+                MyGamesSP.Children.Add(Note);
+            }
             return MyGamesSP;
         }
         #region WatcherMethods
@@ -492,33 +519,69 @@ namespace MEFL.PageModelViews
             while (_readyToBeAdded.Count > 0)
             {
                 var tar = _readyToBeAdded.Dequeue();
-                newItems.Add(GameLoader.LoadOne(tar));
+                AddNew(GameLoader.LoadOne(tar));
+            }
+            while (ReadyToBeRemoved.Count > 0) 
+            {   
+                var tar = ReadyToBeRemoved.Dequeue();
+                DeleteNew(tar);
+            };
+        }
+        private void AddNew(GameInfoBase game)
+        {
+            var linq = cards.Where((x) => x.Title.ToString() == game.GameTypeFriendlyName).ToArray();
+            APIModel.GameInfoConfigs.Add(game);
+            if (linq.Count() == 0)
+            {
+                var tar = newCard.ItemsSource as ObservableCollection<GameInfoBase>;
+                tar.Add(game);
+                newCard.Height = double.NaN;
+                newCard.PART_MY_CARD.OriginalHeight= (tar.Count)*30+70;
+                if (!newCard.PART_MY_CARD.IsSwaped)
+                {
+                    newCard.PART_MY_CARD.Height = newCard.PART_MY_CARD.OriginalHeight;
+                }
+            }
+            else
+            {
+                (linq[0].ItemsSource as ObservableCollection<GameInfoBase>).Add(game);
+                linq[0].PART_MY_CARD.OriginalHeight += 30;
+                if (!linq[0].IsSwaped)
+                {
+                    linq[0].PART_MY_CARD.Height = linq[0].PART_MY_CARD.OriginalHeight;
+                }
             }
         }
-        private void AddNew()
+        private void DeleteNew(GameInfoBase game)
         {
-
-        }
-        private void RemoveNew()
-        {
-
-        }
-        private void DeleteNew()
-        {
-
+            var linq = cards.Where((x) => x.Title.ToString() == game.GameTypeFriendlyName).ToArray();
+            var items = (linq[0].ItemsSource as ObservableCollection<GameInfoBase>);
+            items.Remove(game);
+                linq[0].PART_MY_CARD.OriginalHeight -= 30;
+                if (!linq[0].IsSwaped)
+                {
+                    linq[0].PART_MY_CARD.Height = linq[0].PART_MY_CARD.OriginalHeight;
+                }
+            
+            APIModel.GameInfoConfigs.Remove(game);
+            game.Dispose();
         }
         #endregion
-        private void _mapWacther_Renamed(object sender, RenamedEventArgs e)
-        {
-            
-        }
 
         private void _mapWacther_Deleted(object sender, FileSystemEventArgs e)
         {
             var versionpath = Path.Combine(APIModel.MyFolders[APIModel.SelectedFolderIndex].Path, "versions");
             if (Path.GetDirectoryName(e.FullPath) == versionpath)
             {
-                //todo 移除版本
+                var linq = APIModel.GameInfoConfigs.Where((x) =>x.GameJsonPath==e.FullPath).ToArray()[0];
+                if (UpdateUI)
+                {
+                    DeleteNew(linq);
+                }
+                else
+                {
+                    ReadyToBeRemoved.Enqueue(linq);
+                }
             }
         }
 
@@ -531,18 +594,13 @@ namespace MEFL.PageModelViews
             {
                 if (UpdateUI == false)
                 {
-                    _readyToBeAdded.Enqueue(e.Name);
+                    _readyToBeAdded.Enqueue(e.FullPath);
                 }
                 else
                 {
-
+                    AddNew(GameLoader.LoadOne(e.FullPath));
                 }
             }
-        }
-
-        private void _mapWacther_Changed(object sender, FileSystemEventArgs e)
-        {
-            
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

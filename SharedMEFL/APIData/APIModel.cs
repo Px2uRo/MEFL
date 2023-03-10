@@ -92,7 +92,8 @@ namespace MEFL.APIData
         internal static GameInfoCollection GameInfoConfigs { get; set; }
         internal static ObservableCollection<MEFLFolderInfo> MyFolders 
         {
-            get;set;
+            get;
+            set;
         }
         private static FileInfo[] tmp1;
 
@@ -179,6 +180,13 @@ namespace MEFL.APIData
                 Folders = null;
                 tmp1 = null;
                 tmp2 = null;
+                var value = new List<String>();
+                foreach (var item in Javas)
+                {
+                    value.Add(item.FullName);
+                }
+                var str = JsonConvert.SerializeObject(value);
+                RegManager.Write("RecordedJavas", str,true);
                 SearchJavaThreadIsOK = true;
             });
             t.Start();
@@ -194,6 +202,10 @@ namespace MEFL.APIData
                 if (Directory.Exists(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft")) == false)
                 {
                     Directory.CreateDirectory(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"));
+                }
+                if(regKey== null)
+                {
+                    regKey = new();
                 }
                 if (regKey.Count == 0)
                 {
@@ -259,21 +271,20 @@ namespace MEFL.APIData
             Javas = new ObservableCollection<FileInfo>();
             try
             {
-                foreach (var item in JsonConvert.DeserializeObject<string[]>(RegManager.Read("RecordedJavas")))
+                var collection = JsonConvert.DeserializeObject<string[]>(RegManager.Read("RecordedJavas"));
+                if (collection == null)
+                {
+                    collection = new string[0];
+                    RegManager.Write("RecordedJavas",JsonConvert.SerializeObject(collection),true);
+                }
+                foreach (var item in collection)
                 {
                     Javas.Add(new FileInfo(item));
                 }
             }
             catch (Exception ex)
             {
-                Javas = SearchJavas();
-                var value = new List<String>();
-                foreach (var item in Javas)
-                {
-                    value.Add(item.FullName);
-                }
-                var str = JsonConvert.SerializeObject(value);
-                RegManager.Write("RecordedJavas", str,true);
+
             }
             try
             {
