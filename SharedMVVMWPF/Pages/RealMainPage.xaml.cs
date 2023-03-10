@@ -32,6 +32,8 @@ namespace MEFL.Pages
         private void MyButton_Click(object sender, RoutedEventArgs e)
         {
             ChangeGameBorder.Visibility = Visibility.Visible;
+            APIModel.IndexToUI.UpdateUI = true;
+            APIModel.IndexToUI.DealWithNew();
         }
         private void DeleteItem(object sender, RoutedEventArgs e)
         {

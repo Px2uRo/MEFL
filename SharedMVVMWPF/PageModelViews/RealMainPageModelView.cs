@@ -364,6 +364,17 @@ namespace MEFL.PageModelViews
         #region cards
         Controls.MyItemsCard favorcard = new Controls.MyItemsCard()
         {
+            Height = 0,
+            IsAbleToSwap = true,
+            Title = "Favorite",
+            Margin = VarMargin,
+            BorderThickness = VarBorderThickness,
+            BorderBrush = VarBorderBrush,
+            CornerRadius = VarConrnerRadius
+        };
+        Controls.MyItemsCard newCard = new Controls.MyItemsCard()
+        {
+            Height = 0,
             IsAbleToSwap = true,
             Title = "Favorite",
             Margin = VarMargin,
@@ -373,7 +384,7 @@ namespace MEFL.PageModelViews
         };
         #endregion
         #region 一堆字段而已
-        internal bool UpdateUI;
+        internal bool UpdateUI = false;
         FileSystemWatcher _gameWatcher;
         static Thickness VarMargin = new Thickness(0, 0, 0, 2);
         static Thickness VarBorderThickness = new Thickness(5);
@@ -381,6 +392,8 @@ namespace MEFL.PageModelViews
         static CornerRadius VarConrnerRadius = new CornerRadius(5);
         public StackPanel MyGamesSP = new StackPanel();
         List<Controls.MyItemsCard> cards;
+        ObservableCollection<Contract.GameInfoBase> favoritem;
+        ObservableCollection<Contract.GameInfoBase> newItems;
 
         Queue<GameInfoBase> ReadyToBeRemoved = new();
         Queue<string> _readyToBeAdded = new();
@@ -414,7 +427,7 @@ namespace MEFL.PageModelViews
 
             #region 收藏夹而已
             cards = new List<Controls.MyItemsCard>();
-            ObservableCollection<Contract.GameInfoBase> favoritem = new ObservableCollection<Contract.GameInfoBase>();
+             favoritem = new ObservableCollection<Contract.GameInfoBase>();
             ObservableCollection<String> favorites = (App.Current.Resources["RMPMV"] as RealMainPageModelView).MyFolders[APIModel.SelectedFolderIndex].Favorites;
             foreach (var item in APIModel.GameInfoConfigs)
             {
@@ -427,10 +440,12 @@ namespace MEFL.PageModelViews
                 }
             }
             favorcard.ItemsSource = favoritem;
-            if(favoritem.Count!=0)
+            if (favoritem.Count != 0)
             {
-                cards.Add(favorcard);
+                favorcard.Height = double.NaN;
             }
+            cards.Add(favorcard);
+            
             #endregion
 
             #region 确定有多少卡片而已
@@ -477,7 +492,7 @@ namespace MEFL.PageModelViews
             while (_readyToBeAdded.Count > 0)
             {
                 var tar = _readyToBeAdded.Dequeue();
-                
+                newItems.Add(GameLoader.LoadOne(tar));
             }
         }
         private void AddNew()
@@ -514,86 +529,13 @@ namespace MEFL.PageModelViews
             var jsonpath = Path.GetDirectoryName(e.FullPath);
             if (e.Name.EndsWith(".json")&&versionpath==jsonpath)
             {
-                GameInfoBase game = null;
-                var j= FastLoadJson.Load(e.FullPath);
-                if (j == null)
+                if (UpdateUI == false)
                 {
-                    game = new MEFLErrorType("无法读取该版本，文件损坏",jsonpath);
+                    _readyToBeAdded.Enqueue(e.Name);
                 }
                 else
                 {
-                    List<String> support = new();
-                    foreach (var Hst in APIModel.Hostings)
-                    {
-                        if (Hst.IsOpen)
-                        {
-                            try
-                            {
-                                if (Hst.Permissions != null)
-                                {
-                                    if (Hst.Permissions.UseGameManageAPI)
-                                    {
-                                        try
-                                        {
-                                            foreach (var type in Hst.LuncherGameType.SupportedType)
-                                            {
-                                                support.Add(type);
-                                            }
-                                        }
-                                        catch (Exception ex)
-                                        {
 
-                                        }
-                                    }
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                Debugger.Logger($"未知错误 {ex.Message} at {Hst.FileName} at {ex.Message}");
-                            }
-                        }
-                    }
-                    if (support.Contains(j["type"].ToString()))
-                    {
-                        foreach (var Hst in APIModel.Hostings)
-                        {
-                            if (Hst.IsOpen)
-                            {
-                                try
-                                {
-                                    if (Hst.Permissions != null)
-                                    {
-                                        if (Hst.Permissions.UseGameManageAPI)
-                                        {
-                                            game = (Hst.LuncherGameType.Parse(j["type"].ToString(), e.Name));
-                                        }
-                                    }
-                                }
-                                catch (Exception ex)
-                                {
-                                    game = (new Contract.MEFLErrorType($"从{Hst.FileName}中加载失败：{ex.Message}", e.Name));
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        game = (new Contract.MEFLErrorType($"不支持 {j["type"].ToString()} 版本", e.Name));
-                    }
-                }
-                var linql = cards.Where((x)=>x.Title==game.GameTypeFriendlyName).ToArray();
-                if (linql.Length > 0)
-                {
-
-                }
-                else
-                {
-                    var newCard = new Controls.MyItemsCard() { IsAbleToSwap = true, Title = game.GameTypeFriendlyName, Margin = VarMargin, BorderThickness = VarBorderThickness, BorderBrush = VarBorderBrush, CornerRadius = VarConrnerRadius };
-                    var cardItemSources = new ObservableCollection<Contract.GameInfoBase>();
-                    cardItemSources.Add(game);
-                    newCard.ItemsSource = cardItemSources;
-                    //newCard.OverrideOriginalHeight();
-                    MyGamesSP.Children.Add(newCard);
                 }
             }
         }

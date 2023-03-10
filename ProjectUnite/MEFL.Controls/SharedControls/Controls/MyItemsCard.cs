@@ -8,10 +8,7 @@ namespace MEFL.Controls
 {
     public class MyItemsCard:ListBox
     {
-        public MyCard PART_MY_CARD=>
-        {
-            Template.FindName("PART_MY_CARD", favorcard) as MyCard
-        }
+        public MyCard PART_MY_CARD =>Template.FindName("PART_MY_CARD", this) as MyCard;
         static MyItemsCard()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(MyItemsCard), new FrameworkPropertyMetadata(typeof(MyItemsCard)));

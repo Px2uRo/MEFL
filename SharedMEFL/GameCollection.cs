@@ -123,21 +123,8 @@ namespace MEFL
                     var subJson = System.IO.Path.Combine(item, $"{SubDirName}.json");
                     if (File.Exists(subJson))
                     {
-                        var jOb = FastLoadJson.Load(subJson);
-                        if (jOb == null)
-                        {
-                            folder.Games.Add(new Contract.MEFLErrorType($"无法解析该版本，Json无效或损坏", subJson));
-                        }
-                        else if (jOb["type"] == null)
-                        {
-                            folder.Games.Add(new Contract.MEFLErrorType("不合法 Json", subJson));
-                        }
-                        else
-                        {
                             RefreshSupported();
-                            folder.Games.Add(LoadOne(jOb,subJson));
-                        }
-                        jOb = null;
+                            folder.Games.Add(LoadOne(subJson));
                     }
                     else
                     {
@@ -177,9 +164,18 @@ namespace MEFL
             return task;
         }
 
-        private static GameInfoBase LoadOne(JObject jOb,string subJson)
+        public static GameInfoBase LoadOne(string JsonPath)
         {
             GameInfoBase res = null;
+            var jOb = JObject.Parse(File.ReadAllText(JsonPath));
+            if (jOb == null)
+            {
+                res = (new Contract.MEFLErrorType($"无法解析该版本，Json无效或损坏", JsonPath));
+            }
+            else if (jOb["type"] == null)
+            {
+                res = (new Contract.MEFLErrorType("不合法 Json", JsonPath));
+            }
             if (Supported.Contains(jOb["type"].ToString()))
             {
                 foreach (var Hst in APIData.APIModel.Hostings)
@@ -192,20 +188,20 @@ namespace MEFL
                             {
                                 if (Hst.Permissions.UseGameManageAPI)
                                 {
-                                    res = (Hst.LuncherGameType.Parse(jOb["type"].ToString(), subJson));
+                                    res = (Hst.LuncherGameType.Parse(jOb["type"].ToString(), JsonPath));
                                 }
                             }
                         }
                         catch (Exception ex)
                         {
-                            res = (new Contract.MEFLErrorType($"从{Hst.FileName}中加载失败：{ex.Message}", subJson));
+                            res = (new Contract.MEFLErrorType($"从{Hst.FileName}中加载失败：{ex.Message}", JsonPath));
                         }
                     }
                 }
             }
             else
             {
-                res = (new Contract.MEFLErrorType($"不支持 {jOb["type"].ToString()} 版本", subJson));
+                res = (new Contract.MEFLErrorType($"不支持 {jOb["type"].ToString()} 版本", JsonPath));
             }
             return res;
         }

@@ -280,7 +280,7 @@ namespace MEFL
 
         private void ReturnToRealPage(object sender, MouseButtonEventArgs e)
         {
-            APIModel.IndexToUI.UpdateUI = true;
+            //APIModel.IndexToUI.UpdateUI = true;
         }
     }
 }
