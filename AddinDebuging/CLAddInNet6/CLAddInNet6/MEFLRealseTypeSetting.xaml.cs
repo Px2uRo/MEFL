@@ -25,7 +25,7 @@ namespace MEFL.CLAddIn.Pages
         public event EventHandler<GameInfoBase> OnPageBack;
         public event EventHandler<GameInfoBase> OnListUpdate;
         private static ObservableCollection<CLMapInfo> _mapInfos;
-        private static FileSystemWatcher _mapWacther;
+        private static FileSystemWatcher _mapWacther; 
 
         private void Radio_Checked(object sender, RoutedEventArgs e)
         {
@@ -226,7 +226,14 @@ namespace MEFL.CLAddIn.Pages
         private void OpenSavesFolder(object sender, RoutedEventArgs e)
         {
             var data = this.DataContext as CLGameType;
-            Process.Start("explorer.exe",Path.Combine(data.GameFolder,"saves"));
+            Directory.CreateDirectory(Path.Combine(data.GameFolder, "saves"));
+            Process.Start("explorer.exe", Path.Combine(data.GameFolder, "saves"));
+        }
+        private void OpenModsFolder(object sender, RoutedEventArgs e)
+        {
+            var data = this.DataContext as CLGameType;
+            Directory.CreateDirectory(Path.Combine(data.GameFolder, "mods"));
+            Process.Start("explorer.exe", Path.Combine(data.GameFolder, "mods"));
         }
 
         private void RepairFiles(object sender, RoutedEventArgs e)

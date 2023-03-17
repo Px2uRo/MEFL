@@ -173,7 +173,7 @@ namespace MEFL
         {
             var res = new ObservableCollection<Hosting>();
             string path = System.IO.Path.Combine( 
-                Environment.CurrentDirectory,"AddIns");
+                Environment.CurrentDirectory,"MEFL\\AddIns");
             List<FileInfo> l = new List<FileInfo>();
             if (System.IO.Directory.Exists(path) != true)
             {

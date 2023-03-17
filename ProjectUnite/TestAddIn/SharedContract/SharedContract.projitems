@@ -16,6 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)IAccountPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IDownload.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)IGameSettingPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JsonConverter\GameInfoConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFL.Arguments\InstallArguments.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFL.Arguments\LangID.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFL.Arguments\SettingArgs.cs" />

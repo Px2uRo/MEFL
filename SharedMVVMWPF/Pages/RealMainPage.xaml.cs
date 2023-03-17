@@ -3,6 +3,7 @@ using MEFL.Contract;
 using MEFL.Controls;
 using MEFL.EventsMethod;
 using MEFL.PageModelViews;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -493,6 +494,7 @@ namespace MEFL.Pages
 #if DEBUG
                             var args = $"\"{p.StartInfo.FileName}\" {p.StartInfo.Arguments}";
 #endif
+                            Debugger.Logger($"启动{Game.Name}中，游戏详细信息{JsonConvert.SerializeObject((GameInfoBase)Game, Formatting.Indented)}");
                             Succeed = true;
                             return;
                         }
@@ -501,6 +503,8 @@ namespace MEFL.Pages
                     }
                     catch (Exception ex)
                     {
+                        Debugger.Logger($"启动{Game.Name}失败，游戏详细信息{JsonConvert.SerializeObject((GameInfoBase)Game, Formatting.Indented)}");
+                        Debugger.Logger($"{ex.ToString()} at {ex.Source}");
                         ErrorInfo = ex.Message;
                         Failed = true;
                         return;

@@ -1,4 +1,5 @@
-﻿[23:19:46][MEFL]程序启动了，参数
-[23:19:47][MEFL]读取了注册表，键：Downloader，值：
-[23:19:47][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[23:19:53][ERROR]Object reference not set to an instance of an object.
+﻿[13:56:31][MEFL]程序启动了，参数
+[13:56:32][MEFL]写入了注册表，键：PlayerUuid，值：2de5b08b-1aa4-49f7-9776-a013f3382d39
+[13:56:32][MEFL]读取了注册表，键：Downloader，值：
+[13:56:32][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[13:56:32][MEFL]写入了注册表，键：SelectedFolderIndex，值：0

@@ -32,17 +32,6 @@ namespace MEFL
         private DoubleAnimation _dbani;
         public MainWindow()
         {
-#if DEBUG
-            try
-            {
-                (new FileInfo(@"I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\TestAddIn\bin\Debug\net6.0-windows\TestAddIn.dll"))
-            .CopyTo(@"I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\AddIns\TestAddIn.dll", true);
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-#endif
             this.DataContext = this;
             InitializeComponent();
             //PART_Window_Content.DataContext = this;

@@ -24,8 +24,6 @@ namespace MEFL.CLAddIn.GameTypes
     public class CLGameType : MEFL.Contract.GameInfoBase
     {
         internal bool startWithDebug => _MSOAT.StartInDebugMode;
-        private List<String> _ItemsNeedsToExtract = new List<string>();
-        public override List<string> ItemsNeedsToExtract => _ItemsNeedsToExtract;
         public override FrameworkElement GetManageProcessPage(Process process, SettingArgs args)
         {
             var res = new Pages.MEFLRealseTypeManage(process,this);
@@ -35,7 +33,6 @@ namespace MEFL.CLAddIn.GameTypes
         {
             if (disposing)
             {
-                _ItemsNeedsToExtract.Clear();
                 FileNeedsToDownload.Clear();
                 GC.SuppressFinalize(Icon);
                 GC.SuppressFinalize(_MSOAT);
@@ -202,7 +199,7 @@ namespace MEFL.CLAddIn.GameTypes
                 return res;
             }
         }
-        public override string OtherGameArgs { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public override string OtherGameArgs { get => ""; set => throw new NotImplementedException(); }
         public override string OtherJVMArgs { get => _MSOAT.OtherJVMArguments; set => _MSOAT.OtherJVMArguments = value; }
         public override string GameJsonPath { get; set; }
 

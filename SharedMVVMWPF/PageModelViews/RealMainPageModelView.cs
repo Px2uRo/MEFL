@@ -21,6 +21,7 @@ using System.Reflection.Metadata;
 using MEFL.EventsMethod;
 using System.IO;
 using CoreLaunching.JsonTemplates;
+using System.Windows.Threading;
 
 namespace MEFL.PageModelViews
 {
@@ -500,16 +501,18 @@ namespace MEFL.PageModelViews
                 cards[i].ItemsSource = cardItemSources;
             }
             #endregion
-
-            foreach (var item in cards)
-            {
-                MyGamesSP.Children.Add(item);
-            }
-            if(cards.Count==0)
+            if (cards.Count == 0)
             {
                 Note.Height = double.NaN;
-                Note.Content= "没有下载的版本\n请自行下载或导入";
+                Note.Content = "没有下载的版本\n请自行下载或导入";
                 MyGamesSP.Children.Add(Note);
+            }
+            else
+            {
+                foreach (var item in cards)
+                {
+                    MyGamesSP.Children.Add(item);
+                }
             }
             return MyGamesSP;
         }
@@ -529,42 +532,49 @@ namespace MEFL.PageModelViews
         }
         private void AddNew(GameInfoBase game)
         {
-            var linq = cards.Where((x) => x.Title.ToString() == game.GameTypeFriendlyName).ToArray();
-            APIModel.GameInfoConfigs.Add(game);
-            if (linq.Count() == 0)
+            App.Current.Dispatcher.Invoke(() =>
             {
-                var tar = newCard.ItemsSource as ObservableCollection<GameInfoBase>;
-                tar.Add(game);
-                newCard.Height = double.NaN;
-                newCard.PART_MY_CARD.OriginalHeight= (tar.Count)*30+70;
-                if (!newCard.PART_MY_CARD.IsSwaped)
+                var linq = cards.Where((x) => x.Title.ToString() == game.GameTypeFriendlyName).ToArray();
+                APIModel.GameInfoConfigs.Add(game);
+                if (linq.Count() == 0)
                 {
-                    newCard.PART_MY_CARD.Height = newCard.PART_MY_CARD.OriginalHeight;
+                    newCard.ItemsSource = newItems;
+                    var tar = newCard.ItemsSource as ObservableCollection<GameInfoBase>;
+                    tar.Add(game);
+                    newCard.Height = double.NaN;
+                    newCard.PART_MY_CARD.OriginalHeight = (tar.Count) * 30 + 70;
+                    if (!newCard.PART_MY_CARD.IsSwaped)
+                    {
+                        newCard.PART_MY_CARD.Height = newCard.PART_MY_CARD.OriginalHeight;
+                    }
                 }
-            }
-            else
-            {
-                (linq[0].ItemsSource as ObservableCollection<GameInfoBase>).Add(game);
-                linq[0].PART_MY_CARD.OriginalHeight += 30;
-                if (!linq[0].IsSwaped)
+                else
                 {
-                    linq[0].PART_MY_CARD.Height = linq[0].PART_MY_CARD.OriginalHeight;
+                    (linq[0].ItemsSource as ObservableCollection<GameInfoBase>).Add(game);
+                    linq[0].PART_MY_CARD.OriginalHeight += 30;
+                    if (!linq[0].IsSwaped)
+                    {
+                        linq[0].PART_MY_CARD.Height = linq[0].PART_MY_CARD.OriginalHeight;
+                    }
                 }
-            }
+            });
         }
         private void DeleteNew(GameInfoBase game)
         {
-            var linq = cards.Where((x) => x.Title.ToString() == game.GameTypeFriendlyName).ToArray();
-            var items = (linq[0].ItemsSource as ObservableCollection<GameInfoBase>);
-            items.Remove(game);
+            App.Current.Dispatcher.Invoke(() =>
+            {
+                var linq = cards.Where((x) => x.Title.ToString() == game.GameTypeFriendlyName).ToArray();
+                var items = (linq[0].ItemsSource as ObservableCollection<GameInfoBase>);
+                items.Remove(game);
                 linq[0].PART_MY_CARD.OriginalHeight -= 30;
                 if (!linq[0].IsSwaped)
                 {
                     linq[0].PART_MY_CARD.Height = linq[0].PART_MY_CARD.OriginalHeight;
                 }
-            
-            APIModel.GameInfoConfigs.Remove(game);
-            game.Dispose();
+
+                APIModel.GameInfoConfigs.Remove(game);
+                game.Dispose();
+            });
         }
         #endregion
 

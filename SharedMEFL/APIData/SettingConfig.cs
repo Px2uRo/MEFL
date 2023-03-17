@@ -158,7 +158,7 @@ namespace MEFL.APIData
         public static ObservableCollection<AddInConfig> GetAll()
         {
             ObservableCollection<AddInConfig> ret;
-            var Path = System.IO.Path.Combine(Environment.CurrentDirectory, "AddIns\\Config.json");
+            var Path = System.IO.Path.Combine(Environment.CurrentDirectory, "MEFL\\AddIns\\Config.json");
             try
             {
                 if (System.IO.File.Exists(Path) != true)
@@ -200,7 +200,7 @@ namespace MEFL.APIData
                     NewList.Add(item);
                 }
             }
-            var Path = System.IO.Path.Combine(Environment.CurrentDirectory, "AddIns\\Config.json");
+            var Path = System.IO.Path.Combine(Environment.CurrentDirectory, "MEFL\\AddIns\\Config.json");
             try
             {
                 if (Directory.Exists(Path) != true)

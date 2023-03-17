@@ -35,6 +35,34 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="c:MyItemsCard" x:Key="Mod">
+            <Setter Property="ItemContainerStyle">
+                <Setter.Value>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="35" />
+                                            <ColumnDefinition Width="35" />
+                                        </Grid.ColumnDefinitions>
+                                        <c:MyItemsCardItem ToolTip="{Binding Name}" Title="{Binding Name}">
+                                            <c:MyItemsCardItem.Icon>
+                                                <Image Source="{Binding Image}"/>
+                                            </c:MyItemsCardItem.Icon>
+                                        </c:MyItemsCardItem>
+                                        <c:MyButton Grid.Column="1" Content="×" Width="30" Height="30"/>
+                                        <c:MyButton Grid.Column="2" Content="..." Width="30" Height="30"/>
+                                    </Grid>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </UserControl.Resources>
     <StackPanel>
         <c:MyCard Title="概览">
@@ -89,8 +117,17 @@
                 </ControlTemplate>
             </c:MyItemsCard.Template>
         </c:MyItemsCard>
-        <c:MyItemsCard Title="mod 管理" Name="Modi_Mod_Card">
-
+        <c:MyItemsCard Title="mod 管理(还没做)" Name="Modi_Mod_Card" Style="{DynamicResource Mod}" IsAbleToSwap="True">
+            <c:MyItemsCard.Template>
+                <ControlTemplate TargetType="{x:Type c:MyItemsCard}">
+                    <c:MyCard Title="{TemplateBinding Title}" x:Name="PART_MY_CARD" IsAbleToSwap="True">
+                        <StackPanel>
+                            <ItemsPresenter/>
+                            <c:MyButton Content="浏览" Click="OpenModsFolder" HorizontalAlignment="Right"/>
+                        </StackPanel>
+                    </c:MyCard>
+                </ControlTemplate>
+            </c:MyItemsCard.Template>
         </c:MyItemsCard>
     </StackPanel>
 </UserControl>

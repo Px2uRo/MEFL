@@ -160,14 +160,6 @@ public class MEFLErrorType : GameInfoBase
 		}
 	}
 
-	public override List<string> ItemsNeedsToExtract
-	{
-		get
-		{
-			throw new NotImplementedException();
-		}
-	}
-
 	public override FrameworkElement GetManageProcessPage(Process process, SettingArgs args)
 	{
 		throw new NotImplementedException();
