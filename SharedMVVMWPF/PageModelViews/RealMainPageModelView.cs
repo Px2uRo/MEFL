@@ -432,10 +432,10 @@ namespace MEFL.PageModelViews
             {
                 _gameWatcher = new FileSystemWatcher(path);
                 _gameWatcher.IncludeSubdirectories = true;
-                _gameWatcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.DirectoryName;
-                _gameWatcher.Created += _mapWacther_Created;
-                _gameWatcher.Deleted += _mapWacther_Deleted;
-                _gameWatcher.EnableRaisingEvents = true;
+                //_gameWatcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.DirectoryName;
+                //_gameWatcher.Created += _mapWacther_Created;
+                //_gameWatcher.Deleted += _mapWacther_Deleted;
+                //_gameWatcher.EnableRaisingEvents = true;
             }
             #endregion
 
@@ -483,12 +483,8 @@ namespace MEFL.PageModelViews
             #endregion
 
             #region 给卡片加 ItemSources 而已
-            var startindex = 0;
-            if(favoritem.Count > 0)
-            {
-                startindex = 1;
-            }
-            for (int i = startindex; i < cards.Count; i++)
+
+            for (int i = 0; i < cards.Count; i++)
             {
                 var cardItemSources = new ObservableCollection<Contract.GameInfoBase>();
                 foreach (var item in APIModel.GameInfoConfigs)
@@ -501,6 +497,14 @@ namespace MEFL.PageModelViews
                 cards[i].ItemsSource = cardItemSources;
             }
             #endregion
+            if(favorcard.Items.Count== 0)
+            {
+                favorcard.Height = 0;
+            }
+            if(newCard.Items.Count== 0)
+            {
+                newCard.Height = 0;
+            }
             if (cards.Count == 0)
             {
                 Note.Height = double.NaN;

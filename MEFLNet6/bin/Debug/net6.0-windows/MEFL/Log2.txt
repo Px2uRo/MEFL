@@ -1,19 +1,6 @@
-﻿[13:53:21][MEFL]程序启动了，参数
-[13:53:21][MEFL]写入了注册表，键：PlayerUuid，值：2de5b08b-1aa4-49f7-9776-a013f3382d39
-[13:53:21][MEFL]读取了注册表，键：Downloader，值：
-[13:53:22][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[13:53:22][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[13:53:34][MEFL]启动1.19.3-Forge_44.1.17-OptiFine_I2_pre5中，游戏详细信息{
-  "Version": "1.19.3-Forge_44.1.17-OptiFine_I2_pre5",
-  "Name": "1.19.3-Forge_44.1.17-OptiFine_I2_pre5",
-  "JVMArgs": " -XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump \"-Dos.name=Windows 10\" -Dos.version=10.0 -Djava.library.path=${natives_directory} -Dminecraft.launcher.brand=${launcher_name} -Dminecraft.launcher.version=${launcher_version} -cp ${classpath} -Djava.net.preferIPv6Addresses=system -DignoreList=bootstraplauncher,securejarhandler,asm-commons,asm-util,asm-analysis,asm-tree,asm,JarJarFileSystems,client-extra,fmlcore,javafmllanguage,lowcodelanguage,mclanguage,forge-,${version_name}.jar -DmergeModules=jna-5.10.0.jar,jna-platform-5.10.0.jar -DlibraryDirectory=${library_directory} -p ${library_directory}/cpw/mods/bootstraplauncher/1.1.2/bootstraplauncher-1.1.2.jar;;${classpath_separator}${library_directory}/cpw/mods/securejarhandler/2.1.6/securejarhandler-2.1.6.jar;;${classpath_separator}${library_directory}/org/ow2/asm/asm-commons/9.3/asm-commons-9.3.jar;;${classpath_separator}${library_directory}/org/ow2/asm/asm-util/9.3/asm-util-9.3.jar;;${classpath_separator}${library_directory}/org/ow2/asm/asm-analysis/9.3/asm-analysis-9.3.jar;;${classpath_separator}${library_directory}/org/ow2/asm/asm-tree/9.3/asm-tree-9.3.jar;;${classpath_separator}${library_directory}/org/ow2/asm/asm/9.3/asm-9.3.jar;;${classpath_separator}${library_directory}/net/minecraftforge/JarJarFileSystems/0.3.19/JarJarFileSystems-0.3.19.jar;; --add-modules ALL-MODULE-PATH --add-opens java.base/java.util.jar=cpw.mods.securejarhandler --add-opens java.base/java.lang.invoke=cpw.mods.securejarhandler --add-exports java.base/sun.security.util=cpw.mods.securejarhandler --add-exports jdk.naming.dns/com.sun.jndi.dns=java.naming",
-  "LibrariesPath": "I:\\Xiong's\\MEFLCollection\\MEFLNet6\\bin\\Release\\net6.0-windows\\publish\\win-x86\\.minecraft\\libraries",
-  "NativeLibrariesPath": "I:\\Xiong's\\MEFLCollection\\MEFLNet6\\bin\\Release\\net6.0-windows\\publish\\win-x86\\.minecraft\\natives",
-  "ClassPaths": "共 88 个",
-  "MainClassName": "cpw.mods.bootstraplauncher.BootstrapLauncher",
-  "VersionType": "release",
-  "GameTypeFriendlyName": "Forge",
-  "GameFolder": "I:\\Xiong's\\MEFLCollection\\MEFLNet6\\bin\\Release\\net6.0-windows\\publish\\win-x86\\.minecraft",
-  "AssetsIndexName": "2"
-}
-[13:53:44][MEFL]程序退出了
+﻿[22:16:23][MEFL]程序启动了，参数
+[22:16:24][MEFL]写入了注册表，键：PlayerUuid，值：2de5b08b-1aa4-49f7-9776-a013f3382d39
+[22:16:24][MEFL]读取了注册表，键：Downloader，值：
+[22:16:24][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[22:16:25][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[22:16:31][MEFL]程序退出了
