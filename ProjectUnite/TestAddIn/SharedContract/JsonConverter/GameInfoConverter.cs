@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.UI.Xaml;
+using Newtonsoft.Json;
 using System;
 using System.Windows;
 
@@ -18,9 +19,11 @@ namespace MEFL.Contract
 
         public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
+#if WPF
             Application.Current.Dispatcher.Invoke(new Action(() =>
             {
-                var game = value as GameInfoBase;
+#endif
+            var game = value as GameInfoBase;
                 writer.WriteStartObject();
                 writer.WritePropertyName(nameof(game.Version));
                 writer.WriteValue(game.Version);
@@ -46,7 +49,9 @@ namespace MEFL.Contract
                 writer.WriteValue(game.AssetsIndexName);
                 writer.WriteEndObject();
                 writer.Flush();
-            }));
+#if WPF
+        }));
+#endif
         }
     }
 }

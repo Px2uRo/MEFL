@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\WPFTest\obj\Debug\net6.0-windows\
+I:\Xiong's\MEFLWinUI3\ProjectUnite\MEFL.Controls\WPFTest\obj\Debug\net6.0-windows\
 WPFTest
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\WPFTest\App.xaml
+I:\Xiong's\MEFLWinUI3\ProjectUnite\MEFL.Controls\WPFTest\App.xaml
 11407045341
 
 2-1958734538
 195-228788949
 MainWindow.xaml;
 
-False
+True
 

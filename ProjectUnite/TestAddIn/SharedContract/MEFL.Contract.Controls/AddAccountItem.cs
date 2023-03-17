@@ -1,17 +1,27 @@
 using System;
 using System.Windows;
+using Windows.Devices.Input;
+using System.Drawing;
+#if WPF
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+#elif WINDOWS_UWP
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.UI.Xaml;
+#endif
+
 
 namespace MEFL.Contract.Controls;
 
+#if WPF
 public class AddAccountItem : UserControl
 {
 	private DoubleAnimation _dbAni = new DoubleAnimation
 	{
-		Duration = new Duration(TimeSpan.FromSeconds(0.3))
+		Duration = new Duration() {TimeSpan= TimeSpan.FromSeconds(0.3) }
 	};
 
 	public static readonly DependencyProperty AddAccountContentProperty;
@@ -55,3 +65,6 @@ public class AddAccountItem : UserControl
 		FrameworkElement.DefaultStyleKeyProperty.OverrideMetadata(typeof(AddAccountItem), new FrameworkPropertyMetadata(typeof(AddAccountItem)));
 	}
 }
+#elif WINDOWS_UWP
+
+#endif

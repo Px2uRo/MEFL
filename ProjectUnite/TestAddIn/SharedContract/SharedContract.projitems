@@ -37,10 +37,4 @@
     <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\MEFLErrorType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OtherArgsBase.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)themes\generic.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
 </Project>

@@ -1,15 +1,17 @@
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
-using System.Reflection;
-#if NET4_0
-#else
 using System.Runtime.CompilerServices;
-#endif
+#if NET4_0
 using System.Windows;
 using System.Windows.Media;
+#elif WINDOWS_UWP
+using Microsoft.UI.Xaml.Media;
+#else
+using System.Windows;
+using System.Windows.Media;
+#endif
 using MEFL.Arguments;
 using Newtonsoft.Json;
 

@@ -4,17 +4,17 @@
 library
 C#
 .cs
-I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6.0-windows\
+I:\Xiong's\MEFLWinUI3\ProjectUnite\MEFL.Controls\ControlsNet6\obj\Debug\net6.0-windows\
 MEFL.Controls
 none
 false
 TRACETRACE;WPF;DEBUG;NET;NET6_0;NETCOREAPP
 
-2-239043243
+2-1841328871
 
-161917480939
+161068106292
 194-2004305220
-MyMessageBox.xaml;I:\Xiong's\MEFLCollection\ProjectUnite\MEFL.Controls\SharedControls\Themes\Generic.xaml;
+MyMessageBox.xaml;I:\Xiong's\MEFLWinUI3\ProjectUnite\MEFL.Controls\SharedControls\Themes\Generic.xaml;
 
-False
+True
 

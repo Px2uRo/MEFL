@@ -3,6 +3,9 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
 using MEFL.Arguments;
+#if WINDOWS_UWP
+using Microsoft.UI.Xaml;
+#endif
 
 namespace MEFL.Contract;
 

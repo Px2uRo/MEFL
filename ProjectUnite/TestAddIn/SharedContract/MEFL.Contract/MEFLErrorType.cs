@@ -2,11 +2,18 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using MEFL.Arguments;
+#if WPF
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using MEFL.Arguments;
+#elif WINDOWS_UWP
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
+using Microsoft.UI.Xaml.Media.Imaging;
+#endif
 #if NET6_0
 using MEFL.Contract.Properties;
 using MEFL.Controls;

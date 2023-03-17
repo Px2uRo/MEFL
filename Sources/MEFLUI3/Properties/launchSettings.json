@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "MEFLUI3 (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "MEFLUI3 (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

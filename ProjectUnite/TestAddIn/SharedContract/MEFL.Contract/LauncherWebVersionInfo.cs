@@ -2,7 +2,12 @@ using MEFL.Arguments;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+#if WPF
 using System.Windows.Controls;
+#elif WINDOWS_UWP
+using Microsoft.UI.Xaml.Controls;
+#endif
+
 
 namespace MEFL.Contract;
 

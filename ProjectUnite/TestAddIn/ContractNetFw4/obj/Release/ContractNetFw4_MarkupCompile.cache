@@ -4,17 +4,17 @@
 library
 C#
 .cs
-I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\ContractNetFw4\obj\Release\
+I:\Xiong's\MEFLWinUI3\ProjectUnite\TestAddIn\ContractNetFw4\obj\Release\
 ContractNetFw4
 none
 false
-TRACE
+TRACE;NET4_0
 
-1-902779280
+11804319341
 
-22-1019206854
+30-1638185630
 121219315259
-I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\SharedContract\themes\generic.xaml;
+I:\Xiong's\MEFLWinUI3\ProjectUnite\TestAddIn\SharedContract\themes\generic.xaml;
 
 True
 

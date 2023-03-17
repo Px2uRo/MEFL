@@ -1,4 +1,8 @@
-﻿using System.Windows.Controls;
+﻿#if WPF
+using System.Windows.Controls;
+#elif WINDOWS_UWP
+
+#endif
 
 namespace MEFL.Contract
 {

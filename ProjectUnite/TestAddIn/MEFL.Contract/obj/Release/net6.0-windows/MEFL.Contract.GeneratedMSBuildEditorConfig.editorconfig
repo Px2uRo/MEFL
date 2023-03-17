@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = MEFL.Contract
-build_property.ProjectDir = I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\
+build_property.ProjectDir = I:\Xiong's\MEFLWinUI3\ProjectUnite\TestAddIn\MEFL.Contract\
