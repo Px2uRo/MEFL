@@ -39,22 +39,11 @@ namespace MEFL
             {
                 jOb2.Add(new JProperty("Favorites", "[]"));
             }
-            for (int i = 0; i < Favorites.Count; i++)
+            if (Favorites.Contains(target.GameJsonPath))
             {
-                if (target.GameJsonPath.ToString() == Favorites[i].ToString())
-                {
-                    Favorites.Remove(target.GameJsonPath);
-                    if(Favorites.Count == 0)
-                    {
-                        symbol = -1;
-                    }
-                }
-                else
-                {
-                    Favorites.Add(target.GameJsonPath);
-                }
+                Favorites.Remove(target.GameJsonPath);
             }
-            if (symbol == 0)
+            else
             {
                 Favorites.Add(target.GameJsonPath);
             }
