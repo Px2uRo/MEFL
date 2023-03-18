@@ -39,7 +39,7 @@
                     <TextBox Name="GuidBox" Grid.Column="1" Grid.Row="2" />
                 </Grid>
             </Grid>
-            <c:MyButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding CancelCommand}" Content="取消" Width="70" Margin="0,0,80,10"/>
+            <c:MyButton HorizontalAlignment="Right" VerticalAlignment="Bottom" Content="取消" Width="70" Margin="0,0,80,10" Click="CancelButton"/>
             <c:MyButton IsEnabled="{Binding Account.Uuid,ConverterParameter=Adding}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Command="{Binding AddCommand}" Content="Ok!" Width="70" Margin="0,0,5,10" Click="MyButton_Click"/>
         </Grid>
     </c:MyCard>

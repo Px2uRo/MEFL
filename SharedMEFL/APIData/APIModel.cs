@@ -137,7 +137,7 @@ namespace MEFL.APIData
                 var Folders = new ObservableCollection<DirectoryInfo>();
                 try
                 {
-                    Folders.Add(new DirectoryInfo("C:\\Program Files"));
+                    Folders.Add(new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)));
                     for (int i = 0; i < Folders.Count; i++)
                     {
                         try

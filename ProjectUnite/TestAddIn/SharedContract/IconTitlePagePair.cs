@@ -1,4 +1,7 @@
 using System.Windows;
+#if WINDOWS_UWP
+using Microsoft.UI.Xaml;
+#endif
 
 namespace MEFL.Contract;
 

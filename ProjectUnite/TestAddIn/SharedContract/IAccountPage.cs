@@ -7,7 +7,7 @@ namespace MEFL.Contract
     /// </summary>
     public interface IAddAccountPage
     {
-        public delegate void Canceled(object sender, AccountBase account);
+        public delegate void Canceled(object sender);
         public event Canceled OnCanceled;
         public delegate void AccountAdd(object sender, AccountBase account);
         public event AccountAdd OnAccountAdd;

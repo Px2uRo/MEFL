@@ -4,6 +4,7 @@ using MEFL.Contract.Controls;
 using MEFL.Controls;
 using MEFL.PageModelViews;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -83,14 +84,12 @@ namespace MEFL.SpecialPages
                 }
             }
         }
-
+        MyPageBase NewPage = null;
         private void Item_MouseDown(object sender, MouseButtonEventArgs e)
         {
             MyStackPanel.Children.Clear();
             var content = (sender as AddAccountItem).AddAccountContent;
-            var NewPage = new AddAccountPage() { Content = content
-                ,Tag = "AddAccountPage"
-            };
+            NewPage = new AddAccountPage() { Content = content,Tag = "AddAccountPage"};
             if(!(content is FrameworkElement))
             {
                 MyMessageBox.Show("添加用户页面不是 FrameworkElement，请联系开发者");
@@ -104,9 +103,28 @@ namespace MEFL.SpecialPages
             NewPage.Show(this);
         }
 
-        private void Content_OnCanceled(object sender, AccountBase account)
+        private void Content_OnCanceled(object sender)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
+            {
+                if (((App.Current.Resources["MainPage"] as Grid).Children[i] as FrameworkElement).Tag.ToString()== "UserManagePage")
+                {
+                    var target = (App.Current.Resources["MainPage"] as Grid).Children[i] as MyPageBase;
+                    target.Show(NewPage);
+                    (App.Current.Resources["MainPage"] as Grid).Children.Remove(NewPage);
+                    for (int j = 0; j < (App.Current.Resources["MainPage"] as Grid).Children.Count; j++)
+                    {
+                        if (((App.Current.Resources["MainPage"] as Grid).Children[j] as FrameworkElement).Tag.ToString() == "AddAccountPage")
+                        {
+                            (App.Current.Resources["MainPage"] as Grid).Children.RemoveAt(j);
+                            break;
+                        }
+                    }
+                    GC.SuppressFinalize(NewPage);
+                    NewPage = null;
+                    break;
+                }
+            }
         }
     }
 }

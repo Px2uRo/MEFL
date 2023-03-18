@@ -32,7 +32,7 @@ public partial class AddALegacyAccountPage : UserControl, IAddAccountPage
     private void AddALegacyAccountPage_KeyDown(object sender, KeyEventArgs e)
     {
         if(e.Key == Key.Escape) {
-            OnCanceled.Invoke(this,null);
+            OnCanceled.Invoke(this);
         }
     }
 
@@ -56,5 +56,10 @@ public partial class AddALegacyAccountPage : UserControl, IAddAccountPage
         {
             MessageBox.Show("不合法Guid");
         }
+    }
+
+    private void CancelButton(object sender, RoutedEventArgs e)
+    {
+        OnCanceled.Invoke(this);
     }
 }
