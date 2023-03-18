@@ -470,6 +470,7 @@ namespace MEFL.Pages
                         }
                         #endregion
                         #region 解压Native
+                        Directory.CreateDirectory(Game.NativeLibrariesPath);
                         foreach (var item in Game.NativeFilesNeedToDepackage)
                         {
                             try
@@ -494,7 +495,8 @@ namespace MEFL.Pages
 #if DEBUG
                             var args = $"\"{p.StartInfo.FileName}\" {p.StartInfo.Arguments}";
 #endif
-                            Debugger.Logger($"启动{Game.Name}中，游戏详细信息{JsonConvert.SerializeObject((GameInfoBase)Game, Formatting.Indented)}");
+                            Debugger.Logger($"启动了{Game.Name}，游戏详细信息{JsonConvert.SerializeObject((GameInfoBase)Game, Formatting.Indented)}");
+                            Debugger.Logger($"启动参数{p.StartInfo.FileName + " " +p.StartInfo.Arguments.Replace(APIModel.SelectedAccount.AccessToken,"******")}");
                             Succeed = true;
                             return;
                         }
