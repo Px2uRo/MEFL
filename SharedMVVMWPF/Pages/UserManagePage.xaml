@@ -18,7 +18,7 @@
                 <ContentPresenter Content="{Binding SelectedAccount.ProfileAvator}" Width="100" Height="100"/>
                 <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="15,0,0,0">
                     <TextBlock Text="{Binding SelectedAccount.UserName}" Margin="3" FontWeight="Black" FontSize="16"/>
-                    <TextBlock Text="{Binding SelectedAccount.EmailAddress}" Margin="3" FontSize="16"/>
+                    <TextBlock Text="{Binding SelectedAccount.UserType}" Margin="3" FontSize="16"/>
                     <TextBlock Text="{Binding SelectedAccount.Uuid}" Margin="3" FontSize="16"/>
                 </StackPanel>
                 <c:MyButton Content="..." Width="30" Grid.Column="2" Height="30" Click="ManageCurret"/>

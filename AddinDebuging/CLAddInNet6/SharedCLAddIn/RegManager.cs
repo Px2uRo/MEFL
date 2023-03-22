@@ -65,7 +65,7 @@ namespace MEFL.CLAddIn
         public static string Read(string Key)
         {
 #if WINDOWS
-            if (WinRegKey.GetValue(Key) == null||WinRegKey.GetValue(Key)==string.Empty)
+            if (WinRegKey.GetValue(Key) == null)
             {
                 WinRegKey.SetValue(Key, string.Empty);
             }

@@ -25,9 +25,27 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="MEFLRealseTypeSetting.xaml.cs">
+    <Compile Update="Pages\MEFLRealseTypeSetting.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>MEFLRealseTypeSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\AddALegacyAccount.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>AddALegacyAccount.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\AddNewMSAccount.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Pages\ManageLegacyAccountPage.xaml.cs">
+      <DependentUpon>ManageLegacyAccountPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\MCERPage.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>MCERPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Pages\MEFLRealseTypeManage.xaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>MEFLRealseTypeManage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
@@ -44,7 +62,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="MEFLRealseTypeSetting.xaml">
+    <Page Update="Pages\MEFLRealseTypeSetting.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Pages\AddALegacyAccount.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Pages\ManageLegacyAccountPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Pages\MCERPage.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Pages\MEFLRealseTypeManage.xaml">
       <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
     </Page>
   </ItemGroup>

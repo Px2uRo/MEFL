@@ -25,24 +25,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\AddALegacyAccountModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\MCERModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ModelViewBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Pages\AddALegacyAccount.xaml.cs">
-      <SubType>Code</SubType>
-      <DependentUpon>AddALegacyAccount.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Pages\AddNewMSAccount.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Pages\ManageLegacyAccountPage.xaml.cs">
-      <DependentUpon>ManageLegacyAccountPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Pages\MCERPage.xaml.cs">
-      <SubType>Code</SubType>
-      <DependentUpon>MCERPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Pages\MEFLRealseTypeManage.xaml.cs">
-      <SubType>Code</SubType>
-      <DependentUpon>MEFLRealseTypeManage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)RegManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)..\..\..\..\..\Xiong%27s\MEFLCollection\AddinDebuging\CLAddInNet6\SharedCLAddIn\Downloaders\SolveDupNamePage.xaml.cs">
       <DependentUpon>SolveDupNamePage.xaml</DependentUpon>
@@ -50,29 +32,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)WebVersion\Generic.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)Pages\AddALegacyAccount.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Pages\AddNewMSAccount.xaml">
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Pages\ManageLegacyAccountPage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Pages\MCERPage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Pages\MEFLRealseTypeManage.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="$(MSBuildThisFileDirectory)..\..\..\..\..\Xiong%27s\MEFLCollection\AddinDebuging\CLAddInNet6\SharedCLAddIn\Downloaders\SolveDupNamePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

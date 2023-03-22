@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,7 +11,23 @@ namespace MEFL.CLAddIn.AccountsManagement
     {
         public static MicrosoftList GetReg()
         {
-            return new();
+            var source = RegManager.Read("MicrosoftAccounts");
+            if (string.IsNullOrEmpty(source))
+            {
+                RegManager.Write("MicrosoftAccounts", "[]");
+                return new();
+            }
+            else
+            {
+                var res = new MicrosoftList();
+                var arry = JArray.Parse(source);
+                return res;
+            }
+        }
+
+        public void AddOne(MEFLMicrosoftAccount account)
+        {
+            Model.MicrosoftAccounts.Add(account);
         }
     }
 }

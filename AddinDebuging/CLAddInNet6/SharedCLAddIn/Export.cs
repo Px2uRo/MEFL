@@ -1,5 +1,4 @@
-﻿using CLAddInNet6;
-using CoreLaunching.JsonTemplates;
+﻿using CoreLaunching.JsonTemplates;
 using MEFL.Arguments;
 using MEFL.CLAddIn;
 using MEFL.CLAddIn.Downloaders;
@@ -286,6 +285,7 @@ namespace MEFL.CLAddIn.Export
             AddAccountContent = new AddALegacyAccountPage(),
             Content = new TextBlock() { Text = "离线账户", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, FontSize = 30, FontWeight = FontWeight.FromOpenTypeWeight(999) },
         };
+
         static AddAccountItem msa = new AddAccountItem()
         {
             Width = 400,
@@ -293,11 +293,17 @@ namespace MEFL.CLAddIn.Export
             AddAccountContent = new AddNewMSAccount(),
             Content = new TextBlock() { Text = "微软登录", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, FontSize = 30, FontWeight = FontWeight.FromOpenTypeWeight(999) },
         };
-
         AddAccountItem[] IAccount.GetSingUpPage(SettingArgs args)
         {
+            msa.MouseDown -= Msa_Ini;
+            msa.MouseDown += Msa_Ini;
             var res = new List<AddAccountItem>{Legacy,msa};
             return res.ToArray();
+        }
+
+        private void Msa_Ini(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ((sender as AddAccountItem).AddAccountContent as AddNewMSAccount).ResetWebb();
         }
 
         //private AddAccountItem Legacy = new AddAccountItem() { Width=400,Height=60, AddAccountContent = new AddALegacyAccountPage(),FinnalReturn=new MEFLLegacyAccount(String.Empty,Guid.NewGuid().ToString()) };

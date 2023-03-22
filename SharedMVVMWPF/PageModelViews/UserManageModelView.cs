@@ -104,7 +104,7 @@ namespace MEFL.PageModelViews
             {
                 if (item != APIData.APIModel.SelectedAccount)
                 {
-                    var element = new Controls.MyItemsCardItem() { Title = item.UserName, SubTitle = item.EmailAddress, Icon = item.ProfileAvator,DataContext=item };
+                    var element = new Controls.MyItemsCardItem() { Title = item.UserName, SubTitle = item.UserType, Icon = item.ProfileAvator,DataContext=item };
                     element.MouseDown += Element_MouseDown;
                     panel.Children.Add(element);
                 }

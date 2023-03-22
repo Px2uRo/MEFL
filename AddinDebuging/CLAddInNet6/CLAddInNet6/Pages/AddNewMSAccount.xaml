@@ -1,0 +1,21 @@
+﻿<UserControl x:Class="MEFL.CLAddIn.Pages.AddNewMSAccount"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MEFL.CLAddIn.Pages"
+             mc:Ignorable="d"
+             xmlns:c="clr-namespace:MEFL.Controls;assembly=MEFL.Controls"
+             >
+    <Grid>
+        <Border x:Name="wbb_border" Visibility="Hidden">
+            <WebBrowser Name="wbb" LoadCompleted="Web_Completed"/>
+        </Border>
+        <Border VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="Hidden" Name="border17763">
+            <StackPanel>
+                <TextBlock Text="这边检测到你的 Windows 版本小于 Build 17763 呢"/>
+                <TextBlock Text="请点击下方按钮，登录 Minecraft "/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

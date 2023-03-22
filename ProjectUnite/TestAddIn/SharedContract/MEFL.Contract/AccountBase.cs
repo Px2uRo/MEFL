@@ -41,8 +41,6 @@ public abstract class AccountBase : MEFLClass,INotifyPropertyChanged
 
 	public abstract object WelcomeWords { get; set; }
 
-	public abstract string EmailAddress { get; set; }
-
 	public abstract IManageAccountPage ManagePage { get; }
 
 	public abstract void LaunchGameAction(SettingArgs args);

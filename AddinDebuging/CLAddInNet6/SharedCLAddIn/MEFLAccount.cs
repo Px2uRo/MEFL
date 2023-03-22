@@ -25,7 +25,6 @@ namespace MEFL.CLAddIn
         public override string UserType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override string UserProperties { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public override object WelcomeWords { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override string EmailAddress { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public override IManageAccountPage ManagePage => throw new NotImplementedException();
 
@@ -123,8 +122,6 @@ namespace MEFL.CLAddIn
         public override string UserType { get => "Legacy"; set => throw new NotImplementedException(); }
         [JsonIgnore]
         public override string UserProperties { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        [JsonIgnore]
-        public override string EmailAddress { get => "离线"; set => throw new NotImplementedException(); }
         [JsonIgnore]
         public override IManageAccountPage ManagePage
         {

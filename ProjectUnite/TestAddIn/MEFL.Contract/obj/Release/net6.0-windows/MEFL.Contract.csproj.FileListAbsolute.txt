@@ -4,9 +4,6 @@ I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\bin\Release\net6.
 I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Release\net6.0-windows\MEFL.Contract.csproj.AssemblyReference.cache
 I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Release\net6.0-windows\GeneratedInternalTypeHelper.g.cs
 I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Release\net6.0-windows\MEFL.Contract_MarkupCompile.cache
-I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Release\net6.0-windows\MEFL.Contract_MarkupCompile.lref
-I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Release\net6.0-windows\generic.baml
-I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Release\net6.0-windows\MEFL.Contract.g.resources
 I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Release\net6.0-windows\MEFL.Contract.GeneratedMSBuildEditorConfig.editorconfig
 I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Release\net6.0-windows\MEFL.Contract.AssemblyInfoInputs.cache
 I:\Xiong's\MEFLCollection\ProjectUnite\TestAddIn\MEFL.Contract\obj\Release\net6.0-windows\MEFL.Contract.AssemblyInfo.cs
