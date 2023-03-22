@@ -11,32 +11,52 @@ using Newtonsoft.Json;
 using MEFL.CLAddIn.Pages;
 using System.Configuration;
 using System.ComponentModel;
+using MEFL.CLAddIn.Sercurity;
+using CoreLaunching.MicrosoftAuth;
 
 namespace MEFL.CLAddIn
 {
     public class MEFLMicrosoftAccount : AccountBase
     {
-        public override FrameworkElement ProfileAvator { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override string UserName { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override Guid Uuid { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override string AccessToken { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        [JsonIgnore]
+        public override FrameworkElement ProfileAvator { get => new FrameworkElement();}
+        public override string UserName { get; set; }
+        [JsonIgnore]
+        public override Guid Uuid { get; set; }
+        [JsonIgnore]
+        public override string AccessToken { get; set; }
+        [JsonIgnore]
         public override string ClientID { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        [JsonIgnore]
         public override string Xuid { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override string UserType { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        [JsonIgnore]
+        public override string UserType { get ; set ; }
+        [JsonIgnore]
         public override string UserProperties { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override object WelcomeWords { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
+        [JsonIgnore]
+        public override object WelcomeWords { get => $"欢迎微软账户{UserName}"; }
+        [JsonIgnore]
         public override IManageAccountPage ManagePage => throw new NotImplementedException();
-
         public override void LaunchGameAction(SettingArgs args)
         {
-            throw new NotImplementedException();
+            var info = CoreLaunching.MicrosoftAuth.MSAuthAccount.GetInfoWithRefreshTokenFromRefreshToken(RefreshToken);
+            AccessToken= info.AccessToken;
+            RefreshToken= info.RefreshToken;
         }
 
-        public MEFLMicrosoftAccount(string code)
+        internal static MEFLMicrosoftAccount LoadFromCL(MSAPlayerInfoWithRefreshToken cl)
         {
-
+            var res = new MEFLMicrosoftAccount();
+            res.AccessToken = cl.AccessToken;
+            res.RefreshToken = cl.RefreshToken;
+            res.UserType = "msa";
+            res.UserName = cl.Name;
+            res.Uuid = new(cl.Id);
+            return res;
         }
+
+        [JsonConverter(typeof(TokenConverter))]
+        public string RefreshToken { get; set; }
     }
     public class MEFLLegacyAccount : MEFL.Contract.AccountBase,INotifyPropertyChanged
     {
@@ -65,7 +85,7 @@ namespace MEFL.CLAddIn
             get
             {
                 return string.Format($"欢迎回来 {UserName}");
-            } set=>throw new NotImplementedException();
+            }
         }
         [JsonIgnore]
         public override FrameworkElement ProfileAvator 
@@ -86,7 +106,8 @@ namespace MEFL.CLAddIn
                     _AvatorText.FontSize = 14;
                     return _Avator;
                 }
-            } set => throw new NotImplementedException(); }
+            }
+        }
         private string _username;
         public override string UserName { get => _username; set { _username = value;
                 if (value.Length >= 2)

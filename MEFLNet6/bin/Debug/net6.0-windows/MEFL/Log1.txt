@@ -1,9 +1,5 @@
-﻿[20:22:22][MEFL]程序启动了，参数
-[20:22:23][MEFL]读取了注册表，键：Downloader，值：
-[20:22:23][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[20:22:27][MEFL]加载了一个插件，名称 CLAddIn.dll，版本："0.0.0.0" Guid 1ac187ae-355f-48f7-a936-32b08a12309e
-[20:22:28][MEFL]重写了插件设置,当前文档：[{"Guid":"38df8e0c-8cd4-4cbc-9c9c-a7bd975ed94f","IsOpen":true},{"Guid":"f622179a-020d-4b46-bc17-de1b5d38a7ab","IsOpen":true},{"Guid":"f61001db-b41e-4fb4-affe-232eb887143e","IsOpen":true},{"Guid":"beb0a21e-73bc-45a2-9a47-ae581234a168","IsOpen":true},{"Guid":"9f6bab0f-9b00-438c-ac6a-deaac922cb67","IsOpen":true},{"Guid":"8654089f-b6d1-4539-b38d-fe9964f7eb8d","IsOpen":true},{"Guid":"7695c6ba-dbc2-44b8-bc83-afa1b5761d68","IsOpen":true},{"Guid":"821b0c23-d8fc-42bb-89c3-bb2fc252ce68","IsOpen":true},{"Guid":"b2bb240a-8ca1-4f88-bc7f-9788892edd66","IsOpen":true},{"Guid":"8e76229f-ba5d-4abf-94c2-599d30131fcf","IsOpen":true},{"Guid":"823e9357-dfb8-4ca4-9d85-33be897847b7","IsOpen":true},{"Guid":"e5a8cf12-2081-482c-8cbf-db78a70a833e","IsOpen":true},{"Guid":"d3578696-4f3c-4cfc-bc65-aa517698bdff","IsOpen":true},{"Guid":"92cef5eb-2231-474c-b21b-717bc9dde83b","IsOpen":true},{"Guid":"ec0257e2-04df-423f-ae59-76b96b9e7639","IsOpen":true},{"Guid":"09af8b57-07c7-4f1b-9fb4-ac3844e20b60","IsOpen":true},{"Guid":"8694e758-14e0-49df-8cbe-b2ffaeb873e2","IsOpen":true},{"Guid":"383473f0-ab96-461f-9174-a6db25a41284","IsOpen":true},{"Guid":"1c8febc7-efd9-447d-9763-502b624949dd","IsOpen":true},{"Guid":"2a54e935-efd3-4e3a-a060-8dbacdaaaf1e","IsOpen":true},{"Guid":"7f205c99-dc5f-4e34-95bb-4c10f9c60cba","IsOpen":true},{"Guid":"91e2558d-b454-4965-a997-116f349b263e","IsOpen":true},{"Guid":"1ac187ae-355f-48f7-a936-32b08a12309e","IsOpen":true}]
-[20:22:28][MEFL]写入了注册表，键：PlayerUuid，值：2de5b08b-1aa4-49f7-9776-a013f3382d39
-[20:22:28][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[20:22:28][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[20:22:31][MEFL]程序退出了
+﻿[11:06:04][MEFL]程序启动了，参数
+[11:06:12][MEFL]写入了注册表，键：PlayerUuid，值：2de5b08b-1aa4-49f7-9776-a013f3382d39
+[11:06:12][MEFL]读取了注册表，键：Downloader，值：
+[11:06:12][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
+[11:06:13][MEFL]写入了注册表，键：SelectedFolderIndex，值：0

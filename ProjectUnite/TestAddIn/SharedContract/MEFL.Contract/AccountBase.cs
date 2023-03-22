@@ -23,7 +23,7 @@ public abstract class AccountBase : MEFLClass,INotifyPropertyChanged
 	}
 	public virtual bool Selected { get; set; }
 
-    public abstract FrameworkElement ProfileAvator { get; set; }
+    public abstract FrameworkElement ProfileAvator { get; }
 
 	public abstract string UserName { get; set; }
 
@@ -39,7 +39,7 @@ public abstract class AccountBase : MEFLClass,INotifyPropertyChanged
 
 	public abstract string UserProperties { get; set; }
 
-	public abstract object WelcomeWords { get; set; }
+	public abstract object WelcomeWords { get; }
 
 	public abstract IManageAccountPage ManagePage { get; }
 

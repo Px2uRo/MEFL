@@ -29,6 +29,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)..\..\..\..\..\Xiong%27s\MEFLCollection\AddinDebuging\CLAddInNet6\SharedCLAddIn\Downloaders\SolveDupNamePage.xaml.cs">
       <DependentUpon>SolveDupNamePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Sercurity\TokenConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)WebVersion\Generic.cs" />
   </ItemGroup>
   <ItemGroup>

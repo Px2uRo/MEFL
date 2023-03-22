@@ -45,7 +45,7 @@ namespace MEFL.CLAddIn.Pages
             }
             else
             {
-                border17763.Visibility = Visibility.Hidden;
+                border17763.Visibility = Visibility.Visible;
             }
         }
 
@@ -54,7 +54,18 @@ namespace MEFL.CLAddIn.Pages
             var lnk = (sender as WebBrowser).Source.ToString();
             if (lnk.StartsWith("https://login.live.com/oauth20_desktop.srf?code="))
             {
-                Model.MicrosoftAccounts.AddOne(null);
+                lnk = lnk.Replace("https://login.live.com/oauth20_desktop.srf?code=",string.Empty);
+                var cl = CoreLaunching.MicrosoftAuth.MSAuthAccount.GetInfoWithRefreshTokenFromCode(lnk);
+                if (!cl.HasError)
+                {
+                    var acc = MEFLMicrosoftAccount.LoadFromCL(cl);
+                    //Model.MicrosoftAccounts.AddOne(acc);
+                    OnAccountAdd.Invoke(this,acc);
+                }
+                else
+                {
+                    OnCanceled.Invoke(this);
+                }
             }
         }
     }

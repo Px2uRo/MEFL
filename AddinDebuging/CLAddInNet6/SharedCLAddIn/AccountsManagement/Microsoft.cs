@@ -28,6 +28,7 @@ namespace MEFL.CLAddIn.AccountsManagement
         public void AddOne(MEFLMicrosoftAccount account)
         {
             Model.MicrosoftAccounts.Add(account);
+            RegManager.Write("MicrosoftAccounts", JsonConvert.SerializeObject(Model.MicrosoftAccounts));
         }
     }
 }
