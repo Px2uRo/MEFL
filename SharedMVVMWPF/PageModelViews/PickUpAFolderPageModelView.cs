@@ -153,17 +153,9 @@ namespace MEFL.PageModelViews
                 }
             }
             (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.RenameFolderPage() { Tag = "RenameFolder", Visibility = Visibility.Hidden,SelectedPath=PickUpAFolderPageModel.Selected.FullName });
-            MyPageBase From = null;
-            foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
-            {
-                if (item.Visibility == Visibility.Visible)
-                {
-                    From = item;
-                }
-            }
             foreach (MyPageBase item in FindControl.FromTag("RenameFolder", (App.Current.Resources["MainPage"] as Grid)))
             {
-                item.Show(From);
+                item.Show();
             }
         }
     }

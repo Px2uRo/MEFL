@@ -1,7 +1,2 @@
-﻿[11:11:12][MEFL]程序启动了，参数
-[11:11:15][MEFL]写入了注册表，键：PlayerUuid，值：2de5b08b-1aa4-49f7-9776-a013f3382d39
-[11:11:15][MEFL]读取了注册表，键：Downloader，值：
-[11:11:15][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[11:11:16][MEFL]写入了注册表，键：SelectedFolderIndex，值：0
-[11:12:12][MEFL]写入了注册表，键：PlayerUuid，值：17d03005-e4ae-4456-89ed-f74b53bb386b
-[11:13:53][MEFL]程序退出了
+﻿[20:54:07][MEFL]程序启动了，参数
+[20:54:07][MEFL]读取了注册表，键：Downloader，值：

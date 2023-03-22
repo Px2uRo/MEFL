@@ -82,6 +82,14 @@ namespace MEFL.APIData
         public string OtherJVMArgs { get => _OtherJVMArgs; set { _OtherJVMArgs = value; Update(); } }
         private bool _AlwaysOpenNewExtensions;
         public bool AlwaysOpenNewExtensions { get =>_AlwaysOpenNewExtensions; set { _AlwaysOpenNewExtensions = value;Update(); } }
+        private int _folderIndex;
+
+        public int FolderIndex
+        {
+            get { return _folderIndex; }
+            set { _folderIndex = value; Update(); }
+        }
+
         public void Update()
         {
             try

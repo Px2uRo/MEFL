@@ -66,15 +66,16 @@ namespace MEFL
         }
         public static string Read(string Key)
         {
-#if WINDOWS
-            if (WinRegKey.GetValue(Key) == null||WinRegKey.GetValue(Key)==string.Empty)
+#if WINDOWS            
+            var res = WinRegKey.GetValue(Key);
+            if (res == null)
             {
                 WinRegKey.SetValue(Key, string.Empty);
+                res = WinRegKey.GetValue(Key).ToString();
             }
-            var res = WinRegKey.GetValue(Key).ToString();
             //todo i18N;
             Debugger.Logger($"读取了注册表，键：{Key}，值：{res}");
-            return res;
+            return res.ToString();
 #endif
         }
     }

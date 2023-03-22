@@ -80,7 +80,7 @@ namespace MEFL.PageModelViews
             }
         }
 
-        public ObservableCollection<MEFLFolderInfo> MyFolders 
+        public MEFLFolderColletion MyFolders 
         {
             get
             {

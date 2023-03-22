@@ -1,5 +1,7 @@
-﻿using MEFL.Contract;
+﻿using CoreLaunching.MicrosoftAuth;
+using MEFL.Contract;
 using MEFL.Controls;
+using MEFL.SpecialPages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -61,23 +63,15 @@ namespace MEFL.PageModelViews
 
         public void Execute(object? parameter)
         {
-            foreach (MyPageBase item in FindControl.FromTag("AddAccountPage", (App.Current.Resources["MainPage"] as Grid)))
-            {
-                if (item.Tag as String == "AddAccountPage")
-                {
-                    GC.SuppressFinalize(item);
-                    item.Hide();
-                    (App.Current.Resources["MainPage"] as Grid).Children.Remove(item);
-                }
-            }
             for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
             {
-                if (((App.Current.Resources["MainPage"] as Grid).Children[i] as MyPageBase).Tag == "AddNewAccount")
+                if (((App.Current.Resources["MainPage"] as Grid).Children[i] as FrameworkElement).Tag as String == "AddAccountPage")
                 {
+                    ((App.Current.Resources["MainPage"] as Grid).Children[i] as AddNewAccount).MyStackPanel.Children.Clear();
                     (App.Current.Resources["MainPage"] as Grid).Children.RemoveAt(i);
+                    i--;
                 }
             }
-            (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.AddNewAccount() { Tag = "AddAccountPage", Visibility = Visibility.Hidden});
             MyPageBase From = null;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
             {
@@ -86,6 +80,7 @@ namespace MEFL.PageModelViews
                     From = item;
                 }
             }
+            (App.Current.Resources["MainPage"] as Grid).Children.Add(new SpecialPages.AddNewAccount() { Tag = "AddAccountPage", Visibility = Visibility.Hidden });
             foreach (MyPageBase item in FindControl.FromTag("AddAccountPage", (App.Current.Resources["MainPage"] as Grid)))
             {
                 item.Show(From);

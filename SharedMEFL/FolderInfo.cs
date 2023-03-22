@@ -66,4 +66,51 @@ namespace MEFL
         [JsonIgnore]
         public ObservableCollection<String> Favorites { get; set; }
     }
+
+    public class MEFLFolderColletion : ObservableCollection<MEFLFolderInfo>
+    {
+        public void WriteToReg()
+        {
+            var regObj = new MEFLFolderColletion();
+            for (int i = 1; i < this.Count; i++)
+            {
+                regObj.Add(this[i]);
+            }
+            RegManager.Write("Folders",JsonConvert.SerializeObject(regObj));
+            GC.SuppressFinalize(regObj);
+            regObj = null;
+        }
+        public static MEFLFolderColletion GetReg()
+        {
+            Directory.CreateDirectory(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"));
+            MEFLFolderColletion res = new() { new MEFLFolderInfo(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"), "本地文件夹")};
+            var regstr = RegManager.Read("Folders");
+            try
+            {
+                var regKey = Newtonsoft.Json.JsonConvert.DeserializeObject<MEFLFolderColletion>(regstr);
+                foreach (var item in regKey)
+                {
+                    res.Add(new(item.Path,item.FriendlyName));
+                }
+                GC.SuppressFinalize(regKey);
+            }
+            catch (Exception ex)
+            {
+                RegManager.Write("Folders", "[]",true);
+            }
+            return res;
+        }
+        internal static int GetRegIndex()
+        {
+            var res = APIModel.SettingConfig.FolderIndex;
+            if (res+1> APIModel.MyFolders.Count)
+            {
+                return 0;
+            }
+            else
+            {
+                return res;
+            }
+        }
+    }
 }

@@ -11,15 +11,14 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)APIData\APIModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)APIData\SettingConfig.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Collections\FoldersCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collections\DownloaderCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collections\DownloadSourceCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Collections\GameCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configs\DownloaderConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Debugger.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)..\..\..\Xiong%27s\MEFLCollection\SharedMEFL\Collections\DownloaderCollection.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)..\..\..\Xiong%27s\MEFLCollection\SharedMEFL\Collections\DownloadSourceCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EventsMethod\EventToolkit.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FastLoadJson.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FolderInfo.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)..\..\..\Xiong%27s\MEFLCollection\SharedMEFL\Collections\GameCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Hosting.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Refresher.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RegManager.cs" />
