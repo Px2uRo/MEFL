@@ -7,7 +7,7 @@ using System.Text;
 
 namespace MEFL.CLAddIn.AccountsManagement
 {
-    public class MicrosoftList: ObservableCollection<CLAddIn.MEFLMicrosoftAccount>
+    internal class MicrosoftList: ObservableCollection<CLAddIn.MEFLMicrosoftAccount>
     {
         public static MicrosoftList GetReg()
         {
@@ -19,9 +19,22 @@ namespace MEFL.CLAddIn.AccountsManagement
             }
             else
             {
-                var res = new MicrosoftList();
-                var arry = JArray.Parse(source);
-                return res;
+                try
+                {
+                    var tar = JsonConvert.DeserializeObject<MicrosoftList>(source);
+                    if(tar == null)
+                    {
+                        return new();
+                    }
+                    else
+                    {
+                        return tar;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return new();
+                }
             }
         }
 

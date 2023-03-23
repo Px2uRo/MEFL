@@ -2,8 +2,6 @@ I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\MEFL.exe
 I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\MEFL.dll
 I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\Newtonsoft.Json.dll
 I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\System.ComponentModel.Composition.dll
-I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\CoreLaunchingNet6.dll
-I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\CoreLaunchingNet6.pdb
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\MEFLNet6.csproj.AssemblyReference.cache
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\MainWindow.g.cs
 I:\Xiong's\MEFLCollection\MEFLNet6\obj\Debug\net6.0-windows\App.g.cs

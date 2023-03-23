@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Reflection;
 using System.Windows;
 using MEFL.Arguments;
+using Newtonsoft.Json;
 
 namespace MEFL.Contract;
 
@@ -21,6 +22,7 @@ public abstract class AccountBase : MEFLClass,INotifyPropertyChanged
 	{
 		return $"{UserName} {Uuid}";
 	}
+	[JsonIgnore]
 	public virtual bool Selected { get; set; }
 
     public abstract FrameworkElement ProfileAvator { get; }

@@ -59,7 +59,7 @@ namespace MEFL.CLAddIn.Pages
                 if (!cl.HasError)
                 {
                     var acc = MEFLMicrosoftAccount.LoadFromCL(cl);
-                    //Model.MicrosoftAccounts.AddOne(acc);
+                    Model.MicrosoftAccounts.AddOne(acc);
                     OnAccountAdd.Invoke(this,acc);
                 }
                 else

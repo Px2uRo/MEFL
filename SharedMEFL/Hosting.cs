@@ -183,7 +183,7 @@ namespace MEFL
             var lg = new List<String>();
             foreach (var item in di)
             {
-                if (item.Name.EndsWith(".dll"))
+                if (item.Name.EndsWith(".mefl.dll"))
                 {
                     res.Add(LoadOne(item.FullName));
                 }

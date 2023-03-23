@@ -1,5 +1,2 @@
-﻿[20:59:27][MEFL]程序启动了，参数
-[20:59:27][MEFL]读取了注册表，键：Downloader，值：
-[20:59:37][MEFL]无法获取 CLAddIn.dll 的登录页面，指定的元素已经是另一个元素的逻辑子元素。请先将其断开连接。 at PresentationFramework
-[20:59:47][MEFL]无法获取 CLAddIn.dll 的登录页面，指定的元素已经是另一个元素的逻辑子元素。请先将其断开连接。 at PresentationFramework
-[20:59:54][MEFL]程序退出了
+﻿[21:23:58][MEFL]程序启动了，参数
+[21:24:17][MEFL]读取了注册表，键：Downloader，值：

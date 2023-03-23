@@ -20,7 +20,6 @@ using MEFL.Pages;
 using System.Reflection.Metadata;
 using MEFL.EventsMethod;
 using System.IO;
-using CoreLaunching.JsonTemplates;
 using System.Windows.Threading;
 
 namespace MEFL.PageModelViews

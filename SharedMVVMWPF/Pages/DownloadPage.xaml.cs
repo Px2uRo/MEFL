@@ -16,7 +16,6 @@ using System.Windows.Shapes;
 using ModelView = MEFL.PageModelViews.DownloadPageModelView;
 using MEFL.Controls;
 using System.Collections;
-using CoreLaunching.JsonTemplates;
 using MEFL.Contract;
 using MEFL.APIData;
 using MEFL.SpecialPages;

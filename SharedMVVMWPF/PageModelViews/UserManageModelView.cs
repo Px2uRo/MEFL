@@ -1,5 +1,4 @@
-﻿using CoreLaunching.MicrosoftAuth;
-using MEFL.Contract;
+﻿using MEFL.Contract;
 using MEFL.Controls;
 using MEFL.SpecialPages;
 using System;

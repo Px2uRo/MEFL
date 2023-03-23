@@ -16,12 +16,11 @@ using CoreLaunching.MicrosoftAuth;
 
 namespace MEFL.CLAddIn
 {
-    public class MEFLMicrosoftAccount : AccountBase
+    internal class MEFLMicrosoftAccount : AccountBase
     {
         [JsonIgnore]
         public override FrameworkElement ProfileAvator { get => new FrameworkElement();}
         public override string UserName { get; set; }
-        [JsonIgnore]
         public override Guid Uuid { get; set; }
         [JsonIgnore]
         public override string AccessToken { get; set; }

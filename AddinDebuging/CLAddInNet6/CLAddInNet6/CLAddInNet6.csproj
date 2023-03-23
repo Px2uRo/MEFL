@@ -11,9 +11,9 @@
 	<Description>CoreLaunching For MEFL</Description>
   </PropertyGroup>
 
-  <!--<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="copy &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\MEFL\AddIns\CLAddIn.dll&quot;" />
-  </Target>-->
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy &quot;$(TargetDir)$(AssemblyName).dll&quot; &quot;I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\MEFL\AddIns\MEFL.CLAddIn.mefl.dll&quot;" />
+  </Target>
 
   <ItemGroup>
     <PackageReference Include="MEFL.Controls" Version="0.0.7.6" />

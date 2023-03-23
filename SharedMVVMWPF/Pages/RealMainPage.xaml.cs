@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Threading;
 using System.Windows;
@@ -15,6 +16,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using comp = System.IO.Compression;
 
 namespace MEFL.Pages
 {
@@ -475,7 +477,7 @@ namespace MEFL.Pages
                         {
                             try
                             {
-                                CoreLaunching.ZipFile.Export(item.localpath, Game.NativeLibrariesPath);
+                                Export(item.localpath, Game.NativeLibrariesPath);
                             }
                             catch (Exception ex)
                             {
@@ -514,7 +516,34 @@ namespace MEFL.Pages
                 });
                 t.Start();
         }
-
+#if NET6_0       
+         void Export(string ZipFilePath, string DirName)
+        {
+            Export(ZipFilePath, DirName, false);
+        }
+         void Export(string ZipFilePath, string DirName, bool OverWrite)
+        {
+            using (var str = File.OpenRead(ZipFilePath))
+            {
+                using (var zipf = new comp.ZipArchive(str))
+                {
+                    foreach (var entry in zipf.Entries)
+                    {
+                        if (entry.Name.EndsWith(".dll"))
+                        {
+                            if (!OverWrite && File.Exists(Path.Combine(DirName, entry.Name)))
+                            {
+                                return;
+                            }
+                            var path = Path.Combine(DirName, entry.Name);
+                            entry.ExtractToFile(path, OverWrite);
+                        }
+                    }
+                }
+                str.Close();
+            }
+        }
+#endif
         public void Cancel()
         {
             GC.SuppressFinalize(t);
