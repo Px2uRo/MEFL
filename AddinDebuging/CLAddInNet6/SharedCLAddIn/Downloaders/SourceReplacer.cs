@@ -45,7 +45,7 @@ namespace MEFL.CLAddIn.Downloaders
 
     }
 
-    internal class BMCLAPI_Version_Api_Source : DownloadSource
+    internal class BMCLAPI_Version_Api_Source : CLDownloadSource
     {
         public override string GetUri(string parama)
         {
@@ -59,7 +59,7 @@ namespace MEFL.CLAddIn.Downloaders
             Uri = "https://bmclapi2.bangbang93.com/version/${version}/${category}";
         }
     }
-    internal class MCBBS_Version_Api_Source : DownloadSource
+    internal class MCBBS_Version_Api_Source : CLDownloadSource
     {
         public override string GetUri(string parama)
         {

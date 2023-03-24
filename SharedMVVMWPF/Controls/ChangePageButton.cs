@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MEFL.SpecialPages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -65,6 +66,18 @@ namespace MEFL.Controls
 
         private void ChangePageButton_MouseDown(object sender, MouseButtonEventArgs e)
         {
+            for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
+            {
+                if (((App.Current.Resources["MainPage"] as Grid).Children[i] as FrameworkElement).Tag as String == "AddAccountPage")
+                {
+                    if(((App.Current.Resources["MainPage"] as Grid).Children[i] as AddNewAccount) != null)
+                    {
+                        ((App.Current.Resources["MainPage"] as Grid).Children[i] as AddNewAccount).MyStackPanel.Children.Clear();
+                    }
+                    (App.Current.Resources["MainPage"] as Grid).Children.RemoveAt(i);
+                    i--;
+                }
+            }
             MyPageBase From = null;
             bool TRUE = false;
             foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)

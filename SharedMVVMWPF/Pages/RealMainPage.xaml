@@ -160,7 +160,7 @@
                         </c:MyComboBox.ItemContainerStyle>
                     </c:MyComboBox>
                     <c:MyButton Width="30" Height="30" Grid.Column="1" Content="+" Command="{Binding AddFolderInfoCommand}"/>
-                    <c:MyButton Width="30" Height="30" Grid.Column="2" Content="R" Command="{Binding RefreshFolderInfoCommand}"/>
+                    <c:MyButton Width="30" Height="30" Grid.Column="2" Content="R" Command="{Binding RefreshFolderInfoCommand}" Click="MyButton_Click_1"/>
                     <c:MyButton Width="30" Height="30" Grid.Column="3" Content="E" Command="{Binding OpenInExplorer}"/>
                 </Grid>
                 <ContentPresenter>

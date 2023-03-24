@@ -1,4 +1,4 @@
-﻿using CLAddInNet6.Properties;
+﻿using MEFL.CLAddIn.Properties;
 using CoreLaunching.JsonTemplates;
 using MEFL.Arguments;
 using MEFL.CLAddIn.Pages;

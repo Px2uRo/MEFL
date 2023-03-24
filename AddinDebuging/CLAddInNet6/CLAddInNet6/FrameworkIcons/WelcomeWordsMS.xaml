@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="MEFL.CLAddIn.FrameworkIcons.WelcomeWordsMS"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" Width="200" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center">
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <UniformGrid Columns="2" Rows="2" Height="16" Width="16">
+            <Rectangle Fill="#F26522" Margin="0.5"/>
+            <Rectangle Fill="#7FBA00" Margin="0.5"/>
+            <Rectangle Fill="#00A4EF" Margin="0.5"/>    
+            <Rectangle Fill="#FFB900" Margin="0.5"/>
+        </UniformGrid>
+        <TextBlock Text="{Binding UserName}"/>
+        <TextBlock Text="，"/>
+        <TextBlock Text="你好！"/>
+    </StackPanel>
+</UserControl>

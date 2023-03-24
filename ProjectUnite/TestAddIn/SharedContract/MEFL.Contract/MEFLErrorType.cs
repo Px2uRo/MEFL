@@ -194,4 +194,10 @@ public class MEFLErrorType : GameInfoBase
         Description = ErrorDescription;
 		GameJsonPath = JsonPath;
 	}
+
+    public MEFLErrorType(string ErrorDescription, object title)
+    {
+        Description = ErrorDescription;
+		GameJsonPath = "A:\\" + title.ToString();
+    }
 }

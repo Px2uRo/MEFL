@@ -217,6 +217,11 @@ namespace MEFL.Pages
             _pmv.Cancel();
             _pmv = null;
         }
+
+        private void MyButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            GameInfoCollection.NowYouCanDisposeYourthings = true;
+        }
     }
 
     public class ProcessModelView : PageModelViews.PageModelViewBase

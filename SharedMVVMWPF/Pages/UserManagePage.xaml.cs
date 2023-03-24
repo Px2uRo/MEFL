@@ -63,14 +63,7 @@ namespace MEFL.Pages
             {
                 UserManageModel.ModelView.SelectedAccount = account;
             }
-            MyPageBase From = null;
-            foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
-            {
-                if (item.Visibility == Visibility.Visible)
-                {
-                    From = item;
-                }
-            }
+            MyPageBase From = FindControl.FromTag("AddNewAccount", App.Current.Resources["MainPage"] as Grid)[0] as MyPageBase;
             foreach (MyPageBase item in FindControl.FromTag("UserManagePage", (App.Current.Resources["MainPage"] as Grid)))
             {
                 item.Show(From);

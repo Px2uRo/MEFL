@@ -438,10 +438,6 @@ namespace MEFL.PageModelViews
             }
             #endregion
 
-            foreach (var item in value as ObservableCollection<Contract.GameInfoBase>)
-            {
-                item.Dispose();
-            }
             MyGamesSP.Children.Clear();
 
             #region 收藏夹而已

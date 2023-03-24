@@ -13,6 +13,8 @@ using System.Configuration;
 using System.ComponentModel;
 using MEFL.CLAddIn.Sercurity;
 using CoreLaunching.MicrosoftAuth;
+using CLAddInNet6.Pages;
+using MEFL.CLAddIn.FrameworkIcons;
 
 namespace MEFL.CLAddIn
 {
@@ -29,13 +31,25 @@ namespace MEFL.CLAddIn
         [JsonIgnore]
         public override string Xuid { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         [JsonIgnore]
-        public override string UserType { get ; set ; }
+        public override string UserType { get => "msa"; set { } }
         [JsonIgnore]
         public override string UserProperties { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        private static WelcomeWordsMS _welcomeWords = new();
         [JsonIgnore]
-        public override object WelcomeWords { get => $"欢迎微软账户{UserName}"; }
+        public override object WelcomeWords { get 
+                {
+                _welcomeWords.DataContext = this;
+                return _welcomeWords;
+            }
+        }
+        private static ManageMSAccount mspage = new ManageMSAccount();
         [JsonIgnore]
-        public override IManageAccountPage ManagePage => throw new NotImplementedException();
+        public override IManageAccountPage ManagePage { get 
+            { 
+                mspage.DataContext=this;
+                return mspage;
+            } 
+        }
         public override void LaunchGameAction(SettingArgs args)
         {
             var info = CoreLaunching.MicrosoftAuth.MSAuthAccount.GetInfoWithRefreshTokenFromRefreshToken(RefreshToken);
@@ -48,7 +62,6 @@ namespace MEFL.CLAddIn
             var res = new MEFLMicrosoftAccount();
             res.AccessToken = cl.AccessToken;
             res.RefreshToken = cl.RefreshToken;
-            res.UserType = "msa";
             res.UserName = cl.Name;
             res.Uuid = new(cl.Id);
             return res;

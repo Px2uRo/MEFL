@@ -1,5 +1,4 @@
-﻿using CLAddInNet6.Properties;
-using CoreLaunching;
+﻿using CoreLaunching;
 using CoreLaunching.Down.Web;
 using CoreLaunching.JsonTemplates;
 using MEFL.Arguments;

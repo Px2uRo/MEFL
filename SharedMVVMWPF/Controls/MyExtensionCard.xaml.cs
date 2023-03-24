@@ -33,6 +33,10 @@ namespace MEFL.Controls
         {
             InitializeComponent();
         }
+        private void ThisClick(object sender, RoutedEventArgs e)
+        {
+            GameInfoCollection.NowYouCanDisposeYourthings = true;
+        }
 
         private void Hyperlink_Click(object sender, RoutedEventArgs e)
         {
@@ -341,42 +345,33 @@ namespace MEFL.Controls
                     }
                     for (int i = 0; i < APIModel.DownloadSources.Count; i++)
                     {
-                        var lst = APIModel.DownloadSources.Values.ToArray()[i];
-                        for (int j = 0; j < lst.Count; j++)
+                        var vlu = APIModel.DownloadSources.Values.ToArray()[i]; 
+                        var key = APIModel.DownloadSources.Keys.ToArray()[i];
+                        var lq = vlu.Where((x) => x.AddInGuid == Hosting.Guid).ToArray();
+                        foreach (var item in lq)
                         {
-                            if (lst[j].AddInGuid == Hosting.Guid)
-                            {
-                                if (lst.Selected == lst[j])
-                                {
-                                    if (lst.Count - 1 > 0)
-                                    {
-                                        lst.Selected = lst[0];
-                                    }
-                                    else
-                                    {
-                                        lst.Selected = null;
-                                    }
-                                }
-                                APIModel.DownloadSources.RemoveItem(lst[j]);
-                                j--;
-                            }
+                            APIModel.DownloadSources[key].Remove(item);
                         }
-                        i = i + APIModel.DownloadSources.ChangedCount;
+                        if (APIModel.DownloadSources[key].Count == 0)
+                        {
+                            APIModel.DownloadSources.Remove(key);
+                            i--;
+                        }
                     }
                     #endregion
                 }
                 #region Games
-                (App.Current.Resources["RMPMV"] as RealMainPageModelView).RefreshFolderInfoCommand.Execute("Force");
+                (App.Current.Resources["RMPMV"] as RealMainPageModelView).RefreshFolderInfoCommand.Execute("");
                 #endregion
-                GameRefresher.Refreshing = true;
-                App.Current.Dispatcher.Invoke(() =>
-                {
-                    foreach (var item in HostingsToUI.res.Children)
-                    {
-                        ((item as MyExtensionCard).DataContext as HostingModelView).Invoke("IsRefreshing");
-                    }
-                });
-                GameRefresher.RefreshCurrect();
+                //GameRefresher.Refreshing = true;
+                //App.Current.Dispatcher.Invoke(() =>
+                //{
+                //    foreach (var item in HostingsToUI.res.Children)
+                //    {
+                //        ((item as MyExtensionCard).DataContext as HostingModelView).Invoke("IsRefreshing");
+                //    }
+                //});
+                //GameRefresher.RefreshCurrect();
             }
             catch (Exception ex)
             {

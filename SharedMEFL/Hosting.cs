@@ -12,6 +12,7 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using MEFL.APIData;
+using System.Linq;
 
 namespace MEFL
 {
@@ -68,23 +69,10 @@ namespace MEFL
             } set 
             {
                 _isOpen = value;
-                bool Contians = false;
-                foreach (var item in APIModel.AddInConfigs)
+                var linq = APIModel.AddInConfigs.Where((x) => x.Guid == Guid).ToArray();
+                if (linq.Count()>0)
                 {
-                    if (item.Guid == Guid)
-                    {
-                        Contians = true;
-                    }
-                }
-                if (Contians)
-                {
-                    foreach (var item in APIModel.AddInConfigs)
-                    {
-                        if (item.Guid == Guid)
-                        {
-                            item.IsOpen = _isOpen;
-                        }
-                    }
+                    linq[0].IsOpen = value;
                 }
                 else
                 {

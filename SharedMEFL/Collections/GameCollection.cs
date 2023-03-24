@@ -16,7 +16,17 @@ namespace MEFL
     #region GameCollection
     public class GameInfoCollection : ObservableCollection<GameInfoBase>
     {
-
+        protected override void InsertItem(int index, GameInfoBase item)
+        {
+            if (item == null)
+            {
+                base.InsertItem(index, new MEFLErrorType("NULL",title:"null"));
+            }
+            else
+            {
+                base.InsertItem(index, item);
+            }
+        }
         protected override void RemoveItem(int index)
         {
             if (this[index] == APIModel.CurretGame)
@@ -26,7 +36,7 @@ namespace MEFL
             this[index].Dispose();
             base.RemoveItem(index);
         }
-
+        internal static bool NowYouCanDisposeYourthings = false;
         protected override void ClearItems()
         {
             foreach (var item in this)
@@ -38,7 +48,10 @@ namespace MEFL
                         APIModel.CurretGame = null;
                     }
                 }
-                item.Dispose();
+                if(NowYouCanDisposeYourthings)
+                {
+                    item.Dispose();
+                }
             }
             base.ClearItems();
         }
@@ -65,6 +78,7 @@ namespace MEFL
     {
         private static void RefreshSupported()
         {
+            Supported.Clear();
             foreach (var Hst in APIData.APIModel.Hostings)
             {
                 if (Hst.IsOpen)
@@ -124,7 +138,8 @@ namespace MEFL
                     if (File.Exists(subJson))
                     {
                             RefreshSupported();
-                            folder.Games.Add(LoadOne(subJson));
+                            var loadone = LoadOne(subJson);
+                            folder.Games.Add(loadone);
                     }
                     else
                     {

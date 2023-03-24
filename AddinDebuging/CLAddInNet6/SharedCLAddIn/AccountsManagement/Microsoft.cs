@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using MEFL.Contract;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -41,6 +42,12 @@ namespace MEFL.CLAddIn.AccountsManagement
         public void AddOne(MEFLMicrosoftAccount account)
         {
             Model.MicrosoftAccounts.Add(account);
+            RegManager.Write("MicrosoftAccounts", JsonConvert.SerializeObject(Model.MicrosoftAccounts));
+        }
+
+        internal void RemoveOne(MEFLMicrosoftAccount account)
+        {
+            Model.MicrosoftAccounts.Remove(account);
             RegManager.Write("MicrosoftAccounts", JsonConvert.SerializeObject(Model.MicrosoftAccounts));
         }
     }

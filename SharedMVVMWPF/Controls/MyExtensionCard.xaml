@@ -52,7 +52,7 @@
             </StackPanel>
             <local:MyCheckBox IsChecked="{Binding IsOpen}" Visibility="{Binding IsNotRefreshing}"
                           Background="{DynamicResource SYTLE_Standard_ColorBrush}"
-                          HorizontalAlignment="Right"
+                          HorizontalAlignment="Right" Click="ThisClick"
                           VerticalAlignment="Top"/>
             <local:MyLoadingAnimation Visibility="{Binding IsRefreshing}" HorizontalAlignment="Right" VerticalAlignment="Top" Height="30" Width="30"/>
         </Grid>

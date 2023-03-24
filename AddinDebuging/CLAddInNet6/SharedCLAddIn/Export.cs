@@ -85,7 +85,7 @@ namespace MEFL.CLAddIn.Export
 
         public DownloadSource[] GetDownloadSources(SettingArgs args)
         {
-            var lst = new List<DownloadSource>() {
+            var lst = new List<CLDownloadSource>() {
                 new BMCLAPI_Version_Api_Source(),
                 new MCBBS_Version_Api_Source(),
                 new() { ELItem="${version_manifest}",RuleSourceName = "BMCLAPI",Uri= "https://bmclapi2.bangbang93.com/mc/game/version_manifest.json" },
