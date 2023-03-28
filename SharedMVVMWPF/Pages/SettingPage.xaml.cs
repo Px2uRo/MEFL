@@ -45,7 +45,19 @@ namespace MEFL.Pages
         private void SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DSList data = (sender as ComboBox).ItemsSource as DSList;
-            data.Selected = data[(sender as ComboBox).SelectedIndex];
+            if(data.Count==0)
+            {
+
+            }
+            else if ((sender as ComboBox).SelectedIndex >= data.Count - 1|| (sender as ComboBox).SelectedIndex==-1)
+            {
+                data.Selected = data[0];
+                (sender as ComboBox).SelectedIndex = 0;
+            }
+            else
+            {
+                data.Selected = data[(sender as ComboBox).SelectedIndex];
+            }
         }
         private void ChangePageContentButton_Checked(object sender, RoutedEventArgs e)
         {

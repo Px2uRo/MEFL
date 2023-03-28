@@ -213,6 +213,7 @@ namespace MEFL.Controls
                             }
                         }
                     }
+                    UserManageModel.ModelView.Invoke("Accounts");
                     #endregion
                     #region Downloads
                     if (Hosting.Permissions.UseDownloadPageAPI)
@@ -301,7 +302,7 @@ namespace MEFL.Controls
                                 i--;
                             }
                         }
-                    
+                    UserManageModel.ModelView.Invoke("Accounts");
                     if (APIData.APIModel.SelectedAccount != null)
                     {
                         if (APIData.APIModel.SelectedAccount.AddInGuid == Hosting.Guid)

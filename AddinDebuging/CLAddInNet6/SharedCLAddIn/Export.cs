@@ -80,7 +80,7 @@ namespace MEFL.CLAddIn.Export
         static WebRequest req;
         public MEFLDownloader[] GetDownloaders(SettingArgs args)
         {
-            return new MEFLDownloader[] {new FanCLD()};
+            return new MEFLDownloader[] {new PinKcatDownloader()};
         }
 
         public DownloadSource[] GetDownloadSources(SettingArgs args)

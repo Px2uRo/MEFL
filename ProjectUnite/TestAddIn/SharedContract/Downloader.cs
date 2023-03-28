@@ -36,21 +36,14 @@ namespace MEFL.Contract
         /// <param name="LoaclPath">本地 Url</param>
         /// <param name="sources">下载源</param>
         /// <returns>下载进程</returns>
-        /// <exception cref="NotImplementedException">如果你没有重写就抛出这个异常</exception>
-        public virtual DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources) 
-        { 
-            throw new NotImplementedException();
-        }
+        public abstract DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources);
         /// <summary>
         /// 创建多文件下载进程
         /// </summary>
         /// <param name="NativeLocalPairs">源文件列表</param>
         /// <param name="sources">下载源</param>
         /// <returns>下载进程</returns>
-        public virtual DownloadProgress CreateProgress(NativeLocalPairsList NativeLocalPairs, DownloadSource[] sources) 
-        { 
-            throw new NotImplementedException();
-        }
+        public abstract DownloadProgress CreateProgress(NativeLocalPairsList NativeLocalPairs, DownloadSource[] sources);
         /// <summary>
         /// 安装游戏进程
         /// </summary>
@@ -59,11 +52,7 @@ namespace MEFL.Contract
         /// <param name="sources"></param>
         /// <param name="args">参数</param>
         /// <returns>下载进程</returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public virtual DownloadProgress InstallMinecraft(string jsonSource,  string dotMCFolder, DownloadSource[] sources,InstallArguments args)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract DownloadProgress InstallMinecraft(string jsonSource, string dotMCFolder, DownloadSource[] sources, InstallArguments args);
     }
     public class NativeLocalPair
     {
@@ -170,7 +159,6 @@ namespace MEFL.Contract
             OnLogClear?.Invoke(this,EventArgs.Empty);
         }
         #endregion
-        public NativeLocalPairsList TaskItems;
 
         private string _ErrorInfo;
 
@@ -204,65 +192,43 @@ namespace MEFL.Contract
             get { return _statu; }
             set { _statu = value; ChangeProperty(nameof(State)); }
         }
-        public NativeLocalPairsList Items { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
+        private long _totalCount = 0;
+        public long TotalCount { get => _totalCount; set 
+            {   
+                _totalCount = value;
+                ChangeProperty(nameof(TotalCount)); 
+            } 
+        }
+        private int _downloadedItems;
 
-        private long _totalCount;
-        public long TotalCount => _totalCount;
-
-        private long _downloadedItems;
-        public long DownloadedItems=> _downloadedItems;
-
+        public int DownloadedItems
+        {
+            get { return _downloadedItems; }
+            set { _downloadedItems = value;
+                ChangeProperty(nameof(DownloadedItems));
+            }
+        }
         private long _downloadedSize;
-        public long DownloadedSize => _downloadedSize;
 
+        public long DownloadedSize
+        {
+            get { return _downloadedSize; }
+            set { _downloadedSize = value;
+                ChangeProperty(nameof(DownloadedSize));
+            }
+        }
         private long _totalSize;
-        public long TotalSize => _totalSize;
 
-        public InstallArguments Arguments { get; }
-
-        public DownloadProgress()
+        public long TotalSize
         {
-            TaskItems = new();
-            TaskItems.OnItemAdded += TaskItems_OnItemAdded;
-            TaskItems.IsOverChanged += TaskItems_IsOverChanged;
-            TaskItems.ProgressChanged += TaskItems_ProgressChanged;
-            State = DownloadProgressState.Canceled;
+            get { return _totalSize; }
+            set { _totalSize = value; 
+                ChangeProperty(nameof(TotalSize)); }
         }
 
-        public DownloadProgress(NativeLocalPairsList items)
-        {
-            TaskItems = items;
-            TaskItems.OnItemAdded += TaskItems_OnItemAdded;
-            TaskItems.IsOverChanged += TaskItems_IsOverChanged;
-            TaskItems.ProgressChanged += TaskItems_ProgressChanged;
-            State = DownloadProgressState.Canceled;
-        }
 
-        protected DownloadProgress(InstallArguments args):this()
-        {
-            Arguments = args;
-        }
-
-        private void TaskItems_ProgressChanged(object? sender, long e)
-        {
-            _downloadedSize += e;
-            PropertyChanged.Invoke(this, new(nameof(DownloadedSize)));
-        }
-
-        private void TaskItems_IsOverChanged(object? sender, bool e)
-        {
-            _downloadedItems++;
-            PropertyChanged.Invoke(this, new(nameof(DownloadedItems)));
-        }
-
-        private void TaskItems_OnItemAdded(object? sender, NativeLocalPair e)
-        {
-            _totalSize += e.Length;
-            _totalCount++;
-            PropertyChanged.Invoke(this,new(nameof(TotalSize)));
-            PropertyChanged.Invoke(this, new(nameof(TotalCount)));
-        }
+        public InstallArguments Arguments { get; protected set; }
     }
 
     public enum DownloadProgressState
