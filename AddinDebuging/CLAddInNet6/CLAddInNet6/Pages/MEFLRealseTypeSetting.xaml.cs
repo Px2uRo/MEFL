@@ -244,7 +244,7 @@ namespace MEFL.CLAddIn.Pages
             {
                 list.Add(new NativeLocalPair(item.Native,item.Loacl,item.Length));
             }
-            Contract.Advanced.AddProgress(Advanced.GetSelectedDownloader().CreateProgress(list, Advanced.GetSelectedSources())) ;
+            Advanced.CreateDownloadProgressFromList(list);
         }
     }
 }

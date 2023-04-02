@@ -3,10 +3,20 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
+using Avalonia.Media;
+using MEFL.Arguments;
+using System.Resources;
+using Avalonia;
+#if WPF
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using MEFL.Arguments;
+#elif AVALONIA
+using BitmapImage = Avalonia.Media.Imaging.Bitmap;
+using Avalonia.Controls;
+using FrameworkElement = Avalonia.Controls.Control;
+#endif
+
 #if NET6_0
 using MEFL.Contract.Properties;
 using MEFL.Controls;
@@ -34,8 +44,11 @@ public class MEFLErrorType : GameInfoBase
 	public override string Description { get; set; }
 
 	public override string Version { get; set; }
- 	static BitmapImage _image = null;
-	public override ImageSource IconSource { get 
+    static BitmapImage _image = null;
+#if WPF
+	public override ImageSource IconSource { 
+	
+        get 
 		{
 			if(stream==null)
 			{
@@ -47,7 +60,20 @@ public class MEFLErrorType : GameInfoBase
             }
 			return _image;
 		} 
-	}
+#elif AVALONIA
+    public override IImage IconSource{
+
+        get
+        {
+            if (stream == null)
+			{
+                //TODO 图标
+            }
+            return _image;
+        }
+#endif
+
+    }
 
 	public override string NativeLibrariesPath { get; set; }
 
@@ -172,6 +198,7 @@ public class MEFLErrorType : GameInfoBase
 
 	public override DeleteResult Delete()
 	{
+#if WPF
 		var mb = MyMessageBox.Show("确定要删除吗？","警告",MessageBoxButton.YesNo);
 		//todo IO 操作
 		if (mb.Result == MessageBoxResult.Yes)
@@ -182,9 +209,12 @@ public class MEFLErrorType : GameInfoBase
 		{
 			return DeleteResult.Canceled;
 		}
+#elif AVALONIA
+		return DeleteResult.OK;
+#endif
     }
 
-	public override void Refresh()
+    public override void Refresh()
 	{
 		throw new NotImplementedException();
 	}

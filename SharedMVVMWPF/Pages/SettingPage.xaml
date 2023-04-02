@@ -67,6 +67,15 @@
             <c:MyCard Title="{DynamicResource I18N_String_Setting_Custom_BackgroundImage}">
                 <c:MyButton HorizontalAlignment="Left" DataContext="{DynamicResource SPMV}" Command="{Binding ChangeBackgroundCommand}" Content="{DynamicResource I18N_String_Setting_Custom_BackgroundImage_Open}"/>
             </c:MyCard>
+            <c:MyCard Title="主题颜色">
+                <UniformGrid Width="500" Columns="5">
+                    <RadioButton Content="淡蓝" Checked="ChangeTheme" Tag="0"/>
+                    <RadioButton Content="浅绿" Checked="ChangeTheme" Tag="1"/>
+                    <RadioButton Content="亮黄" Checked="ChangeTheme" Tag="2"/>
+                    <RadioButton Content="橙色" Checked="ChangeTheme" Tag="3"/>
+                    <RadioButton Content="粉红" Checked="ChangeTheme" Tag="4"/>
+                </UniformGrid>
+            </c:MyCard>
         </StackPanel>
         <StackPanel Tag="Game" DataContext="{DynamicResource SPMV}">
             <c:MyCard Title="通用设置">

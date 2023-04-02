@@ -1,4 +1,5 @@
-﻿using MEFL.PageModelViews;
+﻿using MEFL.Contract;
+using MEFL.PageModelViews;
 using System;
 using System.Diagnostics;
 using System.Runtime.Serialization;
@@ -17,7 +18,7 @@ namespace MEFL
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            Contract.Advanced.OnDownloadProgressCreated += Advanced_OnDownloadProgressCreated;
+            Contract.Advanced.AddProcessFromList += Advanced_OnDownloadProgressCreated;
             ThreadPool.SetMinThreads(64, 64);
             string str = String.Empty;
             foreach (var item in e.Args)
@@ -34,10 +35,10 @@ namespace MEFL
             base.OnStartup(e);
         }
 
-        private void Advanced_OnDownloadProgressCreated(object? sender, Contract.DownloadProgress e)
+        private void Advanced_OnDownloadProgressCreated(object? sender, NativeLocalPairsList e)
         {
-            DownloadingProgressPageModel.ModelView.DownloadingProgresses.Add(e);
-            WebListRefresher.GoToDownloadProgressPage();
+            //DownloadingProgressPageModel.ModelView.DownloadingProgresses.Add(e);
+            //WebListRefresher.GoToDownloadProgressPage();
         }
 
         protected override void OnExit(ExitEventArgs e)

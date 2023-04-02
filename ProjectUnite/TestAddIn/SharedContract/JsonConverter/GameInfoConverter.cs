@@ -18,8 +18,6 @@ namespace MEFL.Contract
 
         public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
-            Application.Current.Dispatcher.Invoke(new Action(() =>
-            {
                 var game = value as GameInfoBase;
                 writer.WriteStartObject();
                 writer.WritePropertyName(nameof(game.Version));
@@ -46,7 +44,6 @@ namespace MEFL.Contract
                 writer.WriteValue(game.AssetsIndexName);
                 writer.WriteEndObject();
                 writer.Flush();
-            }));
         }
     }
 }

@@ -27,16 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\MCERModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ModelViewBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RegManager.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)..\..\..\..\..\Xiong%27s\MEFLCollection\AddinDebuging\CLAddInNet6\SharedCLAddIn\Downloaders\SolveDupNamePage.xaml.cs">
-      <DependentUpon>SolveDupNamePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Sercurity\TokenConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)WebVersion\Generic.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)..\..\..\..\..\Xiong%27s\MEFLCollection\AddinDebuging\CLAddInNet6\SharedCLAddIn\Downloaders\SolveDupNamePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
   </ItemGroup>
 </Project>

@@ -5,6 +5,10 @@ using System.Windows;
 using MEFL.Arguments;
 using Newtonsoft.Json;
 
+#if AVALONIA
+using FrameworkElement = Avalonia.Controls.Control;
+#endif
+
 namespace MEFL.Contract;
 
 public abstract class AccountBase : MEFLClass,INotifyPropertyChanged

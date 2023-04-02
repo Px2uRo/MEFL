@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace MEFL
+namespace MEFL.Views
 {
     public partial class MainWindow : Window
     {

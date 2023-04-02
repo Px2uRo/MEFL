@@ -106,8 +106,7 @@ namespace MEFL.CLAddIn.Export
         public DownloadPageItemPair[] GetPairs(SettingArgs args)
         {
             DownloadPageItemPair RealsePair = new("realse", realret, "realse");
-            DownloadPageItemPair SnapsortPair = new("snapsort", snapret, "snapsort");
-            DownloadPageItemPair[] ret = new DownloadPageItemPair[] { RealsePair,SnapsortPair};
+            DownloadPageItemPair[] ret = new DownloadPageItemPair[] { RealsePair};
             foreach (var pair in ret)
             {
                 pair.ListRefreshEvent += Pair_ListRefreshEvent;
@@ -153,7 +152,6 @@ namespace MEFL.CLAddIn.Export
             pair.IsRefreshing =false;
         }
         List<LauncherWebVersionInfoList> realret = new() { new("Other")};
-        List<LauncherWebVersionInfoList> snapret = new() { new("Other") };
         string ResponString;
         JObject jOb;
         private List<LauncherWebVersionInfoList> Refresh(DownloadPageItemPair pair,string tmpFolderPath)
@@ -196,40 +194,8 @@ namespace MEFL.CLAddIn.Export
                         }
                     }
                 }
-                return realret;
             }
-            else
-            {
-                if (snapret.Count <= 1)
-                {
-                    foreach (var item in jOb["versions"])
-                    {
-                        if (item["type"].ToString() == "snapshot")
-                        {
-                            if (Version.TryParse(item["id"].ToString(), out var version))
-                            {
-                                var Tag = $"{version.Major.ToString()}.{version.Minor.ToString()}";
-                                var list = snapret.Where(a => a.VersionMajor == Tag).ToList();
-                                if (list.Count == 0)
-                                {
-                                    var nc = new LauncherWebVersionInfoList(Tag);
-                                    nc.Add(new GenericWebVersion() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
-                                    snapret.Add(nc);
-                                }
-                                else
-                                {
-                                    list[0].Add(new GenericWebVersion() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
-                                }
-                            }
-                            else
-                            {
-                                snapret[0].Add(new GenericWebVersion() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
-                            }
-                        }
-                    }
-                }
-                return snapret;
-            }
+            return realret;
 
         }
 

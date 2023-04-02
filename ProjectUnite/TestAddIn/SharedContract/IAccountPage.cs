@@ -1,6 +1,4 @@
-﻿using System.Windows.Controls;
-
-namespace MEFL.Contract
+﻿namespace MEFL.Contract
 {
     /// <summary>
     /// 仅仅用在 构造(code) 添加用户的页面，不要 Export 这个接口

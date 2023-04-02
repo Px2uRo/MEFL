@@ -13,7 +13,7 @@ namespace MEFL.CLAddIn.Downloaders
 
         public override Version Version => new(0, 0, 0);
 
-        public override object Icon => "C#";
+        public override object pubIcon => "C#";
 
         public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string dotMCFolder)
         {
@@ -33,7 +33,7 @@ namespace MEFL.CLAddIn.Downloaders
 
         public override Version Version => new(0, 0, 0);
 
-        public override object Icon => "CL";
+        public override object pubIcon => "CL";
 
         public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string dotMCFolder)
         {

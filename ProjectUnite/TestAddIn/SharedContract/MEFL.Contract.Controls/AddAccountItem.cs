@@ -1,3 +1,4 @@
+#if WPF
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -55,3 +56,4 @@ public class AddAccountItem : UserControl
 		FrameworkElement.DefaultStyleKeyProperty.OverrideMetadata(typeof(AddAccountItem), new FrameworkPropertyMetadata(typeof(AddAccountItem)));
 	}
 }
+#endif

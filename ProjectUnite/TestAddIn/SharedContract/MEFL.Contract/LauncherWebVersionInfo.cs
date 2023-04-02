@@ -2,7 +2,11 @@ using MEFL.Arguments;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows;
+#if WPF
 using System.Windows.Controls;
+#elif AVALONIA
+using UserControl = Avalonia.Controls.Control;
+#endif
 
 namespace MEFL.Contract;
 
@@ -20,7 +24,7 @@ public abstract class LauncherWebVersionInfo:MEFLClass
 		return $"{Id},{Type}";
 	}
 
-	public abstract InstallProgressInput Download(MEFLDownloader downloader,string dotMCFolder, SettingArgs args, DownloadSource[] sources);
+	public abstract InstallProgressInput Download(MEFLDownloader downloader,string dotMCFolder, SettingArgs args, DownloadSource[] sources, string[] usingLocalFiles);
 }
 /// <summary>
 /// 启动器安装结果

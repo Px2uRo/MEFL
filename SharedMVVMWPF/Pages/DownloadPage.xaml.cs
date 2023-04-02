@@ -19,6 +19,8 @@ using System.Collections;
 using MEFL.Contract;
 using MEFL.APIData;
 using MEFL.SpecialPages;
+using System.Threading;
+using System.IO;
 
 namespace MEFL.Pages
 {
@@ -133,24 +135,42 @@ namespace MEFL.Pages
         private void DownloadItem(object sender, MouseButtonEventArgs e)
         {
             var file = (sender as MyItemsCardItem).DataContext as LauncherWebVersionInfo;
-            if(APIModel.SelectedDownloader == null)
+            if (APIModel.SelectedDownloader == null)
             {
                 MessageBox.Show("没有选中的下载器，去整个插件先？");
             }
             else
             {
-                var result = file.Download(APIModel.SelectedDownloader, APIModel.MyFolders[APIModel.SelectedFolderIndex].Path, APIModel.SettingArgs, APIModel.DownloadSources.Selected);
-                if (result.HasError != true) {
-                    DownloadingProgressPageModel.ModelView.DownloadingProgresses.Add(result.Progress);
-                    WebListRefresher.GoToDownloadProgressPage();
-                }
-                else
+                new Thread(() =>
                 {
-                    result.DownloadButtonClickEvent += Result_DownloadButtonClickEvent;
-                    WebListRefresher.SovlePage.Content=result.Page;
-                    WebListRefresher.SovlePage.DataContext = result;
-                    WebListRefresher.ShowSovlePage();
-                }
+                    var locals = new List<string>();
+                    foreach (var item in DownloadingProgressPageModel.ModelView.DownloadingProgresses)
+                    {
+                        while (!item.GetUsingLocalFiles(out var paths))
+                        {
+                            Thread.Sleep(500);
+                        }
+                        item.GetUsingLocalFiles(out var res);
+                        locals.AddRange(res);
+                    }
+                    App.Current.Dispatcher.Invoke(() =>
+                    {
+                        var result = file.Download(APIModel.SelectedDownloader, APIModel.MyFolders[APIModel.SelectedFolderIndex].Path, APIModel.SettingArgs,
+    APIModel.DownloadSources.Selected, locals.ToArray());
+                        if (result.HasError != true)
+                        {
+                            DownloadingProgressPageModel.ModelView.DownloadingProgresses.Add(result.Progress);
+                            WebListRefresher.GoToDownloadProgressPage();
+                        }
+                        else
+                        {
+                            result.DownloadButtonClickEvent += Result_DownloadButtonClickEvent;
+                            WebListRefresher.SovlePage.Content = result.Page;
+                            WebListRefresher.SovlePage.DataContext = result;
+                            WebListRefresher.ShowSovlePage();
+                        }
+                    });
+                }).Start();
             }
         }
 

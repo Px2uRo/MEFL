@@ -82,7 +82,7 @@ namespace MEFL.CLAddIn.GameTypes
             }
             set => _MSOAT.Description = value;
         }
-        static Stream forgeStream = new MemoryStream(Resources.MaybeForge);
+        public static Stream ForgeStream = new MemoryStream(Resources.MaybeForge);
         static Stream snapshotStream = new MemoryStream(Resources.Snapshot);
         public override string Version { get => _Root.Id; set => _Root.Id = value; }
         static BitmapImage Icon = new BitmapImage(new Uri("pack://application:,,,/RealseTypeLogo.png", UriKind.Absolute));
@@ -95,7 +95,7 @@ namespace MEFL.CLAddIn.GameTypes
                 {
                     if (forge == null)
                     {
-                        var decoder = new PngBitmapDecoder(forgeStream, BitmapCreateOptions.None, BitmapCacheOption.Default);
+                        var decoder = new PngBitmapDecoder(ForgeStream, BitmapCreateOptions.None, BitmapCacheOption.Default);
                         forge = decoder.Frames[0];
                     }
                     return forge;
@@ -125,11 +125,12 @@ namespace MEFL.CLAddIn.GameTypes
                 }
                 else
                 {
-                    if (!Directory.Exists(System.IO.Path.Combine(dotMinecraftPath, "natives")))
+                    res = System.IO.Path.Combine(io.Path.GetDirectoryName(GameJarPath), "natives");
+                    if (!Directory.Exists(res))
                     {
-                        Directory.CreateDirectory(System.IO.Path.Combine(dotMinecraftPath, "natives"));
+                        Directory.CreateDirectory(res);
                     }
-                    res = System.IO.Path.Combine(dotMinecraftPath, "natives");
+                    
                 }
                 return res;
             }

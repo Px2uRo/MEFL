@@ -1,4 +1,5 @@
-﻿using CoreLaunching.PinKcatDownloader;
+﻿using CoreLaunching.Forge;
+using CoreLaunching.PinKcatDownloader;
 using MEFL.Arguments;
 using MEFL.Contract;
 using System;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
+using System.Windows;
 
 namespace MEFL.CLAddIn.Downloaders
 {
@@ -17,9 +19,10 @@ namespace MEFL.CLAddIn.Downloaders
         public string JsonSource { get; private set; }
         public string DotMCPath { get; private set; }
         public DownloadSource[] Sources { get; private set; }
-        
+        public MCFileInfo[] ItemsArray { get; private set; }
+        public string[] OtherUsingFiles { get; private set; }
 
-        internal static DownloadProgress CreateInstall(string jsonSource, string dotMCFolder, DownloadSource[] sources, InstallArguments args)
+        internal static DownloadProgress CreateInstall(string jsonSource, string dotMCFolder, DownloadSource[] sources, InstallArguments args,string[] usingLocalFiles)
         {
             var res = new PinKcatProcess();
             res.Install = true;
@@ -27,6 +30,7 @@ namespace MEFL.CLAddIn.Downloaders
             res.DotMCPath = dotMCFolder;
             res.Sources = sources;
             res.Arguments= args;
+            res.OtherUsingFiles = usingLocalFiles;
             return res;
         }
 
@@ -44,18 +48,38 @@ namespace MEFL.CLAddIn.Downloaders
                         {
                             clt.DownloadFile(JsonSource,localJson);
                         }
-                        var arr = Parser.ParseFromJson(localJson,
-                            Parser.ParseType.FilePath,
+                        if (Arguments is InstallArgsWithForge)
+                        {
+                            var arg = Arguments as InstallArgsWithForge;
+                            var url = BMCLForgeHelper.GetDownloadUrlFromBuild(arg.Forge.Build);
+                            var content = ForgeParser.GetVersionContentFromInstaller(url,true);
+                            var combined = ForgeParser.CombineJson(File.ReadAllText(localJson),content,ParseType.Json);
+                            File.WriteAllText(localJson,combined);
+                        }
+                        var parser = new Parser();
+                        parser.AssetsSource = Sources.Where((x)=>x.ELItem== "${assets}").ToArray()[0].GetUri("");
+                        parser.LibrarySource = Sources.Where((x) => x.ELItem == "${libraries}").ToArray()[0].GetUri("");
+                        var lst = parser.ParseFromJson(localJson,
+                            ParseType.FilePath,
     DotMCPath, Arguments.VersionName, true
-    );
-                        foreach (var item in arr)
+    ).ToList();
+                        foreach (var item in lst)
                         {
                             TotalCount++;
                             TotalSize += item.Size;
                         }
-                        var superSmall = arr.Where((x) => x.Size < 250000).ToArray();
-                        var small = arr.Where((x) => x.Size <= 2500000&&x.Size>= 250000).ToArray();
-                        var large = arr.Where((x) => x.Size > 2500000).ToArray();
+                        ItemsArray = lst.ToArray();
+                        for (int i = 0; i < OtherUsingFiles.Length; i++)
+                        {
+                            var combinedLq = lst.Where((x) => x.Local == OtherUsingFiles[i]).ToArray();
+                            if (combinedLq.Length > 0)
+                            {
+                                lst.Remove(combinedLq[0]);
+                            }
+                        }
+                        var superSmall = lst.Where((x) => x.Size < 250000).ToArray();
+                        var small = lst.Where((x) => x.Size <= 2500000&&x.Size>= 250000).ToArray();
+                        var large = lst.Where((x) => x.Size > 2500000).ToArray();
                         var promss = new SuperSmallProcessManager(superSmall);
                         promss.OneFinished += Proms_OneFinished;
                         promss.QueueEmpty += Promss_QueueEmpty;
@@ -80,15 +104,42 @@ namespace MEFL.CLAddIn.Downloaders
             }).Start();
         }
 
+        int finishedmgr = 0;
         private void Promss_QueueEmpty(object? sender, EventArgs e)
         {
-            LogWriteLine("其中一个下载 Queue 完成（共有三个 Queue）稍等一会（直到三个都完成，且进度条没有动的时候）应该就可以安全退出了");
+            finishedmgr++;
+            if(finishedmgr == 3) 
+            {
+                Application.Current.Dispatcher.Invoke(new Action(() =>
+                {
+                    State = DownloadProgressState.Finished;
+                }));
+            }
         }
 
         private void Proms_OneFinished(object? sender, MCFileInfo e)
         {
             DownloadedItems++;
             DownloadedSize += e.Size;
+        }
+
+        public override bool GetUsingLocalFiles(out string[] paths)
+        {
+            var lst = new List<string>();
+            if (ItemsArray == null)
+            {
+                    paths = null;
+                    return false;
+            }
+            else
+            {
+                for (int i = 0; i < ItemsArray.Length; i++)
+                {
+                    lst.Add(ItemsArray[i].Local);
+                }
+                paths = lst.ToArray();
+                return true;
+            }
         }
     }
 }

@@ -12,6 +12,7 @@ using System.Windows.Input;
 using MEFL.APIData;
 using MEFL.Contract;
 using System.Linq;
+using MEFL.MEFLThemes;
 
 namespace MEFL.Pages
 {
@@ -25,6 +26,12 @@ namespace MEFL.Pages
             InitializeComponent();
             this.DefalutChangeButton.IsChecked = true;
             timer.Elapsed += T_Elapsed;
+        }
+
+        private void ChangeTheme(object sender, RoutedEventArgs e)
+        {
+            var index = Convert.ToInt16((sender as RadioButton).Tag.ToString());
+            ThemeChanger.Change(index);
         }
         private void propChanged(object sender, PropertyChangedEventArgs e)
         {

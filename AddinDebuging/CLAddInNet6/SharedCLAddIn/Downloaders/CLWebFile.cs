@@ -457,7 +457,7 @@ namespace MEFL.CLAddIn.CLDownding
 
         public override Version Version => new(1, 0, 0);
 
-        public override object Icon => "CLAddIn";
+        public override object pubIcon => "CLAddIn";
 
         public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string dotMCFolder)
         {

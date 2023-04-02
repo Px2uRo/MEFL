@@ -328,6 +328,7 @@ namespace MEFL.PageModelViews
             #endregion
             #region 获取背景图片
             img = new Image();
+            img.Stretch = Stretch.UniformToFill;
             if (APIData.APIModel.SettingConfig.PicturePath != null)
             {
                 try

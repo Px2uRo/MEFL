@@ -477,7 +477,11 @@ namespace MEFL.Pages
                         }
                         #endregion
                         #region 解压Native
-                        Directory.CreateDirectory(Game.NativeLibrariesPath);
+                        var dicNati= Directory.CreateDirectory(Game.NativeLibrariesPath);
+                        foreach (var item in dicNati.GetFiles())
+                        {
+                            item.Delete();
+                        }
                         foreach (var item in Game.NativeFilesNeedToDepackage)
                         {
                             try

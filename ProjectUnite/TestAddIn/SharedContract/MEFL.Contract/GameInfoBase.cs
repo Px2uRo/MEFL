@@ -9,7 +9,12 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 #endif
 using System.Windows;
+#if WPF
 using System.Windows.Media;
+#elif AVALONIA
+using Avalonia.Media;
+using FrameworkElement = Avalonia.Controls.Control;
+#endif
 using MEFL.Arguments;
 using Newtonsoft.Json;
 
@@ -100,10 +105,16 @@ public abstract class GameInfoBase : MEFLClass,INotifyPropertyChanged
 	/// 游戏名称，这里指文件夹名称
 	/// </summary>
 	public string Name => Path.GetFileName(GameJsonPath.Replace(".json", string.Empty));
-	/// <summary>
-	/// 图标，Json 没有
-	/// </summary>
+    /// <summary>
+    /// 图标，Json 没有
+    /// </summary>
+#if WPF
+
 	public abstract ImageSource IconSource { get; }
+#elif AVALONIA
+
+    public abstract IImage IconSource { get; }
+#endif
     /// <summary>
     /// 游戏库路径，Json 没有，返回的是Path.Combine(dotMinecraftPath,"libraries");
     /// </summary>

@@ -29,6 +29,7 @@ namespace MEFL
             {
 
             }
+            GameRefresher.RefreshCurrect();
         }
     }
     public class DownloaderCollection : ObservableCollection<Contract.MEFLDownloader>

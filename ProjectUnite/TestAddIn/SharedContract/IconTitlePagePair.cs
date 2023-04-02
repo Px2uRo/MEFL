@@ -1,6 +1,8 @@
 using System.Windows;
 #if WINDOWS_UWP
 using Microsoft.UI.Xaml;
+#elif AVALONIA
+using FrameworkElement = Avalonia.Controls.Control;
 #endif
 
 namespace MEFL.Contract;
