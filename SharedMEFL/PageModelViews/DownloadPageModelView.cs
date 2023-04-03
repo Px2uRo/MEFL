@@ -1,9 +1,14 @@
 ﻿using MEFL.APIData;
 using MEFL.Contract;
-using MEFL.Pages;
 using System.Collections.Generic;
 using System.Windows;
+#if WPF
 using System.Windows.Controls;
+using MEFL.Pages;
+#elif AVALONIA
+using MEFL.Views;
+using Avalonia.Controls;
+#endif
 
 namespace MEFL.PageModelViews
 {

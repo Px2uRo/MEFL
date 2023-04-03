@@ -7,20 +7,26 @@ using System.Globalization;
 using System.Text;
 using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media;
 using MEFL.APIData;
 using MEFL.Contract;
-using MEFL.Controls;
 using Newtonsoft.Json;
 using System.Linq;
-using MEFL.Pages;
-using System.Reflection.Metadata;
 using MEFL.EventsMethod;
 using System.IO;
+#if WPF
+using System.Windows.Data;
+using System.Windows.Media;
+using MEFL.Controls;
+using System.Windows.Controls;
 using System.Windows.Threading;
+using MEFL.Pages;
+#elif AVALONIA
+using Avalonia.Data.Converters;
+using Avalonia;
+using Avalonia.Media;
+using Avalonia.Controls;
+#endif
 
 namespace MEFL.PageModelViews
 {
@@ -29,16 +35,54 @@ namespace MEFL.PageModelViews
     /// </summary>
     public class RealMainPageModelView:PageModelViewBase
     {
-        private Visibility _changeGameVisblity = Visibility.Hidden;
-
+#if WPF
+        #region WpfVisibility
         public Visibility ChangeGameVisblity
         {
             get { return _changeGameVisblity; }
             set { _changeGameVisblity = value; Invoke(nameof(ChangeGameVisblity)); }
         }
 
-        private Pages.ProcessModelView _ProcessModelView;
-        public Pages.ProcessModelView ProcessModelView { get => _ProcessModelView; set { _ProcessModelView = value; Invoke(nameof(ProcessModelView)); } }
+        private Visibility _changeGameVisblity = Visibility.Hidden;
+
+        public Visibility IsRefreshing { get; set; }
+        public Visibility IsNotRefreshing
+        {
+            get
+            {
+                if (IsRefreshing == Visibility.Visible)
+                {
+                    return Visibility.Hidden;
+                }
+                else
+                {
+                    return Visibility.Visible;
+                }
+            }
+        }
+        #endregion
+#elif AVALONIA
+        #region AvaVisibilty
+        public bool ChangeGameVisblity
+        {
+            get { return _changeGameVisblity; }
+            set { _changeGameVisblity = value; Invoke(nameof(ChangeGameVisblity)); }
+        }
+
+        private bool _changeGameVisblity = false;
+
+        public bool IsRefreshing { get; set; }
+        public bool IsNotRefreshing
+        {
+            get
+            {
+                return !IsRefreshing;
+            }
+        }
+        #endregion
+#endif
+        private ProcessModelView _ProcessModelView;
+        public ProcessModelView ProcessModelView { get => _ProcessModelView; set { _ProcessModelView = value; Invoke(nameof(ProcessModelView)); } }
         public Contract.GameInfoBase CurretGame
         {
             get 
@@ -51,18 +95,6 @@ namespace MEFL.PageModelViews
                 Invoke("CurretGame");
             }
         }
-
-        public Visibility IsRefreshing { get; set; }
-        public Visibility IsNotRefreshing { get {
-                if (IsRefreshing == Visibility.Visible)
-                {
-                    return Visibility.Hidden;
-                }
-                else
-                {
-                    return Visibility.Visible;
-                }
-            } }
 
         public GameInfoCollection GameInfoConfigs
         {
@@ -126,7 +158,8 @@ namespace MEFL.PageModelViews
 
         public void RefreshFolderInfoCommand_ClickBeihavior(string parameter)
         {
-            new Thread(() =>
+#if WPF            
+new Thread(() =>
             {
                 App.Current.Dispatcher.Invoke(() =>
                 {
@@ -192,6 +225,10 @@ namespace MEFL.PageModelViews
                     Invoke(nameof(GameInfoConfigs));
                 });
             }).Start();
+
+#elif AVALONIA
+            //TODO Avalonia 自己的搞法
+#endif
         }
     }
 
@@ -219,7 +256,7 @@ namespace MEFL.PageModelViews
             return true;
         }
 
-
+#if WPF
         public void Execute(object? parameter)
         {
             if (APIModel.CurretGame == null)
@@ -259,7 +296,7 @@ namespace MEFL.PageModelViews
             foreach (MyPageBase item in FindControl.FromTag("SettingGamePage", (App.Current.Resources["MainPage"] as Grid)))
             {
                 item.Content = APIModel.CurretGame.SettingsPage;
-                #region Events
+        #region Events
                 APIModel.CurretGame.SettingsPage.OnPageBack -= EventToolkit.SettingsPage_OnPageBack;
                 APIModel.CurretGame.SettingsPage.OnRemoved -= EventToolkit.SettingsPage_OnRemoved;
                 APIModel.CurretGame.SettingsPage.OnSelected -= EventToolkit.SettingsPage_OnSelected;
@@ -268,12 +305,18 @@ namespace MEFL.PageModelViews
                 APIModel.CurretGame.SettingsPage.OnRemoved += EventToolkit.SettingsPage_OnRemoved;
                 APIModel.CurretGame.SettingsPage.OnSelected += EventToolkit.SettingsPage_OnSelected;
                 APIModel.CurretGame.SettingsPage.OnListUpdate += EventToolkit.SettingsPage_OnListUpdate;
-                #endregion
+        #endregion
                 item.Show(From);
             }
-
         }
-    }
+
+#elif AVALONIA
+        public void Execute(object? parameter)
+        { 
+            //TODO Avalonia 自己的搞法
+        }
+#endif
+        }
     public class RefreshFolderInfoCommand : ICommand
     {
         public event EventHandler? CanExecuteChanged;
@@ -309,6 +352,7 @@ namespace MEFL.PageModelViews
             return true;
         }
 
+#if WPF
         public void Execute(object? parameter)
         {
             MyPageBase From = null;
@@ -324,6 +368,12 @@ namespace MEFL.PageModelViews
                 item.Show(From);
             }
         }
+#elif AVALONIA
+        public void Execute(object? parameter) 
+        {
+            //TODO Avalonia 自己的搞法
+        }
+#endif
     }
 
 
@@ -336,6 +386,8 @@ namespace MEFL.PageModelViews
             return true;
         }
 
+
+#if WPF
         public void Execute(object? parameter)
         {
             
@@ -366,10 +418,21 @@ namespace MEFL.PageModelViews
 
             RegKey = null;
         }
+#elif AVALONIA
+        public void Execute(object? parameter)
+        {
+            //TODO Avalonia 自己的搞法
+        }
+#endif
     }
+
+#region IndexToUI
+
+#if WPF
+
     public class IndexToUI : IValueConverter
     {
-        #region cards
+#region cards
         Controls.MyItemsCard favorcard = new Controls.MyItemsCard()
         {
             Height = 0,
@@ -400,8 +463,8 @@ namespace MEFL.PageModelViews
             BorderBrush = VarBorderBrush,
             CornerRadius = VarConrnerRadius
         };
-        #endregion
-        #region 一堆字段而已
+#endregion
+#region 一堆字段而已
         internal bool UpdateUI = false;
 
         FileSystemWatcher _gameWatcher;
@@ -416,11 +479,11 @@ namespace MEFL.PageModelViews
 
         Queue<GameInfoBase> ReadyToBeRemoved = new();
         Queue<string> _readyToBeAdded = new();
-        #endregion
+#endregion
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
 
-            #region Watcher而已
+#region Watcher而已
             if (_gameWatcher != null)
             {
                 _gameWatcher.Dispose();
@@ -436,11 +499,11 @@ namespace MEFL.PageModelViews
                 //_gameWatcher.Deleted += _mapWacther_Deleted;
                 //_gameWatcher.EnableRaisingEvents = true;
             }
-            #endregion
+#endregion
 
             MyGamesSP.Children.Clear();
 
-            #region 收藏夹而已
+#region 收藏夹而已
             cards = new List<Controls.MyItemsCard>();
              favoritem = new ObservableCollection<Contract.GameInfoBase>();
             ObservableCollection<String> favorites = (App.Current.Resources["RMPMV"] as RealMainPageModelView).MyFolders[APIModel.SelectedFolderIndex].Favorites;
@@ -463,9 +526,9 @@ namespace MEFL.PageModelViews
             (newCard.ItemsSource as ObservableCollection<GameInfoBase>).Clear();
             MyGamesSP.Children.Add(newCard);
             MyGamesSP.Children.Add(favorcard);
-            #endregion
+#endregion
 
-            #region 确定有多少卡片而已
+#region 确定有多少卡片而已
             List<string> recorded = new List<string>();
             foreach (var item in APIModel.GameInfoConfigs)
             {
@@ -475,9 +538,9 @@ namespace MEFL.PageModelViews
                     recorded.Add(item.GameTypeFriendlyName);
                 }
             }
-            #endregion
+#endregion
 
-            #region 给卡片加 ItemSources 而已
+#region 给卡片加 ItemSources 而已
 
             for (int i = 0; i < cards.Count; i++)
             {
@@ -491,7 +554,7 @@ namespace MEFL.PageModelViews
                 }
                 cards[i].ItemsSource = cardItemSources;
             }
-            #endregion
+#endregion
             if(favorcard.Items.Count== 0)
             {
                 favorcard.Height = 0;
@@ -515,7 +578,7 @@ namespace MEFL.PageModelViews
             }
             return MyGamesSP;
         }
-        #region WatcherMethods
+#region WatcherMethods
         internal void DealWithNew()
         {
             while (_readyToBeAdded.Count > 0)
@@ -575,7 +638,7 @@ namespace MEFL.PageModelViews
                 game.Dispose();
             });
         }
-        #endregion
+#endregion
 
         private void _mapWacther_Deleted(object sender, FileSystemEventArgs e)
         {
@@ -622,4 +685,19 @@ namespace MEFL.PageModelViews
             APIModel.IndexToUI = this;
         }
     }
+#elif AVALONIA
+    public class IndexToUI : IValueConverter
+    {
+        public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
+        public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+#endif
+#endregion
 }

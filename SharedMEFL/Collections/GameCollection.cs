@@ -9,11 +9,10 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Controls;
 
 namespace MEFL
 {
-    #region GameCollection
+#region GameCollection
     public class GameInfoCollection : ObservableCollection<GameInfoBase>
     {
         protected override void InsertItem(int index, GameInfoBase item)
@@ -114,7 +113,7 @@ namespace MEFL
         public static Task LoadAll(MEFLFolderInfo folder)
         {
             var task = Task.Factory.StartNew(() => {
-                #region 加载游戏嘛
+#region 加载游戏嘛
                 if(folder.Games == null||folder.Favorites==null)
                 {
                     folder.Games = new();
@@ -148,8 +147,8 @@ namespace MEFL
                     subJson = null;
                 }
                 directories = null;
-                #endregion
-                #region 设置收藏夹嘛
+#endregion
+#region 设置收藏夹嘛
                 var mefljsonpath = System.IO.Path.Combine(folder.Path, ".mefl.json");
                 if (File.Exists(mefljsonpath) != true)
                 {
@@ -174,7 +173,7 @@ namespace MEFL
                     File.WriteAllText(mefljsonpath, JsonConvert.SerializeObject(jOb2));
                 }
                 folder.Favorites = JsonConvert.DeserializeObject<ObservableCollection<String>>(jOb2["Favorites"].ToString());
-                #endregion
+#endregion
             });
             return task;
         }
@@ -221,7 +220,7 @@ namespace MEFL
             return res;
         }
     }
-    #endregion
+#endregion
     public class AccountCollection : ObservableCollection<AccountBase>
     {
 

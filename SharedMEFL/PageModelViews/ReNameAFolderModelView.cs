@@ -1,15 +1,17 @@
-﻿
-using MEFL.Controls;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Windows;
+using System.Windows.Input;
+#if WPF
+using MEFL.Controls;
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Input;
-
+#elif AVALONIA
+using Avalonia.Controls;
+#endif
 namespace MEFL.PageModelViews 
 {
 
@@ -64,6 +66,7 @@ namespace MEFL.PageModelViews
             return true;
         }
 
+#if WPF
         public void Execute(object? parameter)
         {
             MEFL.APIData.APIModel.MyFolders.Add(new MEFLFolderInfo(RenameAFolderModel.SelectedPath, RenameAFolderModel.Name));
@@ -83,5 +86,12 @@ namespace MEFL.PageModelViews
             }
             APIData.APIModel.MyFolders.WriteToReg();
         }
+
+#elif AVALONIA
+        public void Execute(object? parameter)
+        {
+            throw new NotImplementedException();
+        }
+#endif
     }
 }

@@ -1,46 +1,23 @@
-﻿using MEFL.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
 using System.Windows;
+#if WPF
+using MEFL.Controls;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+#elif AVALONIA
+using Avalonia.Controls;
+using Avalonia.Animation;
+#endif
 
 namespace MEFL.PageModelViews
 {
     public class ManageProcessesPageModelView:PageModelViewBase
     {
-        private DoubleAnimation _dbani=new DoubleAnimation() { EasingFunction=new PowerEase(),Duration=new Duration(TimeSpan.FromSeconds(0.2))};
-        public ManageProcessesPageModelView()
-        {
-            RunningGames = new ObservableCollection<Process>();
-            RunningGames.CollectionChanged += RunningGames_CollectionChanged;
-            _ContentGrid = new Grid();
-        }
-
-        private void RunningGames_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if((sender as ObservableCollection<Process>).Count > 0)
-            {
-                LoadButton();
-            }
-            else
-            {
-                ReturnToMainPage();
-            }
-            Invoke("RunningGames");
-        }
-        private Grid _ContentGrid;
-
-        public Grid ContentGrid
-        {
-            get { return _ContentGrid; }
-            set { _ContentGrid = value; Invoke(nameof(ContentGrid)); }
-        }
-
-        public ObservableCollection<Process> RunningGames { get; set; }
+#if WPF
         public void LoadButton()
         {
             foreach (ChangePageButton item in FindControl.FromTag("ProcessesManagePage", (App.Current.Resources["ChangePageButtons"] as StackPanel)))
@@ -79,6 +56,49 @@ namespace MEFL.PageModelViews
                 item.BeginAnimation(FrameworkElement.WidthProperty, _dbani);
             }
         }
+
+                private DoubleAnimation _dbani=new DoubleAnimation() { EasingFunction=new PowerEase(),Duration=new Duration(TimeSpan.FromSeconds(0.2))};
+
+#elif AVALONIA
+        private void ReturnToMainPage()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void LoadButton()
+        {
+            throw new NotImplementedException();
+        }
+#endif
+        public ManageProcessesPageModelView()
+        {
+            RunningGames = new ObservableCollection<Process>();
+            RunningGames.CollectionChanged += RunningGames_CollectionChanged;
+            _ContentGrid = new Grid();
+        }
+
+        private void RunningGames_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if((sender as ObservableCollection<Process>).Count > 0)
+            {
+                LoadButton();
+            }
+            else
+            {
+                ReturnToMainPage();
+            }
+            Invoke("RunningGames");
+        }
+
+        private Grid _ContentGrid;
+
+        public Grid ContentGrid
+        {
+            get { return _ContentGrid; }
+            set { _ContentGrid = value; Invoke(nameof(ContentGrid)); }
+        }
+
+        public ObservableCollection<Process> RunningGames { get; set; }
     }
 
     public static class ManageProcessesPageModel

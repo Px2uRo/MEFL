@@ -12,11 +12,13 @@ namespace MEFL
 {
     public class DownloadProgressCollection : ObservableCollection<DownloadProgress>
     {
+#if WPF
         protected override void InsertItem(int index, DownloadProgress item)
         {
             DownloadingProgressPageModel.ModelView.ContentGrid.Children.Add(new Controls.DownloadProgressCard() { DataContext=item});
             base.InsertItem(index, item);
         }
+        
         protected override void RemoveItem(int index)
         {
             this[index].Close();
@@ -31,6 +33,9 @@ namespace MEFL
             }
             GameRefresher.RefreshCurrect();
         }
+#elif AVALONIA
+        //TODO Avalonia 自我的搞法
+#endif
     }
     public class DownloaderCollection : ObservableCollection<Contract.MEFLDownloader>
     {

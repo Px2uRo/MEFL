@@ -1,19 +1,17 @@
 ﻿using MEFL.APIData;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Text;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Input;
-using MEFL.Controls;
-using System.Windows;
 using MEFL.Configs;
 using Newtonsoft.Json;
-using System.Linq;
-using System.Reflection;
-using static MEFL.Contract.IManageAccountPage;
+#if WPF
+using System.Windows.Controls;
+using System.Windows.Data;
+using MEFL.Controls;
+#elif AVALONIA
+using Avalonia.Data.Converters;
+using Avalonia.Controls;
+#endif
 
 namespace MEFL.PageModelViews
 {
@@ -26,6 +24,7 @@ namespace MEFL.PageModelViews
             set { Hostings = value; Invoke(nameof(Hostings)); }
         }
     }
+#if WPF
     public class HostingsToUI : IValueConverter
     {
         internal static StackPanel res = new StackPanel();
@@ -36,7 +35,7 @@ namespace MEFL.PageModelViews
             {
                 var element = new MyExtensionCard() { Margin=new System.Windows.Thickness(0,0,0,15)};
                 element.DataContext = new HostingModelView(item);
-                #region 加载好之后才能做的事情
+    #region 加载好之后才能做的事情
                 //todo 这里能做一些等插件加载好之后才能做的事情
                 var reg = JsonConvert.DeserializeObject<DownloaderConfig>(RegManager.Read("Downloader"));
                 if (reg != null)
@@ -59,7 +58,7 @@ namespace MEFL.PageModelViews
                     }
                 }
                 Contract.Advanced.SetSelectedSources(APIModel.DownloadSources.Selected);
-                #endregion
+    #endregion
                 res.Children.Add(element);
             }
             return res;
@@ -70,4 +69,5 @@ namespace MEFL.PageModelViews
             throw new NotImplementedException();
         }
     }
+#endif
 }

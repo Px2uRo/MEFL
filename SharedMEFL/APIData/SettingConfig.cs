@@ -109,6 +109,7 @@ namespace MEFL.APIData
         public static SettingConfig Load()
         {
             System.IO.FileInfo fi = new System.IO.FileInfo(Path.Combine(Environment.CurrentDirectory, "MEFL\\Config.json"));
+            Directory.CreateDirectory(Path.GetDirectoryName(fi.FullName));
             try
             {
                 if (fi.Exists != true)

@@ -188,11 +188,11 @@ namespace MEFL.APIData
         }
         static APIModel()
         {
+            SettingConfig = MEFL.APIData.SettingConfig.Load();
             #region RegFolders
             MyFolders = MEFLFolderColletion.GetReg();
             #endregion
             AccountConfigs = new();
-            SettingConfig = MEFL.APIData.SettingConfig.Load();
             SelectedFolderIndex = MEFLFolderColletion.GetRegIndex();
             GameInfoConfigs = MyFolders[SelectedFolderIndex].Games;
             AddInConfigs = MEFL.APIData.AddInConfig.GetAll();

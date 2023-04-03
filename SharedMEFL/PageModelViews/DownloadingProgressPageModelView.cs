@@ -1,15 +1,21 @@
-﻿using MEFL.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
 using System.Windows;
+#if WPF
+using MEFL.Controls;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+#elif AVALONIA
+
+#endif
 
 namespace MEFL.PageModelViews
 {
+#if WPF
+
     public class DownloadProgressPageModelView:PageModelViewBase
     {
         private DoubleAnimation _dbani=new DoubleAnimation() { EasingFunction=new PowerEase(),Duration=new Duration(TimeSpan.FromSeconds(0.2))};
@@ -86,6 +92,12 @@ namespace MEFL.PageModelViews
             });
         }
     }
+#elif AVALONIA
+    public class DownloadProgressPageModelView : PageModelViewBase
+    {
+
+    }
+#endif
 
     public static class DownloadingProgressPageModel
     {

@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-#if HOSTING
 using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition;
-#endif
 using MEFL.Contract;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -16,7 +14,6 @@ using System.Linq;
 
 namespace MEFL
 {
-#if HOSTING
     public class Hosting
     {
         public override string ToString()
@@ -253,5 +250,4 @@ namespace MEFL
             return h;
         }
     }
-#endif
 }

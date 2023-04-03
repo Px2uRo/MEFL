@@ -16,6 +16,7 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <AvaloniaResource Include="Assets\**" />
+    <Folder Include="Pages\" />
     <None Remove=".gitignore" />
   </ItemGroup>
   <ItemGroup>
@@ -32,9 +33,14 @@
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="0.10.13" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.13" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="7.0.0" />
 	<PackageReference Include="XamlNameReferenceGenerator" Version="0.10.19" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MEFL.Contract\MEFL.Contract.csproj" />
+  </ItemGroup>
+  <Import Project="..\..\SharedMEFL\SharedMEFL.projitems" Label="Shared" />
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\DownloadPage.axaml" />
   </ItemGroup>
 </Project>

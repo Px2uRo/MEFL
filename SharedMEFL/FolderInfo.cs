@@ -9,7 +9,11 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 using System.Threading;
+#if WPF
 using System.Windows.Shapes;
+#elif AVALONIA
+
+#endif
 
 namespace MEFL
 {
@@ -87,12 +91,14 @@ namespace MEFL
             var regstr = RegManager.Read("Folders");
             try
             {
+#if !AVALONIA
                 var regKey = Newtonsoft.Json.JsonConvert.DeserializeObject<MEFLFolderColletion>(regstr);
                 foreach (var item in regKey)
                 {
                     res.Add(new(item.Path,item.FriendlyName));
                 }
                 GC.SuppressFinalize(regKey);
+#endif
             }
             catch (Exception ex)
             {

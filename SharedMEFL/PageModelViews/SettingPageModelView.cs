@@ -1,24 +1,26 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using MEFL.Arguments;
 using System.Reflection;
 using System.IO;
 using System.Collections.ObjectModel;
-using System.Windows.Data;
 using System.Diagnostics;
 using MEFL.APIData;
-using MEFL.Contract;
+#if WPF
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows;
+using Microsoft.Win32;
+#elif AVALONIA
+using Avalonia.Media;
+using Avalonia.Controls;
+using Avalonia.Data.Converters;
+using DynamicData;
+#endif
 
 namespace MEFL.PageModelViews
 {
@@ -194,9 +196,9 @@ namespace MEFL.PageModelViews
 
         public SettingPageModelView()
         {
-            #region 什么单例            
+#region 什么单例            
             SettingPageModel.ModelView = this;
-            #endregion
+#endregion
             _EnableSearchJava = true;
             LangIndex = (int)APIData.APIModel.SettingArgs.LangID;
             ChangeBackgroundCommand = new ChangeBackground();
@@ -205,7 +207,12 @@ namespace MEFL.PageModelViews
     public static class SettingPageModel
     {
         public static string ContractVersion { get; set; }
+#if WPF
         public static Image img { get; set; }
+#elif AVALONIA
+        public static IImage img { get; set; }
+#endif
+#if WPF
         public static void SetLang()
         {
             ResourceDictionary dic = new ResourceDictionary();
@@ -251,10 +258,16 @@ namespace MEFL.PageModelViews
             }
             dic = null;
         }
+#elif AVALONIA
+        public static void SetLang()
+        {
+            throw new NotImplementedException();
+        }
+#endif
         internal static SettingPageModelView ModelView;
         static SettingPageModel()
         {
-            #region 获取 MEFL.Contract 协议版本
+#region 获取 MEFL.Contract 协议版本
             Assembly ass;
             try
             {
@@ -290,8 +303,8 @@ namespace MEFL.PageModelViews
                 ContractVersion = "Unknown";
             }
             ass = null;
-            #endregion
-            #region Langs
+#endregion
+#region Langs
             if (CultureInfo.CurrentCulture.Name == "zh-CN")
             {
                 APIData.APIModel.SettingArgs.LangID = LangID.zh_CN;
@@ -327,6 +340,8 @@ namespace MEFL.PageModelViews
             SetLang();
             #endregion
             #region 获取背景图片
+#if WPF
+
             img = new Image();
             img.Stretch = Stretch.UniformToFill;
             if (APIData.APIModel.SettingConfig.PicturePath != null)
@@ -340,6 +355,9 @@ namespace MEFL.PageModelViews
 
                 }
             }
+#elif AVALONIA
+            //TODO 背景图片
+#endif
             #endregion
         }
     }
@@ -351,7 +369,7 @@ namespace MEFL.PageModelViews
         {
             return true;
         }
-
+#if WPF
         public void Execute(object? parameter)
         {
             OpenFileDialog o = new OpenFileDialog();
@@ -373,5 +391,31 @@ namespace MEFL.PageModelViews
 
             }
         }
+#elif AVALONIA
+        public void Execute(object? parameter)
+        {
+            OpenFileDialog o = new OpenFileDialog();
+            o.Title = App.Current.Resources["I18N_String_Setting_Custom_BackgroundImage_Open"] as String;
+            //TODO OpenFile
+            
+            //o.Filter = "(*.jpg)|*.jpg|(*.png)|*.png";
+            //o.ShowDialog();
+            //try
+            //{
+            //    if (o.FileName != String.Empty)
+            //    {
+            //        (App.Current.Resources["Background"] as Grid).Children.Clear();
+            //        SettingPageModel.img.Source = new BitmapImage(new Uri(o.FileName));
+            //        (App.Current.Resources["Background"] as Grid).Children.Add(SettingPageModel.img);
+            //        APIData.APIModel.SettingConfig.PicturePath = o.FileName;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+
+            //}
+        }
+
+#endif 
     }
 }

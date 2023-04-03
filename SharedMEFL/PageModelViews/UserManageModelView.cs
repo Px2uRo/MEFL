@@ -1,15 +1,21 @@
 ﻿using MEFL.Contract;
-using MEFL.Controls;
-using MEFL.SpecialPages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Text;
 using System.Windows;
+using System.Windows.Input;
+#if WPF
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Input;
+using MEFL.Controls;
+using MEFL.SpecialPages;
+#elif AVALONIA
+using Avalonia.Controls;
+using Avalonia.Data.Converters;
+using Avalonia.Interactivity;
+#endif
 
 namespace MEFL.PageModelViews
 {
@@ -36,6 +42,7 @@ namespace MEFL.PageModelViews
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+#if WPF
             if(value == null)
             {
                 return Visibility.Visible;
@@ -44,6 +51,10 @@ namespace MEFL.PageModelViews
             {
                 return Visibility.Hidden;
             }
+#elif AVALONIA
+            return value is not null;
+#endif
+
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
@@ -59,7 +70,7 @@ namespace MEFL.PageModelViews
         {
             return true;
         }
-
+#if WPF
         public void Execute(object? parameter)
         {
             for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
@@ -85,11 +96,19 @@ namespace MEFL.PageModelViews
                 item.Show(From);
             }
         }
+#elif AVALONIA
+        public void Execute(object? parameter)
+        {
+            //TODO 添加用户
+        }
+#endif
     }
 
     public class AccountsToUI : IValueConverter
     {
         StackPanel panel = new StackPanel();
+
+#if WPF
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             panel.Children.Clear();
@@ -108,7 +127,7 @@ namespace MEFL.PageModelViews
 
         private void Element_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
+                    for (int i = 0; i < (App.Current.Resources["MainPage"] as Grid).Children.Count; i++)
             {
                 if (((App.Current.Resources["MainPage"] as Grid).Children[i] as MyPageBase).Tag == "AddNewAccount")
                 {
@@ -142,7 +161,7 @@ namespace MEFL.PageModelViews
             }
         }
 
-        private void Content_OnSelected(object sender, AccountBase account)
+                private void Content_OnSelected(object sender, AccountBase account)
         {
             if (account != UserManageModel.ModelView.SelectedAccount)
             {
@@ -219,6 +238,18 @@ namespace MEFL.PageModelViews
 
             account.Dispose();
         }
+#elif AVALONIA
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            //TODO Avalonia 的搞法
+            throw new NotImplementedException();
+        }
+
+        private void Element_MouseDown(object sender, RoutedEventArgs e)
+        {
+            //TODO Avalonia 的搞法
+        }
+#endif
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {

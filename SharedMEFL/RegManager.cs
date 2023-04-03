@@ -66,7 +66,7 @@ namespace MEFL
         }
         public static string Read(string Key)
         {
-#if WINDOWS            
+#if WINDOWS
             var res = WinRegKey.GetValue(Key);
             if (res == null)
             {
@@ -76,6 +76,8 @@ namespace MEFL
             //todo i18N;
             Debugger.Logger($"读取了注册表，键：{Key}，值：{res}");
             return res.ToString();
+#elif AVALONIA
+            return "";
 #endif
         }
     }

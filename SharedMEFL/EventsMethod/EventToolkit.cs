@@ -1,11 +1,15 @@
 ﻿using MEFL.Contract;
+#if WPF
+using System.Windows.Controls;
 using MEFL.Controls;
+#elif AVALONIA
+
+#endif
 using MEFL.PageModelViews;
 using MEFL;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Windows.Controls;
 using System.Windows;
 
 namespace MEFL.EventsMethod
@@ -17,6 +21,7 @@ namespace MEFL.EventsMethod
             throw new NotImplementedException();
         }
 
+#if WPF
         internal static void SettingsPage_OnSelected(object? sender, GameInfoBase e)
         {
             (App.Current.Resources["RMPMV"] as RealMainPageModelView).CurretGame = e;
@@ -50,6 +55,8 @@ namespace MEFL.EventsMethod
         {
             throw new NotImplementedException();
         }
-
+#elif AVALONIA
+        //TODO Avlonia 自己的搞法
+#endif
     }
 }

@@ -1,16 +1,20 @@
-﻿using MEFL.Controls;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Input;
+#if WPF
+using System.Windows.Controls;
+using MEFL.Controls;
+using System.Windows.Data;
+#elif AVALONIA
+using Avalonia.Controls;
+#endif
 
 namespace MEFL.PageModelViews 
 {
-
+#if WPF
     public class PickUpAFolderPageModelView : PageModelViewBase
     {
 
@@ -221,4 +225,5 @@ namespace MEFL.PageModelViews
             throw new NotImplementedException();
         }
     }
+#endif
 }

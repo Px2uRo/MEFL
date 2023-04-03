@@ -12,7 +12,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)..\..\..\Xiong%27s\MEFLCollection\SharedMVVMWPF\PageModelViews\ExtensionPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\ChangePageButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\DownloadProgressCard.xaml.cs">
       <SubType>Code</SubType>
@@ -28,17 +27,6 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)MEFLThemes\Changer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\DownloadPageModelView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ExtraAddInPageModelView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\GenerlSettingGameModelView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\DownloadingProgressPageModelView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ManageProcessesPageModelView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\PageModelViewBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\PickUpAFolderPageModelView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\RealMainPageModelView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ReNameAFolderModelView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\SettingPageModelView.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\UserManageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\DownloadPage.xaml.cs">
       <SubType>Code</SubType>
       <DependentUpon>DownloadPage.xaml</DependentUpon>

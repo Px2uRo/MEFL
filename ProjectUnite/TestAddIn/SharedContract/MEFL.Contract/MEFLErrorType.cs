@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Windows;
-using Avalonia.Media;
 using MEFL.Arguments;
 using System.Resources;
-using Avalonia;
 #if WPF
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 #elif AVALONIA
+using Avalonia.Media;
+using Avalonia;
 using BitmapImage = Avalonia.Media.Imaging.Bitmap;
 using Avalonia.Controls;
 using FrameworkElement = Avalonia.Controls.Control;
