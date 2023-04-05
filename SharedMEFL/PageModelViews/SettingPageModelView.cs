@@ -261,7 +261,7 @@ namespace MEFL.PageModelViews
 #elif AVALONIA
         public static void SetLang()
         {
-            throw new NotImplementedException();
+            //TODO Avalonia 自己的搞法
         }
 #endif
         internal static SettingPageModelView ModelView;

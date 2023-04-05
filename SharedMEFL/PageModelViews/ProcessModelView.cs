@@ -21,7 +21,13 @@ using Avalonia.Media;
 namespace MEFL.PageModelViews;
 public class ProcessModelView : PageModelViews.PageModelViewBase
 {
-    public GameInfoBase Game;
+    private GameInfoBase _game;
+
+    public GameInfoBase Game
+    {
+        get { return _game; }
+        set { _game = value;Progress = 0.0; Process = null; Succeed = false; }
+    }
     private bool _isStarting;
 
     public bool IsStarting
@@ -73,13 +79,7 @@ public class ProcessModelView : PageModelViews.PageModelViewBase
         set { _Canceled = value; Invoke(nameof(Canceled)); }
     }
 
-    private Process _Content;
-
-    public Process GetProcess
-    {
-        get { return _Content; }
-        set { _Content = value; }
-    }
+    public Process Process { get; set; }
     Thread t;
 
     public void BuildProcess()
@@ -88,10 +88,17 @@ public class ProcessModelView : PageModelViews.PageModelViewBase
             try
             {
                 IsStarting = true;
-                Process p = new Process();
+                Process = new Process();
                 ProcessStartInfo i = new ProcessStartInfo();
-                Game.Refresh();
-#region 处理Java
+                if (Game == null)
+                {
+                    throw new Exception("未选择游戏");
+                }
+                else
+                {
+                    Game.Refresh();
+                }
+                #region 处理Java
                 Statu = "处理Java";
                 if (APIModel.SettingArgs.SelectedJava == null)
                 {
@@ -230,7 +237,7 @@ public class ProcessModelView : PageModelViews.PageModelViewBase
                         Args = Args.Replace(item.Key.ToString(), item.Value.ToString());
                     }
                     i.Arguments = Args;
-                    p.StartInfo = i;
+                    Process.StartInfo = i;
                     Progress = 20;
                 }
                 catch (Exception ex)
@@ -299,25 +306,34 @@ public class ProcessModelView : PageModelViews.PageModelViewBase
                 if (TotalSize - DownloadedSize == 0.0)
                 {
                     Progress = 100;
-                    p.StartInfo.RedirectStandardError = true;
-                    p.StartInfo.RedirectStandardOutput = true;
-                    p.EnableRaisingEvents = true;
-                    GetProcess = p;
+                    Process.StartInfo.RedirectStandardError = true;
+                    Process.StartInfo.RedirectStandardOutput = true;
+                    Process.EnableRaisingEvents = true;
 #if DEBUG
-                    var args = $"\"{p.StartInfo.FileName}\" {p.StartInfo.Arguments}";
+                    var args = $"\"{Process.StartInfo.FileName}\" {Process.StartInfo.Arguments}";
 #endif
                     Debugger.Logger($"启动了{Game.Name}，游戏详细信息{JsonConvert.SerializeObject((GameInfoBase)Game, Formatting.Indented)}");
-                    Debugger.Logger($"启动参数{p.StartInfo.FileName + " " + p.StartInfo.Arguments.Replace(APIModel.SelectedAccount.AccessToken, "******")}");
+                    Debugger.Logger($"启动参数{Process.StartInfo.FileName + " " + Process.StartInfo.Arguments.Replace(APIModel.SelectedAccount.AccessToken, "******")}");
                     Succeed = true;
                     return;
                 }
-#endregion
-#endregion
+                #endregion
+                #endregion
             }
             catch (Exception ex)
             {
-                Debugger.Logger($"启动{Game.Name}失败，游戏详细信息{JsonConvert.SerializeObject((GameInfoBase)Game, Formatting.Indented)}");
-                Debugger.Logger($"{ex.ToString()} at {ex.Source}");
+                if (Game != null)
+                {
+                    try
+                    {
+                        Debugger.Logger($"启动{Game.Name}失败，游戏详细信息{JsonConvert.SerializeObject((GameInfoBase)Game, Formatting.Indented)}");
+                        Debugger.Logger($"{ex.ToString()} at {ex.Source}");
+                    }
+                    catch
+                    {
+
+                    }
+                }
                 ErrorInfo = ex.Message;
                 Failed = true;
                 return;
@@ -359,8 +375,8 @@ public class ProcessModelView : PageModelViews.PageModelViewBase
         t = null;
     }
 
-    public ProcessModelView(GameInfoBase game)
+    public ProcessModelView()
     {
-        Game = game;
+
     }
 }

@@ -5,6 +5,7 @@ using System.IO;
 using System.Windows;
 using MEFL.Arguments;
 using System.Resources;
+using MEFL.Contract.Properties;
 #if WPF
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -17,7 +18,7 @@ using Avalonia.Controls;
 using FrameworkElement = Avalonia.Controls.Control;
 #endif
 
-#if NET6_0
+#if NET6_0&&WPF
 using MEFL.Contract.Properties;
 using MEFL.Controls;
 #elif NET4_0
@@ -67,7 +68,11 @@ public class MEFLErrorType : GameInfoBase
         {
             if (stream == null)
 			{
-                //TODO Í¼±ê
+				stream = new MemoryStream();
+				Resources.ErrorImage.Save(stream, Resources.ErrorImage.RawFormat);
+                stream.Position = 0;
+                _image = new BitmapImage(stream);
+				stream.Position = 0;
             }
             return _image;
         }

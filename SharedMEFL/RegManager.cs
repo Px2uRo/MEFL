@@ -5,6 +5,7 @@ using System.Text;
 using System.IO;
 using System.Diagnostics;
 using System.Windows;
+using Newtonsoft.Json.Linq;
 #if WINDOWS
 using Microsoft.Win32;
 #endif
@@ -18,6 +19,25 @@ namespace MEFL
             rsa = new RSACryptoServiceProvider();
 #if WINDOWS
             WinRegKey = Registry.CurrentUser.CreateSubKey("Software").CreateSubKey("MEFL");
+#elif AVALONIA
+            if(Environment.OSVersion.Platform == PlatformID.Win32NT )
+            {
+                var appdata = System.Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+                FileP = Path.Combine(appdata,"MEFL", "Config.json");
+                Directory.CreateDirectory(Path.GetDirectoryName(FileP));
+                if(!File.Exists(FileP) )
+                {
+                    File.Create(FileP).Close();
+                }
+                try
+                {
+                    Reg = JObject.Parse(File.ReadAllText(FileP));
+                }
+                catch
+                {
+                    Reg = new();
+                }
+            }
 #endif
         }
         private static RSACryptoServiceProvider rsa { get; set; }
@@ -30,6 +50,9 @@ namespace MEFL
             WinRegKey = null;
         }
 
+#elif AVALONIA
+        public static JObject Reg;
+        public static string FileP;
 #endif
         public static void SecurityWrite(string Key, string Value)
         {
@@ -62,6 +85,9 @@ namespace MEFL
                 //todo i18N;
                 Debugger.Logger($"写入了注册表，键：{Key}，值：{Value}");
             }
+#elif AVALONIA
+            Reg[Key] = Value;
+            File.WriteAllText(FileP,Reg.ToString());
 #endif
         }
         public static string Read(string Key)
@@ -77,7 +103,15 @@ namespace MEFL
             Debugger.Logger($"读取了注册表，键：{Key}，值：{res}");
             return res.ToString();
 #elif AVALONIA
-            return "";
+            if (Reg[Key] != null)
+            {
+                return Reg[Key].ToString();
+            }
+            else
+            {
+                Reg[Key] = string.Empty;
+                return Reg[Key].ToString();
+            }
 #endif
         }
     }

@@ -12,10 +12,10 @@
 	<RootNamespace>MEFL.CLAddIn</RootNamespace>
   </PropertyGroup>
 
-  <!--<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
 	  <Exec Command="copy &quot;$(TargetDir)$(AssemblyName).dll&quot; &quot;I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\MEFL\AddIns\MEFL.CLAddIn.mefl.dll&quot;" />
 	  <Exec Command="copy &quot;$(TargetDir)CoreLaunchingNet6.dll&quot; &quot;I:\Xiong's\MEFLCollection\MEFLNet6\bin\Debug\net6.0-windows\MEFL\AddIns\CoreLaunchingNet6.dll&quot;" />
-  </Target>-->
+  </Target>
 
   <ItemGroup>
     <PackageReference Include="MEFL.Controls" Version="0.0.7.6" />

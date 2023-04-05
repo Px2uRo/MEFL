@@ -154,6 +154,9 @@ namespace MEFL.PageModelViews
             GameInfoConfigs = MyFolders[SelectedFolderIndex].Games;
             RefreshFolderInfoCommand_ClickBeihavior(null);
             GameSettingCommand = new GameSettingCommand();
+#if AVALONIA
+            App.Current.Resources["RMPMV"] = this;
+#endif
         }
 
         public void RefreshFolderInfoCommand_ClickBeihavior(string parameter)
@@ -336,6 +339,7 @@ new Thread(() =>
     {
         public static ICommand AddFolderInfoCommand;
         public static ICommand ChangeAccountCommand;
+
         static RealMainPageModel()
         {
             AddFolderInfoCommand = new AddFolderInfoCommand();

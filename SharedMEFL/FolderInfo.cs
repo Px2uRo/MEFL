@@ -69,6 +69,13 @@ namespace MEFL
         }
         [JsonIgnore]
         public ObservableCollection<String> Favorites { get; set; }
+
+#if AVALONIA
+        public override string ToString()
+        {
+            return this.FriendlyName + this.Path;
+        }
+#endif
     }
 
     public class MEFLFolderColletion : ObservableCollection<MEFLFolderInfo>
@@ -91,14 +98,12 @@ namespace MEFL
             var regstr = RegManager.Read("Folders");
             try
             {
-#if !AVALONIA
                 var regKey = Newtonsoft.Json.JsonConvert.DeserializeObject<MEFLFolderColletion>(regstr);
                 foreach (var item in regKey)
                 {
                     res.Add(new(item.Path,item.FriendlyName));
                 }
                 GC.SuppressFinalize(regKey);
-#endif
             }
             catch (Exception ex)
             {

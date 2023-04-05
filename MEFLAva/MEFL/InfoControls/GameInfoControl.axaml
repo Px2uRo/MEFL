@@ -1,0 +1,26 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" Height="80" Width="300"
+			 x:Class="MEFL.InfoControls.GameInfoControl">
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="80"/>
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+		<Image Source="{Binding IconSource}"/>
+		<StackPanel Grid.Column="1">
+			<TextBlock Text="{Binding Name}"/>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock Text="{Binding VersionType}"/>
+				<TextBlock Text="{Binding Version}"/>
+			</StackPanel>
+			<TextBlock Text="{Binding Description}"/>
+		</StackPanel>
+		<Grid HorizontalAlignment="Right" Width="30" Height="75" VerticalAlignment="Top" Grid.Column="1">
+			<Button Content="..." VerticalAlignment="Top"/>
+			<Button Content="C " VerticalAlignment="Bottom" Name="Enablebtn"/>
+		</Grid>
+	</Grid>
+</UserControl>

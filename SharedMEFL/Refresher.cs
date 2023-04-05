@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using MEFL.PageModelViews;
 using System.Windows;
+using System.Threading.Tasks;
+using MEFL.APIData;
 #if WPF
 using MEFL.Controls;
 using System.Windows.Controls;
@@ -19,6 +21,7 @@ using Avalonia.Controls;
 
 namespace MEFL
 {
+#if WPF
     public static class GameRefresher
     {
         static Thread t;
@@ -43,7 +46,6 @@ namespace MEFL
                 {
                     await GameLoader.LoadAll(MyFolders[SelectedFolderIndex]);
                     Refreshing = false;
-#if WPF
                     App.Current.Dispatcher.Invoke(() =>
                     {
                         foreach (var item in HostingsToUI.res.Children)
@@ -51,15 +53,11 @@ namespace MEFL
                             ((item as MyExtensionCard).DataContext as HostingModelView).Invoke("IsRefreshing");
                         }
                     });
-#elif AVALONIA
-                    //TODO UI 触发
-#endif
                 }
                 catch (Exception ex)
                 {
                     Debugger.Logger($"刷新时发现未知错误 {ex.Message} at {ex.Source}");
                     Refreshing = false;
-#if WPF
                     App.Current.Dispatcher.Invoke(() =>
                     {
                         foreach (var item in HostingsToUI.res.Children)
@@ -67,16 +65,36 @@ namespace MEFL
                             ((item as MyExtensionCard).DataContext as HostingModelView).Invoke("IsRefreshing");
                         }
                     });
-
-#elif AVALONIA
-                    //TODO UI 触发
-#endif
                 }
                 return;
             });
             t.Start();
         }
     }
+#elif AVALONIA
+    public class GameRefresher : PageModelViewBase
+    {
+        public GameInfoCollection GameInfos => APIModel.MyFolders[SelectedFolderIndex].Games;
+        public static GameRefresher Main= new GameRefresher();
+        private bool _refreshOK;
+
+        public bool RefreshOK
+        {
+            get { return _refreshOK; }
+            set { _refreshOK = value; Invoke(); }
+        }
+
+        public Task Refresh() 
+        {
+            return new Task(async () =>
+            {
+                RefreshOK = false;
+                await GameLoader.LoadAll(MyFolders[SelectedFolderIndex]);
+                RefreshOK = true;
+            });
+        }
+    }
+#endif
 
     public static class WebListRefresher
     {
@@ -132,7 +150,7 @@ namespace MEFL
 
         internal static void GoToDownloadProgressPage()
         {
-#if WPF            
+#if WPF
 App.Current.Dispatcher.Invoke(() =>
             {
                 MyPageBase From = null;

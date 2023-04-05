@@ -4,14 +4,40 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-        x:Class="MEFL.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="MEFL">
+        x:Class="MEFL.Views.MainWindow" Title="Welcome to MEFL for Avalonia!" 
+        Icon="/Assets/avalonia-logo.ico" ExtendClientAreaToDecorationsHint="True"
+ExtendClientAreaChromeHints="NoChrome"
+ExtendClientAreaTitleBarHeightHint="-1">
+	<Grid Margin="8">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="30"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<Grid>
+			<StackPanel Name="LeftButtons" Orientation="Horizontal">
+				<StackPanel Orientation="Horizontal">
+					<Button Height="30" Margin="3" Width="30" Name="ShowMainPageBtn"/>
+					<Button Height="30" Margin="3" Width="30" Name="ShowAddInPageBtn"/>
+					<Button Height="30" Margin="3" Width="30" Name="ShowDownloadPageBtn"/>
+					<Button Height="30" Margin="3" Width="30" Name="ShowSettingPageBtn"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Name="ButtonForAddIns">
 
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
-
-    <TextBlock Name="HELLO" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+				</StackPanel>
+			</StackPanel>
+			<Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+				<TextBlock Text="Welcome to MEFL for Avalonia!"/>
+			</Grid>
+			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+				<Button Height="30" Margin="3" Width="30" Name="MinlizeWindow"/>
+				<Button Height="30" Margin="3" Width="30" Name="MaxlizeWindow"/>
+				<Button Height="30" Margin="3" Width="30" Name="CloseWindow"/>
+			</StackPanel>
+		</Grid>
+		<Grid Name="Page" Grid.Row="1" Margin="3"/>
+		<Grid Grid.Row="1" Name="DialogBackGround" IsVisible="False">
+			<Rectangle Fill="#8F000000"/>
+			<Border HorizontalAlignment="Center" Name="Dialog" VerticalAlignment="Center"/>
+		</Grid>
+	</Grid>
 </Window>

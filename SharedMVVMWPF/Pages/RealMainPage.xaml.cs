@@ -137,22 +137,31 @@ namespace MEFL.Pages
                 {
                     Dispatcher.Invoke(() =>
                     {
-                        ManageProcessesPageModel.ModelView.RunningGames.Add((DataContext as RealMainPageModelView).ProcessModelView.GetProcess);
-                        ManageProcessesPageModel.ModelView.RunningGames[ManageProcessesPageModel.ModelView.RunningGames.Count - 1].Start();
-                        ManageProcessesPageModel.ModelView.ContentGrid.Children.Add((DataContext as RealMainPageModelView).ProcessModelView.Game.GetManageProcessPage(ManageProcessesPageModel.ModelView.RunningGames[ManageProcessesPageModel.ModelView.RunningGames.Count - 1], APIModel.SettingArgs));
-                        MyPageBase From = null;
-                        foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
+                        var p = (DataContext as RealMainPageModelView).ProcessModelView.Process;
+                        if (p == null)
                         {
-                            if (item.Visibility == Visibility.Visible)
+                            return;
+                        }
+                        if (!ManageProcessesPageModel.ModelView.RunningGames.Contains(p))
+                        {
+                            ManageProcessesPageModel.ModelView.RunningGames.Add(p);
+                            p.Start();
+                            ManageProcessesPageModel.ModelView.ContentGrid.Children.Add((DataContext as RealMainPageModelView).ProcessModelView.Game.GetManageProcessPage(p, APIModel.SettingArgs));
+                            MyPageBase From = null;
+                            foreach (MyPageBase item in (App.Current.Resources["MainPage"] as Grid).Children)
                             {
-                                From = item;
+                                if (item.Visibility == Visibility.Visible)
+                                {
+                                    From = item;
+                                }
                             }
+                            foreach (MyPageBase item in FindControl.FromTag("ProcessesManagePage", (App.Current.Resources["MainPage"] as Grid)))
+                            {
+                                item.Show(From);
+                            }
+                            CancelButton_Click(sender, new RoutedEventArgs());
                         }
-                        foreach (MyPageBase item in FindControl.FromTag("ProcessesManagePage", (App.Current.Resources["MainPage"] as Grid)))
-                        {
-                            item.Show(From);
-                        }
-                        CancelButton_Click(sender,new RoutedEventArgs());
+                        (DataContext as RealMainPageModelView).ProcessModelView.Process = null;
                     });
                 }
             }
@@ -168,15 +177,15 @@ namespace MEFL.Pages
                 ((sender as Controls.MyItemsCardItem).DataContext 
                 as Contract.GameInfoBase);
         }
-        static ProcessModelView _pmv;
+        static ProcessModelView PMV = new ProcessModelView();
         private void LaunchGame(object sender, RoutedEventArgs e)
         {
             if (APIModel.CurretGame != null)
             {
             try
             {
-                    _pmv= new ProcessModelView(APIModel.CurretGame);
-                    (DataContext as RealMainPageModelView).ProcessModelView = _pmv;
+                    PMV.Game = APIModel.CurretGame;
+                    (DataContext as RealMainPageModelView).ProcessModelView = PMV;
                     (DataContext as RealMainPageModelView).ProcessModelView.BuildProcess();
             }
                 catch (Exception ex)
@@ -214,8 +223,7 @@ namespace MEFL.Pages
                 _dnani.To = 0;
                 StatuStackPanel.BeginAnimation(HeightProperty, _dnani);
             });
-            _pmv.Cancel();
-            _pmv = null;
+            PMV.Cancel();
         }
 
         private void MyButton_Click_1(object sender, RoutedEventArgs e)

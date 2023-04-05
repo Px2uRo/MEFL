@@ -40,6 +40,7 @@ namespace MEFL
         {
             foreach (var item in this)
             {
+#if WPF
                 if (item == APIModel.CurretGame)
                 {
                     if (!GameRefresher.Refreshing)
@@ -47,7 +48,8 @@ namespace MEFL
                         APIModel.CurretGame = null;
                     }
                 }
-                if(NowYouCanDisposeYourthings)
+#endif
+                if (NowYouCanDisposeYourthings)
                 {
                     item.Dispose();
                 }
@@ -240,10 +242,7 @@ namespace MEFL
             {
                 if (item == APIModel.SelectedAccount)
                 {
-                    if (!GameRefresher.Refreshing)
-                    {
-                        APIModel.SelectedAccount = null;
-                    }
+                    APIModel.SelectedAccount = null;
                 }
                 item.Dispose();
             }
