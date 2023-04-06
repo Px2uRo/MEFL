@@ -45,9 +45,10 @@ public abstract class AccountBase : MEFLClass,INotifyPropertyChanged
 
 	public abstract string UserProperties { get; set; }
 
+#if WPF
 	public abstract object WelcomeWords { get; }
-
-	public abstract IManageAccountPage ManagePage { get; }
+#endif
+    public abstract IManageAccountPage ManagePage { get; }
 
 	public abstract void LaunchGameAction(SettingArgs args);
 }

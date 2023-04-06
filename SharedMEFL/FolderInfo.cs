@@ -80,6 +80,13 @@ namespace MEFL
 
     public class MEFLFolderColletion : ObservableCollection<MEFLFolderInfo>
     {
+#if AVALONIA
+        protected override void InsertItem(int index, MEFLFolderInfo item)
+        {
+            base.InsertItem(index, item);
+            WriteToReg();
+        }
+#endif
         public void WriteToReg()
         {
             var regObj = new MEFLFolderColletion();

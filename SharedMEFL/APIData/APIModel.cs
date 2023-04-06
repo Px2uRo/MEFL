@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -56,7 +57,9 @@ namespace MEFL.APIData
                     value.Selected = true;
                     _SelectedAccount = value;
                     SelectedAccountUUID = value.Uuid.ToString();
+#if WPF
                     App.Current.Resources["WelcomeWords"] = value.WelcomeWords;
+#endif
                     uuid = string.Empty;
                 }
                 UserManageModel.ModelView.Invoke("SelectedAccount");
@@ -69,7 +72,8 @@ namespace MEFL.APIData
             set { SettingConfig.FolderIndex = value; }
         }
         internal static Arguments.SettingArgs SettingArgs { get; set; }
-        internal static Contract.GameInfoBase CurretGame { get => SettingArgs.CurretGame; set { 
+        internal static Contract.GameInfoBase CurretGame { 
+            get => SettingArgs.CurretGame; set { 
                 if(value == null)
                 {
                     SettingConfig.SelectedGame = string.Empty;
@@ -189,19 +193,19 @@ namespace MEFL.APIData
         static APIModel()
         {
             SettingConfig = MEFL.APIData.SettingConfig.Load();
-            #region RegFolders
+#region RegFolders
             MyFolders = MEFLFolderColletion.GetReg();
-            #endregion
+#endregion
             AccountConfigs = new();
             SelectedFolderIndex = MEFLFolderColletion.GetRegIndex();
             GameInfoConfigs = MyFolders[SelectedFolderIndex].Games;
             AddInConfigs = MEFL.APIData.AddInConfig.GetAll();
             Hostings = Hosting.LoadAll();
             SettingArgs = new Arguments.SettingArgs();
-            #region Reg
-            #region Singed Up Accounts
-            #endregion
-            #region Javas
+#region Reg
+#region Singed Up Accounts
+#endregion
+#region Javas
             Javas = new ObservableCollection<FileInfo>();
             try
             {
@@ -232,8 +236,8 @@ namespace MEFL.APIData
                     RegManager.Write("SelectedJava", SettingArgs.SelectedJava.FullName, true);
                 }
             }
-            #endregion
-            #endregion
+#endregion
+#endregion
             _SelectedAccountUUID = RegManager.Read("PlayerUuid");
             if (Directory.Exists(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"))!=true)
             {

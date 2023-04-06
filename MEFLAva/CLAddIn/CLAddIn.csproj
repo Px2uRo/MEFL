@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<Exec Command="copy &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;I:\Xiong's\MEFLCollection\MEFLAva\MEFL\bin\Debug\net7.0\MEFL\AddIns\MEFL.CLAddIn.mefl.ava.dll&quot;" />
+		<Exec Command="copy &quot;I:\Xiong's\MEFLCollection\MEFLAva\CLAddIn\bin\Debug\net7.0\CoreLaunchingNet6.dll&quot; &quot;I:\Xiong's\MEFLCollection\MEFLAva\MEFL\bin\Debug\net7.0\MEFL\AddIns\CoreLaunchingNet6.dll&quot;" />
+	</Target>
+	
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>AVALONIA</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>AVALONIA</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="0.10.19" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.19" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.19" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.ComponentModel.Composition" Version="7.0.0" />
+    <PackageReference Include="XamlNameReferenceGenerator" Version="1.6.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\CoreLaunching\CoreLaunchingNet6\CoreLaunchingNet6.csproj" />
+    <ProjectReference Include="..\MEFL.Contract\MEFL.Contract.csproj" />
+  </ItemGroup>
+
+  <Import Project="..\..\AddinDebuging\CLAddInNet6\SharedCLAddIn\SharedCLAddIn.projitems" Label="Shared" />
+
+</Project>

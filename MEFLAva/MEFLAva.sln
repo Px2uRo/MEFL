@@ -11,6 +11,14 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedContract", "..\Projec
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedMEFL", "..\SharedMEFL\SharedMEFL.shproj", "{A979137B-21DF-4076-AACC-EB503C3F6A1E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLAddIn", "CLAddIn\CLAddIn.csproj", "{319081AF-1955-4672-906D-26957EFE2E89}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedCLAddIn", "..\AddinDebuging\CLAddInNet6\SharedCLAddIn\SharedCLAddIn.shproj", "{FB473F32-00DB-4CE3-BBBA-C88716C07ADA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreLaunchingNet6", "..\..\CoreLaunching\CoreLaunchingNet6\CoreLaunchingNet6.csproj", "{C402FEAB-FB6A-4121-8AB5-866BD87B99C0}"
+EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedCore", "..\..\CoreLaunching\SharedCore\SharedCore.shproj", "{E2A9F52B-6053-4004-9D43-AA972D0DA2CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +33,14 @@ Global
 		{7D6F33E4-BCB0-4205-A248-72C7DA5A6AA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D6F33E4-BCB0-4205-A248-72C7DA5A6AA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D6F33E4-BCB0-4205-A248-72C7DA5A6AA7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{319081AF-1955-4672-906D-26957EFE2E89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{319081AF-1955-4672-906D-26957EFE2E89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{319081AF-1955-4672-906D-26957EFE2E89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{319081AF-1955-4672-906D-26957EFE2E89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C402FEAB-FB6A-4121-8AB5-866BD87B99C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C402FEAB-FB6A-4121-8AB5-866BD87B99C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C402FEAB-FB6A-4121-8AB5-866BD87B99C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C402FEAB-FB6A-4121-8AB5-866BD87B99C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -34,8 +50,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		..\ProjectUnite\TestAddIn\SharedContract\SharedContract.projitems*{15b3e578-1681-42a1-88d8-d9e48ee6cf97}*SharedItemsImports = 13
+		..\AddinDebuging\CLAddInNet6\SharedCLAddIn\SharedCLAddIn.projitems*{319081af-1955-4672-906d-26957efe2e89}*SharedItemsImports = 5
 		..\SharedMEFL\SharedMEFL.projitems*{7d6f33e4-bcb0-4205-a248-72c7da5a6aa7}*SharedItemsImports = 5
 		..\SharedMEFL\SharedMEFL.projitems*{a979137b-21df-4076-aacc-eb503c3f6a1e}*SharedItemsImports = 13
+		..\..\CoreLaunching\SharedCore\SharedCore.projitems*{c402feab-fb6a-4121-8ab5-866bd87b99c0}*SharedItemsImports = 5
+		..\..\CoreLaunching\SharedCore\SharedCore.projitems*{e2a9f52b-6053-4004-9d43-aa972d0da2cf}*SharedItemsImports = 13
 		..\ProjectUnite\TestAddIn\SharedContract\SharedContract.projitems*{f5e200f0-2dfc-48f7-8970-9b137053968e}*SharedItemsImports = 5
+		..\AddinDebuging\CLAddInNet6\SharedCLAddIn\SharedCLAddIn.projitems*{fb473f32-00db-4ce3-bbba-c88716c07ada}*SharedItemsImports = 13
 	EndGlobalSection
 EndGlobal

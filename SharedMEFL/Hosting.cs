@@ -154,21 +154,23 @@ namespace MEFL
             } 
         }
 
+#if WPF
+        private const string EndName = ".mefl.dll";
+#elif AVALONIA
+        private const string EndName = ".mefl.ava.dll";
+#endif
         public static ObservableCollection<Hosting> LoadAll()
         {
             var res = new ObservableCollection<Hosting>();
             string path = System.IO.Path.Combine( 
                 Environment.CurrentDirectory,"MEFL\\AddIns");
             List<FileInfo> l = new List<FileInfo>();
-            if (System.IO.Directory.Exists(path) != true)
-            {
-                System.IO.Directory.CreateDirectory(path);
-            }
+            System.IO.Directory.CreateDirectory(path);
             var di = new DirectoryInfo(path).GetFiles();
             var lg = new List<String>();
             foreach (var item in di)
             {
-                if (item.Name.EndsWith(".mefl.dll"))
+                if (item.Name.EndsWith(EndName))
                 {
                     res.Add(LoadOne(item.FullName));
                 }

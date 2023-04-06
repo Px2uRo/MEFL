@@ -10,8 +10,12 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Timers;
-using System.Windows.Controls;
 using CoreLaunching;
+#if WPF
+using System.Windows.Controls;
+#elif AVALONIA
+
+#endif
 
 namespace MEFL.CLAddIn.Downloaders
 {

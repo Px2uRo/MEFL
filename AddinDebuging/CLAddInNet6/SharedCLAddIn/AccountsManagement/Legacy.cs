@@ -1,5 +1,4 @@
 ﻿using MEFL.CLAddIn.Export;
-using MEFL.CLAddIn.Pages;
 using MEFL.Contract;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -7,6 +6,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+#if WPF
+using MEFL.CLAddIn.Pages;
+#elif AVALONIA
+using CLAddIn.Views;
+#endif
 
 namespace MEFL.CLAddIn.AccountsManagement
 {

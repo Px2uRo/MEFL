@@ -6,8 +6,13 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
+#if WPF
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+#elif AVALONIA
+using Avalonia.Media;
+using Avalonia.Media.Imaging;
+#endif
 
 namespace MEFL.CLAddIn.GameInfos
 {
@@ -22,13 +27,25 @@ namespace MEFL.CLAddIn.GameInfos
 
         }
 
-        public ImageSource Image {get
+#if WPF
+public ImageSource Image {get
                 {
                 var path = Path.Combine(Folder, IconName);
                 if (!File.Exists(path)) return null;
                 else return new BitmapImage(new Uri(path));
             } 
         }
+#elif AVALONIA
+        public IImage Image
+        {
+            get
+            {
+                var path = Path.Combine(Folder, IconName);
+                if (!File.Exists(path)) return null;
+                else return new Bitmap(path);
+            }
+        }
+#endif
     }
 
     internal class GetAllMaps

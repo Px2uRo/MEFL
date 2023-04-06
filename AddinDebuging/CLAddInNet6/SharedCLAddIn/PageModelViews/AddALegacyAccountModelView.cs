@@ -1,15 +1,19 @@
 ﻿using CoreLaunching.JsonTemplates;
 using MEFL.CLAddIn;
-using MEFL.Controls;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using System.Windows;
+using System.Windows.Input;
+#if WPF
 using System.Windows.Controls;
 using System.Windows.Data;
-using System.Windows.Input;
+using MEFL.Controls;
+#elif AVALONIA
+
+#endif
 
 namespace MEFL.CLAddIn
 {

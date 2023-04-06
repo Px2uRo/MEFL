@@ -112,7 +112,6 @@ public abstract class GameInfoBase : MEFLClass,INotifyPropertyChanged
 
 	public abstract ImageSource IconSource { get; }
 #elif AVALONIA
-
     public abstract IImage IconSource { get; }
 #endif
     /// <summary>

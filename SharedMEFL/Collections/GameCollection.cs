@@ -180,6 +180,73 @@ namespace MEFL
             return task;
         }
 
+#if AVALONIA
+        public static void AwaitLoadAll(MEFLFolderInfo folder)
+        {
+            #region 加载游戏嘛
+            if (folder.Games == null || folder.Favorites == null)
+            {
+                folder.Games = new();
+                folder.Favorites = new();
+            }
+            folder.Games.Clear();
+            folder.Favorites.Clear();
+
+            var VersionPath = System.IO.Path.Combine(folder.Path, "versions");
+            if (Directory.Exists(VersionPath) != true)
+            {
+                Directory.CreateDirectory(VersionPath);
+            }
+            string[] directories = Directory.GetDirectories(VersionPath);
+            foreach (var item in directories)
+            {
+                var PrtDir = System.IO.Path.GetDirectoryName(item);
+                var SubDirName = item.Replace(PrtDir + "\\", string.Empty);
+                PrtDir = null;
+                var subJson = System.IO.Path.Combine(item, $"{SubDirName}.json");
+                if (File.Exists(subJson))
+                {
+                    RefreshSupported();
+                    var loadone = LoadOne(subJson);
+                    folder.Games.Add(loadone);
+                }
+                else
+                {
+                    folder.Games.Add(new Contract.MEFLErrorType("不存在Json", subJson));
+                }
+                subJson = null;
+            }
+            directories = null;
+            #endregion
+            #region 设置收藏夹嘛
+            var mefljsonpath = System.IO.Path.Combine(folder.Path, ".mefl.json");
+            if (File.Exists(mefljsonpath) != true)
+            {
+                File.Create(mefljsonpath).Close();
+            }
+            JObject jOb2 = new JObject();
+            try
+            {
+                jOb2 = FastLoadJson.Load(mefljsonpath);
+                if (jOb2 == null)
+                {
+                    jOb2 = new JObject();
+                }
+                if (jOb2["Favorites"] == null)
+                {
+                    throw new Exception();
+                }
+            }
+            catch (Exception ex)
+            {
+                jOb2.Add(new JProperty("Favorites", "[]"));
+                File.WriteAllText(mefljsonpath, JsonConvert.SerializeObject(jOb2));
+            }
+            folder.Favorites = JsonConvert.DeserializeObject<ObservableCollection<String>>(jOb2["Favorites"].ToString());
+            #endregion
+        }
+#endif
+
         public static GameInfoBase LoadOne(string JsonPath)
         {
             GameInfoBase res = null;

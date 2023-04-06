@@ -1,6 +1,8 @@
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Threading;
 using DynamicData;
+using MEFL.APIData;
 using MEFL.AvaControls;
 using MEFL.Contract;
 using MEFL.InfoControls;
@@ -19,6 +21,45 @@ namespace MEFL.Views.DialogContents
         {
             InitializeComponent();
             this.DataContext = App.Current.Resources["RMPMV"];
+            CancelBtn.Click += Contr_Enabled;
+            AddFolderBtn.Click += AddFolderBtn_Click;
+            DelFolderBtn.Click += DelFolderBtn_Click;
+        }
+
+        private async void DelFolderBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            if (SelectedFolderIndex == 0)
+            {
+                return;
+            }
+            else
+            {
+                var newInd = SelectedFolderIndex - 1;
+                MyFolders.Remove(MyFolders[SelectedFolderIndex]);
+                SelectedFolderIndex = newInd;
+                await GameRefresher.Main.Refresh();
+            }
+        }
+
+        private async void AddFolderBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            var d = new OpenFolderDialog();
+            d.Title = "选择文件夹";
+            if (App.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                var mv = desktop.MainWindow as MainWindow;
+                var res = await d.ShowAsync(mv);
+                if (string.IsNullOrEmpty(res))
+                {
+                    return;
+                }
+                else
+                {
+                    var vm = this.DataContext as RealMainPageModelView;
+                    vm.MyFolders.Add(new MEFLFolderInfo(res, "自定义文件夹"));
+                    vm.SelectedFolderIndex = MyFolders.Count - 1;
+                }
+            }
         }
 
         public void ReLoad()
@@ -35,42 +76,19 @@ namespace MEFL.Views.DialogContents
             {
                 if (r.RefreshOK == true)
                 {
-                    if (Games.Children.Count != r.GameInfos.Count)
+                    for (int i = 0; i < Games.Children.Count; i++)
                     {
-                        if (Games.Children.Count == 0)
-                        {
-                            foreach (var item in r.GameInfos)
-                            {
-                                var contr = new GameInfoControl() { DataContext = item };
-                                contr.Enabled += Contr_Enabled;
-                                Games.Children.Add(contr);
-                            }
-                        }
-                        else if (Games.Children.Count > r.GameInfos.Count)
-                        {
-                            var len = r.GameInfos.Count - Games.Children.Count;
-                            for (int i = 1; i <= len; i++)
-                            {
-                                Games.Children.RemoveAt(Games.Children.Count - i);
-                            }
-                        }
-                        else if (Games.Children.Count < r.GameInfos.Count)
-                        {
-                            var len = Games.Children.Count - r.GameInfos.Count;
-                            for (int i = 0; i < len; i++)
-                            {
-                                var contr = new GameInfoControl() { DataContext = DataContext = r.GameInfos[i] };
-                                contr.Enabled += Contr_Enabled;
-                                Games.Children.Add(contr);
-                            }
-                        }
+                        (Games.Children[i].DataContext as GameInfoBase)
+                        .Dispose();
+                        GC.SuppressFinalize(Games.Children[i]);
+                        Games.Children.RemoveAt(i);
+                        i--;
                     }
-                    else
+                    foreach (var item in r.GameInfos)
                     {
-                        for (int i = 0; i < GameInfoConfigs.Count; i++)
-                        {
-                            Games.Children[i].DataContext = GameInfoConfigs[i];
-                        }
+                        var contr = new GameInfoControl() { DataContext = item };
+                        contr.Enabled += Contr_Enabled;
+                        Games.Children.Add(contr);
                     }
                 }
                 else

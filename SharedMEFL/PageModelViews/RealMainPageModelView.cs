@@ -138,6 +138,9 @@ namespace MEFL.PageModelViews
                 APIData.APIModel.GameInfoConfigs =MyFolders[value].Games;
                 Invoke("GameInfoConfigs");
                 Invoke("SelectedFolderIndex");
+#if AVALONIA
+                GameRefresher.Main.Refresh().Start();
+#endif
             }
         }
 

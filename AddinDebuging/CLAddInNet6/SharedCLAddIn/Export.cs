@@ -1,13 +1,11 @@
-﻿using CoreLaunching.JsonTemplates;
+﻿using Avalonia.Controls;
+using CoreLaunching.JsonTemplates;
 using MEFL.Arguments;
 using MEFL.CLAddIn;
 using MEFL.CLAddIn.Downloaders;
 using MEFL.CLAddIn.GameTypes;
-using MEFL.CLAddIn.Pages;
 using MEFL.CLAddIn.WebVersion;
 using MEFL.Contract;
-using MEFL.Contract.Controls;
-using MEFL.Controls;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -19,9 +17,17 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Windows;
+#if WPF
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using MEFL.Contract.Controls;
+using MEFL.Controls;
+using MEFL.CLAddIn.Pages;
+#elif AVALONIA
+
+#endif
+
 
 namespace MEFL.CLAddIn.Export
 {
@@ -29,7 +35,7 @@ namespace MEFL.CLAddIn.Export
     public class BaseInfo : IBaseInfo
     {
         public object Title => "CoreLaunching fo MEFL";
-
+#if WPF
         public object Icon { get {
                     var path = new System.Windows.Shapes.Path()
                     {
@@ -47,6 +53,9 @@ namespace MEFL.CLAddIn.Export
                 return path;
             } 
         }
+#elif AVALONIA
+        public object Icon => "CL";
+#endif
 
 
         public Uri PulisherUri => new Uri("https://space.bilibili.com/283605961");
@@ -244,6 +253,7 @@ namespace MEFL.CLAddIn.Export
             return AccountsManagement.Model.List.ToArray();
         }
 
+#if WPF
         static AddAccountItem Legacy = new AddAccountItem()
         {
             Width = 400,
@@ -271,7 +281,12 @@ namespace MEFL.CLAddIn.Export
         {
             ((sender as AddAccountItem).AddAccountContent as AddNewMSAccount).ResetWebb();
         }
-
+#elif AVALONIA
+        public Button[] GetSingUpPage(SettingArgs args)
+        {
+            return new Button[0];
+        }
+#endif
         //private AddAccountItem Legacy = new AddAccountItem() { Width=400,Height=60, AddAccountContent = new AddALegacyAccountPage(),FinnalReturn=new MEFLLegacyAccount(String.Empty,Guid.NewGuid().ToString()) };
         //todo i18n thx
         //Legacy.Content= new TextBlock() { Text="离线账户",HorizontalAlignment=HorizontalAlignment.Center,VerticalAlignment=VerticalAlignment.Center,FontSize=30,FontWeight=FontWeight.FromOpenTypeWeight(999)};

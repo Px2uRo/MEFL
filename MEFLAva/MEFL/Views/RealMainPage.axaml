@@ -18,6 +18,7 @@
 			<Button Margin="3" Name="GameBtn">
 				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="当前游戏 "/>
+					<TextBlock Text="{Binding CurretGame.Name}"/>
 				</StackPanel>
 			</Button>
 		</StackPanel>

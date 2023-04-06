@@ -1,4 +1,5 @@
-﻿using CoreLaunching.Forge;
+﻿using Avalonia.Threading;
+using CoreLaunching.Forge;
 using CoreLaunching.PinKcatDownloader;
 using MEFL.Arguments;
 using MEFL.Contract;
@@ -110,10 +111,17 @@ namespace MEFL.CLAddIn.Downloaders
             finishedmgr++;
             if(finishedmgr == 3) 
             {
+#if WPF
                 Application.Current.Dispatcher.Invoke(new Action(() =>
                 {
                     State = DownloadProgressState.Finished;
                 }));
+#elif AVALONIA
+                Dispatcher.UIThread.InvokeAsync((() => 
+                {
+                    State = DownloadProgressState.Finished;
+                }));
+#endif
             }
         }
 

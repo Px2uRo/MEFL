@@ -4,9 +4,11 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using MEFL.Contract;
 using Newtonsoft.Json;
+using static MEFL.APIData.APIModel;
 
 namespace MEFL.APIData
 {
@@ -85,7 +87,13 @@ namespace MEFL.APIData
 
         public int FolderIndex
         {
-            get { return _folderIndex; }
+            get { 
+                if(_folderIndex < 0)
+                {
+                    _folderIndex = 0;
+                }
+                return _folderIndex; 
+            }
             set { _folderIndex = value; Update(); }
         }
 

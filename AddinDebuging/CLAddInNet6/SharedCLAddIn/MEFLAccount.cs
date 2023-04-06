@@ -3,18 +3,27 @@ using MEFL.Contract;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Windows.Controls;
 using System.Windows;
-using System.Windows.Media;
-using System.Windows.Shapes;
 using Newtonsoft.Json;
-using MEFL.CLAddIn.Pages;
 using System.Configuration;
 using System.ComponentModel;
 using MEFL.CLAddIn.Sercurity;
 using CoreLaunching.MicrosoftAuth;
+#if WPF
 using CLAddInNet6.Pages;
 using MEFL.CLAddIn.FrameworkIcons;
+using System.Windows.Media;
+using System.Windows.Shapes;
+using System.Windows.Controls;
+using MEFL.CLAddIn.Pages;
+#elif AVALONIA
+using Avalonia.Controls;
+using Avalonia.Media;
+using CLAddIn.Views;
+using Avalonia.Controls.Shapes;
+using Avalonia.Layout;
+using FrameworkElement = Avalonia.Controls.Control;
+#endif
 
 namespace MEFL.CLAddIn
 {
@@ -34,6 +43,7 @@ namespace MEFL.CLAddIn
         public override string UserType { get => "msa"; set { } }
         [JsonIgnore]
         public override string UserProperties { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+#if WPF
         private static WelcomeWordsMS _welcomeWords = new();
         [JsonIgnore]
         public override object WelcomeWords { get 
@@ -42,6 +52,7 @@ namespace MEFL.CLAddIn
                 return _welcomeWords;
             }
         }
+#endif
         private static ManageMSAccount mspage = new ManageMSAccount();
         [JsonIgnore]
         public override IManageAccountPage ManagePage { get 
@@ -91,7 +102,12 @@ namespace MEFL.CLAddIn
             base.Dispose(disposing);
         }
         private Grid _Avator = new Grid();
+#if WPF
         private TextBlock _AvatorText = new TextBlock() { VerticalAlignment = System.Windows.VerticalAlignment.Center, HorizontalAlignment = System.Windows.HorizontalAlignment.Center,FontSize=36,FontWeight=FontWeight.FromOpenTypeWeight(5),Foreground=new SolidColorBrush(Colors.White) };
+#elif AVALONIA
+        private TextBlock _AvatorText = new TextBlock() { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, FontSize = 36, FontWeight = (FontWeight)5, Foreground = new SolidColorBrush(Colors.White) };
+#endif
+#if WPF
         [JsonIgnore]
         public override object WelcomeWords {
             get
@@ -99,6 +115,8 @@ namespace MEFL.CLAddIn
                 return string.Format($"欢迎回来 {UserName}");
             }
         }
+
+#endif
         [JsonIgnore]
         public override FrameworkElement ProfileAvator 
         { 

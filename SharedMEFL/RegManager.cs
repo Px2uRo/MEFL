@@ -8,6 +8,8 @@ using System.Windows;
 using Newtonsoft.Json.Linq;
 #if WINDOWS
 using Microsoft.Win32;
+#elif AVALONIA
+using Avalonia.Controls.ApplicationLifetimes;
 #endif
 
 namespace MEFL
@@ -66,9 +68,7 @@ namespace MEFL
         }
         public static void Write(string Key, string Value)
         {
-#if WINDOWS
             Write(Key, Value, false);
-#endif
         }
         public static void Write(string Key, string Value,bool ForceWrite)
         {
@@ -86,8 +86,22 @@ namespace MEFL
                 Debugger.Logger($"写入了注册表，键：{Key}，值：{Value}");
             }
 #elif AVALONIA
-            Reg[Key] = Value;
-            File.WriteAllText(FileP,Reg.ToString());
+            if(ForceWrite)
+            {
+                Reg[Key] = Value;
+                File.WriteAllText(FileP, Reg.ToString());
+            }
+            else
+            {
+                if(App.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+                {
+                    if(desktop.MainWindow!=null)
+                    {
+                        Reg[Key] = Value;
+                        File.WriteAllText(FileP, Reg.ToString());
+                    }
+                }
+            }
 #endif
         }
         public static string Read(string Key)

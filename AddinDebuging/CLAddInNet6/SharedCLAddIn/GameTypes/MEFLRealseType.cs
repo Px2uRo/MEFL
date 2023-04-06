@@ -1,9 +1,6 @@
-﻿using MEFL.CLAddIn.Properties;
-using CoreLaunching.JsonTemplates;
+﻿using CoreLaunching.JsonTemplates;
 using MEFL.Arguments;
-using MEFL.CLAddIn.Pages;
 using MEFL.Contract;
-using MEFL.Controls;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -13,11 +10,22 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Windows;
+#if WPF
+using MEFL.CLAddIn.Pages;
+using MEFL.CLAddIn.Properties;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using MEFL.Controls;
+#elif AVALONIA
+using FrameworkElement = Avalonia.Controls.Control;
+using Pages = CLAddIn.Views;
+using BitmapImage = Avalonia.Media.Imaging.Bitmap;
+#endif
 using io = System.IO;
+using CLAddIn.Views;
+using Avalonia.Media;
 
 namespace MEFL.CLAddIn.GameTypes
 {
@@ -26,8 +34,13 @@ namespace MEFL.CLAddIn.GameTypes
         internal bool startWithDebug => _MSOAT.StartInDebugMode;
         public override FrameworkElement GetManageProcessPage(Process process, SettingArgs args)
         {
+#if WPF
             var res = new Pages.MEFLRealseTypeManage(process,this);
             return res;
+#elif AVALONIA
+            var res = new Pages.MEFLRealseTypeManage();
+            return res;
+#endif
         }
         protected override void Dispose(bool disposing)
         {
@@ -82,9 +95,10 @@ namespace MEFL.CLAddIn.GameTypes
             }
             set => _MSOAT.Description = value;
         }
+        public override string Version { get => _Root.Id; set => _Root.Id = value; }
+#if WPF
         public static Stream ForgeStream = new MemoryStream(Resources.MaybeForge);
         static Stream snapshotStream = new MemoryStream(Resources.Snapshot);
-        public override string Version { get => _Root.Id; set => _Root.Id = value; }
         static BitmapImage Icon = new BitmapImage(new Uri("pack://application:,,,/RealseTypeLogo.png", UriKind.Absolute));
         static ImageSource forge = null;
         static ImageSource snapshot = null;
@@ -115,6 +129,11 @@ namespace MEFL.CLAddIn.GameTypes
                 }
             }
         }
+#elif AVALONIA
+        //TODO Avalonia 自己的搞法
+        static BitmapImage Icon = new BitmapImage(new MemoryStream());
+        public override IImage IconSource => null;
+#endif
 
         public override string NativeLibrariesPath { get
             {
@@ -239,13 +258,16 @@ namespace MEFL.CLAddIn.GameTypes
             } set {  }
         }
 
+#if WPF
         public override IGameSettingPage SettingsPage {get {
                 _settingPage.DataContext = this;
                 _settingPage.SetShowModCard(_maybeForge);
                 return _settingPage;
             }
         }
-
+#elif AVALONIA
+        public override IGameSettingPage SettingsPage => null;
+#endif
         public override string GameJarPath => GameJsonPath.Replace(".json", ".jar");
 
         public override string HeapDumpPath => "${HeapDumpPath}";
@@ -354,6 +376,7 @@ namespace MEFL.CLAddIn.GameTypes
 
         public override DeleteResult Delete()
         {
+#if WPF
             var mb = MyMessageBox.Show("确定要删除吗？", "警告", MessageBoxButton.YesNo);
             //todo IO 操作
             if (mb.Result == MessageBoxResult.Yes)
@@ -364,6 +387,11 @@ namespace MEFL.CLAddIn.GameTypes
             {
                 return DeleteResult.Canceled;
             }
+#elif AVALONIA
+            return DeleteResult.OK;
+            //TODO Avalonia 自己的搞法
+#endif
+
         }
 
         public override void Refresh()
@@ -392,7 +420,7 @@ namespace MEFL.CLAddIn.GameTypes
     }
     public class MEFLOtherArgs : GameotherArgs
     {
-        #region Privates
+#region Privates
         private string _JsonPath { get; set; }
         private string _Description { get; set; }
         private string _OtherJVMArguments { get; set; }
@@ -401,8 +429,8 @@ namespace MEFL.CLAddIn.GameTypes
         private string _CustomIconPath { get; set; }
         private string _customDotMCPath { get; set; }
         private GamePathType _gamePathType = GamePathType.DotMCPath;
-        #endregion
-        #region Props
+#endregion
+#region Props
         public override string Description { get => _Description; set { _Description = value; ChangeProperty(); } }
         public override string OtherJVMArguments { get => _OtherJVMArguments; set { _OtherJVMArguments = value; ChangeProperty(); } }
         public override string OtherGameArguments { get => _OtherGameArguments; set { _OtherGameArguments = value; ChangeProperty(); } }
@@ -429,7 +457,7 @@ namespace MEFL.CLAddIn.GameTypes
 
             }
         }
-        #endregion
+#endregion
         public MEFLOtherArgs(string JsonPath)
         {
             _JsonPath = JsonPath;
