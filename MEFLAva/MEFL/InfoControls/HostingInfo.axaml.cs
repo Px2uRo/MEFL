@@ -16,6 +16,20 @@ namespace MEFL.InfoControls
         public HostingInfo()
         {
             InitializeComponent();
+            MoreGrid.PointerEnter += MoreGrid_PointerEnter;
+            MoreGrid.PointerLeave += MoreGrid_PointerLeave;
+        }
+
+        private void MoreGrid_PointerLeave(object? sender, Avalonia.Input.PointerEventArgs e)
+        {
+            Animations.AniBack.RunAsync(MoreBtn, null);
+            Animations.WidthBack.RunAsync(Enablebtn, null);
+        }
+
+        private void MoreGrid_PointerEnter(object? sender, Avalonia.Input.PointerEventArgs e)
+        {
+            Animations.AniGo.RunAsync(MoreBtn, null);
+            Animations.WidthGo.RunAsync(Enablebtn, null);
         }
     }
 
@@ -42,7 +56,7 @@ namespace MEFL.InfoControls
                 }
                 h.IsOpen = value;
                 _isOpenlnk= value;
-                ReLoadThis();
+                ReLoadThis(value);
                 Invoke();
                 Invoke(nameof(Icon));
             }
@@ -70,9 +84,9 @@ namespace MEFL.InfoControls
         #endregion
 
         #region Methods
-        private void ReLoadThis()
+        private void ReLoadThis(bool value)
         {
-            if (h.IsOpen)
+            if (value)
             {
 
             }
@@ -90,6 +104,7 @@ namespace MEFL.InfoControls
             if (h.IsOpen)
             {
                 hosting.LoadImports();
+                ReLoadThis(true);
             }
             else
             {

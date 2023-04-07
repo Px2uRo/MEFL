@@ -30,6 +30,13 @@ namespace MEFL.Views
                     CurretGame = linq[0];
                 }
             }
+            AccountBtn.Click += AccountBtn_Click;
+        }
+
+        private void AccountBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            ChooseAccountDialog.UI.ReLoad();
+            ContentDialog.Show(ChooseAccountDialog.UI);
         }
 
         private void GameBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)

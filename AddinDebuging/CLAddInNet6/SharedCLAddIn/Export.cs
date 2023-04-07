@@ -1,4 +1,7 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Layout;
+using Avalonia.Media;
+using CLAddIn.Views;
 using CoreLaunching.JsonTemplates;
 using MEFL.Arguments;
 using MEFL.CLAddIn;
@@ -282,9 +285,12 @@ namespace MEFL.CLAddIn.Export
             ((sender as AddAccountItem).AddAccountContent as AddNewMSAccount).ResetWebb();
         }
 #elif AVALONIA
-        public Button[] GetSingUpPage(SettingArgs args)
+
+        static AddLegacyAccountPage legaPage = new();
+        static AddAccountItem Legacy = new AddAccountItem(new TextBlock() { Text = "微软登录", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, FontSize = 20, FontWeight = (FontWeight)999 },legaPage);
+        public AddAccountItem[] GetSingUpPage(SettingArgs args)
         {
-            return new Button[0];
+            return new AddAccountItem[1] { Legacy };
         }
 #endif
         //private AddAccountItem Legacy = new AddAccountItem() { Width=400,Height=60, AddAccountContent = new AddALegacyAccountPage(),FinnalReturn=new MEFLLegacyAccount(String.Empty,Guid.NewGuid().ToString()) };

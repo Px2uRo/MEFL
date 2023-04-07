@@ -10,7 +10,7 @@
 			<RowDefinition Height="40"/>
 		</Grid.RowDefinitions>
 		<StackPanel HorizontalAlignment="Left" Grid.Row="1" Orientation="Horizontal">
-			<Button Margin="3">
+			<Button Margin="3" Name="AccountBtn">
 				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="当前账户 "/>
 				</StackPanel>

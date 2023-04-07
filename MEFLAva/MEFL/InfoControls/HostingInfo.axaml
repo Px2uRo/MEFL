@@ -6,7 +6,7 @@
              Height="80" Width="290"
 			 x:Class="MEFL.InfoControls.HostingInfo">
 	<Grid>
-		<ToggleButton Name="Enablebtn" IsChecked="{Binding IsOpen}" Width="258" Height="75">
+		<ToggleButton Name="Enablebtn" IsChecked="{Binding IsOpen}" Width="288" Height="75">
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="80"/>
@@ -23,8 +23,8 @@
 				</StackPanel>
 			</Grid>
 		</ToggleButton>
-		<Grid HorizontalAlignment="Right" Width="30" Grid.Column="1">
-			<Button VerticalAlignment="Center" Height="75">
+		<Grid HorizontalAlignment="Right" Name="MoreGrid" Width="30" Background="Transparent" Grid.Column="1">
+			<Button VerticalAlignment="Center" Height="75" Width="30" Name="MoreBtn" Margin="30,0,0,0">
 				<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="..."/>
 			</Button>
 		</Grid>

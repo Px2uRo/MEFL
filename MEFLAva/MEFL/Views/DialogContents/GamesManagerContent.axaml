@@ -2,8 +2,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" Width="300"
-             Background="White" x:Class="MEFL.Views.DialogContents.GamesManagerContent">
+             mc:Ignorable="d" 
+			 Width="300"
+             Background="White" 
+			 x:Class="MEFL.Views.DialogContents.GamesManagerContent">
   <StackPanel Margin="3">
 	  <TextBlock Text="选择文件夹："/>
 	  <Grid>

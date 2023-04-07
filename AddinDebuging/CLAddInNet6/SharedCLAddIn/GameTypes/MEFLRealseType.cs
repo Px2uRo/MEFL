@@ -26,6 +26,8 @@ using BitmapImage = Avalonia.Media.Imaging.Bitmap;
 using io = System.IO;
 using CLAddIn.Views;
 using Avalonia.Media;
+using CLAddIn.Properties;
+using SkiaSharp;
 
 namespace MEFL.CLAddIn.GameTypes
 {
@@ -47,7 +49,6 @@ namespace MEFL.CLAddIn.GameTypes
             if (disposing)
             {
                 FileNeedsToDownload.Clear();
-                GC.SuppressFinalize(Icon);
                 GC.SuppressFinalize(_MSOAT);
                 GC.SuppressFinalize(_Root);
                 GC.SuppressFinalize(FileNeedsToDownload);
@@ -131,8 +132,39 @@ namespace MEFL.CLAddIn.GameTypes
         }
 #elif AVALONIA
         //TODO Avalonia 自己的搞法
-        static BitmapImage Icon = new BitmapImage(new MemoryStream());
-        public override IImage IconSource => null;
+        static MemoryStream forgeIconSource;
+        static MemoryStream releaseIconSource;
+        static BitmapImage _forgeIcon; 
+        static BitmapImage _releaseIcon;
+        public override IImage IconSource {
+            get
+            {
+                if(_maybeForge)
+                {
+                    if(forgeIconSource == null)
+                    {
+                        forgeIconSource = new MemoryStream();
+                        Resources.ForgeIcon.Save(forgeIconSource, Resources.ForgeIcon.RawFormat);
+                        forgeIconSource.Position = 0;
+                        _forgeIcon = new BitmapImage(forgeIconSource);
+                        forgeIconSource.Position = 0;
+                    }
+                    return _forgeIcon;
+                }
+                else
+                {
+                    if(releaseIconSource == null)
+                    {
+                        releaseIconSource = new MemoryStream();
+                        Resources.ReleaseIcon.Save(releaseIconSource, Resources.ReleaseIcon.RawFormat);
+                        releaseIconSource.Position = 0;
+                        _releaseIcon = new BitmapImage(releaseIconSource);
+                        releaseIconSource.Position = 0;
+                    }
+                    return _releaseIcon;
+                }
+            }
+        }
 #endif
 
         public override string NativeLibrariesPath { get

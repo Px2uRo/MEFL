@@ -3,7 +3,11 @@
     /// <summary>
     /// 仅仅用在 构造(code) 添加用户的页面，不要 Export 这个接口
     /// </summary>
+#if WPF
     public interface IAddAccountPage
+#elif AVALONIA
+        public interface IAddAccountContent : IDialogContent
+#endif
     {
         public delegate void Canceled(object sender);
         public event Canceled OnCanceled;

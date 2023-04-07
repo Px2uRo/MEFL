@@ -1,0 +1,23 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Width="300" Background="White" x:Class="MEFL.Views.DialogContents.ChooseAccountDialog">
+	<StackPanel Margin="3">
+		<TextBlock Text="当前账户："/>
+		<Grid Height="80">
+			<TextBlock IsVisible="{Binding DidNotChoose}" Text="当前未选中账户，请在下方选中或添加" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+			<Border Name="CurrectAccountBD"/>
+		</Grid>
+		<ScrollViewer Height="240">
+			<StackPanel Name="Accounts" Margin="0,0,20,0"/>
+		</ScrollViewer>
+		<Button Name="AddBtn" Width="295">
+			<TextBlock Text="添加" HorizontalAlignment="Center"/>
+		</Button>
+		<Button Name="CancelBtn" Width="295">
+			<TextBlock Text="取消" HorizontalAlignment="Center"/>
+		</Button>
+	</StackPanel>
+</UserControl>
