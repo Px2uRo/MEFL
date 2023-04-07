@@ -2,26 +2,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" Height="80" Width="290" VerticalAlignment="Center"
-			 x:Class="MEFL.InfoControls.GameInfoControl">
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             Height="80" Width="290"
+			 x:Class="MEFL.InfoControls.HostingInfo">
 	<Grid>
-		<Button Name="Enablebtn" Width="258" Height="75">
+		<ToggleButton Name="Enablebtn" IsChecked="{Binding IsOpen}" Width="258" Height="75">
 			<Grid>
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="80"/>
 					<ColumnDefinition />
 				</Grid.ColumnDefinitions>
-				<Image Source="{Binding IconSource}"/>
+				<ContentPresenter Content="{Binding Icon}" Width="80" Height="80"/>
 				<StackPanel Grid.Column="1">
 					<TextBlock Text="{Binding Name}"/>
+					<TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
 					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="{Binding VersionType}"/>
+						<TextBlock Text="{Binding Publisher}"/>
 						<TextBlock Text="{Binding Version}"/>
 					</StackPanel>
-					<TextBlock Text="{Binding Description}"/>
 				</StackPanel>
 			</Grid>
-		</Button>
+		</ToggleButton>
 		<Grid HorizontalAlignment="Right" Width="30" Grid.Column="1">
 			<Button VerticalAlignment="Center" Height="75">
 				<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="..."/>

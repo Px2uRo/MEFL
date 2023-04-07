@@ -73,7 +73,7 @@ namespace MEFL
 #if AVALONIA
         public override string ToString()
         {
-            return this.FriendlyName + this.Path;
+            return this.FriendlyName + $"({Path})";
         }
 #endif
     }
@@ -84,6 +84,12 @@ namespace MEFL
         protected override void InsertItem(int index, MEFLFolderInfo item)
         {
             base.InsertItem(index, item);
+            WriteToReg();
+        }
+
+        protected override void RemoveItem(int index)
+        {
+            base.RemoveItem(index);
             WriteToReg();
         }
 #endif

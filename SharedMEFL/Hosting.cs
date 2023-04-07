@@ -11,14 +11,19 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using MEFL.APIData;
 using System.Linq;
+using MEFL.Views;
+using MEFL.InfoControls;
 
 namespace MEFL
 {
     public class Hosting
     {
+#if AVALONIA
+        public bool Loaded = false;
+#endif
         public override string ToString()
         {
-            return FileName + Description;
+            return FileName +" "+ Description;
         }
 
         [Import(AllowRecomposition = true)]
@@ -49,8 +54,9 @@ namespace MEFL
         public string Description { get; private set; }
         public string Guid { get; private set; }
         private bool _isOpen;
-        AssemblyCatalog ac;
-        CompositionContainer cc;
+        internal AssemblyCatalog ac;
+        internal CompositionContainer cc;
+#if WPF
         public bool IsOpen { 
             get 
             {
@@ -153,11 +159,43 @@ namespace MEFL
                 AddInConfig.Update(APIModel.AddInConfigs);
             } 
         }
+#elif AVALONIA
+
+        public bool IsOpen
+        {
+            get {
+                foreach (var item in APIData.APIModel.AddInConfigs)
+                {
+                    if (item.Guid == Guid)
+                    {
+                        _isOpen = item.IsOpen;
+                        break;
+                    }
+                }
+                return _isOpen;
+            }
+            set
+            {
+                _isOpen = value;
+                var linq = APIModel.AddInConfigs.Where((x) => x.Guid == Guid).ToArray();
+                if (linq.Count() > 0)
+                {
+                    linq[0].IsOpen = value;
+                }
+                else
+                {
+                    APIModel.AddInConfigs.Add(new AddInConfig() { Guid = Guid, IsOpen = _isOpen });
+                }
+                AddInConfig.Update(APIModel.AddInConfigs);
+            }
+        }
+
+#endif
 
 #if WPF
-        private const string EndName = ".mefl.dll";
+        internal const string EndName = ".mefl.dll";
 #elif AVALONIA
-        private const string EndName = ".mefl.ava.dll";
+        internal const string EndName = ".mefl.ava.dll";
 #endif
         public static ObservableCollection<Hosting> LoadAll()
         {
@@ -167,7 +205,6 @@ namespace MEFL
             List<FileInfo> l = new List<FileInfo>();
             System.IO.Directory.CreateDirectory(path);
             var di = new DirectoryInfo(path).GetFiles();
-            var lg = new List<String>();
             foreach (var item in di)
             {
                 if (item.Name.EndsWith(EndName))
@@ -175,8 +212,15 @@ namespace MEFL
                     res.Add(LoadOne(item.FullName));
                 }
             }
-
-            lg = null;
+#if AVALONIA
+            AddInPage.UI.PART_UNIFORM_GRID.Children.Clear();
+            foreach (var item in res)
+            {
+                var info = new HostingInfo();
+                info.DataContext = new HostingViewModel(item);
+                AddInPage.UI.PART_UNIFORM_GRID.Children.Add(info);
+            }
+#endif
             return res;
         }
 

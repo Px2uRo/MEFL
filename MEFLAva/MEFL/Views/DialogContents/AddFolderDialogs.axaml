@@ -1,0 +1,20 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" Width="600" Height="400"
+             Background="White"
+			 x:Class="MEFL.Views.DialogContents.AddFolderDialogs">
+	<Grid RowDefinitions="100,100,200">
+		<Button Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Name="CancelBtn" Content="×"/>
+		<TextBlock Text="确定是这个文件夹吗" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+		<Grid Grid.Row="1" HorizontalAlignment="Center" ColumnDefinitions="350,30">
+			<TextBox Name="PathTB" VerticalAlignment="Center"/>
+			<Button Content="..." Name="ChangeBtn" Grid.Column="1"/>
+		</Grid>
+		<Grid Grid.Row="2" HorizontalAlignment="Center" ColumnDefinitions="350,30">
+			<TextBox Name="NameTB" VerticalAlignment="Center"/>
+			<Button Content=">" Name="EnableBtn" Grid.Column="1"/>
+		</Grid>
+	</Grid>
+</UserControl>

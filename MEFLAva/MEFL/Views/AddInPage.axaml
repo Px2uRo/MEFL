@@ -4,5 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MEFL.Views.AddInPage">
-  Welcome to Avalonia!
+	<TabControl>
+		<TabItem Header="插件">
+			<ScrollViewer Margin="0,20,0,0">
+				<UniformGrid HorizontalAlignment="Left" VerticalAlignment="Top" Name="PART_UNIFORM_GRID">
+
+				</UniformGrid>
+			</ScrollViewer>
+		</TabItem>
+		<TabItem Header="更多(未开放)">
+		</TabItem>
+	</TabControl>
 </UserControl>

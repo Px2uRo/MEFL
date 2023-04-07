@@ -55,9 +55,9 @@ namespace MEFL.Views.DialogContents
                 }
                 else
                 {
-                    var vm = this.DataContext as RealMainPageModelView;
-                    vm.MyFolders.Add(new MEFLFolderInfo(res, "自定义文件夹"));
-                    vm.SelectedFolderIndex = MyFolders.Count - 1;
+                    var ui = AddFolderDialogs.UI;
+                    ui.FolderPath= res;
+                    ContentDialog.Show(ui);
                 }
             }
         }
