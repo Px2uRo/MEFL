@@ -111,6 +111,9 @@ namespace MEFL.PageModelViews
             }
         }
 
+#if AVALONIA
+        public string AcoountName => APIModel.SelectedAccount.UserName;
+#endif
         public MEFLFolderColletion MyFolders 
         {
             get

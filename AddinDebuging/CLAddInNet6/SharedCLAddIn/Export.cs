@@ -287,7 +287,9 @@ namespace MEFL.CLAddIn.Export
 #elif AVALONIA
 
         static AddLegacyAccountPage legaPage = new();
-        static AddAccountItem Legacy = new AddAccountItem(new TextBlock() { Text = "微软登录", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, FontSize = 20, FontWeight = (FontWeight)999 },legaPage);
+        static AddAccountItem Legacy = new AddAccountItem(
+            new TextBlock() { Text = "离线登录", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, FontSize = 20, FontWeight = (FontWeight)999 },
+            legaPage);
         public AddAccountItem[] GetSingUpPage(SettingArgs args)
         {
             return new AddAccountItem[1] { Legacy };

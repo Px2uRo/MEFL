@@ -23,7 +23,9 @@ namespace MEFL.AvaControls
                 var mv = desktop.MainWindow as MainWindow;
                 mv.Page.IsEnabled= false;
                 mv.LeftButtons.IsEnabled= false;
+                cd.Content = null;
                 cd.Content = dialogContent;
+                mv.Dialog.Child = null;
                 mv.Dialog.Child = cd;
                 mv.DialogBackGround.IsVisible = true;
             }

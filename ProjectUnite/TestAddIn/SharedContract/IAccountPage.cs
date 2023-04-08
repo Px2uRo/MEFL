@@ -9,8 +9,10 @@
         public interface IAddAccountContent : IDialogContent
 #endif
     {
+#if WPF
         public delegate void Canceled(object sender);
         public event Canceled OnCanceled;
+#endif
         public delegate void AccountAdd(object sender, AccountBase account);
         public event AccountAdd OnAccountAdd;
     }

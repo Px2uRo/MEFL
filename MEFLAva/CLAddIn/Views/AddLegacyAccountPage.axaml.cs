@@ -10,7 +10,6 @@ namespace CLAddIn.Views
             InitializeComponent();
         }
 
-        public event IAddAccountContent.Canceled OnCanceled;
         public event IAddAccountContent.AccountAdd OnAccountAdd;
         public event EventHandler<EventArgs> Quited;
     }
