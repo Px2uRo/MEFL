@@ -1,6 +1,8 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using Avalonia.Media;
+using DynamicData;
+using MEFL.APIData;
 using MEFL.Contract;
 using MEFL.Views;
 using System;
@@ -50,7 +52,7 @@ namespace MEFL.InfoControls
                 return _isOpenlnk; }
             set
             {
-                if (value&&h.Loaded == false)
+                if (value&&h.ImportsLoaded == false)
                 {
                     h.LoadImports();
                 }
@@ -88,11 +90,23 @@ namespace MEFL.InfoControls
         {
             if (value)
             {
-
+                foreach (var item in h.Account.GetSingUpAccounts(APIModel.SettingArgs))
+                {
+                    APIModel.AccountConfigs.Add(item);
+                    if (APIModel.SelectedAccountUUID.ToString() == item.Uuid.ToString())
+                    {
+                        APIModel.SelectedAccount= item;
+                    }
+                }
             }
             else
             {
-
+                var lnq = APIModel.AccountConfigs.Where((x)=>x.AddInGuid==h.Guid).ToArray();
+                if (lnq.Contains(APIModel.SelectedAccount))
+                {
+                    APIModel.SelectedAccount = null;
+                }
+                APIModel.AccountConfigs.RemoveMany(lnq);
             }
         }
         #endregion
@@ -148,7 +162,7 @@ namespace MEFL.InfoControls
                 {
                     h.Account = h.cc.GetExport<IAccount>().Value;
                 }
-                h.Loaded= true;
+                h.ImportsLoaded= true;
                 Debugger.Logger($"加载了一个插件，名称 {h.FileName}，版本：{h.Version} Guid {h.Guid}");
                 h.ac.Dispose();
                 h.cc.Dispose();
@@ -159,7 +173,7 @@ namespace MEFL.InfoControls
             {
                 h.ExceptionInfo = $"{ex.Message} at {ex.Source}";
                 h.IsOpen = false;
-                h.Loaded= false;
+                h.ImportsLoaded= false;
             }
         }
     }

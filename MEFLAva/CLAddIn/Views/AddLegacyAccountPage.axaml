@@ -4,7 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              Width="500" Height="300" Background="White"
              x:Class="CLAddIn.Views.AddLegacyAccountPage">
-	<Grid>
-		
-	</Grid>
+	<Grid RowDefinitions="125,125,50">
+		<Grid Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" ColumnDefinitions="80,350" >
+			<TextBlock VerticalAlignment="Center" Text="账户名"/>
+			<TextBox VerticalAlignment="Center" Name="AccountNameTB" Grid.Column="1"/>
+		</Grid>
+		<Grid Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" ColumnDefinitions="80,350">
+			<TextBlock VerticalAlignment="Center" Text="GUID："/>
+			<TextBox VerticalAlignment="Center" Name="GuidTB" Grid.Column="1"/>
+		</Grid>
+		<StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="2">
+			<Button Content="取消" Name="CancelBtn"/>
+			<Button Content="添加" Name="AddBtn"/>
+		</StackPanel>
+    </Grid>
 </UserControl>

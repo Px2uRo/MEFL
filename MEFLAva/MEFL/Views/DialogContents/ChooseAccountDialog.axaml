@@ -7,7 +7,7 @@
 	<StackPanel Margin="3">
 		<TextBlock Text="当前账户："/>
 		<Grid Height="80">
-			<TextBlock IsVisible="{Binding DidNotChoose}" Text="当前未选中账户，请在下方选中或添加" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+			<TextBlock Name="HintTB" Text="当前未选中账户，请在下方选中或添加" HorizontalAlignment="Center" VerticalAlignment="Center"/>
 			<Border Name="CurrectAccountBD"/>
 		</Grid>
 		<ScrollViewer Height="240">

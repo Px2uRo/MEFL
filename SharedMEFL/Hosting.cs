@@ -19,7 +19,7 @@ namespace MEFL
     public class Hosting
     {
 #if AVALONIA
-        public bool Loaded = false;
+        public bool ImportsLoaded = false;
 #endif
         public override string ToString()
         {

@@ -33,17 +33,19 @@ namespace MEFL.APIData
                 RegManager.Write("PlayerUuid",value);
             }
         }
-        internal static AccountBase SelectedAccount
+        internal static AccountBase SelectedAccount 
         {
-            get {
-                return _SelectedAccount;
-            }
-            set {
+            get => _SelectedAccount;
+
+            set
+            {
                 if (value == null)
                 {
                     _SelectedAccount = null;
+#if WPF
                     App.Current.Resources["WelcomeWords"] = App.Current.Resources["WelcomeWords_NoAccounts"] as String;
-                }
+#endif
+                    }
                 else
                 {
                     string uuid = value.Uuid.ToString();
@@ -55,8 +57,8 @@ namespace MEFL.APIData
                         }
                     }
                     value.Selected = true;
-                    _SelectedAccount = value;
                     SelectedAccountUUID = value.Uuid.ToString();
+                    _SelectedAccount = value;
 #if WPF
                     App.Current.Resources["WelcomeWords"] = value.WelcomeWords;
 #endif
@@ -192,6 +194,7 @@ namespace MEFL.APIData
         }
         static APIModel()
         {
+            _SelectedAccountUUID = RegManager.Read("PlayerUuid");
             SettingConfig = MEFL.APIData.SettingConfig.Load();
 #region RegFolders
             MyFolders = MEFLFolderColletion.GetReg();
@@ -238,7 +241,6 @@ namespace MEFL.APIData
             }
 #endregion
 #endregion
-            _SelectedAccountUUID = RegManager.Read("PlayerUuid");
             if (Directory.Exists(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"))!=true)
             {
                 Directory.CreateDirectory(System.IO.Path.Combine(Environment.CurrentDirectory, ".minecraft"));

@@ -122,6 +122,7 @@ namespace MEFL.CLAddIn
         { 
             get 
             {
+#if WPF
                 if (Selected)
                 {
                     _Avator.Width = 100;
@@ -136,6 +137,12 @@ namespace MEFL.CLAddIn
                     _AvatorText.FontSize = 14;
                     return _Avator;
                 }
+#elif AVALONIA
+                _Avator.Width = 50;
+                _Avator.Height = 50;
+                _AvatorText.FontSize = 18;
+                return _Avator;
+#endif
             }
         }
         private string _username;

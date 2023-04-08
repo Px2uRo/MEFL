@@ -34,7 +34,7 @@ namespace MEFL.Views.DialogContents
             }
             try
             {
-                var loaded = APIModel.Hostings.Where((h) => h.Loaded&&h.IsOpen).ToArray();
+                var loaded = APIModel.Hostings.Where((h) => h.ImportsLoaded&&h.IsOpen).ToArray();
                 var abled = loaded.Where((h) => h.Permissions.UseAccountAPI == true).ToArray();
                 foreach (var item in abled)
                 {
