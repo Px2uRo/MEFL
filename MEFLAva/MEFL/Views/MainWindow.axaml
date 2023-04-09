@@ -8,12 +8,8 @@
         Icon="/Assets/avalonia-logo.ico" ExtendClientAreaToDecorationsHint="True"
 ExtendClientAreaChromeHints="NoChrome"
 ExtendClientAreaTitleBarHeightHint="-1">
-	<Grid Margin="8">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="30"/>
-			<RowDefinition/>
-		</Grid.RowDefinitions>
-		<Grid>
+	<Grid Margin="8" RowDefinitions="30,*" ColumnDefinitions="30,*">
+		<Grid Grid.ColumnSpan="2">
 			<StackPanel Name="LeftButtons" Orientation="Horizontal">
 				<StackPanel Orientation="Horizontal">
 					<Button Height="30" Margin="3" Width="30" Name="ShowMainPageBtn"/>
@@ -34,8 +30,12 @@ ExtendClientAreaTitleBarHeightHint="-1">
 				<Button Height="30" Margin="3" Width="30" Name="CloseWindow"/>
 			</StackPanel>
 		</Grid>
-		<Grid Name="Page" Grid.Row="1" Margin="3"/>
-		<Grid Grid.Row="1" Name="DialogBackGround" IsVisible="False">
+		<Grid Name="Page" Grid.Row="1" 
+			  Grid.Column="0"
+			  Grid.ColumnSpan="2"
+		  Margin="3,3,3,3"/>
+		<StackPanel Grid.Column="0" Grid.Row="1" Margin="3" Width="30" Name="TempBtns"/>
+		<Grid Grid.Row="1" Grid.ColumnSpan="2" Name="DialogBackGround" IsVisible="False">
 			<Rectangle Fill="#8F000000"/>
 			<Border HorizontalAlignment="Center" Name="Dialog" VerticalAlignment="Center"/>
 		</Grid>

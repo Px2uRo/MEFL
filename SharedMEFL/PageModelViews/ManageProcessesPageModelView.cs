@@ -62,12 +62,12 @@ namespace MEFL.PageModelViews
 #elif AVALONIA
         private void ReturnToMainPage()
         {
-            throw new NotImplementedException();
+
         }
 
         private void LoadButton()
         {
-            throw new NotImplementedException();
+
         }
 #endif
         public ManageProcessesPageModelView()

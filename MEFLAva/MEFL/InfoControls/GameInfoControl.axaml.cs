@@ -22,14 +22,14 @@ namespace MEFL.InfoControls
 
         private void MoreInfoGrid_PointerLeave(object? sender, Avalonia.Input.PointerEventArgs e)
         {
-            Animations.AniBack.RunAsync(MoreInfoBtn, null);
-            Animations.WidthBack.RunAsync(Enablebtn, null);
+            Animations.MarginBack(new Thickness(30, 0, 0, 0)).RunAsync(MoreInfoBtn, null);
+            Animations.WidthBack(288.0).RunAsync(Enablebtn, null);
         }
 
         private void MoreInfoGrid_PointerEnter(object? sender, Avalonia.Input.PointerEventArgs e)
         {
-            Animations.AniGo.RunAsync(MoreInfoBtn,null);
-            Animations.WidthGo.RunAsync(Enablebtn,null);
+            Animations.MarginGo(new(0,0,0,0)).RunAsync(MoreInfoBtn,null);
+            Animations.WidthGo(258.0).RunAsync(Enablebtn,null);
         }
 
         private void Enablebtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)

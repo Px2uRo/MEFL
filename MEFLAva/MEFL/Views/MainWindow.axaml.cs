@@ -1,10 +1,14 @@
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Shapes;
+using Avalonia.Interactivity;
 using Avalonia.Media;
+using Avalonia.Threading;
 using MEFL.APIData;
 using MEFL.PageModelViews;
 using System;
+using System.Collections.Generic;
+using Tmds.DBus;
 
 namespace MEFL.Views
 {
@@ -78,7 +82,55 @@ namespace MEFL.Views
         {
             Page.Children.Clear();
         }
-    }
 
-    
+        static Dictionary<Button, EventHandler<RoutedEventArgs>> stupid = new Dictionary<Button,EventHandler<RoutedEventArgs>>();
+        public static void AddTempButton(Button button,Control Page)
+        {
+            if(App.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    var win = desktop.MainWindow as MainWindow;
+                    if (!win.TempBtns.Children.Contains(button))
+                    {
+                        if (!stupid.ContainsKey(button))
+                        {
+                            var MyVoid = new EventHandler<RoutedEventArgs>((sender, e) =>
+                            {
+                                win.ClearPage();
+                                win.Page.Children.Add(Page);
+                            });
+                            stupid.Add(button,MyVoid);
+                        }
+                        button.Click -= stupid[button];
+                        button.Click += stupid[button];
+                        win.TempBtns.Children.Add(button);
+                    }
+                    Animations.WidthGo(30.0).RunAsync(win.TempBtns,null);
+                    Animations.MarginGo(new(33,3,3,3)).RunAsync(win.Page,null);
+                });
+            }
+        }
+
+        public static void RemoveTempButton(Button button)
+        {
+            if (App.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            {
+                Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                var win = desktop.MainWindow as MainWindow;
+                if (win.TempBtns.Children.Contains(button))
+                {
+                    button.Click -= stupid[button];
+                    win.TempBtns.Children.Remove(button);
+                }
+                    if (win.TempBtns.Children.Count==0)
+                    {
+                        Animations.WidthGo(0.0).RunAsync(win.TempBtns, null);
+                        Animations.MarginGo(new(3)).RunAsync(win.Page, null);
+                    }
+                });
+            }
+        }
+    }
 }

@@ -14,17 +14,15 @@ namespace MEFL
     internal static class Animations
     {
         #region Animation
-        public static Animation _anigo;
-        public static Animation _aniback;
+        public static Animation _margingo;
+        public static Animation _marginback;
         private static Easing _easing = new CircularEaseInOut();
 
-        public static Animation AniGo
+        public static Animation MarginGo(Thickness margin)
         {
-            get
-            {
-                if (_anigo == null)
+                if (_margingo == null)
                 {
-                    _anigo = new Animation()
+                    _margingo = new Animation()
                     {
                         Duration = TimeSpan.FromSeconds(0.2),
                         PlaybackDirection = PlaybackDirection.Normal,
@@ -38,20 +36,17 @@ namespace MEFL
                     kfr.Setters.Add(new Setter()
                     {
                         Property = Button.MarginProperty,
-                        Value = new Thickness(0, 0, 0, 0)
+                        Value = margin
                     });
-                    _anigo.Children.Add(kfr);
+                    _margingo.Children.Add(kfr);
                 }
-                return _anigo;
-            }
+            return _margingo;
         }
-        public static Animation AniBack
+        public static Animation MarginBack(Thickness margin)
         {
-            get
-            {
-                if (_aniback == null)
+                if (_marginback == null)
                 {
-                    _aniback = new Animation()
+                    _marginback = new Animation()
                     {
                         Duration = TimeSpan.FromSeconds(0.2),
                         PlaybackDirection = PlaybackDirection.Normal,
@@ -65,21 +60,19 @@ namespace MEFL
                     kfr.Setters.Add(new Setter()
                     {
                         Property = Button.MarginProperty,
-                        Value = new Thickness(30, 0, 0, 0)
+                        Value = margin
                     });
-                    _aniback.Children.Add(kfr);
+                    _marginback.Children.Add(kfr);
                 }
-                return _aniback;
-            }
+                return _marginback;
+            
         }
 
         public static Animation _widthgo;
         public static Animation _widthback;
 
-        public static Animation WidthGo
+        public static Animation WidthGo(double width)
         {
-            get
-            {
                 if (_widthgo == null)
                 {
                     _widthgo = new Animation()
@@ -96,17 +89,14 @@ namespace MEFL
                     kfr.Setters.Add(new Setter()
                     {
                         Property = Button.WidthProperty,
-                        Value = 258.0
+                        Value = width
                     });
                     _widthgo.Children.Add(kfr);
                 }
                 return _widthgo;
-            }
         }
-        public static Animation WidthBack
+        public static Animation WidthBack(double width)
         {
-            get
-            {
                 if (_widthback == null)
                 {
                     _widthback = new Animation()
@@ -123,12 +113,11 @@ namespace MEFL
                     kfr.Setters.Add(new Setter()
                     {
                         Property = Button.WidthProperty,
-                        Value = 288.0
+                        Value = width
                     });
                     _widthback.Children.Add(kfr);
                 }
                 return _widthback;
-            }
         }
         #endregion
     }

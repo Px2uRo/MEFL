@@ -1,3 +1,4 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using Avalonia.Media;
@@ -25,14 +26,14 @@ namespace MEFL.InfoControls
 
         private void MoreGrid_PointerLeave(object? sender, Avalonia.Input.PointerEventArgs e)
         {
-            Animations.AniBack.RunAsync(MoreBtn, null);
-            Animations.WidthBack.RunAsync(Enablebtn, null);
+            Animations.MarginBack(new Thickness(30, 0, 0, 0)).RunAsync(MoreBtn, null);
+            Animations.WidthBack(288.0).RunAsync(Enablebtn, null);
         }
 
         private void MoreGrid_PointerEnter(object? sender, Avalonia.Input.PointerEventArgs e)
         {
-            Animations.AniGo.RunAsync(MoreBtn, null);
-            Animations.WidthGo.RunAsync(Enablebtn, null);
+            Animations.MarginGo(new Thickness(0,0,0,0)).RunAsync(MoreBtn, null);
+            Animations.WidthGo(258.0).RunAsync(Enablebtn, null);
         }
     }
 
