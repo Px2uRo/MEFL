@@ -4,5 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MEFL.Views.SettingPage">
-  This is Setting Page
+	<TabControl>
+		<TabItem Header="启动">
+			<StackPanel>
+				<StackPanel Margin="0,0,0,15">
+					<TextBlock Text="选择Java"/>
+					<Grid IsEnabled="{Binding EnableSearchJava}">
+						<ComboBox Name="JavaList" HorizontalAlignment="Left"/>
+						<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+							<Button Name="RefreshJavas" Content="刷新 Java 列表"/>
+							<Button Name="AddNew" Content="添加 Java"/>
+							<Button Name="Remove" Content="移除此 Java" Background="Red" Foreground="White"/>
+						</StackPanel>
+					</Grid>
+				</StackPanel>
+			</StackPanel>
+		</TabItem>
+	</TabControl>
 </UserControl>

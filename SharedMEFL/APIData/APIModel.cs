@@ -65,6 +65,12 @@ namespace MEFL.APIData
                     uuid = string.Empty;
                 }
                 UserManageModel.ModelView.Invoke("SelectedAccount");
+#if AVALONIA
+                if(App.Current.Resources.ContainsKey("RMPMV"))
+                {
+                    (App.Current.Resources["RMPMV"] as RealMainPageModelView).Invoke("AcoountName");
+                }
+#endif
             }
         }
 
@@ -126,6 +132,7 @@ namespace MEFL.APIData
         public static DownloaderCollection Downloaders = new();
         public static DownloadSourceCollection DownloadSources = new();
 
+#if WPF
         internal static ObservableCollection<FileInfo> SearchJavas()
         {
             _SearchedJavas = new ObservableCollection<FileInfo>();
@@ -192,6 +199,70 @@ namespace MEFL.APIData
 
             return _SearchedJavas;
         }
+#elif AVALONIA
+        internal static void SearchJavas()
+        {
+            _SearchedJavas = new ObservableCollection<FileInfo>();
+            SearchJavaThreadIsOK = false;
+                DirectoryInfo[] tmp2;
+                var Folders = new ObservableCollection<DirectoryInfo>();
+                try
+                {
+                    Folders.Add(new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles)));
+                    for (int i = 0; i < Folders.Count; i++)
+                    {
+                        try
+                        {
+                            tmp2 = Folders[i].GetDirectories();
+                            foreach (var item in tmp2)
+                            {
+                                Folders.Add(item);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+                for (int i = 0; i < Folders.Count; i++)
+                {
+                    try
+                    {
+                        tmp1 = Folders[i].GetFiles();
+                        foreach (var item in tmp1)
+                        {
+                            if (item.Name == "javaw.exe")
+                            {
+                                _SearchedJavas.Add(item);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                }
+                Folders.Clear();
+                Folders = null;
+                tmp1 = null;
+                tmp2 = null;
+                var value = new List<String>();
+            Javas = _SearchedJavas;
+            foreach (var item in Javas)
+                {
+                    value.Add(item.FullName);
+                }
+                var str = JsonConvert.SerializeObject(value);
+                RegManager.Write("RecordedJavas", str, true);
+            SettingPageModel.ModelView.EnableSearchJava= true;
+                SearchJavaThreadIsOK = true;
+        }
+#endif
         static APIModel()
         {
             _SelectedAccountUUID = RegManager.Read("PlayerUuid");

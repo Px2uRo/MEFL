@@ -4,6 +4,7 @@ using Avalonia.Media;
 using DynamicData;
 using MEFL.APIData;
 using MEFL.Contract;
+using MEFL.PageModelViews;
 using MEFL.Views;
 using System;
 using System.Collections.Generic;

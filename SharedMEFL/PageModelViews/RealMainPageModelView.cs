@@ -112,7 +112,10 @@ namespace MEFL.PageModelViews
         }
 
 #if AVALONIA
-        public string AcoountName => APIModel.SelectedAccount.UserName;
+        public string AcoountName { get {
+                if (APIModel.SelectedAccount != null) return APIModel.SelectedAccount.UserName;
+                else return string.Empty;
+            } }
 #endif
         public MEFLFolderColletion MyFolders 
         {

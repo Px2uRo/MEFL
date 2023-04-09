@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Animation;
+using Avalonia.Animation.Easings;
 using Avalonia.Controls;
 using Avalonia.Styling;
 using System;
@@ -15,6 +16,7 @@ namespace MEFL
         #region Animation
         public static Animation _anigo;
         public static Animation _aniback;
+        private static Easing _easing = new CircularEaseInOut();
 
         public static Animation AniGo
         {
@@ -26,7 +28,8 @@ namespace MEFL
                     {
                         Duration = TimeSpan.FromSeconds(0.2),
                         PlaybackDirection = PlaybackDirection.Normal,
-                        FillMode = FillMode.Both
+                        FillMode = FillMode.Both,
+                        Easing = _easing
                     };
                     var kfr = new KeyFrame()
                     {
@@ -52,7 +55,8 @@ namespace MEFL
                     {
                         Duration = TimeSpan.FromSeconds(0.2),
                         PlaybackDirection = PlaybackDirection.Normal,
-                        FillMode = FillMode.Both
+                        FillMode = FillMode.Both,
+                        Easing = _easing
                     };
                     var kfr = new KeyFrame()
                     {
@@ -82,7 +86,8 @@ namespace MEFL
                     {
                         Duration = TimeSpan.FromSeconds(0.2),
                         PlaybackDirection = PlaybackDirection.Normal,
-                        FillMode = FillMode.Both
+                        FillMode = FillMode.Both,
+                        Easing = _easing
                     };
                     var kfr = new KeyFrame()
                     {
@@ -108,7 +113,8 @@ namespace MEFL
                     {
                         Duration = TimeSpan.FromSeconds(0.2),
                         PlaybackDirection = PlaybackDirection.Normal,
-                        FillMode = FillMode.Both
+                        FillMode = FillMode.Both,
+                        Easing = _easing
                     };
                     var kfr = new KeyFrame()
                     {

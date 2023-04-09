@@ -138,8 +138,8 @@ namespace MEFL.CLAddIn
                     return _Avator;
                 }
 #elif AVALONIA
-                _Avator.Width = 50;
-                _Avator.Height = 50;
+                _Avator.Width = 70;
+                _Avator.Height = 70;
                 _AvatorText.FontSize = 18;
                 return _Avator;
 #endif

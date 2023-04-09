@@ -10,6 +10,8 @@ using System.Linq;
 using Newtonsoft.Json;
 using System.IO.Compression;
 using comp = System.IO.Compression;
+using MEFL.AvaControls;
+using MEFL.Views.DialogContents;
 #if WPF
 using MEFL.Controls;
 using System.Windows.Media;
@@ -26,7 +28,12 @@ public class ProcessModelView : PageModelViews.PageModelViewBase
     public GameInfoBase Game
     {
         get { return _game; }
-        set { _game = value;Progress = 0.0; Process = null; Succeed = false; }
+        set { _game = value;
+            Invoke();
+            Failed = false;
+            Progress = 0.0; 
+            Process = null; 
+            Succeed = false; }
     }
     private bool _isStarting;
 
@@ -80,11 +87,11 @@ public class ProcessModelView : PageModelViews.PageModelViewBase
     }
 
     public Process Process { get; set; }
-    Thread t;
+    internal Thread t;
 
     public void BuildProcess()
     {
-        t = new Thread(() => {
+        t = new Thread(async () => {
             try
             {
                 IsStarting = true;
@@ -148,7 +155,8 @@ public class ProcessModelView : PageModelViews.PageModelViewBase
                         }
                     }
 #elif AVALONIA
-                    throw new Exception("Java 不正确，请软件作者处理好这个异常");
+                    var msg = $"不合适的 JAVA\n需要的Java版本\n{Game.JavaMajorVersion}\n当前选择的Java\n{APIModel.SettingArgs.SelectedJava.FullName}\n版本为{FileVersionInfo.GetVersionInfo(APIModel.SettingArgs.SelectedJava.FullName).FileMajorPart}";
+                    JavaManagerDialog.Show(msg);
 #endif
                 }
                 Progress = 1;

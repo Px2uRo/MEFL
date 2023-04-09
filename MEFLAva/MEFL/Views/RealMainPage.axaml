@@ -13,6 +13,7 @@
 			<Button Margin="3" Name="AccountBtn">
 				<StackPanel Orientation="Horizontal">
 					<TextBlock Text="当前账户 "/>
+					<TextBlock Text="{Binding AcoountName}"/>
 				</StackPanel>
 			</Button>
 			<Button Margin="3" Name="GameBtn">
