@@ -15,7 +15,7 @@ using Avalonia.Media;
 using Avalonia;
 using BitmapImage = Avalonia.Media.Imaging.Bitmap;
 using Avalonia.Controls;
-using FrameworkElement = Avalonia.Controls.Control;
+using FrameworkElement = MEFL.Contract.IProcessManagePage;
 #endif
 
 #if NET6_0&&WPF

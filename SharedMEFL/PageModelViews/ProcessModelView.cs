@@ -317,9 +317,6 @@ Invoke();
                 if (TotalSize - DownloadedSize == 0.0)
                 {
                     Progress = 100;
-                    Process.StartInfo.RedirectStandardError = true;
-                    Process.StartInfo.RedirectStandardOutput = true;
-                    Process.EnableRaisingEvents = true;
 #if DEBUG
                     var args = $"\"{Process.StartInfo.FileName}\" {Process.StartInfo.Arguments}";
 #endif

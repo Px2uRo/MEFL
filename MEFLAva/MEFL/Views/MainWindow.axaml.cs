@@ -111,6 +111,8 @@ namespace MEFL.Views
                         Animations.WidthGo(30.0).RunAsync(win.TempBtns, null);
                         Animations.MarginGo(new(33, 3, 3, 3)).RunAsync(win.Page, null);
                     }
+                    win.ClearPage();
+                    win.Page.Children.Add(Page);
                 });
             }
         }
@@ -129,8 +131,10 @@ namespace MEFL.Views
                 }
                     if (win.TempBtns.Children.Count==0)
                     {
-                        Animations.WidthGo(0.0).RunAsync(win.TempBtns, null);
-                        Animations.MarginGo(new(3)).RunAsync(win.Page, null);
+                        Animations.WidthBack(0.0).RunAsync(win.TempBtns, null);
+                        Animations.MarginBack(new(3)).RunAsync(win.Page, null);
+                        win.ClearPage();
+                        win.Page.Children.Add(RealMainPage.UI);
                     }
                 });
             }

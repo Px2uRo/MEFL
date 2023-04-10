@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MEFL.Contract
 {
-    internal interface IProcessManagePage
+    public interface IProcessManagePage
     {
         public event EventHandler Exited;
     }

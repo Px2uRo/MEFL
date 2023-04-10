@@ -13,7 +13,7 @@ using System.Windows;
 using System.Windows.Media;
 #elif AVALONIA
 using Avalonia.Media;
-using FrameworkElement = Avalonia.Controls.Control;
+using FrameworkElement = MEFL.Contract.IProcessManagePage;
 #endif
 using MEFL.Arguments;
 using Newtonsoft.Json;

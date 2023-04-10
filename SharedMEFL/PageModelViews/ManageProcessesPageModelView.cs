@@ -5,6 +5,9 @@ using System.Diagnostics;
 using System.Text;
 using System.Windows;
 using MEFL.Contract;
+using MEFL.Views;
+using System.Linq;
+using Avalonia.Threading;
 #if WPF
 using MEFL.Controls;
 using System.Windows.Controls;
@@ -61,15 +64,7 @@ namespace MEFL.PageModelViews
                 private DoubleAnimation _dbani=new DoubleAnimation() { EasingFunction=new PowerEase(),Duration=new Duration(TimeSpan.FromSeconds(0.2))};
 
 #elif AVALONIA
-        private void ReturnToMainPage()
-        {
 
-        }
-
-        private void LoadButton()
-        {
-
-        }
 #endif
         public ManageProcessesPageModelView()
         {
@@ -88,20 +83,55 @@ namespace MEFL.PageModelViews
         public RunningGamesCollection RunningGames { get; set; }
     }
 
-    public class RunningGamesCollection: Dictionary<Process, IManageAccountPage>
+    public class RunningGamesCollection: Dictionary<Process, IProcessManagePage>
     {
-        public void AddItem(Process process,IManageAccountPage page)
+        Button btn = new Button() { Width = 30.0, Height = 30.0 };
+        public void AddItem(Process process,IProcessManagePage page,GameInfoBase game)
         {
-            this.Add(process,page);
-            if (this.Count > 0)
-            {
-                //LoadButton();
-            }
-            else
-            {
-                //ReturnToMainPage();
-            }
+            page.Exited += Page_Exited;
+            Add(process,page);
+            LoadButton();
+#if AVALONIA
+            var tabItem = new TabItem() { Content=page,Header=game.Name};
+            ProgressPage.TabL.Add(tabItem);
+#elif WPF
+
+#endif
             ManageProcessesPageModel.ModelView.Invoke("RunningGames");
+        }
+
+        public void RemoveItem(IProcessManagePage page)
+        {
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                var lq2 = ProgressPage.TabL.Where((x) => x.Content == page).ToArray();
+                ProgressPage.TabL.Remove(lq2[0]);
+            });
+            var lq = this.Where((x) => x.Value == page).ToArray();
+            Remove(lq[0].Key);
+            if (Count == 0)
+            {
+                ReturnToMainPage();
+            }
+        }
+
+        private void Page_Exited(object? sender, EventArgs e)
+        {
+            RemoveItem(sender as IProcessManagePage);
+        }
+
+        private void ReturnToMainPage()
+        {
+            MainWindow.RemoveTempButton(btn);
+        }
+
+        private void LoadButton()
+        {
+#if AVALONIA
+            MainWindow.AddTempButton(btn, ProgressPage.UI);
+#elif WPF
+
+#endif
         }
     }
 

@@ -19,7 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MEFL.Controls;
 #elif AVALONIA
-using FrameworkElement = Avalonia.Controls.Control;
+using FrameworkElement = MEFL.Contract.IProcessManagePage;
 using Pages = CLAddIn.Views;
 using BitmapImage = Avalonia.Media.Imaging.Bitmap;
 #endif
@@ -40,7 +40,7 @@ namespace MEFL.CLAddIn.GameTypes
             var res = new Pages.MEFLRealseTypeManage(process,this);
             return res;
 #elif AVALONIA
-            var res = new Pages.MEFLRealseTypeManage();
+            var res = new Pages.MEFLRealseTypeManage(process);
             return res;
 #endif
         }

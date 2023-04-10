@@ -61,11 +61,10 @@ namespace MEFL.Views.DialogContents
                 {
                     if (pmv.Succeed)
                     {
-                        //pmv.Process.Start();
-
-                        //TODO ¿´×ÅÐ´°É
-                        ManageProcessesPageModel.ModelView.RunningGames.Add(pmv.Process,null);
+                        var page = pmv.Game.GetManageProcessPage(pmv.Process, APIModel.SettingArgs);
+                        ManageProcessesPageModel.ModelView.RunningGames.AddItem(pmv.Process,page,pmv.Game);
                         pmv.Process = null;
+                        pmv.Game = null;
                         Quited?.Invoke(this, EventArgs.Empty);
                     }
                 }
