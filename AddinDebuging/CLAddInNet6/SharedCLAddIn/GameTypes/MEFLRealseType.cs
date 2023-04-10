@@ -131,7 +131,6 @@ namespace MEFL.CLAddIn.GameTypes
             }
         }
 #elif AVALONIA
-        //TODO Avalonia 自己的搞法
         static MemoryStream forgeIconSource;
         static MemoryStream releaseIconSource;
         static BitmapImage _forgeIcon; 

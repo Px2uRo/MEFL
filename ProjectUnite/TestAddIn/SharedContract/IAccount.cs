@@ -1,8 +1,9 @@
 using System.Collections.Generic;
-using Avalonia.Controls;
 using MEFL.Arguments;
 #if WPF
 using MEFL.Contract.Controls;
+#elif AVALONIA
+using Avalonia.Controls;
 #endif
 
 namespace MEFL.Contract;

@@ -106,8 +106,11 @@ namespace MEFL.Views
                         button.Click += stupid[button];
                         win.TempBtns.Children.Add(button);
                     }
-                    Animations.WidthGo(30.0).RunAsync(win.TempBtns,null);
-                    Animations.MarginGo(new(33,3,3,3)).RunAsync(win.Page,null);
+                    if (win.TempBtns.Width == 0)
+                    {
+                        Animations.WidthGo(30.0).RunAsync(win.TempBtns, null);
+                        Animations.MarginGo(new(33, 3, 3, 3)).RunAsync(win.Page, null);
+                    }
                 });
             }
         }

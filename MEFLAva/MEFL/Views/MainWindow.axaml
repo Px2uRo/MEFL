@@ -34,7 +34,7 @@ ExtendClientAreaTitleBarHeightHint="-1">
 			  Grid.Column="0"
 			  Grid.ColumnSpan="2"
 		  Margin="3,3,3,3"/>
-		<StackPanel Grid.Column="0" Grid.Row="1" Margin="3" Width="30" Name="TempBtns"/>
+		<StackPanel Grid.Column="0" Grid.Row="1" Margin="3" Width="0" Name="TempBtns"/>
 		<Grid Grid.Row="1" Grid.ColumnSpan="2" Name="DialogBackGround" IsVisible="False">
 			<Rectangle Fill="#8F000000"/>
 			<Border HorizontalAlignment="Center" Name="Dialog" VerticalAlignment="Center"/>

@@ -11,8 +11,10 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using MEFL.APIData;
 using System.Linq;
+#if AVALONIA
 using MEFL.Views;
 using MEFL.InfoControls;
+#endif
 
 namespace MEFL
 {

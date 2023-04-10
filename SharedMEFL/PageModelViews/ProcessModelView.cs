@@ -10,14 +10,14 @@ using System.Linq;
 using Newtonsoft.Json;
 using System.IO.Compression;
 using comp = System.IO.Compression;
-using MEFL.AvaControls;
-using MEFL.Views.DialogContents;
 #if WPF
 using MEFL.Controls;
 using System.Windows.Media;
 #elif AVALONIA
 using Avalonia.Controls;
 using Avalonia.Media;
+using MEFL.AvaControls;
+using MEFL.Views.DialogContents;
 #endif
 
 namespace MEFL.PageModelViews;
@@ -29,11 +29,14 @@ public class ProcessModelView : PageModelViews.PageModelViewBase
     {
         get { return _game; }
         set { _game = value;
-            Invoke();
+#if AVALONIA
+Invoke();
             Failed = false;
             Progress = 0.0; 
             Process = null; 
-            Succeed = false; }
+            Succeed = false;
+#endif
+        }
     }
     private bool _isStarting;
 
@@ -105,7 +108,7 @@ public class ProcessModelView : PageModelViews.PageModelViewBase
                 {
                     Game.Refresh();
                 }
-                #region 处理Java
+#region 处理Java
                 Statu = "处理Java";
                 if (APIModel.SettingArgs.SelectedJava == null)
                 {
@@ -321,12 +324,12 @@ public class ProcessModelView : PageModelViews.PageModelViewBase
                     var args = $"\"{Process.StartInfo.FileName}\" {Process.StartInfo.Arguments}";
 #endif
                     Debugger.Logger($"启动了{Game.Name}，游戏详细信息{JsonConvert.SerializeObject((GameInfoBase)Game, Formatting.Indented)}");
-                    Debugger.Logger($"启动参数{Process.StartInfo.FileName + " " + Process.StartInfo.Arguments.Replace(APIModel.SelectedAccount.AccessToken, "******")}");
+                    Debugger.Logger($"启动参数\"{Process.StartInfo.FileName + "\" " + Process.StartInfo.Arguments.Replace(APIModel.SelectedAccount.AccessToken, "******")}");
                     Succeed = true;
                     return;
                 }
-                #endregion
-                #endregion
+#endregion
+#endregion
             }
             catch (Exception ex)
             {

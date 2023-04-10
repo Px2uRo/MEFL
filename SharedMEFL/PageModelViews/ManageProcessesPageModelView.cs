@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Text;
 using System.Windows;
+using MEFL.Contract;
 #if WPF
 using MEFL.Controls;
 using System.Windows.Controls;
@@ -72,22 +73,8 @@ namespace MEFL.PageModelViews
 #endif
         public ManageProcessesPageModelView()
         {
-            RunningGames = new ObservableCollection<Process>();
-            RunningGames.CollectionChanged += RunningGames_CollectionChanged;
+            RunningGames = new();
             _ContentGrid = new Grid();
-        }
-
-        private void RunningGames_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            if((sender as ObservableCollection<Process>).Count > 0)
-            {
-                LoadButton();
-            }
-            else
-            {
-                ReturnToMainPage();
-            }
-            Invoke("RunningGames");
         }
 
         private Grid _ContentGrid;
@@ -98,7 +85,24 @@ namespace MEFL.PageModelViews
             set { _ContentGrid = value; Invoke(nameof(ContentGrid)); }
         }
 
-        public ObservableCollection<Process> RunningGames { get; set; }
+        public RunningGamesCollection RunningGames { get; set; }
+    }
+
+    public class RunningGamesCollection: Dictionary<Process, IManageAccountPage>
+    {
+        public void AddItem(Process process,IManageAccountPage page)
+        {
+            this.Add(process,page);
+            if (this.Count > 0)
+            {
+                //LoadButton();
+            }
+            else
+            {
+                //ReturnToMainPage();
+            }
+            ManageProcessesPageModel.ModelView.Invoke("RunningGames");
+        }
     }
 
     public static class ManageProcessesPageModel

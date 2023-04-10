@@ -239,16 +239,7 @@ namespace MEFL.PageModelViews
             account.Dispose();
         }
 #elif AVALONIA
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-        {
-            //TODO Avalonia 的搞法
-            throw new NotImplementedException();
-        }
 
-        private void Element_MouseDown(object sender, RoutedEventArgs e)
-        {
-            //TODO Avalonia 的搞法
-        }
 #endif
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

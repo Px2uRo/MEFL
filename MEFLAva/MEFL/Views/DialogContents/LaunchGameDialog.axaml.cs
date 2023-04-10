@@ -4,6 +4,7 @@ using MEFL.APIData;
 using MEFL.Contract;
 using MEFL.PageModelViews;
 using System;
+using System.Threading;
 
 namespace MEFL.Views.DialogContents
 {
@@ -60,6 +61,11 @@ namespace MEFL.Views.DialogContents
                 {
                     if (pmv.Succeed)
                     {
+                        //pmv.Process.Start();
+
+                        //TODO ¿´×ÅÐ´°É
+                        ManageProcessesPageModel.ModelView.RunningGames.Add(pmv.Process,null);
+                        pmv.Process = null;
                         Quited?.Invoke(this, EventArgs.Empty);
                     }
                 }
