@@ -92,13 +92,20 @@ namespace MEFL.InfoControls
         {
             if (value)
             {
-                foreach (var item in h.Account.GetSingUpAccounts(APIModel.SettingArgs))
+                if (h.Permissions.UseAccountAPI)
                 {
-                    APIModel.AccountConfigs.Add(item);
-                    if (APIModel.SelectedAccountUUID.ToString() == item.Uuid.ToString())
+                    foreach (var item in h.Account.GetSingUpAccounts(APIModel.SettingArgs))
                     {
-                        APIModel.SelectedAccount= item;
+                        APIModel.AccountConfigs.Add(item);
+                        if (APIModel.SelectedAccountUUID.ToString() == item.Uuid.ToString())
+                        {
+                            APIModel.SelectedAccount = item;
+                        }
                     }
+                }
+                if (h.Permissions.UseDownloadPageAPI)
+                {
+                    DownloadPage.AddPairs(h.Download.GetPairs(APIModel.SettingArgs));
                 }
             }
             else
@@ -109,6 +116,8 @@ namespace MEFL.InfoControls
                     APIModel.SelectedAccount = null;
                 }
                 APIModel.AccountConfigs.RemoveMany(lnq);
+                var dPairLq = DownloadPage.TabS.Where((x) => x.Tag.ToString() == h.Guid.ToString()).ToArray();
+                DownloadPage.RemoveTabItems(dPairLq);
             }
         }
         #endregion
@@ -121,10 +130,6 @@ namespace MEFL.InfoControls
             {
                 hosting.LoadImports();
                 ReLoadThis(true);
-            }
-            else
-            {
-
             }
         }
         #endregion

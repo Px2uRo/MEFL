@@ -31,20 +31,26 @@ namespace MEFL.Views
         {
             var smv = (SettingPageModelView)DataContext;
             var inde = ((ComboBox)sender).SelectedIndex;
-            APIModel.SettingArgs.SelectedJava = smv.Javas[inde];
-            RegManager.Write("SelectedJava", smv.Javas[inde].FullName);
+            if(inde!= -1)
+            {
+                APIModel.SettingArgs.SelectedJava = smv.Javas[inde];
+                RegManager.Write("SelectedJava", smv.Javas[inde].FullName);
+            }
         }
 
         private void Dc_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            var smv = (SettingPageModelView)sender;
-            JavaList.SelectedIndex = -1;
-            if (smv.EnableSearchJava)
+            if(e.PropertyName == "Javas")
             {
-                itms.Clear();
-                foreach (var item in smv.Javas)
+                var smv = (SettingPageModelView)sender;
+                JavaList.SelectedIndex = -1;
+                if (smv.EnableSearchJava)
                 {
-                    itms.Add(item.FullName);
+                    itms.Clear();
+                    foreach (var item in smv.Javas)
+                    {
+                        itms.Add(item.FullName);
+                    }
                 }
             }
         }

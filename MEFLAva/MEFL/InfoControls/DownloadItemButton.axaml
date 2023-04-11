@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MEFL.InfoControls.DownloadItemButton">
+	<Grid>
+		<Button Name="Excutebtn" Width="288" Height="75" HorizontalAlignment="Left">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="80"/>
+					<ColumnDefinition />
+				</Grid.ColumnDefinitions>
+				<Image Source="{Binding IconSource}"/>
+				<StackPanel Grid.Column="1">
+					<TextBlock Text="{Binding Name}"/>
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Text="{Binding VersionType}"/>
+						<TextBlock Text=" "/>
+						<TextBlock Text="{Binding Version}"/>
+					</StackPanel>
+					<TextBlock Text="{Binding Description}"/>
+				</StackPanel>
+			</Grid>
+		</Button>
+		<Grid Background="Transparent" HorizontalAlignment="Right" Width="30" Grid.Column="1" Name="MoreOptionGrid">
+			<Button VerticalAlignment="Center" Height="75" Width="30" Margin="30,0,0,0" Name="MoreOptionBtn">
+				<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="..."/>
+			</Button>
+		</Grid>
+	</Grid>
+</UserControl>

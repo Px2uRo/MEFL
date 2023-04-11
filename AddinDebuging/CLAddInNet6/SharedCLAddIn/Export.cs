@@ -136,12 +136,12 @@ namespace MEFL.CLAddIn.Export
 
         public DownloadPageItemPair[] GetPairs(SettingArgs args)
         {
-            DownloadPageItemPair RealsePair = new("realse", realret, "realse");
+            DownloadPageItemPair RealsePair = new RealsePair("realse", realret, "realse");
             DownloadPageItemPair[] ret = new DownloadPageItemPair[] { RealsePair};
             foreach (var pair in ret)
             {
-                pair.ListRefreshEvent += Pair_ListRefreshEvent;
                 pair.WebRefreshEvent += Pair_WebRefreshEvent;
+                pair.ListRefreshEvent += Pair_ListRefreshEvent;
             }
             return ret;
         }
@@ -149,7 +149,6 @@ namespace MEFL.CLAddIn.Export
         private void Pair_WebRefreshEvent(object sender, string tmpFolderPath)
         {
             var pair = sender as DownloadPageItemPair;
-            pair.IsRefreshing = true;
             try
             {
                 req = HttpWebRequest.Create(website);
@@ -169,7 +168,6 @@ namespace MEFL.CLAddIn.Export
             }
             catch (Exception ex)
             {
-                pair.IsRefreshing = false;
                 pair.HasError = true;
                 pair.ErrorDescription = ex.Message;
             }
@@ -178,9 +176,8 @@ namespace MEFL.CLAddIn.Export
         private void Pair_ListRefreshEvent(object sender, string tmpFolderPath)
         {
             var pair = (sender as DownloadPageItemPair);
-            pair.IsRefreshing = true;
             pair.Contents = Refresh(pair,tmpFolderPath);
-            pair.IsRefreshing =false;
+            pair.RefreshCompete();
         }
         List<LauncherWebVersionInfoList> realret = new() { new("Other")};
         string ResponString;
@@ -191,7 +188,6 @@ namespace MEFL.CLAddIn.Export
             {
                 if (pair.HasError)
                 {
-                    pair.IsRefreshing = false;
                     return new();
                 }
             }

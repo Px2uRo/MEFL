@@ -12,15 +12,11 @@ namespace MEFL.CLAddIn.WebVersion
 {
     public class GenericWebVersion : LauncherWebVersionInfo
     {
-        public override Contract.InstallProgressInput Download(MEFLDownloader downloader, string dotMCFolder, SettingArgs args, DownloadSource[] sources, string[] usingLocalFiles)
+        public override bool Download(MEFLDownloader downloader, string dotMCFolder, SettingArgs args, DownloadSource[] sources, string[] usingLocalFiles,out IInstallPage page)
         {
-#if WPF
             var SubFolderString = Path.GetFileNameWithoutExtension(Url);
-            return new(true, new InstallPage(Url, dotMCFolder, SubFolderString, downloader, sources,usingLocalFiles), null);
-#elif AVALONIA
-            var SubFolderString = Path.GetFileNameWithoutExtension(Url);
-            return new(true, new InstallPage(), null);
-#endif
+            page = new InstallPage(Url, dotMCFolder, SubFolderString, downloader, sources, usingLocalFiles);
+            return false;
         }
     }
 }

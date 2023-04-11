@@ -160,6 +160,7 @@ Invoke();
 #elif AVALONIA
                     var msg = $"不合适的 JAVA\n需要的Java版本\n{Game.JavaMajorVersion}\n当前选择的Java\n{APIModel.SettingArgs.SelectedJava.FullName}\n版本为{FileVersionInfo.GetVersionInfo(APIModel.SettingArgs.SelectedJava.FullName).FileMajorPart}";
                     JavaManagerDialog.Show(msg);
+                    return;
 #endif
                 }
                 Progress = 1;

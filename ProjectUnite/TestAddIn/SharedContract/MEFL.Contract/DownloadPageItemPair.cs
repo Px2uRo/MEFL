@@ -1,3 +1,5 @@
+using HarfBuzzSharp;
+using Microsoft.VisualBasic;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -22,7 +24,7 @@ public class LauncherWebVersionInfoList: ObservableCollection<LauncherWebVersion
 	}
 }
 
-public class DownloadPageItemPair:MEFLClass
+public abstract class DownloadPageItemPair:MEFLClass
 {
 	protected override void Dispose(bool disposing)
 	{
@@ -34,10 +36,9 @@ public class DownloadPageItemPair:MEFLClass
 		base.Dispose(disposing);
 	}
 	public bool HasError { get; set; }
-	public bool IsRefreshing { get; set; }
 	public delegate void RefreshEvent(object sender, string tmpFolderPath);
 
-	public string Title { get; private set; }
+	public string Title { get; protected set; }
 
 	public string Tag { get; set; }
 	public string ErrorDescription;
@@ -50,15 +51,20 @@ public class DownloadPageItemPair:MEFLClass
         ListRefreshEvent?.Invoke(this, tmpFolderPath);
     }
     public event RefreshEvent? WebRefreshEvent;
-    public void WebRefresh(string tmpFolderPath)
+    public virtual void WebRefresh(string tmpFolderPath)
     {
         WebRefreshEvent?.Invoke(this, tmpFolderPath);
     }
-
-    public DownloadPageItemPair(string title, List<LauncherWebVersionInfoList> contents, string tag)
+	public DownloadPageItemPair(string title, List<LauncherWebVersionInfoList> contents, string tag)
 	{
-		Title = title;
-		Contents = contents;
-		Tag = tag;
-	}
+        Title = title;
+        Contents = contents;
+        Tag = tag;
+    }
+    public virtual void RefreshCompete()
+    {
+		RefreshCompeted?.Invoke(this,EventArgs.Empty);
+    }
+
+	public event EventHandler RefreshCompeted;
 }

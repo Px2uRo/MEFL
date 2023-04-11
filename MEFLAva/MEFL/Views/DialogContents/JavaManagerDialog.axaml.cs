@@ -38,7 +38,7 @@ namespace MEFL.Views.DialogContents
 
         private void CancelBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-
+            Quited?.Invoke(this, e);
         }
 
         private void ApplyBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)

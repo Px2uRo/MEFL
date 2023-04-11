@@ -17,6 +17,9 @@
 							<Button Name="Remove" Content="移除此 Java" Background="Red" Foreground="White"/>
 						</StackPanel>
 					</Grid>
+					<TextBlock Text=" "/>
+					<TextBlock Text="最大内存"/>
+					<TextBox Name="MaxMem" Text="{Binding MaxMemory}"/>
 				</StackPanel>
 			</StackPanel>
 		</TabItem>

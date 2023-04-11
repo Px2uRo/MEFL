@@ -136,18 +136,6 @@ namespace MEFL
         public static UserControl SovlePage = new() { Tag = "SovlePage", IsVisible=false };
 #endif
 
-        public static void CleanSovlePage()
-        {
-            if(SovlePage.DataContext != null)
-            {
-                GC.SuppressFinalize(SovlePage.Content);
-                SovlePage.Content = null;
-                (SovlePage.DataContext as Contract.InstallProgressInput).Dispose();
-                SovlePage.DataContext = null;
-            }
-        }
-
-
         internal static void GoToDownloadProgressPage()
         {
 #if WPF
