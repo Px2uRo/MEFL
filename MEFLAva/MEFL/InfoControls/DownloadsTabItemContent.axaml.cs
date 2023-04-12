@@ -13,7 +13,7 @@ namespace MEFL.InfoControls
         public bool ShowInfo
         {
             get { return _showInfo = true; }
-            set { _showInfo = true = value; }
+            set { _showInfo = value; }
         }
 
         public DownloadsTabItemContent()
@@ -24,16 +24,22 @@ namespace MEFL.InfoControls
         public DownloadsTabItemContent(List<LauncherWebVersionInfoList> contents) :this()
         {
             _contents= contents;
+            ReFresh(contents);
         }
 
         internal void ReFresh(List<LauncherWebVersionInfoList> contents)
         {
+            StackP.Children.Clear();
             if(contents!=_contents) 
             { 
                 GC.SuppressFinalize(_contents);
                 _contents= null;
             }
             _contents = contents;
+            foreach (var item in contents)
+            {
+                StackP.Children.Add(new DownloadsTabItemSubContent(item));
+            }
         }
     }
 }

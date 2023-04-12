@@ -136,7 +136,7 @@ namespace MEFL.CLAddIn.Export
 
         public DownloadPageItemPair[] GetPairs(SettingArgs args)
         {
-            DownloadPageItemPair RealsePair = new RealsePair("realse", realret, "realse");
+            DownloadPageItemPair RealsePair = new RealsePair("Release", realret, "realse");
             DownloadPageItemPair[] ret = new DownloadPageItemPair[] { RealsePair};
             foreach (var pair in ret)
             {
@@ -202,7 +202,7 @@ namespace MEFL.CLAddIn.Export
                             if (Version.TryParse(item["id"].ToString(), out var version))
                             {
                                 var Tag = $"{version.Major.ToString()}.{version.Minor.ToString()}";
-                                var list = realret.Where(a => a.VersionMajor == Tag).ToList();
+                                var list = realret.Where(a => a.Title == Tag).ToList();
                                 if (list.Count == 0)
                                 {
                                     var nc = new LauncherWebVersionInfoList(Tag);
@@ -221,9 +221,18 @@ namespace MEFL.CLAddIn.Export
                         }
                     }
                 }
+
+                var first = realret[0];
+                if (first.Title == "Other")
+                {
+                    realret.RemoveAt(0);
+                    if (first.Count != 0)
+                    {
+                        realret.Add(first);
+                    }
+                }
             }
             return realret;
-
         }
 
     }

@@ -196,9 +196,6 @@ namespace MEFL.PageModelViews
 
         public SettingPageModelView()
         {
-#region 什么单例            
-            SettingPageModel.ModelView = this;
-#endregion
             _EnableSearchJava = true;
             LangIndex = (int)APIData.APIModel.SettingArgs.LangID;
             ChangeBackgroundCommand = new ChangeBackground();
@@ -264,7 +261,7 @@ namespace MEFL.PageModelViews
             //TODO Avalonia 自己的搞法
         }
 #endif
-        internal static SettingPageModelView ModelView;
+        internal static SettingPageModelView ModelView = new();
         static SettingPageModel()
         {
 #region 获取 MEFL.Contract 协议版本

@@ -265,8 +265,9 @@ namespace MEFL.APIData
 #endif
         static APIModel()
         {
-            _SelectedAccountUUID = RegManager.Read("PlayerUuid");
+            SettingArgs = new Arguments.SettingArgs();
             SettingConfig = MEFL.APIData.SettingConfig.Load();
+            _SelectedAccountUUID = RegManager.Read("PlayerUuid");
 #region RegFolders
             MyFolders = MEFLFolderColletion.GetReg();
 #endregion
@@ -275,7 +276,6 @@ namespace MEFL.APIData
             GameInfoConfigs = MyFolders[SelectedFolderIndex].Games;
             AddInConfigs = MEFL.APIData.AddInConfig.GetAll();
             Hostings = Hosting.LoadAll();
-            SettingArgs = new Arguments.SettingArgs();
 #region Reg
 #region Singed Up Accounts
 #endregion

@@ -23,5 +23,8 @@
 				</StackPanel>
 			</StackPanel>
 		</TabItem>
+		<TabItem Header="下载器">
+			
+		</TabItem>
 	</TabControl>
 </UserControl>

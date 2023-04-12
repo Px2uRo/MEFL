@@ -106,6 +106,12 @@ namespace MEFL.InfoControls
                 if (h.Permissions.UseDownloadPageAPI)
                 {
                     DownloadPage.AddPairs(h.Download.GetPairs(APIModel.SettingArgs));
+                    APIModel.Downloaders.AddRange(h.Download.GetDownloaders(APIModel.SettingArgs));
+                    SettingPageModel.ModelView.Invoke("Downloaders");
+                    foreach (var item in h.Download.GetDownloadSources(APIModel.SettingArgs))
+                    {
+                        APIModel.DownloadSources.AddItem(item);
+                    }
                 }
             }
             else
@@ -116,6 +122,7 @@ namespace MEFL.InfoControls
                     APIModel.SelectedAccount = null;
                 }
                 APIModel.AccountConfigs.RemoveMany(lnq);
+
                 var dPairLq = DownloadPage.TabS.Where((x) => x.Tag.ToString() == h.Guid.ToString()).ToArray();
                 DownloadPage.RemoveTabItems(dPairLq);
             }

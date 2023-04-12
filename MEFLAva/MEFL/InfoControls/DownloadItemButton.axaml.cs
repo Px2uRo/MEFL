@@ -1,5 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
+using MEFL.APIData;
+using MEFL.AvaControls;
 using MEFL.Contract;
 
 namespace MEFL.InfoControls
@@ -28,7 +30,11 @@ namespace MEFL.InfoControls
 
         private void Excutebtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-
+            if(APIModel.SelectedDownloader == null)
+            {
+                WaringDialog.Show("没有选中的下载器，请查看设置");
+            }
+            var info = DataContext as LauncherWebVersionInfo;
         }
 
         public DownloadItemButton(LauncherWebVersionInfo info):this()

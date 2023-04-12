@@ -12,15 +12,15 @@ public class LauncherWebVersionInfoList: ObservableCollection<LauncherWebVersion
 		this[index].Dispose();
 		base.RemoveItem(index);	
 	}
-	public string VersionMajor;
+	public string Title;
 	public LauncherWebVersionInfoList(string versionMajor)
 	{
-		VersionMajor = versionMajor;
+		Title = versionMajor;
 	}
 
 	public override string ToString()
 	{
-		return VersionMajor;
+		return Title;
 	}
 }
 

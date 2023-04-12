@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using MEFL.APIData;
 using MEFL.PageModelViews;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -14,7 +15,7 @@ namespace MEFL.Views
         public SettingPage()
         {
             InitializeComponent();
-            var dc = new SettingPageModelView();
+            var dc = SettingPageModel.ModelView;
             this.DataContext = dc;
             dc.PropertyChanged += Dc_PropertyChanged;
             JavaList.SelectionChanged += JavaList_SelectionChanged;
@@ -25,6 +26,12 @@ namespace MEFL.Views
             }
             JavaList.Items =itms;
             JavaList.SelectedIndex = dc.SelectedJavaIndex;
+            LoadDownloaderUI(dc.Downloaders);
+        }
+
+        private void LoadDownloaderUI(DownloaderCollection downloaders)
+        {
+
         }
 
         private void JavaList_SelectionChanged(object? sender, SelectionChangedEventArgs e)
@@ -40,6 +47,7 @@ namespace MEFL.Views
 
         private void Dc_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
+            var dc = (SettingPageModelView)sender;
             if(e.PropertyName == "Javas")
             {
                 var smv = (SettingPageModelView)sender;
@@ -52,6 +60,18 @@ namespace MEFL.Views
                         itms.Add(item.FullName);
                     }
                 }
+            }
+            else if (e.PropertyName == "Downloaders")
+            {
+                LoadDownloaderUI(dc.Downloaders);
+            }
+            else if(e.PropertyName==nameof(dc.DownSources))
+            {
+
+            }
+            else if (e.PropertyName == nameof(dc.SelectedDownloaderString))
+            {
+
             }
         }
 
