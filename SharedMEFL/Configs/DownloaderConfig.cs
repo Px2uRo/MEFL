@@ -9,5 +9,9 @@
             FileName = fileName;
             DownloaderName = downloaderName;
         }
+        public DownloaderConfig()
+        {
+
+        }
     }
 }

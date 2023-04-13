@@ -177,7 +177,7 @@ namespace MEFL.PageModelViews
             get { return APIModel.Downloaders; }
         }
 
-
+#if WPF
         public string SelectedDownloaderString
         {
             get {
@@ -191,9 +191,7 @@ namespace MEFL.PageModelViews
                 }
             }
         }
-
-
-
+#endif
         public SettingPageModelView()
         {
             _EnableSearchJava = true;
@@ -335,8 +333,8 @@ namespace MEFL.PageModelViews
                 APIData.APIModel.SettingArgs.LangID = LangID.en_US;
             }
             SetLang();
-            #endregion
-            #region 获取背景图片
+#endregion
+#region 获取背景图片
 #if WPF
 
             img = new Image();
@@ -355,7 +353,7 @@ namespace MEFL.PageModelViews
 #elif AVALONIA
             //TODO 背景图片
 #endif
-            #endregion
+#endregion
         }
     }
     public class ChangeBackground : ICommand
@@ -413,6 +411,6 @@ namespace MEFL.PageModelViews
             //}
         }
 
-#endif 
+#endif
     }
 }

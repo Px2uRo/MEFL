@@ -1,6 +1,10 @@
+using Avalonia;
 using Avalonia.Controls;
 using MEFL.APIData;
+using MEFL.Configs;
+using MEFL.InfoControls;
 using MEFL.PageModelViews;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -11,7 +15,22 @@ namespace MEFL.Views
     {
         internal static IControl UI = new SettingPage();
         ObservableCollection<string> itms = new ObservableCollection<string>();
+        int downloadersCount = 0;
+        DownloaderConfig downloaderConfig;
 
+        protected override Size MeasureOverride(Size availableSize)
+        {
+            DownloadersGrid.Columns = (int)Math.Ceiling(availableSize.Width / 290.0);
+            if (downloadersCount == 0)
+            {
+                DownloadersGrid.Rows = 1;
+            }
+            else
+            {
+                DownloadersGrid.Rows = (int)Math.Ceiling((double)downloadersCount / (double)DownloadersGrid.Columns);
+            }
+            return base.MeasureOverride(availableSize);
+        }
         public SettingPage()
         {
             InitializeComponent();
@@ -31,7 +50,29 @@ namespace MEFL.Views
 
         private void LoadDownloaderUI(DownloaderCollection downloaders)
         {
-
+            try
+            {
+                downloaderConfig = JsonConvert.DeserializeObject<DownloaderConfig>(RegManager.Read("Downloader"));
+            }
+            catch
+            {
+                downloaderConfig = null;
+            }
+            downloadersCount = downloaders.Count;
+            DownloadersGrid.Children.Clear();
+            foreach (var item in downloaders)
+            {
+                var btn = new SelecteDownloaderButton(item);
+                DownloadersGrid.Children.Add(btn);
+                if (downloaderConfig != null)
+                {
+                    if (downloaderConfig.DownloaderName == item.Name && item.FileName == downloaderConfig.FileName)
+                    {
+                        APIModel.SelectedDownloader = item;
+                        btn.Enablebtn.IsChecked= true;
+                    }
+                }
+            }
         }
 
         private void JavaList_SelectionChanged(object? sender, SelectionChangedEventArgs e)
@@ -66,10 +107,6 @@ namespace MEFL.Views
                 LoadDownloaderUI(dc.Downloaders);
             }
             else if(e.PropertyName==nameof(dc.DownSources))
-            {
-
-            }
-            else if (e.PropertyName == nameof(dc.SelectedDownloaderString))
             {
 
             }

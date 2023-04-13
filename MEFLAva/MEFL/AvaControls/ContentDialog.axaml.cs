@@ -33,6 +33,11 @@ namespace MEFL.AvaControls
 
         private static void DialogContent_Quited(object? sender, EventArgs e)
         {
+            Quit();
+        }
+
+        internal static void Quit()
+        {
             if (App.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 var mv = desktop.MainWindow as MainWindow;

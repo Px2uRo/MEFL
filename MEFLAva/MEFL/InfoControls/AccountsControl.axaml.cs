@@ -1,6 +1,9 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using MEFL.APIData;
+using MEFL.AvaControls;
+using MEFL.Contract;
 using System;
 
 namespace MEFL.InfoControls
@@ -17,7 +20,9 @@ namespace MEFL.InfoControls
 
         private void Enablebtn_Click(object? sender, RoutedEventArgs e)
         {
-
+            APIModel.SelectedAccount = this.DataContext as AccountBase;
+            this.Icon.Child= null;
+            ContentDialog.Quit();
         }
 
         private void MoreInfoGrid_PointerLeave(object? sender, Avalonia.Input.PointerEventArgs e)

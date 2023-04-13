@@ -24,7 +24,9 @@
 			</StackPanel>
 		</TabItem>
 		<TabItem Header="下载器">
-			
+			<StackPanel>
+				<UniformGrid Name="DownloadersGrid" />
+			</StackPanel>
 		</TabItem>
 	</TabControl>
 </UserControl>

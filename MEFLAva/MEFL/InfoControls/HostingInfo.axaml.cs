@@ -107,7 +107,6 @@ namespace MEFL.InfoControls
                 {
                     DownloadPage.AddPairs(h.Download.GetPairs(APIModel.SettingArgs));
                     APIModel.Downloaders.AddRange(h.Download.GetDownloaders(APIModel.SettingArgs));
-                    SettingPageModel.ModelView.Invoke("Downloaders");
                     foreach (var item in h.Download.GetDownloadSources(APIModel.SettingArgs))
                     {
                         APIModel.DownloadSources.AddItem(item);
@@ -125,6 +124,12 @@ namespace MEFL.InfoControls
 
                 var dPairLq = DownloadPage.TabS.Where((x) => x.Tag.ToString() == h.Guid.ToString()).ToArray();
                 DownloadPage.RemoveTabItems(dPairLq);
+
+                var downerLq = APIModel.Downloaders.Where((x) => x.AddInGuid == h.Guid).ToArray();
+                foreach (var item in downerLq)
+                {
+                    APIModel.Downloaders.Remove(item);
+                }
             }
         }
         #endregion

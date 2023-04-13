@@ -43,7 +43,9 @@ namespace MEFL
         {
             base.InsertItem(index, item);
             SettingPageModel.ModelView.Invoke(nameof(SettingPageModel.ModelView.Downloaders));
+# if WPF
             SettingPageModel.ModelView.Invoke(nameof(SettingPageModel.ModelView.SelectedDownloaderString));
+#endif
         }
         protected override void RemoveItem(int index)
         {
@@ -58,7 +60,9 @@ namespace MEFL
                 APIModel.SelectedDownloader = this[0];
             }
             SettingPageModel.ModelView.Invoke(nameof(SettingPageModel.ModelView.Downloaders));
+#if WPF
             SettingPageModel.ModelView.Invoke(nameof(SettingPageModel.ModelView.SelectedDownloaderString));
+#endif
         }
     }
 }
