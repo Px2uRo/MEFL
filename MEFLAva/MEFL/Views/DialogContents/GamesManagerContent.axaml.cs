@@ -8,6 +8,7 @@ using MEFL.Contract;
 using MEFL.InfoControls;
 using MEFL.PageModelViews;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using static MEFL.APIData.APIModel;
 
@@ -24,6 +25,13 @@ namespace MEFL.Views.DialogContents
             CancelBtn.Click += Contr_Enabled;
             AddFolderBtn.Click += AddFolderBtn_Click;
             DelFolderBtn.Click += DelFolderBtn_Click;
+            ExploreFolderBtn.Click += ExploreFolderBtn_Click;
+        }
+
+        private void ExploreFolderBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            var path = MyFolders[SelectedFolderIndex].Path;
+            Process.Start("Explorer.exe", path);
         }
 
         private async void DelFolderBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)

@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Linq;
 using System.Collections.ObjectModel;
 using MEFL.Arguments;
+using Avalonia.Threading;
 
 namespace MEFL.Contract
 {
@@ -190,10 +191,20 @@ namespace MEFL.Contract
 
         void ChangeProperty(string propName)
         {
+#if AVALONIA
+            if (PropertyChanged != null)
+            {
+                Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    PropertyChanged.Invoke(this, new(propName));
+                });
+            }
+#elif WPF
             if (PropertyChanged != null)
             {
                 PropertyChanged.Invoke(this, new(propName));
             }
+#endif
         }
         private DownloadProgressState _statu;
 

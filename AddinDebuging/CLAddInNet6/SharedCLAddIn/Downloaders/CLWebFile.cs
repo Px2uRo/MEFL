@@ -332,7 +332,7 @@ namespace MEFL.CLAddIn.CLDownding
     //                    client.SpeedChanged += Client_SpeedChanged;
     //                    client.Finished += Client_Finished;
     //                    IsDownloading= true;
-    //                    client.Download(Native,Local,ThreadNum:delu);
+    //                    client.DirectDownload(Native,Local,ThreadNum:delu);
 				//		client.Dispose();
 				//	}
 				//}

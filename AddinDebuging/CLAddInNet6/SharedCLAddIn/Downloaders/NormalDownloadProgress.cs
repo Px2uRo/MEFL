@@ -320,7 +320,7 @@ namespace MEFL.CLAddIn.Downloaders
                         {
                             Directory.CreateDirectory(Path.GetDirectoryName(Value));
                         }
-                        webClient.Download(Key, Value);
+                        webClient.DirectDownload(Key, Value);
                     }
                     catch (System.Exception ex)
                     {

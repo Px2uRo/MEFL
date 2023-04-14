@@ -2,7 +2,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" Width="400" Height="500" Background="White"
              x:Class="CLAddIn.Views.InstallPage">
-  Welcome to Avalonia!
+	<Grid Margin="10" RowDefinitions="80,*">
+		<Grid RowDefinitions="*,*" ColumnDefinitions="80,60,*">
+			<Rectangle Fill="Aqua" Grid.RowSpan="2"/>
+			<TextBlock Grid.Column="1" Text="名称:" FontSize="24"/>
+			<TextBox Grid.Column="2" Name="NameTP"/>
+			<TextBlock Grid.Column="1" Grid.Row="2" Text="描述:" FontSize="24"/>
+			<TextBlock Grid.Column="2" Grid.Row="2" TextWrapping="Wrap" Name="DesTB"/>
+		</Grid>
+		<StackPanel Grid.Row="1">
+			<CheckBox Content="安装Forge" Name="InstallForge"/>
+			<StackPanel Name="ForgeInfos"/>
+		</StackPanel>
+		<StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="1" Orientation="Horizontal">
+			<Button Content="安装" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+					Grid.Row="1" Margin="3" Name="InstallBtn"/>
+			<Button Content="取消" Background="Red" Foreground="White" Margin="3" Name="CancelBtn"/>
+		</StackPanel>
+	</Grid>
 </UserControl>

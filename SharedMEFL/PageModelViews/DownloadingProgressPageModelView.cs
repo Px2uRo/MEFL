@@ -9,16 +9,22 @@ using MEFL.Controls;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
 #elif AVALONIA
+using Avalonia.Controls;
+using Avalonia.Threading;
+using MEFL.Views;
 
 #endif
 
 namespace MEFL.PageModelViews
 {
-#if WPF
 
     public class DownloadProgressPageModelView:PageModelViewBase
     {
+#if WPF
         private DoubleAnimation _dbani=new DoubleAnimation() { EasingFunction=new PowerEase(),Duration=new Duration(TimeSpan.FromSeconds(0.2))};
+#elif AVALONIA
+        static Button btn = new Button() { Width = 30.0, Height = 30.0 };
+#endif
         public DownloadProgressPageModelView()
         {
             DownloadingProgresses = new ();
@@ -49,6 +55,7 @@ namespace MEFL.PageModelViews
         public DownloadProgressCollection DownloadingProgresses { get; set; }
         public void LoadButton()
         {
+#if WPF
             App.Current.Dispatcher.Invoke(() =>
             {
                 foreach (ChangePageButton item in FindControl.FromTag("DownloadingProgressPage", (App.Current.Resources["ChangePageButtons"] as StackPanel)))
@@ -58,9 +65,17 @@ namespace MEFL.PageModelViews
                     item.BeginAnimation(FrameworkElement.WidthProperty, _dbani);
                 }
             });
+#elif AVALONIA
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                MainWindow.AddTempButton(btn, DownloadProcessPage.UI);
+            });
+#endif
+            
         }
         public void ReturnToMainPage()
         {
+#if WPF
             App.Current.Dispatcher.Invoke(() =>
             {
                 MyPageBase From = null;
@@ -90,22 +105,20 @@ namespace MEFL.PageModelViews
                     item.BeginAnimation(FrameworkElement.WidthProperty, _dbani);
                 }
             });
+#elif AVALONIA
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    MainWindow.RemoveTempButton(btn);
+                });
+            });
+#endif
         }
     }
-#elif AVALONIA
-    public class DownloadProgressPageModelView : PageModelViewBase
-    {
-
-    }
-#endif
 
     public static class DownloadingProgressPageModel
     {
-        public static DownloadProgressPageModelView ModelView { get; set; }
-        static DownloadingProgressPageModel()
-        {
-            ModelView = new();
-        }
-
+        public static DownloadProgressPageModelView ModelView = new();
     }
 }

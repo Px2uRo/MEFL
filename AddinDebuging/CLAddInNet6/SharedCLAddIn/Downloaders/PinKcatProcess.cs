@@ -58,8 +58,19 @@ namespace MEFL.CLAddIn.Downloaders
                             File.WriteAllText(localJson,combined);
                         }
                         var parser = new Parser();
-                        parser.AssetsSource = Sources.Where((x)=>x.ELItem== "${assets}").ToArray()[0].GetUri("");
-                        parser.LibrarySource = Sources.Where((x) => x.ELItem == "${libraries}").ToArray()[0].GetUri("");
+#if WPF
+                        if(Sources.Count()>0)
+                        {
+                            if (Sources.Where((x) => x.ELItem == "${assets}").ToArray() != null)
+                            {
+                                parser.AssetsSource = Sources.Where((x) => x.ELItem == "${assets}").ToArray()[0].GetUri("");
+                            }
+                            if (Sources.Where((x) => x.ELItem == "${libraries}").ToArray() != null)
+                            {
+                                parser.LibrarySource = Sources.Where((x) => x.ELItem == "${libraries}").ToArray()[0].GetUri("");
+                            }
+                        }
+#endif  
                         var lst = parser.ParseFromJson(localJson,
                             ParseType.FilePath,
     DotMCPath, Arguments.VersionName, true

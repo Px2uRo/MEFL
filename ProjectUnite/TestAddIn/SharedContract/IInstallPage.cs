@@ -1,11 +1,13 @@
-﻿using System;
+﻿using MEFL.Arguments;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace MEFL.Contract
 {
-    public interface IInstallPage
+    public interface IInstallPage:IDialogContent
     {
-        public event EventHandler<DownloadProgress> Solved;
+        public event EventHandler<InstallArguments> Solved;
+        public LauncherWebVersionInfo Info { get; set; }
     }
 }

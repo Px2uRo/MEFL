@@ -3,12 +3,14 @@ using Avalonia.Threading;
 using MEFL.AvaControls;
 using MEFL.Contract;
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MEFL.Views.DialogContents
 {
     public partial class JavaManagerDialog : UserControl,IDialogContent
     {
+        public int Action = -1;
         static JavaManagerDialog UI = new JavaManagerDialog();
         public JavaManagerDialog()
         {
@@ -18,22 +20,33 @@ namespace MEFL.Views.DialogContents
             ApplyBtn.Click += ApplyBtn_Click;
         }
 
-        public static void Show(string Info)
+        public static bool Show(string Info,out int action)
         {
             Dispatcher.UIThread.InvokeAsync(new Action(() =>
             {
+                ContentDialog.Show(UI); 
                 UI.InfoTB.Text = Info;
-                ContentDialog.Show(UI);
+                UI.Action = -1;
             }));
-            while (true)
+            Thread.Sleep(300);
+            while (UI.Action==-1)
             {
 
+            }
+            action = UI.Action;
+            if (UI.Action == 2)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
             }
         }
 
         private void ForceBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-
+            Action = 0;
         }
 
         private void CancelBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
@@ -43,7 +56,7 @@ namespace MEFL.Views.DialogContents
 
         private void ApplyBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-
+            Action= 1;
         }
 
         public event EventHandler<EventArgs> Quited;

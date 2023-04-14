@@ -159,8 +159,29 @@ Invoke();
                     }
 #elif AVALONIA
                     var msg = $"不合适的 JAVA\n需要的Java版本\n{Game.JavaMajorVersion}\n当前选择的Java\n{APIModel.SettingArgs.SelectedJava.FullName}\n版本为{FileVersionInfo.GetVersionInfo(APIModel.SettingArgs.SelectedJava.FullName).FileMajorPart}";
-                    JavaManagerDialog.Show(msg);
-                    return;
+                    if(JavaManagerDialog.Show(msg,out var action))
+                    {
+                        if (action == 1)
+                        {
+                            IList<FileInfo> linq = APIModel.Javas.Where(x => FileVersionInfo.GetVersionInfo(x.FullName).FileMajorPart == Game.JavaMajorVersion).ToList();
+                            if (linq.Count() == 0)
+                            {
+                                Canceled = true;
+                                WaringDialog.Show($"你还没装这个版本（版本号：{Game.JavaMajorVersion}）的 Java，给Issues反应大拇指来催更【自动安装】吧。");
+                                return;
+                            }
+                            i.FileName = linq[0].FullName;
+                        }
+                        else
+                        {
+                            i.FileName = APIModel.SettingArgs.SelectedJava.FullName;
+                        }
+                    }
+                    else
+                    {
+                    Canceled= true;
+                        return;
+                    }
 #endif
                 }
                 Progress = 1;

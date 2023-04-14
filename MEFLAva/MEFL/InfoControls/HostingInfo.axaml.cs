@@ -4,9 +4,11 @@ using Avalonia.Controls.Presenters;
 using Avalonia.Media;
 using DynamicData;
 using MEFL.APIData;
+using MEFL.Configs;
 using MEFL.Contract;
 using MEFL.PageModelViews;
 using MEFL.Views;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
@@ -39,6 +41,7 @@ namespace MEFL.InfoControls
 
     internal class HostingViewModel : PageModelViews.PageModelViewBase
     {
+        DownloaderConfig downloaderConfig;
         Hosting h;
         bool _isOpenlnk = false;
 
@@ -106,7 +109,26 @@ namespace MEFL.InfoControls
                 if (h.Permissions.UseDownloadPageAPI)
                 {
                     DownloadPage.AddPairs(h.Download.GetPairs(APIModel.SettingArgs));
-                    APIModel.Downloaders.AddRange(h.Download.GetDownloaders(APIModel.SettingArgs));
+                    try
+                    {
+                        downloaderConfig = JsonConvert.DeserializeObject<DownloaderConfig>(RegManager.Read("Downloader"));
+                    }
+                    catch
+                    {
+                        downloaderConfig = null;
+                    }
+                    foreach (var item in h.Download.GetDownloaders(APIModel.SettingArgs))
+                    {
+                        if (downloaderConfig != null)
+                        {
+                            if (downloaderConfig.DownloaderName == item.Name && item.FileName == downloaderConfig.FileName)
+                            {
+                                APIModel.SelectedDownloader= item;
+                            }
+                        }
+                        APIModel.Downloaders.Add(item);
+                    }
+
                     foreach (var item in h.Download.GetDownloadSources(APIModel.SettingArgs))
                     {
                         APIModel.DownloadSources.AddItem(item);

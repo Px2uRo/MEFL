@@ -1,0 +1,21 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="MEFL.InfoControls.DownloadingProgressBlock">
+	<StackPanel>
+		<StackPanel Orientation="Horizontal">
+			<TextBlock Name="ProgressTB" FontSize="28"/>
+			<TextBlock Width="20" Text=" "/>
+			<TextBlock Name="CurrentFile" FontSize="28"/>
+		</StackPanel>
+		<ProgressBar Name="ValuePB" Margin="3,10,3,0"/>
+		<Grid>
+			<TextBlock Name="CountTB" FontSize="28"/>
+			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+				<Button Name="CancelBtn" Content="取消" Margin="3,20,0,0"/>
+			</StackPanel>
+		</Grid>
+	</StackPanel>
+</UserControl>

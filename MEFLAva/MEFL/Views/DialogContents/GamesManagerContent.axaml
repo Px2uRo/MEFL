@@ -9,8 +9,9 @@
   <StackPanel Margin="3">
 	  <TextBlock Text="选择文件夹："/>
 	  <Grid>
-		<ComboBox Width="230" SelectedIndex="{Binding SelectedFolderIndex}" Items="{Binding MyFolders}"/>
+		<ComboBox Width="200" SelectedIndex="{Binding SelectedFolderIndex}" Items="{Binding MyFolders}"/>
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+			<Button Name="ExploreFolderBtn" Content="E" Width="30"/>
 			<Button Name="DelFolderBtn" Content="×" Width="30"/>
 			<Button Name="AddFolderBtn" Content="+" Width="30" />
 		</StackPanel>

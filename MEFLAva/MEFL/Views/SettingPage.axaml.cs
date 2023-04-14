@@ -16,7 +16,6 @@ namespace MEFL.Views
         internal static IControl UI = new SettingPage();
         ObservableCollection<string> itms = new ObservableCollection<string>();
         int downloadersCount = 0;
-        DownloaderConfig downloaderConfig;
 
         protected override Size MeasureOverride(Size availableSize)
         {
@@ -50,28 +49,13 @@ namespace MEFL.Views
 
         private void LoadDownloaderUI(DownloaderCollection downloaders)
         {
-            try
-            {
-                downloaderConfig = JsonConvert.DeserializeObject<DownloaderConfig>(RegManager.Read("Downloader"));
-            }
-            catch
-            {
-                downloaderConfig = null;
-            }
             downloadersCount = downloaders.Count;
             DownloadersGrid.Children.Clear();
             foreach (var item in downloaders)
             {
                 var btn = new SelecteDownloaderButton(item);
                 DownloadersGrid.Children.Add(btn);
-                if (downloaderConfig != null)
-                {
-                    if (downloaderConfig.DownloaderName == item.Name && item.FileName == downloaderConfig.FileName)
-                    {
-                        APIModel.SelectedDownloader = item;
-                        btn.Enablebtn.IsChecked= true;
-                    }
-                }
+                btn.Enablebtn.IsChecked = APIModel.SelectedDownloader==item;
             }
         }
 

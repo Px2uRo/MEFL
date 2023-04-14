@@ -12,10 +12,11 @@ namespace MEFL.CLAddIn.WebVersion
 {
     public class GenericWebVersion : LauncherWebVersionInfo
     {
-        public override bool Download(MEFLDownloader downloader, string dotMCFolder, SettingArgs args, DownloadSource[] sources, string[] usingLocalFiles,out IInstallPage page)
+        public override bool DirectDownload(string dotMCPath,out IInstallPage page,out InstallArguments args)
         {
             var SubFolderString = Path.GetFileNameWithoutExtension(Url);
-            page = new InstallPage(Url, dotMCFolder, SubFolderString, downloader, sources, usingLocalFiles);
+            page = new InstallPage(this,dotMCPath);
+            args = InstallArguments.Empty;
             return false;
         }
     }

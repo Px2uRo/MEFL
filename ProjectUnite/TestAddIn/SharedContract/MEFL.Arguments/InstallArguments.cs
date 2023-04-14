@@ -9,6 +9,9 @@ namespace MEFL.Arguments
 	/// </summary>
     public class InstallArguments:EventArgs
     {
+        bool _isEmpty = false;
+        public bool IsEmpty => _isEmpty;
+		public static new InstallArguments Empty => new InstallArguments(true);
 		private string _versionName;
 		/// <summary>
 		/// 版本名称
@@ -32,11 +35,17 @@ namespace MEFL.Arguments
 		/// <param name="versionName">版本名称</param>
 		/// <param name="customGameFolder">自定义游戏文件夹</param>
 		/// <param name="gameIcon">游戏图标</param>
-		public InstallArguments(string versionName,string customGameFolder,string gameIcon)
+		public InstallArguments(string versionName,string customGameFolder,string gameIcon):this(false)
 		{
 			_versionName= versionName;
 			_customGameFolder= customGameFolder;
 			_gameIcon= gameIcon;
 		}
+
+		public InstallArguments(bool isEmpty) 
+		{ 
+			_isEmpty= isEmpty;
+		}
+
 	}
 }
