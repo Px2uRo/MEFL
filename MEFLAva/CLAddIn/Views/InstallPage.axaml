@@ -5,20 +5,24 @@
              mc:Ignorable="d" Width="400" Height="500" Background="White"
              x:Class="CLAddIn.Views.InstallPage">
 	<Grid Margin="10" RowDefinitions="80,*">
-		<Grid RowDefinitions="*,*" ColumnDefinitions="80,60,*">
+		<Grid RowDefinitions="*,*" ColumnDefinitions="80,60,*,30">
 			<Rectangle Fill="Aqua" Grid.RowSpan="2"/>
 			<TextBlock Grid.Column="1" Text="名称:" FontSize="24"/>
 			<TextBox Grid.Column="2" Name="NameTP"/>
 			<TextBlock Grid.Column="1" Grid.Row="2" Text="描述:" FontSize="24"/>
 			<TextBlock Grid.Column="2" Grid.Row="2" TextWrapping="Wrap" Name="DesTB"/>
 		</Grid>
-		<StackPanel Grid.Row="1">
-			<CheckBox Content="安装Forge" Name="InstallForge"/>
-			<StackPanel Name="ForgeInfos"/>
-		</StackPanel>
-		<StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="1" Orientation="Horizontal">
+		<Grid Grid.Row="1">
+			<CheckBox Content="安装Forge" Name="InstallForgeCB" VerticalAlignment="Top"/>
+			<ScrollViewer Name="ForgeContentsSC" Margin="0,30,0,0" VerticalAlignment="Top">
+				<StackPanel Name="ForgeContentsSP">
+
+				</StackPanel>
+			</ScrollViewer>
+		</Grid>
+		<StackPanel Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
 			<Button Content="安装" VerticalAlignment="Bottom" HorizontalAlignment="Right" 
-					Grid.Row="1" Margin="3" Name="InstallBtn"/>
+					 Margin="3" Name="InstallBtn"/>
 			<Button Content="取消" Background="Red" Foreground="White" Margin="3" Name="CancelBtn"/>
 		</StackPanel>
 	</Grid>

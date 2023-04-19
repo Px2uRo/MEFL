@@ -54,8 +54,10 @@ namespace MEFL.CLAddIn.Downloaders
                             var arg = Arguments as InstallArgsWithForge;
                             var url = BMCLForgeHelper.GetDownloadUrlFromBuild(arg.Forge.Build);
                             var content = ForgeParser.GetVersionContentFromInstaller(url,true);
-                            var combined = ForgeParser.CombineJson(File.ReadAllText(localJson),content,ParseType.Json);
+                            var combined = ForgeParser.CombineVersionJson(File.ReadAllText(localJson),content,ParseType.Json);
                             File.WriteAllText(localJson,combined);
+                            //var content2 = ForgeParser.GetInstallProfileContentFromInstaller(url, true);
+                            //var combined2 = ForgeParser.CombineInstallerProfileJson(combined, content2, ParseType.Json);
                         }
                         var parser = new Parser();
 #if WPF

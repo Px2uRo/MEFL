@@ -7,6 +7,12 @@ internal class InstallArgsWithForge : InstallArguments
     {
 
     }
+
+    public InstallArgsWithForge(InstallArguments baseArgs, WebForgeInfo info):this(baseArgs.VersionName,baseArgs.CustomGameFolder,baseArgs.GameIcon)
+    {
+        Forge = info;
+    }
+
     private WebForgeInfo _forge;
 
     public WebForgeInfo Forge
