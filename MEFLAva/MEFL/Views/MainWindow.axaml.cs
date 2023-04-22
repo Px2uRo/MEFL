@@ -25,6 +25,12 @@ namespace MEFL.Views
             ShowDownloadPageBtn.Click += ShowDownloadPageBtn_Click;
             MaxlizeWindow.Click += MaxlizeWindow_Click;
             MinlizeWindow.Click += MinlizeWindow_Click;
+            TitelBarGrid.PointerPressed += TitelBarGrid_PointerPressed;
+        }
+
+        private void TitelBarGrid_PointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)
+        {
+            BeginMoveDrag(e);
         }
 
         private void ShowDownloadPageBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)

@@ -5,6 +5,20 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MEFL.Views.SettingPage">
 	<TabControl>
+		<TabItem Header="主页">
+			<ScrollViewer>
+				<StackPanel>
+					<StackPanel Margin="0,0,0,15">
+						<TextBlock Text="背景图片"/>
+						<Grid>
+							<Button Name="ImageButton" Content="选择..."/>
+						</Grid>
+						<TextBlock Text=" "/>
+						<TextBlock Text="最大内存"/>
+					</StackPanel>
+				</StackPanel>
+			</ScrollViewer>
+		</TabItem>
 		<TabItem Header="启动">
 			<StackPanel>
 				<StackPanel Margin="0,0,0,15">

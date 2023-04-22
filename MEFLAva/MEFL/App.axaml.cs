@@ -10,6 +10,7 @@ namespace MEFL
     public partial class App : Application
     {
         internal static OpenFolderDialog OpenFolderDialog = new();
+        internal static OpenFileDialog OpenFileDialog = new();
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);

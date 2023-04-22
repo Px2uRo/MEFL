@@ -1,5 +1,9 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Media;
+using Avalonia.Threading;
+using DynamicData;
 using MEFL.APIData;
 using MEFL.Configs;
 using MEFL.InfoControls;
@@ -45,6 +49,34 @@ namespace MEFL.Views
             JavaList.Items =itms;
             JavaList.SelectedIndex = dc.SelectedJavaIndex;
             LoadDownloaderUI(dc.Downloaders);
+            ImageButton.Click += ImageButton_Click;
+        }
+
+        private async void ImageButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            if(App.Current.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime desktp)
+            {
+                var mw = desktp.MainWindow as MainWindow;
+                App.OpenFileDialog.AllowMultiple = false;
+                App.OpenFileDialog.Filters.Clear();
+                App.OpenFileDialog.Filters.Add(new() { Name="Í¼Æ¬ÎÄ¼þ",Extensions=new() { "png","jpg"} });
+                var res = await App.OpenFileDialog.ShowAsync(mw);
+                Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    mw.BackGround.Children.Clear();
+                    try
+                    {
+                        var image = new Avalonia.Media.Imaging.Bitmap(res[0]);
+                        var imaCont = new Avalonia.Controls.Image() { Source=image};
+                        imaCont.Stretch = Stretch.UniformToFill;
+                        mw.BackGround.Children.Add(imaCont);
+                    }
+                    catch
+                    {
+
+                    }
+                });
+            }
         }
 
         private void LoadDownloaderUI(DownloaderCollection downloaders)

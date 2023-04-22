@@ -8,36 +8,39 @@
         Icon="/Assets/avalonia-logo.ico" ExtendClientAreaToDecorationsHint="True"
 ExtendClientAreaChromeHints="NoChrome"
 ExtendClientAreaTitleBarHeightHint="-1">
-	<Grid Margin="8" RowDefinitions="30,*" ColumnDefinitions="30,*">
-		<Grid Grid.ColumnSpan="2">
-			<StackPanel Name="LeftButtons" Orientation="Horizontal">
-				<StackPanel Orientation="Horizontal">
-					<Button Height="30" Margin="3" Width="30" Name="ShowMainPageBtn"/>
-					<Button Height="30" Margin="3" Width="30" Name="ShowAddInPageBtn"/>
-					<Button Height="30" Margin="3" Width="30" Name="ShowDownloadPageBtn"/>
-					<Button Height="30" Margin="3" Width="30" Name="ShowSettingPageBtn"/>
-				</StackPanel>
-				<StackPanel Orientation="Horizontal" Name="ButtonForAddIns">
+	<Grid>
+		<Grid Name="BackGround"/>
+		<Grid Margin="8" RowDefinitions="30,*" ColumnDefinitions="30,*">
+			<Grid Grid.ColumnSpan="2" Name="TitelBarGrid" Background="Transparent">
+				<StackPanel Name="LeftButtons" Orientation="Horizontal">
+					<StackPanel Orientation="Horizontal">
+						<Button Height="30" Margin="3" Width="30" Name="ShowMainPageBtn"/>
+						<Button Height="30" Margin="3" Width="30" Name="ShowAddInPageBtn"/>
+						<Button Height="30" Margin="3" Width="30" Name="ShowDownloadPageBtn"/>
+						<Button Height="30" Margin="3" Width="30" Name="ShowSettingPageBtn"/>
+					</StackPanel>
+					<StackPanel Orientation="Horizontal" Name="ButtonForAddIns">
 
+					</StackPanel>
 				</StackPanel>
-			</StackPanel>
-			<Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-				<TextBlock Text="Welcome to MEFL on Avalonia!"/>
+				<Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+					<TextBlock Text="Welcome to MEFL on Avalonia!"/>
+				</Grid>
+				<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+					<Button Height="30" Margin="3" Width="30" Name="MinlizeWindow"/>
+					<Button Height="30" Margin="3" Width="30" Name="MaxlizeWindow"/>
+					<Button Height="30" Margin="3" Width="30" Name="CloseWindow"/>
+				</StackPanel>
 			</Grid>
-			<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-				<Button Height="30" Margin="3" Width="30" Name="MinlizeWindow"/>
-				<Button Height="30" Margin="3" Width="30" Name="MaxlizeWindow"/>
-				<Button Height="30" Margin="3" Width="30" Name="CloseWindow"/>
-			</StackPanel>
-		</Grid>
-		<Grid Name="Page" Grid.Row="1" 
-			  Grid.Column="0"
-			  Grid.ColumnSpan="2"
-		  Margin="3,3,3,3"/>
-		<StackPanel Grid.Column="0" Grid.Row="1" Margin="3" Width="0" Name="TempBtns"/>
-		<Grid Grid.Row="1" Grid.ColumnSpan="2" Name="DialogBackGround" IsVisible="False">
-			<Rectangle Fill="#8F000000"/>
-			<Border HorizontalAlignment="Center" Name="Dialog" VerticalAlignment="Center"/>
+			<Grid Name="Page" Grid.Row="1"
+				  Grid.Column="0"
+				  Grid.ColumnSpan="2"
+			  Margin="3,3,3,3"/>
+			<StackPanel Grid.Column="0" Grid.Row="1" Margin="3" Width="0" Name="TempBtns"/>
+			<Grid Grid.Row="1" Grid.ColumnSpan="2" Name="DialogBackGround" IsVisible="False">
+				<Rectangle Fill="#8F000000"/>
+				<Border HorizontalAlignment="Center" Name="Dialog" VerticalAlignment="Center"/>
+			</Grid>
 		</Grid>
 	</Grid>
 </Window>
