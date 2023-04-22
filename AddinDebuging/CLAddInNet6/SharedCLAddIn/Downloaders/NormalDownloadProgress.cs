@@ -19,7 +19,7 @@ using System.Windows.Controls;
 
 namespace MEFL.CLAddIn.Downloaders
 {
-    /*public class NormalDownloadProgress : DownloadProgress
+    /*public class NormalDownloadProgress : InstallProcess
     {
         DownloadSource[] Sources;
         List<bool> bools = new();
@@ -244,7 +244,7 @@ namespace MEFL.CLAddIn.Downloaders
         }
     }*/
 
-    /*public class CLDownloadProgress : DownloadProgress
+    /*public class CLDownloadProgress : InstallProcess
     {
         List<bool> bools = new();
         Downloader webClient;

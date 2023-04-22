@@ -3,12 +3,8 @@ using MEFL.Arguments;
 
 internal class InstallArgsWithForge : InstallArguments
 {
-    public InstallArgsWithForge(string versionName, string customGameFolder, string gameIcon) : base(versionName, customGameFolder, gameIcon)
-    {
 
-    }
-
-    public InstallArgsWithForge(InstallArguments baseArgs, WebForgeInfo info):this(baseArgs.VersionName,baseArgs.CustomGameFolder,baseArgs.GameIcon)
+    public InstallArgsWithForge(FileInfo[] jAVAPaths,InstallArguments baseArgs, WebForgeInfo info): base(jAVAPaths,baseArgs.VersionName,baseArgs.CustomGameFolder,baseArgs.GameIcon)
     {
         Forge = info;
     }

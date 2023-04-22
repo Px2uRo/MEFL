@@ -123,10 +123,10 @@ namespace CLAddIn.Views
             {
                 Directory.CreateDirectory(vp);
             }
-            InstallArguments args = new(NameTP.Text, null, null);
+            InstallArguments args = new(_javas,NameTP.Text, null, null);
             if (_insfor)
             {
-                args = new InstallArgsWithForge(args,_wInfo);
+                args = new InstallArgsWithForge(_javas,args,_wInfo);
             }
             Solved?.Invoke(this, args);
         }
@@ -135,9 +135,10 @@ namespace CLAddIn.Views
         {
             Quited?.Invoke(this, e);
         }
-
-        public InstallPage(LauncherWebVersionInfo info,string dotMCPath) : this()
+        FileInfo[] _javas;
+        public InstallPage(FileInfo[] javas, LauncherWebVersionInfo info,string dotMCPath) : this()
         {
+            _javas = javas;
             Info = info;
             _dotMCPath = dotMCPath;
             DesTB.Text= $"¼´½«°²×°{info.Id}";

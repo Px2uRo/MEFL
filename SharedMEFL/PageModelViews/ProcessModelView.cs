@@ -235,8 +235,8 @@ Invoke();
                     cps += "\"";
                     foreach (var item in Game.ClassPaths)
                     {
-                        cps += item;
-                        cps += ";";
+                            cps += item;
+                            cps += ";";
                     }
                     cps += Game.GameJarPath;
                     cps += "\"";
@@ -261,7 +261,7 @@ Invoke();
                 {"${Dos.version}","10.0"},
                 {"${library_directory}",$"\"{Game.LibrariesPath}\"" },
                 {"${natives_directory}",$"\"{Game.NativeLibrariesPath}\""},
-                {"${classpath_separator}",string.Empty},
+                {"${classpath_separator}",";"},
                 {"${user_properties}","{}" },
                 {"${Dminecraft.client.jar}",Game.GameJarPath }
             };
@@ -340,7 +340,7 @@ Invoke();
                 {
                     Progress = 100;
 #if DEBUG
-                    var args = $"\"{Process.StartInfo.FileName}\" {Process.StartInfo.Arguments}";
+                    //Process.StartInfo.Arguments += " --width 800 --height 450";
 #endif
                     Debugger.Logger($"启动了{Game.Name}，游戏详细信息{JsonConvert.SerializeObject((GameInfoBase)Game, Formatting.Indented)}");
                     Debugger.Logger($"启动参数\"{Process.StartInfo.FileName + "\" " + Process.StartInfo.Arguments.Replace(APIModel.SelectedAccount.AccessToken, "******")}");
@@ -352,7 +352,7 @@ Invoke();
             }
             catch (Exception ex)
             {
-                if (Game != null)
+                 if (Game != null)
                 {
                     try
                     {

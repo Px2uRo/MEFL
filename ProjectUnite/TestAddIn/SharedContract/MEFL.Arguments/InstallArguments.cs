@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace MEFL.Arguments
@@ -35,8 +36,14 @@ namespace MEFL.Arguments
 		/// <param name="versionName">版本名称</param>
 		/// <param name="customGameFolder">自定义游戏文件夹</param>
 		/// <param name="gameIcon">游戏图标</param>
-		public InstallArguments(string versionName,string customGameFolder,string gameIcon):this(false)
+		/// 
+		private FileInfo[] _jAVAPaths;
+
+		public FileInfo[] JAVAPaths => _jAVAPaths;
+
+		public InstallArguments(FileInfo[] jAVAPaths,string versionName,string customGameFolder,string gameIcon):this(false)
 		{
+			_jAVAPaths= jAVAPaths;
 			_versionName= versionName;
 			_customGameFolder= customGameFolder;
 			_gameIcon= gameIcon;

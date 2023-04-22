@@ -1,20 +1,24 @@
 ﻿using Avalonia.Threading;
 using CoreLaunching.Forge;
+using CoreLaunching.MicrosoftAuth;
 using CoreLaunching.PinKcatDownloader;
 using MEFL.Arguments;
 using MEFL.Contract;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Text.Json.Nodes;
 using System.Threading;
 using System.Windows;
 
 namespace MEFL.CLAddIn.Downloaders
 {
-    internal class PinKcatProcess:DownloadProgress
+    internal class PinKcatProcess:InstallProcess
     {
         public bool Install { get; private set; }
         public string JsonSource { get; private set; }
@@ -22,8 +26,17 @@ namespace MEFL.CLAddIn.Downloaders
         public DownloadSource[] Sources { get; private set; }
         public MCFileInfo[] ItemsArray { get; private set; }
         public string[] OtherUsingFiles { get; private set; }
+        public long TotalSize = 0;
+        private string _jaPth="";
+        private int _majorJ;
 
-        internal static DownloadProgress CreateInstall(string jsonSource, string dotMCFolder, DownloadSource[] sources, InstallArguments args,string[] usingLocalFiles)
+        #region Forge
+        private string localMCJson;
+        private string inslocal;
+        private string cltlocal;
+        private string combined2;
+        #endregion
+        internal static InstallProcess CreateInstall(string jsonSource, string dotMCFolder, DownloadSource[] sources, InstallArguments args,string[] usingLocalFiles)
         {
             var res = new PinKcatProcess();
             res.Install = true;
@@ -41,23 +54,71 @@ namespace MEFL.CLAddIn.Downloaders
             new Thread(() => {
                 if (Install)
                 {
+                    TotalProgresses = 2;
+                    CurrectProgressIndex = 0;
+                    Content = "解析版本中（包括 Json 合并）";
                     try
                     {
                         var localJson = Path.Combine(DotMCPath, "versions", Arguments.VersionName,$"{Arguments.VersionName}.json");
                         Directory.CreateDirectory(Path.GetDirectoryName(localJson));
-                        using (var clt = new WebClient())
+                        var webReq = HttpWebRequest.CreateHttp(JsonSource);
+                        using (var respon = webReq.GetResponse())
                         {
-                            clt.DownloadFile(JsonSource,localJson);
+                            TotalSize = respon.ContentLength;
+                            using (var responStream = respon.GetResponseStream())
+                            {
+                                using(var fs = File.Open(localJson,FileMode.OpenOrCreate))
+                                {
+                                    byte[] buffer = new byte[1024];
+                                    int bytesRead;
+                                    while ((bytesRead = responStream.Read(buffer, 0, buffer.Length)) > 0)
+                                    {
+                                        fs.Write(buffer, 0, bytesRead);
+                                        CurrentProgress = (double)((double)fs.Length / (double)TotalSize);
+                                    }
+                                    fs.Position = 0;
+                                    var stri = new StreamReader(fs);
+                                    var job = JObject.Parse(stri.ReadToEnd());
+                                    try
+                                    {
+                                        _majorJ = Convert.ToInt32(job["javaVersion"]["majorVersion"].ToString());
+                                    }
+                                    catch
+                                    {
+                                        _majorJ = 8;
+                                    }
+                                }
+                            }
                         }
-                        if (Arguments is InstallArgsWithForge)
+                        if (Arguments is InstallArgsWithForge arg)
                         {
-                            var arg = Arguments as InstallArgsWithForge;
+                            TotalProgresses = 3;
+                            foreach (var item in arg.JAVAPaths)
+                            {
+                                var versionInfo = FileVersionInfo.GetVersionInfo(item.FullName);
+                                if (versionInfo.FileMajorPart == _majorJ)
+                                {
+                                    _jaPth = item.FullName; break;
+                                }
+                            }
+                            if (string.IsNullOrEmpty(_jaPth))
+                            {
+                                _jaPth = arg.JAVAPaths[0].FullName;
+                            }
                             var url = BMCLForgeHelper.GetDownloadUrlFromBuild(arg.Forge.Build);
-                            var content = ForgeParser.GetVersionContentFromInstaller(url,true);
-                            var combined = ForgeParser.CombineVersionJson(File.ReadAllText(localJson),content,ParseType.Json);
+                            inslocal = Path.Combine( DotMCPath,"versions",arg.VersionName,"[CL]InstallTemp",Path.GetFileName(url));
+                            Directory.CreateDirectory(Path.GetDirectoryName(inslocal));
+                            using (var clt = new WebClient())
+                            {
+                                clt.DownloadFile(url, inslocal);
+                            }
+                            var content = ForgeParser.GetVersionContentFromInstaller(inslocal,false);
+                            var combined = ForgeParser.CombineVersionJson(File.ReadAllText(localJson),content,ParseType.Json,arg.VersionName);
                             File.WriteAllText(localJson,combined);
-                            //var content2 = ForgeParser.GetInstallProfileContentFromInstaller(url, true);
-                            //var combined2 = ForgeParser.CombineInstallerProfileJson(combined, content2, ParseType.Json);
+                            localMCJson = localJson;
+                            cltlocal = localJson.Replace(".json",".jar");
+                            var content2 = ForgeParser.GetInstallProfileContentFromInstaller(url, true);
+                            combined2 = ForgeParser.CombineInstallerProfileJson(combined, content2, ParseType.Json);
                         }
                         var parser = new Parser();
 #if WPF
@@ -73,14 +134,27 @@ namespace MEFL.CLAddIn.Downloaders
                             }
                         }
 #endif  
-                        var lst = parser.ParseFromJson(localJson,
-                            ParseType.FilePath,
-    DotMCPath, Arguments.VersionName, true
-    ).ToList();
+                        CurrectProgressIndex = 1;
+                        Content = "下载文件中（包括资源和运行库）";
+                        TotalSize = 0;
+                        List<MCFileInfo> lst;
+                        if (string.IsNullOrEmpty(combined2))
+                        {
+                            lst = parser.ParseFromJson(localJson,
+                                ParseType.FilePath,
+        DotMCPath, Arguments.VersionName, true
+        ).ToList();
+                        }
+                        else
+                        {
+                            lst = parser.ParseFromJson(combined2,
+    ParseType.Json,
+DotMCPath, Arguments.VersionName, true
+).ToList();
+                        }
                         foreach (var item in lst)
                         {
-                            TotalCount++;
-                            TotalSize += item.Size;
+                            this.TotalSize += item.Size;
                         }
                         ItemsArray = lst.ToArray();
                         for (int i = 0; i < OtherUsingFiles.Length; i++)
@@ -91,58 +165,48 @@ namespace MEFL.CLAddIn.Downloaders
                                 lst.Remove(combinedLq[0]);
                             }
                         }
-                        var superSmall = lst.Where((x) => x.Size < 250000).ToArray();
-                        var small = lst.Where((x) => x.Size <= 2500000&&x.Size>= 250000).ToArray();
-                        var large = lst.Where((x) => x.Size > 2500000).ToArray();
-                        var promss = new SuperSmallProcessManager(superSmall);
-                        promss.OneFinished += Proms_OneFinished;
-                        promss.QueueEmpty += Promss_QueueEmpty;
-                        new Thread(() => promss.DownloadSingle()).Start();
-                        var proms = new SingleThreadProcessManager(small);
-                        proms.OneFinished += Proms_OneFinished;
-                        proms.QueueEmpty += Promss_QueueEmpty;
-                        new Thread(() => proms.DownloadSingle()).Start();
-                        var prom = new MutilFileDownloaManager(large);
-                        var temp = Path.Combine(DotMCPath,"CoreLaunchingTemp");
-                        Directory.CreateDirectory(temp);
-                        prom.OneFinished += Proms_OneFinished;
-                        prom.QueueEmpty += Promss_QueueEmpty;
-                        new Thread(() => prom.Download(temp)).Start();
+                        var processm = new ProcessManager(lst);
+                        var temp = Path.Combine(DotMCPath, "CoreLaunchingTemp");
+                        if(Arguments is InstallArgsWithForge)
+                        {
+                            processm.Finished += Processm_Finished;
+                        }
+                        processm.DownloadedSizeUpdated += Processm_DownloadedSizeUpdated;
+                        processm.Start(temp);
                     }
                     catch (Exception ex)
                     {
                         ErrorInfo=ex.Message;
-                        this.State = DownloadProgressState.Failed;
                     }
                 }
             }).Start();
         }
 
-        int finishedmgr = 0;
-        private void Promss_QueueEmpty(object? sender, EventArgs e)
+        private void Processm_Finished(object? sender, EventArgs e)
         {
-            finishedmgr++;
-            if(finishedmgr == 3) 
+            CurrectProgressIndex = 2;
+            Content = "安装 Forge 中";
+            var installer = new ForgeInstaller();
+            installer.Output += Installer_Output;
+            installer.InstallClient(_jaPth, Path.Combine(DotMCPath,"libraries"),
+                cltlocal,localMCJson,inslocal,ParseType.FilePath);
+            CurrectProgressIndex= 3;
+            Content = "已完成！";
+        }
+
+        private void Installer_Output(object? sender, string e)
+        {
+            Debug.WriteLine(e);
+        }
+
+        private void Processm_DownloadedSizeUpdated(object? sender, long e)
+        {
+            if(CurrectProgressIndex== 1)
             {
-#if WPF
-                Application.Current.Dispatcher.Invoke(new Action(() =>
-                {
-                    State = DownloadProgressState.Finished;
-                }));
-#elif AVALONIA
-                Dispatcher.UIThread.InvokeAsync((() => 
-                {
-                    State = DownloadProgressState.Finished;
-                }));
-#endif
+                CurrentProgress = (double)((double)e / (double)TotalSize);
             }
         }
 
-        private void Proms_OneFinished(object? sender, MCFileInfo e)
-        {
-            DownloadedItems++;
-            DownloadedSize += e.Size;
-        }
 
         public override bool GetUsingLocalFiles(out string[] paths)
         {
@@ -161,6 +225,26 @@ namespace MEFL.CLAddIn.Downloaders
                 paths = lst.ToArray();
                 return true;
             }
+        }
+
+        public override void Retry()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pause()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Cancel()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Continue()
+        {
+            throw new NotImplementedException();
         }
     }
 }

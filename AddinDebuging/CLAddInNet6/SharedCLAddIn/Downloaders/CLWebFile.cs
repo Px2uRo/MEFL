@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace MEFL.CLAddIn.CLDownding
 {
-    public class CLAddInDownloadingProgress : DownloadProgress
+    public class CLAddInDownloadingProgress : InstallProcess
     {
         List<CLWebFile> webFiles = new();
         List<CLWebFile> downloadingWebFiles = new();
@@ -68,7 +68,7 @@ namespace MEFL.CLAddIn.CLDownding
                                     GameJarPath = Path.Combine(versionPath, $"{Path.GetFileNameWithoutExtension(Value)}\\{Path.GetFileNameWithoutExtension(Value)}.jar");
                                     NativeLocalPairs.Add(new(SourceReplacer.Replace(root.Downloads.Client.Url, Sources), GameJarPath));
                                     TotalSize += root.Downloads.Client.Size;
-                                    CurrectProgress = "判断缺失的文件中";
+                                    CurrectProgressIndex = "判断缺失的文件中";
                                     if (!Directory.Exists(Path.Combine(dotMCPath, "assets", "indexs")))
                                     {
                                         Directory.CreateDirectory(Path.Combine(dotMCPath, "assets", "indexs"));
@@ -198,9 +198,9 @@ namespace MEFL.CLAddIn.CLDownding
         public CLAddInDownloadingProgress(string nativeUrl, string loaclPath, string dotMCFolder, DownloadSource[] sources)
         {
             dotMCPath = dotMCFolder;
-            CurrectProgress = Path.GetFileName(loaclPath);
-            versionPath = Path.Combine(dotMCFolder, "versions", Path.GetFileNameWithoutExtension(CurrectProgress));
-            GameJarPath = Path.Combine(versionPath, $"{Path.GetFileNameWithoutExtension(CurrectProgress)}.jar");
+            CurrectProgressIndex = Path.GetFileName(loaclPath);
+            versionPath = Path.Combine(dotMCFolder, "versions", Path.GetFileNameWithoutExtension(CurrectProgressIndex));
+            GameJarPath = Path.Combine(versionPath, $"{Path.GetFileNameWithoutExtension(CurrectProgressIndex)}.jar");
             Sources = sources;
             nativeUrl = SourceReplacer.Replace(nativeUrl, sources);
             this.NativeLocalPairs = new() { new(nativeUrl, loaclPath) };
@@ -459,12 +459,12 @@ namespace MEFL.CLAddIn.CLDownding
 
         public override object pubIcon => "CLAddIn";
 
-        public override DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string dotMCFolder)
+        public override InstallProcess CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string dotMCFolder)
         {
             return new CLAddInDownloadingProgress(NativeUrl, LoaclPath, dotMCFolder,sources);
         }
 
-        public override DownloadProgress CreateProgress(List<NativeLocalPair> NativeLocalPairs, DownloadSource[] sources, string dotMCFolder)
+        public override InstallProcess CreateProgress(List<NativeLocalPair> NativeLocalPairs, DownloadSource[] sources, string dotMCFolder)
         {
             return new CLAddInDownloadingProgress(NativeLocalPairs, dotMCFolder);
         }

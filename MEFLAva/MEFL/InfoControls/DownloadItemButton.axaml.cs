@@ -6,6 +6,7 @@ using MEFL.AvaControls;
 using MEFL.Contract;
 using MEFL.PageModelViews;
 using MEFL.Views;
+using System.Linq;
 
 namespace MEFL.InfoControls
 {
@@ -40,9 +41,9 @@ namespace MEFL.InfoControls
             else
             {
                 var dotMc = APIModel.MyFolders[APIModel.SelectedFolderIndex].Path;
-                DownloadProgress progress = null;
+                InstallProcess progress = null;
                 var zainfo = DataContext as LauncherWebVersionInfo;
-                if(zainfo.DirectDownload(dotMc, out var page,out var args))
+                if(zainfo.DirectDownload(APIModel.Javas.ToArray(),dotMc, out var page,out var args))
                 {
                     var localF = DownloadingProgressPageModel.ModelView.DownloadingProgresses.GetUsingFiles();
                     InstallArguments fargs;
@@ -50,7 +51,7 @@ namespace MEFL.InfoControls
                     {
                         progress = APIModel.SelectedDownloader.InstallMinecraft(zainfo.Url,
 dotMc, APIModel.DownloadSources.Selected,
-new(zainfo.Id, dotMc, null),
+new(APIModel.Javas.ToArray(), zainfo.Id, dotMc, null),
 localF);
                     }
                     else
@@ -85,7 +86,8 @@ localF);
                 var localF = DownloadingProgressPageModel.ModelView.DownloadingProgresses.GetUsingFiles();
                 if (e.IsEmpty)
                 {
-                    fargs = new((sender as IInstallPage).Info.Id, dotMc, null);
+                    var jRE = APIModel.SettingArgs.SelectedJava;
+                    fargs = new(APIModel.Javas.ToArray(),(sender as IInstallPage).Info.Id, dotMc, null);
                 }
                 else
                 {

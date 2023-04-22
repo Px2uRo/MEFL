@@ -34,7 +34,7 @@ namespace MEFL.PageModelViews
 
         private void DownloadingProgresses_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            if((sender as ObservableCollection<Contract.DownloadProgress>).Count > 0)
+            if((sender as ObservableCollection<Contract.InstallProcess>).Count > 0)
             {
                 LoadButton();
             }

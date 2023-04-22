@@ -38,7 +38,7 @@ namespace MEFL.Contract
         /// <param name="usingLocalFiles">正在使用的本地文件</param>
         /// <param name="sources">下载源</param>
         /// <returns>下载进程</returns>
-        public abstract DownloadProgress CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string usingLocalFiles);
+        public abstract InstallProcess CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string usingLocalFiles);
         /// <summary>
         /// 创建多文件下载进程
         /// </summary>
@@ -46,7 +46,7 @@ namespace MEFL.Contract
         /// <param name="sources">下载源</param>
         /// <param name="usingLocalFiles">正在使用的本地文件</param>
         /// <returns>下载进程</returns>
-        public abstract DownloadProgress CreateProgress(NativeLocalPairsList NativeLocalPairs, DownloadSource[] sources,string usingLocalFiles);
+        public abstract InstallProcess CreateProgress(NativeLocalPairsList NativeLocalPairs, DownloadSource[] sources,string usingLocalFiles);
         /// <summary>
         /// 安装游戏进程
         /// </summary>
@@ -56,8 +56,7 @@ namespace MEFL.Contract
         /// <param name="args">参数</param>
         /// <param name="usingLocalFiles">正在使用的本地文件</param>
         /// <returns>下载进程</returns>
-        public abstract DownloadProgress InstallMinecraft(string jsonSource, string dotMCFolder, DownloadSource[] sources, InstallArguments args, string[] usingLocalFiles);
-
+        public abstract InstallProcess InstallMinecraft(string jsonSource, string dotMCFolder, DownloadSource[] sources, InstallArguments args, string[] usingLocalFiles);
     }
     public class NativeLocalPair
     {
@@ -125,8 +124,9 @@ namespace MEFL.Contract
         public event EventHandler<bool>? IsOverChanged;
         public event EventHandler<long>? ProgressChanged;
     }
-    public abstract class DownloadProgress:MEFLClass,INotifyPropertyChanged
+    public abstract class InstallProcess:MEFLClass,INotifyPropertyChanged
     {
+        public event EventHandler<EventArgs>? Finished;
         /// <summary>
         /// 我怕别的下载进程会出现重复情况。所以每个下载进程都要说明它在使用哪些本地文件。
         /// </summary>
@@ -134,27 +134,11 @@ namespace MEFL.Contract
         /// <returns>目前我能不能知道在下载什么文件，如果不能，那我while循环，直到能添加为止</returns>
         public abstract bool GetUsingLocalFiles(out string[] paths);
         #region methods
-        public virtual void Retry()
-        {
-            State = DownloadProgressState.Downloading;
-        }
-
-        public virtual void Pause()
-        {
-            State = DownloadProgressState.Paused;
-        }
-        public virtual void Start()
-        {
-            State = DownloadProgressState.Downloading;
-        }
-        public virtual void Cancel()
-        {
-            State = DownloadProgressState.Canceled;
-        }
-        public virtual void Continue()
-        {
-            State = DownloadProgressState.Downloading;
-        }
+        public abstract void Retry();
+        public abstract void Pause();
+        public abstract void Start();
+        public abstract void Cancel();
+        public abstract void Continue();
         public virtual void Close()
         {
             Dispose();
@@ -171,6 +155,15 @@ namespace MEFL.Contract
         }
         #endregion
 
+        private string _content;
+
+        public string Content
+        {
+            get { return _content; }
+            set { _content = value;
+                ChangeProperty(nameof(Content)); }
+        }
+
         private string _ErrorInfo;
 
         public string ErrorInfo
@@ -179,13 +172,20 @@ namespace MEFL.Contract
             set { _ErrorInfo = value; ChangeProperty(nameof(ErrorInfo)); }
         }
 
-        private string _currectFile;
+        private int _currectProgressIndex = 0;
 
-        public string CurrectProgress
+        public int CurrectProgressIndex
 
         {
-            get { return _currectFile; }
-            set { _currectFile = value; ChangeProperty(nameof(CurrectProgress)); }
+            get { return _currectProgressIndex; }
+            set { _currectProgressIndex = value; ChangeProperty(nameof(CurrectProgressIndex)); }
+        }
+        private int _totalProgresses = 0;
+
+        public int TotalProgresses
+        {
+            get { return _totalProgresses; }
+            set { _totalProgresses = value; ChangeProperty(nameof(TotalProgresses)); }
         }
 
 
@@ -208,45 +208,16 @@ namespace MEFL.Contract
         }
         private DownloadProgressState _statu;
 
-        public DownloadProgressState State
-        {
-            get { return _statu; }
-            set { _statu = value; ChangeProperty(nameof(State)); }
-        }
         public event PropertyChangedEventHandler PropertyChanged;
-        private long _totalCount = 0;
-        public long TotalCount { get => _totalCount; set 
-            {   
-                _totalCount = value;
-                ChangeProperty(nameof(TotalCount)); 
-            } 
-        }
-        private int _downloadedItems;
 
-        public int DownloadedItems
-        {
-            get { return _downloadedItems; }
-            set { _downloadedItems = value;
-                ChangeProperty(nameof(DownloadedItems));
-            }
-        }
-        private long _downloadedSize;
+        private double _CurrentProgress;
 
-        public long DownloadedSize
+        public double CurrentProgress
         {
-            get { return _downloadedSize; }
-            set { _downloadedSize = value;
-                ChangeProperty(nameof(DownloadedSize));
-            }
+            get { return _CurrentProgress; }
+            set { _CurrentProgress = value; ChangeProperty(nameof(CurrentProgress)); }
         }
-        private long _totalSize;
 
-        public long TotalSize
-        {
-            get { return _totalSize; }
-            set { _totalSize = value; 
-                ChangeProperty(nameof(TotalSize)); }
-        }
 
 
         public InstallArguments Arguments { get; protected set; }

@@ -12,10 +12,10 @@ using System.Threading;
 
 namespace MEFL
 {
-    public class DownloadProgressCollection : ObservableCollection<DownloadProgress>
+    public class DownloadProgressCollection : ObservableCollection<InstallProcess>
     {
 
-        protected override void InsertItem(int index, DownloadProgress item)
+        protected override void InsertItem(int index, InstallProcess item)
         {
 #if WPF
             DownloadingProgressPageModel.ModelView.ContentGrid.Children.Add(new Controls.DownloadProgressCard() { DataContext=item});

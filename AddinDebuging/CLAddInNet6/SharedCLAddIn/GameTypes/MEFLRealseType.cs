@@ -218,13 +218,6 @@ namespace MEFL.CLAddIn.GameTypes
                     for (int i = 0; i < _Root.Arguments.Jvm.Count; i++)
                     {
                         var item = _Root.Arguments.Jvm[i];
-                        if (_maybeForge)
-                        {
-                            if (item == "-p")
-                            {
-                                _Root.Arguments.Jvm[(i + 1)] = _Root.Arguments.Jvm[(i+1)].Replace(".jar", ".jar;");
-                            }
-                        }
                         if (item.Contains(' '))
                         {
                             res += $" \"{item}\"";
