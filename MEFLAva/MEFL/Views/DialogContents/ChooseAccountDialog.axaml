@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             Width="300" Background="White" x:Class="MEFL.Views.DialogContents.ChooseAccountDialog">
+             Width="300" x:Class="MEFL.Views.DialogContents.ChooseAccountDialog">
 	<StackPanel Margin="3">
 		<TextBlock Text="当前账户："/>
 		<Grid Height="80">

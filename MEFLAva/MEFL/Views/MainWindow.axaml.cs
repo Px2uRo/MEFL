@@ -4,10 +4,13 @@ using Avalonia.Controls.Shapes;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Threading;
+using Avalonia.VisualTree;
 using MEFL.APIData;
 using MEFL.PageModelViews;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading;
 using Tmds.DBus;
 
 namespace MEFL.Views
@@ -141,6 +144,7 @@ namespace MEFL.Views
                         Animations.MarginBack(new(3)).RunAsync(win.Page, null);
                         win.ClearPage();
                         win.Page.Children.Add(RealMainPage.UI);
+                        
                     }
                 });
             }

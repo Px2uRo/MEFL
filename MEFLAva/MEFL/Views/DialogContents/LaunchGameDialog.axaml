@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" Width="500" Height="300"
-             Background="White" x:Class="MEFL.Views.DialogContents.LaunchGameDialog">
+             x:Class="MEFL.Views.DialogContents.LaunchGameDialog">
 	<Grid RowDefinitions="100,100,100">
 		<Grid Name="FailedHint" HorizontalAlignment="Center" VerticalAlignment="Bottom" IsVisible="False">
 			<TextBlock Text="启动失败！" FontSize="24"/>

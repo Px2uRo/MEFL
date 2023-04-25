@@ -8,8 +8,22 @@
         Icon="/Assets/avalonia-logo.ico" ExtendClientAreaToDecorationsHint="True"
 ExtendClientAreaChromeHints="NoChrome"
 ExtendClientAreaTitleBarHeightHint="-1">
+	<Window.Styles>
+		<Style Selector="Button">
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+		<Style Selector="TextBlock">
+			<Setter Property="Foreground" Value="White"/>
+		</Style>
+		<Style Selector="ComboBoxItem">
+			<Setter Property="Background" Value="Purple"/>
+		</Style>
+		<Style Selector="ComboBox">
+			<Setter Property="Background" Value="Purple"/>
+		</Style>
+	</Window.Styles>
 	<Grid>
-		<Grid Name="BackGround"/>
+		<Grid Name="BackGround" Background="Purple"/>
 		<Grid Margin="8" RowDefinitions="30,*" ColumnDefinitions="30,*">
 			<Grid Grid.ColumnSpan="2" Name="TitelBarGrid" Background="Transparent">
 				<StackPanel Name="LeftButtons" Orientation="Horizontal">

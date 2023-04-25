@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" Width="600" Height="400"
-             Background="White"
+             
 			 x:Class="MEFL.Views.DialogContents.AddFolderDialogs">
 	<Grid RowDefinitions="100,100,200">
 		<Button Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" Name="CancelBtn" Content="×"/>

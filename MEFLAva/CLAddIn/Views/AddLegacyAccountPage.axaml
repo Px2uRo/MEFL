@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             Width="500" Height="300" Background="White"
+             Width="500" Height="300" 
              x:Class="CLAddIn.Views.AddLegacyAccountPage">
 	<Grid RowDefinitions="125,125,50">
 		<Grid Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" ColumnDefinitions="80,350" >

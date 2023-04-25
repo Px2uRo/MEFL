@@ -50,33 +50,20 @@ namespace MEFL.Views
             JavaList.SelectedIndex = dc.SelectedJavaIndex;
             LoadDownloaderUI(dc.Downloaders);
             ImageButton.Click += ImageButton_Click;
+            ShowDownloader.Checked += ShowDownloader_Checked;
+#if DEBUG
+            ShowDownloader.IsChecked = true;
+#endif
+        }
+
+        private void ShowDownloader_Checked(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+
         }
 
         private async void ImageButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            if(App.Current.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime desktp)
-            {
-                var mw = desktp.MainWindow as MainWindow;
-                App.OpenFileDialog.AllowMultiple = false;
-                App.OpenFileDialog.Filters.Clear();
-                App.OpenFileDialog.Filters.Add(new() { Name="Í¼Æ¬ÎÄ¼þ",Extensions=new() { "png","jpg"} });
-                var res = await App.OpenFileDialog.ShowAsync(mw);
-                Dispatcher.UIThread.InvokeAsync(() =>
-                {
-                    mw.BackGround.Children.Clear();
-                    try
-                    {
-                        var image = new Avalonia.Media.Imaging.Bitmap(res[0]);
-                        var imaCont = new Avalonia.Controls.Image() { Source=image};
-                        imaCont.Stretch = Stretch.UniformToFill;
-                        mw.BackGround.Children.Add(imaCont);
-                    }
-                    catch
-                    {
-
-                    }
-                });
-            }
+            (DataContext as SettingPageModelView).ChangeBackgroundCommand.Execute("");
         }
 
         private void LoadDownloaderUI(DownloaderCollection downloaders)

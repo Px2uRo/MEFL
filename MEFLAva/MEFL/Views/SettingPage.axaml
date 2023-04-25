@@ -5,16 +5,21 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MEFL.Views.SettingPage">
 	<TabControl>
-		<TabItem Header="主页">
+		<TabItem Header="个性化">
 			<ScrollViewer>
 				<StackPanel>
-					<StackPanel Margin="0,0,0,15">
+					<StackPanel Margin="0,0,0,10">
 						<TextBlock Text="背景图片"/>
 						<Grid>
 							<Button Name="ImageButton" Content="选择..."/>
 						</Grid>
+					</StackPanel>
+					<StackPanel Margin="0,0,0,10">
+						<TextBlock Text="主页设置"/>
+						<StackPanel Orientation="Horizontal">
+							<CheckBox Name="ShowDownloader" Content="在主页展示 “下载测试” 窗口"/>
+						</StackPanel>
 						<TextBlock Text=" "/>
-						<TextBlock Text="最大内存"/>
 					</StackPanel>
 				</StackPanel>
 			</ScrollViewer>

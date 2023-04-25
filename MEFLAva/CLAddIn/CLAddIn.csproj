@@ -9,10 +9,10 @@
 	  <Description>CoreLaunching for MEFL but Avalonia</Description>
   </PropertyGroup>
 
-	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+	<!--<Target Name="PostBuild" AfterTargets="PostBuildEvent">
 		<Exec Command="copy &quot;$(TargetDir)$(ProjectName).dll&quot; &quot;I:\Xiong's\MEFLCollection\MEFLAva\MEFL\bin\Debug\net7.0\MEFL\AddIns\MEFL.CLAddIn.mefl.ava.dll&quot;" />
 		<Exec Command="copy &quot;I:\Xiong's\MEFLCollection\MEFLAva\CLAddIn\bin\Debug\net7.0\CoreLaunchingNet6.dll&quot; &quot;I:\Xiong's\MEFLCollection\MEFLAva\MEFL\bin\Debug\net7.0\MEFL\AddIns\CoreLaunchingNet6.dll&quot;" />
-	</Target>
+	</Target>-->
 	
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DefineConstants>AVALONIA</DefineConstants>

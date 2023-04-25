@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             Background="White" Width="500" Height="300" 
+             Width="500" Height="300" 
              x:Class="MEFL.Views.DialogContents.JavaManagerDialog">
 	<Grid RowDefinitions="100,100,100">
 		<TextBlock Text="你的 Java 不对劲！" Name="CustomHint" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="24"/>

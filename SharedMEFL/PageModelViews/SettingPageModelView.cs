@@ -8,6 +8,9 @@ using System.IO;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using MEFL.APIData;
+using Avalonia.Controls.ApplicationLifetimes;
+using MEFL.Views;
+using Avalonia.Threading;
 #if WPF
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -333,8 +336,8 @@ namespace MEFL.PageModelViews
                 APIData.APIModel.SettingArgs.LangID = LangID.en_US;
             }
             SetLang();
-#endregion
-#region 获取背景图片
+            #endregion
+            #region 获取背景图片
 #if WPF
 
             img = new Image();
@@ -351,9 +354,26 @@ namespace MEFL.PageModelViews
                 }
             }
 #elif AVALONIA
-            //TODO 背景图片
+            if (APIData.APIModel.SettingConfig.PicturePath != null)
+            {
+                if (App.Current.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime desktop)
+                {
+                    Dispatcher.UIThread.InvokeAsync(() =>
+                    {
+                        if (desktop.MainWindow is MainWindow window)
+                        {
+
+                            var image = new Avalonia.Media.Imaging.Bitmap(APIData.APIModel.SettingConfig.PicturePath);
+                            var imaCont = new Avalonia.Controls.Image() { Source = image };
+                            imaCont.Stretch = Stretch.UniformToFill;
+                            window.BackGround.Children.Clear();
+                            window.BackGround.Children.Add(imaCont);
+                        }
+                    });
+                }
+            }
 #endif
-#endregion
+            #endregion
         }
     }
     public class ChangeBackground : ICommand
@@ -387,28 +407,30 @@ namespace MEFL.PageModelViews
             }
         }
 #elif AVALONIA
-        public void Execute(object? parameter)
+        public async void Execute(object? parameter)
         {
-            OpenFileDialog o = new OpenFileDialog();
-            o.Title = App.Current.Resources["I18N_String_Setting_Custom_BackgroundImage_Open"] as String;
-            //TODO OpenFile
-            
-            //o.Filter = "(*.jpg)|*.jpg|(*.png)|*.png";
-            //o.ShowDialog();
-            //try
-            //{
-            //    if (o.FileName != String.Empty)
-            //    {
-            //        (App.Current.Resources["Background"] as Grid).Children.Clear();
-            //        SettingPageModel.img.Source = new BitmapImage(new Uri(o.FileName));
-            //        (App.Current.Resources["Background"] as Grid).Children.Add(SettingPageModel.img);
-            //        APIData.APIModel.SettingConfig.PicturePath = o.FileName;
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-
-            //}
+            if(App.Current.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime desktop)
+            {
+                App.OpenFileDialog.AllowMultiple= false;
+                App.OpenFileDialog.Filters.Clear();
+                App.OpenFileDialog.Filters.Add(new() { Extensions = new(){"jpg","png"},Name="图片"});
+                if(desktop.MainWindow is MainWindow window)
+                {
+                    var res = await App.OpenFileDialog.ShowAsync(window);
+                    if(res!=null)
+                    {
+                        if (res.Length > 0)
+                        {
+                            var image = new Avalonia.Media.Imaging.Bitmap(res[0]);
+                            var imaCont = new Avalonia.Controls.Image() { Source = image };
+                            imaCont.Stretch = Stretch.UniformToFill;
+                            window.BackGround.Children.Clear();
+                            window.BackGround.Children.Add(imaCont);
+                            APIData.APIModel.SettingConfig.PicturePath = res[0];
+                        }
+                    }
+                }
+            }
         }
 
 #endif

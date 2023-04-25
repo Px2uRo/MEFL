@@ -1,6 +1,7 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Media;
 using MEFL.Contract;
 using MEFL.Views;
 using System;
@@ -25,6 +26,7 @@ namespace MEFL.AvaControls
                 mv.LeftButtons.IsEnabled= false;
                 cd.Content = null;
                 cd.Content = dialogContent;
+                cd.Background = new SolidColorBrush(Colors.Purple);
                 mv.Dialog.Child = null;
                 mv.Dialog.Child = cd;
                 mv.DialogBackGround.IsVisible = true;
