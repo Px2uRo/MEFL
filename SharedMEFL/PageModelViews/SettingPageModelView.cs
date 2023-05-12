@@ -11,6 +11,9 @@ using MEFL.APIData;
 using Avalonia.Controls.ApplicationLifetimes;
 using MEFL.Views;
 using Avalonia.Threading;
+using MEFL.AvaControls;
+using MEFL.Views.MainPageTool;
+using MEFL.Contract;
 #if WPF
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -94,6 +97,23 @@ namespace MEFL.PageModelViews
     }
     public class SettingPageModelView: PageModelViewBase
     {
+        public bool ShowDownloader
+        {
+            get { return APIModel.SettingConfig.ShowSimpleDownloaderTool; }
+            set { APIModel.SettingConfig.ShowSimpleDownloaderTool = value; 
+                if (value)
+                {
+                    var p = APIModel.SettingConfig.SimpleDownloaderPosition;
+                    var args = new AddMainPageToolArgs(new(p.X, p.Y));
+                    MainPageToolContoller.Add(SimpleDownloaderTool.UI,"MEFL1",args);
+                }
+                else
+                {
+                    MainPageToolContoller.Remove("MEFL1");
+                }
+            }
+        }
+
         public string MaxMemory
         {
             get
@@ -262,6 +282,8 @@ namespace MEFL.PageModelViews
             //TODO Avalonia 自己的搞法
         }
 #endif
+
+
         internal static SettingPageModelView ModelView = new();
         static SettingPageModel()
         {

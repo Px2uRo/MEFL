@@ -203,9 +203,13 @@ namespace MEFL.CLAddIn.GameTypes
                         }
                     return res;
                 }
+                else if(_Root.Arguments != null&&string.IsNullOrEmpty(_Root.OldMinecraftArguments))
+                {
+                    throw new Exception();
+                }
                 else
                 {
-                    res = _Root.MinecraftArguments;
+                    res = _Root.OldMinecraftArguments;
                 }
                 return res;
             } 
@@ -290,7 +294,7 @@ namespace MEFL.CLAddIn.GameTypes
             }
         }
 #elif AVALONIA
-        public override IGameSettingPage SettingsPage => null;
+        public override IGameSettingPage SettingsPage => _settingPage;
 #endif
         public override string GameJarPath => GameJsonPath.Replace(".json", ".jar");
 

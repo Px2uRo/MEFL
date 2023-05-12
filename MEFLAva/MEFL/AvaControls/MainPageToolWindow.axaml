@@ -1,0 +1,18 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+				
+			 Background="Transparent" x:Class="MEFL.AvaControls.MainPageToolWindow">
+	<Border BorderBrush="Black" BorderThickness="1">
+		<Grid RowDefinitions="25,*">
+			<Grid Name="Title" Background="White">
+				<TextBlock Text="{Binding Title}" Foreground="Black" VerticalAlignment="Center"/>
+				<Rectangle Fill="Aqua" IsEnabled="{Binding IsAbleToExit}" HorizontalAlignment="Right" Name="Remove" Width="25"/>
+			</Grid>
+			<ContentControl Grid.Row="1" Name="ContentBox" />
+		</Grid>
+	</Border>
+
+</UserControl>

@@ -17,9 +17,9 @@ namespace MEFL.CLAddIn.Downloaders
 
         public override object Icon => "P";
 
-        public override InstallProcess CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string usingLocalFiles)
+        public override SingleProcess CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string[] usingLocalFiles)
         {
-            throw new NotImplementedException();
+            return new PinKcatSingleProcess(NativeUrl,LoaclPath);
         }
 
         public override InstallProcess CreateProgress(NativeLocalPairsList NativeLocalPairs, DownloadSource[] sources, string usingLocalFiles)

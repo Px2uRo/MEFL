@@ -6,6 +6,7 @@ using System.Linq;
 using System.Collections.ObjectModel;
 using MEFL.Arguments;
 using Avalonia.Threading;
+using DynamicData;
 
 namespace MEFL.Contract
 {
@@ -38,7 +39,7 @@ namespace MEFL.Contract
         /// <param name="usingLocalFiles">正在使用的本地文件</param>
         /// <param name="sources">下载源</param>
         /// <returns>下载进程</returns>
-        public abstract InstallProcess CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string usingLocalFiles);
+        public abstract SingleProcess CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string[] usingLocalFiles);
         /// <summary>
         /// 创建多文件下载进程
         /// </summary>
@@ -126,7 +127,18 @@ namespace MEFL.Contract
     }
     public abstract class InstallProcess:MEFLClass,INotifyPropertyChanged
     {
-        public event EventHandler<EventArgs>? Finished;
+        public void Finish()
+        {
+            Finished?.Invoke(this,EventArgs.Empty);
+        }
+
+        public void Fail()
+        {
+            Failed?.Invoke(this, EventArgs.Empty);
+        }
+        public event EventHandler<EventArgs>? Finished; 
+        
+        public event EventHandler<EventArgs>? Failed;
         /// <summary>
         /// 我怕别的下载进程会出现重复情况。所以每个下载进程都要说明它在使用哪些本地文件。
         /// </summary>
@@ -189,7 +201,7 @@ namespace MEFL.Contract
         }
 
 
-        void ChangeProperty(string propName)
+        internal void ChangeProperty(string propName)
         {
 #if AVALONIA
             if (PropertyChanged != null)
@@ -208,6 +220,13 @@ namespace MEFL.Contract
         }
         private DownloadProgressState _statu;
 
+        public DownloadProgressState Statu
+        {
+            get { return _statu; }
+            set { _statu = value; }
+        }
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         private double _CurrentProgress;
@@ -221,6 +240,41 @@ namespace MEFL.Contract
 
 
         public InstallArguments Arguments { get; protected set; }
+    }
+
+    public abstract class SingleProcess : InstallProcess
+    {
+        private string _localPath;
+
+        public string LocalPath
+        {
+            get { return _localPath; }
+            set { _localPath = value; }
+        }
+
+        private string _nativeUrl;
+
+        public string NativeUrl
+        {
+            get { return _nativeUrl; }
+            set { _nativeUrl = value; }
+        }
+
+        private long _downloadedSize;
+
+        public long DownloadedSize
+        {
+            get { return _downloadedSize; }
+            set { _downloadedSize = value; ChangeProperty(nameof(DownloadedSize)); }
+        }
+
+        private long _totalSize;
+
+        public long TotalSize
+        {
+            get { return _totalSize; }
+            set { _totalSize = value; ChangeProperty(nameof(TotalSize)); }
+        }
     }
 
     public enum DownloadProgressState

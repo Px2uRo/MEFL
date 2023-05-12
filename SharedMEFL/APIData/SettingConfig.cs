@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 using MEFL.Contract;
 using Newtonsoft.Json;
 using static MEFL.APIData.APIModel;
@@ -17,6 +18,14 @@ namespace MEFL.APIData
     /// </summary>
     public class SettingConfig
     {
+        private Point _simpleDownloaderPosition = new();
+
+        public Point SimpleDownloaderPosition
+        {
+            get { return _simpleDownloaderPosition; }
+            set { _simpleDownloaderPosition = value; Update(); }
+        }
+
         [JsonIgnore]
         public string MEFLConfigForder;
         private int _LogIndex;
@@ -84,6 +93,14 @@ namespace MEFL.APIData
         private bool _AlwaysOpenNewExtensions;
         public bool AlwaysOpenNewExtensions { get =>_AlwaysOpenNewExtensions; set { _AlwaysOpenNewExtensions = value;Update(); } }
         private int _folderIndex;
+        private bool _showSimpleDownloaderTool;
+
+        public bool ShowSimpleDownloaderTool
+        {
+            get { return _showSimpleDownloaderTool; }
+            set { _showSimpleDownloaderTool = value; Update(); }
+        }
+
 
         public int FolderIndex
         {

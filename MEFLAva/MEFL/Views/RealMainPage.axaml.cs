@@ -1,3 +1,4 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Threading;
 using MEFL.APIData;
@@ -11,6 +12,13 @@ namespace MEFL.Views
 {
     public partial class RealMainPage : UserControl
     {
+        protected override Size ArrangeOverride(Size finalSize)
+        {
+            var b = base.ArrangeOverride(finalSize);
+            ToolCanvas.Width = b.Width - 10;
+            ToolCanvas.Height = b.Height - 50;
+            return b;
+        }
         public static RealMainPage UI = new RealMainPage();
         public RealMainPage()
         {
@@ -29,6 +37,12 @@ namespace MEFL.Views
                 }
             }
             AccountBtn.Click += AccountBtn_Click;
+            GameSettings.Click += GameSettings_Click;
+        }
+
+        private void GameSettings_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            ContentDialog.Show((DataContext as RealMainPageModelView).CurretGame.SettingsPage);
         }
 
         private void AccountBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)

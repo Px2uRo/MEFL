@@ -50,16 +50,9 @@ namespace MEFL.Views
             JavaList.SelectedIndex = dc.SelectedJavaIndex;
             LoadDownloaderUI(dc.Downloaders);
             ImageButton.Click += ImageButton_Click;
-            ShowDownloader.Checked += ShowDownloader_Checked;
-#if DEBUG
-            ShowDownloader.IsChecked = true;
-#endif
         }
 
-        private void ShowDownloader_Checked(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
-        {
 
-        }
 
         private async void ImageButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
@@ -102,6 +95,10 @@ namespace MEFL.Views
                     foreach (var item in smv.Javas)
                     {
                         itms.Add(item.FullName);
+                    }
+                    if(smv.Javas.Count> 0)
+                    {
+                        JavaList.SelectedIndex = 0;
                     }
                 }
             }

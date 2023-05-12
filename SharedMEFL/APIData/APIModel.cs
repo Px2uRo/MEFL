@@ -1,4 +1,7 @@
-﻿using MEFL.Configs;
+﻿using MEFL.Arguments;
+using MEFL.AvaControls;
+using MEFL.Callers;
+using MEFL.Configs;
 using MEFL.Contract;
 using MEFL.PageModelViews;
 using Newtonsoft.Json;
@@ -261,6 +264,8 @@ namespace MEFL.APIData
                 RegManager.Write("RecordedJavas", str, true);
             SettingPageModel.ModelView.EnableSearchJava= true;
                 SearchJavaThreadIsOK = true;
+
+            SettingPageModel.ModelView.Invoke("Javas");
         }
 #endif
         static APIModel()
@@ -324,11 +329,43 @@ namespace MEFL.APIData
             {
 
             }
+            MainPageToolContoller.LoadMEFL();
+            DownloaderCaller.SingleCallerEvent += DownloaderCaller_SingleCallerEvent;
 #if DEBUG
 
 #else
             
 #endif
+        }
+
+        private static void DownloaderCaller_SingleCallerEvent(object? sender, DownloadSingleArgs e)
+        {
+            if (SelectedDownloader != null)
+            {
+                var f = DownloadingProgressPageModel.ModelView.DownloadingProgresses.GetUsingFiles();
+                try
+                {
+                    var progress = APIModel.SelectedDownloader.CreateProgress(e.Native, e.Local, DownloadSources.Selected, f);
+                    if (progress != null)
+                    {
+                        DownloadingProgressPageModel.ModelView.DownloadingProgresses.Add(progress);
+                    }
+                    else
+                    {
+                        WaringDialog.Show("无效的下载进程，去联系插件开发者。");
+                    }
+
+                }
+                catch
+                {
+                    WaringDialog.Show("无效的下载进程，去联系插件开发者。");
+                }
+
+            }
+            else
+            {
+                WaringDialog.Show("没有下载器哇");
+            }
         }
     }
 }

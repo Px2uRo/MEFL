@@ -7,8 +7,8 @@ using System.Windows;
 using Newtonsoft.Json;
 using System.Configuration;
 using System.ComponentModel;
-using MEFL.CLAddIn.Sercurity;
 using CoreLaunching.MicrosoftAuth;
+using MEFL.CLAddIn.Sercurity;
 #if WPF
 using CLAddInNet6.Pages;
 using MEFL.CLAddIn.FrameworkIcons;

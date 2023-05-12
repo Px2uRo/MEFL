@@ -1,4 +1,5 @@
 ﻿using Avalonia.Threading;
+using Avalonia.X11;
 using CoreLaunching.Forge;
 using CoreLaunching.MicrosoftAuth;
 using CoreLaunching.PinKcatDownloader;
@@ -6,6 +7,7 @@ using MEFL.Arguments;
 using MEFL.Contract;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -245,6 +247,106 @@ DotMCPath, Arguments.VersionName, true
         public override void Continue()
         {
             throw new NotImplementedException();
+        }
+    }
+
+    internal class PinKcatSingleProcess : SingleProcess
+    {
+        public PinKcatSingleProcess(string nativePath,string localPath)
+        {
+            NativeUrl= nativePath;
+            LocalPath= localPath;
+        }
+
+        public override void Cancel()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Continue()
+        {
+            if (Statu == DownloadProgressState.Downloading)
+            {
+                ThreadPool.SetMaxThreads(512, 512);
+                var info = new MCFileInfo(NativeUrl,"",TotalSize,NativeUrl,LocalPath);
+                if (TotalSize > 2500000)
+                {
+                    var p = MutilFileDownloadProcess.Create(info,Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),$"[CL]Tempfor{Path.GetFileNameWithoutExtension(NativeUrl)}"));
+                    //p.OnePartFinished += P_DownloadedUpdated;
+                    p.CombineFinished += P_CombineFinished;
+                    try
+                    {
+                        foreach (var t in p.Requsets)
+                        {
+                            t.Thread.Start();
+                            t.OnePartFinished += P_DownloadedUpdated;
+                        }
+                        p.CombineThread.Start();
+                    }
+                    catch
+                    {
+
+                    }
+                }
+                else
+                {
+                    var p = FileDownloadProgressWithUpdate.CreateSingle(info);
+                    p.DownloadedUpdated += P_DownloadedUpdated;
+                    p.Finished += P_Finished;
+                    p.Start();
+                }
+            }
+        }
+
+        private void P_CombineFinished(object? sender, MCFileInfo e)
+        {
+            Finish();
+        }
+
+        private void P_Finished(object? sender, Thread e)
+        {
+            Finish();
+        }
+
+        private void P_DownloadedUpdated(object? sender, long e)
+        {
+            DownloadedSize += e;
+        }
+
+        public override bool GetUsingLocalFiles(out string[] paths)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Pause()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Retry()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Start()
+        {
+            new Thread(() =>
+            {
+                try
+                {
+                    var webReq = HttpWebRequest.CreateHttp(NativeUrl);
+                    using (var rep = webReq.GetResponse())
+                    {
+                        TotalSize= rep.ContentLength;
+                    }
+                    Statu = DownloadProgressState.Downloading;
+                    Continue();
+                }
+                catch
+                {
+                    Fail();
+                }
+            }).Start();
         }
     }
 }

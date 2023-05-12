@@ -9,6 +9,7 @@
 			<RowDefinition/>
 			<RowDefinition Height="40"/>
 		</Grid.RowDefinitions>
+		<Canvas Name="ToolCanvas"/>
 		<StackPanel HorizontalAlignment="Left" Grid.Row="1" Orientation="Horizontal">
 			<Button Margin="3" Name="AccountBtn">
 				<StackPanel Orientation="Horizontal">
@@ -24,7 +25,7 @@
 			</Button>
 		</StackPanel>
 		<StackPanel HorizontalAlignment="Right" Grid.Row="1" Orientation="Horizontal">
-			<Button Content="游戏设置" Margin="3"/>
+			<Button Content="游戏设置" Margin="3" Name="GameSettings"/>
 			<Button Margin="3" Name="LaunchBtn">
 				<Grid Width="52" Height="19" >
 					<TextBlock Text="Launch!" VerticalAlignment="Center" HorizontalAlignment="Center" Name="LaunchBtnText"/>

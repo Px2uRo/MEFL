@@ -36,6 +36,12 @@ namespace MEFL.InfoControls
             {
                 ContentTB.Text = vm.Content;
             }
+            else if(e.PropertyName == "TotalSize" || e.PropertyName== "DownloadedSize")
+            {
+                ValuePB.Value = ((((vm as SingleProcess).DownloadedSize / (double)(vm as SingleProcess).TotalSize)) * 100d);
+                ProgressTB.Text = ValuePB.Value.ToString() + "%";
+                StepTB.Text = $"{(vm as SingleProcess).DownloadedSize} / {(vm as SingleProcess).TotalSize}";
+            }
         }
     }
 }

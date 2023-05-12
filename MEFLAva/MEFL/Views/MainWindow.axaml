@@ -6,7 +6,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="MEFL.Views.MainWindow" Title="Welcome to MEFL for Avalonia!" 
         Icon="/Assets/avalonia-logo.ico" ExtendClientAreaToDecorationsHint="True"
-ExtendClientAreaChromeHints="NoChrome"
+		ExtendClientAreaChromeHints="NoChrome"
 ExtendClientAreaTitleBarHeightHint="-1">
 	<Window.Styles>
 		<Style Selector="Button">

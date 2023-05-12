@@ -14,5 +14,6 @@ namespace CLAddIn.Views
         public event EventHandler<GameInfoBase> OnRemoved;
         public event EventHandler<GameInfoBase> OnPageBack;
         public event EventHandler<GameInfoBase> OnListUpdate;
+        public event EventHandler<EventArgs> Quited;
     }
 }
