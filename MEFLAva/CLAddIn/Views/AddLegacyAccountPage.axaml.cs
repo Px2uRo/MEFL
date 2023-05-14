@@ -1,3 +1,4 @@
+using Avalonia;
 using Avalonia.Controls;
 using MEFL.CLAddIn;
 using MEFL.CLAddIn.AccountsManagement;
@@ -37,6 +38,11 @@ namespace CLAddIn.Views
         private void CancelBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             Quited?.Invoke(this, e);
+        }
+
+        public void WindowSizeChanged(Size size)
+        {
+
         }
 
         public event IAddAccountContent.AccountAdd OnAccountAdd;

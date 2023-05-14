@@ -42,7 +42,15 @@ namespace MEFL.Views
 
         private void GameSettings_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            ContentDialog.Show((DataContext as RealMainPageModelView).CurretGame.SettingsPage);
+            var g = (DataContext as RealMainPageModelView).CurretGame;
+            if(g != null)
+            {
+                ContentDialog.Show(g.SettingsPage);
+            }
+            else
+            {
+                WaringDialog.Show("没有选中的游戏");
+            }
         }
 
         private void AccountBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)

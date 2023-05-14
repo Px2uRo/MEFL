@@ -1,3 +1,4 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Shapes;
@@ -6,6 +7,8 @@ using Avalonia.Media;
 using Avalonia.Threading;
 using Avalonia.VisualTree;
 using MEFL.APIData;
+using MEFL.AvaControls;
+using MEFL.Contract;
 using MEFL.PageModelViews;
 using System;
 using System.Collections.Generic;
@@ -17,6 +20,15 @@ namespace MEFL.Views
 {
     public partial class MainWindow : Window
     {
+        protected override Size ArrangeOverride(Size finalSize)
+        {
+            if((Dialog.Child as ContentDialog) != null)
+            {
+                var cd = (Dialog.Child as ContentDialog);
+                (cd.Content as IDialogContent).WindowSizeChanged(finalSize);
+            }
+            return base.ArrangeOverride(finalSize);
+        }
         public MainWindow()
         {
             InitializeComponent();

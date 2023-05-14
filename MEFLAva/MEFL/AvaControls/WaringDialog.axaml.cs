@@ -1,3 +1,4 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Threading;
 using MEFL.Contract;
@@ -26,6 +27,11 @@ namespace MEFL.AvaControls
                 UI.ContentTB.Text = content;
                 ContentDialog.Show(UI);
             }));
+        }
+
+        public void WindowSizeChanged(Size size)
+        {
+
         }
 
         public event EventHandler<EventArgs> Quited;

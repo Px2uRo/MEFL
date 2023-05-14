@@ -39,6 +39,7 @@ namespace MEFL.Views.MainPageTool
         private void ExcuteBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             Callers.DownloaderCaller.CallSingle(NativeTB.Text,System.IO.Path.Combine(LocalTB.Text,System.IO.Path.GetFileName(NativeTB.Text)));
+            NativeTB.Text = string.Empty;
         }
 
         private void SimpleDownloaderTool_OnPositionChanged(object? sender, Point e)

@@ -95,6 +95,10 @@ namespace MEFL.InfoControls
         {
             if (value)
             {
+                if (!string.IsNullOrEmpty(h.ExceptionInfo))
+                {
+                    return;
+                }
                 if (h.Permissions.UseAccountAPI)
                 {
                     foreach (var item in h.Account.GetSingUpAccounts(APIModel.SettingArgs))

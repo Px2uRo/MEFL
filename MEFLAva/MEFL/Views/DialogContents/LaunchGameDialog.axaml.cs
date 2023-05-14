@@ -1,3 +1,4 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Threading;
 using MEFL.APIData;
@@ -85,6 +86,11 @@ namespace MEFL.Views.DialogContents
         {
             PMV.Game = APIModel.CurretGame;
             PMV.BuildProcess();
+        }
+
+        public void WindowSizeChanged(Size size)
+        {
+
         }
     }
 }

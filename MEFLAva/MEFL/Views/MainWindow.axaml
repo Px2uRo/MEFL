@@ -3,27 +3,13 @@
         xmlns:vm="using:MEFL.ViewModels"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" Width="800" Height="480"
         x:Class="MEFL.Views.MainWindow" Title="Welcome to MEFL for Avalonia!" 
         Icon="/Assets/avalonia-logo.ico" ExtendClientAreaToDecorationsHint="True"
 		ExtendClientAreaChromeHints="NoChrome"
 ExtendClientAreaTitleBarHeightHint="-1">
-	<Window.Styles>
-		<Style Selector="Button">
-			<Setter Property="Foreground" Value="White"/>
-		</Style>
-		<Style Selector="TextBlock">
-			<Setter Property="Foreground" Value="White"/>
-		</Style>
-		<Style Selector="ComboBoxItem">
-			<Setter Property="Background" Value="Purple"/>
-		</Style>
-		<Style Selector="ComboBox">
-			<Setter Property="Background" Value="Purple"/>
-		</Style>
-	</Window.Styles>
 	<Grid>
-		<Grid Name="BackGround" Background="Purple"/>
+		<Grid Name="BackGround"/>
 		<Grid Margin="8" RowDefinitions="30,*" ColumnDefinitions="30,*">
 			<Grid Grid.ColumnSpan="2" Name="TitelBarGrid" Background="Transparent">
 				<StackPanel Name="LeftButtons" Orientation="Horizontal">
@@ -38,7 +24,7 @@ ExtendClientAreaTitleBarHeightHint="-1">
 					</StackPanel>
 				</StackPanel>
 				<Grid HorizontalAlignment="Center" VerticalAlignment="Center">
-					<TextBlock Text="Welcome to MEFL on Avalonia!"/>
+					<TextBlock Text="Welcome to MEFL for Avalonia!"/>
 				</Grid>
 				<StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
 					<Button Height="30" Margin="3" Width="30" Name="MinlizeWindow"/>

@@ -4,6 +4,9 @@
              x:Class="MEFL.App">
 
     <Application.Styles>
-        <FluentTheme Mode="Light"/>
+		<Style Selector="TextBox">
+			<Setter Property="FontFamily" Value="Microsoft Yahei"/>
+		</Style>
+		<FluentTheme Mode="Dark"/>
     </Application.Styles>
 </Application>

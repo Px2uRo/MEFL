@@ -40,6 +40,24 @@ namespace MEFL.AvaControls
             {
                 var c = ContentBox.Content as IMainPageTool;
                 c.ChangePosition(new(GetValue(Canvas.LeftProperty), GetValue(Canvas.TopProperty)));
+                var ld = GetValue(Canvas.LeftProperty);
+                var rd = GetValue(Canvas.TopProperty);
+                if (!(ld >= 0))
+                {
+                    SetValue(Canvas.LeftProperty, 0);
+                }
+                if (!(rd >= 0))
+                {
+                    SetValue(Canvas.TopProperty, 0);
+                }
+                if (!((ld + a.Width) <= this.Parent.Width))
+                {
+                    SetValue(Canvas.LeftProperty, this.Parent.Width - a.Width);
+                }
+                if (!((rd + a.Height) <= this.Parent.Height))
+                {
+                    SetValue(Canvas.TopProperty, this.Parent.Height - a.Height);
+                }
             }
         }
 
@@ -50,11 +68,8 @@ namespace MEFL.AvaControls
                 var p = e.GetPointerPoint(this.Parent);
                 var ld = p.Position.X - DesiredSize.Width / 2;
                 var rd = p.Position.Y - (sender as Grid).DesiredSize.Height / 2;
-                if ((ld >= 0&&rd>=0)&& (ld + a.Width) <= this.Parent.Width&& (rd + a.Height) <= this.Parent.Height)
-                {
-                    SetValue(Canvas.LeftProperty, ld);
-                    SetValue(Canvas.TopProperty, rd);
-                }
+                SetValue(Canvas.LeftProperty, ld);
+                SetValue(Canvas.TopProperty, rd);
             }
         }
     }

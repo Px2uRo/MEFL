@@ -26,7 +26,7 @@ namespace MEFL.AvaControls
                 mv.LeftButtons.IsEnabled= false;
                 cd.Content = null;
                 cd.Content = dialogContent;
-                cd.Background = new SolidColorBrush(Colors.Purple);
+                cd.Background = new SolidColorBrush(Colors.Black);
                 mv.Dialog.Child = null;
                 mv.Dialog.Child = cd;
                 mv.DialogBackGround.IsVisible = true;

@@ -64,7 +64,7 @@ namespace MEFL.CLAddIn.Downloaders
         public override void Start()
         {
             paused = false;
-            new Thread(() => {
+            new DownThread(() => {
                 try
                 {
                 for (int i = 0; i < this.NativeLocalPairs.Count; i++)
@@ -80,7 +80,7 @@ namespace MEFL.CLAddIn.Downloaders
                     }
                     while (paused)
                     {
-                        Thread.Sleep(100);
+                        DownThread.Sleep(100);
                         if(State == DownloadProgressState.RetryingOrContiuning)
                         {
                             paused = false;
@@ -285,7 +285,7 @@ namespace MEFL.CLAddIn.Downloaders
         public override void Start()
         {
             paused = false;
-            new Thread(() => {
+            new DownThread(() => {
                 for (int i = 0; i < this.NativeLocalPairs.Count; i++)
                 {
                     if (State == DownloadProgressState.Canceling)
@@ -299,7 +299,7 @@ namespace MEFL.CLAddIn.Downloaders
                     }
                     while (paused)
                     {
-                        Thread.Sleep(100);
+                        DownThread.Sleep(100);
                         if (State == DownloadProgressState.RetryingOrContiuning)
                         {
                             paused = false;

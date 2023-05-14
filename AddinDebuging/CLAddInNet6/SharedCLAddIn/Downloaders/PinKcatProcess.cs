@@ -252,6 +252,9 @@ DotMCPath, Arguments.VersionName, true
 
     internal class PinKcatSingleProcess : SingleProcess
     {
+        Queue<RequestWithRange> total = new();
+        List<RequestWithRange> running = new();
+        Queue<RequestWithRange> failed = new();
         public PinKcatSingleProcess(string nativePath,string localPath)
         {
             NativeUrl= nativePath;
@@ -265,37 +268,18 @@ DotMCPath, Arguments.VersionName, true
 
         public override void Continue()
         {
-            if (Statu == DownloadProgressState.Downloading)
-            {
-                ThreadPool.SetMaxThreads(512, 512);
-                var info = new MCFileInfo(NativeUrl,"",TotalSize,NativeUrl,LocalPath);
-                if (TotalSize > 2500000)
-                {
-                    var p = MutilFileDownloadProcess.Create(info,Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),$"[CL]Tempfor{Path.GetFileNameWithoutExtension(NativeUrl)}"));
-                    //p.OnePartFinished += P_DownloadedUpdated;
-                    p.CombineFinished += P_CombineFinished;
-                    try
-                    {
-                        foreach (var t in p.Requsets)
-                        {
-                            t.Thread.Start();
-                            t.OnePartFinished += P_DownloadedUpdated;
-                        }
-                        p.CombineThread.Start();
-                    }
-                    catch
-                    {
 
-                    }
-                }
-                else
-                {
-                    var p = FileDownloadProgressWithUpdate.CreateSingle(info);
-                    p.DownloadedUpdated += P_DownloadedUpdated;
-                    p.Finished += P_Finished;
-                    p.Start();
-                }
-            }
+        }
+
+        private void T_WholeFinished(object? sender, long e)
+        {
+            running.Remove(sender as RequestWithRange);
+        }
+
+        private void T_Failed(object? sender, EventArgs e)
+        {
+            failed.Enqueue(sender as RequestWithRange);
+            running.Remove(sender as RequestWithRange);
         }
 
         private void P_CombineFinished(object? sender, MCFileInfo e)
@@ -315,7 +299,8 @@ DotMCPath, Arguments.VersionName, true
 
         public override bool GetUsingLocalFiles(out string[] paths)
         {
-            throw new NotImplementedException();
+            paths = new string[0];
+            return true;
         }
 
         public override void Pause()
@@ -340,7 +325,54 @@ DotMCPath, Arguments.VersionName, true
                         TotalSize= rep.ContentLength;
                     }
                     Statu = DownloadProgressState.Downloading;
-                    Continue();
+                    if (Statu == DownloadProgressState.Downloading)
+                    {
+                        ThreadPool.SetMaxThreads(512, 512);
+                        var info = new MCFileInfo(NativeUrl, "", TotalSize, NativeUrl, LocalPath);
+                        if (TotalSize > 2500000)
+                        {
+                            var p = MutilFileDownloadProcess.Create(info,
+                                Path.Combine(
+                                    Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),
+                                    $"[CL]Tempfor{Path.GetFileNameWithoutExtension(NativeUrl)}"));
+                            //p.OnePartFinished += P_DownloadedUpdated;
+                            p.CombineFinished += P_CombineFinished;
+                            try
+                            {
+                                foreach (var t in p.Requsets)
+                                {
+                                    t.OnePartFinished += P_DownloadedUpdated;
+                                    t.Failed += T_Failed;
+                                    total.Enqueue(t);
+                                }
+                                while (total.Count > 0)
+                                {
+                                    if (running.Count < 64)
+                                    {
+                                        var t = total.Dequeue();
+                                        if (t != null)
+                                        {
+                                            t.WholeFinished += T_WholeFinished;
+                                            t.DownThread.Start();
+                                            running.Add(t);
+                                        }
+                                    }
+                                }
+                                p.CombineThread.Start();
+                            }
+                            catch
+                            {
+
+                            }
+                        }
+                        else
+                        {
+                            var p = FileDownloadProgressWithUpdate.CreateSingle(info);
+                            p.DownloadedUpdated += P_DownloadedUpdated;
+                            p.Finished += P_Finished;
+                            p.Start();
+                        }
+                    }
                 }
                 catch
                 {

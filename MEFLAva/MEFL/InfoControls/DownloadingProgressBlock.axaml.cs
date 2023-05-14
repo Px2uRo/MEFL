@@ -1,5 +1,7 @@
 using Avalonia.Controls;
+using Avalonia.Threading;
 using MEFL.Contract;
+using MEFL.PageModelViews;
 using System;
 
 namespace MEFL.InfoControls
@@ -15,8 +17,16 @@ namespace MEFL.InfoControls
         {
             progress.PropertyChanged += Progress_PropertyChanged;
             this.DataContext= progress;
-            
+            progress.Finished += Progress_Finished;
             progress.Start();
+        }
+
+        private void Progress_Finished(object? sender, EventArgs e)
+        {
+            Dispatcher.UIThread.InvokeAsync(() => {
+                DownloadingProgressPageModel.ModelView.DownloadingProgresses.Remove(DataContext as InstallProcess);
+                (this.Parent as Panel).Children.Remove(this);
+            });
         }
 
         private void Progress_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)

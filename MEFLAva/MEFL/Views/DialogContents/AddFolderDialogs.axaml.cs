@@ -1,3 +1,4 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Threading;
@@ -62,7 +63,7 @@ namespace MEFL.Views.DialogContents
 
         private void CancelBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            ContentDialog.Show(GamesManagerContent.UI);
+
         }
 
         private void PathTB_PropertyChanged(object? sender, Avalonia.AvaloniaPropertyChangedEventArgs e)
@@ -77,6 +78,11 @@ namespace MEFL.Views.DialogContents
                 }
                 NameTB.Text = folderName;
             }
+        }
+
+        public void WindowSizeChanged(Size size)
+        {
+            throw new NotImplementedException();
         }
 
         public event EventHandler<EventArgs> Quited;

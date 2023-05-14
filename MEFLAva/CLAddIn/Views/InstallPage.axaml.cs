@@ -5,6 +5,7 @@ using CoreLaunching;
 using MEFL.Arguments;
 using MEFL.Contract;
 using CoreLaunching.Forge;
+using Avalonia;
 
 namespace CLAddIn.Views
 {
@@ -135,6 +136,12 @@ namespace CLAddIn.Views
         {
             Quited?.Invoke(this, e);
         }
+
+        public void WindowSizeChanged(Size size)
+        {
+
+        }
+
         FileInfo[] _javas;
         public InstallPage(FileInfo[] javas, LauncherWebVersionInfo info,string dotMCPath) : this()
         {

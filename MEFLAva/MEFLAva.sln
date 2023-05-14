@@ -11,13 +11,15 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedContract", "..\Projec
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedMEFL", "..\SharedMEFL\SharedMEFL.shproj", "{A979137B-21DF-4076-AACC-EB503C3F6A1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLAddIn", "CLAddIn\CLAddIn.csproj", "{319081AF-1955-4672-906D-26957EFE2E89}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CLAddIn", "CLAddIn\CLAddIn.csproj", "{319081AF-1955-4672-906D-26957EFE2E89}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedCLAddIn", "..\AddinDebuging\CLAddInNet6\SharedCLAddIn\SharedCLAddIn.shproj", "{FB473F32-00DB-4CE3-BBBA-C88716C07ADA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreLaunchingNet6", "..\..\CoreLaunching\CoreLaunchingNet6\CoreLaunchingNet6.csproj", "{C402FEAB-FB6A-4121-8AB5-866BD87B99C0}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedCore", "..\..\CoreLaunching\SharedCore\SharedCore.shproj", "{E2A9F52B-6053-4004-9D43-AA972D0DA2CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignViewer", "DesignViewer\DesignViewer.csproj", "{4145818F-304C-4EFA-83EF-EF534AB51AFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +43,10 @@ Global
 		{C402FEAB-FB6A-4121-8AB5-866BD87B99C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C402FEAB-FB6A-4121-8AB5-866BD87B99C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C402FEAB-FB6A-4121-8AB5-866BD87B99C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4145818F-304C-4EFA-83EF-EF534AB51AFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4145818F-304C-4EFA-83EF-EF534AB51AFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4145818F-304C-4EFA-83EF-EF534AB51AFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4145818F-304C-4EFA-83EF-EF534AB51AFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -30,7 +30,7 @@ namespace MEFL.CLAddIn.CLDownding
                 webFiles.Remove(sender);
                 downloadingWebFiles[inde] = item;
                 sender.Dispose();
-                new Thread(() =>
+                new DownThread(() =>
                 {
                     item.DownloadFinished += CLAddInDownloadingProgress_DownloadFinished;
                     var tryed = item.TryDownload(out var local);
@@ -49,7 +49,7 @@ namespace MEFL.CLAddIn.CLDownding
         public override void Start()
         {
             paused = false;
-            new Thread(() => {
+            new DownThread(() => {
                 try
                 {
                     var Key = NativeLocalPairs[0].NativeUrl;
@@ -166,7 +166,7 @@ namespace MEFL.CLAddIn.CLDownding
                     }
                     foreach (var item in downloadingWebFiles)
                     {
-                        new Thread(() =>
+                        new DownThread(() =>
                         {
                             var tryed = item.TryDownload(out var local);
                             while (tryed)

@@ -5,7 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 				
 			 Background="Transparent" x:Class="MEFL.AvaControls.MainPageToolWindow">
-	<Border BorderBrush="Black" BorderThickness="1">
+	<Border CornerRadius="5" BorderBrush="Black" BorderThickness="1">
 		<Grid RowDefinitions="25,*">
 			<Grid Name="Title" Background="White">
 				<TextBlock Text="{Binding Title}" Foreground="Black" VerticalAlignment="Center"/>

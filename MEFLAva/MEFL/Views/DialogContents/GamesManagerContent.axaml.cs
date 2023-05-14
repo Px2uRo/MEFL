@@ -1,3 +1,4 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Threading;
@@ -109,6 +110,11 @@ namespace MEFL.Views.DialogContents
         private void Contr_Enabled(object? sender, EventArgs e)
         {
             Quited.Invoke(this,e);
+        }
+
+        public void WindowSizeChanged(Size size)
+        {
+
         }
     }
 }

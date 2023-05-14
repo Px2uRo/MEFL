@@ -133,14 +133,14 @@ namespace MEFL.CLAddIn.GameTypes
 #elif AVALONIA
         static MemoryStream forgeIconSource;
         static MemoryStream releaseIconSource;
-        static BitmapImage _forgeIcon; 
+        static BitmapImage _forgeIcon;
         static BitmapImage _releaseIcon;
         public override IImage IconSource {
             get
             {
-                if(_maybeForge)
+                if (_maybeForge)
                 {
-                    if(forgeIconSource == null)
+                    if (forgeIconSource == null)
                     {
                         forgeIconSource = new MemoryStream();
                         Resources.ForgeIcon.Save(forgeIconSource, Resources.ForgeIcon.RawFormat);
@@ -152,7 +152,7 @@ namespace MEFL.CLAddIn.GameTypes
                 }
                 else
                 {
-                    if(releaseIconSource == null)
+                    if (releaseIconSource == null)
                     {
                         releaseIconSource = new MemoryStream();
                         Resources.ReleaseIcon.Save(releaseIconSource, Resources.ReleaseIcon.RawFormat);
@@ -180,7 +180,7 @@ namespace MEFL.CLAddIn.GameTypes
                     {
                         Directory.CreateDirectory(res);
                     }
-                    
+
                 }
                 return res;
             }
@@ -189,21 +189,21 @@ namespace MEFL.CLAddIn.GameTypes
                 _MSOAT.NativeLibrariesPath = value;
             }
         }
-        public override string GameArgs { get 
+        public override string GameArgs { get
             {
                 var res = string.Empty;
-                if (_Root.Arguments!=null)
+                if (_Root.Arguments != null)
                 {
                     foreach (var item in _Root.Arguments.Game)
+                    {
+                        if (!item.HasValues)
                         {
-                            if (!item.HasValues)
-                            {
-                                res += $" {item.ToString()}";
-                            }
+                            res += $" {item.ToString()}";
                         }
+                    }
                     return res;
                 }
-                else if(_Root.Arguments != null&&string.IsNullOrEmpty(_Root.OldMinecraftArguments))
+                else if (_Root.Arguments != null && string.IsNullOrEmpty(_Root.OldMinecraftArguments))
                 {
                     throw new Exception();
                 }
@@ -212,7 +212,7 @@ namespace MEFL.CLAddIn.GameTypes
                     res = _Root.OldMinecraftArguments;
                 }
                 return res;
-            } 
+            }
         }
         public override string JVMArgs { get
             {
@@ -264,7 +264,7 @@ namespace MEFL.CLAddIn.GameTypes
                 }
             }
         }
-        public GamePathType GamePathType { get => _MSOAT.GamePathType;set { _MSOAT.GamePathType = value; PropChanged(); } }
+        public GamePathType GamePathType { get => _MSOAT.GamePathType; set { _MSOAT.GamePathType = value; PropChanged(); } }
         public override string GameFolder { get {
                 if (GamePathType == GamePathType.Versions)
                 {
@@ -275,7 +275,7 @@ namespace MEFL.CLAddIn.GameTypes
                     }
                     return path;
                 }
-                else if (GamePathType==GamePathType.Custom)
+                else if (GamePathType == GamePathType.Custom)
                 {
                     return _MSOAT.CustomDotMCPath;
                 }
@@ -283,8 +283,15 @@ namespace MEFL.CLAddIn.GameTypes
                 {
                     return dotMinecraftPath;
                 }
-            } set {  }
+            } set { }
         }
+
+        public string CustomDotMCPath
+        {
+            get { return _MSOAT.CustomDotMCPath; }
+            set { _MSOAT.CustomDotMCPath = value; }
+        }
+
 
 #if WPF
         public override IGameSettingPage SettingsPage {get {
@@ -294,7 +301,7 @@ namespace MEFL.CLAddIn.GameTypes
             }
         }
 #elif AVALONIA
-        public override IGameSettingPage SettingsPage => _settingPage;
+        public override IGameSettingPage SettingsPage {get{ _settingPage.DataContext = this; return _settingPage; } }
 #endif
         public override string GameJarPath => GameJsonPath.Replace(".json", ".jar");
 

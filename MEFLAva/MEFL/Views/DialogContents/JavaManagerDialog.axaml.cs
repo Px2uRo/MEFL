@@ -1,3 +1,4 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Threading;
 using MEFL.AvaControls;
@@ -57,6 +58,11 @@ namespace MEFL.Views.DialogContents
         private void ApplyBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             Action= 1;
+        }
+
+        public void WindowSizeChanged(Size size)
+        {
+
         }
 
         public event EventHandler<EventArgs> Quited;

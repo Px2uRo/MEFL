@@ -1,4 +1,5 @@
-﻿using MEFL.APIData;
+﻿using Avalonia.Threading;
+using MEFL.APIData;
 using MEFL.Contract;
 using MEFL.InfoControls;
 using MEFL.PageModelViews;
@@ -7,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Reflection;
 using System.Text;
 using System.Threading;
 
@@ -57,10 +59,19 @@ namespace MEFL
             }
             GameRefresher.RefreshCurrect();
         }
-#elif AVALONIA
-        //TODO Avalonia 自我的搞法
+#elif AVALONIA        
+        protected override void RemoveItem(int index)
+        {
+            this[index].Close();
+            this[index].Dispose();
+            base.RemoveItem(index);
+            if (this.Count == 0)
+            {
+
+            }
+        }
 #endif
-    }
+}
         public class DownloaderCollection : ObservableCollection<Contract.MEFLDownloader>
     {
         protected override void InsertItem(int index, MEFLDownloader item)

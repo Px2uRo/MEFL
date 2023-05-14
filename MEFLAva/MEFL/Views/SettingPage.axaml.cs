@@ -12,6 +12,8 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading;
+using System.Diagnostics;
 
 namespace MEFL.Views
 {
@@ -34,6 +36,7 @@ namespace MEFL.Views
             }
             return base.MeasureOverride(availableSize);
         }
+
         public SettingPage()
         {
             InitializeComponent();

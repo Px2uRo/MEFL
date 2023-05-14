@@ -1,3 +1,4 @@
+using Avalonia;
 using Avalonia.Controls;
 using MEFL.APIData;
 using MEFL.AvaControls;
@@ -74,6 +75,11 @@ namespace MEFL.Views.DialogContents
             (App.Current.Resources["RMPMV"] as RealMainPageModelView).Invoke("AccountName");
             ChooseAccountDialog.UI.ReLoad();
             ContentDialog.Show(ChooseAccountDialog.UI);
+        }
+
+        public void WindowSizeChanged(Size size)
+        {
+
         }
 
         public event EventHandler<EventArgs> Quited;

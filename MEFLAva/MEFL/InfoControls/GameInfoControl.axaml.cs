@@ -3,6 +3,7 @@ using Avalonia.Animation;
 using Avalonia.Controls;
 using Avalonia.Styling;
 using MEFL.APIData;
+using MEFL.AvaControls;
 using MEFL.Contract;
 using System;
 
@@ -18,6 +19,15 @@ namespace MEFL.InfoControls
             Enablebtn.Click += Enablebtn_Click;
             MoreInfoGrid.PointerEnter += MoreInfoGrid_PointerEnter;
             MoreInfoGrid.PointerLeave += MoreInfoGrid_PointerLeave;
+            MoreInfoBtn.Click += MoreInfoBtn_Click;
+        }
+
+        private void MoreInfoBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            var g = DataContext as GameInfoBase; if (g != null)
+            {
+                ContentDialog.Show(g.SettingsPage);
+            }
         }
 
         private void MoreInfoGrid_PointerLeave(object? sender, Avalonia.Input.PointerEventArgs e)
