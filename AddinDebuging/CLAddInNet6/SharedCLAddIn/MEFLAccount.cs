@@ -81,16 +81,19 @@ namespace MEFL.CLAddIn
         [JsonConverter(typeof(TokenConverter))]
         public string RefreshToken { get; set; }
     }
-    public class MEFLLegacyAccount : MEFL.Contract.AccountBase,INotifyPropertyChanged
+    internal class MEFLLegacyAccount : MEFL.Contract.AccountBase, INotifyPropertyChanged
     {
         public static ManageALegacyAccountPage page = new ManageALegacyAccountPage();
         [JsonIgnore]
-        public override bool Selected { get => base.Selected;
-            set {
+        public override bool Selected
+        {
+            get => base.Selected;
+            set
+            {
                 _Avator.Width = 200;
                 _Avator.Height = 200;
-                base.Selected = value; 
-            } 
+                base.Selected = value;
+            }
         }
         protected override void Dispose(bool disposing)
         {
@@ -118,9 +121,9 @@ namespace MEFL.CLAddIn
 
 #endif
         [JsonIgnore]
-        public override FrameworkElement ProfileAvator 
-        { 
-            get 
+        public override FrameworkElement ProfileAvator
+        {
+            get
             {
 #if WPF
                 if (Selected)
@@ -146,7 +149,11 @@ namespace MEFL.CLAddIn
             }
         }
         private string _username;
-        public override string UserName { get => _username; set { _username = value;
+        public override string UserName
+        {
+            get => _username; set
+            {
+                _username = value;
                 if (value.Length >= 2)
                 {
                     _AvatorText.Text = value.Substring(0, 2);
@@ -162,17 +169,21 @@ namespace MEFL.CLAddIn
                         _AvatorText.Text = String.Empty;
                     }
                 }
-            } 
+                PropChange();
+            }
         }
         private Guid _uuid;
-        public override Guid Uuid { get => _uuid; set {
-                _uuid=value;
-            } 
+        public override Guid Uuid
+        {
+            get => _uuid; set
+            {
+                _uuid = value; PropChange();
+            }
         }
         [JsonIgnore]
         public override string AccessToken { get => "0123456789abcdef0123456789ABCDEF"; set => throw new NotImplementedException(); }
 
-        [JsonIgnore] 
+        [JsonIgnore]
         public override string ClientID { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         [JsonIgnore]
         public override string Xuid { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
@@ -185,16 +196,151 @@ namespace MEFL.CLAddIn
         {
             get
             {
-                page.DataContext= this;
+                page.DataContext = this;
                 return page;
             }
         }
 
         public override void LaunchGameAction(Arguments.SettingArgs args)
         {
-            
+
         }
-        public MEFLLegacyAccount(string Name,Guid Uuid)
+        public MEFLLegacyAccount(string Name, Guid Uuid)
+        {
+            UserName = Name;
+            this.Uuid = Uuid;
+            _Avator.Children.Add(new Ellipse()
+            {
+                Fill = new SolidColorBrush(Colors.DarkGray),
+            });
+            _Avator.Children.Add(_AvatorText);
+        }
+    }
+    internal class MEFLUnitedPassportAccount : MEFL.Contract.AccountBase, INotifyPropertyChanged
+    {
+        public static ManageAUPAPage page = new ManageAUPAPage();
+        [JsonIgnore]
+        public override bool Selected
+        {
+            get => base.Selected;
+            set
+            {
+                _Avator.Width = 200;
+                _Avator.Height = 200;
+                base.Selected = value;
+            }
+        }
+        protected override void Dispose(bool disposing)
+        {
+            GC.SuppressFinalize(_Avator);
+            GC.SuppressFinalize(_AvatorText);
+            GC.SuppressFinalize(_username);
+            GC.SuppressFinalize(_uuid);
+
+            base.Dispose(disposing);
+        }
+        private Grid _Avator = new Grid();
+#if WPF
+        private TextBlock _AvatorText = new TextBlock() { VerticalAlignment = System.Windows.VerticalAlignment.Center, HorizontalAlignment = System.Windows.HorizontalAlignment.Center,FontSize=36,FontWeight=FontWeight.FromOpenTypeWeight(5),Foreground=new SolidColorBrush(Colors.White) };
+#elif AVALONIA
+        private TextBlock _AvatorText = new TextBlock() { VerticalAlignment = VerticalAlignment.Center, HorizontalAlignment = HorizontalAlignment.Center, FontSize = 36, FontWeight = (FontWeight)5, Foreground = new SolidColorBrush(Colors.White) };
+#endif
+#if WPF
+        [JsonIgnore]
+        public override object WelcomeWords {
+            get
+            {
+                return string.Format($"欢迎回来 {UserName}");
+            }
+        }
+
+#endif
+        [JsonIgnore]
+        public override FrameworkElement ProfileAvator
+        {
+            get
+            {
+#if WPF
+                if (Selected)
+                {
+                    _Avator.Width = 100;
+                    _Avator.Height = 100;
+                    _AvatorText.FontSize = 36;
+                    return _Avator;
+                }
+                else
+                {
+                    _Avator.Width = 25;
+                    _Avator.Height = 25;
+                    _AvatorText.FontSize = 14;
+                    return _Avator;
+                }
+#elif AVALONIA
+                _Avator.Width = 70;
+                _Avator.Height = 70;
+                _AvatorText.FontSize = 18;
+                return _Avator;
+#endif
+            }
+        }
+        private string _username;
+        public override string UserName
+        {
+            get => _username; set
+            {
+                _username = value;
+                if (value.Length >= 2)
+                {
+                    _AvatorText.Text = value.Substring(0, 2);
+                }
+                else
+                {
+                    if (value.Length == 1)
+                    {
+                        _AvatorText.Text = value.Substring(0, 1);
+                    }
+                    else
+                    {
+                        _AvatorText.Text = String.Empty;
+                    }
+                }
+                PropChange();
+            }
+        }
+        private Guid _uuid;
+        public override Guid Uuid
+        {
+            get => _uuid; set
+            {
+                _uuid = value; PropChange();
+            }
+        }
+        [JsonIgnore]
+        public override string AccessToken { get => "0123456789abcdef0123456789ABCDEF"; set => throw new NotImplementedException(); }
+
+        [JsonIgnore]
+        public override string ClientID { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        [JsonIgnore]
+        public override string Xuid { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        [JsonIgnore]
+        public override string UserType { get => "Legacy"; set => throw new NotImplementedException(); }
+        [JsonIgnore]
+        public override string UserProperties { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        [JsonIgnore]
+        public override IManageAccountPage ManagePage
+        {
+            get
+            {
+                page.DataContext = this;
+                return page;
+            }
+        }
+
+        public override void LaunchGameAction(Arguments.SettingArgs args)
+        {
+
+        }
+        public MEFLUnitedPassportAccount(string Name, Guid Uuid)
         {
             UserName = Name;
             this.Uuid = Uuid;

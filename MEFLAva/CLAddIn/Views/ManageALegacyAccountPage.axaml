@@ -4,5 +4,27 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CLAddIn.Views.ManageALegacyAccountPage">
-  Welcome to Avalonia!
+	<Grid Width="400" Height="300" Margin="10">
+		<Grid VerticalAlignment="Center">
+			<Grid VerticalAlignment="Center">
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition Height="50"/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="auto"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<TextBlock Text="用户名" FontSize="20" HorizontalAlignment="Right"/>
+				<TextBox Grid.Column="1" Name="NameBox"/>
+				<TextBlock Grid.Row="1" VerticalAlignment="Center" FontSize="24" FontWeight="Bold" Name="ErrorInfoBox" Grid.ColumnSpan="2" Foreground="Red" />
+				<TextBlock Grid.Row="2" FontSize="20" Text="GUID:" HorizontalAlignment="Right"/>
+				<TextBox Name="GuidBox" Grid.Column="1" Grid.Row="2"/>
+			</Grid>
+		</Grid>
+		<Button Foreground="White" Background="Red" HorizontalAlignment="Right" VerticalAlignment="Bottom" Name="DeleteBtn" Content="删除" Width="70" Margin="0,0,5,10"/>
+		<Button HorizontalAlignment="Right" VerticalAlignment="Bottom"  Content="取消" Name="CancelBtn" Width="70" Margin="0,0,155,10"/>
+		<Button HorizontalAlignment="Right" VerticalAlignment="Bottom"  Content="选择" Name="SelecteBtn" Width="70" Margin="0,0,80,10"/>
+	</Grid>
 </UserControl>

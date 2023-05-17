@@ -16,6 +16,30 @@ namespace MEFL.InfoControls
             Enablebtn.Click += Enablebtn_Click;
             MoreInfoGrid.PointerEnter += MoreInfoGrid_PointerEnter;
             MoreInfoGrid.PointerLeave += MoreInfoGrid_PointerLeave;
+            MoreInfoBtn.Click += MoreInfoBtn_Click;
+        }
+
+        private void MoreInfoBtn_Click(object? sender, RoutedEventArgs e)
+        {
+            var a = (this.DataContext as AccountBase);
+            a.ManagePage.OnSelected += ManagePage_OnSelected;
+            a.ManagePage.OnAccountDeleted += ManagePage_OnAccountDeleted;
+            ContentDialog.Show(a.ManagePage);
+        }
+
+        private void ManagePage_OnAccountDeleted(object sender, AccountBase account)
+        {
+            GC.SuppressFinalize(account);
+            APIModel.AccountConfigs.Remove(account);
+            this.Icon.Child = null;
+            ContentDialog.Quit();
+        }
+
+        private void ManagePage_OnSelected(object sender, AccountBase account)
+        {
+            APIModel.SelectedAccount = account;
+            this.Icon.Child = null;
+            ContentDialog.Quit();
         }
 
         private void Enablebtn_Click(object? sender, RoutedEventArgs e)

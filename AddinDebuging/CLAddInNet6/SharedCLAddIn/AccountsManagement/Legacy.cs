@@ -14,8 +14,12 @@ using CLAddIn.Views;
 
 namespace MEFL.CLAddIn.AccountsManagement
 {
-    public class LegacyList : ObservableCollection<CLAddIn.MEFLLegacyAccount>
+    internal class LegacyList : ObservableCollection<CLAddIn.MEFLLegacyAccount>
     {
+        public void WriteReg()
+        {
+            RegManager.Write("LegacyAccounts", JsonConvert.SerializeObject(this));
+        }
         public static LegacyList GetReg() {
             LegacyList res = new();
             try

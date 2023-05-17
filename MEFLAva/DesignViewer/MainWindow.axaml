@@ -5,31 +5,13 @@
         mc:Ignorable="d"
         x:Class="DesignViewer.MainWindow"
         Title="DesignViewer" Height="600" Width="750">
-	<Grid RowDefinitions="*,30">
-		<ScrollViewer>
-			<StackPanel>
-				<TextBlock Text="概览" FontSize="36" FontWeight="Bold" Margin="10"/>
-				<Grid RowDefinitions="auto,*" Height="128" ColumnDefinitions="128,*">
-					<Image Margin="3" Grid.RowSpan="2" Source="{Binding IconSource}" Width="128" HorizontalAlignment="Left"/>
-					<TextBox Grid.Column="1" FontWeight="Bold" BorderBrush="Transparent" Text="{Binding Name}" FontSize="26"/>
-					<TextBox Grid.Row="1" Text="{Binding Description}" Grid.Column="1" BorderBrush="Transparent" FontSize="20" TextWrapping="Wrap"/>
-				</Grid>
-				<TextBlock Text="游戏文件夹" FontSize="36" FontWeight="Bold" Margin="10"/>
-				<StackPanel Margin="10">
-					<RadioButton Name="UseMC" Content="使用 .minecraft 文件夹"/>
-					<RadioButton Name="Version" Content="隔离版本"/>
-					<RadioButton Name="Custom" Content="使用下面的自定义文件夹"/>
-					<Grid ColumnDefinitions="*,30">
-						<TextBox Text="{Binding CustomDotMCPath}"/>
-						<Button Name="Explorer" Width="30" Content=">" Height="30" Grid.Column="1"/>
-					</Grid>
-				</StackPanel>
-				<TextBlock Text="地图管理" FontSize="36" FontWeight="Bold" Margin="10"/>
-				<StackPanel Name="Maps"/>
-				<TextBlock Text="Mod管理 (还没做)" FontSize="36" FontWeight="Bold" Margin="10"/>
-				<StackPanel Name="Mods"/>
-			</StackPanel>
-		</ScrollViewer>
-		<Button Name="ExcuteBtn" Content="确定" HorizontalAlignment="Right" Grid.Row="1"/>
-	</Grid>
+	<StackPanel>
+		<Button Name="Web" Content="点击这个按钮打开 登陆网页" HorizontalAlignment="Center"/>
+	    <Rectangle Height="20"/>
+		<TextBlock Text="点击上面的登录按钮进行登录，成功后会是一片白色，这时请复制网址（以 https://login.live.com/oauth20_desktop.srf?code= 开头）到下方文本框，然后点击尝试登录" TextWrapping="Wrap"/>
+		<TextBox Name="WebSite" Width="400"/>
+		<Rectangle Height="20"/>
+		<Button Content="尝试登录" HorizontalAlignment="Center"/>
+	</StackPanel>
+    
 </Window>

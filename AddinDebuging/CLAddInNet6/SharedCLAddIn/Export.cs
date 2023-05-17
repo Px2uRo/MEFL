@@ -312,13 +312,26 @@ namespace MEFL.CLAddIn.Export
 
         static AddLegacyAccountPage legaPage = new();
 
+        static AddMSAccountPage mspage = new();
+
+        static AddUnitedPassportPage auppage = new();
+
         static AddAccountItem Legacy = new AddAccountItem(
-            new TextBlock() { Text = "离线登录", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, FontSize = 20, FontWeight = (FontWeight)999 },
+            new TextBlock() { Margin = new(5), Text = "离线登录", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, FontSize = 20, FontWeight = (FontWeight)999 },
             legaPage);
+
+        static AddAccountItem Msa = new AddAccountItem(
+            new TextBlock() { Margin=new(5), Text = "微软账号", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, FontSize = 20, FontWeight = (FontWeight)999 },
+            mspage); 
+        static AddAccountItem Aup = new AddAccountItem(
+            new TextBlock() { Margin = new(5), Text = "统一通行证", HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center, FontSize = 20, FontWeight = (FontWeight)999 },
+            auppage);
         public AddAccountItem[] GetSingUpPage(SettingArgs args)
         {
             legaPage.Refresh();
-            return new AddAccountItem[1] { Legacy };
+            mspage.Refresh();
+            auppage.Refresh();
+            return new AddAccountItem[3] { Legacy, Msa,Aup};
         }
 #endif
         //private AddAccountItem Legacy = new AddAccountItem() { Width=400,Height=60, AddAccountContent = new AddALegacyAccountPage(),FinnalReturn=new MEFLLegacyAccount(String.Empty,Guid.NewGuid().ToString()) };

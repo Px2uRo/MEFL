@@ -1,0 +1,17 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="CLAddIn.Views.AddMSAccountPage">
+	<StackPanel>
+		<Button Name="Web" Content="点击这个按钮打开 登录网页" HorizontalAlignment="Center"/>
+		<Rectangle Height="20"/>
+		<TextBlock Text="点击上面的登录按钮进行登录，成功后会是一片白色，这时请复制网址（以 https://login.live.com/oauth20_desktop.srf?code= 开头）到下方文本框，然后点击尝试登录" TextWrapping="Wrap"/>
+		<TextBox Name="WebSite" Width="400"/>
+		<Rectangle Height="20"/>
+		<Button Content="尝试登录" HorizontalAlignment="Center" Name="TryLogIn"/>
+		<Rectangle Height="20"/>
+		<Button Name="CancelBtn" Content="取消" Background="Red" Foreground="White" HorizontalAlignment="Center"/>
+	</StackPanel>
+</UserControl>

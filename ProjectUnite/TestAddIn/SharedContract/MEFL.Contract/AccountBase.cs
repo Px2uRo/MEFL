@@ -1,6 +1,7 @@
 using System;
 using System.ComponentModel;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using MEFL.Arguments;
 using Newtonsoft.Json;
@@ -14,8 +15,14 @@ namespace MEFL.Contract;
 public abstract class AccountBase : MEFLClass,INotifyPropertyChanged
 {
     public event PropertyChangedEventHandler? PropertyChanged;
+#if AVALONIA
+
+    public virtual void PropChange([CallerMemberName] string Prop = "")
+#elif WPF
+
 	public virtual void PropChange(string Prop)
-	{
+#endif
+    {
 		if (PropertyChanged != null)
 		{
 			PropertyChanged.Invoke(this,new(Prop));

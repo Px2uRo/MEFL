@@ -5,10 +5,10 @@ using System.Text;
 
 namespace MEFL.CLAddIn.AccountsManagement
 {
-    public static class Model
+    internal static class Model
     {
-        public static List<AccountBase> List;
-        public static LegacyList LegacyAccounts;
+        internal static List<AccountBase> List;
+        internal static LegacyList LegacyAccounts;
         internal static MicrosoftList MicrosoftAccounts;
 
         static Model()

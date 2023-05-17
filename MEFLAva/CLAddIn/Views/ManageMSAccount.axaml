@@ -4,5 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CLAddIn.Views.ManageMSAccount">
-  
+	<StackPanel>
+		<TextBlock FontSize="24" FontWeight="Bold" Text="你好，目前仅支持以下几个功能，你想干什么？"/>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+				<Button Content="返回" Name="QuitBtn" Margin="3"/>
+				<Button Content="网页" Name="WebSite" Margin="3"/>
+				<Button Content="选中" Name="Selec" Margin="3"/>
+				<Button Content="删除" Name="Delte" Background="Red" Foreground="White" Margin="3"/>
+			</StackPanel>
+	</StackPanel>
 </UserControl>
