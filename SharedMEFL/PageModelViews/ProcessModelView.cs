@@ -10,6 +10,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using System.IO.Compression;
 using comp = System.IO.Compression;
+using Avalonia.Threading;
 #if WPF
 using MEFL.Controls;
 using System.Windows.Media;
@@ -184,6 +185,10 @@ Invoke();
                     }
 #endif
                 }
+                await Dispatcher.UIThread.InvokeAsync(() => {
+                    ContentDialog.Quit();
+                    ContentDialog.Show(LaunchGameDialog.UI);
+                });
                 Progress = 1;
 #endregion
 #region 登录用户
@@ -209,6 +214,8 @@ Invoke();
                 {
                     Statu = "拼接参数";
                     string Args = string.Empty;
+                    Args += APIModel.SelectedAccount.JavaArgs;
+                    Args += " ";
                     if (String.IsNullOrEmpty(Game.OtherJVMArgs))
                     {
                         Args += APIModel.SettingConfig.OtherJVMArgs;
@@ -251,7 +258,7 @@ Invoke();
                 {"${assets_root}",$"\"{Game.dotMinecraftPath}\\assets\""},
                 {"${game_assets}",$"\"{Game.dotMinecraftPath}\\assets\\virtual\\legacy\""},
                 {"${assets_index_name}",$"{Game.AssetsIndexName}"},
-                {"${auth_uuid}",$"{APIData.APIModel.SelectedAccount.Uuid}" },
+                {"${auth_uuid}",$"{APIModel.SelectedAccount.Uuid}" },
                 {"${auth_access_token}",$"{APIModel.SelectedAccount.AccessToken}"},
                 {"${user_type}",$"{APIModel.SelectedAccount.UserType}"},
                 {"${version_type}",$"{Game.VersionType}"},

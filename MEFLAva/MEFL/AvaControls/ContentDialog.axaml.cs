@@ -26,6 +26,7 @@ namespace MEFL.AvaControls
                 mv.LeftButtons.IsEnabled= false;
                 cd.Content = null;
                 cd.Content = dialogContent;
+                dialogContent.WindowSizeChanged(mv.ClientSize);
                 cd.Background = new SolidColorBrush(Colors.Black);
                 mv.Dialog.Child = null;
                 mv.Dialog.Child = cd;

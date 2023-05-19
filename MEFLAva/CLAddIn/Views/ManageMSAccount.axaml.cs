@@ -21,7 +21,7 @@ namespace CLAddIn.Views
         private void Delte_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             var ms = DataContext as MEFLMicrosoftAccount;
-            Model.MicrosoftAccounts.RemoveOne(ms);
+            MicrosoftList.RemoveOne(ms);
             OnAccountDeleted?.Invoke(this,ms);
         }
 

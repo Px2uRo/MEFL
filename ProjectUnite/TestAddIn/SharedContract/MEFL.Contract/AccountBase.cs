@@ -33,7 +33,10 @@ public abstract class AccountBase : MEFLClass,INotifyPropertyChanged
 	{
 		return $"{UserName} {Uuid}";
 	}
-	[JsonIgnore]
+
+    public virtual string JavaArgs { get => ""; }
+	public virtual string GameArgs { get => ""; }
+    [JsonIgnore]
 	public virtual bool Selected { get; set; }
 
     public abstract FrameworkElement ProfileAvator { get; }

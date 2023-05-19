@@ -331,11 +331,17 @@ namespace MEFL.APIData
             }
             MainPageToolContoller.LoadMEFL();
             DownloaderCaller.SingleCallerEvent += DownloaderCaller_SingleCallerEvent;
+            AccountCaller.RemoveAccountEvent += AccountCaller_RemoveAccountEvent;
 #if DEBUG
 
 #else
             
 #endif
+        }
+
+        private static void AccountCaller_RemoveAccountEvent(object? sender, AccountBase e)
+        {
+            AccountConfigs.Remove(e);
         }
 
         private static void DownloaderCaller_SingleCallerEvent(object? sender, DownloadSingleArgs e)

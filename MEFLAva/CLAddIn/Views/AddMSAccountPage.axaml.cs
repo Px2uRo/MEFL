@@ -4,6 +4,8 @@ using MEFL.CLAddIn.AccountsManagement;
 using MEFL.CLAddIn;
 using MEFL.Contract;
 using System.Diagnostics;
+using MEFL.Callers;
+using System;
 
 namespace CLAddIn.Views
 {
@@ -32,6 +34,12 @@ namespace CLAddIn.Views
                 if (!cl.HasError)
                 {
                     var acc = MEFLMicrosoftAccount.LoadFromCL(cl);
+                    var lnq = Model.MicrosoftAccounts.Where((x => x.Uuid.ToString() == acc.Uuid.ToString())).ToArray();
+                    foreach (var item in lnq)
+                    {
+                        MicrosoftList.RemoveOne(item);
+                        AccountCaller.Remove(item);
+                    }
                     Model.MicrosoftAccounts.AddOne(acc);
                     OnAccountAdd.Invoke(this, acc);
                 }

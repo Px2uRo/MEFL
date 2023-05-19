@@ -138,6 +138,7 @@ namespace MEFL.CLAddIn.Downloaders
 #endif  
                         CurrectProgressIndex = 1;
                         Content = "下载文件中（包括资源和运行库）";
+                        CurrentProgress = 0;
                         TotalSize = 0;
                         List<MCFileInfo> lst;
                         if (string.IsNullOrEmpty(combined2))
@@ -172,9 +173,15 @@ DotMCPath, Arguments.VersionName, true
                         if(Arguments is InstallArgsWithForge)
                         {
                             processm.Finished += Processm_Finished;
+                            processm.DownloadedSizeUpdated += Processm_DownloadedSizeUpdated;
+                            processm.Start(temp,true);
                         }
-                        processm.DownloadedSizeUpdated += Processm_DownloadedSizeUpdated;
-                        processm.Start(temp);
+                        else
+                        {
+                            processm.Finished += Processm_Finished1;
+                            processm.DownloadedSizeUpdated += Processm_DownloadedSizeUpdated;
+                            processm.Start(temp);
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -184,9 +191,15 @@ DotMCPath, Arguments.VersionName, true
             }).Start();
         }
 
+        private void Processm_Finished1(object? sender, EventArgs e)
+        {
+            Finish();
+        }
+
         private void Processm_Finished(object? sender, EventArgs e)
         {
             CurrectProgressIndex = 2;
+            CurrentProgress = 0;
             Content = "安装 Forge 中";
             var installer = new ForgeInstaller();
             installer.Output += Installer_Output;
@@ -194,6 +207,7 @@ DotMCPath, Arguments.VersionName, true
                 cltlocal,localMCJson,inslocal,ParseType.FilePath);
             CurrectProgressIndex= 3;
             Content = "已完成！";
+            Finish();
         }
 
         private void Installer_Output(object? sender, string e)

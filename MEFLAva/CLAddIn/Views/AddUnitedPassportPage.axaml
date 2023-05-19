@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CLAddIn.Views.AddUnitedPassportPage">
-	<Grid RowDefinitions="125,125,50">
+	<Grid RowDefinitions="125,125,125,50">
 		<Grid Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" ColumnDefinitions="80,350" >
 			<TextBlock VerticalAlignment="Center" Text="账户 / 邮箱"/>
 			<TextBox VerticalAlignment="Center" Name="AccountNameTB" Grid.Column="1"/>
@@ -13,7 +13,11 @@
 			<TextBlock VerticalAlignment="Center" Text="密码："/>
 			<TextBox VerticalAlignment="Center" Name="PWTB" PasswordChar="*" Grid.Column="1"/>
 		</Grid>
-		<StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="2">
+		<Grid Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" ColumnDefinitions="80,350">
+			<TextBlock VerticalAlignment="Center" Text="服务器 ID："/>
+			<TextBox VerticalAlignment="Center" Name="ServerID" Grid.Column="1"/>
+		</Grid>
+		<StackPanel HorizontalAlignment="Right" VerticalAlignment="Center" Orientation="Horizontal" Grid.Row="3">
 			<Button Content="取消" Name="CancelBtn"/>
 			<Button Content="添加" Name="AddBtn"/>
 		</StackPanel>

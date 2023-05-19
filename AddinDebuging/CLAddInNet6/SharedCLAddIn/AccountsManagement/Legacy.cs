@@ -55,7 +55,7 @@ namespace MEFL.CLAddIn.AccountsManagement
             RegManager.Write("LegacyAccounts", JsonConvert.SerializeObject(Model.LegacyAccounts));
         }
 
-        internal void RemoveOne(MEFLLegacyAccount account)
+        internal static void RemoveOne(MEFLLegacyAccount account)
         {
             Model.LegacyAccounts.Remove(account);
             RegManager.Write("LegacyAccounts", JsonConvert.SerializeObject(Model.LegacyAccounts));

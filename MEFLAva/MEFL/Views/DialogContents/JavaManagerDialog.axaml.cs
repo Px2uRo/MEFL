@@ -32,7 +32,7 @@ namespace MEFL.Views.DialogContents
             Thread.Sleep(300);
             while (UI.Action==-1)
             {
-
+                Thread.Sleep(300);
             }
             action = UI.Action;
             if (UI.Action == 2)

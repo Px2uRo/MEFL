@@ -1,9 +1,19 @@
-﻿using System;
+﻿using MEFL.Contract;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace MEFL.Callers
 {
+    public static class AccountCaller
+    {
+        public static event EventHandler<AccountBase>  RemoveAccountEvent;
+
+        public static void Remove(AccountBase account)
+        {
+            RemoveAccountEvent?.Invoke(null,account);
+        }
+    }
     public static class DownloaderCaller
     {
         public static event EventHandler<DownloadSingleArgs> SingleCallerEvent;

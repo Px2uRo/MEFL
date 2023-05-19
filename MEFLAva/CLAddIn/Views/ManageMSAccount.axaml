@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="CLAddIn.Views.ManageMSAccount">
+             Margin="25" x:Class="CLAddIn.Views.ManageMSAccount">
 	<StackPanel>
 		<TextBlock FontSize="24" FontWeight="Bold" Text="你好，目前仅支持以下几个功能，你想干什么？"/>
 		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">

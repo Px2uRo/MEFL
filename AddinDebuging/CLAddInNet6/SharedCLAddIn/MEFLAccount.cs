@@ -9,6 +9,13 @@ using System.Configuration;
 using System.ComponentModel;
 using CoreLaunching.MicrosoftAuth;
 using MEFL.CLAddIn.Sercurity;
+using CoreLaunching.Accounts;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using MEFL.CLAddIn.AccountsManagement;
+using System.Net;
+using CoreLaunching.JsonTemplates;
+using File = System.IO.File;
+using Avalonia.Threading;
 #if WPF
 using CLAddInNet6.Pages;
 using MEFL.CLAddIn.FrameworkIcons;
@@ -63,9 +70,9 @@ namespace MEFL.CLAddIn
         }
         public override void LaunchGameAction(SettingArgs args)
         {
-            var info = CoreLaunching.MicrosoftAuth.MSAuthAccount.GetInfoWithRefreshTokenFromRefreshToken(RefreshToken);
-            AccessToken= info.AccessToken;
-            RefreshToken= info.RefreshToken;
+                var info = CoreLaunching.MicrosoftAuth.MSAuthAccount.GetInfoWithRefreshTokenFromRefreshToken(RefreshToken);
+                AccessToken = info.AccessToken;
+                RefreshToken = info.RefreshToken;
         }
 
         internal static MEFLMicrosoftAccount LoadFromCL(MSAPlayerInfoWithRefreshToken cl)
@@ -218,6 +225,7 @@ namespace MEFL.CLAddIn
     }
     internal class MEFLUnitedPassportAccount : MEFL.Contract.AccountBase, INotifyPropertyChanged
     {
+        public override string JavaArgs => _cl.JVMArgs;
         public static ManageAUPAPage page = new ManageAUPAPage();
         [JsonIgnore]
         public override bool Selected
@@ -234,8 +242,7 @@ namespace MEFL.CLAddIn
         {
             GC.SuppressFinalize(_Avator);
             GC.SuppressFinalize(_AvatorText);
-            GC.SuppressFinalize(_username);
-            GC.SuppressFinalize(_uuid);
+            GC.SuppressFinalize(_cl);
 
             base.Dispose(disposing);
         }
@@ -283,47 +290,51 @@ namespace MEFL.CLAddIn
 #endif
             }
         }
-        private string _username;
         public override string UserName
         {
-            get => _username; set
+            get => _cl.UserName; set
             {
-                _username = value;
-                if (value.Length >= 2)
-                {
-                    _AvatorText.Text = value.Substring(0, 2);
-                }
-                else
-                {
-                    if (value.Length == 1)
+                _cl.UserName = value;
+                Dispatcher.UIThread.InvokeAsync(() => {
+                    if (value.Length >= 2)
                     {
-                        _AvatorText.Text = value.Substring(0, 1);
+                        _AvatorText.Text = value.Substring(0, 2);
                     }
                     else
                     {
-                        _AvatorText.Text = String.Empty;
+                        if (value.Length == 1)
+                        {
+                            _AvatorText.Text = value.Substring(0, 1);
+                        }
+                        else
+                        {
+                            _AvatorText.Text = String.Empty;
+                        }
                     }
-                }
+                    PropChange();
+                });
+            }
+        }
+        public override Guid Uuid
+        {
+            get =>Guid.Parse( _cl.Uuid );
+            set
+            {
+                _cl.Uuid = value.ToString();
                 PropChange();
             }
         }
-        private Guid _uuid;
-        public override Guid Uuid
-        {
-            get => _uuid; set
-            {
-                _uuid = value; PropChange();
-            }
-        }
-        [JsonIgnore]
-        public override string AccessToken { get => "0123456789abcdef0123456789ABCDEF"; set => throw new NotImplementedException(); }
-
+        public string ServerID { get => _cl.ServerID; set { _cl.ServerID = value; } }
+        [JsonConverter(typeof(TokenConverter))]
+        public string ClientToken { get => _cl.ClientToken; set { _cl.ClientToken = value; } }
+        [JsonConverter(typeof(TokenConverter))]
+        public override string AccessToken { get => _cl.AccessToken; set { _cl.AccessToken = value; } }
         [JsonIgnore]
         public override string ClientID { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         [JsonIgnore]
         public override string Xuid { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         [JsonIgnore]
-        public override string UserType { get => "Legacy"; set => throw new NotImplementedException(); }
+        public override string UserType { get => "msa"; set => throw new NotImplementedException(); }
         [JsonIgnore]
         public override string UserProperties { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         [JsonIgnore]
@@ -338,12 +349,38 @@ namespace MEFL.CLAddIn
 
         public override void LaunchGameAction(Arguments.SettingArgs args)
         {
-
+            if (!File.Exists(_cl.Nide8AuthPath))
+            {
+                using (var clt = new WebClient())
+                {
+                    Directory.CreateDirectory(System.IO.Path.GetDirectoryName(_cl.Nide8AuthPath));
+                    clt.DownloadFile("https://static.mc-user.com:233/downloads/nide8auth.jar",_cl.Nide8AuthPath);
+                }
+            }
+            if (_cl.SingUp(out var errorInfo))
+            {
+                RegManager.Write("UnitedPassportAccounts", JsonConvert.SerializeObject(Model.UPList));
+            }
+            else
+            {
+                throw new Exception(errorInfo);
+            }
         }
-        public MEFLUnitedPassportAccount(string Name, Guid Uuid)
+        public string EmailAddress { get => _cl.EmailAddress; set { _cl.EmailAddress = value; } }
+        internal UnitedPassportAccount _cl = null;
+        public MEFLUnitedPassportAccount(CoreLaunching.Accounts.UnitedPassportAccount cl)
         {
-            UserName = Name;
-            this.Uuid = Uuid;
+            _cl = cl;
+            _Avator.Children.Add(new Ellipse()
+            {
+                Fill = new SolidColorBrush(Colors.DarkGray),
+            });
+            _Avator.Children.Add(_AvatorText);
+        }
+
+        public MEFLUnitedPassportAccount()
+        {
+            _cl = new();
             _Avator.Children.Add(new Ellipse()
             {
                 Fill = new SolidColorBrush(Colors.DarkGray),

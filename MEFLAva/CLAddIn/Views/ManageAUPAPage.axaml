@@ -3,6 +3,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="CLAddIn.Views.ManageAUPAPage">
-  Welcome to Avalonia!
+             x:Class="CLAddIn.Views.ManageAUPAPage" Margin="25">
+	<StackPanel>
+		<TextBlock TextWrapping="Wrap" Text="        你好，暂时不支持直接从该页面更改统一通行证账户信息，请点击以下按钮进行操作" FontWeight="Bold" FontSize="24"/>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+			<Button Content="返回" Name="BackBtn" Margin="3"/>
+			<Button Content="修改密码" Name="PWBtn" Margin="3"/>
+			<Button Content="修改皮肤" Name="WebSiteBtn" Margin="3"/>
+			<Button Content="选中" Name="Selec" Margin="3"/>
+			<Button Content="删除" Name="Delte" Background="Red" Foreground="White" Margin="3"/>
+		</StackPanel>
+	</StackPanel>
 </UserControl>

@@ -1,5 +1,6 @@
 using Avalonia;
 using Avalonia.Controls;
+using MEFL.Callers;
 using MEFL.CLAddIn;
 using MEFL.CLAddIn.AccountsManagement;
 using MEFL.Contract;
@@ -28,8 +29,13 @@ namespace CLAddIn.Views
             }
             if(Guid.TryParse(GuidTB.Text,out var guid)) 
             {
-
                 var account = new MEFLLegacyAccount(AccountNameTB.Text,guid);
+                var lnq = Model.LegacyAccounts.Where((x => x.Uuid.ToString() == guid.ToString())).ToArray();
+                foreach (var item in lnq)
+                {
+                    LegacyList.RemoveOne(item);
+                    AccountCaller.Remove(item);
+                }
                 LegacyList.AddOne(account);
                 OnAccountAdd.Invoke(this,account);
             }

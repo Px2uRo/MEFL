@@ -6,12 +6,12 @@
         x:Class="DesignViewer.MainWindow"
         Title="DesignViewer" Height="600" Width="750">
 	<StackPanel>
-		<Button Name="Web" Content="点击这个按钮打开 登陆网页" HorizontalAlignment="Center"/>
-	    <Rectangle Height="20"/>
-		<TextBlock Text="点击上面的登录按钮进行登录，成功后会是一片白色，这时请复制网址（以 https://login.live.com/oauth20_desktop.srf?code= 开头）到下方文本框，然后点击尝试登录" TextWrapping="Wrap"/>
-		<TextBox Name="WebSite" Width="400"/>
-		<Rectangle Height="20"/>
-		<Button Content="尝试登录" HorizontalAlignment="Center"/>
+		<TextBlock TextWrapping="Wrap" Text="        你好，暂时不支持直接从该页面更改统一通行证账户信息，请点击以下按钮打开网页更改" FontWeight="Bold" FontSize="24"/>
+		<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+			<Button Content="修改密码" Name="BackBtn" Margin="3"/>
+			<Button Content="修改皮肤" Name="WebSiteBtn" Margin="3"/>
+			<Button Content="选中" Name="Selec" Margin="3"/>
+			<Button Content="删除" Name="Delte" Background="Red" Foreground="White" Margin="3"/>
+		</StackPanel>
 	</StackPanel>
-    
 </Window>

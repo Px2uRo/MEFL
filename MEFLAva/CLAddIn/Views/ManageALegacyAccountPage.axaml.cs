@@ -27,7 +27,7 @@ namespace CLAddIn.Views
         private void DeleteBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             var a = DataContext as MEFLLegacyAccount;
-            Model.LegacyAccounts.RemoveOne(a);
+            LegacyList.RemoveOne(a);
             OnAccountDeleted?.Invoke(this,a);
         }
 

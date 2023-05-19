@@ -15,17 +15,17 @@ namespace CLAddIn.Views
         public MEFLRealseTypeManage(Process process)
         {
             InitializeComponent();
-            //process.StartInfo.RedirectStandardError = false;
-            //process.StartInfo.CreateNoWindow = false;
+            process.StartInfo.RedirectStandardError = false;
+            process.StartInfo.CreateNoWindow = false;
 
-            //process.StartInfo.RedirectStandardOutput = true;
-            //process.StartInfo.RedirectStandardError= true;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.RedirectStandardError= true;
             process.EnableRaisingEvents = true; 
-            //process.OutputDataReceived += Process_OutputDataReceived;
-            //process.ErrorDataReceived += Process_ErrorDataReceived;
+            process.OutputDataReceived += Process_OutputDataReceived;
+            process.ErrorDataReceived += Process_ErrorDataReceived;
             process.Start();
-            //process.BeginOutputReadLine();
-            //process.BeginErrorReadLine();
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
             process.Exited += Process_Exited;
             TB.Text = $"{DateTime.Now} 游戏启动，等待游戏加载";
         }
@@ -56,6 +56,14 @@ namespace CLAddIn.Views
             if((sender as Process).ExitCode == 0)
             {
                 Exited?.Invoke(this, e);
+            }
+            else
+            {
+                Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    Scl.ScrollToEnd();
+                    TB.Text = TB.Text + "\n" + "异常退出";
+                });
             }
         }
 
