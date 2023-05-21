@@ -15,17 +15,17 @@ namespace CLAddIn.Views
         public MEFLRealseTypeManage(Process process)
         {
             InitializeComponent();
-            process.StartInfo.RedirectStandardError = false;
-            process.StartInfo.CreateNoWindow = false;
+            //process.StartInfo.RedirectStandardError = false;
+            //process.StartInfo.CreateNoWindow = false;
 
-            process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.RedirectStandardError= true;
+            //process.StartInfo.RedirectStandardOutput = true;
+            //process.StartInfo.RedirectStandardError= true;
             process.EnableRaisingEvents = true; 
-            process.OutputDataReceived += Process_OutputDataReceived;
-            process.ErrorDataReceived += Process_ErrorDataReceived;
+            //process.OutputDataReceived += Process_OutputDataReceived;
+            //process.ErrorDataReceived += Process_ErrorDataReceived;
             process.Start();
-            process.BeginOutputReadLine();
-            process.BeginErrorReadLine();
+            //process.BeginOutputReadLine();
+            //process.BeginErrorReadLine();
             process.Exited += Process_Exited;
             TB.Text = $"{DateTime.Now} 游戏启动，等待游戏加载";
         }
@@ -63,8 +63,17 @@ namespace CLAddIn.Views
                 {
                     Scl.ScrollToEnd();
                     TB.Text = TB.Text + "\n" + "异常退出";
+                    var btn = new Button() { HorizontalAlignment=Avalonia.Layout.HorizontalAlignment.Right,
+                        VerticalAlignment=Avalonia.Layout.VerticalAlignment.Center,Content="清除"};
+                    btn.Click += Btn_Click;
+                    grid.Children.Add(btn);
                 });
             }
+        }
+
+        private void Btn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         public event EventHandler Exited;

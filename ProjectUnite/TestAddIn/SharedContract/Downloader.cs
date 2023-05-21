@@ -47,7 +47,7 @@ namespace MEFL.Contract
         /// <param name="sources">下载源</param>
         /// <param name="usingLocalFiles">正在使用的本地文件</param>
         /// <returns>下载进程</returns>
-        public abstract InstallProcess CreateProgress(NativeLocalPairsList NativeLocalPairs, DownloadSource[] sources,string usingLocalFiles);
+        public abstract SingleProcess CreateProgressFromPair(List<JsonFileInfo> NativeLocalPairs, DownloadSource[] sources,string[] usingLocalFiles);
         /// <summary>
         /// 安装游戏进程
         /// </summary>

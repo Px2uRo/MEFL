@@ -459,12 +459,12 @@ namespace MEFL.CLAddIn.CLDownding
 
         public override object pubIcon => "CLAddIn";
 
-        public override InstallProcess CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string dotMCFolder)
+        public override InstallProcess CreateProgressFromPair(string NativeUrl, string LoaclPath, DownloadSource[] sources, string dotMCFolder)
         {
             return new CLAddInDownloadingProgress(NativeUrl, LoaclPath, dotMCFolder,sources);
         }
 
-        public override InstallProcess CreateProgress(List<NativeLocalPair> NativeLocalPairs, DownloadSource[] sources, string dotMCFolder)
+        public override InstallProcess CreateProgressFromPair(List<NativeLocalPair> NativeLocalPairs, DownloadSource[] sources, string dotMCFolder)
         {
             return new CLAddInDownloadingProgress(NativeLocalPairs, dotMCFolder);
         }

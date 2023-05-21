@@ -24,8 +24,15 @@ namespace MEFL.InfoControls
         private void Progress_Finished(object? sender, EventArgs e)
         {
             Dispatcher.UIThread.InvokeAsync(() => {
-                DownloadingProgressPageModel.ModelView.DownloadingProgresses.Remove(DataContext as InstallProcess);
-                (this.Parent as Panel).Children.Remove(this);
+                try
+                {
+                    DownloadingProgressPageModel.ModelView.DownloadingProgresses.Remove(DataContext as InstallProcess);
+                    (this.Parent as Panel).Children.Remove(this);
+                }
+                catch
+                {
+
+                }
             });
         }
 

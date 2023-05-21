@@ -299,28 +299,39 @@ Invoke();
                     TotalSize += item.size;
                     TotalItems++;
                 }
-#endregion
-#region Download
+                #endregion
+                #region Download
+                var procfinished = true;
                 if (TotalSize != 0.0)
                 {
+                    procfinished = false;
                     Debug.WriteLine(TotalItems);
-                    foreach (var item in Game.FileNeedsToDownload)
+                    if (APIModel.SelectedDownloader != null)
                     {
-                        try
+                        var proc = APIModel.SelectedDownloader.CreateProgressFromPair(Game.FileNeedsToDownload, APIModel.DownloadSources.Selected,new List<string>().ToArray());
+                        proc.Finished += new((s, e) => { 
+                        procfinished= true;
+                        });
+                        proc.Failed += new((s, e) => {
+                            procfinished = true;
+                        });
+                        proc.PropertyChanged += new((s, e) =>
                         {
-                            Directory.CreateDirectory(Path.GetDirectoryName(item.localpath));
-                            File.Create(item.localpath).Close();
-
-                            //todo 补全文件
-                            //APIModel.SelectedDownloader.CreateProgress(item.Url, item.localpath);
-                        }
-                        catch (Exception ex)
-                        {
-                            ErrorInfo = $"无法下载{item.Url}，原因是{ex.Message}";
-                            Failed = true;
-                            return;
-                        }
+                        var sen = s as SingleProcess;
+                        Progress = 10 + Math.Round(((double)sen.DownloadedSize / (double)sen.TotalSize) * 90d);
+                        });
+                        proc.Start();
                     }
+                    else
+                    {
+                        ErrorInfo = "启动游戏需要下载一些文件，但是你好像还没选择下载器";
+                        Failed = true;
+                        return;
+                    }
+                }
+                while (!procfinished)
+                {
+                    Thread.Sleep(200);
                 }
 #endregion
 #region 解压Native
@@ -343,7 +354,7 @@ Invoke();
                         }
                     }
                 }
-                if (TotalSize - DownloadedSize == 0.0)
+                if (true)
                 {
                     Progress = 100;
 #if DEBUG

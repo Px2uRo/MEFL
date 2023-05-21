@@ -15,12 +15,12 @@ namespace MEFL.CLAddIn.Downloaders
 
         public override object pubIcon => "C#";
 
-        public override InstallProcess CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string dotMCFolder)
+        public override InstallProcess CreateProgressFromPair(string NativeUrl, string LoaclPath, DownloadSource[] sources, string dotMCFolder)
         {
             return new NormalDownloadProgress(NativeUrl, LoaclPath, dotMCFolder,sources);
         }
 
-        public override InstallProcess CreateProgress(List<NativeLocalPair> NativeLocalPairs, DownloadSource[] sources, string dotMCFolder)
+        public override InstallProcess CreateProgressFromPair(List<NativeLocalPair> NativeLocalPairs, DownloadSource[] sources, string dotMCFolder)
         {
             return new NormalDownloadProgress(NativeLocalPairs, dotMCFolder,sources);
         }
@@ -35,12 +35,12 @@ namespace MEFL.CLAddIn.Downloaders
 
         public override object pubIcon => "CL";
 
-        public override InstallProcess CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string dotMCFolder)
+        public override InstallProcess CreateProgressFromPair(string NativeUrl, string LoaclPath, DownloadSource[] sources, string dotMCFolder)
         {
             return new CLDownloadProgress(NativeUrl, LoaclPath, dotMCFolder);
         }
 
-        public override InstallProcess CreateProgress(List<NativeLocalPair> NativeLocalPairs, DownloadSource[] sources, string dotMCFolder)
+        public override InstallProcess CreateProgressFromPair(List<NativeLocalPair> NativeLocalPairs, DownloadSource[] sources, string dotMCFolder)
         {
             return new CLDownloadProgress(NativeLocalPairs, dotMCFolder);
         }

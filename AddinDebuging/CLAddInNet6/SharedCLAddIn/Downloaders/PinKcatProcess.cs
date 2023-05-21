@@ -1,6 +1,7 @@
 ﻿using Avalonia.Threading;
 using Avalonia.X11;
 using CoreLaunching.Forge;
+using CoreLaunching.JsonTemplates;
 using CoreLaunching.MicrosoftAuth;
 using CoreLaunching.PinKcatDownloader;
 using MEFL.Arguments;
@@ -17,6 +18,7 @@ using System.Text;
 using System.Text.Json.Nodes;
 using System.Threading;
 using System.Windows;
+using File = System.IO.File;
 
 namespace MEFL.CLAddIn.Downloaders
 {
@@ -116,7 +118,7 @@ namespace MEFL.CLAddIn.Downloaders
                             }
                             var content = ForgeParser.GetVersionContentFromInstaller(inslocal,false);
                             var combined = ForgeParser.CombineVersionJson(File.ReadAllText(localJson),content,ParseType.Json,arg.VersionName);
-                            File.WriteAllText(localJson,combined);
+                            System.IO.File.WriteAllText(localJson,combined);
                             localMCJson = localJson;
                             cltlocal = localJson.Replace(".json",".jar");
                             var content2 = ForgeParser.GetInstallProfileContentFromInstaller(url, true);
@@ -170,18 +172,10 @@ DotMCPath, Arguments.VersionName, true
                         }
                         var processm = new ProcessManager(lst);
                         var temp = Path.Combine(DotMCPath, "CoreLaunchingTemp");
-                        if(Arguments is InstallArgsWithForge)
-                        {
-                            processm.Finished += Processm_Finished;
-                            processm.DownloadedSizeUpdated += Processm_DownloadedSizeUpdated;
-                            processm.Start(temp,true);
-                        }
-                        else
-                        {
-                            processm.Finished += Processm_Finished1;
-                            processm.DownloadedSizeUpdated += Processm_DownloadedSizeUpdated;
-                            processm.Start(temp);
-                        }
+
+                        processm.Finished += Processm_Finished1;
+                        processm.DownloadedSizeUpdated += Processm_DownloadedSizeUpdated;
+                        processm.Start(temp);
                     }
                     catch (Exception ex)
                     {
@@ -191,7 +185,44 @@ DotMCPath, Arguments.VersionName, true
             }).Start();
         }
 
+        DateTime part2LastUpd;
         private void Processm_Finished1(object? sender, EventArgs e)
+        {
+            var m = sender as ProcessManager;
+            firstM = m.DownloadedSize;
+            if (Arguments is InstallArgsWithForge)
+            {
+                var NoExistList = ItemsArray.Where(x => !File.Exists(x.Local)).ToArray();
+                var processm = new ProcessManager(NoExistList);
+                processm.Finished += Processm_Finished;
+                processm.DownloadedSizeUpdated += Nm_DownloadedSizeUpdated;
+                processm.Start(Path.Combine(DotMCPath, "CoreLaunchingTemp"), true);
+            }
+            else
+            {
+                var nm = new ProcessManager(m.Remains);
+                nm.Finished += Nm_Finished;
+                nm.DownloadedSizeUpdated += Nm_DownloadedSizeUpdated;
+                nm.Start(Path.Combine(DotMCPath, "CoreLaunchingTemp"), true);
+                part2LastUpd = DateTime.Now;
+                while (DateTime.Now - part2LastUpd < TimeSpan.FromSeconds(20))
+                {
+                    Thread.Sleep(100);
+                }
+                Finish();
+            }
+        }
+        long firstM = 0;
+        private void Nm_DownloadedSizeUpdated(object? sender, long e)
+        {
+            part2LastUpd = DateTime.Now;
+            if (CurrectProgressIndex == 1)
+            {
+                CurrentProgress = (double)(firstM + e )/ (double)TotalSize;
+            }
+        }
+
+        private void Nm_Finished(object? sender, EventArgs e)
         {
             Finish();
         }
@@ -205,13 +236,26 @@ DotMCPath, Arguments.VersionName, true
             installer.Output += Installer_Output;
             installer.InstallClient(_jaPth, Path.Combine(DotMCPath,"libraries"),
                 cltlocal,localMCJson,inslocal,ParseType.FilePath);
-            CurrectProgressIndex= 3;
+            CurrentProgress = 1;
+            CurrectProgressIndex = 3;
             Content = "已完成！";
             Finish();
         }
 
         private void Installer_Output(object? sender, string e)
         {
+            if (e.Contains("MCP_DATA"))
+            {
+                CurrentProgress = 0.05;
+            }
+            else if (e.Contains("DOWNLOAD_MOJMAPS"))
+            {
+                CurrentProgress = 0.1;
+            }
+            else if (e.Contains("MERGE_MAPPING"))
+            {
+                CurrentProgress = 0.15;
+            }
             Debug.WriteLine(e);
         }
 
@@ -269,10 +313,10 @@ DotMCPath, Arguments.VersionName, true
         Queue<RequestWithRange> total = new();
         List<RequestWithRange> running = new();
         Queue<RequestWithRange> failed = new();
-        public PinKcatSingleProcess(string nativePath,string localPath)
+        public PinKcatSingleProcess(string nativePath, string localPath)
         {
-            NativeUrl= nativePath;
-            LocalPath= localPath;
+            NativeUrl = nativePath;
+            LocalPath = localPath;
         }
 
         public override void Cancel()
@@ -336,7 +380,7 @@ DotMCPath, Arguments.VersionName, true
                     var webReq = HttpWebRequest.CreateHttp(NativeUrl);
                     using (var rep = webReq.GetResponse())
                     {
-                        TotalSize= rep.ContentLength;
+                        TotalSize = rep.ContentLength;
                     }
                     Statu = DownloadProgressState.Downloading;
                     if (Statu == DownloadProgressState.Downloading)
@@ -393,6 +437,106 @@ DotMCPath, Arguments.VersionName, true
                     Fail();
                 }
             }).Start();
+        }
+    }
+    internal class PinKcatPairProcess : SingleProcess
+    {
+        Queue<RequestWithRange> total = new();
+        List<RequestWithRange> running = new();
+        Queue<RequestWithRange> failed = new();
+        private List<JsonFileInfo> nativeLocalPairs;
+        private DownloadSource[] sources;
+        private string[] usingLocalFiles;
+
+        public PinKcatPairProcess(List<JsonFileInfo> nativeLocalPairs, DownloadSource[] sources, string[] usingLocalFiles)
+        {
+            this.nativeLocalPairs = nativeLocalPairs;
+            this.sources = sources;
+            this.usingLocalFiles = usingLocalFiles;
+        }
+
+        public override void Cancel()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Continue()
+        {
+
+        }
+
+        private void T_WholeFinished(object? sender, long e)
+        {
+            running.Remove(sender as RequestWithRange);
+        }
+
+        private void T_Failed(object? sender, EventArgs e)
+        {
+            failed.Enqueue(sender as RequestWithRange);
+            running.Remove(sender as RequestWithRange);
+        }
+
+        private void P_CombineFinished(object? sender, MCFileInfo e)
+        {
+            Finish();
+        }
+
+        private void P_Finished(object? sender, Thread e)
+        {
+            Finish();
+        }
+
+        private void P_DownloadedUpdated(object? sender, long e)
+        {
+            DownloadedSize += e;
+        }
+
+        public override bool GetUsingLocalFiles(out string[] paths)
+        {
+            paths = new string[0];
+            return true;
+        }
+
+        public override void Pause()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Retry()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Start()
+        {
+            new Thread(() =>
+            {
+                try
+                {
+                    var infos = new List<MCFileInfo>();
+                    foreach (var item in nativeLocalPairs)
+                    {
+                        infos.Add(new(Path.GetFileName(item.Url),item.sha1,item.size,item.Url,item.localpath));
+                    }
+                    var proms = new ProcessManager(infos);
+                    var temp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"CLtemp");
+                    proms.DownloadedSizeUpdated += (sender, e) =>
+                    {
+                        DownloadedSize = e;
+                    };
+                    proms.Finished += Proms_Finished;
+                    new Thread(()=> { proms.Start(temp, true);}).Start();
+                }
+                catch
+                {
+                    Fail();
+                }
+            }).Start();
+        }
+
+        private void Proms_Finished(object? sender, EventArgs e)
+        {
+            Finish();
         }
     }
 }

@@ -22,9 +22,9 @@ namespace MEFL.CLAddIn.Downloaders
             return new PinKcatSingleProcess(NativeUrl,LoaclPath);
         }
 
-        public override InstallProcess CreateProgress(NativeLocalPairsList NativeLocalPairs, DownloadSource[] sources, string usingLocalFiles)
+        public override SingleProcess CreateProgressFromPair(List<JsonFileInfo> NativeLocalPairs, DownloadSource[] sources, string[] usingLocalFiles)
         {
-            throw new NotImplementedException();
+            return new PinKcatPairProcess(NativeLocalPairs,sources,usingLocalFiles);
         }
 
         public override InstallProcess InstallMinecraft(string jsonSource, string dotMCFolder, DownloadSource[] sources, InstallArguments args, string[] usingLocalFiles)

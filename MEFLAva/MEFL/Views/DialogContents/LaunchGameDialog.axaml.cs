@@ -31,7 +31,7 @@ namespace MEFL.Views.DialogContents
             {
                 if (e.PropertyName == nameof(pmv.Progress))
                 {
-                    PB.Value = pmv.Progress * 100d;
+                    PB.Value = pmv.Progress;
                 }
                 else if (e.PropertyName == nameof(pmv.Failed))
                 {
