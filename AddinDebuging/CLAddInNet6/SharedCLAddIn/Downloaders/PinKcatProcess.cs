@@ -244,6 +244,10 @@ DotMCPath, Arguments.VersionName, true
 
         private void Installer_Output(object? sender, string e)
         {
+            if (e == null)
+            {
+                return;
+            }
             if (e.Contains("MCP_DATA"))
             {
                 CurrentProgress = 0.05;

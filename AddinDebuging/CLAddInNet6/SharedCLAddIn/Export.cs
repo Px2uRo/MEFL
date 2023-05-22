@@ -235,6 +235,11 @@ namespace MEFL.CLAddIn.Export
             return realret;
         }
 
+        static List<LauncherWebVersionContext> contexts = new() { new WDCServer()};
+        public LauncherWebVersionContext[] GetDataCotexts(string url, FileInfo[] Javas, string dotMCPath)
+        {
+            return contexts.ToArray();
+        }
     }
 
     [Export(typeof(ILuncherGameType))]

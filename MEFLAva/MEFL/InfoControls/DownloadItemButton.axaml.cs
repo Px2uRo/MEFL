@@ -6,6 +6,7 @@ using MEFL.AvaControls;
 using MEFL.Contract;
 using MEFL.PageModelViews;
 using MEFL.Views;
+using MEFL.Views.DialogContents;
 using System.Linq;
 
 namespace MEFL.InfoControls
@@ -18,6 +19,12 @@ namespace MEFL.InfoControls
             Excutebtn.Click += Excutebtn_Click;
             MoreOptionGrid.PointerEnter += MoreOptionGrid_PointerEnter;
             MoreOptionGrid.PointerLeave += MoreOptionGrid_PointerLeave;
+            MoreOptionBtn.Click += MoreOptionBtn_Click;
+        }
+
+        private void MoreOptionBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            ContentDialog.Show(DownloaderContextMenu.GetUI(DataContext as LauncherWebVersionInfo));
         }
 
         private void MoreOptionGrid_PointerLeave(object? sender, Avalonia.Input.PointerEventArgs e)
@@ -74,7 +81,6 @@ localF);
                     ContentDialog.Show(page);
                 }
             }
-            var info = DataContext as LauncherWebVersionInfo;
         }
 
         private void Page_Solved(object? sender, InstallArguments e)

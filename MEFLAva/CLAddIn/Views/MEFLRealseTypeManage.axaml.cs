@@ -19,13 +19,13 @@ namespace CLAddIn.Views
             //process.StartInfo.CreateNoWindow = false;
 
             //process.StartInfo.RedirectStandardOutput = true;
-            //process.StartInfo.RedirectStandardError= true;
+            process.StartInfo.RedirectStandardError= true;
             process.EnableRaisingEvents = true; 
             //process.OutputDataReceived += Process_OutputDataReceived;
-            //process.ErrorDataReceived += Process_ErrorDataReceived;
+            process.ErrorDataReceived += Process_ErrorDataReceived;
             process.Start();
             //process.BeginOutputReadLine();
-            //process.BeginErrorReadLine();
+            process.BeginErrorReadLine();
             process.Exited += Process_Exited;
             TB.Text = $"{DateTime.Now} 游戏启动，等待游戏加载";
         }
@@ -44,11 +44,14 @@ namespace CLAddIn.Views
 
         private void Process_OutputDataReceived(object sender, DataReceivedEventArgs e)
         {
-            Dispatcher.UIThread.InvokeAsync(() =>
+            if (!String.IsNullOrWhiteSpace(e.Data))
             {
-                Scl.ScrollToEnd();
-                TB.Text = TB.Text + "\n" + e.Data;
-            });
+                Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    Scl.ScrollToEnd();
+                    TB.Text = TB.Text + "\n" + e.Data;
+                });
+            }
         }
 
         private void Process_Exited(object? sender, EventArgs e)
@@ -73,7 +76,7 @@ namespace CLAddIn.Views
 
         private void Btn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            Exited?.Invoke(this, e);
         }
 
         public event EventHandler Exited;

@@ -26,5 +26,7 @@ namespace MEFL.Contract
         /// <param name="args"></param>
         /// <returns></returns>
         public DownloadPageItemPair[] GetPairs(SettingArgs args);
+
+        public LauncherWebVersionContext[] GetDataCotexts(string url, FileInfo[] Javas, string dotMCPath);
     }
 }
