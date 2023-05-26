@@ -41,7 +41,7 @@ namespace MEFL
         public IPages Pages;
 
         [Import(AllowRecomposition = true)]
-        public ILuncherGameType LuncherGameType;
+        public IGameTypeManage LuncherGameType;
 
         [Import(AllowRecomposition = true)]
         public IDownload Download; 

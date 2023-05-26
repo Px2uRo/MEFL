@@ -19,7 +19,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreLaunchingNet6", "..\..\
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SharedCore", "..\..\CoreLaunching\SharedCore\SharedCore.shproj", "{E2A9F52B-6053-4004-9D43-AA972D0DA2CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignViewer", "DesignViewer\DesignViewer.csproj", "{4145818F-304C-4EFA-83EF-EF534AB51AFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesignViewer", "DesignViewer\DesignViewer.csproj", "{4145818F-304C-4EFA-83EF-EF534AB51AFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerInstaller", "ServerInstaller\ServerInstaller.csproj", "{B16F029C-AD69-4A1C-A1D8-E3259A4CA04A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{4145818F-304C-4EFA-83EF-EF534AB51AFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4145818F-304C-4EFA-83EF-EF534AB51AFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4145818F-304C-4EFA-83EF-EF534AB51AFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B16F029C-AD69-4A1C-A1D8-E3259A4CA04A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B16F029C-AD69-4A1C-A1D8-E3259A4CA04A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B16F029C-AD69-4A1C-A1D8-E3259A4CA04A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B16F029C-AD69-4A1C-A1D8-E3259A4CA04A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

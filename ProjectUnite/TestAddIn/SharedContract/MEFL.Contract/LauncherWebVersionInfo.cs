@@ -1,3 +1,4 @@
+using Avalonia.Input;
 using Avalonia.Media;
 using MEFL.Arguments;
 using System.Collections.Generic;
@@ -40,15 +41,5 @@ public abstract class LauncherWebVersionInfo:MEFLClass
 public abstract class LauncherWebVersionContext
 {
 	public abstract string Name { get; }
-    /// <summary>
-    /// 调用下载
-    /// </summary>
-    /// <param name="downloader">下载器</param>
-    /// <param name="dotMCFolder">.minecraft文件夹</param>
-    /// <param name="args">参数</param>
-    /// <param name="sources">下载源</param>
-    /// <param name="usingLocalFiles">正在下载中的本地文件（Avalonia 暂未实现）</param>
-    /// <param name="page">如果为 false 返回这个Page</param>
-    /// <returns>是否可以下载</returns>
-    public abstract bool DirectDownload(string url,FileInfo[] Javas, string dotMCPath, out IInstallPage page, out InstallArguments args);
+	public abstract bool Install(LauncherWebVersionInfo info, FileInfo[] javas, string dotMCPath, out IInstallContextMenuPage page,out InstallProcess process);
 }

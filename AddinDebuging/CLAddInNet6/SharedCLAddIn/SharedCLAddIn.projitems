@@ -30,7 +30,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)RealsePair.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RegManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Sercurity\TokenConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)WDCServer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)WebVersion\Generic.cs" />
   </ItemGroup>
 </Project>

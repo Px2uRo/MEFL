@@ -10,4 +10,9 @@ namespace MEFL.Contract
         public event EventHandler<InstallArguments> Solved;
         public LauncherWebVersionInfo Info { get; set; }
     }
+
+    public interface IInstallContextMenuPage : IDialogContent
+    {
+        public event EventHandler<InstallProcess> Solved;
+    }
 }

@@ -1,10 +1,9 @@
-<Window xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        x:Class="DesignViewer.MainWindow"
-        Title="DesignViewer" Height="600" Width="750">
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             Width="500" Height="350" x:Class="ServerInstaller.InstallServerPage">
 	<Grid Margin="10" RowDefinitions="80,*">
 		<Grid RowDefinitions="*,*" ColumnDefinitions="80,60,*,30">
 			<Rectangle Fill="Aqua" Grid.RowSpan="2"/>
@@ -16,23 +15,22 @@
 		<TabControl Grid.Row="1">
 			<TabItem Header="基本">
 				<ScrollViewer>
-
 					<StackPanel>
 						<TextBlock Text=" " FontSize="24"/>
 						<TextBlock Text="版本号：" FontSize="20"/>
-						<TextBlock Text="1.19.4" FontSize="36" FontWeight="Bold"/>
+						<TextBlock FontSize="36" FontWeight="Bold" Name="VersionTB"/>
 						<TextBlock Text=" " FontSize="24"/>
 						<TextBlock Text="端口号：" FontSize="24"/>
-						<TextBox Text="25565" FontSize="36" FontWeight="Bold"/>
+						<TextBox Text="25565" FontSize="36" FontWeight="Bold" Name="PortTB"/>
 						<TextBlock Text=" " FontSize="24"/>
-						<CheckBox Content="正版验证" FontSize="24"/>
-						<CheckBox Content="白名单" FontSize="24"/>
+						<CheckBox Content="正版验证" FontSize="24" Name="OnlineOption"/>
+						<CheckBox Content="白名单" FontSize="24" Name="WhitelistOption"/>
 						<StackPanel Orientation="Horizontal">
 							<TextBlock Text="最大在线人数：" FontSize="24" />
-							<TextBox Text="20"/>
+							<TextBox Text="20" Name="MaxPlayersCount"/>
 						</StackPanel>
 						<TextBlock Text=" " FontSize="24"/>
-						<TextBlock Text="描述：" FontSize="24"/>
+						<TextBlock Text="描述：" FontSize="24" Name="Description"/>
 						<TextBox Text="一个 Minecraft 服务器" FontSize="20" FontFamily="Microsoft Yahei"/>
 						<TextBlock Text=" " FontSize="24"/>
 						<TextBlock Text="（更多设置选项将会被考虑制作）" FontSize="24"/>
@@ -43,9 +41,9 @@
 				<StackPanel>
 					<TextBlock Text=" " FontSize="24"/>
 					<TextBlock Text="如果启用下面的服务器ID被填写，会自动设置online-mode=true" FontSize="16" Foreground="Red"/>
-					<Button HorizontalAlignment="Center" Content="打开服主管理页面"/>
+					<Button HorizontalAlignment="Center" Content="打开服主管理页面" Name="OpenUPW"/>
 					<TextBlock Text="服务器ID：" FontSize="24"/>
-					<TextBox Text="a543da71e8d011ed9cf600163e095b49" FontSize="16" />
+					<TextBox Name="ServerID" FontSize="16" />
 				</StackPanel>
 			</TabItem>
 			<TabItem Header="服务端类型">
@@ -65,4 +63,4 @@
 			<Button Content="取消" Background="Red" Foreground="White" Margin="3" Name="CancelBtn"/>
 		</StackPanel>
 	</Grid>
-</Window>
+</UserControl>

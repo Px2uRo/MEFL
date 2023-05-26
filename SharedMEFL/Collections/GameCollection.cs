@@ -9,6 +9,7 @@ using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace MEFL
 {
@@ -271,7 +272,10 @@ namespace MEFL
                             {
                                 if (Hst.Permissions.UseGameManageAPI)
                                 {
-                                    res = (Hst.LuncherGameType.Parse(jOb["type"].ToString(), JsonPath));
+                                    if (Hst.LuncherGameType.SupportedType.Contains(jOb["type"].ToString()))
+                                    {
+                                        res = (Hst.LuncherGameType.Parse(jOb["type"].ToString(), JsonPath));
+                                    }
                                 }
                             }
                         }

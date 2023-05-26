@@ -235,16 +235,16 @@ namespace MEFL.CLAddIn.Export
             return realret;
         }
 
-        static List<LauncherWebVersionContext> contexts = new() { new WDCServer()};
-        public LauncherWebVersionContext[] GetDataCotexts(string url, FileInfo[] Javas, string dotMCPath)
+        static List<LauncherWebVersionContext> contexts = new();
+        public LauncherWebVersionContext[] GetDataCotexts(LauncherWebVersionInfo baseInfo, FileInfo[] Javas, string dotMCPath)
         {
             return contexts.ToArray();
         }
     }
 
-    [Export(typeof(ILuncherGameType))]
+    [Export(typeof(IGameTypeManage))]
 
-    public class Games : ILuncherGameType
+    public class Games : IGameTypeManage
     {
         public string[] SupportedType => new[] { "release" , "snapshot" };
 

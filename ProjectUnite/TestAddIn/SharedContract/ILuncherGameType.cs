@@ -1,6 +1,6 @@
 namespace MEFL.Contract;
 
-public interface ILuncherGameType
+public interface IGameTypeManage
 {
 	string[] SupportedType { get; }
 

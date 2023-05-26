@@ -197,7 +197,7 @@ namespace MEFL.InfoControls
                 }
                 if (h.Permissions.UseGameManageAPI)
                 {
-                    h.LuncherGameType = h.cc.GetExport<ILuncherGameType>().Value;
+                    h.LuncherGameType = h.cc.GetExport<IGameTypeManage>().Value;
                 }
                 if (h.Permissions.UseDownloadPageAPI)
                 {
