@@ -1,7 +1,9 @@
 ﻿using MEFL.Arguments;
 using MEFL.Callers;
 using MEFL.Contract;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using ServerInstaller.Properties;
 using System.Net;
 
 namespace ServerInstaller
@@ -57,16 +59,21 @@ namespace ServerInstaller
         {
             new Thread(() => 
             {
-                try
+            try
+            {
+                string Text = "";
+                using (var clt = new WebClient())
                 {
-                    string Text = "";
-                    using (var clt = new WebClient())
-                    {
-                        Text = clt.DownloadString(_info.Url);
-                    }
-                    var serverurl = JObject.Parse(Text)["downloads"]["server"]["url"].ToString();
-                    var pro = DownloaderCaller.CallSingleProcess(serverurl,"I:\\Test.jar");
-                    pro.Start();
+                    Text = clt.DownloadString(_info.Url);
+                }
+                MCFile serverdowns = JsonConvert.DeserializeObject<MCFile>(JObject.Parse(Text)["downloads"]["server"].ToString());
+                var vP = Path.Combine(_dotMCPath, $"versions\\{_args.CustomName}");
+                Directory.CreateDirectory(vP);
+                using (var jsonP = File.CreateText(Path.Combine(vP, $"{_args.CustomName}.json")))
+                {
+                    jsonP.Write(CreateJsonText(serverdowns, Convert.ToInt32(JObject.Parse(Text)["javaVersion"]["majorVersion"].ToString())));
+                }
+                var pro = DownloaderCaller.CallSingleProcess(serverdowns.url, Path.Combine(vP, $"{_args.CustomName}.jar"));
                     pro.PropertyChanged += ((s, e) => 
                     {
                         var p = s as SingleProcess;
@@ -75,9 +82,14 @@ namespace ServerInstaller
                             this.CurrentProgress = ((double)p.DownloadedSize / (double)p.TotalSize);
                         }
                     });
+                    pro.Start();
                     pro.Finished += ((s,e) =>
                     {
-
+                        using (var clt = new WebClient())
+                        {
+                            clt.DownloadFile("https://static.mc-user.com:233/downloads/nide8auth.jar",Path.Combine(vP, "nide8auth.jar"));
+                        }
+                        Finish();
                     });
                 }
                 catch (Exception ex)
@@ -85,6 +97,24 @@ namespace ServerInstaller
                     Fail();
                 }
             }).Start();
+        }
+
+        private string CreateJsonText(MCFile serverdowns,int majorJava)
+        {
+            var res = JsonConvert.DeserializeObject<Root>(Resources.VersionInfoTemplate);
+            res.BaseVersion = _info.Id;
+            res.Type= "server";
+            res.ServerType = _args.Type;
+            res.JavaMajor= majorJava;
+            if (!string.IsNullOrEmpty(_args.UpaServerID))
+            {
+                res.UpaOption = new();
+                res.UpaOption.Server_Id= _args.UpaServerID;
+            }
+            res.Downloads = new();
+            res.Downloads.Server = serverdowns;
+            var rtxt= JsonConvert.SerializeObject(res, Formatting.Indented);
+            return rtxt;
         }
 
         #endregion
@@ -122,13 +152,19 @@ namespace ServerInstaller
         private string _upaServerID;
 
         public string UpaServerID => _upaServerID;
+        private string _customName;
 
-        public InstServerBaseArgs(bool online,bool wl,string port, string upaServerID)
+        public string CustomName => _customName;
+        string _type = "server";
+        public string Type => _type;
+
+        public InstServerBaseArgs(string customName,bool online,bool wl,string port, string upaServerID)
         {
             _onlineMode= online;
             _wl= wl;
             _port= port;
             _upaServerID= upaServerID;
+            _customName= customName;
         }
     }
 }

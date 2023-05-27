@@ -69,7 +69,7 @@ namespace ServerInstaller
 
         public GameInfoBase Parse(string type, string JsonPath)
         {
-            throw new NotImplementedException();
+            return new ServerType(JsonPath);
         }
     }
 }

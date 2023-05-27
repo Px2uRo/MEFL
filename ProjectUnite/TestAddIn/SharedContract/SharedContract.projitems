@@ -38,5 +38,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\LauncherWebVersionInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MEFL.Contract\MEFLErrorType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)OtherArgsBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SettingsGetter.cs" />
   </ItemGroup>
 </Project>

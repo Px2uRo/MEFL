@@ -23,6 +23,8 @@ namespace MEFL.Contract;
 [JsonConverter(typeof(GameInfoConverter))]
 public abstract class GameInfoBase : MEFLClass,INotifyPropertyChanged
 {
+	public virtual bool IgnoreLauncherArguments => false;
+    public virtual bool IgnoreAccount => false;
     public event PropertyChangedEventHandler? PropertyChanged;
 #if NET4_0
 

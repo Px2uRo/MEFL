@@ -41,7 +41,7 @@
 				<StackPanel>
 					<TextBlock Text=" " FontSize="24"/>
 					<TextBlock Text="如果启用下面的服务器ID被填写，会自动设置online-mode=true" FontSize="16" Foreground="Red"/>
-					<Button HorizontalAlignment="Center" Content="打开服主管理页面" Name="OpenUPW"/>
+					<Button HorizontalAlignment="Center" Content="打开 集成说明" Name="OpenUPW"/>
 					<TextBlock Text="服务器ID：" FontSize="24"/>
 					<TextBox Name="ServerID" FontSize="16" />
 				</StackPanel>

@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ServerInstaller.ManagePanel">
+	<Grid ColumnDefinitions="*,150" RowDefinitions="150,*,150">
+		<Grid RowDefinitions="30,*" ColumnDefinitions="*,10" Grid.RowSpan="3">
+			<TextBlock Text="控制台" FontSize="24" FontWeight="Bold"/>
+			<ScrollViewer  Grid.Row="1">
+				<TextBlock Name="ConsoleOutput" TextWrapping="Wrap"/>
+			</ScrollViewer>
+			<TextBox FontFamily="Microsoft Yahei" Grid.Row="1" VerticalAlignment="Bottom"
+					 Name="Contents" FontSize="20" Margin="0,0,30,0"/>
+			<Button VerticalAlignment="Bottom"
+					Name="SendBtn"
+					HorizontalAlignment="Right"
+					Grid.Row="1" Content=">"
+					Height="35" Margin="0,0,0,2"/>
+		</Grid>
+		<Grid Grid.Column="1" Background="#90FFFFFF">
+			<TextBlock
+				Text="最大内存"
+				HorizontalAlignment="Center"
+				FontWeight="Bold" FontSize="18" Margin="0,5,0,0" />
+			<TextBlock
+				Name="MemTB"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				FontWeight="Bold" FontSize="36" />
+		</Grid>
+	</Grid>
+</UserControl>

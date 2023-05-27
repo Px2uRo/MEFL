@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls;
 using MEFL.Arguments;
 using MEFL.Contract;
+using System.Diagnostics;
 
 namespace ServerInstaller
 {
@@ -13,7 +14,14 @@ namespace ServerInstaller
             CancelBtn.Click += CancelBtn_Click;
             InstallBtn.Click += InstallBtn_Click;
             NameTP.PropertyChanged += NameTP_PropertyChanged;
+            OpenUPW.Click += OpenUPW_Click;
         }
+
+        private void OpenUPW_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            Process.Start("explorer.exe", "https://login.mc-user.com:233/server/intro");
+        }
+
         private void NameTP_PropertyChanged(object? sender, Avalonia.AvaloniaPropertyChangedEventArgs e)
         {
             if (e.Property == TextBlock.TextProperty)
@@ -50,7 +58,7 @@ namespace ServerInstaller
             {
                 Directory.CreateDirectory(vp);
             }
-            var args = new InstServerBaseArgs((bool)OnlineOption.IsChecked,(bool)WhitelistOption.IsChecked,PortTB.Text,ServerID.Text);
+            var args = new InstServerBaseArgs(NameTP.Text,(bool)OnlineOption.IsChecked,(bool)WhitelistOption.IsChecked,PortTB.Text,ServerID.Text);
             _p = new(args, _info,_javas,_dotMCPath);
             Solved.Invoke(this,_p);
         }
@@ -63,12 +71,13 @@ namespace ServerInstaller
         LauncherWebVersionInfo _info;
         FileInfo[] _javas;
         string _dotMCPath;
-        public InstallServerPage(LauncherWebVersionInfo info, FileInfo[] javas, string dotMCPath)
+        public InstallServerPage(LauncherWebVersionInfo info, FileInfo[] javas, string dotMCPath):this()
         {
-            VersionTB.Text=info.Id.ToString();
             _javas = javas;
             _dotMCPath = dotMCPath;
-            _info= info;
+            _info = info;
+            VersionTB.Text = info.Id.ToString();
+            NameTP.Text = info.Id.ToString()+"_server";
         }
         InstServer _p;
 

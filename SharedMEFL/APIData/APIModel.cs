@@ -239,7 +239,7 @@ namespace MEFL.APIData
                         tmp1 = Folders[i].GetFiles();
                         foreach (var item in tmp1)
                         {
-                            if (item.Name == "javaw.exe")
+                            if (item.Name == "javaw.exe"|| item.Name == "java.exe")
                             {
                                 _SearchedJavas.Add(item);
                             }

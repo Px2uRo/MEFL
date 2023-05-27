@@ -190,23 +190,27 @@ Invoke();
                     ContentDialog.Show(LaunchGameDialog.UI);
                 });
                 Progress = 1;
-#endregion
-#region 登录用户
-                Statu = "登录用户";
-                try
+                #endregion
+                #region 登录用户
+                if (!Game.IgnoreAccount)
                 {
-                    if (APIModel.SelectedAccount == null)
+
+                    Statu = "登录用户";
+                    try
                     {
-                        throw new Exception("未登陆账户");
+                        if (APIModel.SelectedAccount == null)
+                        {
+                            throw new Exception("未登陆账户");
+                        }
+                        APIModel.SelectedAccount.LaunchGameAction(APIModel.SettingArgs);
+                        Progress = 10;
                     }
-                    APIModel.SelectedAccount.LaunchGameAction(APIModel.SettingArgs);
-                    Progress = 10;
-                }
-                catch (Exception ex)
-                {
-                    ErrorInfo = $"无法登录用户 {ex.Message}，错误发生在 {ex.Source}";
-                    Failed = true;
-                    return;
+                    catch (Exception ex)
+                    {
+                        ErrorInfo = $"无法登录用户 {ex.Message}，错误发生在 {ex.Source}";
+                        Failed = true;
+                        return;
+                    }
                 }
 #endregion
 #region 拼接参数
@@ -214,40 +218,42 @@ Invoke();
                 {
                     Statu = "拼接参数";
                     string Args = string.Empty;
-                    Args += APIModel.SelectedAccount.JavaArgs;
-                    Args += " ";
-                    if (String.IsNullOrEmpty(Game.OtherJVMArgs))
+                    if (!Game.IgnoreLauncherArguments)
                     {
-                        Args += APIModel.SettingConfig.OtherJVMArgs;
-                    }
-                    else
-                    {
-                        Args += Game.OtherJVMArgs;
-                    }
-                    Args += $" {Game.JVMArgs}";
+                        Args += APIModel.SelectedAccount.JavaArgs;
+                        Args += " ";
+                        if (String.IsNullOrEmpty(Game.OtherJVMArgs))
+                        {
+                            Args += APIModel.SettingConfig.OtherJVMArgs;
+                        }
+                        else
+                        {
+                            Args += Game.OtherJVMArgs;
+                        }
+                        Args += $" {Game.JVMArgs}";
 
-                    var mems = string.Empty;
-                    if (Game.GameMaxMem == null || Game.GameMinMem == null || Game.GameMaxMem == 0)
-                    {
-                        mems = $" -Xmx{APIModel.MaxMemory}m";
-                    }
-                    else
-                    {
-                        mems = $" -Xmn{Game.GameMinMem.ToString()}m -Xmx{Game.GameMaxMem.ToString()}m";
-                    }
-                    Args += mems;
-                    Args += $" {Game.MainClassName}";
-                    Args += $" {Game.GameArgs}";
-                    var cps = String.Empty;
-                    cps += "\"";
-                    foreach (var item in Game.ClassPaths)
-                    {
+                        var mems = string.Empty;
+                        if (Game.GameMaxMem == null || Game.GameMinMem == null || Game.GameMaxMem == 0)
+                        {
+                            mems = $" -Xmx{APIModel.MaxMemory}m";
+                        }
+                        else
+                        {
+                            mems = $" -Xmn{Game.GameMinMem.ToString()}m -Xmx{Game.GameMaxMem.ToString()}m";
+                        }
+                        Args += mems;
+                        Args += $" {Game.MainClassName}";
+                        Args += $" {Game.GameArgs}";
+                        var cps = String.Empty;
+                        cps += "\"";
+                        foreach (var item in Game.ClassPaths)
+                        {
                             cps += item;
                             cps += ";";
-                    }
-                    cps += Game.GameJarPath;
-                    cps += "\"";
-                    Dictionary<string, string> dic = new Dictionary<string, string>()
+                        }
+                        cps += Game.GameJarPath;
+                        cps += "\"";
+                        Dictionary<string, string> dic = new Dictionary<string, string>()
             {
                 {"${cp}",$"{cps}"},
                 {"${classpath}",$"{cps}"},
@@ -272,9 +278,14 @@ Invoke();
                 {"${user_properties}","{}" },
                 {"${Dminecraft.client.jar}",Game.GameJarPath }
             };
-                    foreach (var item in dic)
+                        foreach (var item in dic)
+                        {
+                            Args = Args.Replace(item.Key.ToString(), item.Value.ToString());
+                        }
+                    }
+                    else
                     {
-                        Args = Args.Replace(item.Key.ToString(), item.Value.ToString());
+                        Args = Game.JVMArgs + Game.MainClassName + Game.GameArgs;
                     }
                     i.Arguments = Args;
                     Process.StartInfo = i;
@@ -333,24 +344,27 @@ Invoke();
                 {
                     Thread.Sleep(200);
                 }
-#endregion
-#region 解压Native
-                var dicNati = Directory.CreateDirectory(Game.NativeLibrariesPath);
-                foreach (var item in dicNati.GetFiles())
+                #endregion
+                #region 解压Native
+                if (!String.IsNullOrEmpty(Game.NativeLibrariesPath))
                 {
-                    item.Delete();
-                }
-                foreach (var item in Game.NativeFilesNeedToDepackage)
-                {
-                    try
+                    var dicNati = Directory.CreateDirectory(Game.NativeLibrariesPath);
+                    foreach (var item in dicNati.GetFiles())
                     {
-                        Export(item.localpath, Game.NativeLibrariesPath);
+                        item.Delete();
                     }
-                    catch (Exception ex)
+                    foreach (var item in Game.NativeFilesNeedToDepackage)
                     {
-                        if (ex.GetType() == typeof(InvalidDataException))
+                        try
                         {
-                            throw new Exception($"解压：{item.localpath}时发生错误，文件损坏");
+                            Export(item.localpath, Game.NativeLibrariesPath);
+                        }
+                        catch (Exception ex)
+                        {
+                            if (ex.GetType() == typeof(InvalidDataException))
+                            {
+                                throw new Exception($"解压：{item.localpath}时发生错误，文件损坏");
+                            }
                         }
                     }
                 }
@@ -361,7 +375,14 @@ Invoke();
                     //Process.StartInfo.Arguments += " --width 800 --height 450";
 #endif
                     Debugger.Logger($"启动了{Game.Name}，游戏详细信息{JsonConvert.SerializeObject((GameInfoBase)Game, Formatting.Indented)}");
-                    Debugger.Logger($"启动参数\"{Process.StartInfo.FileName + "\" " + Process.StartInfo.Arguments.Replace(APIModel.SelectedAccount.AccessToken, "******")}");
+                    if (Game.IgnoreAccount)
+                    {
+                        Debugger.Logger($"启动参数\"{Process.StartInfo.FileName + "\" " + Process.StartInfo.Arguments}");
+                    }
+                    else
+                    {
+                        Debugger.Logger($"启动参数\"{Process.StartInfo.FileName + "\" " + Process.StartInfo.Arguments.Replace(APIModel.SelectedAccount.AccessToken, "******")}");
+                    }
                     Succeed = true;
                     return;
                 }
