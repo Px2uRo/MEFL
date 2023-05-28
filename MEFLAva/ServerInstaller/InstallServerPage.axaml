@@ -17,6 +17,10 @@
 				<ScrollViewer>
 					<StackPanel>
 						<TextBlock Text=" " FontSize="24"/>
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="点击安装即代表同意 " FontSize="16"/>
+							<TextBlock Text="Minecraft EULA" TextDecorations="UnderLine" Foreground="Aqua" Name="OpenAKA"/>
+						</StackPanel>
 						<TextBlock Text="版本号：" FontSize="20"/>
 						<TextBlock FontSize="36" FontWeight="Bold" Name="VersionTB"/>
 						<TextBlock Text=" " FontSize="24"/>

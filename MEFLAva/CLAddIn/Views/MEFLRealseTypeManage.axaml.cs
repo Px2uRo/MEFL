@@ -79,6 +79,11 @@ namespace CLAddIn.Views
             Exited?.Invoke(this, e);
         }
 
+        public void LauncherQuited()
+        {
+            
+        }
+
         public event EventHandler Exited;
     }
 }

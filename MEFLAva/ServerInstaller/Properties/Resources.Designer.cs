@@ -61,6 +61,16 @@ namespace ServerInstaller.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap TypeLogo {
+            get {
+                object obj = ResourceManager.GetObject("TypeLogo", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 {
         ///    &quot;arguments&quot;:{
         ///        &quot;jvm&quot;:[

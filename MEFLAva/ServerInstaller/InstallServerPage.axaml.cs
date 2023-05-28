@@ -15,6 +15,12 @@ namespace ServerInstaller
             InstallBtn.Click += InstallBtn_Click;
             NameTP.PropertyChanged += NameTP_PropertyChanged;
             OpenUPW.Click += OpenUPW_Click;
+            OpenAKA.PointerPressed += OpenAKA_PointerPressed; 
+        }
+
+        private void OpenAKA_PointerPressed(object? sender, Avalonia.Input.PointerPressedEventArgs e)
+        {
+            Process.Start("explorer.exe", "https://aka.ms/MinecraftEULA");
         }
 
         private void OpenUPW_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
@@ -58,7 +64,7 @@ namespace ServerInstaller
             {
                 Directory.CreateDirectory(vp);
             }
-            var args = new InstServerBaseArgs(NameTP.Text,(bool)OnlineOption.IsChecked,(bool)WhitelistOption.IsChecked,PortTB.Text,ServerID.Text);
+            var args = new InstServerBaseArgs(Convert.ToInt32(MaxPlayersCount.Text),NameTP.Text,(bool)OnlineOption.IsChecked,(bool)WhitelistOption.IsChecked,PortTB.Text,ServerID.Text);
             _p = new(args, _info,_javas,_dotMCPath);
             Solved.Invoke(this,_p);
         }

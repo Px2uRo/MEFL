@@ -9,5 +9,6 @@ namespace MEFL.Contract
     public interface IProcessManagePage
     {
         public event EventHandler Exited;
+        void LauncherQuited();
     }
 }

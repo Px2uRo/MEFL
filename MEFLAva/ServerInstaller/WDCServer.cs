@@ -82,12 +82,44 @@ namespace ServerInstaller
                             this.CurrentProgress = ((double)p.DownloadedSize / (double)p.TotalSize);
                         }
                     });
+                    Content = "正在下载 原版 端";
                     pro.Start();
                     pro.Finished += ((s,e) =>
                     {
-                        using (var clt = new WebClient())
+                        using (var fs = File.CreateText(Path.Combine(vP,"eula.txt")))
                         {
-                            clt.DownloadFile("https://static.mc-user.com:233/downloads/nide8auth.jar",Path.Combine(vP, "nide8auth.jar"));
+                            fs.WriteLine("eula=TRUE");
+                        }
+                        using (var fs = File.CreateText(Path.Combine(vP, "server.properties")))
+                        {
+                            fs.WriteLine($"server-port={_args.Port}");
+                            fs.WriteLine($"white-list={_args.WL}");
+                            fs.WriteLine($"max-players={_args.MaxPlayers}");
+                        }
+                        if(!string.IsNullOrEmpty(_args.UpaServerID))
+                        {
+                            Content = "正在下载 统一通行证 运行库";
+                            using (var clt = new WebClient())
+                            {
+                                clt.DownloadFile("https://static.mc-user.com:233/downloads/nide8auth.jar", Path.Combine(vP, "nide8auth.jar"));
+                            }
+                            using (var bs = File.OpenWrite(Path.Combine(vP, "server.properties")))
+                            {
+                                using (var fs = new StreamWriter(bs))
+                                {
+                                    fs.WriteLine($"online-mode={true}");
+                                }
+                            }
+                        }
+                        else
+                        {
+                            using (var bs = File.OpenWrite(Path.Combine(vP, "server.properties")))
+                            {
+                                using (var fs = new StreamWriter(bs))
+                                {
+                                    fs.WriteLine($"online-mode={_args.OnlineMode}");
+                                }
+                            }
                         }
                         Finish();
                     });
@@ -110,6 +142,10 @@ namespace ServerInstaller
             {
                 res.UpaOption = new();
                 res.UpaOption.Server_Id= _args.UpaServerID;
+            }
+            else
+            {
+                res.UpaOption = new();
             }
             res.Downloads = new();
             res.Downloads.Server = serverdowns;
@@ -140,6 +176,10 @@ namespace ServerInstaller
 
     public class InstServerBaseArgs
     {
+        private int _maxPlayers;
+
+        public int MaxPlayers => _maxPlayers;
+
         private bool _onlineMode;
 
         public bool OnlineMode => _onlineMode;
@@ -158,8 +198,9 @@ namespace ServerInstaller
         string _type = "server";
         public string Type => _type;
 
-        public InstServerBaseArgs(string customName,bool online,bool wl,string port, string upaServerID)
+        public InstServerBaseArgs(int max_players,string customName,bool online,bool wl,string port, string upaServerID)
         {
+            _maxPlayers = max_players;
             _onlineMode= online;
             _wl= wl;
             _port= port;

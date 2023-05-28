@@ -1,8 +1,10 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Media;
+using Avalonia.Media.Imaging;
 using MEFL.Arguments;
 using MEFL.Contract;
 using Newtonsoft.Json;
+using ServerInstaller.Properties;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -40,8 +42,26 @@ namespace ServerInstaller
 
         public override string GameJarPath => GameJsonPath.Replace(".json", ".jar");
 
-        public override IImage IconSource => throw new NotImplementedException();
 
+        static MemoryStream _ms;
+        static Bitmap _serverbitmap;
+        public override IImage IconSource
+        {
+            get
+            {
+
+                    if (_ms == null)
+                    {
+                        _ms = new MemoryStream();
+                        Resources.TypeLogo.Save(_ms, Resources.TypeLogo.RawFormat);
+                        _ms.Position = 0;
+                        _serverbitmap = new Bitmap(_ms);
+                        _ms.Position = 0;
+                    }
+                    return _serverbitmap;
+                
+            }
+        }
         public override string NativeLibrariesPath { get => ""; set => throw new NotImplementedException(); }
 
         public override string GameArgs => "";

@@ -11,11 +11,21 @@ namespace ServerInstaller
         {
             InitializeComponent();
             SendBtn.Click += SendBtn_Click;
+            this.KeyDown += ManagePanel_KeyDown;
+        }
+
+        private void ManagePanel_KeyDown(object? sender, Avalonia.Input.KeyEventArgs e)
+        {
+            if (e.Key == Avalonia.Input.Key.Enter)
+            {
+                SendBtn_Click(null,null);
+            }
         }
 
         private void SendBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             _p.StandardInput.WriteLine(Contents.Text);
+            Contents.Text = string.Empty;
         }
         Process _p;
         internal ManagePanel(ServerType game, Process process):this()
@@ -30,6 +40,7 @@ namespace ServerInstaller
             process.OutputDataReceived += Process_OutputDataReceived;
             process.ErrorDataReceived += Process_ErrorDataReceived;
             process.StartInfo.WorkingDirectory = Path.GetDirectoryName(game.GameJsonPath);
+            process.StartInfo.StandardInputEncoding = System.Text.Encoding.UTF8;
             process.Start();
             process.BeginErrorReadLine();
             process.BeginOutputReadLine();
@@ -42,6 +53,7 @@ namespace ServerInstaller
                 Dispatcher.UIThread.InvokeAsync(() =>
                 {
                     ConsoleOutput.Text += $"{e.Data}\n";
+                    Scrl.ScrollToEnd();
                 });
             }
         }
@@ -53,6 +65,7 @@ namespace ServerInstaller
                 Dispatcher.UIThread.InvokeAsync(() =>
                 {
                     ConsoleOutput.Text += $"{e.Data}\n";
+                    Scrl.ScrollToEnd();
                 });
             }
         }
@@ -61,16 +74,23 @@ namespace ServerInstaller
         {
             Dispatcher.UIThread.InvokeAsync(() =>
             {
-                ConsoleOutput.Text += "将会在 30 秒后自动退出";
+                ConsoleOutput.Text += "已退出，将会在 10 秒后关闭页面";
             });
             new Thread(() =>
             {
-                Thread.Sleep(30000);
+                Thread.Sleep(10000);
                 Dispatcher.UIThread.InvokeAsync(() =>
                 {
                     Exited?.Invoke(this, e);
                 });
             }).Start();
+        }
+
+        public void LauncherQuited()
+        {
+            _p.StandardInput.WriteLine("stop");
+            _p.WaitForExit();
+            //_p.Kill();
         }
 
         public event EventHandler Exited;
