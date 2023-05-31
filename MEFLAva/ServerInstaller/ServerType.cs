@@ -16,7 +16,7 @@ namespace ServerInstaller
 {
     internal class ServerType : GameInfoBase
     {
-        Root root;
+        internal Root root;
         public override bool IgnoreAccount => true;
         public override bool IgnoreLauncherArguments => true;
         public override List<JsonFileInfo> FileNeedsToDownload { get; set; }
@@ -148,8 +148,12 @@ namespace ServerInstaller
         public override int JavaMajorVersion => root.JavaMajor;
 
         public override string GameFolder { get => ""; set => throw new NotImplementedException(); }
-
-        public override IGameSettingPage SettingsPage => throw new NotImplementedException();
+        static SettingPage _p = new();
+        public override IGameSettingPage SettingsPage { get {
+                _p.DataContext = this;
+                _p.ReadData();
+                return _p;
+            } }
 
         public override DeleteResult Delete()
         {
@@ -177,6 +181,12 @@ namespace ServerInstaller
                 }
             }
         }
+
+        internal void Save()
+        {
+            File.WriteAllText(GameJsonPath,JsonConvert.SerializeObject(root));
+        }
+
         public ServerType()
         {
             FileNeedsToDownload = new();

@@ -17,6 +17,10 @@ namespace MEFL.AvaControls
         public static ContentDialog cd = new ContentDialog();
         public static void Show(IDialogContent dialogContent)
         {
+            if(dialogContent == null)
+            {
+                return;
+            }
             dialogContent.Quited -= DialogContent_Quited;
             dialogContent.Quited += DialogContent_Quited;
             if (App.Current.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)

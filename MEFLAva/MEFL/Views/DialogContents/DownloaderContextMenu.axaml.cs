@@ -6,6 +6,7 @@ using MEFL.InfoControls;
 using ReactiveUI;
 using System;
 using System.Linq;
+using System.Net.Quic;
 
 namespace MEFL.Views.DialogContents
 {
@@ -43,6 +44,25 @@ namespace MEFL.Views.DialogContents
         public DownloaderContextMenu()
         {
             InitializeComponent();
+            Quited += DownloaderContextMenu_Quited;
+            Cls.Click += Cls_Click;
+        }
+
+        private void Cls_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            Quited?.Invoke(this,null);
+        }
+
+        private void DownloaderContextMenu_Quited(object? sender, EventArgs e)
+        {
+            for (int i = 0; i < Context.Children.Count; i++)
+            {
+                var item = Context.Children[i] as WebVersionContextItem;
+                item.Btn.Content = null;
+                Context.Children.RemoveAt(i);
+                i--;
+            }
+            Context.Children.Clear();
         }
 
         public event EventHandler<EventArgs> Quited;

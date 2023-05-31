@@ -28,5 +28,15 @@
 				HorizontalAlignment="Center" VerticalAlignment="Center"
 				FontWeight="Bold" FontSize="36" />
 		</Grid>
+		<Grid Grid.Column="1" Grid.Row="1" Background="#90FFFFFF">
+			<TextBlock
+				Text="端口"
+				HorizontalAlignment="Center"
+				FontWeight="Bold" FontSize="18" Margin="0,5,0,0" />
+			<TextBlock
+				Name="PortTB"
+				HorizontalAlignment="Center" Text="未检测到" VerticalAlignment="Center"
+				FontWeight="Bold" FontSize="36" />
+		</Grid>
 	</Grid>
 </UserControl>

@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Media;
 using Avalonia.Threading;
 using MEFL.Contract;
 using System.Diagnostics;
@@ -65,6 +66,14 @@ namespace ServerInstaller
                 Dispatcher.UIThread.InvokeAsync(() =>
                 {
                     ConsoleOutput.Text += $"{e.Data}\n";
+                    if(e.Data.Contains("Starting Minecraft server on *:"))
+                    {
+                        _p.StandardInput.WriteLine();
+                        var inp = e.Data.IndexOf("*:");
+                        PortTB.Text = e.Data.Substring(inp + 2);
+                        var grid = PortTB.Parent as Grid;
+                        grid.Background = new SolidColorBrush(Colors.Aqua);
+                    }
                     Scrl.ScrollToEnd();
                 });
             }
@@ -89,8 +98,15 @@ namespace ServerInstaller
         public void LauncherQuited()
         {
             _p.StandardInput.WriteLine("stop");
+            new Thread(() =>
+            {
+                Thread.Sleep(5000);
+                if (!_p.HasExited)
+                {
+                    _p.Kill();
+                }
+            }).Start();
             _p.WaitForExit();
-            //_p.Kill();
         }
 
         public event EventHandler Exited;

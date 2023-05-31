@@ -287,7 +287,45 @@ namespace MEFL.PageModelViews
         internal static SettingPageModelView ModelView = new();
         static SettingPageModel()
         {
-#region 获取 MEFL.Contract 协议版本
+            #region 获取背景图片
+#if WPF
+
+            img = new Image();
+            img.Stretch = Stretch.UniformToFill;
+            if (APIData.APIModel.SettingConfig.PicturePath != null)
+            {
+                try
+                {
+                    img.Source = new BitmapImage(new Uri(APIData.APIModel.SettingConfig.PicturePath));
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+#elif AVALONIA
+            if (APIData.APIModel.SettingConfig.PicturePath != null)
+            {
+                if (App.Current.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime desktop)
+                {
+                    Dispatcher.UIThread.InvokeAsync(() =>
+                    {
+                        if (desktop.MainWindow is MainWindow window)
+                        {
+
+                            var image = new Avalonia.Media.Imaging.Bitmap(APIData.APIModel.SettingConfig.PicturePath);
+                            var imaCont = new Avalonia.Controls.Image() { Source = image };
+                            imaCont.Stretch = Stretch.UniformToFill;
+                            window.BackGround.Children.Clear();
+                            window.BackGround.Children.Add(imaCont);
+                        }
+                    });
+                }
+            }
+#endif
+            #endregion
+
+            #region 获取 MEFL.Contract 协议版本
             Assembly ass;
             try
             {
@@ -358,43 +396,6 @@ namespace MEFL.PageModelViews
                 APIData.APIModel.SettingArgs.LangID = LangID.en_US;
             }
             SetLang();
-            #endregion
-            #region 获取背景图片
-#if WPF
-
-            img = new Image();
-            img.Stretch = Stretch.UniformToFill;
-            if (APIData.APIModel.SettingConfig.PicturePath != null)
-            {
-                try
-                {
-                    img.Source = new BitmapImage(new Uri(APIData.APIModel.SettingConfig.PicturePath));
-                }
-                catch (Exception ex)
-                {
-
-                }
-            }
-#elif AVALONIA
-            if (APIData.APIModel.SettingConfig.PicturePath != null)
-            {
-                if (App.Current.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime desktop)
-                {
-                    Dispatcher.UIThread.InvokeAsync(() =>
-                    {
-                        if (desktop.MainWindow is MainWindow window)
-                        {
-
-                            var image = new Avalonia.Media.Imaging.Bitmap(APIData.APIModel.SettingConfig.PicturePath);
-                            var imaCont = new Avalonia.Controls.Image() { Source = image };
-                            imaCont.Stretch = Stretch.UniformToFill;
-                            window.BackGround.Children.Clear();
-                            window.BackGround.Children.Add(imaCont);
-                        }
-                    });
-                }
-            }
-#endif
             #endregion
         }
     }

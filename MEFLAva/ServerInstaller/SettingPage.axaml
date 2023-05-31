@@ -1,0 +1,65 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="ServerInstaller.SettingPage">
+	<Grid Margin="10" RowDefinitions="80,*,auto">
+		<Grid RowDefinitions="*,*" ColumnDefinitions="80,60,*,30">
+			<Rectangle Fill="Aqua" Grid.RowSpan="2"/>
+			<TextBlock Grid.Column="1" Text="名称:" FontSize="24"/>
+			<TextBox Grid.Column="2" Name="NameTP"/>
+			<TextBlock Grid.Column="1" Grid.Row="2" Text="描述:" FontSize="24"/>
+			<TextBlock Grid.Column="2" Grid.Row="2" TextWrapping="Wrap" Name="DesTB"/>
+		</Grid>
+		<TabControl Grid.Row="1">
+			<TabItem Header="基本">
+				<ScrollViewer>
+					<StackPanel>
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="EULA: " FontSize="16"/>
+							<TextBlock Text="Minecraft EULA" TextDecorations="UnderLine" Foreground="Aqua" Name="OpenAKA"/>
+						</StackPanel>
+						<TextBlock Text="版本号：" FontSize="20"/>
+						<TextBlock FontSize="36" FontWeight="Bold" Name="VersionTB"/>
+						<TextBlock Text=" " FontSize="24"/>
+						<TextBlock Text="端口号：" FontSize="24"/>
+						<TextBox Text="25565" FontSize="36" FontWeight="Bold" Name="PortTB"/>
+						<TextBlock Text=" " FontSize="24"/>
+						<CheckBox Content="正版验证" FontSize="24" Name="OnlineOption"/>
+						<CheckBox Content="白名单" FontSize="24" Name="WhitelistOption"/>
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="最大在线人数：" FontSize="24" />
+							<TextBox Text="20" Name="MaxPlayersCount"/>
+						</StackPanel>
+						<TextBlock Text=" " FontSize="24"/>
+						<TextBlock Text="描述：" FontSize="24" Name="Description"/>
+						<TextBox Text="一个 Minecraft 服务器" FontSize="20" FontFamily="Microsoft Yahei"/>
+						<TextBlock Text=" " FontSize="24"/>
+						<TextBlock Text="（更多设置选项将会被考虑制作）" FontSize="24"/>
+					</StackPanel>
+				</ScrollViewer>
+			</TabItem>
+			<TabItem Header="统一通行证选项">
+				<StackPanel>
+					<TextBlock Text=" " FontSize="24"/>
+					<TextBlock Text="如果启用下面的服务器ID被填写，会自动设置online-mode=true" FontSize="16" Foreground="Red"/>
+					<Button HorizontalAlignment="Center" Content="打开 集成说明" Name="OpenUPW"/>
+					<TextBlock Text="服务器ID：" FontSize="24"/>
+					<TextBox Name="ServerID" FontSize="16" />
+				</StackPanel>
+			</TabItem>
+			<TabItem Header="服务端选项">
+				<StackPanel>
+					<TextBlock Text=" " FontSize="24"/>
+					<TextBlock Text="中考完了再说" FontSize="24" FontWeight="Bold"/>
+				</StackPanel>
+			</TabItem>
+		</TabControl>
+		<StackPanel Grid.Row="2" VerticalAlignment="Bottom" HorizontalAlignment="Right" Orientation="Horizontal">
+			<Button Content="选择" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+					 Margin="3" Name="InstallBtn"/>
+			<Button Content="取消" Background="Red" Foreground="White" Margin="3" Name="CancelBtn"/>
+		</StackPanel>
+	</Grid>
+</UserControl>
