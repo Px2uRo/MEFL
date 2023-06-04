@@ -1,0 +1,90 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="CLAddIn.Views.ResourceFinder">
+	<Grid Margin="10">
+		<Grid Name="DetailStack"  IsVisible="False">
+			<StackPanel>
+				<Border VerticalAlignment="Top" Background="#40FFFFFF" CornerRadius="5" Height="80">
+					<Grid ColumnDefinitions="80,*">
+						<Image Name="DetailImg" Width="75" Height="75" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+						<StackPanel Grid.Column="1" >
+							<StackPanel Orientation="Horizontal">
+								<TextBlock Name="DetailNameTB" FontSize="26" FontWeight="Bold"/>
+								<TextBlock Name="DetailTagsTB" Margin="10,0,0,0" VerticalAlignment="Center"/>
+							</StackPanel>
+							<TextBlock Name="DetailDesTB"/>
+							<Grid>
+								<StackPanel TextBlock.FontSize="10" Orientation="Horizontal" Margin="0,8,0,0">
+									<TextBlock Text="支持版本："/>
+									<TextBlock Name="DetailSupportVersionTB"/>
+								</StackPanel>
+								<StackPanel TextBlock.FontSize="10" Orientation="Horizontal" Margin="0,8,0,0" HorizontalAlignment="Center">
+									<TextBlock Text="作者："/>
+									<StackPanel Name="DetailAuthorsStack" Orientation="Horizontal"/>
+								</StackPanel>
+								<StackPanel TextBlock.FontSize="10" Orientation="Horizontal" Margin="0,8,0,0" HorizontalAlignment="Right">
+									<TextBlock Text="下载量："/>
+									<TextBlock Name="DetailDownloadCount"/>
+								</StackPanel>
+							</Grid>
+						</StackPanel>
+					</Grid>
+				</Border>
+				<StackPanel>
+					<TextBlock Text="适用于您当前版本的版本下载链接：" FontSize="20" Name="ForYourCurrectHint" IsVisible="False"/>
+					<Border Name="ForYourCurrect" IsVisible="False"/>
+				</StackPanel>
+				<StackPanel Name="Others"/>
+			</StackPanel>
+			<Button Name="CancelDetailBtn" Content="取消"  VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+		</Grid>
+		<TabControl Name="ListsPage">
+			<TabItem Header="模组">
+				<StackPanel Name="SearchBar">
+					<Grid Margin="0,0,0,10" ColumnDefinitions="*,4*,0.5*,*" RowDefinitions="auto,10,auto" Height="30">
+						<TextBlock Text="名称:" FontSize="20" Margin="10,0,10,0"/>
+						<TextBox Text="" Grid.Column="1" FontFamily="Microsoft Yahei"/>
+						<!--<TextBlock Text="源：" Grid.Column="2" FontSize="20" Margin="10,0,10,0"/>
+						<ComboBox SelectedIndex="0" Grid.Column="3">
+							<ComboBoxItem>Forge</ComboBoxItem>
+						</ComboBox>-->
+						<Grid Grid.Row="2" Grid.ColumnSpan="4" ColumnDefinitions="*,4*,0.5*,*" Height="30">
+							<TextBlock Text="版本:" FontSize="20" Margin="10,0,10,0"/>
+							<TextBox Text="" Grid.Column="1" FontFamily="Microsoft Yahei"/>
+							<!--<TextBlock Text="源：" Grid.Column="2" FontSize="20" Margin="10,0,10,0"/>
+						<ComboBox SelectedIndex="0" Grid.Column="3">
+							<ComboBoxItem>Forge</ComboBoxItem>
+						</ComboBox>-->
+						</Grid>
+						<Button Name="SearchBtn" Content="搜索" Grid.Column="2" Grid.RowSpan="3" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"></Button>
+					</Grid>
+					<TabControl Margin="0,30,0,0">
+						<TabItem Header="热门" Name="HotRoot">
+							<Grid Name="HotGrid">
+								<Border Background="#90FFFFFF" Name="HotInfoBD" Height="50" CornerRadius="5">
+									<TextBlock Text="加载中" Name="HotInfoTB" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+								</Border>
+								<ScrollViewer Name="HotScrl">
+									<StackPanel Name="HotList"/>
+								</ScrollViewer>
+							</Grid>
+						</TabItem>
+						<TabItem Header="搜索结果" Name="ResultRoot" IsVisible="False">
+
+						</TabItem>
+					</TabControl>
+				</StackPanel>
+			</TabItem>
+			<TabItem Header="整合包（即将来临）"/>
+			<TabItem Header="准备安装" Name="PrepareRoot" IsVisible="False">
+
+			</TabItem>
+		</TabControl>
+		<TabControl Name="InstallPage" IsVisible="False">
+			
+		</TabControl>
+	</Grid>
+</UserControl>

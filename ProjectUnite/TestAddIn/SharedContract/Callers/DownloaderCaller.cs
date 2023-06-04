@@ -33,6 +33,16 @@ namespace MEFL.Callers
         }
     }
 
+    public static class GamesCaller
+    {
+        public static event EventHandler LoadGames;
+        public static GameInfoBase _selected;
+        public static GameInfoBase GetSelected() {
+            LoadGames?.Invoke(null,EventArgs.Empty);
+            return _selected;
+        }
+    }
+
     public class DownloadSingleArgs:EventArgs
     {
         public string Native { get; private set; }

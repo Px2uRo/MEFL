@@ -100,7 +100,7 @@ namespace MEFL.Views
             Page.Children.Add(RealMainPage.UI);
         }
 
-        private void ClearPage()
+        internal void ClearPage()
         {
             Page.Children.Clear();
         }

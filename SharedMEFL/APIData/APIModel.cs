@@ -333,11 +333,17 @@ namespace MEFL.APIData
             DownloaderCaller.SingleCallerEvent += DownloaderCaller_SingleCallerEvent;
             DownloaderCaller.LoadDownloader += DownloaderCaller_LoadDownloader;
             AccountCaller.RemoveAccountEvent += AccountCaller_RemoveAccountEvent;
+            GamesCaller.LoadGames += GamesCaller_LoadGames;
 #if DEBUG
 
 #else
             
 #endif
+        }
+
+        private static void GamesCaller_LoadGames(object? sender, EventArgs e)
+        {
+            GamesCaller._selected = APIModel.CurretGame;
         }
 
         private static void DownloaderCaller_LoadDownloader(object? sender, EventArgs e)

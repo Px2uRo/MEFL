@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" Height="80"
+             x:Class="MEFL.CLAddIn.ResourcesDownloadItem">
+		<Button Name="RootBtn">
+			<Grid ColumnDefinitions="80,*">
+				<Image Name="Img" Width="75" Height="75" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+				<StackPanel Grid.Column="1" >
+					<StackPanel Orientation="Horizontal">
+						<TextBlock Name="NameTB" FontSize="26" FontWeight="Bold"/>
+						<TextBlock Name="TagsTB" Margin="10,0,0,0" VerticalAlignment="Center"/>
+					</StackPanel>
+					<TextBlock Name="DesTB"/>
+					<Grid>
+						<StackPanel TextBlock.FontSize="10" Orientation="Horizontal" Margin="0,8,0,0">
+							<TextBlock Text="支持版本："/>
+							<TextBlock Name="SupportVersionTB"/>
+						</StackPanel>
+						<StackPanel TextBlock.FontSize="10" Orientation="Horizontal" Margin="0,8,0,0" HorizontalAlignment="Center">
+							<TextBlock Text="作者："/>
+							<StackPanel Name="AuthorsStack" Orientation="Horizontal"/>
+						</StackPanel>
+						<StackPanel TextBlock.FontSize="10" Orientation="Horizontal" Margin="0,8,0,0" HorizontalAlignment="Right">
+							<TextBlock Text="下载量："/>
+							<TextBlock Name="DownloadCount"/>
+						</StackPanel>
+
+					</Grid>
+				</StackPanel>
+			</Grid>
+		</Button>
+</UserControl>

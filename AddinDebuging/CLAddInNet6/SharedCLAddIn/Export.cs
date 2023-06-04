@@ -95,13 +95,30 @@ namespace MEFL.CLAddIn.Export
     {
         public bool UseSettingPageAPI =>false;
 
-        public bool UsePagesAPI => false;
+        public bool UsePagesAPI => true;
 
         public bool UseGameManageAPI => true;
 
         public bool UseDownloadPageAPI => true;
 
         public bool UseAccountAPI => true;
+    }
+
+    [Export(typeof(IPages))]
+    public class Pages : IPages
+    {
+        static Dictionary<object, Control> _pages = new() { { "",new ResourceFinder()} };
+        public Dictionary<object, Control> IconAndPage => _pages;
+
+        public void Added(int index, SettingArgs args)
+        {
+
+        }
+
+        public void Delected(int index, SettingArgs args)
+        {
+
+        }
     }
 
     [Export(typeof(IDownload))]
@@ -252,22 +269,7 @@ namespace MEFL.CLAddIn.Export
         {
             try
             {
-                if (type == "release")
-                {
-                    var _Root = JsonConvert.DeserializeObject<Root>(System.IO.File.ReadAllText(JsonPath));
-                    if (_Root.MainClass== "cpw.mods.bootstraplauncher.BootstrapLauncher")
-                    {
-                        return new CLGameType(JsonPath, true);
-                    }
-                    else
-                    {
-                        return new CLGameType(JsonPath, false);
-                    }
-                }
-                else
-                {
-                    return new CLGameType(JsonPath, false);
-                }
+                return new CLGameType(JsonPath);
             }
             catch (Exception ex)
             {

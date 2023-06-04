@@ -31,7 +31,7 @@ using SkiaSharp;
 
 namespace MEFL.CLAddIn.GameTypes
 {
-    public class CLGameType : MEFL.Contract.GameInfoBase
+    public class CLGameType : MEFL.Contract.GameInfoBase,IModLoaderOption
     {
         internal bool startWithDebug => _MSOAT.StartInDebugMode;
         public override FrameworkElement GetManageProcessPage(Process process, SettingArgs args)
@@ -64,7 +64,7 @@ namespace MEFL.CLAddIn.GameTypes
         {
             get
             {
-                if (_maybeForge)
+                if (ModLoaderType==ModLoaderType.Forge)
                 {
                     return "Forge";
                 }
@@ -84,7 +84,7 @@ namespace MEFL.CLAddIn.GameTypes
                 }
                 else
                 {
-                    if (_maybeForge)
+                    if (ModLoaderType == ModLoaderType.Forge)
                     {
                         return $"Forge: {_Root.Id}";
                     }
@@ -138,7 +138,7 @@ namespace MEFL.CLAddIn.GameTypes
         public override IImage IconSource {
             get
             {
-                if (_maybeForge)
+                if (ModLoaderType == ModLoaderType.Forge)
                 {
                     if (forgeIconSource == null)
                     {
@@ -404,10 +404,20 @@ namespace MEFL.CLAddIn.GameTypes
             } 
         }
 
-        private readonly bool _maybeForge;
-
         public override List<JsonFileInfo> FileNeedsToDownload { get; set ; }
         public override List<JsonFileInfo> NativeFilesNeedToDepackage { get ; set ; }
+
+        public ModLoaderType ModLoaderType { get; set; }
+        public string BaseVersion { get {
+                if (!string.IsNullOrEmpty(_Root.InheritsFrom))
+                {
+                    return _Root.InheritsFrom;
+                }
+                else
+                {
+                    return _Root.ClientVersion;
+                }
+            } set => throw new NotImplementedException(); }
 
         public override DeleteResult Delete()
         {
@@ -435,9 +445,8 @@ namespace MEFL.CLAddIn.GameTypes
             NativeFilesNeedToDepackage= new List<JsonFileInfo>();
         }
 
-        public CLGameType(string JsonPath,bool maybeForge)
+        public CLGameType(string JsonPath)
         {
-            _maybeForge = maybeForge;
             FileNeedsToDownload = new List<JsonFileInfo>();
             string otherArgsPath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(JsonPath), "MEFLOtherArguments.json");
             _MSOAT =new MEFLOtherArgs(otherArgsPath);
@@ -446,6 +455,14 @@ namespace MEFL.CLAddIn.GameTypes
             try
             {
                 _Root = JsonConvert.DeserializeObject<Root>(System.IO.File.ReadAllText(JsonPath));
+                if (_Root.MainClass == "cpw.mods.bootstraplauncher.BootstrapLauncher")
+                {
+                    ModLoaderType = ModLoaderType.Forge;
+                }
+                else
+                {
+                    ModLoaderType = ModLoaderType.AnyOrNone;
+                }
             }
             catch (Exception ex)
             {

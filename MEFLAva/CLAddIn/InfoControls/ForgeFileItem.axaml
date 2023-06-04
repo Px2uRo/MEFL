@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" Height="60"
+             x:Class="MEFL.CLAddIn.ForgeFileItem">
+	<Button Name="RootBtn">
+		<Grid ColumnDefinitions="50,*">
+			<Image Name="Img" Width="45" Height="45" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+			<StackPanel Grid.Column="1" >
+				<StackPanel>
+					<TextBlock Name="NameTB" FontSize="20" VerticalAlignment="Top" FontWeight="Bold"/>
+					<StackPanel VerticalAlignment="Center" TextBlock.FontSize="13" Orientation="Horizontal">
+						<TextBlock Name="LoaderTB"  HorizontalAlignment="Left"/>
+						<StackPanel  Margin="15,0,0,0" Orientation="Horizontal" HorizontalAlignment="Left">
+							<TextBlock Text="下载量：" />
+							<TextBlock Name="DownloadTB"/>
+						</StackPanel>
+					</StackPanel>
+				</StackPanel>
+			</StackPanel>
+		</Grid>
+	</Button>
+</UserControl>

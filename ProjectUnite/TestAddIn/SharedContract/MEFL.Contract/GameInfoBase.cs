@@ -177,6 +177,22 @@ public abstract class GameInfoBase : MEFLClass,INotifyPropertyChanged
 	/// </summary>
 }
 
+public interface IModLoaderOption
+{
+    ModLoaderType ModLoaderType { get; set; }
+	string BaseVersion { get; set; }
+}
+
+public enum ModLoaderType
+{
+    AnyOrNone = 0,
+    Forge = 1,
+    Cauldron = 2,
+    LitLoader = 3,
+    Fabric = 4,
+    Quilt = 5
+}
+
 public enum DeleteResult 
 { 
 	OK,

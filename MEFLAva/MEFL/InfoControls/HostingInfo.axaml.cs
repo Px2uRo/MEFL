@@ -1,7 +1,9 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Presenters;
 using Avalonia.Media;
+using Avalonia.Threading;
 using DynamicData;
 using MEFL.APIData;
 using MEFL.Configs;
@@ -98,6 +100,25 @@ namespace MEFL.InfoControls
                 if (!string.IsNullOrEmpty(h.ExceptionInfo))
                 {
                     return;
+                }
+                if (h.Permissions.UsePagesAPI)
+                {
+                    foreach (var item in h.Pages.IconAndPage)
+                    {
+                        if(App.Current.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime app)
+                        {
+                            Dispatcher.UIThread.InvokeAsync(() =>
+                            {
+                                var mw = app.MainWindow as MainWindow;
+                                var btn = new Button() { Width = 30, Height = 30, Margin = new(3) };
+                                btn.Click += new((x, e) => {
+                                    mw.ClearPage();
+                                    mw.Page.Children.Add(item.Value);
+                                });
+                                mw.ButtonForAddIns.Children.Add(btn);
+                            });
+                        }
+                    }
                 }
                 if (h.Permissions.UseAccountAPI)
                 {

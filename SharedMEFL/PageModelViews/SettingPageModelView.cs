@@ -312,12 +312,19 @@ namespace MEFL.PageModelViews
                     {
                         if (desktop.MainWindow is MainWindow window)
                         {
+                            try
+                            {
 
-                            var image = new Avalonia.Media.Imaging.Bitmap(APIData.APIModel.SettingConfig.PicturePath);
-                            var imaCont = new Avalonia.Controls.Image() { Source = image };
-                            imaCont.Stretch = Stretch.UniformToFill;
-                            window.BackGround.Children.Clear();
-                            window.BackGround.Children.Add(imaCont);
+                                var image = new Avalonia.Media.Imaging.Bitmap(APIData.APIModel.SettingConfig.PicturePath);
+                                var imaCont = new Avalonia.Controls.Image() { Source = image };
+                                imaCont.Stretch = Stretch.UniformToFill;
+                                window.BackGround.Children.Clear();
+                                window.BackGround.Children.Add(imaCont);
+                            }
+                            catch (Exception e)
+                            {
+                                
+                            }
                         }
                     });
                 }

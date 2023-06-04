@@ -37,6 +37,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="InfoControls\ForgeFileItem.axaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Update="InfoControls\ResourcesDownloadItem.axaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
     <Compile Update="Properties\Resources.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
@@ -52,5 +58,9 @@
   </ItemGroup>
 
   <Import Project="..\..\AddinDebuging\CLAddInNet6\SharedCLAddIn\SharedCLAddIn.projitems" Label="Shared" />
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\ResourceFinder.axaml" />
+  </ItemGroup>
 
 </Project>
