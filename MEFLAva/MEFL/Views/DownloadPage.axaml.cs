@@ -33,6 +33,10 @@ namespace MEFL.Views
                 pair.RefreshCompeted -= Pair_RefreshCompeted;
                 pair.RefreshCompeted += Pair_RefreshCompeted;
                 new Thread(() => {
+                    while (APIModel.SettingConfig == null)
+                    {
+
+                    }
                     pair.WebRefresh(APIModel.SettingConfig.TempFolderPath);
                     pair.RefreshList(APIModel.SettingConfig.TempFolderPath);
                 }).Start();

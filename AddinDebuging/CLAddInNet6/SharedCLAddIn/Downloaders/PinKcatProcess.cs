@@ -18,7 +18,9 @@ using System.Text;
 using System.Text.Json.Nodes;
 using System.Threading;
 using System.Windows;
+using CoreLaunching.DownloadAPIs.Forge;
 using File = System.IO.File;
+using CoreLaunching;
 
 namespace MEFL.CLAddIn.Downloaders
 {
@@ -52,6 +54,7 @@ namespace MEFL.CLAddIn.Downloaders
             return res;
         }
 
+        List<MCFileInfo> lst;
         public override void Start()
         {
             ThreadPool.SetMaxThreads(512, 512);
@@ -100,7 +103,7 @@ namespace MEFL.CLAddIn.Downloaders
                             foreach (var item in arg.JAVAPaths)
                             {
                                 var versionInfo = FileVersionInfo.GetVersionInfo(item.FullName);
-                                if (versionInfo.FileMajorPart == _majorJ)
+                                if (versionInfo.FileMajorPart == _majorJ&&item.FullName.EndsWith("javaw.exe"))
                                 {
                                     _jaPth = item.FullName; break;
                                 }
@@ -125,7 +128,7 @@ namespace MEFL.CLAddIn.Downloaders
                             combined2 = ForgeParser.CombineInstallerProfileJson(combined, content2, ParseType.Json);
                         }
                         var parser = new Parser();
-#if WPF
+#if true
                         if(Sources.Count()>0)
                         {
                             if (Sources.Where((x) => x.ELItem == "${assets}").ToArray() != null)
@@ -142,7 +145,6 @@ namespace MEFL.CLAddIn.Downloaders
                         Content = "下载文件中（包括资源和运行库）";
                         CurrentProgress = 0;
                         TotalSize = 0;
-                        List<MCFileInfo> lst;
                         if (string.IsNullOrEmpty(combined2))
                         {
                             lst = parser.ParseFromJson(localJson,
@@ -232,6 +234,9 @@ DotMCPath, Arguments.VersionName, true
             CurrectProgressIndex = 2;
             CurrentProgress = 0;
             Content = "安装 Forge 中";
+
+            
+
             var installer = new ForgeInstaller();
             installer.Output += Installer_Output;
             installer.InstallClient(_jaPth, Path.Combine(DotMCPath,"libraries"),
@@ -261,6 +266,7 @@ DotMCPath, Arguments.VersionName, true
                 CurrentProgress = 0.15;
             }
             Debug.WriteLine(e);
+            Content = (e);
         }
 
         private void Processm_DownloadedSizeUpdated(object? sender, long e)

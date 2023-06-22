@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MEFL.Views.SettingPage">
-	<TabControl>
+	<TabControl SelectedIndex="2">
 		<TabItem Header="启动">
 			<StackPanel>
 				<StackPanel Margin="0,0,0,15">
@@ -43,9 +43,31 @@
 			</ScrollViewer>
 		</TabItem>
 		<TabItem Header="下载器">
-			<StackPanel>
-				<UniformGrid Name="DownloadersGrid" />
-			</StackPanel>
+			<ScrollViewer>
+				<StackPanel>
+					<UniformGrid Name="DownloadersGrid" />
+					<TextBlock Margin="0,10,0,10" Text="下载源" FontSize="24" FontWeight="Bold"/>
+					<ListBox Name="SourcesLB">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<Grid ColumnDefinitions="*,*,*">
+									<Grid Height="30" Margin="0,0,0,5">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="140"/>
+											<ColumnDefinition Width="auto"/>
+											<ColumnDefinition Width="auto"/>
+										</Grid.ColumnDefinitions>
+										<Rectangle Name="Rect" Opacity="0" Fill="Transparent" Grid.ColumnSpan="3"/>
+										<TextBlock Text="{Binding Key}" />
+										<ComboBox Items="{Binding Value}" Grid.Column="1" Name="CMB" SelectionChanged="CGD" Initialized="LDD" SelectedIndex="0"/>
+										<TextBlock Text="{Binding Value.Selected.Uri}" Grid.Column="2"/>
+									</Grid>
+								</Grid>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</StackPanel>
+			</ScrollViewer>
 		</TabItem>
 	</TabControl>
 </UserControl>

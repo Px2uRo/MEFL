@@ -20,6 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)FastLoadJson.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FolderInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Hosting.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)JsonUtil.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\DownloadingProgressPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\DownloadPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ExtensionPageModelView.cs" />

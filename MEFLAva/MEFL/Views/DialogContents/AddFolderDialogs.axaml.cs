@@ -82,7 +82,7 @@ namespace MEFL.Views.DialogContents
 
         public void WindowSizeChanged(Size size)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
 
         public event EventHandler<EventArgs> Quited;

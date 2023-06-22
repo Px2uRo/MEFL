@@ -11,6 +11,11 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using MEFL.APIData;
 using System.Linq;
+using Avalonia.Threading;
+using static MEFL.JsonUtil;
+using MEFL.Configs;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 #if AVALONIA
 using MEFL.Views;
 using MEFL.InfoControls;
@@ -222,6 +227,47 @@ namespace MEFL
                 info.DataContext = new HostingViewModel(item);
                 AddInPage.UI.PART_UNIFORM_GRID.Children.Add(info);
             }
+            foreach (var sources in APIModel.DownloadSources)
+            {
+                if (sources.Value.Selected == null)
+                {
+                    sources.Value.Selected = sources.Value[0];
+                }
+            }
+
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                #region Avalonia 中，加载好的这样做
+                try
+                {
+                    string txt = RegManager.Read("DownSources");
+                    var obj = JArray.Parse(txt);
+                    foreach (var source in obj)
+                    {
+                        if (source!=null&&source["ELItem"] != null&& source["Uri"] != null)
+                        {
+                            try
+                            {
+                                APIModel.DownloadSources[source["ELItem"].ToString()].Selected =
+                                APIModel.DownloadSources[source["ELItem"].ToString()]
+                                .Where(x => x.Uri == source["Uri"].ToString()).ToArray()[0];
+                            }
+                            catch (Exception ex)
+                            {
+
+                            }
+                        }
+                    }
+                }
+                catch(Exception ex)
+                {
+
+                }
+                Views.SettingPage.UI.LoadSourceLB();
+                #endregion
+            });
+            Contract.Advanced.SetSelectedSources(APIModel.DownloadSources.Selected);
+
 #endif
             return res;
         }

@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Threading;
+using CoreLaunching.DownloadAPIs.Forge;
 using CoreLaunching.Forge;
 using System.Diagnostics;
 using System.Net;
@@ -38,7 +39,7 @@ namespace MEFL.CLAddIn
                 TagsTB.Text += $"#{item.Name} ";
             }
             SupportVersionTB.Text = $"{versions.First()}-{versions.Last()}";
-            DownloadCount.Text = info.ChineseDownloadCount;
+            DownloadCount.Text = info.DownloadCounts;
             try
             {
                 foreach (var item in info.Authors)

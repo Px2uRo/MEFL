@@ -1,5 +1,6 @@
 ﻿using MEFL.Contract;
 using MEFL.PageModelViews;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,8 +19,16 @@ namespace MEFL.APIData
                 _selected = value;
                 OnPropertyChanged(new("Selected"));
                 Contract.Advanced.SetSelectedSources(APIModel.DownloadSources.Selected);
+                RegUpdate();
             }
         }
+
+        private void RegUpdate()
+        {
+            var txt = APIModel.DownloadSources.Selected.ToJson();
+            RegManager.Write("DownSources", txt);
+        }
+
         protected override void RemoveItem(int index)
         {
             this[index].Dispose();
@@ -47,6 +56,7 @@ namespace MEFL.APIData
                 return ret.ToArray();
             }
         }
+
         public void AddItem(DownloadSource item)
         {
             SettingPageModel.ModelView.Invoke("DownSources");

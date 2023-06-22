@@ -37,8 +37,14 @@
 					<TextBlock Text="适用于您当前版本的版本下载链接：" FontSize="20" Name="ForYourCurrectHint" IsVisible="False"/>
 					<Border Name="ForYourCurrect" IsVisible="False"/>
 				</StackPanel>
-				<StackPanel Name="Others"/>
+				<Grid>
+					<TextBlock Text="所有版本:"/>
+					<ComboBox Name="OtherIndexs" HorizontalAlignment="Right"/>
+				</Grid>
 			</StackPanel>
+			<ScrollViewer Margin="0,200,0,0">
+				<StackPanel Name="Others"/>
+			</ScrollViewer>
 			<Button Name="CancelDetailBtn" Content="取消"  VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
 		</Grid>
 		<TabControl Name="ListsPage">

@@ -153,8 +153,8 @@ namespace MEFL.InfoControls
                         }
                         APIModel.Downloaders.Add(item);
                     }
-
-                    foreach (var item in h.Download.GetDownloadSources(APIModel.SettingArgs))
+                    var arr = h.Download.GetDownloadSources(APIModel.SettingArgs).ToArray();
+                    foreach (var item in arr)
                     {
                         APIModel.DownloadSources.AddItem(item);
                     }

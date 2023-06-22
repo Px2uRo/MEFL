@@ -6,6 +6,7 @@ using MEFL.Arguments;
 using MEFL.Contract;
 using CoreLaunching.Forge;
 using Avalonia;
+using CoreLaunching.DownloadAPIs.Forge;
 
 namespace CLAddIn.Views
 {

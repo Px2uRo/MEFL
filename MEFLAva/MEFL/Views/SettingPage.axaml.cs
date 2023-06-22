@@ -19,7 +19,7 @@ namespace MEFL.Views
 {
     public partial class SettingPage : UserControl
     {
-        internal static IControl UI = new SettingPage();
+        internal static SettingPage UI = new SettingPage();
         ObservableCollection<string> itms = new ObservableCollection<string>();
         int downloadersCount = 0;
 
@@ -111,7 +111,7 @@ namespace MEFL.Views
             }
             else if(e.PropertyName==nameof(dc.DownSources))
             {
-
+                LoadSourceLB();
             }
         }
 
@@ -120,6 +120,40 @@ namespace MEFL.Views
             var smv = (SettingPageModelView)DataContext;
             smv.EnableSearchJava = false;
             APIModel.SearchJavas();
+        }
+
+
+        private void LDD(object? sender, EventArgs e)
+        {
+            var cmb = (sender as ComboBox);
+            DSList data = (sender as ComboBox).Items as DSList;
+            cmb.SelectedIndex = data.IndexOf(data.Selected);
+        }
+        private void CGD(object? sender, SelectionChangedEventArgs e)
+        {
+            DSList data = (sender as ComboBox).Items as DSList;
+            if(data == null)
+            {
+                return;
+            }
+            if (data.Count == 0)
+            {
+
+            }
+            else if ((sender as ComboBox).SelectedIndex > data.Count - 1 || (sender as ComboBox).SelectedIndex == -1)
+            {
+                data.Selected = data[0];
+                (sender as ComboBox).SelectedIndex = 0;
+            }
+            else
+            {
+                data.Selected = data[(sender as ComboBox).SelectedIndex];
+            }
+        }
+
+        internal void LoadSourceLB()
+        {
+            SourcesLB.Items = APIModel.DownloadSources;
         }
     }
 }

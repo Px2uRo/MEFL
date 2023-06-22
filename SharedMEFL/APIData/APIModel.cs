@@ -22,7 +22,7 @@ namespace MEFL.APIData
         internal static ObservableCollection<Hosting> Hostings { get; set; }
         internal static bool SearchJavaThreadIsOK;
         internal static ObservableCollection<FileInfo> Javas { get; set; }
-        internal static SettingConfig SettingConfig { get; set; }
+        internal static SettingConfig SettingConfig = MEFL.APIData.SettingConfig.Load();
         internal static ObservableCollection<AddInConfig> AddInConfigs { get; set; }
 
         internal static AccountCollection AccountConfigs;
@@ -271,7 +271,6 @@ namespace MEFL.APIData
         static APIModel()
         {
             SettingArgs = new Arguments.SettingArgs();
-            SettingConfig = MEFL.APIData.SettingConfig.Load();
             _SelectedAccountUUID = RegManager.Read("PlayerUuid");
 #region RegFolders
             MyFolders = MEFLFolderColletion.GetReg();

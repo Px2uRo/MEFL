@@ -1,4 +1,5 @@
-﻿using CoreLaunching.Forge;
+﻿using CoreLaunching.DownloadAPIs.Forge;
+using CoreLaunching.Forge;
 using MEFL.Arguments;
 
 internal class InstallArgsWithForge : InstallArguments
