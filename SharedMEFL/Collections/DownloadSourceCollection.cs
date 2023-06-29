@@ -1,4 +1,5 @@
-﻿using MEFL.Contract;
+﻿using MEFL.Callers;
+using MEFL.Contract;
 using MEFL.PageModelViews;
 using Newtonsoft.Json;
 using System;
@@ -18,7 +19,7 @@ namespace MEFL.APIData
             {
                 _selected = value;
                 OnPropertyChanged(new("Selected"));
-                Contract.Advanced.SetSelectedSources(APIModel.DownloadSources.Selected);
+                DownloaderCaller.Set(APIModel.DownloadSources.Selected);
                 RegUpdate();
             }
         }
@@ -37,6 +38,18 @@ namespace MEFL.APIData
     }
     public class DownloadSourceCollection:Dictionary<string,DSList>
     {
+        internal IEnumerable<DownloadSource> ShowAll()
+        {
+            var lst = new List<DownloadSource>();
+            foreach (var keys in this.Values)
+            {
+                foreach (var vlu in keys)
+                {
+                    lst.Add(vlu);
+                }
+            }
+            return lst;
+        }
         private int _ChangedCount;
 
         public int ChangedCount

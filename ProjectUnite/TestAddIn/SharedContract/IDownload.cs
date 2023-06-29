@@ -27,6 +27,15 @@ namespace MEFL.Contract
         /// <returns></returns>
         public DownloadPageItemPair[] GetPairs(SettingArgs args);
 
-        public LauncherWebVersionContext[] GetDataCotexts(LauncherWebVersionInfo baseInfo, FileInfo[] Javas, string dotMCPath);
+        /// <summary>
+        /// 获取版本下载的附加项。
+        /// </summary>
+        /// <param name="baseInfo">基本信息</param>
+        /// <param name="Javas">Java 列表</param>
+        /// <param name="dotMCPath">.minecraft 文件夹位置</param>
+        /// <returns>版本下载的附加项</returns>
+        public LauncherWebVersionContext[] GetDataContexts(LauncherWebVersionInfo baseInfo, FileInfo[] Javas, string dotMCPath);
+    
+
     }
 }

@@ -16,6 +16,7 @@ using static MEFL.JsonUtil;
 using MEFL.Configs;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using MEFL.Callers;
 #if AVALONIA
 using MEFL.Views;
 using MEFL.InfoControls;
@@ -266,7 +267,7 @@ namespace MEFL
                 Views.SettingPage.UI.LoadSourceLB();
                 #endregion
             });
-            Contract.Advanced.SetSelectedSources(APIModel.DownloadSources.Selected);
+            DownloaderCaller.Set(APIModel.DownloadSources.Selected);
 
 #endif
             return res;

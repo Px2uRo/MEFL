@@ -124,8 +124,6 @@ namespace MEFL.CLAddIn.Export
     [Export(typeof(IDownload))]
     public class Download : IDownload
     {
-        static string website = "https://launchermeta.mojang.com/mc/game/version_manifest.json";
-        static WebRequest req;
         public MEFLDownloader[] GetDownloaders(SettingArgs args)
         {
             return new MEFLDownloader[] {new PinKcatDownloader()};
@@ -140,120 +138,29 @@ namespace MEFL.CLAddIn.Export
                 new() { ELItem = "${AssIndex}", RuleSourceName = "BMCLAPI", Uri = "https://bmclapi2.bangbang93.com" },
                 new() { ELItem = "${assets}", RuleSourceName = "BMCLAPI", Uri = "https://bmclapi2.bangbang93.com/assets" },
                 new() { ELItem = "${libraries}", RuleSourceName = "BMCLAPI", Uri = "https://bmclapi2.bangbang93.com/maven/" },
+                new() { ELItem = "${forge_libraries}", RuleSourceName = "BMCLAPI", Uri = "https://bmclapi2.bangbang93.com/maven/" },
                 new() { ELItem="${version_manifest}",RuleSourceName = "MCBBS",Uri= "https://download.mcbbs.net/" },
                 new() { ELItem = "${AssIndex}", RuleSourceName = "MCBBS", Uri = "https://download.mcbbs.net/" },
                 new() { ELItem = "${assets}", RuleSourceName = "MCBBS", Uri = "https://download.mcbbs.net/assets" },
                 new() { ELItem = "${libraries}", RuleSourceName = "MCBBS", Uri = "https://download.mcbbs.net/maven/" },
+                new() { ELItem = "${forge_libraries}", RuleSourceName = "MCBBS", Uri = "https://download.mcbbs.net/maven/" },
                 new() { ELItem="${version_manifest}",RuleSourceName = "Mojang",Uri= "http://launchermeta.mojang.com/mc/game/version_manifest.json" },
                 new() { ELItem = "${AssIndex}", RuleSourceName = "Mojang", Uri = "https://launcher.mojang.com/" },
                 new() { ELItem = "${assets}", RuleSourceName = "Mojang", Uri = "http://resources.download.minecraft.net" },
+                new() { ELItem = "${forge_libraries}", RuleSourceName = "Forge", Uri = "https://maven.minecraftforge.net/" },
                 new() { ELItem = "${libraries}", RuleSourceName = "Mojang", Uri = "https://libraries.minecraft.net/" }};
             return lst.ToArray();
         }
 
         public DownloadPageItemPair[] GetPairs(SettingArgs args)
         {
-            DownloadPageItemPair RealsePair = new RealsePair("Release", realret, "realse");
+            DownloadPageItemPair RealsePair = new DownloadPagePair();
             DownloadPageItemPair[] ret = new DownloadPageItemPair[] { RealsePair};
-            foreach (var pair in ret)
-            {
-                pair.WebRefreshEvent += Pair_WebRefreshEvent;
-                pair.ListRefreshEvent += Pair_ListRefreshEvent;
-            }
             return ret;
         }
 
-        private void Pair_WebRefreshEvent(object sender, string tmpFolderPath)
-        {
-            var pair = sender as DownloadPageItemPair;
-            try
-            {
-                req = HttpWebRequest.Create(website);
-                req.Method = "GET";
-                using (WebResponse wr = req.GetResponse())
-                {
-                    var strm1 = wr.GetResponseStream();
-                    var strm2 = new StreamReader(strm1);
-                    ResponString = strm2.ReadToEnd();
-                    strm1.Close();
-                    strm1.Dispose();
-                    strm2.Close();
-                    strm2.Dispose();
-                    jOb = JObject.Parse(ResponString);
-                }
-                req.Abort();
-            }
-            catch (Exception ex)
-            {
-                pair.HasError = true;
-                pair.ErrorDescription = ex.Message;
-            }
-        }
-
-        private void Pair_ListRefreshEvent(object sender, string tmpFolderPath)
-        {
-            var pair = (sender as DownloadPageItemPair);
-            pair.Contents = Refresh(pair,tmpFolderPath);
-            pair.RefreshCompete();
-        }
-        List<LauncherWebVersionInfoList> realret = new() { new("Other")};
-        string ResponString;
-        JObject jOb;
-        private List<LauncherWebVersionInfoList> Refresh(DownloadPageItemPair pair,string tmpFolderPath)
-        {
-            while (string.IsNullOrEmpty(ResponString))
-            {
-                if (pair.HasError)
-                {
-                    return new();
-                }
-            }
-            if (pair.Tag == "realse")
-            {
-                if (realret.Count <= 1)
-                {
-                    foreach (var item in jOb["versions"])
-                    {
-                        if (item["type"].ToString() == "release")
-                        {
-                            if (Version.TryParse(item["id"].ToString(), out var version))
-                            {
-                                var Tag = $"{version.Major.ToString()}.{version.Minor.ToString()}";
-                                var list = realret.Where(a => a.Title == Tag).ToList();
-                                if (list.Count == 0)
-                                {
-                                    var nc = new LauncherWebVersionInfoList(Tag);
-                                    nc.Add(new GenericWebVersion() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
-                                    realret.Add(nc);
-                                }
-                                else
-                                {
-                                    list[0].Add(new GenericWebVersion() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
-                                }
-                            }
-                            else
-                            {
-                                realret[0].Add(new GenericWebVersion() { Id = item["id"].ToString(), Type = item["type"].ToString(), Url = item["url"].ToString(), ReleaseTime = item["releaseTime"].ToString() });
-                            }
-                        }
-                    }
-                }
-
-                var first = realret[0];
-                if (first.Title == "Other")
-                {
-                    realret.RemoveAt(0);
-                    if (first.Count != 0)
-                    {
-                        realret.Add(first);
-                    }
-                }
-            }
-            return realret;
-        }
-
         static List<LauncherWebVersionContext> contexts = new();
-        public LauncherWebVersionContext[] GetDataCotexts(LauncherWebVersionInfo baseInfo, FileInfo[] Javas, string dotMCPath)
+        public LauncherWebVersionContext[] GetDataContexts(LauncherWebVersionInfo baseInfo, FileInfo[] Javas, string dotMCPath)
         {
             return contexts.ToArray();
         }

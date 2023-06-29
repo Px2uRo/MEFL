@@ -328,7 +328,7 @@ Invoke();
                         });
                         proc.PropertyChanged += new((s, e) =>
                         {
-                        var sen = s as SingleProcess;
+                        var sen = s as SizedProcess;
                         Progress = 10 + Math.Round(((double)sen.DownloadedSize / (double)sen.TotalSize) * 90d);
                         });
                         proc.Start();

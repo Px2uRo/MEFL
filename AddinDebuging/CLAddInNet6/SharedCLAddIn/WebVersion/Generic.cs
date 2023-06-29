@@ -10,14 +10,19 @@ using CLAddIn.Views;
 
 namespace MEFL.CLAddIn.WebVersion
 {
-    public class GenericWebVersion : LauncherWebVersionInfo
+    public class NormalWebVersion : LauncherWebVersionInfo
     {
-        public override bool DirectDownload(FileInfo[] Javas,string dotMCPath,out IInstallPage page,out InstallArguments args)
+        public override bool DirectDownload(FileInfo[] Javas,string dotMCPath,out IInstallPage page,out IEnumerable<InstallArguments> args)
         {
             var SubFolderString = Path.GetFileNameWithoutExtension(Url);
             page = new InstallPage(Javas,this,dotMCPath);
-            args = InstallArguments.Empty;
+            args = new InstallArguments[] { InstallArguments.Empty };
             return false;
+        }
+
+        public NormalWebVersion()
+        {
+
         }
     }
 }

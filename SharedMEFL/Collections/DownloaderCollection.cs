@@ -1,5 +1,6 @@
 ﻿using Avalonia.Threading;
 using MEFL.APIData;
+using MEFL.Callers;
 using MEFL.Contract;
 using MEFL.InfoControls;
 using MEFL.PageModelViews;
@@ -28,6 +29,7 @@ namespace MEFL
             DownloadProcessPage.UI.ContentPanel.Children.Add(block);
 
             base.InsertItem(index, item);
+            DownloaderCaller.Set(this);
 #endif
         }
 
@@ -65,10 +67,7 @@ namespace MEFL
             this[index].Close();
             this[index].Dispose();
             base.RemoveItem(index);
-            if (this.Count == 0)
-            {
-
-            }
+            DownloaderCaller.Set(this);
         }
 #endif
 }

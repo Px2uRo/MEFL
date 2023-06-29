@@ -26,7 +26,7 @@ namespace MEFL.Views.DialogContents
                         if(h.Permissions.UseDownloadPageAPI)
                         {
                             var dmc = APIModel.MyFolders[APIModel.SelectedFolderIndex].Path;
-                            foreach (var c in h.Download.GetDataCotexts(baseInfo,APIModel.Javas.ToArray(),dmc))
+                            foreach (var c in h.Download.GetDataContexts(baseInfo,APIModel.Javas.ToArray(),dmc))
                             {
                                 var child = new WebVersionContextItem(c,baseInfo);
                                 _ui.Context.Children.Add(child);

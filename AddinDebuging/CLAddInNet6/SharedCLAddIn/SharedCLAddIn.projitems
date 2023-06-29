@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)BitMaps.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CLDownloadSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Downloaders\NormalDownloader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Downloaders\OringnalInstallProcess.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Downloaders\PinKcatDownloader.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Downloaders\PinKcatProcess.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Downloaders\SourceReplacer.cs" />

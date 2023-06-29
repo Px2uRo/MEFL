@@ -17,19 +17,20 @@ namespace MEFL.CLAddIn.Downloaders
 
         public override object Icon => "P";
 
-        public override SingleProcess CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string[] usingLocalFiles)
+        public override SizedProcess CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string[] usingLocalFiles)
         {
             return new PinKcatSingleProcess(NativeUrl,LoaclPath);
         }
 
-        public override SingleProcess CreateProgressFromPair(List<JsonFileInfo> NativeLocalPairs, DownloadSource[] sources, string[] usingLocalFiles)
+        public override SizedProcess CreateProgressFromPair(List<JsonFileInfo> NativeLocalPairs, DownloadSource[] sources, string[] usingLocalFiles)
         {
             return new PinKcatPairProcess(NativeLocalPairs,sources,usingLocalFiles);
         }
 
-        public override InstallProcess InstallMinecraft(string jsonSource, string dotMCFolder, DownloadSource[] sources, InstallArguments args, string[] usingLocalFiles)
+        public override InstallProcess InstallMinecraft(string jsonSource, string dotMCFolder, DownloadSource[] sources,IEnumerable<InstallArguments> args, string[] usingLocalFiles)
         {
-            return PinKcatProcess.CreateInstall(jsonSource, dotMCFolder, sources, args,usingLocalFiles);
+            return new OringnalInstallProcess(args,dotMCFolder,sources);
+            return PinKcatProcess.CreateInstall(jsonSource, dotMCFolder, sources, args.First(),usingLocalFiles);
         }
     }
 }

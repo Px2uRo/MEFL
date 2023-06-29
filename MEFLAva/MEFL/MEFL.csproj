@@ -15,7 +15,6 @@
   </PropertyGroup>
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
-    <Folder Include="Pages\" />
     <None Remove=".gitignore" />
   </ItemGroup>
   <ItemGroup>

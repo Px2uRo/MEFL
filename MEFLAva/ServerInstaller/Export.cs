@@ -40,7 +40,7 @@ namespace ServerInstaller
     public class Download : IDownload
     {
         List<LauncherWebVersionContext> _contexts = new List<LauncherWebVersionContext>() {new WDCServer()};
-        public LauncherWebVersionContext[] GetDataCotexts(LauncherWebVersionInfo baseInfo, FileInfo[] Javas, string dotMCPath)
+        public LauncherWebVersionContext[] GetDataContexts(LauncherWebVersionInfo baseInfo, FileInfo[] Javas, string dotMCPath)
         {
             return _contexts.ToArray();
         }

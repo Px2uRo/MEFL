@@ -29,64 +29,64 @@ namespace ServerInstaller
         private string _serverId;
         InstServerBaseArgs _args;
         #region Overrides
-        public override void Cancel()
+        public override Task Cancel()
         {
-
+            return null;
         }
 
-        public override void Continue()
+        public override Task Continue()
         {
-
+            return null;
         }
 
-        public override bool GetUsingLocalFiles(out string[] paths)
+        public override bool GetUsingLocalFiles(out IEnumerable<string> paths)
         {
             paths = new string[0];
             return false;
         }
 
-        public override void Pause()
+        public override Task Pause()
         {
-
+            return null;
         }
 
-        public override void Retry()
+        public override Task Retry()
         {
-
+            return null;
         }
 
-        public override void Start()
+        public override Task Start()
         {
-            new Thread(() => 
-            {
-            try
-            {
-                string Text = "";
-                using (var clt = new WebClient())
+            return Task.Factory.StartNew(() => {
+
+                try
                 {
-                    Text = clt.DownloadString(_info.Url);
-                }
-                MCFile serverdowns = JsonConvert.DeserializeObject<MCFile>(JObject.Parse(Text)["downloads"]["server"].ToString());
-                var vP = Path.Combine(_dotMCPath, $"versions\\{_args.CustomName}");
-                Directory.CreateDirectory(vP);
-                using (var jsonP = File.CreateText(Path.Combine(vP, $"{_args.CustomName}.json")))
-                {
-                    jsonP.Write(CreateJsonText(serverdowns, Convert.ToInt32(JObject.Parse(Text)["javaVersion"]["majorVersion"].ToString())));
-                }
-                var pro = DownloaderCaller.CallSingleProcess(serverdowns.url, Path.Combine(vP, $"{_args.CustomName}.jar"));
-                    pro.PropertyChanged += ((s, e) => 
+                    string Text = "";
+                    using (var clt = new WebClient())
                     {
-                        var p = s as SingleProcess;
-                        if (e.PropertyName == nameof(p.DownloadedSize)|| e.PropertyName == nameof(p.TotalSize))
+                        Text = clt.DownloadString(_info.Url);
+                    }
+                    MCFile serverdowns = JsonConvert.DeserializeObject<MCFile>(JObject.Parse(Text)["downloads"]["server"].ToString());
+                    var vP = Path.Combine(_dotMCPath, $"versions\\{_args.CustomName}");
+                    Directory.CreateDirectory(vP);
+                    using (var jsonP = File.CreateText(Path.Combine(vP, $"{_args.CustomName}.json")))
+                    {
+                        jsonP.Write(CreateJsonText(serverdowns, Convert.ToInt32(JObject.Parse(Text)["javaVersion"]["majorVersion"].ToString())));
+                    }
+                    var pro = DownloaderCaller.CallSingleProcess(serverdowns.url, Path.Combine(vP, $"{_args.CustomName}.jar"));
+                    pro.PropertyChanged += ((s, e) =>
+                    {
+                        var p = s as SizedProcess;
+                        if (e.PropertyName == nameof(p.DownloadedSize) || e.PropertyName == nameof(p.TotalSize))
                         {
                             this.CurrentProgress = ((double)p.DownloadedSize / (double)p.TotalSize);
                         }
                     });
                     Content = "正在下载 原版 端";
                     pro.Start();
-                    pro.Finished += ((s,e) =>
+                    pro.Finished += ((s, e) =>
                     {
-                        using (var fs = File.CreateText(Path.Combine(vP,"eula.txt")))
+                        using (var fs = File.CreateText(Path.Combine(vP, "eula.txt")))
                         {
                             fs.WriteLine("eula=TRUE");
                         }
@@ -96,7 +96,7 @@ namespace ServerInstaller
                             fs.WriteLine($"white-list={_args.WL}");
                             fs.WriteLine($"max-players={_args.MaxPlayers}");
                         }
-                        if(!string.IsNullOrEmpty(_args.UpaServerID))
+                        if (!string.IsNullOrEmpty(_args.UpaServerID))
                         {
                             Content = "正在下载 统一通行证 运行库";
                             using (var clt = new WebClient())
@@ -128,7 +128,7 @@ namespace ServerInstaller
                 {
                     Fail();
                 }
-            }).Start();
+            });
         }
 
         private string CreateJsonText(MCFile serverdowns,int majorJava)

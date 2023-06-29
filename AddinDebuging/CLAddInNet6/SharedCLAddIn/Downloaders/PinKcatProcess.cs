@@ -55,10 +55,10 @@ namespace MEFL.CLAddIn.Downloaders
         }
 
         List<MCFileInfo> lst;
-        public override void Start()
+        public override Task Start()
         {
-            ThreadPool.SetMaxThreads(512, 512);
-            new Thread(() => {
+            return Task.Factory.StartNew(() => {
+                ThreadPool.SetMaxThreads(512, 512);
                 if (Install)
                 {
                     TotalProgresses = 2;
@@ -66,7 +66,7 @@ namespace MEFL.CLAddIn.Downloaders
                     Content = "解析版本中（包括 Json 合并）";
                     try
                     {
-                        var localJson = Path.Combine(DotMCPath, "versions", Arguments.VersionName,$"{Arguments.VersionName}.json");
+                        var localJson = Path.Combine(DotMCPath, "versions", Arguments.VersionName, $"{Arguments.VersionName}.json");
                         Directory.CreateDirectory(Path.GetDirectoryName(localJson));
                         var webReq = HttpWebRequest.CreateHttp(JsonSource);
                         using (var respon = webReq.GetResponse())
@@ -74,7 +74,7 @@ namespace MEFL.CLAddIn.Downloaders
                             TotalSize = respon.ContentLength;
                             using (var responStream = respon.GetResponseStream())
                             {
-                                using(var fs = File.Open(localJson,FileMode.OpenOrCreate))
+                                using (var fs = File.Open(localJson, FileMode.OpenOrCreate))
                                 {
                                     byte[] buffer = new byte[1024];
                                     int bytesRead;
@@ -103,7 +103,7 @@ namespace MEFL.CLAddIn.Downloaders
                             foreach (var item in arg.JAVAPaths)
                             {
                                 var versionInfo = FileVersionInfo.GetVersionInfo(item.FullName);
-                                if (versionInfo.FileMajorPart == _majorJ&&item.FullName.EndsWith("javaw.exe"))
+                                if (versionInfo.FileMajorPart == _majorJ && item.FullName.EndsWith("javaw.exe"))
                                 {
                                     _jaPth = item.FullName; break;
                                 }
@@ -112,24 +112,24 @@ namespace MEFL.CLAddIn.Downloaders
                             {
                                 _jaPth = arg.JAVAPaths[0].FullName;
                             }
-                            var url = BMCLForgeHelper.GetDownloadUrlFromBuild(arg.Forge.Build);
-                            inslocal = Path.Combine( DotMCPath,"versions",arg.VersionName,"[CL]InstallTemp",Path.GetFileName(url));
+                            var url = BMCLForgeDownloadAPI.GetDownloadUrlFromBuild(arg.Forge.Build);
+                            inslocal = Path.Combine(DotMCPath, "versions", arg.VersionName, "[CL]InstallTemp", Path.GetFileName(url));
                             Directory.CreateDirectory(Path.GetDirectoryName(inslocal));
                             using (var clt = new WebClient())
                             {
                                 clt.DownloadFile(url, inslocal);
                             }
-                            var content = ForgeParser.GetVersionContentFromInstaller(inslocal,false);
-                            var combined = ForgeParser.CombineVersionJson(File.ReadAllText(localJson),content,ParseType.Json,arg.VersionName);
-                            System.IO.File.WriteAllText(localJson,combined);
+                            var content = ForgeParser.GetVersionContentFromInstaller(inslocal, false);
+                            var combined = ForgeParser.CombineVersionJson(File.ReadAllText(localJson), content, ParseType.Json, arg.VersionName);
+                            System.IO.File.WriteAllText(localJson, combined);
                             localMCJson = localJson;
-                            cltlocal = localJson.Replace(".json",".jar");
+                            cltlocal = localJson.Replace(".json", ".jar");
                             var content2 = ForgeParser.GetInstallProfileContentFromInstaller(url, true);
                             combined2 = ForgeParser.CombineInstallerProfileJson(combined, content2, ParseType.Json);
                         }
                         var parser = new Parser();
 #if true
-                        if(Sources.Count()>0)
+                        if (Sources.Count() > 0)
                         {
                             if (Sources.Where((x) => x.ELItem == "${assets}").ToArray() != null)
                             {
@@ -138,6 +138,10 @@ namespace MEFL.CLAddIn.Downloaders
                             if (Sources.Where((x) => x.ELItem == "${libraries}").ToArray() != null)
                             {
                                 parser.LibrarySource = Sources.Where((x) => x.ELItem == "${libraries}").ToArray()[0].GetUri("");
+                            }
+                            if (Sources.Where((x) => x.ELItem == "${forge_libraries}").ToArray() != null)
+                            {
+                                parser.ForgeLibrarySource = Sources.Where((x) => x.ELItem == "${forge_libraries}").ToArray()[0].GetUri("");
                             }
                         }
 #endif  
@@ -181,10 +185,10 @@ DotMCPath, Arguments.VersionName, true
                     }
                     catch (Exception ex)
                     {
-                        ErrorInfo=ex.Message;
+                        ErrorInfo = ex.Message;
                     }
                 }
-            }).Start();
+            });
         }
 
         DateTime part2LastUpd;
@@ -194,24 +198,11 @@ DotMCPath, Arguments.VersionName, true
             firstM = m.DownloadedSize;
             if (Arguments is InstallArgsWithForge)
             {
-                var NoExistList = ItemsArray.Where(x => !File.Exists(x.Local)).ToArray();
-                var processm = new ProcessManager(NoExistList);
+                var problems = ItemsArray.Verify().ToList();
+                var processm = new ProcessManager(problems);
                 processm.Finished += Processm_Finished;
                 processm.DownloadedSizeUpdated += Nm_DownloadedSizeUpdated;
-                processm.Start(Path.Combine(DotMCPath, "CoreLaunchingTemp"), true);
-            }
-            else
-            {
-                var nm = new ProcessManager(m.Remains);
-                nm.Finished += Nm_Finished;
-                nm.DownloadedSizeUpdated += Nm_DownloadedSizeUpdated;
-                nm.Start(Path.Combine(DotMCPath, "CoreLaunchingTemp"), true);
-                part2LastUpd = DateTime.Now;
-                while (DateTime.Now - part2LastUpd < TimeSpan.FromSeconds(20))
-                {
-                    Thread.Sleep(100);
-                }
-                Finish();
+                processm.Start(Path.Combine(DotMCPath, "CoreLaunchingTemp"));
             }
         }
         long firstM = 0;
@@ -234,9 +225,6 @@ DotMCPath, Arguments.VersionName, true
             CurrectProgressIndex = 2;
             CurrentProgress = 0;
             Content = "安装 Forge 中";
-
-            
-
             var installer = new ForgeInstaller();
             installer.Output += Installer_Output;
             installer.InstallClient(_jaPth, Path.Combine(DotMCPath,"libraries"),
@@ -278,7 +266,7 @@ DotMCPath, Arguments.VersionName, true
         }
 
 
-        public override bool GetUsingLocalFiles(out string[] paths)
+        public override bool GetUsingLocalFiles(out IEnumerable<string> paths)
         {
             var lst = new List<string>();
             if (ItemsArray == null)
@@ -292,33 +280,32 @@ DotMCPath, Arguments.VersionName, true
                 {
                     lst.Add(ItemsArray[i].Local);
                 }
-                paths = lst.ToArray();
+                paths = lst;
                 return true;
             }
         }
 
-        public override void Retry()
+        public override Task Retry()
         {
             throw new NotImplementedException();
         }
 
-        public override void Pause()
+        public override Task Pause()
         {
             throw new NotImplementedException();
         }
 
-        public override void Cancel()
+        public override Task Cancel()
         {
             throw new NotImplementedException();
         }
 
-        public override void Continue()
+        public override Task Continue()
         {
             throw new NotImplementedException();
         }
     }
-
-    internal class PinKcatSingleProcess : SingleProcess
+    internal class PinKcatSingleProcess : SizedProcess
     {
         Queue<RequestWithRange> total = new();
         List<RequestWithRange> running = new();
@@ -329,14 +316,14 @@ DotMCPath, Arguments.VersionName, true
             LocalPath = localPath;
         }
 
-        public override void Cancel()
+        public override Task Cancel()
         {
             throw new NotImplementedException();
         }
 
-        public override void Continue()
+        public override Task Continue()
         {
-
+            throw new NotImplementedException();
         }
 
         private void T_WholeFinished(object? sender, long e)
@@ -365,26 +352,25 @@ DotMCPath, Arguments.VersionName, true
             DownloadedSize += e;
         }
 
-        public override bool GetUsingLocalFiles(out string[] paths)
+        public override bool GetUsingLocalFiles(out IEnumerable<string> paths)
         {
             paths = new string[0];
             return true;
         }
 
-        public override void Pause()
+        public override Task Pause()
         {
             throw new NotImplementedException();
         }
 
-        public override void Retry()
+        public override Task Retry()
         {
             throw new NotImplementedException();
         }
 
-        public override void Start()
+        public override Task Start()
         {
-            new Thread(() =>
-            {
+            return Task.Factory.StartNew(() => {
                 try
                 {
                     var webReq = HttpWebRequest.CreateHttp(NativeUrl);
@@ -446,10 +432,10 @@ DotMCPath, Arguments.VersionName, true
                 {
                     Fail();
                 }
-            }).Start();
+            });
         }
     }
-    internal class PinKcatPairProcess : SingleProcess
+    internal class PinKcatPairProcess : SizedProcess
     {
         Queue<RequestWithRange> total = new();
         List<RequestWithRange> running = new();
@@ -465,14 +451,14 @@ DotMCPath, Arguments.VersionName, true
             this.usingLocalFiles = usingLocalFiles;
         }
 
-        public override void Cancel()
+        public override Task Cancel()
         {
             throw new NotImplementedException();
         }
 
-        public override void Continue()
+        public override Task Continue()
         {
-
+            throw new NotImplementedException();
         }
 
         private void T_WholeFinished(object? sender, long e)
@@ -501,47 +487,48 @@ DotMCPath, Arguments.VersionName, true
             DownloadedSize += e;
         }
 
-        public override bool GetUsingLocalFiles(out string[] paths)
+        public override bool GetUsingLocalFiles(out IEnumerable<string> paths)
         {
             paths = new string[0];
             return true;
         }
 
-        public override void Pause()
+        public override Task Pause()
         {
             throw new NotImplementedException();
         }
 
-        public override void Retry()
+        public override Task Retry()
         {
             throw new NotImplementedException();
         }
 
-        public override void Start()
+        public override Task Start()
         {
-            new Thread(() =>
+            return Task.Factory.StartNew(() =>
             {
+
                 try
                 {
                     var infos = new List<MCFileInfo>();
                     foreach (var item in nativeLocalPairs)
                     {
-                        infos.Add(new(Path.GetFileName(item.Url),item.sha1,item.size,item.Url,item.localpath));
+                        infos.Add(new(Path.GetFileName(item.Url), item.sha1, item.size, item.Url, item.localpath));
                     }
                     var proms = new ProcessManager(infos);
-                    var temp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData),"CLtemp");
+                    var temp = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CLtemp");
                     proms.DownloadedSizeUpdated += (sender, e) =>
                     {
                         DownloadedSize = e;
                     };
                     proms.Finished += Proms_Finished;
-                    new Thread(()=> { proms.Start(temp, true);}).Start();
+                    new Thread(() => { proms.Start(temp); }).Start();
                 }
                 catch
                 {
                     Fail();
                 }
-            }).Start();
+            });
         }
 
         private void Proms_Finished(object? sender, EventArgs e)

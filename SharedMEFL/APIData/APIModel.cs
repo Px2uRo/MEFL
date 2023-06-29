@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -331,6 +332,7 @@ namespace MEFL.APIData
             MainPageToolContoller.LoadMEFL();
             DownloaderCaller.SingleCallerEvent += DownloaderCaller_SingleCallerEvent;
             DownloaderCaller.LoadDownloader += DownloaderCaller_LoadDownloader;
+            DownloaderCaller.CustomProcessAdded += DownloaderCaller_CustomProcessAdded;
             AccountCaller.RemoveAccountEvent += AccountCaller_RemoveAccountEvent;
             GamesCaller.LoadGames += GamesCaller_LoadGames;
 #if DEBUG
@@ -338,6 +340,11 @@ namespace MEFL.APIData
 #else
             
 #endif
+        }
+
+        private static void DownloaderCaller_CustomProcessAdded(object? sender, InstallProcess e)
+        {
+            DownloadingProgressPageModel.ModelView.DownloadingProgresses.Add(e);
         }
 
         private static void GamesCaller_LoadGames(object? sender, EventArgs e)

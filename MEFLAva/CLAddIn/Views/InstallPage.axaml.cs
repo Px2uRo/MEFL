@@ -38,7 +38,7 @@ namespace CLAddIn.Views
         private void InstallForgeCB_Checked(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             ForgeContentsSC.IsVisible= true;
-            if (!BMCLForgeHelper.GetSupporttedVersions().Contains(Info.Id))
+            if (!BMCLForgeDownloadAPI.GetSupporttedVersions().Contains(Info.Id))
             {
                 InstallForgeCB.IsChecked = false;
                 InstallForgeCB.IsVisible = false;
@@ -49,7 +49,7 @@ namespace CLAddIn.Views
             {
                 if (ForgeContentsSP.Children.Count==0)
                 {
-                    var items = BMCLForgeHelper.GetKnownUrlsFromMcVersion(Info.Id);
+                    var items = BMCLForgeDownloadAPI.GetKnownUrlsFromMcVersion(Info.Id);
                     for (int i = 0; i < items.Length; i++)
                     {
                         var item = items[i]; 
@@ -114,6 +114,7 @@ namespace CLAddIn.Views
 
         private void InstallBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
+            var args = new List<InstallArguments>();
             var vp = System.IO.Path.Combine(_dotMCPath, "versions", NameTP.Text);
             if (Directory.Exists(vp))
             {
@@ -125,10 +126,10 @@ namespace CLAddIn.Views
             {
                 Directory.CreateDirectory(vp);
             }
-            InstallArguments args = new(_javas,NameTP.Text, null, null);
+            args.Add(new(_javas,NameTP.Text, null, null,Info));
             if (_insfor)
             {
-                args = new InstallArgsWithForge(_javas,args,_wInfo);
+                args.Add(new InstallArgsWithForge(_javas,args.First(),_wInfo));
             }
             Solved?.Invoke(this, args);
         }
@@ -153,7 +154,7 @@ namespace CLAddIn.Views
             NameTP.Text = info.Id;
         }
 
-        public event EventHandler<InstallArguments> Solved;
+        public event EventHandler<IEnumerable<InstallArguments>> Solved;
         public event EventHandler<EventArgs> Quited;
     }
 }

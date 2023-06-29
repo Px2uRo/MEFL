@@ -7,6 +7,8 @@ using MEFL.Contract;
 using MEFL.PageModelViews;
 using MEFL.Views;
 using MEFL.Views.DialogContents;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MEFL.InfoControls
@@ -54,11 +56,11 @@ namespace MEFL.InfoControls
                 {
                     var localF = DownloadingProgressPageModel.ModelView.DownloadingProgresses.GetUsingFiles();
                     InstallArguments fargs;
-                    if (args.IsEmpty)
+                    if (args.Count()==0)
                     {
                         progress = APIModel.SelectedDownloader.InstallMinecraft(zainfo.Url,
-dotMc, APIModel.DownloadSources.Selected,
-new(APIModel.Javas.ToArray(), zainfo.Id, dotMc, null),
+dotMc, APIModel.DownloadSources.Selected, new InstallArguments[] {
+new(APIModel.Javas.ToArray(), zainfo.Id, dotMc, null,this.DataContext as LauncherWebVersionInfo)},
 localF);
                     }
                     else
@@ -83,31 +85,41 @@ localF);
             }
         }
 
-        private void Page_Solved(object? sender, InstallArguments e)
+        private void Page_Solved(object? sender, IEnumerable<InstallArguments> e)
         {
             InstallArguments fargs;
             if((sender as IInstallPage).Info != null)
             {
                 var dotMc = APIModel.MyFolders[APIModel.SelectedFolderIndex].Path;
                 var localF = DownloadingProgressPageModel.ModelView.DownloadingProgresses.GetUsingFiles();
-                if (e.IsEmpty)
+                if (e.Count()==0)
                 {
                     var jRE = APIModel.SettingArgs.SelectedJava;
-                    fargs = new(APIModel.Javas.ToArray(),(sender as IInstallPage).Info.Id, dotMc, null);
+                    fargs = new(APIModel.Javas.ToArray(),(sender as IInstallPage).Info.Id, dotMc, null,DataContext as LauncherWebVersionInfo);
+                    var progress = APIModel.SelectedDownloader.InstallMinecraft((sender as IInstallPage).Info.Url,
+                                dotMc, APIModel.DownloadSources.Selected, new[] {fargs}, localF);
+                    if (progress != null)
+                    {
+                        DownloadingProgressPageModel.ModelView.DownloadingProgresses.Add(progress);
+                    }
+                    else
+                    {
+                        WaringDialog.Show("无效的下载进程，去联系插件开发者。");
+                    }
                 }
                 else
                 {
-                    fargs = e;
-                }
-                var progress = APIModel.SelectedDownloader.InstallMinecraft((sender as IInstallPage).Info.Url,
-                            dotMc, APIModel.DownloadSources.Selected, fargs, localF);
-                if (progress != null)
-                {
-                    DownloadingProgressPageModel.ModelView.DownloadingProgresses.Add(progress);
-                }
-                else
-                {
-                    WaringDialog.Show("无效的下载进程，去联系插件开发者。");
+
+                    var progress = APIModel.SelectedDownloader.InstallMinecraft((sender as IInstallPage).Info.Url,
+                                dotMc, APIModel.DownloadSources.Selected, e, localF);
+                    if (progress != null)
+                    {
+                        DownloadingProgressPageModel.ModelView.DownloadingProgresses.Add(progress);
+                    }
+                    else
+                    {
+                        WaringDialog.Show("无效的下载进程，去联系插件开发者。");
+                    }
                 }
             }
             else

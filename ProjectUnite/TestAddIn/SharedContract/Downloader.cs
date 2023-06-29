@@ -39,7 +39,7 @@ namespace MEFL.Contract
         /// <param name="usingLocalFiles">正在使用的本地文件</param>
         /// <param name="sources">下载源</param>
         /// <returns>下载进程</returns>
-        public abstract SingleProcess CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string[] usingLocalFiles);
+        public abstract SizedProcess CreateProgress(string NativeUrl, string LoaclPath, DownloadSource[] sources, string[] usingLocalFiles);
         /// <summary>
         /// 创建多文件下载进程
         /// </summary>
@@ -47,7 +47,7 @@ namespace MEFL.Contract
         /// <param name="sources">下载源</param>
         /// <param name="usingLocalFiles">正在使用的本地文件</param>
         /// <returns>下载进程</returns>
-        public abstract SingleProcess CreateProgressFromPair(List<JsonFileInfo> NativeLocalPairs, DownloadSource[] sources,string[] usingLocalFiles);
+        public abstract SizedProcess CreateProgressFromPair(List<JsonFileInfo> NativeLocalPairs, DownloadSource[] sources,string[] usingLocalFiles);
         /// <summary>
         /// 安装游戏进程
         /// </summary>
@@ -57,7 +57,7 @@ namespace MEFL.Contract
         /// <param name="args">参数</param>
         /// <param name="usingLocalFiles">正在使用的本地文件</param>
         /// <returns>下载进程</returns>
-        public abstract InstallProcess InstallMinecraft(string jsonSource, string dotMCFolder, DownloadSource[] sources, InstallArguments args, string[] usingLocalFiles);
+        public abstract InstallProcess InstallMinecraft(string jsonSource, string dotMCFolder, DownloadSource[] sources, IEnumerable<InstallArguments> args, string[] usingLocalFiles);
     }
     public class NativeLocalPair
     {
@@ -144,13 +144,13 @@ namespace MEFL.Contract
         /// </summary>
         /// <param name="paths">文件</param>
         /// <returns>目前我能不能知道在下载什么文件，如果不能，那我while循环，直到能添加为止</returns>
-        public abstract bool GetUsingLocalFiles(out string[] paths);
+        public abstract bool GetUsingLocalFiles(out IEnumerable<string> paths);
         #region methods
-        public abstract void Retry();
-        public abstract void Pause();
-        public abstract void Start();
-        public abstract void Cancel();
-        public abstract void Continue();
+        public abstract Task Retry();
+        public abstract Task Pause();
+        public abstract Task Start();
+        public abstract Task Cancel();
+        public abstract Task Continue();
         public virtual void Close()
         {
             Dispose();
@@ -190,7 +190,7 @@ namespace MEFL.Contract
 
         {
             get { return _currectProgressIndex; }
-            set { _currectProgressIndex = value; ChangeProperty(nameof(CurrectProgressIndex)); }
+            set { _currectProgressIndex = value; CurrentProgress = 0; ChangeProperty(nameof(CurrectProgressIndex)); }
         }
         private int _totalProgresses = 0;
 
@@ -231,6 +231,9 @@ namespace MEFL.Contract
 
         private double _CurrentProgress;
 
+        /// <summary>
+        /// 不乘 100 就可以了，也就是说一般是0.XX
+        /// </summary>
         public double CurrentProgress
         {
             get { return _CurrentProgress; }
@@ -242,7 +245,7 @@ namespace MEFL.Contract
         public InstallArguments Arguments { get; protected set; }
     }
 
-    public abstract class SingleProcess : InstallProcess
+    public abstract class SizedProcess : InstallProcess
     {
         private string _localPath;
 

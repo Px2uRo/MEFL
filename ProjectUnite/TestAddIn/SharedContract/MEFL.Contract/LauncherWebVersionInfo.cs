@@ -35,7 +35,7 @@ public abstract class LauncherWebVersionInfo:MEFLClass
 	/// <param name="usingLocalFiles">正在下载中的本地文件（Avalonia 暂未实现）</param>
 	/// <param name="page">如果为 false 返回这个Page</param>
 	/// <returns>是否可以下载</returns>
-	public abstract bool DirectDownload(FileInfo[] Javas,string dotMCPath,out IInstallPage page,out InstallArguments args);
+	public abstract bool DirectDownload(FileInfo[] Javas,string dotMCPath,out IInstallPage page,out IEnumerable<InstallArguments> args);
 }
 
 public abstract class LauncherWebVersionContext

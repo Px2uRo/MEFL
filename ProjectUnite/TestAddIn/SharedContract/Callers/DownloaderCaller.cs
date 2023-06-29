@@ -26,10 +26,41 @@ namespace MEFL.Callers
             SingleCallerEvent?.Invoke(null,new DownloadSingleArgs(native,local));
         }
 
-        public static SingleProcess CallSingleProcess(string native, string local)
+        public static SizedProcess CallSingleProcess(string native, string local)
         {
             LoadDownloader?.Invoke(null,null);
             return SelectedDownloader.CreateProgress(native,local,sources,usingLocalFiles);
+        }
+
+        [Obsolete("别用，不要用，不是给你用的")]
+        public static event EventHandler<NativeLocalPairsList>? AddProcessFromList;
+
+        public static void CallDownloadProgressFromList(NativeLocalPairsList list)
+        {
+            AddProcessFromList.Invoke(null, list);
+        }
+
+        private static DownloadSource[] selectedSources { get; set; }
+        [Obsolete("别用，不要用，不是给你用的")]
+        public static void Set(DownloadSource[] value)
+        {
+            selectedSources = value;
+        }
+        public static DownloadSource[] GetSelectedSources() => selectedSources;
+
+        private static IEnumerable<InstallProcess> _processes { get; set; }
+        [Obsolete("别用，不要用，不是给你用的")]
+        public static void Set(IEnumerable<InstallProcess> value)
+        {
+            _processes = value;
+        }
+        public static IEnumerable<InstallProcess> GetRunningTasks() => _processes;
+
+        [Obsolete("别用，不要用，不是给你用的")]
+        public static event EventHandler<InstallProcess>? CustomProcessAdded;
+        public static void Add(InstallProcess process)
+        {
+            CustomProcessAdded?.Invoke(null, process);
         }
     }
 

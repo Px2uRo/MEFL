@@ -7,7 +7,7 @@ namespace MEFL.Contract
 {
     public interface IInstallPage:IDialogContent
     {
-        public event EventHandler<InstallArguments> Solved;
+        public event EventHandler<IEnumerable<InstallArguments>> Solved;
         public LauncherWebVersionInfo Info { get; set; }
     }
 

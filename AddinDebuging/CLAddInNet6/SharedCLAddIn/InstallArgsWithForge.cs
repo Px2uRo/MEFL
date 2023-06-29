@@ -4,8 +4,8 @@ using MEFL.Arguments;
 
 internal class InstallArgsWithForge : InstallArguments
 {
-
-    public InstallArgsWithForge(FileInfo[] jAVAPaths,InstallArguments baseArgs, WebForgeInfo info): base(jAVAPaths,baseArgs.VersionName,baseArgs.CustomGameFolder,baseArgs.GameIcon)
+    public override int Steps => 4;
+    public InstallArgsWithForge(FileInfo[] jAVAPaths,InstallArguments baseArgs, WebForgeInfo info): base(jAVAPaths,baseArgs.VersionName,baseArgs.CustomGameFolder,baseArgs.GameIcon,baseArgs.Info)
     {
         Forge = info;
     }

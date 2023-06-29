@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.ComponentModel.Composition.Hosting;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace MEFL.InfoControls
 {
@@ -110,9 +111,10 @@ namespace MEFL.InfoControls
                             Dispatcher.UIThread.InvokeAsync(() =>
                             {
                                 var mw = app.MainWindow as MainWindow;
-                                var btn = new Button() { Width = 30, Height = 30, Margin = new(3) };
+                                var btn = new Button() { Width = 30, Height = 30, Margin = new(3),Tag=h.Guid };
                                 btn.Click += new((x, e) => {
                                     mw.ClearPage();
+                                    item.Value.Tag = h.Guid;
                                     mw.Page.Children.Add(item.Value);
                                 });
                                 mw.ButtonForAddIns.Children.Add(btn);
@@ -162,6 +164,33 @@ namespace MEFL.InfoControls
             }
             else
             {
+
+                if (App.Current.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime app)
+                {
+                    Dispatcher.UIThread.InvokeAsync(() =>
+                    {
+                        var mw = app.MainWindow as MainWindow;
+                        for (int i = 0;i< mw.ButtonForAddIns.Children.Count;i++)
+                        {
+                            var item = mw.ButtonForAddIns.Children[i];
+                            if ((item as Control).Tag!=null&&(item as Button).Tag.ToString() == h.Guid)
+                            {
+                                mw.ButtonForAddIns.Children.Remove(item);
+                                i = i-1;
+                            }
+                        }
+                        for (int i = 0; i < mw.Page.Children.Count; i++)
+                        {
+                            var item = mw.Page.Children[i];
+                            if ((item as Control).Tag!=null&&(item as Control).Tag.ToString() == h.Guid)
+                            {
+                                mw.Page.Children.Remove(item);
+                                i = i - 1;
+                            }
+                        }
+                    });
+                }
+
                 var lnq = APIModel.AccountConfigs.Where((x)=>x.AddInGuid==h.Guid).ToArray();
                 if (lnq.Contains(APIModel.SelectedAccount))
                 {
@@ -177,7 +206,18 @@ namespace MEFL.InfoControls
                 {
                     APIModel.Downloaders.Remove(item);
                 }
+
+                var downSourceLq = APIModel.DownloadSources.ShowAll().Where((x) => x.AddInGuid == h.Guid).ToArray();
+                foreach (var item in downSourceLq)
+                {
+                    APIModel.DownloadSources.RemoveItem(item);
+                }
             }
+            new Task(() =>
+            {
+                Task.Delay(100);
+                Dispatcher.UIThread.InvokeAsync(()=>Views.SettingPage.UI.LoadSourceLB());
+            }).Start();
         }
         #endregion
 
