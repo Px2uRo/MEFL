@@ -16,6 +16,7 @@ using static CoreLaunching.FileVerifyUtil;
 using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using ThreadState = System.Threading.ThreadState;
+using CoreLaunching.MicrosoftAuth;
 
 namespace MEFL.CLAddIn.Downloaders
 {
@@ -58,6 +59,7 @@ namespace MEFL.CLAddIn.Downloaders
             return Task.Factory.StartNew(() =>
             {
                 this.Content = "正在获取版本 JSON 信息";
+                CurrectProgressIndex = 1;
                 try
                 {
                     foreach (var arg in _arguments)
@@ -102,6 +104,10 @@ namespace MEFL.CLAddIn.Downloaders
                             var InstProfInfos = ForgeParser.GetInstallProfileContentFromInstaller(inserp, false);
                             var fi = DownloadLib(forge, InstProfInfos);
                             fi.Files = fi.Files.Verify();
+                            #region MOJANGMAPS
+                            DownloadMJMAP(_info,InstProfInfos);
+
+                            #endregion
                             foreach (var file in fi.Files)
                             {
                                 _usingFiles.Add(file.Local);
@@ -126,6 +132,7 @@ namespace MEFL.CLAddIn.Downloaders
                                     jaPth = item.FullName; break;
                                 }
                             }
+                            inser.Output += Inser_Output;
                             inser.InstallClient(jaPth, Path.Combine(_dotMCFolder, "libraries"),
                 _infop.Replace(".json", ".jar"), _infop, inserp, ParseType.FilePath);
                             CurrectProgressIndex++;
@@ -145,6 +152,7 @@ namespace MEFL.CLAddIn.Downloaders
                             this.Content = "正在下载 原版 游戏与支持库";
                             //AssetsDownloadProcess.AddItemsFromVersionInfo(_info,_parser);
                             var o = DownloadLib(arg, _info);
+                            o.Files = o.Files.Verify();
                             foreach (var file in o.Files)
                             {
                                 _usingFiles.Add(file.Local);
@@ -169,6 +177,46 @@ namespace MEFL.CLAddIn.Downloaders
                     Fail();
                 }
             });
+        }
+
+        private void DownloadMJMAP(string gameInfo,string instpInfo)
+        {
+            var url = JsonConvert.DeserializeObject<Root>(gameInfo).Downloads.Client_mappings.Url;
+            var forgeroot = JsonConvert.DeserializeObject<InstallProfile>(instpInfo);
+            
+            var nP = forgeroot.Data["{MOJMAPS}"].Client;
+            nP = nP.Replace("[", "").Replace("]", "");
+            nP = nP.GetLibraryFileName(Path.Combine(_dotMCFolder, "libraries"));
+            if (nP.Contains(" ")) { nP = $"\"{nP}\""; }
+            using (var clt = new WebClient())
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(nP));
+                clt.DownloadFile(url,nP);
+            }
+        }
+
+        private void Inser_Output(object? sender, string e)
+        {
+            if (string.IsNullOrEmpty(e))
+            {
+                return;
+            }
+            if(e.Contains("Task: MCP_DATA"))
+            {
+                CurrentProgress= 0.05;
+            }
+            else if (e.Contains("Task: DOWNLOAD_MOJMAPS"))
+            {
+                CurrentProgress = 0.10;
+            }
+            else if (e.Contains("Task: MERGE_MAPPING"))
+            {
+                CurrentProgress = 0.15;
+            }
+            else if (e.Contains("Forge Auto Renaming Tool"))
+            {
+                CurrentProgress = 0.20;
+            }
         }
 
         private void O_OneFileFinished(object? sender, MCFileInfo e)
@@ -196,7 +244,7 @@ namespace MEFL.CLAddIn.Downloaders
         private ProcessManager DownloadLib(InstallArguments arg, string json)
         {
             var infos = _parser.ParseLibraries(json, ParseType.Json, _dotMCFolder, arg.VersionName, true);
-            var libraries = new ProcessManager(infos);      
+            var libraries = new ProcessManager(infos);
             return libraries;
         }
 
