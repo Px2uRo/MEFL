@@ -378,8 +378,8 @@ DotMCPath, Arguments.VersionName, true
                     {
                         TotalSize = rep.ContentLength;
                     }
-                    Statu = DownloadProgressState.Downloading;
-                    if (Statu == DownloadProgressState.Downloading)
+                    State = DownloadProgressState.Downloading;
+                    if (State == DownloadProgressState.Downloading)
                     {
                         ThreadPool.SetMaxThreads(512, 512);
                         var info = new MCFileInfo(NativeUrl, "", TotalSize, NativeUrl, LocalPath);
@@ -428,9 +428,9 @@ DotMCPath, Arguments.VersionName, true
                         }
                     }
                 }
-                catch
+                catch(Exception ex)
                 {
-                    Fail();
+                    Fail(ex);
                 }
             });
         }
@@ -524,9 +524,9 @@ DotMCPath, Arguments.VersionName, true
                     proms.Finished += Proms_Finished;
                     new Thread(() => { proms.Start(temp); }).Start();
                 }
-                catch
+                catch(Exception ex)
                 {
-                    Fail();
+                    Fail(ex.Message);
                 }
             });
         }

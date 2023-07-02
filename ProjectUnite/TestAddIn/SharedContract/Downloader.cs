@@ -132,8 +132,17 @@ namespace MEFL.Contract
             Finished?.Invoke(this,EventArgs.Empty);
         }
 
-        public void Fail()
+        public void Fail(Exception ex)
         {
+            ErrorInfo = ex.Message;
+            State = DownloadProgressState.Failed;
+            Failed?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void Fail(string message)
+        {
+            ErrorInfo = message;
+            State = DownloadProgressState.Failed;
             Failed?.Invoke(this, EventArgs.Empty);
         }
         public event EventHandler<EventArgs>? Finished; 
@@ -218,12 +227,12 @@ namespace MEFL.Contract
             }
 #endif
         }
-        private DownloadProgressState _statu;
+        private DownloadProgressState _state;
 
-        public DownloadProgressState Statu
+        public DownloadProgressState State
         {
-            get { return _statu; }
-            set { _statu = value; }
+            get { return _state; }
+            set { _state = value; }
         }
 
 

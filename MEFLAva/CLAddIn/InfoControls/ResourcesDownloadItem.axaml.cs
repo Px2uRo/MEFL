@@ -52,26 +52,26 @@ namespace MEFL.CLAddIn
             {
 
             }
-            try
-            {
                 new Thread(() =>
                 {
-                    using (var clt = new WebClient())
+                    try
                     {
-                        var ms = new MemoryStream(clt.DownloadData(info.Logo.Url));
-                    Dispatcher.UIThread.InvokeAsync(() =>
+                        using (var clt = new WebClient())
+                        {
+                            var ms = new MemoryStream(clt.DownloadData(info.Logo.Url));
+                            Dispatcher.UIThread.InvokeAsync(() =>
+                            {
+                                Img.Source = new Bitmap(ms);
+                                ms.Close();
+                                ms.Dispose();
+                            });
+                        }
+                    }
+                    catch (Exception)
                     {
-                        Img.Source = new Bitmap(ms);
-                        ms.Close();
-                        ms.Dispose();
-                    });
+
                     }
                 }).Start();
-            }
-            catch (Exception ex)
-            {
-                
-            }
         }
     }
 }

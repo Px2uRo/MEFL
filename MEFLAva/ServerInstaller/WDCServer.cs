@@ -126,7 +126,7 @@ namespace ServerInstaller
                 }
                 catch (Exception ex)
                 {
-                    Fail();
+                    Fail(ex);
                 }
             });
         }

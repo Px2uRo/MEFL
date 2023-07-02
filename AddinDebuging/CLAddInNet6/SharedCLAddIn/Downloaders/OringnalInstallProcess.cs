@@ -17,6 +17,8 @@ using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using ThreadState = System.Threading.ThreadState;
 using CoreLaunching.MicrosoftAuth;
+using System.Collections.ObjectModel;
+using CoreLaunching;
 
 namespace MEFL.CLAddIn.Downloaders
 {
@@ -86,7 +88,6 @@ namespace MEFL.CLAddIn.Downloaders
                             CurrectProgressIndex++;
                             Content = "正在下载 Forge 游戏库";
                             var f = DownloadLib(arg, versionInfoInIns);
-                            f.Files = f.Files.Verify();
                             foreach (var file in f.Files)
                             {
                                 _usingFiles.Add(file.Local);
@@ -94,7 +95,7 @@ namespace MEFL.CLAddIn.Downloaders
                             f.OneFileFinished += O_OneFileFinished;
                             f.DownloadedSizeUpdated += O_DownloadedSizeUpdated;
                             f.Start(Path.Combine(_dotMCFolder, "CoreLaunchingTemp"));
-                            while (f.DownloadedSize!=f.TotalSize)
+                            while (f.DownloadedCount!=f.TotalCount)
                             {
                                 Thread.Sleep(100);
                             };
@@ -103,7 +104,6 @@ namespace MEFL.CLAddIn.Downloaders
                             Content = "正在下载 Forge 安装库";
                             var InstProfInfos = ForgeParser.GetInstallProfileContentFromInstaller(inserp, false);
                             var fi = DownloadLib(forge, InstProfInfos);
-                            fi.Files = fi.Files.Verify();
                             #region MOJANGMAPS
                             DownloadMJMAP(_info,InstProfInfos);
 
@@ -115,7 +115,7 @@ namespace MEFL.CLAddIn.Downloaders
                             fi.OneFileFinished += O_OneFileFinished;
                             fi.DownloadedSizeUpdated += O_DownloadedSizeUpdated;
                             fi.Start(Path.Combine(_dotMCFolder, "CoreLaunchingTemp"));
-                            while (fi.DownloadedSize != fi.TotalSize)
+                            while (fi.DownloadedCount != fi.TotalCount)
                             {
                                 Thread.Sleep(100);
                             };
@@ -150,9 +150,8 @@ namespace MEFL.CLAddIn.Downloaders
                             CurrentProgress = 1;
                             CurrectProgressIndex++;
                             this.Content = "正在下载 原版 游戏与支持库";
-                            //AssetsDownloadProcess.AddItemsFromVersionInfo(_info,_parser);
+                            AssetsDownloadProcess.AddItemsFromVersionInfoAsync(_info,_parser,_dotMCFolder);
                             var o = DownloadLib(arg, _info);
-                            o.Files = o.Files.Verify();
                             foreach (var file in o.Files)
                             {
                                 _usingFiles.Add(file.Local);
@@ -160,7 +159,7 @@ namespace MEFL.CLAddIn.Downloaders
                             o.OneFileFinished += O_OneFileFinished;
                             o.DownloadedSizeUpdated += O_DownloadedSizeUpdated;
                             o.Start(Path.Combine(_dotMCFolder, "CoreLaunchingTemp"));
-                            while (o.DownloadedSize != o.TotalSize)
+                            while (o.DownloadedCount != o.TotalCount)
                             {
                                 Thread.Sleep(100);
                             };
@@ -174,24 +173,39 @@ namespace MEFL.CLAddIn.Downloaders
                 }
                 catch (Exception ex)
                 {
-                    Fail();
+                    Fail(ex.Message);
                 }
             });
         }
 
         private void DownloadMJMAP(string gameInfo,string instpInfo)
         {
-            var url = JsonConvert.DeserializeObject<Root>(gameInfo).Downloads.Client_mappings.Url;
+            CurrectProgressIndex++;
+            var urlinfo = JsonConvert.DeserializeObject<Root>(gameInfo).Downloads.Client_mappings;
             var forgeroot = JsonConvert.DeserializeObject<InstallProfile>(instpInfo);
             
             var nP = forgeroot.Data["{MOJMAPS}"].Client;
             nP = nP.Replace("[", "").Replace("]", "");
             nP = nP.GetLibraryFileName(Path.Combine(_dotMCFolder, "libraries"));
-            if (nP.Contains(" ")) { nP = $"\"{nP}\""; }
-            using (var clt = new WebClient())
+            var sha1 = Certutil.Sha1(nP);
+            if (sha1 != urlinfo.Sha1)
             {
-                Directory.CreateDirectory(Path.GetDirectoryName(nP));
-                clt.DownloadFile(url,nP);
+                using (var clt = new WebClient())
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(nP));
+                    clt.DownloadProgressChanged += new((s, e) =>
+                    {
+                        CurrentProgress = (double)e.BytesReceived / (double)e.TotalBytesToReceive;
+                    });
+                    try
+                    {
+                        clt.DownloadFile(urlinfo.Url, nP);
+                    }
+                    catch (Exception ex)
+                    {
+                        Fail(ex);
+                    }
+                }
             }
         }
 
@@ -295,18 +309,49 @@ namespace MEFL.CLAddIn.Downloaders
 
     internal class AssetsDownloadProcess : SizedProcess
     {
+        class indexDownloaderPair
+        {
+            internal string index;
+            internal ProcessManager proc;
+        }
+        private static ObservableCollection<indexDownloaderPair> downloading = new();
         internal static AssetsDownloadProcess Running = new();
-        internal static void Show()
+        static AssetsDownloadProcess()
+        {
+            downloading.CollectionChanged += Downloading_CollectionChanged;
+        }
+
+        private static void Downloading_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            var c = sender as ObservableCollection<indexDownloaderPair>;
+            if (c.Count == 0)
+            {
+                Running.Finish();
+            }
+            else
+            {
+                Show();
+            }
+        }
+
+        private static void Show()
         {
             if (!DownloaderCaller.GetRunningTasks().Contains(Running))
             {
                 DownloaderCaller.Add(Running);
             }
         }
-        internal static void AddItemsFromVersionInfo(string json,Parser parser)
+        internal static Task AddItemsFromVersionInfoAsync(string json,Parser parser,string dotMCFolder)
         {
-            var r = JsonConvert.DeserializeObject<Root>(json);
-
+            return Task.Factory.StartNew(() =>
+            {
+                var r = JsonConvert.DeserializeObject<Root>(json);
+                var lq = downloading.Where(x => x.index == r.AssetIndex.Id);
+                if (lq.Count() == 0)
+                {
+                    var infos= parser.ParseAssetsFromIndexUrl(r.AssetIndex.Url, ParseType.NativeUrl, dotMCFolder);
+                }
+            });
         }
         public override Task Cancel()
         {
