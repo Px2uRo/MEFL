@@ -155,7 +155,7 @@ namespace MEFL.CLAddIn.Downloaders
                                         var objectPath = Path.Combine(dotMCPath, "assets", "objects",item.Hash.Substring(0,2),item.Hash);
                                         if (!System.IO.File.Exists(objectPath))
                                         {
-                                            var native = SourceReplacer.Replace($"http://resources.download.minecraft.net/{item.Hash[..2]}/{item.Hash}", Sources);
+                                            var native = SourceReplacer.Replace($"https://resources.download.minecraft.net/{item.Hash[..2]}/{item.Hash}", Sources);
                                             var nlp = new NativeLocalPair(native, objectPath);
                                             NativeLocalPairs.Add(nlp);
                                             TotalSize += item.Size;
@@ -371,7 +371,7 @@ namespace MEFL.CLAddIn.Downloaders
                                         var objectPath = Path.Combine(dotMCPath, "assets", "objects", item.Hash.Substring(0, 2), item.Hash);
                                         if (!System.IO.File.Exists(objectPath))
                                         {
-                                            NativeLocalPairs.Add(new($"http://resources.download.minecraft.net/{item.Hash.Substring(0, 2)}/{item.Hash}", objectPath));
+                                            NativeLocalPairs.Add(new($"https://resources.download.minecraft.net/{item.Hash.Substring(0, 2)}/{item.Hash}", objectPath));
                                             TotalSize += item.Size;
                                             TotalCount++;
                                         }

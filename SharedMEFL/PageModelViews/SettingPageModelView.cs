@@ -14,6 +14,7 @@ using Avalonia.Threading;
 using MEFL.AvaControls;
 using MEFL.Views.MainPageTool;
 using MEFL.Contract;
+using System.Timers;
 #if WPF
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -95,17 +96,49 @@ namespace MEFL.PageModelViews
             throw new NotImplementedException();
         }
     }
-    public class SettingPageModelView: PageModelViewBase
+    public class SettingPageModelView : PageModelViewBase
     {
+        public ulong Totalmemory = MemoryUtil.GetTotal();
+        Timer _timer = new Timer(2000);
+        public bool AutoRefresh { get; set; }
+        private ulong _usedMem;
+
+        public ulong UsedMem
+        {
+            get { return _usedMem; }
+            set { _usedMem = value; InvokeDispacher(nameof(UsedMem)); }
+        }
+
+        public bool AutoMemory 
+        {
+            get 
+            {
+                try
+                {
+                    return Convert.ToBoolean(RegManager.Read("AutoMemory"));
+                }
+                catch
+                {
+                    RegManager.Write("AutoMemory", true.ToString());
+                    return true;
+                }
+            }
+            set
+            {
+                RegManager.Write("AutoMemory",value.ToString());
+            }
+        }
         public bool ShowDownloader
         {
             get { return APIModel.SettingConfig.ShowSimpleDownloaderTool; }
-            set { APIModel.SettingConfig.ShowSimpleDownloaderTool = value; 
+            set
+            {
+                APIModel.SettingConfig.ShowSimpleDownloaderTool = value;
                 if (value)
                 {
                     var p = APIModel.SettingConfig.SimpleDownloaderPosition;
                     var args = new AddMainPageToolArgs(new(p.X, p.Y));
-                    MainPageToolContoller.Add(SimpleDownloaderTool.UI,"MEFL1",args);
+                    MainPageToolContoller.Add(SimpleDownloaderTool.UI, "MEFL1", args);
                 }
                 else
                 {
@@ -113,12 +146,45 @@ namespace MEFL.PageModelViews
                 }
             }
         }
+        public ulong Memory
+        {
+            get
+            {
+                if (AutoMemory)
+                {
+                    var mem = MemoryUtil.GetFree();
+                    return (ulong)(mem * 0.9);
+                }
+                else
+                {
+                    return (ulong)APIModel.MaxMemory;
+                }
+            }
+            set
+            {
+                try
+                {
+                    APIData.APIModel.MaxMemory = (int)value;
+                }
+                catch (Exception ex)
+                {
 
+                }
+            }
+        }
         public string MaxMemory
         {
             get
             {
-                return APIModel.MaxMemory.ToString();
+                if (AutoMemory)
+                {
+                    var mem = MemoryUtil.GetFree();
+                    return ((int)((mem * 0.9))).ToString();
+                }
+                else
+                {
+                    return APIModel.MaxMemory.ToString();
+                }
             }
             set
             {
@@ -128,15 +194,17 @@ namespace MEFL.PageModelViews
                 }
                 catch (Exception ex)
                 {
+
                 }
                 Invoke(nameof(MaxMemory));
             }
         }
+
         public DownloadSourceCollection DownSources => APIModel.DownloadSources;
         public string TempFolderPath
         {
             get { return APIModel.SettingConfig.TempFolderPath; }
-            set { APIModel.SettingConfig.TempFolderPath = value;Invoke(nameof(TempFolderPath)); }
+            set { APIModel.SettingConfig.TempFolderPath = value; Invoke(nameof(TempFolderPath)); }
         }
 
         public string OtherJVMArgs
@@ -146,12 +214,13 @@ namespace MEFL.PageModelViews
         }
 
         public ICommand ChangeBackgroundCommand { get; set; }
-        public int LangIndex {
+        public int LangIndex
+        {
             get
             {
                 return (int)APIData.APIModel.SettingArgs.LangID;
             }
-            set 
+            set
             {
                 APIData.APIModel.SettingArgs.LangID = (LangID)value;
                 SettingPageModel.SetLang();
@@ -160,9 +229,10 @@ namespace MEFL.PageModelViews
 
         public int SelectedJavaIndex
         {
-            get { 
+            get
+            {
                 int res = 0;
-                for(int i = 0; i < Javas.Count; i++)
+                for (int i = 0; i < Javas.Count; i++)
                 {
                     if (Javas[i].FullName.ToString() == APIData.APIModel.SettingArgs.SelectedJava.FullName.ToString())
                     {
@@ -171,7 +241,8 @@ namespace MEFL.PageModelViews
                 }
                 return res;
             }
-            set {
+            set
+            {
                 try
                 {
                     APIData.APIModel.SettingArgs.SelectedJava = Javas[value];
@@ -181,17 +252,17 @@ namespace MEFL.PageModelViews
                 {
 
                 }
-                Invoke("SelectedJavaIndex"); 
+                Invoke("SelectedJavaIndex");
             }
         }
 
-        public ObservableCollection<FileInfo> Javas { get => APIData.APIModel.Javas; set { APIData.APIModel.Javas = value;Invoke("Javas"); } }
+        public ObservableCollection<FileInfo> Javas { get => APIData.APIModel.Javas; set { APIData.APIModel.Javas = value; Invoke("Javas"); } }
         private bool _EnableSearchJava;
 
         public bool EnableSearchJava
         {
             get { return _EnableSearchJava; }
-            set { _EnableSearchJava = value;Invoke("EnableSearchJava"); }
+            set { _EnableSearchJava = value; Invoke("EnableSearchJava"); }
         }
 
 
@@ -220,11 +291,21 @@ namespace MEFL.PageModelViews
             _EnableSearchJava = true;
             LangIndex = (int)APIData.APIModel.SettingArgs.LangID;
             ChangeBackgroundCommand = new ChangeBackground();
+            _timer.Elapsed += new((s, e) =>
+            {
+                if (AutoRefresh)
+                {
+                    UsedMem = Totalmemory - MemoryUtil.GetFree();
+                }
+            });
+            _timer.Start();
         }
     }
     public static class SettingPageModel
     {
         public static string ContractVersion { get; set; }
+
+
 #if WPF
         public static Image img { get; set; }
 #elif AVALONIA

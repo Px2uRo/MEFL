@@ -5,21 +5,27 @@
              mc:Ignorable="d" 
 			 Width="300" 
 			 x:Class="MEFL.Views.DialogContents.GamesManagerContent">
-  <StackPanel Margin="3">
-	  <TextBlock Text="选择文件夹："/>
-	  <Grid>
-		<ComboBox Width="200" SelectedIndex="{Binding SelectedFolderIndex}" Items="{Binding MyFolders}"/>
-		<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-			<Button Name="ExploreFolderBtn" Content="E" Width="30"/>
-			<Button Name="DelFolderBtn" Content="×" Width="30"/>
-			<Button Name="AddFolderBtn" Content="+" Width="30" />
-		</StackPanel>
-	  </Grid>
-	  <ScrollViewer Height="240">
+  <Grid Margin="3" RowDefinitions="auto,*,auto">
+	  <StackPanel Grid.Row="0">
+		  <TextBlock Text="选择文件夹："/>
+		  <Grid ColumnDefinitions="*,auto">
+			  <ComboBox SelectedIndex="{Binding SelectedFolderIndex}" Items="{Binding MyFolders}"/>
+			  <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+				  <Button Name="ExploreFolderBtn" Content="E" Width="30"/>
+				  <Button Name="DelFolderBtn" Content="×" Width="30"/>
+				  <Button Name="AddFolderBtn" Content="+" Width="30" />
+			  </StackPanel>
+		  </Grid>
+		  <Grid ColumnDefinitions="*,auto">
+			  <TextBox Name="SearchBox"/>
+			  <Button Grid.Column="1" Name="SearchBtn" Content="S" Width="30" />
+		  </Grid>
+	  </StackPanel>
+	  <ScrollViewer Grid.Row="1">
 		  <StackPanel Name="Games" Margin="0,0,20,0"/>
 	  </ScrollViewer>
-  <Button Name="CancelBtn" Width="295">
+  <Button Grid.Row="2" VerticalAlignment="Bottom" Margin="0,5,20,0" HorizontalAlignment="Center" Name="CancelBtn" Width="295">
 	  <TextBlock Text="取消" HorizontalAlignment="Center"/>
 	  </Button>
-  </StackPanel>
+  </Grid>
 </UserControl>

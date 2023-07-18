@@ -14,7 +14,7 @@
 				</Grid.ColumnDefinitions>
 				<Image Source="{Binding IconSource}"/>
 				<StackPanel Grid.Column="1">
-					<TextBlock Text="{Binding Name}"/>
+					<TextBlock Text="{Binding Name}" FontSize="20" FontWeight="Bold"/>
 					<StackPanel Orientation="Horizontal">
 						<TextBlock Text="{Binding VersionType}"/>
 						<TextBlock Text=" "/>
@@ -24,8 +24,14 @@
 				</StackPanel>
 			</Grid>
 		</Button>
-		<Grid Background="Transparent" HorizontalAlignment="Right" Width="30" Grid.Column="1" Name="MoreInfoGrid">
-			<Button VerticalAlignment="Center" Height="75" Width="30" Margin="30,0,0,0" Name="MoreInfoBtn">
+		<Grid RowDefinitions="*,*,*" Background="Transparent" HorizontalAlignment="Right" Width="30" Grid.Column="1" Name="MoreInfoGrid">
+			<Button Background="Red" VerticalAlignment="Center" Grid.Row="0" Height="25" Width="30" Margin="30,0,0,0" Name="DeleteBtn">
+				<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="×"/>
+			</Button>
+			<Button VerticalAlignment="Center" Grid.Row="1" Height="25" Width="30" Margin="30,0,0,0" Name="FavorBtn">
+				<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="★" FontSize="12"/>
+			</Button>
+			<Button VerticalAlignment="Center" Grid.Row="2" Height="25" Width="30" Name="MoreInfoBtn" Margin="30,0,0,0" >
 				<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="..."/>
 			</Button>
 		</Grid>

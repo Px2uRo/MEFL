@@ -2,10 +2,12 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Threading;
 using CoreLaunching.DownloadAPIs.Forge;
+using CoreLaunching.DownloadAPIs.Interfaces;
 using CoreLaunching.Forge;
 using CoreLaunching.MicrosoftAuth;
 using MEFL.Callers;
 using MEFL.CLAddIn;
+using MEFL.CLAddIn.Export;
 using MEFL.Contract;
 using System.Collections.ObjectModel;
 using System.Net;
@@ -18,6 +20,7 @@ namespace CLAddIn.Views
         {
             var b = base.ArrangeOverride(finalSize);
             HotScrl.Height = b.Height - 200;
+            FitherVersionCB.Width= finalSize.Width - 165;
             return b;
         }
         public ResourceFinder()
@@ -25,23 +28,84 @@ namespace CLAddIn.Views
             InitializeComponent();
             CancelDetailBtn.Click += CancelDetailBtn_Click;
             OtherIndexs.SelectionChanged += OtherIndexs_SelectionChanged;
+            SearchBtn.Click += SearchBtn_Click;
+            LoadVersion();
             LoadHot();
         }
 
-        ForgeModInfo _currectInfo;
-        LatestFilesIndex[] indexes;
+        private void SearchBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            SearchBtn.IsEnabled = false;
+            new Thread(() =>
+            {
+                var can = ForgeResourceFinder.FindMinecraft(out var res, out var er, keyWords: FitherTB.Text);
+                if (can)
+                {
+                    LoadResult(res.Data, FitherTB.Text);
+                }
+                else
+                {
+                    Dispatcher.UIThread.InvokeAsync(() =>
+                    {
+                        HotInfoTB.Text = er;
+                    });
+                }
+                Dispatcher.UIThread.InvokeAsync(() =>
+                {
+                    SearchBtn.IsEnabled = true;
+                });
+            }).Start();
+            
+        }
+
+        private void LoadVersion()
+        {
+            var items = new List<string>();
+            var v = CoreLaunching.DownloadAPIs.Mojang.GetVersion().Where(x=>x.Type== "release");
+            foreach (var item in v)
+            {
+                items.Add(item.Id);
+            }
+            FitherVersionCB.Items = items;
+            if (FitherVersionCB.SelectedIndex == -1&&items.Count!=0) 
+            {
+                var game = GamesCaller.GetSelected();
+                if (game is IModLoaderOption g)
+                {
+                    if (items.Contains(g.BaseVersion))
+                    {
+                        FitherVersionCB.SelectedIndex = items.IndexOf(g.BaseVersion);
+                    }
+                    else
+                    {
+                        FitherVersionCB.SelectedIndex = 0;
+                    }
+                }
+                else
+                {
+                    FitherVersionCB.SelectedIndex = 0;
+                }
+            }
+        }
+
+        IModInfo _currectInfo;
+        IEnumerable<IModFileInfo> indexes;
         private void OtherIndexs_SelectionChanged(object? sender, SelectionChangedEventArgs e)
         {
             var s = sender as ComboBox;
             if(s.SelectedIndex != -1)
             {
-                var item = s.SelectedItem;
-                Others.Children.Clear();
-                var others = indexes.Where(x => x.GameVersion == item.ToString());
-                foreach (var ite in others)
+                if (_currectInfo is ForgeModInfo i)
                 {
-                    var child = new ForgeFileItem(_currectInfo.Id, ite);
-                    Others.Children.Add(child);
+
+                    var item = s.SelectedItem;
+                    Others.Children.Clear();
+                    var others = indexes.Where(x => x.Versions.First() == item.ToString());
+                    foreach (var ite in others)
+                    {
+                        var child = new ForgeFileItem(i.Id, ite as LatestFilesIndex);
+                        Others.Children.Add(child);
+                    }
                 }
             }
         }
@@ -52,12 +116,33 @@ namespace CLAddIn.Views
             DetailStack.IsVisible = false;
         }
 
+        private void LoadResult(IEnumerable<IModInfo> mods,string title)
+        {
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                HotInfoBD.IsVisible = false;
+                TabItem res = new TabItem();
+                var btn = new ResultHeader(title) { DataContext = res};
+                var stack = new StackPanel();
+                foreach (var mod in mods)
+                {
+                    var child = new ResourcesDownloadItem(mod);
+                    child.RootBtn.Click += RootBtn_Click;
+                    stack.Children.Add(child);
+                }
+                res.Header = btn;
+                res.Content = stack;
+                (MyContent.Items as IList<object>).Add(res);
+                MyContent.SelectedIndex = MyContent.ItemCount-1;
+            });    
+        }
+
         private void LoadHot()
         {
-
             new Thread(() =>
             {
-                var can = ForgeResourceFinder.GetFeatured(out var res, out var e);
+
+                var can = ForgeResourceFinder.GetFeatured(out var res,out var e);
                 if (can)
                 {
                     Dispatcher.UIThread.InvokeAsync(() =>
@@ -69,6 +154,7 @@ namespace CLAddIn.Views
                             child.RootBtn.Click += RootBtn_Click;
                             HotList.Children.Add(child);
                         }
+
                     });
                 }
                 else
@@ -92,9 +178,9 @@ namespace CLAddIn.Views
         ObservableCollection<String> versions = new ObservableCollection<String>();
         private void LoadDetail(ResourcesDownloadItem control)
         {
-            _currectInfo = control.DataContext as ForgeModInfo;
+            _currectInfo = control.DataContext as IModInfo;
             DetailNameTB.Text = _currectInfo.Name;
-            DetailDesTB.Text = _currectInfo.Summary;
+            DetailDesTB.Text = _currectInfo.Description;
             var versions = new List<Version>();
             DetailSupportVersionTB.Text = control.SupportVersionTB.Text;
             DetailDownloadCount.Text = _currectInfo.DownloadCounts;
@@ -105,37 +191,44 @@ namespace CLAddIn.Views
                 DetailAuthorsStack.Children.Add(child);
             }
             DetailTagsTB.Text = "";
-            foreach (var item in _currectInfo.Categories)
+            foreach (var item in _currectInfo.Tags)
             {
-                DetailTagsTB.Text += $"#{item.Name} ";
+                DetailTagsTB.Text += $"#{item} ";
             }
             DetailImg.Source = control.Img.Source;
-            indexes = _currectInfo.LatestFilesIndexes.OrderByVersion(true);
+            indexes = _currectInfo.GetDownloadLinks().OrderByVersion(true);
             var game = GamesCaller.GetSelected();
             if (game is IModLoaderOption g)
             {
                 foreach (var item in indexes)
                 {
-                    if ((int)item.ModLoader == (int)g.ModLoaderType&&item.GameVersion == g.BaseVersion)
+                    if ((int)item.ModLoader == (int)g.ModLoaderType&&item.Versions.First() == g.BaseVersion)
                     {
+                        ForYourCurrectHint.Height = double.NaN;
                         ForYourCurrectHint.IsVisible= true;
                         ForYourCurrect.IsVisible = true;
-                        ForYourCurrect.Child = new ForgeFileItem(_currectInfo.Id, item);
+                        if(_currectInfo is ForgeModInfo c)
+                        {
+                            ForYourCurrect.Child = new ForgeFileItem(c.Id,item as LatestFilesIndex);
+                        }
                         break;
                     }
                 }
+            }
+            else
+            {
+                ForYourCurrectHint.Height= 0;
             }
             Others.Children.Clear();
             versions.Clear();
             OtherIndexs.SelectedItem = -1;
             foreach (var item in indexes)
             {
-                var v = Version.Parse(item.GameVersion);
+                var v = Version.Parse(item.Versions.First());
                 if (!versions.Contains(v))
                 {
                     versions.Add(v);
                 }
-                //Others.Children.Add(new ForgeFileItem(info.Id, item));
             }
             versions.OrderByDescending(x=>x);
             if (versions.Count > 0)

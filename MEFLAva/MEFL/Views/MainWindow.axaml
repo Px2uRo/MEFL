@@ -15,8 +15,8 @@ ExtendClientAreaTitleBarHeightHint="-1">
 				<StackPanel Name="LeftButtons" Orientation="Horizontal">
 					<StackPanel Orientation="Horizontal">
 						<Button Height="30" Margin="3" Width="30" Name="ShowMainPageBtn"/>
-						<Button Height="30" Margin="3" Width="30" Name="ShowAddInPageBtn"/>
 						<Button Height="30" Margin="3" Width="30" Name="ShowDownloadPageBtn"/>
+						<Button Height="30" Margin="3" Width="30" Name="ShowAddInPageBtn"/>
 						<Button Height="30" Margin="3" Width="30" Name="ShowSettingPageBtn"/>
 					</StackPanel>
 					<StackPanel Orientation="Horizontal" Name="ButtonForAddIns">

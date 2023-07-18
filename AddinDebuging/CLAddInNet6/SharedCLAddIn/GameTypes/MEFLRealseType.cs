@@ -28,22 +28,14 @@ using CLAddIn.Views;
 using Avalonia.Media;
 using CLAddIn.Properties;
 using SkiaSharp;
+using MEFL.Contract.Views;
 
 namespace MEFL.CLAddIn.GameTypes
 {
     public class CLGameType : MEFL.Contract.GameInfoBase,IModLoaderOption
     {
         internal bool startWithDebug => _MSOAT.StartInDebugMode;
-        public override FrameworkElement GetManageProcessPage(Process process, SettingArgs args)
-        {
-#if WPF
-            var res = new Pages.MEFLRealseTypeManage(process,this);
-            return res;
-#elif AVALONIA
-            var res = new Pages.MEFLRealseTypeManage(process);
-            return res;
-#endif
-        }
+        public override FrameworkElement GetManageProcessPage(Process process, SettingArgs args) => new Pages.MEFLRealseTypeManage(process, this);
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -312,10 +304,10 @@ namespace MEFL.CLAddIn.GameTypes
 
         public override List<string> ClassPaths { get 
             {
-                var AssetsJson = io.Path.Combine(dotMinecraftPath, "AssetsJsons", $"{_Root.AssetIndex.Id}.json");
-                if (!Directory.Exists(io.Path.Combine(dotMinecraftPath, "AssetsJsons")))
+                var AssetsJson = io.Path.Combine(dotMinecraftPath, "assets\\indexes", $"{_Root.AssetIndex.Id}.json");
+                if (!Directory.Exists(io.Path.Combine(dotMinecraftPath, "assets\\indexes")))
                 {
-                    Directory.CreateDirectory(io.Path.Combine(dotMinecraftPath, "AssetsJsons"));
+                    Directory.CreateDirectory(io.Path.Combine(dotMinecraftPath, "assets\\indexes"));
                 }
                 Stream strm;
                 if (!io.File.Exists(AssetsJson))
@@ -344,7 +336,7 @@ namespace MEFL.CLAddIn.GameTypes
                     }
                     if (!io.File.Exists(io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}\\{item.Hash}")))
                     {
-                        FileNeedsToDownload.Add(new JsonFileInfo() { localpath = io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}\\{item.Hash}"), Url = $"http://resources.download.minecraft.net/{item.Hash.Substring(0, 2)}/{item.Hash}" });
+                        FileNeedsToDownload.Add(new JsonFileInfo() { localpath = io.Path.Combine(dotMinecraftPath, "assets\\objects", $"{item.Hash.Substring(0, 2)}\\{item.Hash}"), Url = $"https://resources.download.minecraft.net/{item.Hash.Substring(0, 2)}/{item.Hash}" });
                     }
                 }
                 var res = new List<string>();
@@ -419,9 +411,10 @@ namespace MEFL.CLAddIn.GameTypes
                 }
             } set => throw new NotImplementedException(); }
 
-        public override DeleteResult Delete()
-        {
+
 #if WPF
+public override DeleteResult Delete()
+        {
             var mb = MyMessageBox.Show("确定要删除吗？", "警告", MessageBoxButton.YesNo);
             //todo IO 操作
             if (mb.Result == MessageBoxResult.Yes)
@@ -432,17 +425,47 @@ namespace MEFL.CLAddIn.GameTypes
             {
                 return DeleteResult.Canceled;
             }
+        }
 #elif AVALONIA
-            return DeleteResult.OK;
-            //TODO Avalonia 自己的搞法
 #endif
 
-        }
+        
 
         public override void Refresh()
         {
             FileNeedsToDownload= new List<JsonFileInfo>();
             NativeFilesNeedToDepackage= new List<JsonFileInfo>();
+        }
+
+        public override Task<DeleteResult> Delete()
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                string msg = "";
+                if (GamePathType == GamePathType.Versions)
+                {
+                    msg = "该版本已开启版本隔离，删除会导致游戏地图，mod 等数据都被删除";
+                }
+                else if (GamePathType==GamePathType.Custom)
+                {
+                    msg = "因为你使用了自定义游戏文件夹，删除该版本不会删除游戏文件夹里面的内容";
+                }
+                else
+               {
+                    msg = "您确定要删除吗？";
+                }
+                var mb = MessageWindow.Show(msg, "警告", MessageBoxButton.YesNo);
+                if (mb.Result == MessageBoxResult.Yes)
+                {
+                    var Dire = new DirectoryInfo(Path.GetDirectoryName(GameJsonPath));
+                    Dire.Delete(true);
+                    return DeleteResult.Finished;
+                }
+                else
+                {
+                    return DeleteResult.Canceled;
+                }
+            });
         }
 
         public CLGameType(string JsonPath)

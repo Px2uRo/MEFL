@@ -1,8 +1,11 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Threading;
 using CoreLaunching.DownloadAPIs.Forge;
 using CoreLaunching.Forge;
+using MEFL.Contract;
+using ModLoaderType = CoreLaunching.DownloadAPIs.Forge.ModLoaderType;
 
 namespace MEFL.CLAddIn
 {
@@ -33,10 +36,10 @@ namespace MEFL.CLAddIn
         {
             new Thread(() =>
             {
-                var info = ForgeResourceFinder.GetFromModIdAndFileId(modId, index.FileId);
+                var info = ForgeResourceFinder.GetFromModIdAndFileId(modId, index.FileId);                
                 Dispatcher.UIThread.InvokeAsync(() =>
                 {
-
+                    this.DataContext = info;
                     NameTB.Text = info.DisplayName;
                     if (info.ModLoader == ModLoaderType.Any)
                     {
@@ -86,8 +89,34 @@ namespace MEFL.CLAddIn
                         }
                     }
                     DownloadTB.Text = info.ChineseDownloadCount;
+                    RootBtn.Click += RootBtn_Click;
                 });
             }).Start();
+        }
+        static OpenFileDialog _o = new();
+        private async void RootBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            if(DataContext is ForgeFileInfo f&&Application.Current.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime app)
+            {
+                _o.Title = "选择文件名称";
+                _o.Filters = new List<FileDialogFilter>() { new FileDialogFilter() {Name="jar 包",Extensions=new() { "*.jar" } } };
+                var game = Callers.GamesCaller.GetSelected();
+                if (game != null)
+                {
+                    _o.Directory = Path.Combine(game.GameFolder,"mods");
+                }
+                else
+                {
+                    _o.Directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "downloads");
+                }
+                _o.InitialFileName = f.DisplayName;
+                _o.AllowMultiple= false;
+                var chosed = await _o.ShowAsync(app.MainWindow);
+                if (chosed!=null&&string.IsNullOrEmpty(chosed.First())!=true)
+                {
+                    Callers.DownloaderCaller.CallSingle(f.DownloadUrl, chosed.First());
+                }
+            }
         }
     }
 }

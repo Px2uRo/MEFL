@@ -50,24 +50,24 @@
 		<TabControl Name="ListsPage">
 			<TabItem Header="模组">
 				<StackPanel Name="SearchBar">
-					<Grid Margin="0,0,0,10" ColumnDefinitions="*,4*,0.5*,*" RowDefinitions="auto,10,auto" Height="30">
+					<Grid Margin="0,0,0,10" ColumnDefinitions="auto,*,auto" RowDefinitions="auto,10,auto" Height="30">
 						<TextBlock Text="名称:" FontSize="20" Margin="10,0,10,0"/>
-						<TextBox Text="" Grid.Column="1" FontFamily="Microsoft Yahei"/>
+						<TextBox Text="" Grid.Column="1" FontFamily="Microsoft Yahei" Name="FitherTB" Grid.ColumnSpan="2"/>
 						<!--<TextBlock Text="源：" Grid.Column="2" FontSize="20" Margin="10,0,10,0"/>
 						<ComboBox SelectedIndex="0" Grid.Column="3">
 							<ComboBoxItem>Forge</ComboBoxItem>
 						</ComboBox>-->
-						<Grid Grid.Row="2" Grid.ColumnSpan="4" ColumnDefinitions="*,4*,0.5*,*" Height="30">
+						<Grid Grid.Row="2" Grid.ColumnSpan="4" ColumnDefinitions="auto,*,auto" Height="30">
 							<TextBlock Text="版本:" FontSize="20" Margin="10,0,10,0"/>
-							<TextBox Text="" Grid.Column="1" FontFamily="Microsoft Yahei"/>
+							<ComboBox Grid.Column="1" Margin="0,0,50,0" FontFamily="Microsoft Yahei" Name="FitherVersionCB"/>
 							<!--<TextBlock Text="源：" Grid.Column="2" FontSize="20" Margin="10,0,10,0"/>
 						<ComboBox SelectedIndex="0" Grid.Column="3">
 							<ComboBoxItem>Forge</ComboBoxItem>
 						</ComboBox>-->
 						</Grid>
-						<Button Name="SearchBtn" Content="搜索" Grid.Column="2" Grid.RowSpan="3" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"></Button>
+						<Button Name="SearchBtn" Content="搜索" Grid.Column="3" Grid.RowSpan="3" VerticalAlignment="Bottom" HorizontalAlignment="Right"></Button>
 					</Grid>
-					<TabControl Margin="0,30,0,0">
+					<TabControl Margin="0,30,0,0" Name="MyContent">
 						<TabItem Header="热门" Name="HotRoot">
 							<Grid Name="HotGrid">
 								<Border Background="#90FFFFFF" Name="HotInfoBD" Height="50" CornerRadius="5">
@@ -79,7 +79,7 @@
 							</Grid>
 						</TabItem>
 						<TabItem Header="搜索结果" Name="ResultRoot" IsVisible="False">
-
+							
 						</TabItem>
 					</TabControl>
 				</StackPanel>
@@ -90,7 +90,7 @@
 			</TabItem>
 		</TabControl>
 		<TabControl Name="InstallPage" IsVisible="False">
-			
+
 		</TabControl>
 	</Grid>
 </UserControl>

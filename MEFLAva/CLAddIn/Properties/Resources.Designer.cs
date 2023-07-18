@@ -151,6 +151,15 @@ namespace CLAddIn.Properties {
         }
         
         /// <summary>
+        ///   查找类似 [{&quot;majorName&quot;:&quot;工业时代2&quot;,&quot;minorName&quot;:&quot;Industrial Craft 2&quot;,&quot;simplifiedName&quot;:&quot;IC2&quot;,&quot;slugs&quot;:[&quot;industrial-craft&quot;],&quot;mcModIndex&quot;:2,&quot;mCBBSIndex&quot;:&quot;515771-1-1&quot;},{&quot;majorName&quot;:&quot;红石力量2&quot;,&quot;minorName&quot;:&quot;RedPower2&quot;,&quot;simplifiedName&quot;:&quot;RP2&quot;,&quot;slugs&quot;:[&quot;redpower2-core&quot;],&quot;mcModIndex&quot;:3,&quot;mCBBSIndex&quot;:&quot;71843-1-1&quot;},{&quot;majorName&quot;:&quot;建筑&quot;,&quot;minorName&quot;:&quot;BuildCraft&quot;,&quot;simplifiedName&quot;:&quot;BC&quot;,&quot;slugs&quot;:[&quot;buildcraft&quot;,&quot;https://sourceforge.net/p/buildcraft/code/&quot;],&quot;mcModIndex&quot;:4,&quot;mCBBSIndex&quot;:&quot;884720-1-1&quot;},{&quot;majorName&quot;:&quot;林业&quot;,&quot;minorName&quot;:&quot;Forestry&quot;,&quot;simplified [字符串的其余部分被截断]&quot;; 的本地化字符串。
+        /// </summary>
+        internal static string ModCache {
+            get {
+                return ResourceManager.GetString("ModCache", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Bitmap Release {
@@ -166,6 +175,16 @@ namespace CLAddIn.Properties {
         internal static System.Drawing.Bitmap ReleaseIcon {
             get {
                 object obj = ResourceManager.GetObject("ReleaseIcon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Drawing.Bitmap 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Bitmap ResourceFinder {
+            get {
+                object obj = ResourceManager.GetObject("ResourceFinder", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

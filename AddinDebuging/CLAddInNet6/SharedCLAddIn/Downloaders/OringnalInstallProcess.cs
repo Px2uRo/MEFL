@@ -19,6 +19,7 @@ using ThreadState = System.Threading.ThreadState;
 using CoreLaunching.MicrosoftAuth;
 using System.Collections.ObjectModel;
 using CoreLaunching;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace MEFL.CLAddIn.Downloaders
 {
@@ -150,7 +151,7 @@ namespace MEFL.CLAddIn.Downloaders
                             CurrentProgress = 1;
                             CurrectProgressIndex++;
                             this.Content = "正在下载 原版 游戏与支持库";
-                            AssetsDownloadProcess.AddItemsFromVersionInfoAsync(_info,_parser,_dotMCFolder);
+                            AssetsDownloadProcess.Running.AddItemsFromVersionInfoAsync(_info,_parser,_dotMCFolder);
                             var o = DownloadLib(arg, _info);
                             foreach (var file in o.Files)
                             {
@@ -190,21 +191,24 @@ namespace MEFL.CLAddIn.Downloaders
             var sha1 = Certutil.Sha1(nP);
             if (sha1 != urlinfo.Sha1)
             {
-                using (var clt = new WebClient())
+                var proc = MutilFileDownloadProcess.Create(new("Mojaps",urlinfo.Sha1,urlinfo.Size,urlinfo.Url,nP), Path.Combine(_dotMCFolder, "CoreLaunchingTemp"));
+                bool go = false;
+                proc.OnePartFinished += (_, e) =>
                 {
-                    Directory.CreateDirectory(Path.GetDirectoryName(nP));
-                    clt.DownloadProgressChanged += new((s, e) =>
-                    {
-                        CurrentProgress = (double)e.BytesReceived / (double)e.TotalBytesToReceive;
-                    });
-                    try
-                    {
-                        clt.DownloadFile(urlinfo.Url, nP);
-                    }
-                    catch (Exception ex)
-                    {
-                        Fail(ex);
-                    }
+                    CurrentProgress += (double)e / (double)urlinfo.Size;
+                };
+                for (int i = 0; i < proc.Requsets.Length; i++)
+                {
+                    proc.Requsets[i].DownThread.Start();
+                }
+                proc.CombineThread.Start();
+                proc.CombineFinished += (_, e) =>
+                {
+                    go = true;
+                };
+                while (!go)
+                {
+                    Thread.Sleep(100);
                 }
             }
         }
@@ -231,6 +235,9 @@ namespace MEFL.CLAddIn.Downloaders
             {
                 CurrentProgress = 0.20;
             }
+#if DEBUG
+            Callers.Debugger.WriteLine("CL Forge 安装",e);
+#endif
         }
 
         private void O_OneFileFinished(object? sender, MCFileInfo e)
@@ -316,12 +323,12 @@ namespace MEFL.CLAddIn.Downloaders
         }
         private static ObservableCollection<indexDownloaderPair> downloading = new();
         internal static AssetsDownloadProcess Running = new();
-        static AssetsDownloadProcess()
+        internal AssetsDownloadProcess()
         {
             downloading.CollectionChanged += Downloading_CollectionChanged;
         }
 
-        private static void Downloading_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private void Downloading_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             var c = sender as ObservableCollection<indexDownloaderPair>;
             if (c.Count == 0)
@@ -334,14 +341,14 @@ namespace MEFL.CLAddIn.Downloaders
             }
         }
 
-        private static void Show()
+        private void Show()
         {
             if (!DownloaderCaller.GetRunningTasks().Contains(Running))
             {
                 DownloaderCaller.Add(Running);
             }
         }
-        internal static Task AddItemsFromVersionInfoAsync(string json,Parser parser,string dotMCFolder)
+        internal Task AddItemsFromVersionInfoAsync(string json,Parser parser,string dotMCFolder)
         {
             return Task.Factory.StartNew(() =>
             {
@@ -349,10 +356,25 @@ namespace MEFL.CLAddIn.Downloaders
                 var lq = downloading.Where(x => x.index == r.AssetIndex.Id);
                 if (lq.Count() == 0)
                 {
-                    var infos= parser.ParseAssetsFromIndexUrl(r.AssetIndex.Url, ParseType.NativeUrl, dotMCFolder);
+                    var infos= parser.ParseAssetsFromIndexUrl(r.AssetIndex.Id,r.AssetIndex.Url, ParseType.NativeUrl, dotMCFolder, r.AssetIndex.Sha1);
+                    foreach (var file in infos)
+                    {
+                        this.TotalSize += file.Size;
+                    }
+                    var proc = new ProcessManager(infos);
+                    var item = new indexDownloaderPair() {index=r.AssetIndex.Id,proc=proc};
+                    downloading.Add(item);
+                    proc.Finished += (_, _) =>
+                    { downloading.Remove(item); };
+                    proc.OneFileFinished += (_, e) =>
+                    {
+                        this.DownloadedSize += e.Size;
+                    };
+                    proc.Start(Path.Combine(dotMCFolder, "CoreLaunchingTemp"));
                 }
             });
         }
+
         public override Task Cancel()
         {
             throw new NotImplementedException();
@@ -381,8 +403,8 @@ namespace MEFL.CLAddIn.Downloaders
 
         public override Task Start()
         {
-            return Task.Factory.StartNew(() => { 
-                
+            return Task.Factory.StartNew(() => {
+                this.Content = "资源下载中";
             });
         }
     }

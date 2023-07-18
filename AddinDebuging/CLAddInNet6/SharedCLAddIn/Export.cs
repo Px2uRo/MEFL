@@ -107,7 +107,19 @@ namespace MEFL.CLAddIn.Export
     [Export(typeof(IPages))]
     public class Pages : IPages
     {
-        static Dictionary<object, Control> _pages = new() { { "",new ResourceFinder()} };
+        static Image _img = null;
+        static Image img()
+        {
+            if (_img== null)
+            {
+                _img=new Image();
+                _img.Source = BitMaps.ResourceFinder;
+                _img.Width = 20; 
+                _img.Height=20;
+            }
+            return _img;
+        }
+        static Dictionary<object, Control> _pages = new() { { img(),new ResourceFinder()} };
         public Dictionary<object, Control> IconAndPage => _pages;
 
         public void Added(int index, SettingArgs args)
@@ -146,15 +158,14 @@ namespace MEFL.CLAddIn.Export
                 new() { ELItem = "${forge_libraries}", RuleSourceName = "MCBBS", Uri = "https://download.mcbbs.net/maven/" },
                 new() { ELItem="${version_manifest}",RuleSourceName = "Mojang",Uri= "http://launchermeta.mojang.com/mc/game/version_manifest.json" },
                 new() { ELItem = "${AssIndex}", RuleSourceName = "Mojang", Uri = "https://launcher.mojang.com/" },
-                new() { ELItem = "${assets}", RuleSourceName = "Mojang", Uri = "http://resources.download.minecraft.net" },
+                new() { ELItem = "${assets}", RuleSourceName = "Mojang", Uri = "https://resources.download.minecraft.net" },
                 new() { ELItem = "${forge_libraries}", RuleSourceName = "Forge", Uri = "https://maven.minecraftforge.net/" },
                 new() { ELItem = "${libraries}", RuleSourceName = "Mojang", Uri = "https://libraries.minecraft.net/" }};
             return lst.ToArray();
         }
-
         public DownloadPageItemPair[] GetPairs(SettingArgs args)
-        {
-            DownloadPageItemPair RealsePair = new DownloadPagePair();
+        {   
+            var RealsePair = new DownloadPagePair();
             DownloadPageItemPair[] ret = new DownloadPageItemPair[] { RealsePair};
             return ret;
         }

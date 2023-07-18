@@ -12,8 +12,14 @@
 			<TextBlock Text="正在启动 " FontSize="24"/>
 			<TextBlock Text="{Binding Game.Name}" FontSize="24"/>
 		</StackPanel>
-		<Grid Grid.Row="1"> 
-			<ProgressBar Width="300" Name="PB"/>
+		<Grid Grid.Row="1">
+			<StackPanel VerticalAlignment="Center">
+				<ProgressBar Width="300" Name="PB"/>
+				<Grid VerticalAlignment="Center" Width="300">
+					<TextBlock Name="ValueString" HorizontalAlignment="Left" />
+					<TextBlock Name="DetailTB" HorizontalAlignment="Right" />
+				</Grid>
+			</StackPanel>
 			<TextBlock Name="HintTB" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="20"/>
 		</Grid>
 		<StackPanel HorizontalAlignment="Center" Grid.Row="2">

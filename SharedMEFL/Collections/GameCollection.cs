@@ -117,13 +117,11 @@ namespace MEFL
         {
             var task = Task.Factory.StartNew(() => {
 #region 加载游戏嘛
-                if(folder.Games == null||folder.Favorites==null)
+                if(folder.Games == null)
                 {
                     folder.Games = new();
-                    folder.Favorites= new();
                 }
                 folder.Games.Clear();
-                folder.Favorites.Clear();
 
                 var VersionPath = System.IO.Path.Combine(folder.Path, "versions");
                 if (Directory.Exists(VersionPath) != true)
@@ -151,32 +149,6 @@ namespace MEFL
                 }
                 directories = null;
 #endregion
-#region 设置收藏夹嘛
-                var mefljsonpath = System.IO.Path.Combine(folder.Path, ".mefl.json");
-                if (File.Exists(mefljsonpath) != true)
-                {
-                    File.Create(mefljsonpath).Close();
-                }
-                JObject jOb2 = new JObject();
-                try
-                {
-                    jOb2 = FastLoadJson.Load(mefljsonpath);
-                    if (jOb2 == null)
-                    {
-                        jOb2 = new JObject();
-                    }
-                    if (jOb2["Favorites"] == null)
-                    {
-                        throw new Exception();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    jOb2.Add(new JProperty("Favorites", "[]"));
-                    File.WriteAllText(mefljsonpath, JsonConvert.SerializeObject(jOb2));
-                }
-                folder.Favorites = JsonConvert.DeserializeObject<ObservableCollection<String>>(jOb2["Favorites"].ToString());
-#endregion
             });
             return task;
         }
@@ -185,13 +157,11 @@ namespace MEFL
         public static void AwaitLoadAll(MEFLFolderInfo folder)
         {
             #region 加载游戏嘛
-            if (folder.Games == null || folder.Favorites == null)
+            if (folder.Games == null)
             {
                 folder.Games = new();
-                folder.Favorites = new();
             }
             folder.Games.Clear();
-            folder.Favorites.Clear();
 
             var VersionPath = System.IO.Path.Combine(folder.Path, "versions");
             if (Directory.Exists(VersionPath) != true)
@@ -218,32 +188,6 @@ namespace MEFL
                 subJson = null;
             }
             directories = null;
-            #endregion
-            #region 设置收藏夹嘛
-            var mefljsonpath = System.IO.Path.Combine(folder.Path, ".mefl.json");
-            if (File.Exists(mefljsonpath) != true)
-            {
-                File.Create(mefljsonpath).Close();
-            }
-            JObject jOb2 = new JObject();
-            try
-            {
-                jOb2 = FastLoadJson.Load(mefljsonpath);
-                if (jOb2 == null)
-                {
-                    jOb2 = new JObject();
-                }
-                if (jOb2["Favorites"] == null)
-                {
-                    throw new Exception();
-                }
-            }
-            catch (Exception ex)
-            {
-                jOb2.Add(new JProperty("Favorites", "[]"));
-                File.WriteAllText(mefljsonpath, JsonConvert.SerializeObject(jOb2));
-            }
-            folder.Favorites = JsonConvert.DeserializeObject<ObservableCollection<String>>(jOb2["Favorites"].ToString());
             #endregion
         }
 #endif

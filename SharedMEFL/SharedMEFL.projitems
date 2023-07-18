@@ -11,6 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)APIData\APIModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)APIData\SettingConfig.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Bitmaps.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collections\DownloaderCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collections\DownloadSourceCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Collections\GameCollection.cs" />
@@ -21,6 +22,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)FolderInfo.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Hosting.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)JsonUtil.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MemoryUtil.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\DownloadingProgressPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\DownloadPageModelView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PageModelViews\ExtensionPageModelView.cs" />

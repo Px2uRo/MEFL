@@ -155,11 +155,6 @@ namespace ServerInstaller
                 return _p;
             } }
 
-        public override DeleteResult Delete()
-        {
-            return DeleteResult.Canceled;
-        }
-
         public override IProcessManagePage GetManageProcessPage(Process process, SettingArgs args)
         {
             var res = new ManagePanel(this,process);

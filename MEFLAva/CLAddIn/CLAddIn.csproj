@@ -26,6 +26,8 @@
     <PackageReference Include="Avalonia" Version="0.10.19" />
     <PackageReference Include="Avalonia.Desktop" Version="0.10.19" />
     <PackageReference Include="Avalonia.Diagnostics" Version="0.10.19" />
+    <PackageReference Include="Clowd.Clipboard" Version="1.0.1" />
+    <PackageReference Include="Clowd.Clipboard.Avalonia" Version="1.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="System.ComponentModel.Composition" Version="7.0.0" />
     <PackageReference Include="XamlNameReferenceGenerator" Version="1.6.1" />
@@ -61,6 +63,10 @@
 
   <ItemGroup>
     <UpToDateCheckInput Remove="Views\ResourceFinder.axaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\ResultHeader.axaml" />
   </ItemGroup>
 
 </Project>

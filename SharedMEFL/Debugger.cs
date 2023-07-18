@@ -49,6 +49,12 @@ namespace MEFL
             {
                 APIModel.SettingConfig.LogIndex = 0;
             }
+            Callers.Debugger.DebugerEvent += Debugger_DebugerEvent;
+        }
+
+        private static void Debugger_DebugerEvent(string fileName, string str)
+        {
+            Logger(str, fileName);
         }
     }
 }

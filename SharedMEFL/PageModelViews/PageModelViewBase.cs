@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Avalonia.Threading;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -21,6 +22,17 @@ namespace MEFL.PageModelViews
             if (PropertyChanged != null)
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public void InvokeDispacher([CallerMemberName] string propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                Dispatcher.UIThread.InvokeAsync(new Action(() =>
+                {
+                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+                }));
             }
         }
 #endif

@@ -12,6 +12,7 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
@@ -271,6 +272,9 @@ namespace MEFL.APIData
 #endif
         static APIModel()
         {
+#if DEBUG
+            Assembly.LoadFile("C:\\Users\\Lenovo\\.nuget\\packages\\clowd.clipboard\\1.0.1\\lib\\net6.0\\Clowd.Clipboard.dll");
+#endif
             SettingArgs = new Arguments.SettingArgs();
             _SelectedAccountUUID = RegManager.Read("PlayerUuid");
 #region RegFolders
@@ -335,11 +339,17 @@ namespace MEFL.APIData
             DownloaderCaller.CustomProcessAdded += DownloaderCaller_CustomProcessAdded;
             AccountCaller.RemoveAccountEvent += AccountCaller_RemoveAccountEvent;
             GamesCaller.LoadGames += GamesCaller_LoadGames;
+            DialogCaller.ShowDialogEvent += DialogCaller_ShowDialogEvent;
 #if DEBUG
 
 #else
             
 #endif
+        }
+
+        private static void DialogCaller_ShowDialogEvent(object? sender, IDialogContent e)
+        {
+            ContentDialog.Show(e);
         }
 
         private static void DownloaderCaller_CustomProcessAdded(object? sender, InstallProcess e)

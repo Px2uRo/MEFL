@@ -30,15 +30,29 @@ namespace MEFL.Views
             }
             return base.ArrangeOverride(finalSize);
         }
+        private Image GetImage(Avalonia.Media.Imaging.Bitmap bitmap)
+        {
+            var res = new Image();
+            res.HorizontalAlignment = Avalonia.Layout.HorizontalAlignment.Center;
+            res.VerticalAlignment = Avalonia.Layout.VerticalAlignment.Center;
+            res.Margin = new Thickness(3);
+            res.Height = 23;res.Width= 23;
+            res.Source = bitmap;
+            return res;
+        }
         public MainWindow()
         {
             InitializeComponent();
             ShowMainPageBtn.Click += ShowMainPage_Click;
             ShowMainPage_Click(null,null);
+            ShowMainPageBtn.Content = GetImage(BitMaps.HomePage);
             CloseWindow.Click += CloseWindow_Click;
             ShowAddInPageBtn.Click += ShowAddInPageBtn_Click;
+            ShowAddInPageBtn.Content = GetImage(BitMaps.AddIns);
             ShowSettingPageBtn.Click += ShowSettingPageBtn_Click;
+            ShowSettingPageBtn.Content = GetImage(BitMaps.Settings);
             ShowDownloadPageBtn.Click += ShowDownloadPageBtn_Click;
+            ShowDownloadPageBtn.Content = GetImage(BitMaps.Downloads);
             MaxlizeWindow.Click += MaxlizeWindow_Click;
             MinlizeWindow.Click += MinlizeWindow_Click;
             TitelBarGrid.PointerPressed += TitelBarGrid_PointerPressed;

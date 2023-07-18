@@ -1,4 +1,5 @@
-﻿using MEFL.APIData;
+﻿using Avalonia.Controls.ApplicationLifetimes;
+using MEFL.APIData;
 using MEFL.Contract;
 using MEFL.PageModelViews;
 using Newtonsoft.Json;
@@ -21,40 +22,6 @@ namespace MEFL
     {
         private string _configPath { get => System.IO.Path.Combine(Path, ".mefl.json"); }
         public string Path { get; set; }
-        JObject jOb2 = new JObject();
-        int symbol;
-        public void SetToFavorite(GameInfoBase target)
-        {
-            symbol = Favorites.Count;
-            jOb2 = new JObject();
-            if (File.Exists(_configPath) != true)
-            {
-                File.Create(_configPath).Close();
-            }
-            try
-            {
-                jOb2 = FastLoadJson.Load(_configPath);
-                if (jOb2["Favorites"] == null)
-                {
-                    throw new Exception();
-                }
-            }
-            catch (Exception ex)
-            {
-                jOb2.Add(new JProperty("Favorites", "[]"));
-            }
-            if (Favorites.Contains(target.GameJsonPath))
-            {
-                Favorites.Remove(target.GameJsonPath);
-            }
-            else
-            {
-                Favorites.Add(target.GameJsonPath);
-            }
-            File.WriteAllText(_configPath, JsonConvert.SerializeObject(new JObject() { new JProperty("Favorites", JsonConvert.SerializeObject(Favorites)) }));
-            jOb2 = null;
-        }
-        private string _VersionPath;
         public string FriendlyName { get; set; }
         [JsonIgnore]
         public ObservableCollection<String> VersionJsons { get; set; }
@@ -66,9 +33,47 @@ namespace MEFL
             Games=new GameInfoCollection();
             this.Path = Path;
             this.FriendlyName = FriendlyName;
+
+            try
+            {
+                ObservableCollection<string> f = null;
+                if (File.Exists(_configPath))
+                {
+                    var t = File.ReadAllText(_configPath);
+                    f = JsonConvert.DeserializeObject<ObservableCollection<string>>(t);
+                }
+                else
+                {
+                    File.CreateText(_configPath);
+                }
+                if (f != null)
+                {
+                    Favorites = f;
+                }
+                else
+                {
+                    Favorites = new();
+                }   
+            }
+            catch (Exception ex)
+            {
+                Favorites = new();
+            }
+            Favorites.CollectionChanged += Favorites_CollectionChanged;
+        }
+
+        private void Favorites_CollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if(App.Current.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime app)
+            {
+                if (app.Windows.Count > 0)
+                {
+                    File.WriteAllText(_configPath, Favorites.ToJson());
+                }
+            }
         }
         [JsonIgnore]
-        public ObservableCollection<String> Favorites { get; set; }
+        public ObservableCollection<string> Favorites { get; set; }
 
 #if AVALONIA
         public override string ToString()

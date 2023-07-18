@@ -22,7 +22,25 @@ namespace MEFL.CLAddIn
         private static Bitmap _fabricRelease;
         private static Bitmap _fabricBeta;
         private static Bitmap _fabricAlpha;
+        private static Bitmap _resourceFinder;
         #region Bitmaps
+
+        public static Bitmap ResourceFinder
+        {
+            get {
+                if (_resourceFinder == null) {
+
+                    using (var ms = new MemoryStream())
+                    {
+                        Resources.ResourceFinder.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                        ms.Position = 0;
+                        _resourceFinder = new Bitmap(ms);
+                    }
+                }
+                return _resourceFinder;
+            }
+        }
+
         public static Bitmap Release
         {
             get { 

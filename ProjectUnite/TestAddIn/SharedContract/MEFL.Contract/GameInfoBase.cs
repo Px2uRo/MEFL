@@ -17,6 +17,7 @@ using FrameworkElement = MEFL.Contract.IProcessManagePage;
 #endif
 using MEFL.Arguments;
 using Newtonsoft.Json;
+using MEFL.Contract.Views;
 
 namespace MEFL.Contract;
 
@@ -160,18 +161,36 @@ public abstract class GameInfoBase : MEFLClass,INotifyPropertyChanged
 	/// 刷新游戏。每次开始启动就会执行这里面的代码
 	/// </summary>
 	public abstract void Refresh();
-	/// <summary>
-	/// 删除游戏，通常做法是写事件
-	/// </summary>
-	/// <returns>是否确定删除对话框</returns>
+    /// <summary>
+    /// 删除游戏，通常做法是写事件
+    /// </summary>
+    /// <returns>是否确定删除对话框</returns>
+#if WPF
 	public abstract DeleteResult Delete();
-	/// <summary>
-	/// 启动后管理页面
-	/// </summary>
-	/// <param name="process">传入进程</param>
-	/// <param name="args">设置参数</param>
-	/// <returns>页面</returns>
-	public abstract FrameworkElement GetManageProcessPage(Process process, SettingArgs args);
+#elif AVALONIA
+    public virtual Task<DeleteResult> Delete()
+	{
+        return Task.Factory.StartNew(() => {
+
+            var mb = MessageWindow.Show("确定要删除吗？", "警告", MessageBoxButton.YesNo);
+            if (mb.Result == MessageBoxResult.Yes)
+            {
+                return DeleteResult.Finished;
+            }
+            else
+            {
+                return DeleteResult.Canceled;
+            }
+        });
+    }
+#endif
+    /// <summary>
+    /// 启动后管理页面
+    /// </summary>
+    /// <param name="process">传入进程</param>
+    /// <param name="args">设置参数</param>
+    /// <returns>页面</returns>
+    public abstract FrameworkElement GetManageProcessPage(Process process, SettingArgs args);
 	/// <summary>
 	/// 强制删除
 	/// </summary>
@@ -195,6 +214,6 @@ public enum ModLoaderType
 
 public enum DeleteResult 
 { 
-	OK,
+	Finished,
 	Canceled
 }

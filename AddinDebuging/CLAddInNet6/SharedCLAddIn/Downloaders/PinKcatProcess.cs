@@ -449,6 +449,10 @@ DotMCPath, Arguments.VersionName, true
             this.nativeLocalPairs = nativeLocalPairs;
             this.sources = sources;
             this.usingLocalFiles = usingLocalFiles;
+            foreach (var item in nativeLocalPairs)
+            {
+                TotalSize += item.size;
+            }
         }
 
         public override Task Cancel()
@@ -461,30 +465,10 @@ DotMCPath, Arguments.VersionName, true
             throw new NotImplementedException();
         }
 
-        private void T_WholeFinished(object? sender, long e)
-        {
-            running.Remove(sender as RequestWithRange);
-        }
-
         private void T_Failed(object? sender, EventArgs e)
         {
             failed.Enqueue(sender as RequestWithRange);
             running.Remove(sender as RequestWithRange);
-        }
-
-        private void P_CombineFinished(object? sender, MCFileInfo e)
-        {
-            Finish();
-        }
-
-        private void P_Finished(object? sender, Thread e)
-        {
-            Finish();
-        }
-
-        private void P_DownloadedUpdated(object? sender, long e)
-        {
-            DownloadedSize += e;
         }
 
         public override bool GetUsingLocalFiles(out IEnumerable<string> paths)
@@ -522,7 +506,7 @@ DotMCPath, Arguments.VersionName, true
                         DownloadedSize = e;
                     };
                     proms.Finished += Proms_Finished;
-                    new Thread(() => { proms.Start(temp); }).Start();
+                    new Thread(() => { proms.Start(temp,true); }).Start();
                 }
                 catch(Exception ex)
                 {

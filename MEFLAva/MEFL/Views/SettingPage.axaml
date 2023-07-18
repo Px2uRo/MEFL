@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="MEFL.Views.SettingPage">
-	<TabControl SelectedIndex="2">
+	<TabControl>
 		<TabItem Header="启动">
 			<StackPanel>
 				<StackPanel Margin="0,0,0,15">
@@ -18,8 +18,20 @@
 						</StackPanel>
 					</Grid>
 					<TextBlock Text=" "/>
-					<TextBlock Text="最大内存 (MB)" FontWeight="Bold" FontSize="20" Margin="0,0,0,3"/>
-					<TextBox Name="MaxMem" Text="{Binding MaxMemory}"/>
+					<TextBlock Text="内存" FontWeight="Bold" FontSize="20" Margin="0,0,0,3"/>
+					<StackPanel>
+						<RadioButton Name="MemOPEN" Content="自动分配" Checked="AutoMemChecked"/>
+						<RadioButton Name="MemCLOSE" Content="手动定义" Checked="AutoMemChecked"/>
+						<Grid>
+							<Rectangle Fill="Aqua" Name="SetBlock" Height="19" Margin="0,5,0,0" Width="500" HorizontalAlignment="Left"/>
+							<Slider Name="MemSlider" Maximum="1"/>
+							<Rectangle Fill="Purple" Name="UsedBlock" Height="20" Margin="0,5,0,0" Width="300" HorizontalAlignment="Left"/>
+						</Grid>
+						<Canvas>
+							<TextBlock Text="使用" Name="UsedInfo"/>
+							<TextBlock Text="分配" Name="SettedInfo" Canvas.Left="300"/>
+						</Canvas>
+					</StackPanel>
 				</StackPanel>
 			</StackPanel>
 		</TabItem>

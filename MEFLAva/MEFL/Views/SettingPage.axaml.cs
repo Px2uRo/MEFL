@@ -14,6 +14,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
 using System.Diagnostics;
+using Avalonia.Interactivity;
+using Timer = System.Timers.Timer;
 
 namespace MEFL.Views
 {
@@ -22,7 +24,8 @@ namespace MEFL.Views
         internal static SettingPage UI = new SettingPage();
         ObservableCollection<string> itms = new ObservableCollection<string>();
         int downloadersCount = 0;
-
+        Timer _timer = new(2000);
+        Size _mess;
         protected override Size MeasureOverride(Size availableSize)
         {
             DownloadersGrid.Columns = (int)Math.Ceiling(availableSize.Width / 290.0);
@@ -34,6 +37,21 @@ namespace MEFL.Views
             {
                 DownloadersGrid.Rows = (int)Math.Ceiling((double)downloadersCount / (double)DownloadersGrid.Columns);
             }
+            _mess = new(availableSize.Width - Margin.Left - Margin.Right - 30, availableSize.Height);
+
+            if(DataContext is SettingPageModelView dc)
+            {
+                var usdmem = dc.UsedMem;
+
+                UsedInfo.Text = "使用了：" + Math.Round((double) usdmem/ 1024d, 1).ToString() + " G";
+                SettedInfo.Text = "分配了：" + Math.Round((double)dc.Memory / 1024d, 1).ToString() + " G";
+                UsedBlock.Width = ((double)usdmem / (double)dc.Totalmemory) * _mess.Width;
+                var res = ((double)usdmem + (double)dc.Memory) / (double)dc.Totalmemory;
+                SetBlock.Width = res * _mess.Width;
+                SettedInfo.SetValue(Canvas.LeftProperty, UsedBlock.Width);
+            }
+
+
             return base.MeasureOverride(availableSize);
         }
 
@@ -49,13 +67,72 @@ namespace MEFL.Views
             {
                 itms.Add(item.FullName);
             }
-            JavaList.Items =itms;
+            JavaList.Items = itms;
             JavaList.SelectedIndex = dc.SelectedJavaIndex;
             LoadDownloaderUI(dc.Downloaders);
             ImageButton.Click += ImageButton_Click;
+            if (dc.AutoMemory)
+            {
+                MemOPEN.IsChecked = true;
+                MemSlider.IsVisible = false;
+            }
+            else
+            {
+                MemCLOSE.IsChecked = true;
+                MemSlider.IsVisible = true;
+            }
+            UsedInfo.Text = "使用了：" + Math.Round((double)dc.UsedMem / 1024d, 1).ToString() + " G";
+            SettedInfo.Text = "分配了：" + Math.Round((double)dc.Memory / 1024d, 1).ToString() + " G";
+            UsedBlock.Width = ((double)dc.UsedMem / (double)dc.Totalmemory) * _mess.Width;
+            var res = ((double)dc.UsedMem + (double)dc.Memory) / (double)dc.Totalmemory;
+            SetBlock.Width = res * _mess.Width;
+            SettedInfo.SetValue(Canvas.LeftProperty, UsedBlock.Width);
+            _timer.Elapsed += _timer_Elapsed;
+            _timer.Start();
+
+            MemSlider.PropertyChanged += MemSlider_PropertyChanged;
         }
 
+        private void MemSlider_PropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e)
+        {
+            if (e.Property == Slider.ValueProperty)
+            {
+                var value = (double)e.NewValue;
+                var dc = DataContext as SettingPageModelView;
 
+                var usdmem = dc.UsedMem;
+                ulong newmemo = (ulong)(dc.Totalmemory * value - usdmem);
+                if((long)newmemo < 512)
+                {
+                    dc.Memory = 512;
+                    MemSlider.Value = (double)(usdmem + 512) / (double)dc.Totalmemory;
+                    return;
+                }
+                dc.Memory = newmemo;
+                UsedInfo.Text = "使用了：" + Math.Round((double)usdmem / 1024d, 1).ToString() + " G";
+                SettedInfo.Text = "分配了：" + Math.Round((double)dc.Memory / 1024d, 1).ToString() + " G";
+                UsedBlock.Width = ((double)usdmem / (double)dc.Totalmemory) * _mess.Width;
+                var res = ((double)usdmem + (double)dc.Memory) / (double)dc.Totalmemory;
+                SetBlock.Width = res * _mess.Width;
+                SettedInfo.SetValue(Canvas.LeftProperty, UsedBlock.Width);
+            }
+        }
+
+        private void _timer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
+        {
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                var dc = DataContext as SettingPageModelView;
+                if (this.IsVisible&&Opacity==1d)
+                {
+                    dc.AutoRefresh = true;
+                }
+                else
+                {
+                    dc.AutoRefresh = false;
+                }
+            });
+        }
 
         private async void ImageButton_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
@@ -70,7 +147,7 @@ namespace MEFL.Views
             {
                 var btn = new SelecteDownloaderButton(item);
                 DownloadersGrid.Children.Add(btn);
-                btn.Enablebtn.IsChecked = APIModel.SelectedDownloader==item;
+                btn.Enablebtn.IsChecked = APIModel.SelectedDownloader == item;
             }
         }
 
@@ -78,7 +155,7 @@ namespace MEFL.Views
         {
             var smv = (SettingPageModelView)DataContext;
             var inde = ((ComboBox)sender).SelectedIndex;
-            if(inde!= -1)
+            if (inde != -1)
             {
                 APIModel.SettingArgs.SelectedJava = smv.Javas[inde];
                 RegManager.Write("SelectedJava", smv.Javas[inde].FullName);
@@ -88,7 +165,7 @@ namespace MEFL.Views
         private void Dc_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             var dc = (SettingPageModelView)sender;
-            if(e.PropertyName == "Javas")
+            if (e.PropertyName == "Javas")
             {
                 var smv = (SettingPageModelView)sender;
                 JavaList.SelectedIndex = -1;
@@ -99,7 +176,7 @@ namespace MEFL.Views
                     {
                         itms.Add(item.FullName);
                     }
-                    if(smv.Javas.Count> 0)
+                    if (smv.Javas.Count > 0)
                     {
                         JavaList.SelectedIndex = 0;
                     }
@@ -109,13 +186,39 @@ namespace MEFL.Views
             {
                 LoadDownloaderUI(dc.Downloaders);
             }
-            else if(e.PropertyName==nameof(dc.DownSources))
+            else if (e.PropertyName == nameof(dc.DownSources))
             {
                 LoadSourceLB();
             }
+            else if (e.PropertyName == nameof(dc.UsedMem))
+            {
+                UsedInfo.Text = "使用了：" + Math.Round((double)dc.UsedMem / 1024d, 1).ToString() + " G";
+                SettedInfo.Text = "分配了：" + Math.Round((double)dc.Memory / 1024d, 1).ToString() + " G";
+                UsedBlock.Width = ((double)dc.UsedMem / (double)dc.Totalmemory) * _mess.Width;
+                var res = ((double)dc.UsedMem + (double)dc.Memory) / (double)dc.Totalmemory;
+                SetBlock.Width = res * _mess.Width;
+                SettedInfo.SetValue(Canvas.LeftProperty,UsedBlock.Width);
+            }
         }
 
-        private void RefreshJavas_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        private void AutoMemChecked(object? sender, RoutedEventArgs e)
+        {
+            var dc = DataContext as SettingPageModelView;
+            if ((sender as Control).Name.Contains("OPEN"))
+            {
+                MemSlider.IsEnabled= false;
+                dc.AutoMemory= true;
+                MemSlider.IsVisible = false;
+            }
+            else
+            {
+                MemSlider.IsEnabled = true;
+                dc.AutoMemory = false;
+                MemSlider.IsVisible = true;
+            }
+        }
+
+        private void RefreshJavas_Click(object? sender, RoutedEventArgs e)
         {
             var smv = (SettingPageModelView)DataContext;
             smv.EnableSearchJava = false;

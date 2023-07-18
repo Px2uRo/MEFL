@@ -111,7 +111,7 @@ namespace MEFL.InfoControls
                             Dispatcher.UIThread.InvokeAsync(() =>
                             {
                                 var mw = app.MainWindow as MainWindow;
-                                var btn = new Button() { Width = 30, Height = 30, Margin = new(3),Tag=h.Guid };
+                                var btn = new Button() { Content=item.Key,Width = 30, Height = 30, Margin = new(3),Tag=h.Guid };
                                 btn.Click += new((x, e) => {
                                     mw.ClearPage();
                                     item.Value.Tag = h.Guid;

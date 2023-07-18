@@ -17,7 +17,7 @@ namespace MEFL.CLAddIn
         }
         string ResponString;
         JObject jOb;
-        static string website = "https://launchermeta.mojang.com/mc/game/version_manifest.json";
+        const string website = "https://launchermeta.mojang.com/mc/game/version_manifest.json";
         static WebRequest req;
         private List<LauncherWebVersionInfoList> Refresh(DownloadPageItemPair pair, string tmpFolderPath)
         {

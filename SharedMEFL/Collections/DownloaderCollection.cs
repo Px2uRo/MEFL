@@ -25,11 +25,14 @@ namespace MEFL
             base.InsertItem(index, item);
 #endif
 #if AVALONIA
-            var block = new DownloadingProgressBlock(item);
-            DownloadProcessPage.UI.ContentPanel.Children.Add(block);
+            Dispatcher.UIThread.InvokeAsync(() =>
+            {
+                var block = new DownloadingProgressBlock(item);
+                DownloadProcessPage.UI.ContentPanel.Children.Add(block);
 
-            base.InsertItem(index, item);
-            DownloaderCaller.Set(this);
+                base.InsertItem(index, item);
+                DownloaderCaller.Set(this);
+            });
 #endif
         }
 

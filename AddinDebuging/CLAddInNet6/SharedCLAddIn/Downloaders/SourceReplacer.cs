@@ -15,7 +15,7 @@ namespace MEFL.CLAddIn.Downloaders
             native = native.Replace("http://launchermeta.mojang.com/mc/game/version_manifest.json", "${version_manifest}");
             native = native.Replace("https://launchermeta.mojang.com/", "${AssIndex}");
             native = native.Replace("https://launcher.mojang.com/", "${AssIndex}");
-            native = native.Replace("http://resources.download.minecraft.net", "${assets}");
+            native = native.Replace("https://resources.download.minecraft.net", "${assets}");
             native = native.Replace("https://libraries.minecraft.net/", "${libraries}");
             for (int i = 0; i < sources.Length; i++)
             {
@@ -32,7 +32,7 @@ namespace MEFL.CLAddIn.Downloaders
                 natives[i] = natives[i].Replace("https://piston-meta.mojang.com", "${json}");
                 natives[i] = natives[i].Replace("https://launchermeta.mojang.com/", "${AssIndex}");
                 natives[i] = natives[i].Replace("https://launcher.mojang.com/", "${AssIndex}");
-                natives[i] = natives[i].Replace("http://resources.download.minecraft.net", "${assets}");
+                natives[i] = natives[i].Replace("https://resources.download.minecraft.net", "${assets}");
                 natives[i] = natives[i].Replace("https://libraries.minecraft.net/", "${libraries}");
                 for (int j = 0; j < sources.Length; j++)
                 {

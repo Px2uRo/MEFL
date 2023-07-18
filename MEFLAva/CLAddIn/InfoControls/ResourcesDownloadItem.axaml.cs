@@ -4,6 +4,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Threading;
 using CoreLaunching.DownloadAPIs.Forge;
+using CoreLaunching.DownloadAPIs.Interfaces;
 using CoreLaunching.Forge;
 using System.Diagnostics;
 using System.Net;
@@ -23,20 +24,35 @@ namespace MEFL.CLAddIn
             InitializeComponent();
         }
 
-        public ResourcesDownloadItem(ForgeModInfo info):this()
+        public ResourcesDownloadItem(IModInfo info):this()
         {
             DataContext= info;
-            NameTB.Text = info.Name;
-            DesTB.Text = info.Summary;
-            var versions = new List<Version>();
-            foreach (var item in info.LatestFilesIndexes)
+            var c = ModCache.Caches.Where(x => x.slugs.Contains(info.Slug));
+            if (c.Count()>0)
             {
-                versions.Add(Version.Parse(item.GameVersion));
+                if (!string.IsNullOrEmpty(c.First().majorName))
+                {
+                    NameTB.Text = c.First().majorName;
+                }
+                else
+                {
+                    NameTB.Text = info.Name;
+                }
+            }
+            else
+            {
+                NameTB.Text = info.Name;
+            }
+            DesTB.Text = info.Description;
+            var versions = new List<Version>();
+            foreach (var item in info.GetDownloadLinks())
+            {
+                versions.Add(Version.Parse(item.Versions.FirstOrDefault()));
             }
             versions.Sort();
-            foreach (var item in info.Categories)
+            foreach (var item in info.Tags)
             {
-                TagsTB.Text += $"#{item.Name} ";
+                TagsTB.Text += $"#{item} ";
             }
             SupportVersionTB.Text = $"{versions.First()}-{versions.Last()}";
             DownloadCount.Text = info.DownloadCounts;
@@ -58,7 +74,7 @@ namespace MEFL.CLAddIn
                     {
                         using (var clt = new WebClient())
                         {
-                            var ms = new MemoryStream(clt.DownloadData(info.Logo.Url));
+                            var ms = new MemoryStream(clt.DownloadData(info.GetLogoUrl()));
                             Dispatcher.UIThread.InvokeAsync(() =>
                             {
                                 Img.Source = new Bitmap(ms);

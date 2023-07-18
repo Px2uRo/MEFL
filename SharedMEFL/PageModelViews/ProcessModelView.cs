@@ -171,7 +171,15 @@ Invoke();
                                 WaringDialog.Show($"你还没装这个版本（版本号：{Game.JavaMajorVersion}）的 Java，给Issues反应大拇指来催更【自动安装】吧。");
                                 return;
                             }
-                            i.FileName = linq[0].FullName;
+                            foreach (var item in linq)
+                            {
+                                if (item.FullName.EndsWith(".javaw.exe"))
+                                {
+                                    i.FileName = item.FullName;
+                                    break;
+                                }
+                                i.FileName = item.FullName;
+                            }
                         }
                         else
                         {
@@ -235,7 +243,7 @@ Invoke();
                         var mems = string.Empty;
                         if (Game.GameMaxMem == null || Game.GameMinMem == null || Game.GameMaxMem == 0)
                         {
-                            mems = $" -Xmx{APIModel.MaxMemory}m";
+                            mems = $" -Xmx{SettingPageModel.ModelView.MaxMemory}m";
                         }
                         else
                         {
@@ -329,7 +337,7 @@ Invoke();
                         proc.PropertyChanged += new((s, e) =>
                         {
                         var sen = s as SizedProcess;
-                        Progress = 10 + Math.Round(((double)sen.DownloadedSize / (double)sen.TotalSize) * 90d);
+                        Progress = 20 + Math.Round(((double)sen.DownloadedSize / (double)sen.TotalSize) * 80d,2);
                         });
                         proc.Start();
                     }

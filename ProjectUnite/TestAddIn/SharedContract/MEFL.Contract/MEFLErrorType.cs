@@ -198,26 +198,26 @@ public class MEFLErrorType : GameInfoBase
 
 	protected override void Dispose(bool disposing)
 	{
-		
-	}
+
+    }
+
+#if WPF
 
 	public override DeleteResult Delete()
 	{
-#if WPF
 		var mb = MyMessageBox.Show("确定要删除吗？","警告",MessageBoxButton.YesNo);
 		//todo IO 操作
 		if (mb.Result == MessageBoxResult.Yes)
 		{
-			return DeleteResult.OK;
+			return DeleteResult.Finished;
         }
 		else
 		{
 			return DeleteResult.Canceled;
 		}
-#elif AVALONIA
-		return DeleteResult.OK;
+	}
 #endif
-    }
+    
 
     public override void Refresh()
 	{

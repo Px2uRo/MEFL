@@ -4,10 +4,35 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="CLAddIn.Views.MEFLRealseTypeManage">
-	<Grid ColumnDefinitions="*,30">
+	<Grid ColumnDefinitions="*,200">
 		<ScrollViewer Name="Scl">
 			<TextBlock Name="TB" TextWrapping="Wrap"/>
 		</ScrollViewer>
-		<Grid Name="grid"/>
+		<StackPanel Name="Panel" Grid.Column="1">
+			<Grid Height="150" Background="#00B0F0" Margin="10">
+				<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Text="内存占用：" Margin="3"/>
+				<TextBlock FontSize="32" VerticalAlignment="Center" HorizontalAlignment="Center" FontWeight="Bold" Foreground="White" Name="MemScan" />
+			</Grid>
+			<Grid Height="160" Background="#00B0F0" Margin="10">
+				<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" Text="点击可预览截图" Margin="3"/>
+				<TextBlock Text="暂时没有新的截图" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+				<Image Margin="0,0,0,10" Name="PreViewImage" Height="100" Width="160" Stretch="Uniform"/>
+				<Button Click="OpenScreen" VerticalAlignment="Bottom" Width="170"  HorizontalAlignment="Center">
+					<TextBlock Text="打开文件夹" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+				</Button>
+			</Grid>
+			<StackPanel Background="#00B0F0" Margin="10">
+				<TextBlock HorizontalAlignment="Left"
+						   VerticalAlignment="Top"
+						   Foreground="White"
+						   Text="其他功能" Margin="3"/>
+				<Button Click="OpenSave" VerticalAlignment="Bottom" Margin="0,0,0,3" Width="170"  HorizontalAlignment="Center">
+					<TextBlock Text="打开存档文件夹" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+				</Button>
+				<Button Click="ForceExit" Background="Red" VerticalAlignment="Bottom" Margin="0,0,0,3" Width="170"  HorizontalAlignment="Center">
+					<TextBlock Text="强制退出且关闭" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+				</Button>
+			</StackPanel>
+		</StackPanel>
 	</Grid>
 </UserControl>

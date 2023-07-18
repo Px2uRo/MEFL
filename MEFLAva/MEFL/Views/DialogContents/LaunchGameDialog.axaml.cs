@@ -32,6 +32,7 @@ namespace MEFL.Views.DialogContents
                 if (e.PropertyName == nameof(pmv.Progress))
                 {
                     PB.Value = pmv.Progress;
+                    ValueString.Text = pmv.Progress.ToString() + "%";
                 }
                 else if (e.PropertyName == nameof(pmv.Failed))
                 {
@@ -68,6 +69,10 @@ namespace MEFL.Views.DialogContents
                         pmv.Game = null;
                         Quited?.Invoke(this, EventArgs.Empty);
                     }
+                }
+                else if(e.PropertyName == nameof(pmv.Statu))
+                {
+                    DetailTB.Text = pmv.Statu;
                 }
             }));
         }
