@@ -21,7 +21,7 @@ namespace MEFL.CLAddIn
         {
             InitializeComponent();
         }
-
+        string _chineseName;
         public ForgeFileItem(ForgeFileInfo info):this()
         {
             NameTB.Text = info.DisplayName;
@@ -32,11 +32,13 @@ namespace MEFL.CLAddIn
             DownloadTB.Text = info.ChineseDownloadCount;
         }
 
-        public ForgeFileItem(int modId,LatestFilesIndex index):this()
+        public ForgeFileItem(int modId,LatestFilesIndex index, string chineseName) :this()
         {
+            _chineseName = chineseName;
             new Thread(() =>
             {
-                var info = ForgeResourceFinder.GetFromModIdAndFileId(modId, index.FileId);                
+                var info = ForgeResourceFinder.GetFromModIdAndFileId(modId, index.FileId);
+                info.ChineseName = _chineseName;
                 Dispatcher.UIThread.InvokeAsync(() =>
                 {
                     this.DataContext = info;
@@ -93,29 +95,31 @@ namespace MEFL.CLAddIn
                 });
             }).Start();
         }
-        static OpenFileDialog _o = new();
+        static SaveFileDialog _s;
         private async void RootBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             if(DataContext is ForgeFileInfo f&&Application.Current.ApplicationLifetime is ClassicDesktopStyleApplicationLifetime app)
             {
-                _o.Title = "选择文件名称";
-                _o.Filters = new List<FileDialogFilter>() { new FileDialogFilter() {Name="jar 包",Extensions=new() { "*.jar" } } };
+                _s = new();
+                _s.Title = "选择文件名称";
+                _s.Filters = new List<FileDialogFilter>() { new FileDialogFilter() {Name="jar 包",Extensions=new() { "*.jar" } } };
                 var game = Callers.GamesCaller.GetSelected();
                 if (game != null)
                 {
-                    _o.Directory = Path.Combine(game.GameFolder,"mods");
+                    _s.Directory = Path.Combine(game.GameFolder,"mods");
                 }
                 else
                 {
-                    _o.Directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "downloads");
+                    _s.Directory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "downloads");
                 }
-                _o.InitialFileName = f.DisplayName;
-                _o.AllowMultiple= false;
-                var chosed = await _o.ShowAsync(app.MainWindow);
-                if (chosed!=null&&string.IsNullOrEmpty(chosed.First())!=true)
+                _s.InitialFileName = f.GetLocalName();
+                // _s.AllowMultiple= false;
+                var chosed = await _s.ShowAsync(app.MainWindow);
+                if (!string.IsNullOrEmpty(chosed))
                 {
-                    Callers.DownloaderCaller.CallSingle(f.DownloadUrl, chosed.First());
+                    Callers.DownloaderCaller.CallSingle(f.DownloadUrl, chosed);
                 }
+                GC.SuppressFinalize(_s);
             }
         }
     }

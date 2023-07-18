@@ -101,9 +101,15 @@ namespace CLAddIn.Views
                     var item = s.SelectedItem;
                     Others.Children.Clear();
                     var others = indexes.Where(x => x.Versions.First() == item.ToString());
+                    string _ch = "";
+                    var lq = ModCache.Caches.Where(x => x.slugs.Contains(i.Slug));
+                    if (lq.Count() > 0)
+                    {
+                        _ch = lq.First().majorName;
+                    }
                     foreach (var ite in others)
                     {
-                        var child = new ForgeFileItem(i.Id, ite as LatestFilesIndex);
+                        var child = new ForgeFileItem(i.Id, ite as LatestFilesIndex,_ch);
                         Others.Children.Add(child);
                     }
                 }
@@ -207,9 +213,15 @@ namespace CLAddIn.Views
                         ForYourCurrectHint.Height = double.NaN;
                         ForYourCurrectHint.IsVisible= true;
                         ForYourCurrect.IsVisible = true;
-                        if(_currectInfo is ForgeModInfo c)
+                        string _ch = "";
+                        var lq = ModCache.Caches.Where(x => x.slugs.Contains(_currectInfo.Slug));
+                        if (lq.Count() > 0)
                         {
-                            ForYourCurrect.Child = new ForgeFileItem(c.Id,item as LatestFilesIndex);
+                            _ch = lq.First().majorName;
+                        }
+                        if (_currectInfo is ForgeModInfo c)
+                        {
+                            ForYourCurrect.Child = new ForgeFileItem(c.Id,item as LatestFilesIndex,_ch);
                         }
                         break;
                     }
