@@ -55,7 +55,7 @@ namespace MEFL.CLAddIn
                 TagsTB.Text += $"#{item} ";
             }
             SupportVersionTB.Text = $"{versions.First()}-{versions.Last()}";
-            DownloadCount.Text = info.DownloadCounts;
+            DownloadCount.Text = info.DownloadCountsInfo;
             try
             {
                 foreach (var item in info.Authors)

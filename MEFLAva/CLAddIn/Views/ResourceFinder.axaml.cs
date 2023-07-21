@@ -1,6 +1,8 @@
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Interactivity;
 using Avalonia.Threading;
+using CoreLaunching;
 using CoreLaunching.DownloadAPIs.Forge;
 using CoreLaunching.DownloadAPIs.Interfaces;
 using CoreLaunching.Forge;
@@ -16,41 +18,98 @@ namespace CLAddIn.Views
 {
     public partial class ResourceFinder : UserControl
     {
+        private List<ScrollViewer> scrs = new List<ScrollViewer>();
         protected override Size ArrangeOverride(Size finalSize)
         {
             var b = base.ArrangeOverride(finalSize);
-            HotScrl.Height = b.Height - 200;
+            for (int i = 0; i < scrs.Count; i++)
+            {
+                scrs[i].Height = b.Height - 200;
+            }
             FitherVersionCB.Width= finalSize.Width - 165;
             return b;
         }
         public ResourceFinder()
         {
             InitializeComponent();
+            scrs.Add(HotScrl);
             CancelDetailBtn.Click += CancelDetailBtn_Click;
             OtherIndexs.SelectionChanged += OtherIndexs_SelectionChanged;
             SearchBtn.Click += SearchBtn_Click;
+            FitherTB.KeyDown += FitherTB_KeyDown;
             LoadVersion();
             LoadHot();
         }
 
+        private void FitherTB_KeyDown(object? sender, Avalonia.Input.KeyEventArgs e)
+        {
+            if(e.Key==Avalonia.Input.Key.Enter)
+            {
+                SearchBtn_Click(SearchBtn, null);
+            }
+        }
         private void SearchBtn_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
             SearchBtn.IsEnabled = false;
             new Thread(() =>
             {
-                var can = ForgeResourceFinder.FindMinecraft(out var res, out var er, keyWords: FitherTB.Text);
-                if (can)
+                List<IModInfo> mods = new List<IModInfo>();
+                if (!FitherTB.Text.IsOnlyASCII())
                 {
-                    LoadResult(res.Data, FitherTB.Text);
+                    var cns = ModCache.Caches.Where(x => x.majorName.Contains( FitherTB.Text));
+                    var slugs= new List<string>();
+                    foreach (var item in cns)
+                    {
+                        var _slug = item.slugs.FirstOrDefault();
+                        if (!slugs.Contains(_slug))
+                        {
+                            slugs.Add(_slug);
+                        }
+                    }
+                    var mod = ForgeResourceFinder.MutilGetInfos(slugs);
+                    foreach (var _m in mod)
+                    {
+                        mods.Add(_m);
+                    }
                 }
                 else
                 {
-                    Dispatcher.UIThread.InvokeAsync(() =>
+                    foreach (var item in ModCache.Caches.Where(x => x.simplifiedName == FitherTB.Text))
                     {
-                        HotInfoTB.Text = er;
-                    });
+                        var _slug = item.slugs.FirstOrDefault();
+                        var can2 = ForgeResourceFinder.FindMinecraft(out var slugsres, out var er1, slug: _slug);
+                        if (can2)
+                        {
+                            foreach (var mod in slugsres.Data)
+                            {
+                                if (!(mods.Where(x => x.Slug == mod.Slug).Count() > 0))
+                                {
+                                    mods.Add(mod);
+                                }
+                            }
+                        }
+                    }
+                    var can = ForgeResourceFinder.FindMinecraft(out var res, out var er, keyWords: FitherTB.Text);
+                    if (can)
+                    {
+                        foreach (var item in res.Data)
+                        {
+                            if (!(mods.Where(x => x.Slug == item.Slug).Count() > 0))
+                            {
+                                mods.Add(item);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Dispatcher.UIThread.InvokeAsync(() =>
+                        {
+                            HotInfoTB.Text = er;
+                        });
+                    }
                 }
-                Dispatcher.UIThread.InvokeAsync(() =>
+                LoadResult(mods, FitherTB.Text);
+                Dispatcher.UIThread.InvokeAsync(    () =>
                 {
                     SearchBtn.IsEnabled = true;
                 });
@@ -97,7 +156,7 @@ namespace CLAddIn.Views
             {
                 if (_currectInfo is ForgeModInfo i)
                 {
-
+                        
                     var item = s.SelectedItem;
                     Others.Children.Clear();
                     var others = indexes.Where(x => x.Versions.First() == item.ToString());
@@ -124,20 +183,35 @@ namespace CLAddIn.Views
 
         private void LoadResult(IEnumerable<IModInfo> mods,string title)
         {
+            var modl = mods.ToList();
+            for (int i = 0; i < modl.Count(); i++)
+            {
+                if (modl[i]==null)
+                {
+                    modl.RemoveAt(i);
+                    i--;
+                }
+            }
+            modl = modl.OrderByDescending(x => x.DownloadCount).ToList();
             Dispatcher.UIThread.InvokeAsync(() =>
             {
                 HotInfoBD.IsVisible = false;
                 TabItem res = new TabItem();
                 var btn = new ResultHeader(title) { DataContext = res};
                 var stack = new StackPanel();
-                foreach (var mod in mods)
+                foreach (var mod in modl)
                 {
-                    var child = new ResourcesDownloadItem(mod);
-                    child.RootBtn.Click += RootBtn_Click;
-                    stack.Children.Add(child);
+                    if (mod != null)
+                    {
+                        var child = new ResourcesDownloadItem(mod);
+                        child.RootBtn.Click += RootBtn_Click;
+                        stack.Children.Add(child);
+                    }
                 }
                 res.Header = btn;
-                res.Content = stack;
+                var scrl = new ScrollViewer() { Content = stack };
+                res.Content = scrl;
+                scrs.Add(scrl);
                 (MyContent.Items as IList<object>).Add(res);
                 MyContent.SelectedIndex = MyContent.ItemCount-1;
             });    
@@ -189,7 +263,7 @@ namespace CLAddIn.Views
             DetailDesTB.Text = _currectInfo.Description;
             var versions = new List<Version>();
             DetailSupportVersionTB.Text = control.SupportVersionTB.Text;
-            DetailDownloadCount.Text = _currectInfo.DownloadCounts;
+            DetailDownloadCount.Text = _currectInfo.DownloadCountsInfo;
             DetailAuthorsStack.Children.Clear();
             foreach (var item in _currectInfo.Authors)
             {
