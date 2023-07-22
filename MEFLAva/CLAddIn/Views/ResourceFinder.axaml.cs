@@ -7,11 +7,14 @@ using CoreLaunching.DownloadAPIs.Forge;
 using CoreLaunching.DownloadAPIs.Interfaces;
 using CoreLaunching.Forge;
 using CoreLaunching.MicrosoftAuth;
+using DynamicData;
 using MEFL.Callers;
 using MEFL.CLAddIn;
 using MEFL.CLAddIn.Export;
 using MEFL.Contract;
+using MEFL.Contract.Views;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Net;
 
 namespace CLAddIn.Views
@@ -60,11 +63,22 @@ namespace CLAddIn.Views
                     var slugs= new List<string>();
                     foreach (var item in cns)
                     {
-                        var _slug = item.slugs.FirstOrDefault();
-                        if (!slugs.Contains(_slug))
+                        foreach (var slug in item.slugs)
                         {
-                            slugs.Add(_slug);
+                            if (!slugs.Contains(slug))
+                            {
+                                slugs.Add(slug);
+                            }
                         }
+                    }
+                    if(!(slugs.Count > 0))
+                    {
+                        //DialogCaller.ShowText();
+                        Dispatcher.UIThread.InvokeAsync(() =>
+                        {
+                            SearchBtn.IsEnabled = true;
+                        });
+                        return;
                     }
                     var mod = ForgeResourceFinder.MutilGetInfos(slugs);
                     foreach (var _m in mod)
@@ -74,7 +88,8 @@ namespace CLAddIn.Views
                 }
                 else
                 {
-                    foreach (var item in ModCache.Caches.Where(x => x.simplifiedName == FitherTB.Text))
+                    var lq = ModCache.Caches.Where(x => x.simplifiedName == FitherTB.Text);
+                    foreach (var item in lq)
                     {
                         var _slug = item.slugs.FirstOrDefault();
                         var can2 = ForgeResourceFinder.FindMinecraft(out var slugsres, out var er1, slug: _slug);
@@ -258,6 +273,10 @@ namespace CLAddIn.Views
         ObservableCollection<String> versions = new ObservableCollection<String>();
         private void LoadDetail(ResourcesDownloadItem control)
         {
+            if (DetailS.Children.Contains(ForYourStack))
+            {
+                DetailS.Children.Remove(ForYourStack);
+            }
             _currectInfo = control.DataContext as IModInfo;
             DetailNameTB.Text = _currectInfo.Name;
             DetailDesTB.Text = _currectInfo.Description;
@@ -284,7 +303,7 @@ namespace CLAddIn.Views
                 {
                     if ((int)item.ModLoader == (int)g.ModLoaderType&&item.Versions.First() == g.BaseVersion)
                     {
-                        ForYourCurrectHint.Height = double.NaN;
+                        DetailS.Children.Insert(1,ForYourStack);
                         ForYourCurrectHint.IsVisible= true;
                         ForYourCurrect.IsVisible = true;
                         string _ch = "";
