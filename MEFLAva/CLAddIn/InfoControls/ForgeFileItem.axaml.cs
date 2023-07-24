@@ -2,8 +2,10 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Threading;
+using CoreLaunching;
 using CoreLaunching.DownloadAPIs.Forge;
 using CoreLaunching.Forge;
+using DynamicData;
 using MEFL.Contract;
 using ModLoaderType = CoreLaunching.DownloadAPIs.Forge.ModLoaderType;
 
@@ -31,7 +33,7 @@ namespace MEFL.CLAddIn
             }
             DownloadTB.Text = info.ChineseDownloadCount;
         }
-
+        IList<ForgeFileInfo> Dpendencies;
         public ForgeFileItem(int modId,LatestFilesIndex index, string chineseName) :this()
         {
             _chineseName = chineseName;
@@ -39,9 +41,62 @@ namespace MEFL.CLAddIn
             {
                 var info = ForgeResourceFinder.GetFromModIdAndFileId(modId, index.FileId);
                 info.ChineseName = _chineseName;
+                if (info.Dependencies.Length > 0)
+                {
+                    Dpendencies = new List<ForgeFileInfo>();
+                }
+                foreach (var item in info.Dependencies)
+                {
+                    if(item.RelationType == RelationType.RequiredDependency)
+                    {
+                        var files = ForgeResourceFinder.GetFilesFromModId(item.ModId);
+                        Version thsV = new Version();
+                        string thisLoader=info.ModLoader.ToString().ToLower();
+                        foreach (var v in info.GameVersions)
+                        {
+                            if(Version.TryParse(v,out var ve))
+                            {
+                                thsV = ve;
+                            }
+                        }
+                        foreach (var file in files.Data)
+                        {
+                            bool canbreak = false;
+                            foreach (var vf in file.GameVersions)
+                            {
+                                if (Version.TryParse(vf, out var ve2))
+                                {
+                                    if(thsV == ve2)
+                                    {
+                                        if (thsV>=new Version(1,13,0))
+                                        {
+                                            if (file.GameVersions.Where(x=>x.ToLower()==thisLoader).Count()>0)
+                                            {
+                                                Dpendencies.Add(file);
+                                                canbreak = true;
+                                                break;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            Dpendencies.Add(file);
+                                            canbreak = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                            if(canbreak)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
                 Dispatcher.UIThread.InvokeAsync(() =>
                 {
                     this.DataContext = info;
+                    
                     NameTB.Text = info.DisplayName;
                     if (info.ModLoader == ModLoaderType.Any)
                     {
@@ -117,7 +172,13 @@ namespace MEFL.CLAddIn
                 var chosed = await _s.ShowAsync(app.MainWindow);
                 if (!string.IsNullOrEmpty(chosed))
                 {
-                    Callers.DownloaderCaller.CallSingle(f.DownloadUrl, chosed   );
+                    var red = UrlUtil.Redirect(f.DownloadUrl);
+                    Callers.DownloaderCaller.CallSingle(red, chosed);
+                    var fo = Path.GetDirectoryName(chosed);
+                    foreach (var item in Dpendencies)
+                    {
+                        Callers.DownloaderCaller.CallSingle(item.DownloadUrl,Path.Combine(fo,item.Name));
+                    }
                 }
                 GC.SuppressFinalize(_s);
             }

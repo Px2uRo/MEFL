@@ -85,7 +85,10 @@ namespace MEFL.CLAddIn
                     }
                     catch (Exception)
                     {
-
+                        Dispatcher.UIThread.InvokeAsync(new Action(() =>
+                        {
+                            Img.Source = BitMaps.ImageError;
+                        }));
                     }
                 }).Start();
         }

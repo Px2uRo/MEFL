@@ -23,8 +23,26 @@ namespace MEFL.CLAddIn
         private static Bitmap _fabricBeta;
         private static Bitmap _fabricAlpha;
         private static Bitmap _resourceFinder;
+        private static Bitmap _imageError;
         #region Bitmaps
+        public static Bitmap ImageError
+        {
+            get
+            {
+                if (_imageError == null)
+                {
 
+                    using (var ms = new MemoryStream())
+                    {
+                        Resources.ImageError.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                        ms.Position = 0;
+                        _resourceFinder = new Bitmap(ms);
+                    }
+                }
+                return _imageError;
+            }
+
+        }
         public static Bitmap ResourceFinder
         {
             get {

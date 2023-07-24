@@ -6,7 +6,7 @@
              x:Class="CLAddIn.Views.ResourceFinder">
 	<Grid Margin="10">
 		<Grid Name="DetailStack"  IsVisible="False">
-			<StackPanel>
+			<StackPanel Name="DetailS">
 				<Border VerticalAlignment="Top" Background="#40FFFFFF" CornerRadius="5" Height="80">
 					<Grid ColumnDefinitions="80,*">
 						<Image Name="DetailImg" Width="75" Height="75" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -33,18 +33,18 @@
 						</StackPanel>
 					</Grid>
 				</Border>
-				<StackPanel>
+				<StackPanel Name="ForYourStack">
 					<TextBlock Text="适用于您当前版本的版本下载链接：" FontSize="20" Name="ForYourCurrectHint" IsVisible="False"/>
 					<Border Name="ForYourCurrect" IsVisible="False"/>
 				</StackPanel>
 				<Grid>
 					<TextBlock Text="所有版本:"/>
 					<ComboBox Name="OtherIndexs" HorizontalAlignment="Right"/>
-				</Grid>
+				</Grid>	
+				<ScrollViewer>
+					<StackPanel Name="Others"/>
+				</ScrollViewer>
 			</StackPanel>
-			<ScrollViewer Margin="0,200,0,0">
-				<StackPanel Name="Others"/>
-			</ScrollViewer>
 			<Button Name="CancelDetailBtn" Content="取消"  VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
 		</Grid>
 		<TabControl Name="ListsPage">
